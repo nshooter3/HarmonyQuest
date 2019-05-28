@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 376019934}
   - component: {fileID: 376019933}
   - component: {fileID: 376019932}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: AttackHitBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -495,10 +495,9 @@ GameObject:
   - component: {fileID: 1224216814}
   - component: {fileID: 1224216813}
   - component: {fileID: 1224216812}
-  - component: {fileID: 1224216811}
   - component: {fileID: 1224216810}
   - component: {fileID: 1224216815}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -516,26 +515,12 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 1
+  m_Height: 2
   m_Radius: 0.5
   m_SlopeLimit: 90
   m_StepOffset: 0.3
   m_SkinWidth: 0.5
   m_MinMoveDistance: 0
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!136 &1224216811
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1224216809}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1224216812
 MeshRenderer:
@@ -615,6 +600,7 @@ MonoBehaviour:
   parryBox: {fileID: 1494763813}
   playerMat: {fileID: 2100000, guid: f118d5f93706b48458284eaca8e44d0e, type: 2}
   health: 100
+  attackDamage: 10
   speed: 6
   gravity: 200
   rotateSpeed: 25
@@ -883,7 +869,7 @@ GameObject:
   - component: {fileID: 1494763814}
   - component: {fileID: 1494763816}
   - component: {fileID: 1494763815}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ParryEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -961,7 +947,7 @@ GameObject:
   - component: {fileID: 1722078813}
   - component: {fileID: 1722078812}
   - component: {fileID: 1722078811}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: AttackHitBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1051,11 +1037,10 @@ GameObject:
   - component: {fileID: 1887438317}
   - component: {fileID: 1887438316}
   - component: {fileID: 1887438315}
-  - component: {fileID: 1887438314}
   - component: {fileID: 1887438313}
   - component: {fileID: 1887438312}
   - component: {fileID: 1887438311}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1170,12 +1155,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4909f8bfa701a1340b3ee32e10ab3787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 100
   attackBox: {fileID: 376019931}
   metronomeSound: {fileID: 1887438311}
   enemyMat: {fileID: 2100000, guid: ac70f68daba057c439d0743387ee4f6a, type: 2}
   sixteenthNoteDuration: 0.125
   windUpColor: {r: 1, g: 0.51526874, b: 0, a: 0}
   preAttackColor: {r: 1, g: 0, b: 0, a: 0}
+  defaultColor: {r: 1, g: 0, b: 1, a: 0}
 --- !u!143 &1887438313
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1187,26 +1174,12 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 1
+  m_Height: 2
   m_Radius: 0.5
   m_SlopeLimit: 90
   m_StepOffset: 0.3
   m_SkinWidth: 0.5
   m_MinMoveDistance: 0
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!136 &1887438314
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1887438310}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1887438315
 MeshRenderer:

@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class TestEnemy : MonoBehaviour
 {
+    public int health = 100;
+    public int attackDamage = 10;
+
     [SerializeField]
     private GameObject attackBox;
     [SerializeField]
     private AudioSource metronomeSound;
-    [SerializeField]
+    //[SerializeField]
     private Material enemyMat;
 
     //Manually make the enemy act on beat by using the duration of our 16th note at 120 BPM as an update timer.
@@ -19,17 +22,19 @@ public class TestEnemy : MonoBehaviour
 
     private float timeUntilNextSixteenthNote = 0;
 
-    private float attackTimer, maxAttackTimer = 0.2f;
+    private float attackTimer, maxAttackTimer = 0.4f;
 
     //Change color to telegraph attacks for now
     public Color windUpColor, preAttackColor;
-    private Color defaultColor;
+    public Color defaultColor;
+
+    float beatCount = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-        defaultColor = enemyMat.color;
-        EightNoteUpdate();
+        enemyMat = GetComponent<Renderer>().material;
+        SixteenthNoteUpdate();
         timeUntilNextSixteenthNote = sixteenthNoteDuration;
     }
 
@@ -44,8 +49,19 @@ public class TestEnemy : MonoBehaviour
             timeUntilNextSixteenthNote = sixteenthNoteDuration;
             //Once we pass our max 16th note count, reset to 1 instead of 0.
             sixteenthNoteCount = Mathf.Max((sixteenthNoteCount + 1) % (maxSixteenthNoteCount + 1), 1);
-            EightNoteUpdate();
+            SixteenthNoteUpdate();
         }
+
+        beatCount += Time.deltaTime;
+
+        /*(if (WasAttackedOnBeat())
+        {
+            enemyMat.color = windUpColor;
+        }
+        else
+        {
+            enemyMat.color = defaultColor;
+        }*/
     }
 
     void UpdateTimers()
@@ -60,7 +76,7 @@ public class TestEnemy : MonoBehaviour
         }
     }
 
-    bool IsAttacking()
+    public bool IsAttacking()
     {
         return attackTimer > 0;
     }
@@ -70,11 +86,19 @@ public class TestEnemy : MonoBehaviour
         attackBox.SetActive(false);
     }
 
-    void EightNoteUpdate()
+    void SixteenthNoteUpdate()
     {
         if (sixteenthNoteCount % 4 == 1)
         {
             //Mark our rhythm by playing a metronome sound once per beat, which is four 16th notes.
+            metronomeSound.pitch = 1;
+            metronomeSound.Play();
+            //print("BEAT COUNT: " + beatCount);
+            beatCount = 0;
+        }
+        else
+        {
+            metronomeSound.pitch = 0.7f;
             metronomeSound.Play();
         }
 
@@ -91,14 +115,75 @@ public class TestEnemy : MonoBehaviour
             case 9:
                 enemyMat.color = defaultColor;
                 //Attack right on the third beat of the measure
-                Attack();
+                Attack(true);
                 break;
         }
     }
 
-    void Attack()
+    void Attack(bool parryable = true)
     {
         attackBox.SetActive(true);
         attackTimer = maxAttackTimer;
+        Collider boxCol = attackBox.GetComponent<BoxCollider>();
+        Collider[] cols = Physics.OverlapBox(boxCol.bounds.center, boxCol.bounds.extents, boxCol.transform.rotation, LayerMask.GetMask("Player"));
+        for (int i = 0; i < cols.Length; i++)
+        {
+            TestPlayer player = cols[i].GetComponent<TestPlayer>();
+            if (player != null)
+            {
+                print("ATTACK HIT PLAYER!");
+                player.ReceiveAttack(attackDamage, this, parryable);
+            }
+        }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
+
+    /// <summary>
+    /// Make this enemy take damage
+    /// </summary>
+    /// <param name="damage"> How much damage to take </param>
+    /// <returns> Whether or not the player attacked the enemy on beat </returns>
+    public bool TakeDamageAndCheckForOnBeatAttack(int damage)
+    {
+        TakeDamage(damage);
+        return WasAttackedOnBeat(true);
+    }
+
+    void Die()
+    {
+        //print("ENEMY DIE");
+    }
+
+    //Allow a little bit of wiggle room both before and after the beat for determing whether or not the enemy was attacked on beat.
+    bool WasAttackedOnBeat(bool debug = false)
+    {
+        //An attack within a 32nd note before the beat will count as on beat.
+        bool attackedWithinRangeBeforeBeat = sixteenthNoteCount % 4 == 0 && (timeUntilNextSixteenthNote) <= sixteenthNoteDuration / 2.0f;
+        //An attack within a 32nd note after the beat will count as on beat.
+        bool attackedWithinRangeAfterBeat = (sixteenthNoteCount % 4 == 1) || sixteenthNoteCount % 4 == 2 && (timeUntilNextSixteenthNote >= sixteenthNoteDuration / 2.0f);
+        if (debug)
+        {
+            if (attackedWithinRangeBeforeBeat)
+            {
+                print("BEFORE BEAT, GOOD TIMING");
+            }
+            else if (attackedWithinRangeAfterBeat)
+            {
+                print("AFTER BEAT, GOOD TIMING");
+            }
+            else
+            {
+                print("OFF BEAT, BAD TIMING");
+            }
+        }
+        return attackedWithinRangeBeforeBeat || attackedWithinRangeAfterBeat;
     }
 }

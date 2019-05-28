@@ -8,10 +8,11 @@ public class TestPlayer : MonoBehaviour
 
     [SerializeField]
     private GameObject attackBox, parryBox;
-    [SerializeField]
+    //[SerializeField]
     private Material playerMat;
 
     public int health = 100;
+    public int attackDamage = 10;
 
     public float speed;
     public float gravity;
@@ -22,7 +23,7 @@ public class TestPlayer : MonoBehaviour
     private Vector3 moveDirectionNoGravity = Vector3.zero;
 
     //Timers to determine how long actions are active, as well as how long of a cooldown they have before they can be used again.
-    private float attackTimer, maxAttackTimer = 0.2f;
+    private float attackTimer, maxAttackTimer = 0.1f;
     private float attackCooldownTimer, maxAttackCooldownTimer = 0.05f;
     private float parryTimer, maxParryTimer = 0.2f;
     //If the player's parry doesn't deflect any attacks, briefly leave them in a vulnerable state.
@@ -35,9 +36,19 @@ public class TestPlayer : MonoBehaviour
 
     private Color defaultPlayerMatColor;
 
+    struct ReceivedAttack{
+        public TestEnemy attacker;
+        public int damage;
+        public bool parryable;
+    }
+
+    private List<ReceivedAttack> receivedAttacks;
+
     // Start is called before the first frame update
     void Start()
     {
+        receivedAttacks = new List<ReceivedAttack>();
+        playerMat = GetComponent<Renderer>().material;
         characterController = GetComponent<CharacterController>();
         defaultPlayerMatColor = playerMat.color;
     }
@@ -46,8 +57,9 @@ public class TestPlayer : MonoBehaviour
     void Update()
     {
         Move();
-        UpdateTimers();
         CheckForInput();
+        CheckReceivedAttacks();
+        UpdateTimers();
     }
 
     void UpdateTimers()
@@ -157,6 +169,26 @@ public class TestPlayer : MonoBehaviour
         }
         attackBox.SetActive(true);
         attackTimer = maxAttackTimer;
+        Collider boxCol = attackBox.GetComponent<BoxCollider>();
+        Collider[] cols = Physics.OverlapBox(boxCol.bounds.center, boxCol.bounds.extents, boxCol.transform.rotation, LayerMask.GetMask("Enemy"));
+        for (int i = 0; i < cols.Length; i++)
+        {
+            TestEnemy enemy = cols[i].GetComponent<TestEnemy>();
+            if (enemy != null)
+            {
+                bool attackedOnBeat = enemy.TakeDamageAndCheckForOnBeatAttack(attackDamage);
+                if (attackedOnBeat)
+                {
+                    //TODO increase attack multiplier meter
+                    //print("GOOD! ON BEAT ATTACK!");
+                }
+                else
+                {
+                    //TODO decrease attack multiplier
+                    //print("BAD! OFF BEAT ATTACK!");
+                }
+            }
+        }
     }
 
     void Dash()
@@ -262,30 +294,52 @@ public class TestPlayer : MonoBehaviour
         transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
     }
 
-    //TODO: Hook this up to something and make sure that it works.
-    void TakeDamage(int damage, GameObject source, bool damageIsParryable = true)
+    public void ReceiveAttack(int damage, TestEnemy attacker, bool parryable = true)
     {
-        if (damageIsParryable == true && WasDamageParried(source) == true)
+        //The player does not immediately receive damage upon taking an attack. They have until the attack ends to parry or dodge it.
+        ReceivedAttack receivedAttack = new ReceivedAttack { damage = damage, attacker = attacker, parryable = parryable};
+        receivedAttacks.Add(receivedAttack);
+    }
+
+    //The player does not immediately receive damage upon taking an attack. They have until the attack ends to parry or dodge it.
+    void CheckReceivedAttacks()
+    {
+        for (int i = receivedAttacks.Count - 1; i >= 0; i--)
         {
-            print("Successful parry!");
-            //Deal damage back to enemy, deflect projectiles, etc.
-        }
-        else
-        {
-            print("Player takes " + damage + " damage!");
-            health = Mathf.Max(0, health - damage);
-            if (health <= 0)
+            if (receivedAttacks[i].parryable && WasDamageParried(receivedAttacks[i].attacker.gameObject) == true)
             {
-                Die();
+                print("SUCCESSFUL PARRY!");
+                receivedAttacks[i].attacker.TakeDamage(receivedAttacks[i].damage);
+                receivedAttacks.RemoveAt(i);
             }
+            else if (IsDashing())
+            {
+                print("SUCCESSFUL LATE DODGE!");
+                receivedAttacks.RemoveAt(i);
+            }
+            else if (receivedAttacks[i].attacker.IsAttacking() == false)
+            {
+                TakeDamage(receivedAttacks[i].damage);
+                receivedAttacks.RemoveAt(i);
+            }
+        }
+    }
+
+    //TODO: Hook this up to something and make sure that it works.
+    void TakeDamage(int damage)
+    {
+        print("Player takes " + damage + " damage!");
+        health = Mathf.Max(0, health - damage);
+        if (health <= 0)
+        {
+            Die();
         }
     }
 
     //TODO: Make sure that this works.
     bool WasDamageParried(GameObject source)
     {
-        //Is the player currently parrying?
-        if (parryTimer > 0)
+        if (IsParrying())
         {
             //Calculate the angle of the absorbed attack by getting the angle between where the damage came from relative to the player, and the direction the player is facing.
             Vector3 sourceDirection = source.transform.position - transform.position;
