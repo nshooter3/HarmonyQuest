@@ -14,6 +14,9 @@ public class TestPlayer : MonoBehaviour
     public int health = 100;
     public int attackDamage = 10;
 
+    public TestEnemy lockOnTarget;
+    public GameObject lockOnReticule;
+
     public float speed;
     public float gravity;
     public float rotateSpeed;
@@ -21,6 +24,8 @@ public class TestPlayer : MonoBehaviour
 
     private Vector3 moveDirection = Vector3.zero;
     private Vector3 moveDirectionNoGravity = Vector3.zero;
+
+    private bool isLockedOn = false;
 
     //Timers to determine how long actions are active, as well as how long of a cooldown they have before they can be used again.
     private float attackTimer, maxAttackTimer = 0.1f;
@@ -116,6 +121,11 @@ public class TestPlayer : MonoBehaviour
             {
                 Dash();
             }
+        }
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            isLockedOn = !isLockedOn;
+            lockOnReticule.SetActive(isLockedOn);
         }
     }
 
@@ -280,6 +290,11 @@ public class TestPlayer : MonoBehaviour
         {
             Vector3 targetPos = transform.position + moveDirectionNoGravity;
             Vector3 targetDir = targetPos - transform.position;
+            //If locked on, ignore movement direction and always attempt to face enemy
+            if (isLockedOn)
+            {
+                targetDir = lockOnTarget.transform.position - transform.position;
+            }
 
             // The step size is equal to speed times frame time.
             float step = rotateSpeed * turnSpeedModifier * Time.deltaTime;
