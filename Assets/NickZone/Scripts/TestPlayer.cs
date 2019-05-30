@@ -41,7 +41,7 @@ public class TestPlayer : MonoBehaviour
     //TODO: Implement this
     private float parryWhiffTimer, maxParryWhiffTimer = 0.1f;
     private float parryCooldownTimer, maxParryCooldownTimer = 0.1f;
-    private float dashTimer, maxDashTimer = 0.25f;
+    private float dashTimer, maxDashTimer = 0.2f;
     private float dashCooldownTimer, maxDashCooldownTimer = 0.1f;
     private Vector3 dashDirection = Vector3.zero;
 
@@ -213,7 +213,15 @@ public class TestPlayer : MonoBehaviour
     {
         dashTimer = maxDashTimer;
         playerMat.color = Color.white;
-        dashDirection = transform.forward;
+        if (characterController.velocity.magnitude > 0)
+        {
+            dashDirection = characterController.velocity.normalized;
+        }
+        else
+        {
+            //If the player isn't moving when they dash, make them dash backwards.
+            dashDirection = transform.forward * -1;
+        }
     }
 
     void EndParry()
@@ -261,13 +269,7 @@ public class TestPlayer : MonoBehaviour
         moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
         if (movementSpeedOverride != 0)
         {
-            int inversionModifier = 1;
-            if (moveDirection.magnitude == 0)
-            {
-                //If the player isn't moving when they dash, make them dash backwards.
-                inversionModifier = -1;
-            }
-            moveDirection = dashDirection * inversionModifier * movementSpeedOverride;
+            moveDirection = dashDirection * movementSpeedOverride;
         }
         else
         {
@@ -284,11 +286,7 @@ public class TestPlayer : MonoBehaviour
         // Move the controller
         characterController.Move(moveDirection * Time.deltaTime);
 
-        //Only rotate player if they aren't dashing
-        if (IsDashing() == false)
-        {
-            RotatePlayer(turnSpeedModifier);
-        }
+        RotatePlayer(turnSpeedModifier);
     }
 
     void RotatePlayer(float turnSpeedModifier)
@@ -332,7 +330,7 @@ public class TestPlayer : MonoBehaviour
             if (receivedAttacks[i].parryable && WasDamageParried(receivedAttacks[i].attacker.gameObject) == true)
             {
                 print("SUCCESSFUL PARRY!");
-                receivedAttacks[i].attacker.TakeDamage(receivedAttacks[i].damage);
+                receivedAttacks[i].attacker.TakeDamage(attackDamage*3);
                 receivedAttacks.RemoveAt(i);
             }
             else if (IsDashing())
