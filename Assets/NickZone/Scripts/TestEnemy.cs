@@ -11,7 +11,9 @@ public class TestEnemy : MonoBehaviour
     [SerializeField]
     private GameObject attackBox;
     [SerializeField]
-    private AudioSource metronomeSound;
+    private ParticleSystem getHitParticles;
+    [SerializeField]
+    private AudioSource metronomeSound, getHitSound;
 
     [SerializeField]
     private GameObject healthBar;
@@ -149,6 +151,9 @@ public class TestEnemy : MonoBehaviour
     {
         health = Mathf.Max(0, health - damage);
         //print("Enemy " + damage + " damage taken! Health is currently " + health);
+
+        getHitParticles.Play();
+        getHitSound.Play();
 
         float healthPercentage = (float)health / maxHealth;
         //print("HEALTH PERCENTAGE IS " + healthPercentage);

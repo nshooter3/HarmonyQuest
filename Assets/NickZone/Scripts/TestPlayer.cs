@@ -10,8 +10,14 @@ public class TestPlayer : MonoBehaviour
     private GameObject attackBox, parryBox;
 
     [SerializeField]
+    private ParticleSystem parryParticles, getHitParticles;
+
+    [SerializeField]
     private GameObject healthBar;
     private Vector3 maxHealthBarScale;
+
+    [SerializeField]
+    private AudioSource parrySound, getHitSound;
 
     //[SerializeField]
     private Material playerMat;
@@ -330,6 +336,8 @@ public class TestPlayer : MonoBehaviour
             if (receivedAttacks[i].parryable && WasDamageParried(receivedAttacks[i].attacker.gameObject) == true)
             {
                 print("SUCCESSFUL PARRY!");
+                parryParticles.Play();
+                parrySound.Play();
                 receivedAttacks[i].attacker.TakeDamage(attackDamage*3);
                 receivedAttacks.RemoveAt(i);
             }
@@ -350,6 +358,10 @@ public class TestPlayer : MonoBehaviour
     void TakeDamage(int damage)
     {
         print("Player takes " + damage + " damage!");
+
+        getHitParticles.Play();
+        getHitSound.Play();
+
         health = Mathf.Max(0, health - damage);
 
         float healthPercentage = (float)health / maxHealth;
