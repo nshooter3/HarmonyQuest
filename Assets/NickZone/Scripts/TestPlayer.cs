@@ -8,10 +8,16 @@ public class TestPlayer : MonoBehaviour
 
     [SerializeField]
     private GameObject attackBox, parryBox;
+
+    [SerializeField]
+    private GameObject healthBar;
+    private Vector3 maxHealthBarScale;
+
     //[SerializeField]
     private Material playerMat;
 
-    public int health = 100;
+    public int health;
+    public int maxHealth;
     public int attackDamage = 10;
 
     public TestEnemy lockOnTarget;
@@ -52,6 +58,8 @@ public class TestPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        health = maxHealth;
+        maxHealthBarScale = healthBar.transform.localScale;
         receivedAttacks = new List<ReceivedAttack>();
         playerMat = GetComponent<Renderer>().material;
         characterController = GetComponent<CharacterController>();
@@ -345,6 +353,10 @@ public class TestPlayer : MonoBehaviour
     {
         print("Player takes " + damage + " damage!");
         health = Mathf.Max(0, health - damage);
+
+        float healthPercentage = (float)health / maxHealth;
+        //print("HEALTH PERCENTAGE IS " + healthPercentage);
+        healthBar.transform.localScale = new Vector3(healthPercentage * maxHealthBarScale.x, maxHealthBarScale.y, maxHealthBarScale.z);
         if (health <= 0)
         {
             Die();

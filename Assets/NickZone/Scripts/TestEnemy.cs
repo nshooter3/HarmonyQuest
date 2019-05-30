@@ -4,13 +4,19 @@ using UnityEngine;
 
 public class TestEnemy : MonoBehaviour
 {
-    public int health = 100;
+    public int maxHealth;
+    public int health;
     public int attackDamage = 10;
 
     [SerializeField]
     private GameObject attackBox;
     [SerializeField]
     private AudioSource metronomeSound;
+
+    [SerializeField]
+    private GameObject healthBar;
+    private Vector3 maxHealthBarScale;
+
     //[SerializeField]
     private Material enemyMat;
 
@@ -33,6 +39,8 @@ public class TestEnemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        maxHealthBarScale = healthBar.transform.localScale;
+        health = maxHealth;
         enemyMat = GetComponent<Renderer>().material;
         SixteenthNoteUpdate();
         timeUntilNextSixteenthNote = sixteenthNoteDuration;
@@ -139,7 +147,13 @@ public class TestEnemy : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        health -= damage;
+        health = Mathf.Max(0, health - damage);
+        //print("Enemy " + damage + " damage taken! Health is currently " + health);
+
+        float healthPercentage = (float)health / maxHealth;
+        //print("HEALTH PERCENTAGE IS " + healthPercentage);
+        healthBar.transform.localScale = new Vector3(healthPercentage * maxHealthBarScale.x, maxHealthBarScale.y, maxHealthBarScale.z);
+
         if (health <= 0)
         {
             Die();
@@ -159,7 +173,7 @@ public class TestEnemy : MonoBehaviour
 
     void Die()
     {
-        //print("ENEMY DIE");
+        Destroy(gameObject);
     }
 
     //Allow a little bit of wiggle room both before and after the beat for determing whether or not the enemy was attacked on beat.
