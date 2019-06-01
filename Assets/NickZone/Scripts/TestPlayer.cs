@@ -75,6 +75,10 @@ public class TestPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isLockedOn && lockOnTarget == null)
+        {
+            isLockedOn = false;
+        }
         Move();
         CheckForInput();
         CheckReceivedAttacks();
@@ -136,7 +140,7 @@ public class TestPlayer : MonoBehaviour
                 Dash();
             }
         }
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift) && lockOnTarget != null)
         {
             isLockedOn = !isLockedOn;
             lockOnReticule.SetActive(isLockedOn);

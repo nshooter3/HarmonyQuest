@@ -26,8 +26,7 @@ public class TestEnemy : MonoBehaviour
     private AudioSource metronomeSound, getHitSound;
 
     [SerializeField]
-    private GameObject healthBar;
-    private Vector3 maxHealthBarScale;
+    private TestEnemyHealthbar healthBar;
 
     //[SerializeField]
     private Material enemyMat;
@@ -54,7 +53,6 @@ public class TestEnemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        maxHealthBarScale = healthBar.transform.localScale;
         health = maxHealth;
         enemyMat = GetComponent<Renderer>().material;
         SixteenthNoteUpdate();
@@ -208,12 +206,10 @@ public class TestEnemy : MonoBehaviour
         health = Mathf.Max(0, health - damage);
         //print("Enemy " + damage + " damage taken! Health is currently " + health);
 
+        healthBar.SetHealthBarSize(health, maxHealth);
+
         getHitParticles.Play();
         getHitSound.Play();
-
-        float healthPercentage = (float)health / maxHealth;
-        //print("HEALTH PERCENTAGE IS " + healthPercentage);
-        healthBar.transform.localScale = new Vector3(healthPercentage * maxHealthBarScale.x, maxHealthBarScale.y, maxHealthBarScale.z);
 
         if (health <= 0)
         {
@@ -234,6 +230,7 @@ public class TestEnemy : MonoBehaviour
 
     void Die()
     {
+        Destroy(healthBar.gameObject);
         Destroy(gameObject);
     }
 
