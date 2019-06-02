@@ -52,6 +52,8 @@ public class TestPlayer : MonoBehaviour
 
     private Color defaultPlayerMatColor;
 
+    private int attackMultiplier = 1, nextMultiplierProgress = 0;
+
     struct ReceivedAttack{
         public TestEnemy attacker;
         public int damage;
@@ -68,6 +70,7 @@ public class TestPlayer : MonoBehaviour
         playerMat = GetComponent<Renderer>().material;
         characterController = GetComponent<CharacterController>();
         defaultPlayerMatColor = playerMat.color;
+        playerUI.SetMultiplierProgress(attackMultiplier, nextMultiplierProgress);
     }
 
     // Update is called once per frame
@@ -202,16 +205,16 @@ public class TestPlayer : MonoBehaviour
             TestEnemy enemy = cols[i].GetComponent<TestEnemy>();
             if (enemy != null)
             {
-                bool attackedOnBeat = enemy.TakeDamageAndCheckForOnBeatAttack(attackDamage);
+                bool attackedOnBeat = enemy.TakeDamageAndCheckForOnBeatAttack(attackDamage * attackMultiplier);
                 if (attackedOnBeat)
                 {
-                    //TODO increase attack multiplier meter
                     //print("GOOD! ON BEAT ATTACK!");
+                    AddToMultiplierProgress(1);
                 }
                 else
                 {
-                    //TODO decrease attack multiplier
                     //print("BAD! OFF BEAT ATTACK!");
+                    LoseAttackMultiplierLevel();
                 }
             }
         }
@@ -338,9 +341,10 @@ public class TestPlayer : MonoBehaviour
             if (receivedAttacks[i].parryable && WasDamageParried(receivedAttacks[i].attacker.gameObject) == true)
             {
                 print("SUCCESSFUL PARRY!");
+                AddToMultiplierProgress(2);
                 parryParticles.Play();
                 parrySound.Play();
-                receivedAttacks[i].attacker.TakeDamage(attackDamage*3);
+                receivedAttacks[i].attacker.TakeDamage(attackDamage * 3 * attackMultiplier);
                 receivedAttacks.RemoveAt(i);
             }
             else if (IsDashing())
@@ -356,6 +360,23 @@ public class TestPlayer : MonoBehaviour
         }
     }
 
+    void AddToMultiplierProgress(int nodesToAdd = 1)
+    {
+        for (int i = 0; i < nodesToAdd; i++)
+        {
+            nextMultiplierProgress = Mathf.Min(10, nextMultiplierProgress + 1);
+            if (nextMultiplierProgress >= 10 && attackMultiplier < 4)
+            {
+                attackMultiplier++;
+                if (attackMultiplier < 4)
+                {
+                    nextMultiplierProgress = 0;
+                }
+            }
+        }
+        playerUI.SetMultiplierProgress(attackMultiplier, nextMultiplierProgress);
+    }
+
     //TODO: Hook this up to something and make sure that it works.
     void TakeDamage(int damage)
     {
@@ -365,13 +386,22 @@ public class TestPlayer : MonoBehaviour
         getHitSound.Play();
 
         health = Mathf.Max(0, health - damage);
-
         playerUI.SetHealthBar(health, maxHealth);
+
+        LoseAttackMultiplierLevel();
 
         if (health <= 0)
         {
             Die();
         }
+    }
+
+    void LoseAttackMultiplierLevel()
+    {
+        attackMultiplier = Mathf.Max(1, attackMultiplier - 1);
+        nextMultiplierProgress = 0;
+
+        playerUI.SetMultiplierProgress(attackMultiplier, nextMultiplierProgress);
     }
 
     //TODO: Make sure that this works.
