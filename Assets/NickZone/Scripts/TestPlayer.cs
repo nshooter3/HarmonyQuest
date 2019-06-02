@@ -13,11 +13,10 @@ public class TestPlayer : MonoBehaviour
     private ParticleSystem parryParticles, getHitParticles;
 
     [SerializeField]
-    private GameObject healthBar;
-    private Vector3 maxHealthBarScale;
+    private AudioSource parrySound, getHitSound;
 
     [SerializeField]
-    private AudioSource parrySound, getHitSound;
+    private TestPlayerUI playerUI;
 
     //[SerializeField]
     private Material playerMat;
@@ -65,7 +64,6 @@ public class TestPlayer : MonoBehaviour
     void Start()
     {
         health = maxHealth;
-        maxHealthBarScale = healthBar.transform.localScale;
         receivedAttacks = new List<ReceivedAttack>();
         playerMat = GetComponent<Renderer>().material;
         characterController = GetComponent<CharacterController>();
@@ -368,9 +366,8 @@ public class TestPlayer : MonoBehaviour
 
         health = Mathf.Max(0, health - damage);
 
-        float healthPercentage = (float)health / maxHealth;
-        //print("HEALTH PERCENTAGE IS " + healthPercentage);
-        healthBar.transform.localScale = new Vector3(healthPercentage * maxHealthBarScale.x, maxHealthBarScale.y, maxHealthBarScale.z);
+        playerUI.SetHealthBar(health, maxHealth);
+
         if (health <= 0)
         {
             Die();
