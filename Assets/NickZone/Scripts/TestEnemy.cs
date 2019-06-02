@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestEnemy : MonoBehaviour
+public class TestEnemy : BeatTrackerObject
 {
     public int maxHealth;
     public int health;
@@ -23,7 +23,7 @@ public class TestEnemy : MonoBehaviour
     [SerializeField]
     private ParticleSystem getHitParticles;
     [SerializeField]
-    private AudioSource metronomeSound, getHitSound;
+    private AudioSource getHitSound;
 
     [SerializeField]
     private TestEnemyHealthbar healthBar;
@@ -31,21 +31,11 @@ public class TestEnemy : MonoBehaviour
     //[SerializeField]
     private Material enemyMat;
 
-    //Manually make the enemy act on beat by using the duration of our 16th note at 120 BPM as an update timer.
-    public float sixteenthNoteDuration = 0.125f;
-    private int sixteenthNoteCount = 1;
-    //The enemy's logic cycle for now simply lasts 16 16th notes, which equals 4 beats, which equals 1 measure. Music, yeah!
-    private int maxSixteenthNoteCount = 16;
-
-    private float timeUntilNextSixteenthNote = 0;
-
     private float attackTimer, maxAttackTimer = 0.4f;
 
     //Change color to telegraph attacks for now
     public Color windUpColor, preAttackColor;
     public Color defaultColor;
-
-    float beatCount = 0;
 
     private Vector3 moveDirection = Vector3.zero;
     private Vector3 moveDirectionNoGravity = Vector3.zero;
@@ -55,25 +45,12 @@ public class TestEnemy : MonoBehaviour
     {
         health = maxHealth;
         enemyMat = GetComponent<Renderer>().material;
-        SixteenthNoteUpdate();
-        timeUntilNextSixteenthNote = sixteenthNoteDuration;
     }
 
     // Update is called once per frame
     void Update()
     {
         UpdateTimers();
-
-        timeUntilNextSixteenthNote -= Time.deltaTime;
-        if (timeUntilNextSixteenthNote <= 0)
-        {
-            timeUntilNextSixteenthNote = sixteenthNoteDuration;
-            //Once we pass our max 16th note count, reset to 1 instead of 0.
-            sixteenthNoteCount = Mathf.Max((sixteenthNoteCount + 1) % (maxSixteenthNoteCount + 1), 1);
-            SixteenthNoteUpdate();
-        }
-
-        beatCount += Time.deltaTime;
 
         if (pursuePlayer)
         {
@@ -150,24 +127,10 @@ public class TestEnemy : MonoBehaviour
         attackBox.SetActive(false);
     }
 
-    void SixteenthNoteUpdate()
+    public override void SixteenthNoteUpdate()
     {
-        if (sixteenthNoteCount % 4 == 1)
-        {
-            //Mark our rhythm by playing a metronome sound once per beat, which is four 16th notes.
-            metronomeSound.pitch = 1;
-            metronomeSound.Play();
-            //print("BEAT COUNT: " + beatCount);
-            beatCount = 0;
-        }
-        else
-        {
-            //metronomeSound.pitch = 0.7f;
-            //metronomeSound.Play();
-        }
-
         //Giant switch statements, the mark of a true prototype. We gotta come up with a more eloquent way to do beat based actions.
-        switch (sixteenthNoteCount) {
+        switch (TestBeatTracker.instance.sixteenthNoteCount) {
             case 5:
                 //Start telegraphing attack on the second beat of the measure
                 enemyMat.color = windUpColor;
@@ -230,6 +193,7 @@ public class TestEnemy : MonoBehaviour
 
     void Die()
     {
+        TestBeatTracker.instance.RemoveBeatTrackerAtIndex(beatTrackerIndex);
         Destroy(healthBar.gameObject);
         Destroy(gameObject);
     }
@@ -237,25 +201,6 @@ public class TestEnemy : MonoBehaviour
     //Allow a little bit of wiggle room both before and after the beat for determing whether or not the enemy was attacked on beat.
     bool WasAttackedOnBeat(bool debug = false)
     {
-        //An attack within a 32nd note before the beat will count as on beat.
-        bool attackedWithinRangeBeforeBeat = sixteenthNoteCount % 4 == 0 && (timeUntilNextSixteenthNote) <= sixteenthNoteDuration / 2.0f;
-        //An attack within a 32nd note after the beat will count as on beat.
-        bool attackedWithinRangeAfterBeat = (sixteenthNoteCount % 4 == 1) || sixteenthNoteCount % 4 == 2 && (timeUntilNextSixteenthNote >= sixteenthNoteDuration / 2.0f);
-        if (debug)
-        {
-            if (attackedWithinRangeBeforeBeat)
-            {
-                print("BEFORE BEAT, GOOD TIMING");
-            }
-            else if (attackedWithinRangeAfterBeat)
-            {
-                print("AFTER BEAT, GOOD TIMING");
-            }
-            else
-            {
-                print("OFF BEAT, BAD TIMING");
-            }
-        }
-        return attackedWithinRangeBeforeBeat || attackedWithinRangeAfterBeat;
+        return TestBeatTracker.instance.WasActionOnBeat(debug);
     }
 }
