@@ -420,14 +420,22 @@ public class TestPlayer : MonoBehaviour
         getHitParticles.Play();
         getHitSound.Play();
 
-        health = Mathf.Max(0, health - damage);
-        playerUI.SetHealthBar(health, maxHealth);
-
         LoseAttackMultiplierLevel();
 
-        if (health <= 0)
+        if (isInHarmonyMode)
         {
-            Die();
+            harmonyCharge = Mathf.Max(0, harmonyCharge - damage * 2);
+            playerUI.SetHarmonyChargeBar(health, maxHealth);
+        }
+        else
+        {
+            health = Mathf.Max(0, health - damage);
+            playerUI.SetHealthBar(health, maxHealth);
+
+            if (health <= 0)
+            {
+                Die();
+            }
         }
     }
 

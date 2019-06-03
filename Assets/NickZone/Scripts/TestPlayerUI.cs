@@ -38,7 +38,7 @@ public class TestPlayerUI : MonoBehaviour
         SetHarmonyModeBar(currentHarmonyCharge, maxHarmonyCharge);
     }
 
-    public void SetHarmonyModeBar(float currentHarmonyModeDuration, float maxHarmonyModeDuration)
+    private void SetHarmonyModeBar(float currentHarmonyModeDuration, float maxHarmonyModeDuration)
     {
         float harmonyModeDurationBarLength = maxHarmonyModeBarLength * currentHarmonyModeDuration / maxHarmonyModeDuration;
         harmonyModeBar.transform.localScale = new Vector3(harmonyModeDurationBarLength, healthBar.transform.localScale.y, healthBar.transform.localScale.z);
