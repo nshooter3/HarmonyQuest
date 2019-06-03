@@ -21,9 +21,16 @@ public class TestPlayer : MonoBehaviour
     //[SerializeField]
     private Material playerMat;
 
+    public int attackDamage = 10;
+
+    [HideInInspector]
     public int health;
     public int maxHealth;
-    public int attackDamage = 10;
+
+    //[HideInInspector]
+    public float harmonyCharge;
+    public float maxHarmonyCharge;
+    public float harmonyChargeDropSpeed = 10.0f;
 
     public TestEnemy lockOnTarget;
     public GameObject lockOnReticule;
@@ -37,6 +44,9 @@ public class TestPlayer : MonoBehaviour
     private Vector3 moveDirectionNoGravity = Vector3.zero;
 
     private bool isLockedOn = false;
+
+    private bool isInHarmonyMode = false;
+    private int harmonyModeMultilpier = 1;
 
     //Timers to determine how long actions are active, as well as how long of a cooldown they have before they can be used again.
     private float attackTimer, maxAttackTimer = 0.1f;
@@ -70,7 +80,9 @@ public class TestPlayer : MonoBehaviour
         playerMat = GetComponent<Renderer>().material;
         characterController = GetComponent<CharacterController>();
         defaultPlayerMatColor = playerMat.color;
-        playerUI.SetMultiplierProgress(attackMultiplier, nextMultiplierProgress);
+        playerUI.SetHealthBar(health, maxHealth);
+        playerUI.SetHarmonyChargeBar(harmonyCharge, maxHarmonyCharge);
+        playerUI.SetMultiplierProgress(attackMultiplier * harmonyModeMultilpier, nextMultiplierProgress);
     }
 
     // Update is called once per frame
@@ -123,6 +135,18 @@ public class TestPlayer : MonoBehaviour
                 EndDash();
             }
         }
+        if (isInHarmonyMode)
+        {
+            harmonyCharge = Mathf.Max(0, harmonyCharge - Time.deltaTime * harmonyChargeDropSpeed);
+            playerUI.SetHarmonyChargeBar(harmonyCharge, maxHarmonyCharge);
+            if (harmonyCharge <= 0)
+            {
+                isInHarmonyMode = false;
+                harmonyModeMultilpier = 1;
+                playerUI.ToggleHarmonyMode(false);
+                playerUI.SetMultiplierProgress(attackMultiplier * harmonyModeMultilpier, nextMultiplierProgress);
+            }
+        }
     }
 
     void CheckForInput()
@@ -145,6 +169,13 @@ public class TestPlayer : MonoBehaviour
         {
             isLockedOn = !isLockedOn;
             lockOnReticule.SetActive(isLockedOn);
+        }
+        if (Input.GetKeyDown(KeyCode.Space) && harmonyCharge >= maxHarmonyCharge / 2.0f && isInHarmonyMode == false)
+        {
+            playerUI.ToggleHarmonyMode(true);
+            isInHarmonyMode = true;
+            harmonyModeMultilpier = 2;
+            playerUI.SetMultiplierProgress(attackMultiplier * harmonyModeMultilpier, nextMultiplierProgress);
         }
     }
 
@@ -210,6 +241,8 @@ public class TestPlayer : MonoBehaviour
                 {
                     //print("GOOD! ON BEAT ATTACK!");
                     AddToMultiplierProgress(1);
+                    harmonyCharge = Mathf.Min(maxHarmonyCharge, harmonyCharge + 2);
+                    playerUI.SetHarmonyChargeBar(harmonyCharge, maxHarmonyCharge);
                 }
                 else
                 {
@@ -342,6 +375,8 @@ public class TestPlayer : MonoBehaviour
             {
                 print("SUCCESSFUL PARRY!");
                 AddToMultiplierProgress(2);
+                harmonyCharge = Mathf.Min(maxHarmonyCharge, harmonyCharge + 6);
+                playerUI.SetHarmonyChargeBar(harmonyCharge, maxHarmonyCharge);
                 parryParticles.Play();
                 parrySound.Play();
                 receivedAttacks[i].attacker.TakeDamage(attackDamage * 3 * attackMultiplier);
@@ -374,7 +409,7 @@ public class TestPlayer : MonoBehaviour
                 }
             }
         }
-        playerUI.SetMultiplierProgress(attackMultiplier, nextMultiplierProgress);
+        playerUI.SetMultiplierProgress(attackMultiplier * harmonyModeMultilpier, nextMultiplierProgress);
     }
 
     //TODO: Hook this up to something and make sure that it works.
@@ -401,7 +436,7 @@ public class TestPlayer : MonoBehaviour
         attackMultiplier = Mathf.Max(1, attackMultiplier - 1);
         nextMultiplierProgress = 0;
 
-        playerUI.SetMultiplierProgress(attackMultiplier, nextMultiplierProgress);
+        playerUI.SetMultiplierProgress(attackMultiplier * harmonyModeMultilpier, nextMultiplierProgress);
     }
 
     //TODO: Make sure that this works.

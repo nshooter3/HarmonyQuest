@@ -6,30 +6,42 @@ using UnityEngine.UI;
 public class TestPlayerUI : MonoBehaviour
 {
     [SerializeField]
-    private GameObject healthBar, harmonyChargeBar;
+    private GameObject healthBar, harmonyChargeBar, harmonyModeBar, normalModeUI, harmonyModeUI;
     [SerializeField]
     private GameObject[] nextMultiplierProgressNodes;
     [SerializeField]
     private Text multiplier;
+    [SerializeField]
+    private Image multiplierBackground;
 
-    private float maxHealthBarLength, maxHarmonyChargeBarLength;
+    private bool isInHarmonyMode = false;
+
+    private float maxHealthBarLength, maxHarmonyChargeBarLength, maxHarmonyModeBarLength;
 
     private void Start()
     {
         maxHealthBarLength = healthBar.transform.localScale.x;
         maxHarmonyChargeBarLength = harmonyChargeBar.transform.localScale.x;
+        maxHarmonyModeBarLength = harmonyModeBar.transform.localScale.x;
     }
 
     public void SetHealthBar(int currentHealth, int maxHealth)
     {
-        float healthBarLength = ((float) currentHealth) / ((float) maxHealth);
+        float healthBarLength = maxHealthBarLength * ((float) currentHealth) / ((float) maxHealth);
         healthBar.transform.localScale = new Vector3(healthBarLength, healthBar.transform.localScale.y, healthBar.transform.localScale.z);
     }
 
-    public void SetHarmonyModeBar(int currentHarmonyCharge, int maxHarmonyCharge)
+    public void SetHarmonyChargeBar(float currentHarmonyCharge, float maxHarmonyCharge)
     {
-        float healthBarLength = ((float) currentHarmonyCharge) / ((float) maxHarmonyCharge);
-        healthBar.transform.localScale = new Vector3(healthBarLength, healthBar.transform.localScale.y, healthBar.transform.localScale.z);
+        float harmonyChargeBarLength = maxHarmonyChargeBarLength * currentHarmonyCharge / maxHarmonyCharge;
+        harmonyChargeBar.transform.localScale = new Vector3(harmonyChargeBarLength, healthBar.transform.localScale.y, healthBar.transform.localScale.z);
+        SetHarmonyModeBar(currentHarmonyCharge, maxHarmonyCharge);
+    }
+
+    public void SetHarmonyModeBar(float currentHarmonyModeDuration, float maxHarmonyModeDuration)
+    {
+        float harmonyModeDurationBarLength = maxHarmonyModeBarLength * currentHarmonyModeDuration / maxHarmonyModeDuration;
+        harmonyModeBar.transform.localScale = new Vector3(harmonyModeDurationBarLength, healthBar.transform.localScale.y, healthBar.transform.localScale.z);
     }
 
     public void SetMultiplierProgress(int multiplierValue, int nextMultiplierProgress)
@@ -39,6 +51,23 @@ public class TestPlayerUI : MonoBehaviour
         {
             bool isNodeActive = i + 1 <= nextMultiplierProgress;
             nextMultiplierProgressNodes[i].SetActive(isNodeActive);
+        }
+    }
+
+    public void ToggleHarmonyMode(bool isHarmonyModeOn)
+    {
+        isInHarmonyMode = isHarmonyModeOn;
+        normalModeUI.SetActive(!isHarmonyModeOn);
+        harmonyModeUI.SetActive(isHarmonyModeOn);
+        if (isHarmonyModeOn)
+        {
+            multiplierBackground.color = Color.cyan;
+            multiplier.color = Color.blue;
+        }
+        else
+        {
+            multiplierBackground.color = Color.white;
+            multiplier.color = Color.black;
         }
     }
 }
