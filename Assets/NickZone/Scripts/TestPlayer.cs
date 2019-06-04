@@ -10,7 +10,7 @@ public class TestPlayer : MonoBehaviour
     private GameObject attackBox, parryBox;
 
     [SerializeField]
-    private ParticleSystem parryParticles, getHitParticles;
+    private ParticleSystem parryParticles, getHitParticles, healParticles;
 
     [SerializeField]
     private AudioSource parrySound, getHitSound;
@@ -26,6 +26,9 @@ public class TestPlayer : MonoBehaviour
     [HideInInspector]
     public int health;
     public int maxHealth;
+
+    public int healingItems;
+    private int healingAmount;
 
     //[HideInInspector]
     public float harmonyCharge;
@@ -52,6 +55,7 @@ public class TestPlayer : MonoBehaviour
     private float attackTimer, maxAttackTimer = 0.1f;
     private float attackCooldownTimer, maxAttackCooldownTimer = 0.05f;
     private float parryTimer, maxParryTimer = 0.2f;
+    private float healTimer, maxHealTimer = 0.4f;
     //If the player's parry doesn't deflect any attacks, briefly leave them in a vulnerable state.
     //TODO: Implement this
     private float parryWhiffTimer, maxParryWhiffTimer = 0.1f;
@@ -76,6 +80,7 @@ public class TestPlayer : MonoBehaviour
     void Start()
     {
         health = maxHealth;
+        healingAmount = Mathf.CeilToInt(maxHealth * 0.4f);
         receivedAttacks = new List<ReceivedAttack>();
         playerMat = GetComponent<Renderer>().material;
         characterController = GetComponent<CharacterController>();
@@ -83,6 +88,7 @@ public class TestPlayer : MonoBehaviour
         playerUI.SetHealthBar(health, maxHealth);
         playerUI.SetHarmonyChargeBar(harmonyCharge, maxHarmonyCharge);
         playerUI.SetMultiplierProgress(attackMultiplier * harmonyModeMultilpier, nextMultiplierProgress);
+        playerUI.SetHealingItems(healingItems);
     }
 
     // Update is called once per frame
@@ -100,6 +106,10 @@ public class TestPlayer : MonoBehaviour
 
     void UpdateTimers()
     {
+        if (IsHealing())
+        {
+            healTimer -= Time.deltaTime;
+        }
         if (IsParryCooldown())
         {
             parryCooldownTimer -= Time.deltaTime;
@@ -151,8 +161,12 @@ public class TestPlayer : MonoBehaviour
 
     void CheckForInput()
     {
-        if(IsParrying() == false && IsAttacking() == false){
-            if (Input.GetKeyDown(KeyCode.X) && IsParryCooldown() == false)
+        if(IsParrying() == false && IsAttacking() == false && IsHealing() == false){
+            if (Input.GetKeyDown(KeyCode.LeftControl) && healingItems > 0 && !isInHarmonyMode)
+            {
+                Heal();
+            }
+            else if (Input.GetKeyDown(KeyCode.X) && IsParryCooldown() == false)
             {
                 Parry();
             }
@@ -175,7 +189,9 @@ public class TestPlayer : MonoBehaviour
             playerUI.ToggleHarmonyMode(true);
             isInHarmonyMode = true;
             harmonyModeMultilpier = 2;
+            health = maxHealth;
             playerUI.SetMultiplierProgress(attackMultiplier * harmonyModeMultilpier, nextMultiplierProgress);
+            playerUI.SetHealthBar(health, maxHealth);
         }
     }
 
@@ -207,6 +223,11 @@ public class TestPlayer : MonoBehaviour
     bool IsDashCooldown()
     {
         return dashCooldownTimer > 0;
+    }
+
+    bool IsHealing()
+    {
+        return healTimer > 0;
     }
 
     void Parry()
@@ -266,6 +287,16 @@ public class TestPlayer : MonoBehaviour
             //If the player isn't moving when they dash, make them dash backwards.
             dashDirection = transform.forward * -1;
         }
+    }
+
+    void Heal()
+    {
+        health = Mathf.Min(health + healingAmount, maxHealth);
+        healingItems--;
+        playerUI.SetHealthBar(health, maxHealth);
+        playerUI.SetHealingItems(healingItems);
+        healTimer = maxHealTimer;
+        healParticles.Play();
     }
 
     void EndParry()

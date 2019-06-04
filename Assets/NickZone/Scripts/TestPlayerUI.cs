@@ -10,7 +10,7 @@ public class TestPlayerUI : MonoBehaviour
     [SerializeField]
     private GameObject[] nextMultiplierProgressNodes;
     [SerializeField]
-    private Text multiplier;
+    private Text multiplier, healingItems;
     [SerializeField]
     private Image multiplierBackground;
 
@@ -29,6 +29,11 @@ public class TestPlayerUI : MonoBehaviour
     {
         float healthBarLength = maxHealthBarLength * ((float) currentHealth) / ((float) maxHealth);
         healthBar.transform.localScale = new Vector3(healthBarLength, healthBar.transform.localScale.y, healthBar.transform.localScale.z);
+    }
+
+    public void SetHealingItems(int currentHealingItems)
+    {
+        healingItems.text = "" + currentHealingItems;
     }
 
     public void SetHarmonyChargeBar(float currentHarmonyCharge, float maxHarmonyCharge)
