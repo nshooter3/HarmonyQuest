@@ -10,7 +10,7 @@ public class TestPlayerUI : MonoBehaviour
     [SerializeField]
     private GameObject[] nextMultiplierProgressNodes;
     [SerializeField]
-    private Text multiplier, healingItems;
+    private Text multiplier, healingItems, harmonyModeReady;
     [SerializeField]
     private Image multiplierBackground;
 
@@ -41,6 +41,7 @@ public class TestPlayerUI : MonoBehaviour
         float harmonyChargeBarLength = maxHarmonyChargeBarLength * currentHarmonyCharge / maxHarmonyCharge;
         harmonyChargeBar.transform.localScale = new Vector3(harmonyChargeBarLength, healthBar.transform.localScale.y, healthBar.transform.localScale.z);
         SetHarmonyModeBar(currentHarmonyCharge, maxHarmonyCharge);
+        harmonyModeReady.gameObject.SetActive(currentHarmonyCharge >= maxHarmonyCharge / 2.0f);
     }
 
     private void SetHarmonyModeBar(float currentHarmonyModeDuration, float maxHarmonyModeDuration)

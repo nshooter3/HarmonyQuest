@@ -13,7 +13,7 @@ public class TestPlayer : MonoBehaviour
     private ParticleSystem parryParticles, getHitParticles, healParticles;
 
     [SerializeField]
-    private AudioSource parrySound, getHitSound;
+    private AudioSource parrySound, getHitSound, whiffSound;
 
     [SerializeField]
     private TestPlayerUI playerUI;
@@ -55,7 +55,7 @@ public class TestPlayer : MonoBehaviour
     private float attackTimer, maxAttackTimer = 0.1f;
     private float attackCooldownTimer, maxAttackCooldownTimer = 0.05f;
     private float parryTimer, maxParryTimer = 0.2f;
-    private float healTimer, maxHealTimer = 0.4f;
+    private float healTimer, maxHealTimer = 0.2f;
     //If the player's parry doesn't deflect any attacks, briefly leave them in a vulnerable state.
     //TODO: Implement this
     private float parryWhiffTimer, maxParryWhiffTimer = 0.1f;
@@ -268,7 +268,13 @@ public class TestPlayer : MonoBehaviour
                 else
                 {
                     //print("BAD! OFF BEAT ATTACK!");
-                    LoseAttackMultiplierLevel();
+                    whiffSound.Play();
+                    nextMultiplierProgress = 0;
+                    if (attackMultiplier == 4)
+                    {
+                        attackMultiplier = 3;
+                    }
+                    playerUI.SetMultiplierProgress(attackMultiplier * harmonyModeMultilpier, nextMultiplierProgress);
                 }
             }
         }
@@ -410,7 +416,7 @@ public class TestPlayer : MonoBehaviour
                 playerUI.SetHarmonyChargeBar(harmonyCharge, maxHarmonyCharge);
                 parryParticles.Play();
                 parrySound.Play();
-                receivedAttacks[i].attacker.TakeDamage(attackDamage * 3 * attackMultiplier);
+                receivedAttacks[i].attacker.TakeDamage(attackDamage * 4 * attackMultiplier);
                 receivedAttacks.RemoveAt(i);
             }
             else if (IsDashing())
@@ -435,6 +441,27 @@ public class TestPlayer : MonoBehaviour
             {
                 attackMultiplier++;
                 if (attackMultiplier < 4)
+                {
+                    nextMultiplierProgress = 0;
+                }
+            }
+        }
+        playerUI.SetMultiplierProgress(attackMultiplier * harmonyModeMultilpier, nextMultiplierProgress);
+    }
+
+    void SubtractFromMultiplierProgress(int nodesToSubtract = 1)
+    {
+        for (int i = 0; i < nodesToSubtract; i++)
+        {
+            nextMultiplierProgress = nextMultiplierProgress - 1;
+            if (nextMultiplierProgress < 0)
+            {
+                if (attackMultiplier > 1)
+                {
+                    attackMultiplier--;
+                    nextMultiplierProgress = 10;
+                }
+                else
                 {
                     nextMultiplierProgress = 0;
                 }

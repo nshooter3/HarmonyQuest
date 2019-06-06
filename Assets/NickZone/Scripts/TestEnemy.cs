@@ -23,7 +23,7 @@ public class TestEnemy : BeatTrackerObject
     [SerializeField]
     private ParticleSystem getHitParticles;
     [SerializeField]
-    private AudioSource getHitSound;
+    private AudioSource getHitSound, charge1, charge2;
 
     [SerializeField]
     private TestEnemyHealthbar healthBar;
@@ -32,9 +32,11 @@ public class TestEnemy : BeatTrackerObject
     private Material enemyMat;
 
     private float attackTimer, maxAttackTimer = 0.4f;
+    //Which attack this enemy will perform. 1 means parryable attack, 2 means unparryable attack that must be dodged.
+    private float attackType = 1;
 
     //Change color to telegraph attacks for now
-    public Color windUpColor, preAttackColor;
+    public Color windUpColor1, windUpColor2, preAttackColor;
     public Color defaultColor;
 
     private Vector3 moveDirection = Vector3.zero;
@@ -133,7 +135,22 @@ public class TestEnemy : BeatTrackerObject
         switch (TestBeatTracker.instance.sixteenthNoteCount) {
             case 5:
                 //Start telegraphing attack on the second beat of the measure
-                enemyMat.color = windUpColor;
+                attackType = 1;
+                int ran = Random.Range(0,9);
+                if (ran < 4)
+                {
+                    attackType = 2;
+                }
+                if (attackType == 1)
+                {
+                    enemyMat.color = windUpColor1;
+                    charge1.Play();
+                }
+                else
+                {
+                    enemyMat.color = windUpColor2;
+                    charge2.Play();
+                }
                 break;
             case 8:
                 //Flash red RIGHT before the moment of attack. One 16th note away, to be precise.
@@ -142,7 +159,14 @@ public class TestEnemy : BeatTrackerObject
             case 9:
                 enemyMat.color = defaultColor;
                 //Attack right on the third beat of the measure
-                Attack(true);
+                if (attackType == 1)
+                {
+                    Attack(true);
+                }
+                else
+                {
+                    Attack(false);
+                }
                 break;
         }
     }
@@ -187,8 +211,12 @@ public class TestEnemy : BeatTrackerObject
     /// <returns> Whether or not the player attacked the enemy on beat </returns>
     public bool TakeDamageAndCheckForOnBeatAttack(int damage)
     {
-        TakeDamage(damage);
-        return WasAttackedOnBeat(true);
+        bool wasAttackedOnBeat = WasAttackedOnBeat(true);
+        if (wasAttackedOnBeat)
+        {
+            TakeDamage(damage);
+        }
+        return wasAttackedOnBeat;
     }
 
     void Die()
