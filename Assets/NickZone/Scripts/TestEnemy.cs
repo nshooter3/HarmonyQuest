@@ -13,6 +13,7 @@ public class TestEnemy : BeatTrackerObject
     public float rotateSpeed;
 
     public bool pursuePlayer = true;
+    public bool attackPlayer = true;
 
     [SerializeField]
     private CharacterController characterController;
@@ -131,43 +132,47 @@ public class TestEnemy : BeatTrackerObject
 
     public override void SixteenthNoteUpdate()
     {
-        //Giant switch statements, the mark of a true prototype. We gotta come up with a more eloquent way to do beat based actions.
-        switch (TestBeatTracker.instance.sixteenthNoteCount) {
-            case 5:
-                //Start telegraphing attack on the second beat of the measure
-                attackType = 1;
-                int ran = Random.Range(0,9);
-                if (ran < 4)
-                {
-                    attackType = 2;
-                }
-                if (attackType == 1)
-                {
-                    enemyMat.color = windUpColor1;
-                    charge1.Play();
-                }
-                else
-                {
-                    enemyMat.color = windUpColor2;
-                    charge2.Play();
-                }
-                break;
-            case 8:
-                //Flash red RIGHT before the moment of attack. One 16th note away, to be precise.
-                enemyMat.color = preAttackColor;
-                break;
-            case 9:
-                enemyMat.color = defaultColor;
-                //Attack right on the third beat of the measure
-                if (attackType == 1)
-                {
-                    Attack(true);
-                }
-                else
-                {
-                    Attack(false);
-                }
-                break;
+        if (attackPlayer)
+        {
+            //Giant switch statements, the mark of a true prototype. We gotta come up with a more eloquent way to do beat based actions.
+            switch (TestBeatTracker.instance.sixteenthNoteCount)
+            {
+                case 5:
+                    //Start telegraphing attack on the second beat of the measure
+                    attackType = 1;
+                    int ran = Random.Range(0, 9);
+                    if (ran < 4)
+                    {
+                        attackType = 2;
+                    }
+                    if (attackType == 1)
+                    {
+                        enemyMat.color = windUpColor1;
+                        charge1.Play();
+                    }
+                    else
+                    {
+                        enemyMat.color = windUpColor2;
+                        charge2.Play();
+                    }
+                    break;
+                case 8:
+                    //Flash red RIGHT before the moment of attack. One 16th note away, to be precise.
+                    enemyMat.color = preAttackColor;
+                    break;
+                case 9:
+                    enemyMat.color = defaultColor;
+                    //Attack right on the third beat of the measure
+                    if (attackType == 1)
+                    {
+                        Attack(true);
+                    }
+                    else
+                    {
+                        Attack(false);
+                    }
+                    break;
+            }
         }
     }
 
