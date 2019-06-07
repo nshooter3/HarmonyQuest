@@ -24,7 +24,7 @@ public class TestEnemy : BeatTrackerObject
     [SerializeField]
     private ParticleSystem getHitParticles;
     [SerializeField]
-    private AudioSource getHitSound, charge1, charge2;
+    private AudioSource getHitSound, charge1Sound, charge2Sound, attack1Sound, attack2Sound;
 
     [SerializeField]
     private TestEnemyHealthbar healthBar;
@@ -148,12 +148,12 @@ public class TestEnemy : BeatTrackerObject
                     if (attackType == 1)
                     {
                         enemyMat.color = windUpColor1;
-                        charge1.Play();
+                        charge1Sound.Play();
                     }
                     else
                     {
                         enemyMat.color = windUpColor2;
-                        charge2.Play();
+                        charge2Sound.Play();
                     }
                     break;
                 case 8:
@@ -166,10 +166,12 @@ public class TestEnemy : BeatTrackerObject
                     if (attackType == 1)
                     {
                         Attack(true);
+                        attack1Sound.Play();
                     }
                     else
                     {
                         Attack(false);
+                        attack2Sound.Play();
                     }
                     break;
             }

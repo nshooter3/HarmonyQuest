@@ -13,7 +13,7 @@ public class TestPlayer : MonoBehaviour
     private ParticleSystem parryParticles, getHitParticles, healParticles;
 
     [SerializeField]
-    private AudioSource parrySound, getHitSound, whiffSound;
+    private AudioSource parrySound, getHitSound, whiffSound, harmonyModeActivateSound, attackSound, comboUpSound, healSound;
 
     [SerializeField]
     private TestPlayerUI playerUI;
@@ -186,6 +186,7 @@ public class TestPlayer : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Space) && harmonyCharge >= maxHarmonyCharge / 2.0f && isInHarmonyMode == false)
         {
+            harmonyModeActivateSound.Play();
             playerUI.ToggleHarmonyMode(true);
             isInHarmonyMode = true;
             harmonyModeMultilpier = 2;
@@ -243,6 +244,7 @@ public class TestPlayer : MonoBehaviour
 
     void Attack()
     {
+        attackSound.Play();
         //The player can cancel out of a dash to attack
         if (IsDashing())
         {
@@ -297,6 +299,7 @@ public class TestPlayer : MonoBehaviour
 
     void Heal()
     {
+        healSound.Play();
         health = Mathf.Min(health + healingAmount, maxHealth);
         healingItems--;
         playerUI.SetHealthBar(health, maxHealth);
@@ -440,6 +443,7 @@ public class TestPlayer : MonoBehaviour
             if (nextMultiplierProgress >= 10 && attackMultiplier < 4)
             {
                 attackMultiplier++;
+                comboUpSound.Play();
                 if (attackMultiplier < 4)
                 {
                     nextMultiplierProgress = 0;
