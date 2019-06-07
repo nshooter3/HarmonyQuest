@@ -68,6 +68,8 @@ public class TestPlayer : MonoBehaviour
 
     private int attackMultiplier = 1, nextMultiplierProgress = 0;
 
+    private bool isDead = false;
+
     struct ReceivedAttack{
         public TestEnemy attacker;
         public int damage;
@@ -98,8 +100,12 @@ public class TestPlayer : MonoBehaviour
         {
             isLockedOn = false;
         }
-        Move();
-        CheckForInput();
+        if (isDead == false)
+        {
+            Move();
+            CheckForInput();
+        }
+
         CheckReceivedAttacks();
         UpdateTimers();
     }
@@ -528,6 +534,7 @@ public class TestPlayer : MonoBehaviour
 
     void Die()
     {
-        print("Oh no I died :(");
+        isDead = true;
+        TestGameState.instance.Lose();
     }
 }

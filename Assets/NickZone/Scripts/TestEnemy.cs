@@ -228,6 +228,7 @@ public class TestEnemy : BeatTrackerObject
 
     void Die()
     {
+        TestGameState.instance.Win();
         TestBeatTracker.instance.RemoveBeatTrackerAtIndex(beatTrackerIndex);
         Destroy(healthBar.gameObject);
         Destroy(gameObject);
