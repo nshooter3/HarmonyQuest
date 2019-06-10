@@ -168,29 +168,29 @@ public class TestPlayer : MonoBehaviour
     void CheckForInput()
     {
         if(IsParrying() == false && IsAttacking() == false && IsHealing() == false){
-            if (Input.GetKeyDown(KeyCode.LeftControl) && healingItems > 0 && !isInHarmonyMode)
+            if (TestPlayerInputManager.instance.HealButtonDown() && healingItems > 0 && !isInHarmonyMode)
             {
                 Heal();
             }
-            else if (Input.GetKeyDown(KeyCode.X) && IsParryCooldown() == false)
+            else if (TestPlayerInputManager.instance.ParryButtonDown() && IsParryCooldown() == false)
             {
                 Parry();
             }
-            else if (Input.GetKeyDown(KeyCode.Z) && IsAttackCooldown() == false)
+            else if (TestPlayerInputManager.instance.AttackButtonDown() && IsAttackCooldown() == false)
             {
                 Attack();
             }
-            else if (Input.GetKeyDown(KeyCode.C) && IsDashCooldown() == false)
+            else if (TestPlayerInputManager.instance.DodgeButtonDown() && IsDashCooldown() == false)
             {
                 Dash();
             }
         }
-        if (Input.GetKeyDown(KeyCode.LeftShift) && lockOnTarget != null)
+        if (TestPlayerInputManager.instance.LockonButtonDown() && lockOnTarget != null)
         {
             isLockedOn = !isLockedOn;
             lockOnReticule.SetActive(isLockedOn);
         }
-        if (Input.GetKeyDown(KeyCode.Space) && harmonyCharge >= maxHarmonyCharge / 2.0f && isInHarmonyMode == false)
+        if (TestPlayerInputManager.instance.HarmonyModeButtonDown() && harmonyCharge >= maxHarmonyCharge / 2.0f && isInHarmonyMode == false)
         {
             harmonyModeActivateSound.Play();
             playerUI.ToggleHarmonyMode(true);
@@ -356,7 +356,7 @@ public class TestPlayer : MonoBehaviour
         }
 
 
-        moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
+        moveDirection = new Vector3(TestPlayerInputManager.instance.GetHorizontalMovement(), 0.0f, TestPlayerInputManager.instance.GetVerticalMovement());
         if (movementSpeedOverride != 0)
         {
             moveDirection = dashDirection * movementSpeedOverride;
