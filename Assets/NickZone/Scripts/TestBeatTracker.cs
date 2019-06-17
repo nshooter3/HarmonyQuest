@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TestBeatTracker : MonoBehaviour
 {
@@ -10,16 +12,17 @@ public class TestBeatTracker : MonoBehaviour
     //List of objects that subscribe to TestBeatTracker updates
     public List<BeatTrackerObject> beatTrackerObjects;
 
-    public int bpm = 120;
-    private float sixteenthNoteDuration;
-    [HideInInspector]
-    public int sixteenthNoteCount = 1;
-    //Our beat based update cycle for now simply lasts 16 16th notes, which equals 4 beats, which equals 1 measure. Music, yeah!
-    private int maxSixteenthNoteCount = 16;
+    public Image debugImage;
 
-    private float timeUntilNextSixteenthNote = 0;
+    public int bpm = 140;
+    public int beatsPerMeasure = 4;
+    public float onBeatPadding = 0;
+    public int sixteenthNoteCount;
 
-    public bool playMetronome = false;
+    private float beatTimeDuration;
+    private float beatTimer;
+    private int beatCount;
+
     [SerializeField]
     private AudioSource metronomeSound;
 
@@ -39,9 +42,9 @@ public class TestBeatTracker : MonoBehaviour
     void Start()
     {
         InitBeatTrackerObjects();
-        sixteenthNoteDuration = (60.0f / bpm)/4.0f;
-        SixteenthNoteUpdate();
-        timeUntilNextSixteenthNote = sixteenthNoteDuration;
+        beatTimeDuration = 1.0f / (bpm / 60.0f);
+        beatTimer = 0.0f;
+        beatCount = 0;
     }
 
     void InitBeatTrackerObjects()
@@ -62,6 +65,8 @@ public class TestBeatTracker : MonoBehaviour
                 i--;
             }
         }
+
+
     }
 
     public void RemoveBeatTrackerAtIndex(int index)
@@ -73,27 +78,55 @@ public class TestBeatTracker : MonoBehaviour
     void Update()
     {
         UpdateCounts();
+
+        //Make multiplier image change colors during the "on beat" window
+        if (beatTimer > beatTimeDuration - (beatTimeDuration * 0.05) ||
+            beatTimer <= (beatTimeDuration * 0.05))
+        {
+            debugImage.color = Color.red;
+        }
+        else if (beatTimer > beatTimeDuration - (beatTimeDuration * onBeatPadding) /*||
+           beatTimer <= (beatTimeDuration * onBeatPadding)*/)
+        {
+            debugImage.color = Color.yellow;
+        }
+        else
+        {
+            debugImage.color = Color.white;
+        }
     }
 
     void UpdateCounts()
     {
-        timeUntilNextSixteenthNote -= Time.deltaTime;
-        if (timeUntilNextSixteenthNote <= 0)
+        beatTimer += Time.deltaTime;
+        SixteenthNoteUpdate();
+    }
+
+    //SoundController Calls this during the beat callback. 
+    public void Beat()
+    {
+        //metronomeSound.Play();
+        beatTimer = 0;
+        beatCount++;
+        sixteenthNoteCount = 0;
+        if (beatCount == beatsPerMeasure)
         {
-            timeUntilNextSixteenthNote = sixteenthNoteDuration;
-            //Once we pass our max 16th note count, reset to 1 instead of 0.
-            sixteenthNoteCount = Mathf.Max((sixteenthNoteCount + 1) % (maxSixteenthNoteCount + 1), 1);
-            SixteenthNoteUpdate();
+            beatCount = 0;
+        }
+        print("@@@ sixteenth notes" + sixteenthNoteCount);
+        foreach (BeatTrackerObject beatTrackerObject in beatTrackerObjects)
+        {
+            beatTrackerObject.SixteenthNoteUpdate();
         }
     }
 
-    //Allow a little bit of wiggle room both before and after the beat for determing whether or not an action was on beat.
+    //Allow a little bit of wiggle room both before and after the beat for determining whether or not an action was on beat.
     public bool WasActionOnBeat(bool debug = false)
     {
         //An attack within a 32nd note before the beat will count as on beat.
-        bool attackedWithinRangeBeforeBeat = (sixteenthNoteCount % 4 == 0) && (timeUntilNextSixteenthNote <= sixteenthNoteDuration / 2.0f);
+        bool attackedWithinRangeBeforeBeat = beatTimer > beatTimeDuration - (beatTimeDuration * onBeatPadding);
         //An attack within a 32nd note after the beat will count as on beat.
-        bool attackedWithinRangeAfterBeat = (sixteenthNoteCount % 4 == 1) && (timeUntilNextSixteenthNote >= sixteenthNoteDuration / 2.0f);
+        bool attackedWithinRangeAfterBeat = beatTimer <= (beatTimeDuration * onBeatPadding);
         if (debug)
         {
             if (attackedWithinRangeBeforeBeat)
@@ -112,19 +145,26 @@ public class TestBeatTracker : MonoBehaviour
         return attackedWithinRangeBeforeBeat || attackedWithinRangeAfterBeat;
     }
 
+
     void SixteenthNoteUpdate()
     {
-        ClearNullBeatTrackerObjects();
-        if (playMetronome && sixteenthNoteCount % 4 == 1)
+        if (sixteenthNoteCount < 3)
         {
-            metronomeSound.Play();
-        }
-        foreach (BeatTrackerObject beatTrackerObject in beatTrackerObjects)
-        {
-            beatTrackerObject.SixteenthNoteUpdate();
+            ClearNullBeatTrackerObjects();
+            int newSixteenthNoteCount = (int)(beatTimer / (beatTimeDuration / 4.0f));
+            if (sixteenthNoteCount != newSixteenthNoteCount)
+            {
+                sixteenthNoteCount = newSixteenthNoteCount;
+                print("@@@ sixteenth notes" + sixteenthNoteCount);
+                foreach (BeatTrackerObject beatTrackerObject in beatTrackerObjects)
+                {
+                    beatTrackerObject.SixteenthNoteUpdate();
+                }
+            }
         }
     }
 
+    /*
     void EighthNoteUpdate()
     {
         ClearNullBeatTrackerObjects();
@@ -160,4 +200,5 @@ public class TestBeatTracker : MonoBehaviour
             beatTrackerObject.EighthTripletNoteUpdate();
         }
     }
+    */
 }
