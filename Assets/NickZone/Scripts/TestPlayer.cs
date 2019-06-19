@@ -236,6 +236,10 @@ public class TestPlayer : MonoBehaviour
     {
         return healTimer > 0;
     }
+    public bool IsLockedOn()
+    {
+        return isLockedOn && lockOnTarget != null;
+    }
 
     void Parry()
     {
