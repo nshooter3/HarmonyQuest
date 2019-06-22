@@ -109,6 +109,7 @@ public class FmodListener : MonoBehaviour
     [AOT.MonoPInvokeCallback(typeof(FMOD.Studio.EVENT_CALLBACK))]
     static FMOD.RESULT BeatEventCallback(FMOD.Studio.EVENT_CALLBACK_TYPE type, FMOD.Studio.EventInstance instance, IntPtr parameterPtr)
     {
+        //Debug.Log("BeatEventCallback");
         // Retrieve the user data
         IntPtr timelineInfoPtr;
         FMOD.RESULT result = instance.getUserData(out timelineInfoPtr);
@@ -144,6 +145,11 @@ public class FmodListener : MonoBehaviour
                         var parameter = (FMOD.Studio.TIMELINE_MARKER_PROPERTIES)Marshal.PtrToStructure(parameterPtr, typeof(FMOD.Studio.TIMELINE_MARKER_PROPERTIES));
                         timelineInfo.lastMarker = parameter.name;
                         //print(parameter.name + " MARKER CALLBACK");
+                        if (FmodChordInterpreter.instance != null && FmodChordInterpreter.instance.IsFmodMarkerChordInformation(parameter.name))
+                        {
+                            FmodChordInterpreter.instance.ParseChordFromMarker(parameter.name);
+                            //FmodChordInterpreter.instance.PrintCurrentChord();
+                        }
                     }
                     break;
                 case FMOD.Studio.EVENT_CALLBACK_TYPE.STARTED:

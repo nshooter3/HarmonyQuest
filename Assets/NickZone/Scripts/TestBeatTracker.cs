@@ -113,7 +113,7 @@ public class TestBeatTracker : MonoBehaviour
         {
             beatCount = 0;
         }
-        print("@@@ sixteenth notes" + sixteenthNoteCount);
+        //print("@@@ sixteenth notes" + sixteenthNoteCount);
         foreach (BeatTrackerObject beatTrackerObject in beatTrackerObjects)
         {
             beatTrackerObject.SixteenthNoteUpdate();
@@ -155,7 +155,7 @@ public class TestBeatTracker : MonoBehaviour
             if (sixteenthNoteCount != newSixteenthNoteCount)
             {
                 sixteenthNoteCount = newSixteenthNoteCount;
-                print("@@@ sixteenth notes" + sixteenthNoteCount);
+                //print("@@@ sixteenth notes" + sixteenthNoteCount);
                 foreach (BeatTrackerObject beatTrackerObject in beatTrackerObjects)
                 {
                     beatTrackerObject.SixteenthNoteUpdate();

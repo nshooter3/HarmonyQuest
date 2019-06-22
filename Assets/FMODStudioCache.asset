@@ -1,5 +1,22 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9100211345255941413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Crystal Man Fight - Pink (v.2)/dissonance
+  m_EditorClassIdentifier: 
+  Name: dissonance
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
 --- !u!114 &-8886970573425337427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51,6 +68,23 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 0
+--- !u!114 &-8606541698709506636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Crystal Man Fight - Pink/fight
+  m_EditorClassIdentifier: 
+  Name: fight
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 0
 --- !u!114 &-8526163485615960779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -85,6 +119,29 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 1
+--- !u!114 &-7700123963301654750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/referenced events/Dissonance
+  m_EditorClassIdentifier: 
+  Path: event:/referenced events/Dissonance
+  guid: 264db2180bbd884cb4bbb0c9e8c1a247
+  Banks:
+  - {fileID: -6395342369003233155}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 30857
 --- !u!114 &-7600505648758000469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,6 +176,23 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 0
+--- !u!114 &-7500404849897938595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Crystal Man Fight - Pink (v.2)/fight_idle
+  m_EditorClassIdentifier: 
+  Name: fight_idle
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
 --- !u!114 &-7217804252091718800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,6 +210,25 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 0
+--- !u!114 &-6891587376868980150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master Bank.strings.bank
+  m_EditorClassIdentifier: 
+  Path: Assets\Audio\FMOD\Harmony Quest FMOD\Build\Desktop\Master Bank.strings.bank
+  lastModified: 636967368418587326
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 1078
+  Exists: 1
 --- !u!114 &-6773924343479824026
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,6 +246,66 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 0
+--- !u!114 &-6460364212067043674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Crystal Man Fight - Pink/fight
+  m_EditorClassIdentifier: 
+  Name: fight
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
+--- !u!114 &-6395342369003233155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Crystal Man.bank
+  m_EditorClassIdentifier: 
+  Path: C:\Users\Nick\Documents\GitHub\HarmonyQuest\Assets\Audio\FMOD\Harmony Quest
+    FMOD\Build\Desktop\Crystal Man.bank
+  lastModified: 636967368418517322
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 31061184
+  Exists: 1
+--- !u!114 &-6278768587670890847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/referenced events/Hit
+  m_EditorClassIdentifier: 
+  Path: event:/referenced events/Hit
+  guid: f1fbaf2036504a48809aac15cb0f66d5
+  Banks:
+  - {fileID: -6395342369003233155}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 3498
 --- !u!114 &-6262098664765349036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,6 +340,23 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 0
+--- !u!114 &-5427930057867468564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Crystal Man Fight - Pink/fight_outro
+  m_EditorClassIdentifier: 
+  Name: fight_outro
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
 --- !u!114 &-5303583495211686274
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -286,11 +456,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: C:\Users\Nick\Documents\GitHub\HarmonyQuest\Assets\Audio\FMOD\CMF Pink\Build\Desktop\Master
     Bank.bank
-  lastModified: 636963338465591482
+  lastModified: 636964179392640661
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 2547264
+    Value: 2547392
   Exists: 1
 --- !u!114 &-3137253424413853600
 MonoBehaviour:
@@ -360,6 +530,23 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 0
+--- !u!114 &-2497119748920156721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Crystal Man Fight - Pink/dissonance
+  m_EditorClassIdentifier: 
+  Name: dissonance
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 0
 --- !u!114 &-2110337941863328860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -394,6 +581,23 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 0
+--- !u!114 &-1982083716844252468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Crystal Man Fight - Pink/dissonance_idle
+  m_EditorClassIdentifier: 
+  Name: dissonance_idle
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 0
 --- !u!114 &-1637031319042342768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -411,6 +615,23 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 0
+--- !u!114 &-1335455980277807338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Crystal Man Fight - Pink (v.2)/dissonance_idle
+  m_EditorClassIdentifier: 
+  Name: dissonance_idle
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
 --- !u!114 &-1186996077062623860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -428,6 +649,29 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 0
+--- !u!114 &-990481781476257258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/referenced events/Intro
+  m_EditorClassIdentifier: 
+  Path: event:/referenced events/Intro
+  guid: d35dcccb3bf155459be3154bfad6a16e
+  Banks:
+  - {fileID: -6395342369003233155}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 30857
 --- !u!114 &-939495252125257838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -530,6 +774,23 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 0
+--- !u!114 &-86494243118663461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Crystal Man Fight - Pink/fight_idle
+  m_EditorClassIdentifier: 
+  Name: fight_idle
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -543,15 +804,22 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
   EditorBanks:
-  - {fileID: 4159772256755772361}
-  - {fileID: -4066420768607538018}
+  - {fileID: -6891587376868980150}
+  - {fileID: 5886854101943802208}
+  - {fileID: -6395342369003233155}
   EditorEvents:
-  - {fileID: 8566229527261170047}
+  - {fileID: -7700123963301654750}
+  - {fileID: 1321621387710840358}
+  - {fileID: 2280425454951843121}
+  - {fileID: 3616573197085165211}
+  - {fileID: 5688543952603104251}
+  - {fileID: -990481781476257258}
+  - {fileID: -6278768587670890847}
   MasterBanks:
-  - {fileID: -4066420768607538018}
+  - {fileID: 5886854101943802208}
   StringsBanks:
-  - {fileID: 4159772256755772361}
-  stringsBankWriteTime: 636963338465651485
+  - {fileID: -6891587376868980150}
+  stringsBankWriteTime: 636967368418587326
   cacheVersion: 3
 --- !u!114 &617184948273282697
 MonoBehaviour:
@@ -621,6 +889,23 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 0
+--- !u!114 &841202485422941527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Crystal Man Fight - Pink/fight_idle
+  m_EditorClassIdentifier: 
+  Name: fight_idle
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 0
 --- !u!114 &940383119521868758
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -638,6 +923,29 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 1
+--- !u!114 &1321621387710840358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/referenced events/Fight
+  m_EditorClassIdentifier: 
+  Path: event:/referenced events/Fight
+  guid: 339cb287b135c043b54d2fadf62b8792
+  Banks:
+  - {fileID: -6395342369003233155}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 31285
 --- !u!114 &1597728912644563705
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -672,6 +980,34 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 1
+--- !u!114 &2280425454951843121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Crystal Man Fight - Pink (v.2)
+  m_EditorClassIdentifier: 
+  Path: event:/Crystal Man Fight - Pink (v.2)
+  guid: 85723d791c19bd4aaaf8ef09d27b4e14
+  Banks:
+  - {fileID: -6395342369003233155}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 4330712719655634781}
+  - {fileID: -9100211345255941413}
+  - {fileID: -7500404849897938595}
+  - {fileID: 3389586600113026737}
+  - {fileID: -1335455980277807338}
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 176571
 --- !u!114 &2327572871417279090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -757,6 +1093,23 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 0
+--- !u!114 &3389586600113026737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Crystal Man Fight - Pink (v.2)/fight_outro
+  m_EditorClassIdentifier: 
+  Name: fight_outro
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
 --- !u!114 &3497331324847620257
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -774,6 +1127,29 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 0
+--- !u!114 &3616573197085165211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/referenced events/Fight Idle
+  m_EditorClassIdentifier: 
+  Path: event:/referenced events/Fight Idle
+  guid: 8c5cac7011635c42964bddcea9b62049
+  Banks:
+  - {fileID: -6395342369003233155}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 31285
 --- !u!114 &3734939035865959874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -821,11 +1197,28 @@ MonoBehaviour:
   m_Name: bank:/Master Bank.strings.bank
   m_EditorClassIdentifier: 
   Path: Assets\Audio\FMOD\CMF Pink\Build\Desktop\Master Bank.strings.bank
-  lastModified: 636963338465651485
+  lastModified: 636964179392690664
   LoadResult: 0
   FileSizes:
   - Name: Desktop
     Value: 734
+  Exists: 1
+--- !u!114 &4330712719655634781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Crystal Man Fight - Pink (v.2)/fight
+  m_EditorClassIdentifier: 
+  Name: fight
+  Min: 0
+  Max: 1
+  Default: 0
   Exists: 1
 --- !u!114 &4377331336705089686
 MonoBehaviour:
@@ -929,6 +1322,29 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 1
+--- !u!114 &5688543952603104251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/referenced events/Dissonance Idle
+  m_EditorClassIdentifier: 
+  Path: event:/referenced events/Dissonance Idle
+  guid: 97c4964aa6d9004a9eddbf715d9944aa
+  Banks:
+  - {fileID: -6395342369003233155}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 30857
 --- !u!114 &5702263501249462578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -946,6 +1362,26 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 0
+--- !u!114 &5886854101943802208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master Bank.bank
+  m_EditorClassIdentifier: 
+  Path: C:\Users\Nick\Documents\GitHub\HarmonyQuest\Assets\Audio\FMOD\Harmony Quest
+    FMOD\Build\Desktop\Master Bank.bank
+  lastModified: 636967368418577325
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 12474
+  Exists: 1
 --- !u!114 &6788026009352584256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -963,6 +1399,23 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 0
+--- !u!114 &7123274790653346652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Crystal Man Fight - Pink/dissonance_idle
+  m_EditorClassIdentifier: 
+  Name: dissonance_idle
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
 --- !u!114 &7638603094755612334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -993,6 +1446,23 @@ MonoBehaviour:
   m_Name: parameter:/Crystal Man Fight - Pink/fight_idle
   m_EditorClassIdentifier: 
   Name: fight_idle
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 0
+--- !u!114 &7855994780760914271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Crystal Man Fight - Pink/fight_outro
+  m_EditorClassIdentifier: 
+  Name: fight_outro
   Min: 0
   Max: 1
   Default: 0
@@ -1153,11 +1623,11 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 2327572871417279090}
-  - {fileID: 1597728912644563705}
-  - {fileID: -4905156511328950691}
-  - {fileID: -8047481754552226519}
-  - {fileID: -3137253424413853600}
+  - {fileID: 7123274790653346652}
+  - {fileID: 8932554280916794320}
+  - {fileID: -86494243118663461}
+  - {fileID: -5427930057867468564}
+  - {fileID: -6460364212067043674}
   MinDistance: 0
   MaxDistance: 0
   Length: 37714
@@ -1195,3 +1665,20 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 0
+--- !u!114 &8932554280916794320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Crystal Man Fight - Pink/dissonance
+  m_EditorClassIdentifier: 
+  Name: dissonance
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1

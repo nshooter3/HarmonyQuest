@@ -8,7 +8,7 @@
 [WRN] SystemI::init                            : Output requires a sample rate of 44100Hz, resampling will occur.
 [LOG] Thread::initThread                       : Init FMOD stream thread. Priority: 2, Stack Size: 65536, Semaphore: No, Sleep Time: 10, Looping: Yes.
 [LOG] Thread::initThread                       : Init FMOD mixer thread. Priority: 3, Stack Size: 49152, Semaphore: No, Sleep Time: 0, Looping: Yes.
-[LOG] AsyncManager::init                       : manager 0000000039C9E428 isAsync 0 updatePeriod 0.02
+[LOG] AsyncManager::init                       : manager 0000000039C9FE48 isAsync 0 updatePeriod 0.02
 [LOG] AsyncManager::init                       : done
 [LOG] PlaybackSystem::init                     : 
 [LOG] Thread::initThread                       : Init FMOD Studio sample load thread. Priority: 0, Stack Size: 65536, Semaphore: No, Sleep Time: 1, Looping: No.
@@ -16,28 +16,22 @@
 [LOG] Thread::initThread                       : Init FMOD Studio bank load thread. Priority: 0, Stack Size: 65536, Semaphore: No, Sleep Time: 1, Looping: No.
 [LOG] Manager::init                            : done.
 [LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
-[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
-[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
-[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
-[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
-[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
-[LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 3
-[LOG] SoundI::release                          :  (0000000032B36BE8)
-[LOG] SoundI::release                          :     cmf_pink_music_transition2 (0000000056916888)
-[LOG] SoundI::release                          :  (0000000032B36628)
-[LOG] SoundI::release                          :     cmf_pink_music_transition1 (000000002C43E688)
-[LOG] SoundI::release                          :  (0000000032B361D8)
-[LOG] SoundI::release                          :     cmf_pink_music_dissonance (000000002C43E4E8)
+[LOG] SoundI::release                          :  (0000000032CD3F58)
+[LOG] SoundI::release                          :     cmf_pink_music_transition2 (0000000059722018)
+[LOG] SoundI::release                          :  (0000000032CD3548)
+[LOG] SoundI::release                          :     cmf_pink_music_transition1 (0000000059677008)
+[LOG] SoundI::release                          :  (0000000032CD36B8)
+[LOG] SoundI::release                          :     cmf_pink_music_dissonance (0000000059722B78)
+[LOG] SoundI::release                          :  (0000000032CD3828)
+[LOG] SoundI::release                          :     cmf_pink_music_fight (00000000597229D8)
+[LOG] SoundI::release                          :  (0000000032B35EF8)
+[LOG] SoundI::release                          :     cmf_pink_music_fight_idle (00000000596771A8)
+[LOG] SoundI::release                          :  (0000000032CD3C78)
+[LOG] SoundI::release                          :     cmf_pink_music_knockout (0000000059722358)
 [LOG] SoundI::release                          :  (0000000032B36A78)
-[LOG] SoundI::release                          :     cmf_pink_music_fight (000000002C43E348)
-[LOG] SoundI::release                          :  (0000000031FEF6F8)
-[LOG] SoundI::release                          :     cmf_pink_music_fight_idle (000000002C43E828)
-[LOG] SoundI::release                          :  (0000000032B36068)
-[LOG] SoundI::release                          :     cmf_pink_music_knockout (000000002C43E008)
-[LOG] SoundI::release                          :  (0000000031FEFCB8)
-[LOG] SoundI::release                          :     cmf_pink_music_intro (000000002C43E9C8)
-[LOG] SoundI::release                          :  (0000000032B364B8)
-[LOG] SoundI::release                          :     GDYN - ETS2 - Pummel (000000002C43E1A8)
+[LOG] SoundI::release                          :     cmf_pink_music_intro (0000000059677348)
+[LOG] SoundI::release                          :  (0000000032CD3B08)
+[LOG] SoundI::release                          :     GDYN - ETS2 - Pummel (0000000059722838)
 [LOG] Thread::callback                         : FMOD Studio update thread finished.
 [LOG] Thread::callback                         : FMOD Studio bank load thread finished.
 [LOG] Thread::callback                         : FMOD Studio sample load thread finished.
@@ -51,8 +45,15 @@
 [LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
 [LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
 [LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 3
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
 [LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
 [LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 3
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
 [LOG] Thread::callback                         : FMOD Studio bank load thread finished.
 [LOG] Thread::callback                         : FMOD Studio sample load thread finished.
 [LOG] LiveUpdate::release                      : 
