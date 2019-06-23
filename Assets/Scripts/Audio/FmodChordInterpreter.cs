@@ -7,17 +7,6 @@ public class FmodChordInterpreter : MonoBehaviour
 {
     public static FmodChordInterpreter instance;
 
-    /// <summary>
-    /// Holds onto relevant note information within our chord.
-    /// </summary>
-    public struct FmodNote
-    {
-        public int midiValue;
-        public string note;
-        public int octave;
-        public bool isRootNote;
-    }
-
     private List<FmodNote> fmodChord = new List<FmodNote>();
 
     /// <summary>
@@ -61,7 +50,7 @@ public class FmodChordInterpreter : MonoBehaviour
     /// Initialize our dictionary with the midi values of all our notes. This allows us to convert a note name into a midi value.
     /// There are a few duplicate values, since some differently named notes refer to the same key on a keyboard (C# and Db, for instance)
     /// </summary>
-    void InitMidiConversionMap()
+    private void InitMidiConversionMap()
     {
         noteToMidiConversionMap = new Dictionary<string, int>();
 
@@ -155,6 +144,11 @@ public class FmodChordInterpreter : MonoBehaviour
     public void ResetFmodChord()
     {
         fmodChord = new List<FmodNote>();
+    }
+
+    public List<FmodNote> GetFmodChord()
+    {
+        return fmodChord;
     }
 
     public void PrintCurrentChord()

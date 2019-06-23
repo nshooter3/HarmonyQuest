@@ -55,6 +55,8 @@ public class FmodListener : MonoBehaviour
         // Pass the object through the userdata of the instance
         emitter.EventInstance.setUserData(GCHandle.ToIntPtr(timelineHandle));
 
+        //emitter.EventInstance.setVolume(0.1f);
+
         //emitter.EventInstance.setVolume(0);
 
         emitter.EventInstance.setCallback(beatCallback,
@@ -149,6 +151,7 @@ public class FmodListener : MonoBehaviour
                         {
                             FmodChordInterpreter.instance.ParseChordFromMarker(parameter.name);
                             //FmodChordInterpreter.instance.PrintCurrentChord();
+                            //TestMusicalSfxPlayer.instance.PlayChord(FmodChordInterpreter.instance.GetFmodChord());
                         }
                     }
                     break;
