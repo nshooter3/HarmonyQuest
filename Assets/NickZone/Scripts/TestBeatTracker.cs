@@ -21,8 +21,10 @@ public class TestBeatTracker : MonoBehaviour
 
     private float beatTimeDuration;
     private float beatTimer;
-    private int beatCount;
+    public int beatCount;
 
+    [SerializeField]
+    private bool playMetronome = false;
     [SerializeField]
     private AudioSource metronomeSound;
 
@@ -105,7 +107,10 @@ public class TestBeatTracker : MonoBehaviour
     //SoundController Calls this during the beat callback. 
     public void Beat()
     {
-        //metronomeSound.Play();
+        if (playMetronome)
+        {
+            metronomeSound.Play();
+        }
         beatTimer = 0;
         beatCount++;
         sixteenthNoteCount = 0;

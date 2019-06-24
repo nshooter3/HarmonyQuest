@@ -134,14 +134,17 @@ public class TestEnemy : BeatTrackerObject
     {
         if (attackPlayer)
         {
+            int count = 1 + TestBeatTracker.instance.sixteenthNoteCount + (TestBeatTracker.instance.beatCount) * 4;
+            //print("ENEMY COUNT = " + count);
+
             //Giant switch statements, the mark of a true prototype. We gotta come up with a more eloquent way to do beat based actions.
-            switch (TestBeatTracker.instance.sixteenthNoteCount)
+            switch (count)
             {
                 case 5:
                     //Start telegraphing attack on the second beat of the measure
                     attackType = 1;
-                    int ran = Random.Range(0, 9);
-                    if (ran < 4)
+                    int ran = Random.Range(0, 8);
+                    if (ran < 2)
                     {
                         attackType = 2;
                     }

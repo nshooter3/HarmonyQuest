@@ -20,9 +20,22 @@ public class TestMusicalSfxPlayer : MonoBehaviour
         }
     }
 
-    public void PlayMusicalSFX(int scaleDegree)
+    public void PlayRootNote()
     {
-        musicalSFX[scaleDegree].Play();
+        FmodNote rootNote = FmodChordInterpreter.instance.GetFmodRootNote();
+        if (rootNote != null)
+        {
+            musicalSFX[rootNote.midiValue % 12].Play();
+        }
+        else
+        {
+            Debug.LogWarning("No root note found in current chord. Playing nothing.");
+        }
+    }
+
+    public void PlayRandomNote()
+    {
+        musicalSFX[FmodChordInterpreter.instance.GetFmodRandomNote().midiValue % 12].Play();
     }
 
     public void PlayChord(List<FmodNote> notes)

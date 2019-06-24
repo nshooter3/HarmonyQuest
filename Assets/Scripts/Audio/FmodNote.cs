@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FmodNote : MonoBehaviour
+public class FmodNote
 {
     public int midiValue;
     public string note;

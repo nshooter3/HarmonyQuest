@@ -151,6 +151,23 @@ public class FmodChordInterpreter : MonoBehaviour
         return fmodChord;
     }
 
+    public FmodNote GetFmodRootNote()
+    {
+        foreach (FmodNote note in fmodChord)
+        {
+            if (note.isRootNote)
+            {
+                return note;
+            }
+        }
+        return null;
+    }
+
+    public FmodNote GetFmodRandomNote()
+    {
+        return fmodChord[UnityEngine.Random.Range(0, fmodChord.Count)];
+    }
+
     public void PrintCurrentChord()
     {
         foreach (FmodNote note in fmodChord)

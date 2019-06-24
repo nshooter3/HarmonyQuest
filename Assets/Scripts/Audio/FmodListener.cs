@@ -8,6 +8,8 @@ public class FmodListener : MonoBehaviour
 {
     public static FmodListener instance;
 
+    public float musicVolume;
+
     // Variables that are modified in the callback need to be part of a seperate class.
     // This class needs to be 'blittable' otherwise it can't be pinned in memory.
     [StructLayout(LayoutKind.Sequential)]
@@ -55,7 +57,7 @@ public class FmodListener : MonoBehaviour
         // Pass the object through the userdata of the instance
         emitter.EventInstance.setUserData(GCHandle.ToIntPtr(timelineHandle));
 
-        //emitter.EventInstance.setVolume(0.1f);
+        emitter.EventInstance.setVolume(musicVolume);
 
         //emitter.EventInstance.setVolume(0);
 
