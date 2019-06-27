@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
 
-public class FmodListener : MonoBehaviour
+public class FmodMusicHandler : MonoBehaviour
 {
-    public static FmodListener instance;
+    public static FmodMusicHandler instance;
 
     public float musicVolume;
 
@@ -68,40 +68,10 @@ public class FmodListener : MonoBehaviour
             );
     }
 
-    /*void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            StartEvent();
-        }
-    }
-
-    void StartEvent()
-    {
-        emitter.enabled = true;
-    }*/
-
-    public void StopEvent()
-    {
-        emitter.EventInstance.setUserData(IntPtr.Zero);
-        emitter.EventInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-        emitter.EventInstance.release();
-        timelineHandle.Free();
-    }
-
     private void OnDestroy()
     {
-        StopEvent();
-    }
-
-    public void SetFmodParameterValue(string parameter, float value)
-    {
-        print(emitter.EventInstance.setParameterValue(parameter, value));
-    }
-
-    void OnGUI()
-    {
-        GUILayout.Box(String.Format("Current Beat = {0}, Last Marker = {1}", timelineInfo.currentMusicBeat, (string)timelineInfo.lastMarker));
+        timelineHandle.Free();
+        FmodFacade.instance.StopFmodEvent(emitter.EventInstance);
     }
 
     public int GetCurrentBeat()

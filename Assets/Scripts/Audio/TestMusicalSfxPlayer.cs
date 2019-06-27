@@ -8,6 +8,8 @@ public class TestMusicalSfxPlayer : MonoBehaviour
 
     public AudioSource[] musicalSFX;
 
+    public float volume = 1.0f;
+
     private void Awake()
     {
         if (instance == null)
@@ -20,12 +22,14 @@ public class TestMusicalSfxPlayer : MonoBehaviour
         }
     }
 
-    public void PlayRootNote()
+    public void PlayRootNote(string eventName, string paramName)
     {
         FmodNote rootNote = FmodChordInterpreter.instance.GetFmodRootNote();
         if (rootNote != null)
         {
-            musicalSFX[rootNote.midiValue % 12].Play();
+            //musicalSFX[rootNote.midiValue % 12].Play();
+            float noteValue = rootNote.midiValue % 12 + 1.0f;
+            FmodFacade.instance.CreateAndRunOneShotFmodEvent(eventName, volume, paramName, noteValue);
         }
         else
         {
@@ -33,16 +37,20 @@ public class TestMusicalSfxPlayer : MonoBehaviour
         }
     }
 
-    public void PlayRandomNote()
+    public void PlayRandomNote(string eventName, string paramName)
     {
-        musicalSFX[FmodChordInterpreter.instance.GetFmodRandomNote().midiValue % 12].Play();
+        //musicalSFX[FmodChordInterpreter.instance.GetFmodRandomNote().midiValue % 12].Play();
+        float noteValue = FmodChordInterpreter.instance.GetFmodRandomNote().midiValue % 12 + 1.0f;
+        FmodFacade.instance.CreateAndRunOneShotFmodEvent(eventName, volume, paramName, noteValue);
     }
 
-    public void PlayChord(List<FmodNote> notes)
+    public void PlayChord(string eventName, string paramName, List<FmodNote> notes)
     {
         foreach (FmodNote note in notes)
         {
-            musicalSFX[note.midiValue % 12].Play();
+            //musicalSFX[note.midiValue % 12].Play();
+            float noteValue = note.midiValue % 12 + 1.0f;
+            FmodFacade.instance.CreateAndRunOneShotFmodEvent(eventName, volume, paramName, noteValue);
         }
     }
 }

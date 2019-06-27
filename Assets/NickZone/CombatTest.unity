@@ -14609,8 +14609,9 @@ GameObject:
   - component: {fileID: 1073725860}
   - component: {fileID: 1073725862}
   - component: {fileID: 1073725861}
+  - component: {fileID: 1073725863}
   m_Layer: 0
-  m_Name: FmodListener
+  m_Name: FmodMusicHandler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14642,7 +14643,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68c1bcd8e0aaa4b4681d180912059dda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  musicVolume: 0.2
+  musicVolume: 0.8
 --- !u!114 &1073725861
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14676,6 +14677,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bafd768a39cc50947aa2a8621c27934a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1073725863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1073725858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4368f7d9db20be0438a3a30c0fea89c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1127097936
@@ -15021,6 +15034,10 @@ MonoBehaviour:
   comboUpSound: {fileID: 622063295}
   healSound: {fileID: 1835457716}
   playerUI: {fileID: 938023311}
+  fmodAttackEvent: event:/SFX/Melody Attack
+  fmodAttackParam: melody_attack_tonal
+  fmodParryEvent: event:/SFX/Melody Parry
+  fmodParryParam: melody_parry_tonal
   attackDamage: 10
   health: 0
   maxHealth: 50
@@ -22999,6 +23016,7 @@ MonoBehaviour:
   - {fileID: 1643742772}
   - {fileID: 946312342}
   - {fileID: 1529845361}
+  volume: 0.2
 --- !u!4 &1922830681
 Transform:
   m_ObjectHideFlags: 0
