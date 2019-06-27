@@ -17,6 +17,23 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 1
+--- !u!114 &-8910520027538083927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Melody Attack/melody_attack_tonal
+  m_EditorClassIdentifier: 
+  Name: melody_attack_tonal
+  Min: 0
+  Max: 12
+  Default: 0
+  Exists: 1
 --- !u!114 &-8886970573425337427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102,6 +119,23 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 0
+--- !u!114 &-8476111555809398277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Crystal Man Fight - Pink (v.2)/dissonance
+  m_EditorClassIdentifier: 
+  Name: dissonance
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
 --- !u!114 &-8130262781307245950
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,11 +149,11 @@ MonoBehaviour:
   m_Name: bank:/Master Bank.strings.bank
   m_EditorClassIdentifier: 
   Path: Assets\Audio\FMOD\Harmony Quest FMOD\Build\Desktop\Master Bank.strings.bank
-  lastModified: 636967368418587326
+  lastModified: 636971897325136500
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 1078
+    Value: 960
   Exists: 1
 --- !u!114 &-8047481754552226519
 MonoBehaviour:
@@ -226,8 +260,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/referenced events/Dissonance
   guid: 264db2180bbd884cb4bbb0c9e8c1a247
-  Banks:
-  - {fileID: 3476039448407143858}
+  Banks: []
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
@@ -249,8 +282,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/referenced events/Fight
   guid: 339cb287b135c043b54d2fadf62b8792
-  Banks:
-  - {fileID: 3476039448407143858}
+  Banks: []
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
@@ -275,6 +307,23 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 0
+--- !u!114 &-7127028856072437651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Melody Parry/melody_parry_tonal
+  m_EditorClassIdentifier: 
+  Name: melody_parry_tonal
+  Min: 0
+  Max: 12
+  Default: 0
+  Exists: 1
 --- !u!114 &-6891587376868980150
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -422,6 +471,23 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 1
+--- !u!114 &-5398206339966831304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Crystal Man Fight - Pink (v.2)/melody_parry_tonal
+  m_EditorClassIdentifier: 
+  Name: melody_parry_tonal
+  Min: 0
+  Max: 12
+  Default: 0
+  Exists: 1
 --- !u!114 &-5356801811234587129
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -487,8 +553,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/referenced events/Dissonance Idle
   guid: 97c4964aa6d9004a9eddbf715d9944aa
-  Banks:
-  - {fileID: 3476039448407143858}
+  Banks: []
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
@@ -567,6 +632,65 @@ MonoBehaviour:
   - Name: Desktop
     Value: 2547392
   Exists: 1
+--- !u!114 &-4052641089199169196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Crystal Man Fight - Pink (v.2)/fight
+  m_EditorClassIdentifier: 
+  Name: fight
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
+--- !u!114 &-3721197485697952461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Melody Parry
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Melody Parry
+  guid: cb0dd874e493ad4d888f915a37e4fee0
+  Banks:
+  - {fileID: -1049485877293158063}
+  - {fileID: 1881208539979549951}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -7127028856072437651}
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 14000
+--- !u!114 &-3438789113736818086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Crystal Man Fight - Pink (v.2)/melody_attack_tonal
+  m_EditorClassIdentifier: 
+  Name: melody_attack_tonal
+  Min: 0
+  Max: 12
+  Default: 0
+  Exists: 1
 --- !u!114 &-3137253424413853600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -635,6 +759,23 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 0
+--- !u!114 &-2696735479789812700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Crystal Man Fight - Pink (v.2)/fight_outro
+  m_EditorClassIdentifier: 
+  Name: fight_outro
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
 --- !u!114 &-2497119748920156721
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -737,6 +878,31 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 0
+--- !u!114 &-1497224445187462965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Melody Attack
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Melody Attack
+  guid: 0e7526e8497f7745a5709f20ca186ed2
+  Banks:
+  - {fileID: -1049485877293158063}
+  - {fileID: 1881208539979549951}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -8910520027538083927}
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 14000
 --- !u!114 &-1335455980277807338
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -771,6 +937,43 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 0
+--- !u!114 &-1101073199235709685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Crystal Man Fight - Pink (v.2)/fight_idle
+  m_EditorClassIdentifier: 
+  Name: fight_idle
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
+--- !u!114 &-1049485877293158063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/SFX.bank
+  m_EditorClassIdentifier: 
+  Path: C:\Users\Nick\Documents\GitHub\HarmonyQuest\Assets\Audio\FMOD\Harmony Quest
+    FMOD\Build\Desktop\SFX.bank
+  lastModified: 636971897350547953
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 856096
+  Exists: 1
 --- !u!114 &-990481781476257258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -893,8 +1096,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/referenced events/Fight Idle
   guid: 8c5cac7011635c42964bddcea9b62049
-  Banks:
-  - {fileID: 3476039448407143858}
+  Banks: []
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
@@ -933,8 +1135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/referenced events/Intro
   guid: d35dcccb3bf155459be3154bfad6a16e
-  Banks:
-  - {fileID: 3476039448407143858}
+  Banks: []
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
@@ -974,20 +1175,17 @@ MonoBehaviour:
   EditorBanks:
   - {fileID: -8130262781307245950}
   - {fileID: 505198051047084838}
-  - {fileID: 3476039448407143858}
+  - {fileID: -1049485877293158063}
+  - {fileID: 1881208539979549951}
   EditorEvents:
-  - {fileID: -7442433628985850063}
-  - {fileID: -7287366641576075202}
-  - {fileID: 4516168053339637453}
-  - {fileID: -288664649497200488}
-  - {fileID: -5123108522900294949}
-  - {fileID: -87326022347316326}
-  - {fileID: 4379856672727705883}
+  - {fileID: -1497224445187462965}
+  - {fileID: -3721197485697952461}
+  - {fileID: 3606366239970219477}
   MasterBanks:
   - {fileID: 505198051047084838}
   StringsBanks:
   - {fileID: -8130262781307245950}
-  stringsBankWriteTime: 636967368418587326
+  stringsBankWriteTime: 636971897325136500
   cacheVersion: 3
 --- !u!114 &505198051047084838
 MonoBehaviour:
@@ -1003,7 +1201,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: C:\Users\Nick\Documents\GitHub\HarmonyQuest\Assets\Audio\FMOD\Harmony Quest
     FMOD\Build\Desktop\Master Bank.bank
-  lastModified: 636967368418577325
+  lastModified: 636971897325056495
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -1024,6 +1222,23 @@ MonoBehaviour:
   Name: dissonance_idle
   Min: 0
   Max: 1
+  Default: 0
+  Exists: 0
+--- !u!114 &682695912260148199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Melody Attack/melody_attack_tonal
+  m_EditorClassIdentifier: 
+  Name: melody_attack_tonal
+  Min: 0
+  Max: 12
   Default: 0
   Exists: 0
 --- !u!114 &689408655016775676
@@ -1167,6 +1382,26 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+  Exists: 1
+--- !u!114 &1881208539979549951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Music.bank
+  m_EditorClassIdentifier: 
+  Path: C:\Users\Nick\Documents\GitHub\HarmonyQuest\Assets\Audio\FMOD\Harmony Quest
+    FMOD\Build\Desktop\Music.bank
+  lastModified: 636971897350287939
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 4074176
   Exists: 1
 --- !u!114 &2022115787934559314
 MonoBehaviour:
@@ -1334,7 +1569,7 @@ MonoBehaviour:
   FileSizes:
   - Name: Desktop
     Value: 31061184
-  Exists: 1
+  Exists: 0
 --- !u!114 &3497331324847620257
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1352,6 +1587,36 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 0
+--- !u!114 &3606366239970219477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/Crystal Man/Crystal Man Fight - Pink (v.2)
+  m_EditorClassIdentifier: 
+  Path: event:/Music/Crystal Man/Crystal Man Fight - Pink (v.2)
+  guid: 85723d791c19bd4aaaf8ef09d27b4e14
+  Banks:
+  - {fileID: 1881208539979549951}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -4052641089199169196}
+  - {fileID: -3438789113736818086}
+  - {fileID: -8476111555809398277}
+  - {fileID: -1101073199235709685}
+  - {fileID: -2696735479789812700}
+  - {fileID: -5398206339966831304}
+  - {fileID: 3930350785467008972}
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 447428
 --- !u!114 &3616573197085165211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1392,6 +1657,23 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 0
+--- !u!114 &3930350785467008972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Crystal Man Fight - Pink (v.2)/dissonance_idle
+  m_EditorClassIdentifier: 
+  Name: dissonance_idle
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
 --- !u!114 &4001330223382281190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1476,8 +1758,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/referenced events/Hit
   guid: f1fbaf2036504a48809aac15cb0f66d5
-  Banks:
-  - {fileID: 3476039448407143858}
+  Banks: []
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1516,8 +1797,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Crystal Man Fight - Pink (v.2)
   guid: 85723d791c19bd4aaaf8ef09d27b4e14
-  Banks:
-  - {fileID: 3476039448407143858}
+  Banks: []
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
@@ -1675,6 +1955,23 @@ MonoBehaviour:
   - Name: Desktop
     Value: 12474
   Exists: 1
+--- !u!114 &5951063581916515178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Melody Parry/melody_parry_tonal
+  m_EditorClassIdentifier: 
+  Name: melody_parry_tonal
+  Min: 0
+  Max: 12
+  Default: 0
+  Exists: 0
 --- !u!114 &6788026009352584256
 MonoBehaviour:
   m_ObjectHideFlags: 0
