@@ -8,6 +8,9 @@ public class FmodFacade : MonoBehaviour
 {
     public static FmodFacade instance;
 
+    [SerializeField]
+    private bool debugOneShot = false;
+
     private void Awake()
     {
         if (instance == null)
@@ -41,8 +44,22 @@ public class FmodFacade : MonoBehaviour
     public void PlayOneShotFmodEvent(FMOD.Studio.EventInstance fmodEvent, float volume = 1.0f)
     {
         fmodEvent.setVolume(volume);
+        if (debugOneShot)
+        {
+            Debug.Log("1. START ONE SHOT EVENT");
+            FMOD.Studio.EVENT_CALLBACK stoppedOneShotEventCallback;
+            stoppedOneShotEventCallback = new FMOD.Studio.EVENT_CALLBACK(StoppedOneShotEventCallback);
+            fmodEvent.setCallback(stoppedOneShotEventCallback, FMOD.Studio.EVENT_CALLBACK_TYPE.STOPPED);
+        }
         fmodEvent.start();
         fmodEvent.release();
+    }
+
+    [AOT.MonoPInvokeCallback(typeof(FMOD.Studio.EVENT_CALLBACK))]
+    static FMOD.RESULT StoppedOneShotEventCallback(FMOD.Studio.EVENT_CALLBACK_TYPE type, FMOD.Studio.EventInstance instance, IntPtr parameterPtr)
+    {
+        Debug.Log("2. RELEASE ONE SHOT EVENT");
+        return FMOD.RESULT.OK;
     }
 
     public FMOD.Studio.EventInstance CreateFmodEventInstance(string eventName)

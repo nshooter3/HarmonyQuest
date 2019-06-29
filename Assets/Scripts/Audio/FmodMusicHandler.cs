@@ -10,6 +10,9 @@ public class FmodMusicHandler : MonoBehaviour
 
     public float musicVolume;
 
+    [SerializeField]
+    private bool memoryDebug = false;
+
     // Variables that are modified in the callback need to be part of a seperate class.
     // This class needs to be 'blittable' otherwise it can't be pinned in memory.
     [StructLayout(LayoutKind.Sequential)]
@@ -39,6 +42,16 @@ public class FmodMusicHandler : MonoBehaviour
         else
         {
             Destroy(gameObject);
+        }
+    }
+
+    void OnGUI()
+    {
+        if (memoryDebug)
+        {
+            int curAlloc, maxAlloc;
+            FMOD.Memory.GetStats(out curAlloc, out maxAlloc);
+            GUILayout.Box("Fmod cur memory alloc: " + curAlloc + ", Fmod max memory alloc: " + maxAlloc);
         }
     }
 
