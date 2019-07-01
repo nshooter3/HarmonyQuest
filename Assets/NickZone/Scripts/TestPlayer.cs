@@ -18,9 +18,9 @@ public class TestPlayer : MonoBehaviour
     [SerializeField]
     private TestPlayerUI playerUI;
 
-    //The names of the fmod events and parameters that we'll be using to do musical player sfx.
+    //References to the scripts we'll be using to play musical sounds.
     [SerializeField]
-    private string fmodAttackEvent, fmodAttackParam, fmodParryEvent, fmodParryParam;
+    private FmodMusicalSfxPlayer fmodAttackEvent, fmodParryEvent;
 
     //[SerializeField]
     private Material playerMat;
@@ -273,7 +273,7 @@ public class TestPlayer : MonoBehaviour
                 if (attackedOnBeat)
                 {
                     //print("GOOD! ON BEAT ATTACK!");
-                    FmodMusicalSfxPlayer.instance.PlayRootNote(fmodAttackEvent, fmodAttackParam);
+                    fmodAttackEvent.Play();
                     AddToMultiplierProgress(1);
                     harmonyCharge = Mathf.Min(maxHarmonyCharge, harmonyCharge + 2);
                     playerUI.SetHarmonyChargeBar(harmonyCharge, maxHarmonyCharge);
@@ -425,7 +425,7 @@ public class TestPlayer : MonoBehaviour
             if (receivedAttacks[i].parryable && WasDamageParried(receivedAttacks[i].attacker.gameObject) == true)
             {
                 print("SUCCESSFUL PARRY!");
-                FmodMusicalSfxPlayer.instance.PlayChord(fmodParryEvent, fmodParryParam, FmodChordInterpreter.instance.GetFmodChord());
+                fmodParryEvent.Play();
                 AddToMultiplierProgress(2);
                 harmonyCharge = Mathf.Min(maxHarmonyCharge, harmonyCharge + 6);
                 playerUI.SetHarmonyChargeBar(harmonyCharge, maxHarmonyCharge);

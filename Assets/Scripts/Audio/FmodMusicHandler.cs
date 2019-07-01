@@ -29,7 +29,7 @@ public class FmodMusicHandler : MonoBehaviour
     /// <summary>
     /// Delegate that gets called when we get a chord marker callback from fmod. Load any functions that need to get called on a new chord marker here.
     /// </summary>
-    public delegate void OnChordMarkerDelegate(string chord);
+    public delegate void OnChordMarkerDelegate(List<FmodNote> chord);
     OnChordMarkerDelegate onChordMarkerDelegate;
 
     // Variables that are modified in the callback need to be part of a seperate class.
@@ -162,7 +162,11 @@ public class FmodMusicHandler : MonoBehaviour
                         //print(parameter.name + " MARKER CALLBACK");
                         if (FmodChordInterpreter.instance != null && FmodChordInterpreter.instance.IsFmodMarkerChordInformation(parameter.name))
                         {
-                            FmodMusicHandler.instance.onChordMarkerDelegate(parameter.name);
+                            FmodChordInterpreter.instance.ParseChordFromMarker(parameter.name);
+                            if (FmodMusicHandler.instance.onChordMarkerDelegate != null)
+                            {
+                                FmodMusicHandler.instance.onChordMarkerDelegate(FmodChordInterpreter.instance.GetFmodChord());
+                            }
                             //FmodChordInterpreter.instance.PrintCurrentChord();
                         }
                     }

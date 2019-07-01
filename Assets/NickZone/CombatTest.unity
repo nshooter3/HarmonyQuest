@@ -5707,6 +5707,55 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &153897606
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 153897607}
+  - component: {fileID: 153897608}
+  m_Layer: 0
+  m_Name: PlayerParrySound
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &153897607
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 153897606}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 6, y: -1.5, z: 14}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1224216814}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &153897608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 153897606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86a6da65ac159e04b88019d629aa5555, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sfxEventName: event:/SFX/Melody Parry
+  sfxParamName: melody_parry_tonal
+  sfxEventVolume: 0.2
+  glissDelay: 0.1
+  resetNoteIndexOnNewChord: 0
+  sfxMode: 6
 --- !u!1 &161482472
 GameObject:
   m_ObjectHideFlags: 0
@@ -14352,6 +14401,8 @@ Transform:
   - {fileID: 1459011450}
   - {fileID: 622063296}
   - {fileID: 1835457717}
+  - {fileID: 1922830681}
+  - {fileID: 153897607}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -14380,10 +14431,8 @@ MonoBehaviour:
   comboUpSound: {fileID: 622063295}
   healSound: {fileID: 1835457716}
   playerUI: {fileID: 938023311}
-  fmodAttackEvent: event:/SFX/Melody Attack
-  fmodAttackParam: melody_attack_tonal
-  fmodParryEvent: event:/SFX/Melody Parry
-  fmodParryParam: melody_parry_tonal
+  fmodAttackEvent: {fileID: 1922830680}
+  fmodParryEvent: {fileID: 153897608}
   attackDamage: 10
   health: 0
   maxHealth: 50
@@ -21442,7 +21491,7 @@ GameObject:
   - component: {fileID: 1922830681}
   - component: {fileID: 1922830680}
   m_Layer: 0
-  m_Name: FmodMusicalSfxPlayer
+  m_Name: PlayerAttackSound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21460,7 +21509,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86a6da65ac159e04b88019d629aa5555, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volume: 0.2
+  sfxEventName: event:/SFX/Melody Attack
+  sfxParamName: melody_attack_tonal
+  sfxEventVolume: 0.2
+  glissDelay: 0.1
   resetNoteIndexOnNewChord: 0
   sfxMode: 0
 --- !u!4 &1922830681
@@ -21470,12 +21522,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1922830679}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 6, y: -1.5, z: 14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_Father: {fileID: 1224216814}
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2016110640
 GameObject:

@@ -38,6 +38,8 @@ public class TestBeatTracker : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        FmodMusicHandler.instance.AssignFunctionToOnBeatDelegate(Beat);
     }
 
     // Start is called before the first frame update
@@ -47,7 +49,6 @@ public class TestBeatTracker : MonoBehaviour
         beatTimeDuration = 1.0f / (bpm / 60.0f);
         beatTimer = 0.0f;
         beatCount = 1;
-        FmodMusicHandler.instance.AssignFunctionToOnBeatDelegate(Beat);
     }
 
     public void SetTempo(float newBpm)
@@ -126,7 +127,6 @@ public class TestBeatTracker : MonoBehaviour
         SetTempo(FmodMusicHandler.instance.GetCurrentMusicTempo());
         beatCount = FmodMusicHandler.instance.GetCurrentBeat();
         sixteenthNoteCount = 0;
-        //print("@@@ sixteenth notes" + sixteenthNoteCount);
         foreach (BeatTrackerObject beatTrackerObject in beatTrackerObjects)
         {
             beatTrackerObject.SixteenthNoteUpdate();

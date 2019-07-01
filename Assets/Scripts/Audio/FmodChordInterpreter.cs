@@ -46,11 +46,6 @@ public class FmodChordInterpreter : MonoBehaviour
         InitMidiConversionMap();
     }
 
-    private void Start()
-    {
-        FmodMusicHandler.instance.AssignFunctionToOnChordMarkerDelegate(ParseChordFromMarker);
-    }
-
     /// <summary>
     /// Initialize our dictionary with the midi values of all our notes. This allows us to convert a note name into a midi value.
     /// There are a few duplicate values, since some differently named notes refer to the same key on a keyboard (C# and Db, for instance)
@@ -165,6 +160,19 @@ public class FmodChordInterpreter : MonoBehaviour
     public FmodNote GetFmodRandomNote()
     {
         return fmodChord[UnityEngine.Random.Range(0, fmodChord.Count)];
+    }
+
+    public FmodNote GetFmodNoteAtIndex(int index)
+    {
+        if (index < fmodChord.Count)
+        {
+            return fmodChord[index];
+        }
+        else
+        {
+            Debug.LogWarning("GetFmodNoteAtIndex called on index too high for current chord. Returning highest index note instead.");
+            return fmodChord[fmodChord.Count - 1];
+        }
     }
 
     public void PrintCurrentChord()
