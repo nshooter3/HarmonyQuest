@@ -134,7 +134,7 @@ public class TestEnemy : BeatTrackerObject
     {
         if (attackPlayer)
         {
-            int count = 1 + TestBeatTracker.instance.sixteenthNoteCount + (TestBeatTracker.instance.beatCount) * 4;
+            int count = 1 + TestBeatTracker.instance.sixteenthNoteCount + (TestBeatTracker.instance.beatCount - 1) * 4;
             //print("ENEMY COUNT = " + count);
 
             //Giant switch statements, the mark of a true prototype. We gotta come up with a more eloquent way to do beat based actions.

@@ -273,7 +273,7 @@ public class TestPlayer : MonoBehaviour
                 if (attackedOnBeat)
                 {
                     //print("GOOD! ON BEAT ATTACK!");
-                    TestMusicalSfxPlayer.instance.PlayRootNote(fmodAttackEvent, fmodAttackParam);
+                    FmodMusicalSfxPlayer.instance.PlayRootNote(fmodAttackEvent, fmodAttackParam);
                     AddToMultiplierProgress(1);
                     harmonyCharge = Mathf.Min(maxHarmonyCharge, harmonyCharge + 2);
                     playerUI.SetHarmonyChargeBar(harmonyCharge, maxHarmonyCharge);
@@ -425,7 +425,7 @@ public class TestPlayer : MonoBehaviour
             if (receivedAttacks[i].parryable && WasDamageParried(receivedAttacks[i].attacker.gameObject) == true)
             {
                 print("SUCCESSFUL PARRY!");
-                TestMusicalSfxPlayer.instance.PlayChord(fmodParryEvent, fmodParryParam, FmodChordInterpreter.instance.GetFmodChord());
+                FmodMusicalSfxPlayer.instance.PlayChord(fmodParryEvent, fmodParryParam, FmodChordInterpreter.instance.GetFmodChord());
                 AddToMultiplierProgress(2);
                 harmonyCharge = Mathf.Min(maxHarmonyCharge, harmonyCharge + 6);
                 playerUI.SetHarmonyChargeBar(harmonyCharge, maxHarmonyCharge);

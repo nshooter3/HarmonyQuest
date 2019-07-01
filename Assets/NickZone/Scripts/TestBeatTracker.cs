@@ -14,7 +14,7 @@ public class TestBeatTracker : MonoBehaviour
 
     public Image debugImage;
 
-    public int bpm = 140;
+    public float bpm = 140;
     public int beatsPerMeasure = 4;
     public float onBeatPadding = 0;
     public int sixteenthNoteCount;
@@ -46,7 +46,14 @@ public class TestBeatTracker : MonoBehaviour
         InitBeatTrackerObjects();
         beatTimeDuration = 1.0f / (bpm / 60.0f);
         beatTimer = 0.0f;
-        beatCount = 0;
+        beatCount = 1;
+        FmodMusicHandler.instance.AssignFunctionToOnBeatDelegate(Beat);
+    }
+
+    public void SetTempo(float newBpm)
+    {
+        bpm = newBpm;
+        beatTimeDuration = 1.0f / (bpm / 60.0f);
     }
 
     void InitBeatTrackerObjects()
@@ -79,22 +86,25 @@ public class TestBeatTracker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UpdateCounts();
+        if (FmodMusicHandler.instance.isMusicPlaying)
+        {
+            UpdateCounts();
 
-        //Make multiplier image change colors during the "on beat" window
-        if (beatTimer > beatTimeDuration - (beatTimeDuration * 0.05) ||
-            beatTimer <= (beatTimeDuration * 0.05))
-        {
-            debugImage.color = Color.red;
-        }
-        else if (beatTimer > beatTimeDuration - (beatTimeDuration * onBeatPadding) /*||
+            //Make multiplier image change colors during the "on beat" window
+            if (beatTimer > beatTimeDuration - (beatTimeDuration * 0.05) ||
+                beatTimer <= (beatTimeDuration * 0.05))
+            {
+                debugImage.color = Color.red;
+            }
+            else if (beatTimer > beatTimeDuration - (beatTimeDuration * onBeatPadding) /*||
            beatTimer <= (beatTimeDuration * onBeatPadding)*/)
-        {
-            debugImage.color = Color.yellow;
-        }
-        else
-        {
-            debugImage.color = Color.white;
+            {
+                debugImage.color = Color.yellow;
+            }
+            else
+            {
+                debugImage.color = Color.white;
+            }
         }
     }
 
@@ -107,17 +117,15 @@ public class TestBeatTracker : MonoBehaviour
     //SoundController Calls this during the beat callback. 
     public void Beat()
     {
+        
         if (playMetronome)
         {
             metronomeSound.Play();
         }
         beatTimer = 0;
-        beatCount++;
+        SetTempo(FmodMusicHandler.instance.GetCurrentMusicTempo());
+        beatCount = FmodMusicHandler.instance.GetCurrentBeat();
         sixteenthNoteCount = 0;
-        if (beatCount == beatsPerMeasure)
-        {
-            beatCount = 0;
-        }
         //print("@@@ sixteenth notes" + sixteenthNoteCount);
         foreach (BeatTrackerObject beatTrackerObject in beatTrackerObjects)
         {

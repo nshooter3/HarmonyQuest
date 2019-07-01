@@ -8,10 +8,29 @@ public class FmodMusicHandler : MonoBehaviour
 {
     public static FmodMusicHandler instance;
 
+    public string musicEventName;
     public float musicVolume;
 
     [SerializeField]
+    private bool startMusicOnAwake = false;
+
+    [SerializeField]
     private bool memoryDebug = false;
+
+    [HideInInspector]
+    public bool isMusicPlaying = false;
+
+    /// <summary>
+    /// Delegate that gets called when we get a beat callback from fmod. Load any functions that need to get called on beat here.
+    /// </summary>
+    public delegate void OnBeatDelegate();
+    OnBeatDelegate onBeatDelegate;
+
+    /// <summary>
+    /// Delegate that gets called when we get a chord marker callback from fmod. Load any functions that need to get called on a new chord marker here.
+    /// </summary>
+    public delegate void OnChordMarkerDelegate(string chord);
+    OnChordMarkerDelegate onChordMarkerDelegate;
 
     // Variables that are modified in the callback need to be part of a seperate class.
     // This class needs to be 'blittable' otherwise it can't be pinned in memory.
@@ -30,7 +49,7 @@ public class FmodMusicHandler : MonoBehaviour
     TimelineInfo timelineInfo;
     GCHandle timelineHandle;
 
-    FMODUnity.StudioEventEmitter emitter;
+    FMOD.Studio.EventInstance songEvent;
     FMOD.Studio.EVENT_CALLBACK beatCallback;
 
     private void Awake()
@@ -45,46 +64,51 @@ public class FmodMusicHandler : MonoBehaviour
         }
     }
 
-    void OnGUI()
-    {
-        if (memoryDebug)
-        {
-            int curAlloc, maxAlloc;
-            FMOD.Memory.GetStats(out curAlloc, out maxAlloc);
-            GUILayout.Box("Fmod cur memory alloc: " + curAlloc + ", Fmod max memory alloc: " + maxAlloc);
-        }
-    }
-
     // Start is called before the first frame update
     void Start()
     {
         timelineInfo = new TimelineInfo();
-
-        emitter = GetComponent<FMODUnity.StudioEventEmitter>();
-
         beatCallback = new FMOD.Studio.EVENT_CALLBACK(BeatEventCallback);
-
 
         // Pin the class that will store the data modified during the callback
         timelineHandle = GCHandle.Alloc(timelineInfo, GCHandleType.Pinned);
-        // Pass the object through the userdata of the instance
-        emitter.EventInstance.setUserData(GCHandle.ToIntPtr(timelineHandle));
 
-        emitter.EventInstance.setVolume(musicVolume);
+        if (startMusicOnAwake)
+        {
+            StartMusic(musicEventName, musicVolume);
+        }
+    }
 
-        //emitter.EventInstance.setVolume(0);
+    public void StartMusic(string name, float volume)
+    {
+        musicEventName = name;
+        musicVolume = volume;
 
-        emitter.EventInstance.setCallback(beatCallback,
+        songEvent = FmodFacade.instance.CreateFmodEventInstance(name);
+
+        songEvent.setCallback(beatCallback,
               FMOD.Studio.EVENT_CALLBACK_TYPE.TIMELINE_BEAT
             | FMOD.Studio.EVENT_CALLBACK_TYPE.TIMELINE_MARKER
             | FMOD.Studio.EVENT_CALLBACK_TYPE.STARTED
             );
+
+        // Pass the object through the userdata of the instance
+        songEvent.setUserData(GCHandle.ToIntPtr(timelineHandle));
+
+        FmodFacade.instance.PlayFmodEvent(songEvent, volume);
+        isMusicPlaying = true;
+    }
+
+    public void StopMusic()
+    {
+        timelineHandle.Free();
+        FmodFacade.instance.StopFmodEvent(songEvent);
+        isMusicPlaying = false;
     }
 
     private void OnDestroy()
     {
-        timelineHandle.Free();
-        FmodFacade.instance.StopFmodEvent(emitter.EventInstance);
+        StopMusic();
     }
 
     public int GetCurrentBeat()
@@ -92,11 +116,15 @@ public class FmodMusicHandler : MonoBehaviour
         return timelineInfo.currentMusicBeat;
     }
 
+    public float GetCurrentMusicTempo()
+    {
+        return timelineInfo.currentMusicTempo;
+    }
+
 
     [AOT.MonoPInvokeCallback(typeof(FMOD.Studio.EVENT_CALLBACK))]
     static FMOD.RESULT BeatEventCallback(FMOD.Studio.EVENT_CALLBACK_TYPE type, FMOD.Studio.EventInstance instance, IntPtr parameterPtr)
     {
-        //Debug.Log("BeatEventCallback");
         // Retrieve the user data
         IntPtr timelineInfoPtr;
         FMOD.RESULT result = instance.getUserData(out timelineInfoPtr);
@@ -124,7 +152,7 @@ public class FmodMusicHandler : MonoBehaviour
                         timelineInfo.currentMusicPosition = parameter.position;
                         timelineInfo.currentMusicTimeSignatureUpper = parameter.timesignatureupper;
                         timelineInfo.currentMusicTimeSignatureLower = parameter.timesignaturelower;
-                        TestBeatTracker.instance.Beat();
+                        FmodMusicHandler.instance.onBeatDelegate();
                     }
                     break;
                 case FMOD.Studio.EVENT_CALLBACK_TYPE.TIMELINE_MARKER:
@@ -134,9 +162,8 @@ public class FmodMusicHandler : MonoBehaviour
                         //print(parameter.name + " MARKER CALLBACK");
                         if (FmodChordInterpreter.instance != null && FmodChordInterpreter.instance.IsFmodMarkerChordInformation(parameter.name))
                         {
-                            FmodChordInterpreter.instance.ParseChordFromMarker(parameter.name);
+                            FmodMusicHandler.instance.onChordMarkerDelegate(parameter.name);
                             //FmodChordInterpreter.instance.PrintCurrentChord();
-                            //TestMusicalSfxPlayer.instance.PlayChord(FmodChordInterpreter.instance.GetFmodChord());
                         }
                     }
                     break;
@@ -149,5 +176,53 @@ public class FmodMusicHandler : MonoBehaviour
 
         }
         return FMOD.RESULT.OK;
+    }
+
+    /// <summary>
+    /// If a function needs to be called on beat with the music, pass it in here!
+    /// </summary>
+    /// <param name="func"> Function to be called on beat </param>
+    public void AssignFunctionToOnBeatDelegate(OnBeatDelegate func)
+    {
+        onBeatDelegate += func;
+    }
+
+    public void RemoveFunctionFromOnBeatDelegate(OnBeatDelegate func)
+    {
+        onBeatDelegate -= func;
+    }
+
+    public void ClearOnBeatDelegate()
+    {
+        onBeatDelegate = null;
+    }
+
+    /// <summary>
+    /// If a function needs to be called on a chord change, pass it in here!
+    /// </summary>
+    /// <param name="func"> Function to be called on a chord change </param>
+    public void AssignFunctionToOnChordMarkerDelegate(OnChordMarkerDelegate func)
+    {
+        onChordMarkerDelegate += func;
+    }
+
+    public void RemoveFunctionFromOnChordMarkerDelegate(OnChordMarkerDelegate func)
+    {
+        onChordMarkerDelegate -= func;
+    }
+
+    public void ClearOnChordMarkerDelegate()
+    {
+        onChordMarkerDelegate = null;
+    }
+
+    void OnGUI()
+    {
+        if (memoryDebug)
+        {
+            int curAlloc, maxAlloc;
+            FMOD.Memory.GetStats(out curAlloc, out maxAlloc);
+            GUILayout.Box("Fmod cur memory alloc: " + curAlloc + ", Fmod max memory alloc: " + maxAlloc);
+        }
     }
 }

@@ -46,6 +46,11 @@ public class FmodChordInterpreter : MonoBehaviour
         InitMidiConversionMap();
     }
 
+    private void Start()
+    {
+        FmodMusicHandler.instance.AssignFunctionToOnChordMarkerDelegate(ParseChordFromMarker);
+    }
+
     /// <summary>
     /// Initialize our dictionary with the midi values of all our notes. This allows us to convert a note name into a midi value.
     /// There are a few duplicate values, since some differently named notes refer to the same key on a keyboard (C# and Db, for instance)
@@ -92,12 +97,11 @@ public class FmodChordInterpreter : MonoBehaviour
             ResetFmodChord();
             //Remove fmodFlagChar from the front of our marker
             marker = marker.Substring(1);
-            //Debug.Log("Remove tilda: " + marker);
+
             string[] delimitedNotesInfo = marker.Split(fmodNoteDelimitterChar);
             for (int i = 0; i < delimitedNotesInfo.Length; i++)
             {
                 string noteInfo = delimitedNotesInfo[i].Trim();
-                //Debug.Log("Note Info: " + noteInfo);
 
                 FmodNote noteStruct = new FmodNote();
 
@@ -106,7 +110,6 @@ public class FmodChordInterpreter : MonoBehaviour
                     noteStruct.isRootNote = true;
                     //Remove fmodRootNoteChar from the start of the note when we no longer need it.
                     noteInfo = noteInfo.Substring(1);
-                    //Debug.Log("Remove root chord: " + noteInfo);
                 }
                 else
                 {
@@ -118,19 +121,15 @@ public class FmodChordInterpreter : MonoBehaviour
 
                 //Trim octave from end of note name when we no longer need it
                 noteInfo = noteInfo.Substring(0, noteInfo.Length - 1);
-                //Debug.Log("Remove octave: " + noteInfo);
 
                 //At this point, the leftover bits of noteInfo should just be the note name.
                 noteStruct.note = noteInfo;
-                //Debug.Log("Note name: " + noteInfo);
 
                 //Calculate our note's midi value based on the note name and the octave.
                 int midiValue = 0;
                 noteToMidiConversionMap.TryGetValue(noteStruct.note, out midiValue);
                 midiValue += (noteStruct.octave + octaveOffset) * octaveMidiValue;
                 noteStruct.midiValue = midiValue;
-
-                //Debug.Log("Note midi value: " + midiValue);
 
                 fmodChord.Add(noteStruct);
             }
