@@ -424,7 +424,7 @@ public class TestPlayer : MonoBehaviour
         {
             if (receivedAttacks[i].parryable && WasDamageParried(receivedAttacks[i].attacker.gameObject) == true)
             {
-                print("SUCCESSFUL PARRY!");
+                //print("SUCCESSFUL PARRY!");
                 fmodParryEvent.Play();
                 AddToMultiplierProgress(2);
                 harmonyCharge = Mathf.Min(maxHarmonyCharge, harmonyCharge + 6);
@@ -436,7 +436,7 @@ public class TestPlayer : MonoBehaviour
             }
             else if (IsDashing())
             {
-                print("SUCCESSFUL LATE DODGE!");
+                //print("SUCCESSFUL LATE DODGE!");
                 receivedAttacks.RemoveAt(i);
             }
             else if (receivedAttacks[i].attacker.IsAttacking() == false)
@@ -489,7 +489,7 @@ public class TestPlayer : MonoBehaviour
     //TODO: Hook this up to something and make sure that it works.
     void TakeDamage(int damage)
     {
-        print("Player takes " + damage + " damage!");
+        //print("Player takes " + damage + " damage!");
 
         getHitParticles.Play();
         getHitSound.Play();

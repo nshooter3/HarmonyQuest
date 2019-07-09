@@ -18,6 +18,8 @@ public class FmodMusicalSfxPlayer : MonoBehaviour
 
     private bool firstPlayRequest = true;
 
+    private string octaveParamName = "global_octave";
+
     //Determines what this object does when it is told to play a musical SFX
     public enum SfxMode
     {
@@ -133,7 +135,9 @@ public class FmodMusicalSfxPlayer : MonoBehaviour
         if (rootNote != null)
         {
             float noteValue = ConvertMidiValueToFmodParamValue(rootNote.midiValue);
-            FmodFacade.instance.CreateAndRunOneShotFmodEvent(sfxEventName, sfxEventVolume, sfxParamName, noteValue);
+            float noteOctave = rootNote.octave;
+            //Debug.Log("NOTE TO PLAY: " + rootNote.note + noteOctave);
+            FmodFacade.instance.CreateAndRunOneShotFmodEvent(sfxEventName, sfxEventVolume, sfxParamName, octaveParamName, noteValue, noteOctave);
         }
         else
         {
@@ -184,13 +188,16 @@ public class FmodMusicalSfxPlayer : MonoBehaviour
     private void PlayNoteAtIndex(int index)
     {
         float noteValue = ConvertMidiValueToFmodParamValue(FmodChordInterpreter.instance.GetFmodNoteAtIndex(index).midiValue);
-        FmodFacade.instance.CreateAndRunOneShotFmodEvent(sfxEventName, sfxEventVolume, sfxParamName, noteValue);
+        float noteOctave = FmodChordInterpreter.instance.GetFmodNoteAtIndex(index).octave;
+        //Debug.Log("NOTE TO PLAY: " + FmodChordInterpreter.instance.GetFmodNoteAtIndex(index).note + FmodChordInterpreter.instance.GetFmodNoteAtIndex(index).octave);
+        FmodFacade.instance.CreateAndRunOneShotFmodEvent(sfxEventName, sfxEventVolume, sfxParamName, octaveParamName, noteValue, noteOctave);
     }
 
     private void PlayRandomNote()
     {
         float noteValue = ConvertMidiValueToFmodParamValue(FmodChordInterpreter.instance.GetFmodRandomNote().midiValue);
-        FmodFacade.instance.CreateAndRunOneShotFmodEvent(sfxEventName, sfxEventVolume, sfxParamName, noteValue);
+        float noteOctave = FmodChordInterpreter.instance.GetFmodRandomNote().octave;
+        FmodFacade.instance.CreateAndRunOneShotFmodEvent(sfxEventName, sfxEventVolume, sfxParamName, octaveParamName, noteValue, noteOctave);
     }
 
     private void PlayChord()
@@ -198,7 +205,8 @@ public class FmodMusicalSfxPlayer : MonoBehaviour
         foreach (FmodNote note in notesInChord)
         {
             float noteValue = ConvertMidiValueToFmodParamValue(note.midiValue);
-            FmodFacade.instance.CreateAndRunOneShotFmodEvent(sfxEventName, sfxEventVolume, sfxParamName, noteValue);
+            float noteOctave = note.octave;
+            FmodFacade.instance.CreateAndRunOneShotFmodEvent(sfxEventName, sfxEventVolume, sfxParamName, octaveParamName, noteValue, noteOctave);
         }
     }
 
@@ -208,8 +216,9 @@ public class FmodMusicalSfxPlayer : MonoBehaviour
         {
             //Debug.Log("PLAY CHORD NOTE: " + i + ", WITH MIDI VALUE " + notesInChord[i].midiValue);
             float noteValue = ConvertMidiValueToFmodParamValue(notesInChord[i].midiValue);
+            float noteOctave = notesInChord[i].octave;
             float delay = glissDelay * i;
-            IEnumerator coroutine = PlayNoteDelayed(delay, sfxEventName, sfxEventVolume, sfxParamName, noteValue);
+            IEnumerator coroutine = PlayNoteDelayed(delay, sfxEventName, sfxEventVolume, sfxParamName, octaveParamName, noteValue, noteOctave);
             StartCoroutine(coroutine);
         }
     }
@@ -219,16 +228,17 @@ public class FmodMusicalSfxPlayer : MonoBehaviour
         for (int i = notesInChord.Count - 1; i >= 0; i--)
         {
             float noteValue = ConvertMidiValueToFmodParamValue(notesInChord[i].midiValue);
+            float noteOctave = notesInChord[i].octave;
             float delay = glissDelay * ((notesInChord.Count - 1) - i);
-            IEnumerator coroutine = PlayNoteDelayed(delay, sfxEventName, sfxEventVolume, sfxParamName, noteValue);
+            IEnumerator coroutine = PlayNoteDelayed(delay, sfxEventName, sfxEventVolume, sfxParamName, octaveParamName, noteValue, noteOctave);
             StartCoroutine(coroutine);
         }
     }
 
-    IEnumerator PlayNoteDelayed(float delay, string sfxEventName, float sfxEventVolume, string sfxParamName, float noteValue)
+    IEnumerator PlayNoteDelayed(float delay, string sfxEventName, float sfxEventVolume, string sfxParamName, string octaveParamName, float noteValue, float noteOctave)
     {
         yield return new WaitForSeconds(delay);
-        FmodFacade.instance.CreateAndRunOneShotFmodEvent(sfxEventName, sfxEventVolume, sfxParamName, noteValue);
+        FmodFacade.instance.CreateAndRunOneShotFmodEvent(sfxEventName, sfxEventVolume, sfxParamName, octaveParamName, noteValue, noteOctave);
     }
 
     private float ConvertMidiValueToFmodParamValue(int midiValue)

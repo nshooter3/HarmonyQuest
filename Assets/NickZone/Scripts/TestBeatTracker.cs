@@ -144,15 +144,15 @@ public class TestBeatTracker : MonoBehaviour
         {
             if (attackedWithinRangeBeforeBeat)
             {
-                print("GOOD TIMING, BEFORE BEAT");
+                //print("GOOD TIMING, BEFORE BEAT");
             }
             else if (attackedWithinRangeAfterBeat)
             {
-                print("GOOD TIMING, AFTER BEAT");
+                //print("GOOD TIMING, AFTER BEAT");
             }
             else
             {
-                print("BAD TIMING, OFF BEAT");
+                //print("BAD TIMING, OFF BEAT");
             }
         }
         return attackedWithinRangeBeforeBeat || attackedWithinRangeAfterBeat;

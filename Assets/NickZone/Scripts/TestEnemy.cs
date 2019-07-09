@@ -192,7 +192,7 @@ public class TestEnemy : BeatTrackerObject
             TestPlayer player = cols[i].GetComponent<TestPlayer>();
             if (player != null)
             {
-                print("ATTACK HIT PLAYER!");
+                //print("ATTACK HIT PLAYER!");
                 player.ReceiveAttack(attackDamage, this, parryable);
             }
         }
