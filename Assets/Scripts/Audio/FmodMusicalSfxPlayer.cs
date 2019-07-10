@@ -10,9 +10,8 @@ public class FmodMusicalSfxPlayer : MonoBehaviour
 
     public float glissDelay = 0.1f;
 
-    public bool resetNoteIndexOnNewChord = false;
-
     private int noteIndex = 0;
+    private int lastPlayedNoteIndex = 0;
     private int noteDirection;
     private List<FmodNote> notesInChord;
 
@@ -39,11 +38,25 @@ public class FmodMusicalSfxPlayer : MonoBehaviour
 
     public SfxMode sfxMode;
 
+    //Determines what this object's index does upon a chord change
+    public enum IndexBehaviorOnNewChord
+    {
+        DoNothing,
+        ResetNoteToInitIndex,
+        ResetIndexToLastIndexPlayed,
+    };
+
+    public IndexBehaviorOnNewChord indexBehaviorOnNewChord;
+
     private void Awake()
     {
-        if (resetNoteIndexOnNewChord)
+        if (indexBehaviorOnNewChord == IndexBehaviorOnNewChord.ResetNoteToInitIndex)
         {
-            FmodMusicHandler.instance.AssignFunctionToOnChordMarkerDelegate(ResetNoteIndex);
+            FmodMusicHandler.instance.AssignFunctionToOnChordMarkerDelegate(ResetNoteToInitIndex);
+        }
+        else if (indexBehaviorOnNewChord == IndexBehaviorOnNewChord.ResetIndexToLastIndexPlayed)
+        {
+            FmodMusicHandler.instance.AssignFunctionToOnChordMarkerDelegate(ResetNoteToLastPlayedIndex);
         }
     }
 
@@ -60,9 +73,14 @@ public class FmodMusicalSfxPlayer : MonoBehaviour
         }
     }
 
-    private void ResetNoteIndex(List<FmodNote> chord)
+    private void ResetNoteToInitIndex(List<FmodNote> chord)
     {
         InitNoteIndexAndDirection(chord);
+    }
+
+    private void ResetNoteToLastPlayedIndex(List<FmodNote> chord)
+    {
+        noteIndex = lastPlayedNoteIndex;
     }
 
     private void InitNoteIndexAndDirection(List<FmodNote> chord)
@@ -191,6 +209,7 @@ public class FmodMusicalSfxPlayer : MonoBehaviour
         float noteOctave = FmodChordInterpreter.instance.GetFmodNoteAtIndex(index).octave;
         //Debug.Log("NOTE TO PLAY: " + FmodChordInterpreter.instance.GetFmodNoteAtIndex(index).note + FmodChordInterpreter.instance.GetFmodNoteAtIndex(index).octave);
         FmodFacade.instance.CreateAndRunOneShotFmodEvent(sfxEventName, sfxEventVolume, sfxParamName, octaveParamName, noteValue, noteOctave);
+        lastPlayedNoteIndex = index;
     }
 
     private void PlayRandomNote()
