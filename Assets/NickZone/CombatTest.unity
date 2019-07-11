@@ -16381,7 +16381,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   beatTrackerIndex: -1
-  maxHealth: 1200
+  maxHealth: 6000
   health: 0
   attackDamage: 15
   speed: 5
@@ -16389,6 +16389,7 @@ MonoBehaviour:
   rotateSpeed: 25
   pursuePlayer: 1
   attackPlayer: 1
+  aggroRange: 15
   characterController: {fileID: 1887438313}
   player: {fileID: 1224216815}
   attackBox: {fileID: 376019931}
@@ -16403,6 +16404,7 @@ MonoBehaviour:
   windUpColor2: {r: 0.1573993, g: 1, b: 0, a: 0}
   preAttackColor: {r: 1, g: 0, b: 0, a: 0}
   defaultColor: {r: 1, g: 0, b: 1, a: 0}
+  enemyState: 0
 --- !u!143 &1887438313
 CharacterController:
   m_ObjectHideFlags: 0

@@ -23,8 +23,24 @@ public class FmodFacade : MonoBehaviour
         }
     }
 
+    public void StartMusic(string name, float volume)
+    {
+        FmodMusicHandler.instance.StartMusic(name, volume);
+    }
+
+    public void StopMusic()
+    {
+        FmodMusicHandler.instance.StopMusic();
+    }
+
     public void SetFmodParameterValue(FMOD.Studio.EventInstance fmodEvent, string parameter, float value)
     {
+        fmodEvent.setParameterValue(parameter, value);
+    }
+
+    public void SetMusicEventParameterValue(string parameter, float value)
+    {
+        FMOD.Studio.EventInstance fmodEvent = FmodMusicHandler.instance.GetMusicEvent();
         fmodEvent.setParameterValue(parameter, value);
     }
 

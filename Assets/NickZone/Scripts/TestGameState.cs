@@ -7,7 +7,7 @@ public class TestGameState : MonoBehaviour
 
     public GameObject winText, loseText;
     private bool gameOver = false;
-    private float messageTimer = 5.0f;
+    private float messageTimer = 10.0f;
 
     private void Awake()
     {

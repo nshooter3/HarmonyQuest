@@ -15,6 +15,8 @@ public class TestEnemy : BeatTrackerObject
     public bool pursuePlayer = true;
     public bool attackPlayer = true;
 
+    public float aggroRange = 10.0f;
+
     [SerializeField]
     private CharacterController characterController;
     [SerializeField]
@@ -43,11 +45,22 @@ public class TestEnemy : BeatTrackerObject
     private Vector3 moveDirection = Vector3.zero;
     private Vector3 moveDirectionNoGravity = Vector3.zero;
 
+    public enum EnemyState
+    {
+        Idle,
+        Phase1,
+        Phase2,
+        Dead
+    };
+
+    public EnemyState enemyState;
+
     // Start is called before the first frame update
     void Start()
     {
         health = maxHealth;
         enemyMat = GetComponent<Renderer>().material;
+        enemyState = EnemyState.Idle;
     }
 
     // Update is called once per frame
@@ -55,19 +68,12 @@ public class TestEnemy : BeatTrackerObject
     {
         UpdateTimers();
 
-        if (pursuePlayer)
+        if (pursuePlayer && IsAggroed())
         {
             PursuePlayer();
         }
 
-        /*(if (WasAttackedOnBeat())
-        {
-            enemyMat.color = windUpColor;
-        }
-        else
-        {
-            enemyMat.color = defaultColor;
-        }*/
+        CheckForPlayerEnteringAggroRange();
     }
 
     void UpdateTimers()
@@ -80,6 +86,23 @@ public class TestEnemy : BeatTrackerObject
                 EndAttack();
             }
         }
+    }
+
+    void CheckForPlayerEnteringAggroRange()
+    {
+        if (IsAggroed() == false)
+        {
+            if (Vector3.Distance(transform.position, player.transform.position) <= aggroRange)
+            {
+                enemyState = EnemyState.Phase1;
+                FmodFacade.instance.SetMusicEventParameterValue("global_phase1", 1.0f);
+            }
+        }
+    }
+
+    bool IsAggroed()
+    {
+        return enemyState == EnemyState.Phase1 || enemyState == EnemyState.Phase2;
     }
 
     void PursuePlayer()
@@ -132,7 +155,7 @@ public class TestEnemy : BeatTrackerObject
 
     public override void SixteenthNoteUpdate()
     {
-        if (attackPlayer)
+        if (attackPlayer && IsAggroed())
         {
             int count = 1 + TestBeatTracker.instance.sixteenthNoteCount + (TestBeatTracker.instance.beatCount - 1) * 4;
             //print("ENEMY COUNT = " + count);
@@ -143,11 +166,17 @@ public class TestEnemy : BeatTrackerObject
                 case 5:
                     //Start telegraphing attack on the second beat of the measure
                     attackType = 1;
-                    int ran = Random.Range(0, 8);
-                    if (ran < 2)
+
+                    //Add the chance to do an unparryable attack once phase 2 activates
+                    if (enemyState == EnemyState.Phase2)
                     {
-                        attackType = 2;
+                        int ran = Random.Range(0, 8);
+                        if (ran < 3)
+                        {
+                            attackType = 2;
+                        }
                     }
+
                     if (attackType == 1)
                     {
                         enemyMat.color = windUpColor1;
@@ -208,9 +237,13 @@ public class TestEnemy : BeatTrackerObject
         getHitParticles.Play();
         getHitSound.Play();
 
-        if (health <= 0)
+        if (enemyState != EnemyState.Dead && health <= 0)
         {
             Die();
+        }
+        else if (enemyState != EnemyState.Phase2 && enemyState != EnemyState.Dead && health <= maxHealth / 2.0f)
+        {
+            TransitionToPhase2();
         }
     }
 
@@ -229,10 +262,20 @@ public class TestEnemy : BeatTrackerObject
         return wasAttackedOnBeat;
     }
 
+    void TransitionToPhase2()
+    {
+        FmodFacade.instance.SetMusicEventParameterValue("global_phase1_idle", 1.0f);
+        FmodFacade.instance.SetMusicEventParameterValue("global_dissonance", 1.0f);
+        enemyState = EnemyState.Phase2;
+    }
+
     void Die()
     {
+        FmodFacade.instance.SetMusicEventParameterValue("global_dissonance_idle", 1.0f);
+        FmodFacade.instance.SetMusicEventParameterValue("global_fight_outro", 1.0f);
         TestGameState.instance.Win();
         TestBeatTracker.instance.RemoveBeatTrackerAtIndex(beatTrackerIndex);
+        enemyState = EnemyState.Dead;
         Destroy(healthBar.gameObject);
         Destroy(gameObject);
     }

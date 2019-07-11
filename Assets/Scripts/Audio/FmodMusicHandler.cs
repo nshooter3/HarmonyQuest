@@ -49,7 +49,7 @@ public class FmodMusicHandler : MonoBehaviour
     TimelineInfo timelineInfo;
     GCHandle timelineHandle;
 
-    FMOD.Studio.EventInstance songEvent;
+    FMOD.Studio.EventInstance musicEvent;
     FMOD.Studio.EVENT_CALLBACK beatCallback;
 
     private void Awake()
@@ -84,25 +84,25 @@ public class FmodMusicHandler : MonoBehaviour
         musicEventName = name;
         musicVolume = volume;
 
-        songEvent = FmodFacade.instance.CreateFmodEventInstance(name);
+        musicEvent = FmodFacade.instance.CreateFmodEventInstance(name);
 
-        songEvent.setCallback(beatCallback,
+        musicEvent.setCallback(beatCallback,
               FMOD.Studio.EVENT_CALLBACK_TYPE.TIMELINE_BEAT
             | FMOD.Studio.EVENT_CALLBACK_TYPE.TIMELINE_MARKER
             | FMOD.Studio.EVENT_CALLBACK_TYPE.STARTED
             );
 
         // Pass the object through the userdata of the instance
-        songEvent.setUserData(GCHandle.ToIntPtr(timelineHandle));
+        musicEvent.setUserData(GCHandle.ToIntPtr(timelineHandle));
 
-        FmodFacade.instance.PlayFmodEvent(songEvent, volume);
+        FmodFacade.instance.PlayFmodEvent(musicEvent, volume);
         isMusicPlaying = true;
     }
 
     public void StopMusic()
     {
         timelineHandle.Free();
-        FmodFacade.instance.StopFmodEvent(songEvent);
+        FmodFacade.instance.StopFmodEvent(musicEvent);
         isMusicPlaying = false;
     }
 
@@ -121,6 +121,10 @@ public class FmodMusicHandler : MonoBehaviour
         return timelineInfo.currentMusicTempo;
     }
 
+    public FMOD.Studio.EventInstance GetMusicEvent()
+    {
+        return musicEvent;
+    }
 
     [AOT.MonoPInvokeCallback(typeof(FMOD.Studio.EVENT_CALLBACK))]
     static FMOD.RESULT BeatEventCallback(FMOD.Studio.EVENT_CALLBACK_TYPE type, FMOD.Studio.EventInstance instance, IntPtr parameterPtr)
