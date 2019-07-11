@@ -18,14 +18,13 @@
         void Update()
         {
             bias = 2f;
-            direction = PlayerVelocity() / 1.2f;
+            direction = PlayerLocation() + PlayerVelocity() / 1.2f;
             if (IsLockedOn())
             {
                 direction = Vector3.Lerp(TargetLocation(), PlayerLocation(), 0.5f);
                 bias = 9f;
             }
-            // direction += distanceFromPlayer;
-            // direction = Vector3.Lerp(PlayerLocation(), direction, 2f * Time.deltaTime);
+            direction +=  distanceFromPlayer;
         }
 
         private Vector3 PlayerLocation()
@@ -35,7 +34,10 @@
 
         private Vector3 PlayerVelocity()
         {
-            return characterController.velocity;
+            if (!IsFollowingPOI())
+                return characterController.velocity;
+            else
+                return Vector3.zero;
         }
 
         private Vector3 TargetLocation()
@@ -46,6 +48,11 @@
         private bool IsLockedOn()
         {
             return player.IsLockedOn();
+        }
+
+        private bool IsFollowingPOI()
+        {
+            return (CameraController.instance.GetCameraBehavior(CameraBehaviors.FollowPointOfInterest) as CameraFollowPointOfInterest).targetPoint != null;
         }
 
         Vector3 ScaleVectorComponents(Vector3 v, float xScale, float yScale, float zScale)

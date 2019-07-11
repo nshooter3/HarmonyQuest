@@ -7,18 +7,19 @@
         [SerializeField]
         public TestPlayer player;
         public Transform targetPoint;
+        public Vector3 distanceFromPlayer;
 
         void Awake()
         {
             type = CameraBehaviors.FollowPointOfInterest;
+            bias = 1.5f;
         }
 
         void Update()
         {
             if (targetPoint != null)
             {
-                direction = (targetPoint.position - player.transform.position) * 0.4f;
-                direction.y *= direction.y;
+                direction = Vector3.Lerp(player.transform.position, targetPoint.position, 0.5f) + distanceFromPlayer;
             }
             else
             {

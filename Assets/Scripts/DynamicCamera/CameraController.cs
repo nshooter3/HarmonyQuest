@@ -11,7 +11,6 @@
         private List<CameraBehavior> behaviors = new List<CameraBehavior>();
 
         private Vector3 target;
-        private float speed = 2f;
 
         private static CameraController inst;
         public static CameraController instance
@@ -43,13 +42,16 @@
         private void MoveCamera()
         {
             behaviors.ForEach(b => b.Move());
-            // target = followPlayer.Movement() + followPOI.Movement();
-            // transform.position = Vector3.Lerp(transform.position, target, speed * Time.deltaTime);
         }
-
+        
         public void ToggleCamera(CameraBehaviors c)
         {
             behaviors.Find(x => x.type == c).ToggleActive();
+        }
+
+        public CameraBehavior GetCameraBehavior(CameraBehaviors c)
+        {
+            return behaviors.Find(x => x.type == c);
         }
     }
 }
