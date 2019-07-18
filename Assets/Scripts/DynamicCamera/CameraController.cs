@@ -3,9 +3,7 @@
     using UnityEngine;
     using System.Collections.Generic;
 
-    public enum CameraBehaviors {FollowPlayer, FollowPointOfInterest}
-
-    public class CameraController : CameraBehavior
+    public class CameraController : MonoBehaviour
     {
         [SerializeField]
         private List<CameraBehavior> behaviors = new List<CameraBehavior>();
@@ -32,8 +30,9 @@
 
         void Awake()
         {
-            ToggleCamera(CameraBehaviors.FollowPlayer);
+            ToggleCamera<CameraFollowPlayer>();
         }
+
         void LateUpdate()
         {
             MoveCamera();
@@ -43,15 +42,19 @@
         {
             behaviors.ForEach(b => b.Move());
         }
-        
-        public void ToggleCamera(CameraBehaviors c)
+
+        public void ToggleCamera<T>()
         {
-            behaviors.Find(x => x.type == c).ToggleActive();
+            behaviors.Find(x => x is T).ToggleActive();
         }
 
-        public CameraBehavior GetCameraBehavior(CameraBehaviors c)
+        /**
+         * Pass a camera behavior type and get an object back
+         * A good lesson in C# generics
+         */
+        public T GetCameraBehavior<T>() where T : CameraBehavior
         {
-            return behaviors.Find(x => x.type == c);
+            return (T) behaviors.Find(x => x is T);
         }
     }
 }
