@@ -83,26 +83,15 @@ public class FmodFacade : MonoBehaviour
         return FMODUnity.RuntimeManager.CreateInstance(eventName);
     }
 
-    public void CreateAndRunOneShotFmodEvent(string eventName, float volume = 1.0f, string parameter = "", float value = 0)
+    public void CreateAndRunOneShotFmodEvent(string eventName, float volume = 1.0f, FmodParamData[] paramData = null)
     {
         FMOD.Studio.EventInstance fmodEvent = CreateFmodEventInstance(eventName);
-        if (parameter != "")
+        if (paramData != null)
         {
-            SetFmodParameterValue(fmodEvent, parameter, value);
-        }
-        PlayOneShotFmodEvent(fmodEvent, volume);
-    }
-
-    public void CreateAndRunOneShotFmodEvent(string eventName, float volume = 1.0f, string parameter = "", string parameter2 = "", float value = 0, float value2 = 0)
-    {
-        FMOD.Studio.EventInstance fmodEvent = CreateFmodEventInstance(eventName);
-        if (parameter != "")
-        {
-            SetFmodParameterValue(fmodEvent, parameter, value);
-        }
-        if (parameter2 != "")
-        {
-            SetFmodParameterValue(fmodEvent, parameter2, value2);
+            for (int i = 0; i < paramData.Length; i++)
+            {
+                SetFmodParameterValue(fmodEvent, paramData[i].paramName, paramData[i].paramValue);
+            }
         }
         PlayOneShotFmodEvent(fmodEvent, volume);
     }
