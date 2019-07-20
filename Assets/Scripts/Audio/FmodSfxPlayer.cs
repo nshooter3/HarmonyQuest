@@ -44,6 +44,9 @@ public class FmodSfxPlayer : MonoBehaviour
 
     public IndexBehaviorOnNewChord indexBehaviorOnNewChord;
 
+    public Rigidbody rb;
+    public bool debugPrintVelocity = false;
+
     private int noteIndex = 0;
     private int lastPlayedNoteIndex = 0;
     private int noteDirection;
@@ -63,6 +66,17 @@ public class FmodSfxPlayer : MonoBehaviour
         {
             FmodMusicHandler.instance.AssignFunctionToOnChordMarkerDelegate(ResetNoteToLastPlayedIndex);
         }
+
+        //We need a rigidbody component on our sfx objects so that fmod can track where our sounds are as they move around. If there isn't one, add it.
+        if (rb == null)
+        {
+            rb = GetComponent<Rigidbody>();
+            if (rb == null)
+            {
+                rb = gameObject.AddComponent<Rigidbody>();
+            }
+        }
+        rb.useGravity = false;
     }
 
     private void Start()
@@ -75,6 +89,14 @@ public class FmodSfxPlayer : MonoBehaviour
             case TonalSfxMode.DownThenUp:
                 noteDirection = -1;
                 break;
+        }
+    }
+
+    private void Update()
+    {
+        if (debugPrintVelocity)
+        {
+            Debug.Log("Sfx player velocity: " + rb.velocity);
         }
     }
 
@@ -157,7 +179,7 @@ public class FmodSfxPlayer : MonoBehaviour
 
     private void PlayNonTonalNote(FmodParamData[] extraParams = null)
     {
-        FmodFacade.instance.CreateAndRunOneShotFmodEvent(sfxEventName, sfxEventVolume, extraParams);
+        FmodFacade.instance.CreateAndRunOneShotFmodEvent(sfxEventName, sfxEventVolume, gameObject, rb, extraParams);
     }
 
     private void PlayRootNote(FmodParamData[] extraParams = null)
@@ -169,7 +191,7 @@ public class FmodSfxPlayer : MonoBehaviour
             float noteOctave = rootNote.octave;
 
             FmodParamData[] paramData = GenerateParamData(musicalSfxParamName, noteValue, octaveParamName, noteOctave, extraParams);
-            FmodFacade.instance.CreateAndRunOneShotFmodEvent(sfxEventName, sfxEventVolume, paramData);
+            FmodFacade.instance.CreateAndRunOneShotFmodEvent(sfxEventName, sfxEventVolume, gameObject, rb, paramData);
         }
         else
         {
@@ -223,7 +245,7 @@ public class FmodSfxPlayer : MonoBehaviour
         float noteOctave = FmodChordInterpreter.instance.GetFmodNoteAtIndex(index).octave;
 
         FmodParamData[] paramData = GenerateParamData(musicalSfxParamName, noteValue, octaveParamName, noteOctave, extraParams);
-        FmodFacade.instance.CreateAndRunOneShotFmodEvent(sfxEventName, sfxEventVolume, paramData);
+        FmodFacade.instance.CreateAndRunOneShotFmodEvent(sfxEventName, sfxEventVolume, gameObject, rb, paramData);
         lastPlayedNoteIndex = index;
     }
 
@@ -233,7 +255,7 @@ public class FmodSfxPlayer : MonoBehaviour
         float noteOctave = FmodChordInterpreter.instance.GetFmodRandomNote().octave;
 
         FmodParamData[] paramData = GenerateParamData(musicalSfxParamName, noteValue, octaveParamName, noteOctave, extraParams);
-        FmodFacade.instance.CreateAndRunOneShotFmodEvent(sfxEventName, sfxEventVolume, paramData);
+        FmodFacade.instance.CreateAndRunOneShotFmodEvent(sfxEventName, sfxEventVolume, gameObject, rb, paramData);
     }
 
     private void PlayChord(FmodParamData[] extraParams = null)
@@ -244,7 +266,7 @@ public class FmodSfxPlayer : MonoBehaviour
             float noteOctave = note.octave;
 
             FmodParamData[] paramData = GenerateParamData(musicalSfxParamName, noteValue, octaveParamName, noteOctave, extraParams);
-            FmodFacade.instance.CreateAndRunOneShotFmodEvent(sfxEventName, sfxEventVolume, paramData);
+            FmodFacade.instance.CreateAndRunOneShotFmodEvent(sfxEventName, sfxEventVolume, gameObject, rb, paramData);
         }
     }
 
@@ -280,7 +302,7 @@ public class FmodSfxPlayer : MonoBehaviour
     IEnumerator PlayNoteDelayed(float delay, string sfxEventName, float sfxEventVolume, FmodParamData[] paramData)
     {
         yield return new WaitForSeconds(delay);
-        FmodFacade.instance.CreateAndRunOneShotFmodEvent(sfxEventName, sfxEventVolume, paramData);
+        FmodFacade.instance.CreateAndRunOneShotFmodEvent(sfxEventName, sfxEventVolume, gameObject, rb, paramData);
     }
 
     private float ConvertMidiValueToFmodParamValue(int midiValue)

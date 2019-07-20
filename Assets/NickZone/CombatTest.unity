@@ -5753,6 +5753,7 @@ GameObject:
   m_Component:
   - component: {fileID: 153897607}
   - component: {fileID: 153897608}
+  - component: {fileID: 153897609}
   m_Layer: 0
   m_Name: ParryTonalSound
   m_TagString: Untagged
@@ -5792,6 +5793,24 @@ MonoBehaviour:
   glissTimeBetweenNotes: 0.1
   sfxMode: 6
   indexBehaviorOnNewChord: 0
+  rb: {fileID: 153897609}
+  printVelocity: 0
+--- !u!54 &153897609
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 153897606}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &161482472
 GameObject:
   m_ObjectHideFlags: 0
@@ -12025,6 +12044,7 @@ GameObject:
   m_Component:
   - component: {fileID: 549607146}
   - component: {fileID: 549607147}
+  - component: {fileID: 549607148}
   m_Layer: 8
   m_Name: AttackConnectSounds
   m_TagString: Untagged
@@ -12064,6 +12084,24 @@ MonoBehaviour:
   glissTimeBetweenNotes: 0.1
   sfxMode: 0
   indexBehaviorOnNewChord: 0
+  rb: {fileID: 549607148}
+  printVelocity: 0
+--- !u!54 &549607148
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 549607145}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &586360989
 GameObject:
   m_ObjectHideFlags: 0
@@ -12932,6 +12970,7 @@ GameObject:
   m_Component:
   - component: {fileID: 848042779}
   - component: {fileID: 848042780}
+  - component: {fileID: 848042781}
   m_Layer: 8
   m_Name: HarmonyMeterSounds
   m_TagString: Untagged
@@ -12971,6 +13010,24 @@ MonoBehaviour:
   glissTimeBetweenNotes: 0.1
   sfxMode: 0
   indexBehaviorOnNewChord: 0
+  rb: {fileID: 848042781}
+  printVelocity: 0
+--- !u!54 &848042781
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 848042778}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &902313419
 GameObject:
   m_ObjectHideFlags: 0
@@ -14703,6 +14760,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1459011450}
   - component: {fileID: 1459011451}
+  - component: {fileID: 1459011452}
   m_Layer: 8
   m_Name: AttackSwingSound
   m_TagString: Untagged
@@ -14742,6 +14800,24 @@ MonoBehaviour:
   glissTimeBetweenNotes: 0.1
   sfxMode: 0
   indexBehaviorOnNewChord: 0
+  rb: {fileID: 1459011452}
+  printVelocity: 0
+--- !u!54 &1459011452
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1459011449}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1469208757
 GameObject:
   m_ObjectHideFlags: 0
@@ -15672,6 +15748,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1835457717}
   - component: {fileID: 1835457716}
+  - component: {fileID: 1835457718}
   m_Layer: 8
   m_Name: HealSound
   m_TagString: Untagged
@@ -15697,6 +15774,8 @@ MonoBehaviour:
   glissTimeBetweenNotes: 0.1
   sfxMode: 0
   indexBehaviorOnNewChord: 0
+  rb: {fileID: 1835457718}
+  printVelocity: 0
 --- !u!4 &1835457717
 Transform:
   m_ObjectHideFlags: 0
@@ -15711,6 +15790,22 @@ Transform:
   m_Father: {fileID: 13314618}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &1835457718
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1835457715}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1887438310
 GameObject:
   m_ObjectHideFlags: 0
@@ -20855,6 +20950,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1922830681}
   - component: {fileID: 1922830680}
+  - component: {fileID: 1922830682}
   m_Layer: 0
   m_Name: AttackTonalSound
   m_TagString: Untagged
@@ -20880,6 +20976,8 @@ MonoBehaviour:
   glissTimeBetweenNotes: 0.1
   sfxMode: 1
   indexBehaviorOnNewChord: 2
+  rb: {fileID: 1922830682}
+  printVelocity: 0
 --- !u!4 &1922830681
 Transform:
   m_ObjectHideFlags: 0
@@ -20894,6 +20992,22 @@ Transform:
   m_Father: {fileID: 13314618}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &1922830682
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1922830679}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &2016110640
 GameObject:
   m_ObjectHideFlags: 0
