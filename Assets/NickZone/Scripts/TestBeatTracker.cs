@@ -23,6 +23,13 @@ public class TestBeatTracker : MonoBehaviour
     private float beatTimer;
     public int beatCount;
 
+    public enum OnBeatAccuracy
+    {
+        Great = 1,
+        Good = 2,
+        Miss = 3,
+    }
+
     [SerializeField]
     private bool playMetronome = false;
     [SerializeField]
@@ -134,28 +141,25 @@ public class TestBeatTracker : MonoBehaviour
     }
 
     //Allow a little bit of wiggle room both before and after the beat for determining whether or not an action was on beat.
-    public bool WasActionOnBeat(bool debug = false)
+    public OnBeatAccuracy WasActionOnBeat(bool debug = false)
     {
-        //An attack within a 32nd note before the beat will count as on beat.
-        bool attackedWithinRangeBeforeBeat = beatTimer > beatTimeDuration - (beatTimeDuration * onBeatPadding);
-        //An attack within a 32nd note after the beat will count as on beat.
-        bool attackedWithinRangeAfterBeat = beatTimer <= (beatTimeDuration * onBeatPadding);
-        if (debug)
+        //Full onBeatPadding range for good on beat
+        bool attackedWithinRangeBeforeBeatGood = beatTimer > beatTimeDuration - (beatTimeDuration * onBeatPadding);
+        bool attackedWithinRangeAfterBeatGood = beatTimer <= (beatTimeDuration * onBeatPadding);
+
+        //Half onBeatPadding range for great on beat
+        bool attackedWithinRangeBeforeBeatGreat = beatTimer > beatTimeDuration - (beatTimeDuration * (onBeatPadding / 2.0f));
+        bool attackedWithinRangeAfterBeatGreat = beatTimer <= (beatTimeDuration * (onBeatPadding/2.0f));
+
+        if (attackedWithinRangeBeforeBeatGreat || attackedWithinRangeAfterBeatGreat)
         {
-            if (attackedWithinRangeBeforeBeat)
-            {
-                //print("GOOD TIMING, BEFORE BEAT");
-            }
-            else if (attackedWithinRangeAfterBeat)
-            {
-                //print("GOOD TIMING, AFTER BEAT");
-            }
-            else
-            {
-                //print("BAD TIMING, OFF BEAT");
-            }
+            return OnBeatAccuracy.Great;
         }
-        return attackedWithinRangeBeforeBeat || attackedWithinRangeAfterBeat;
+        else if (attackedWithinRangeBeforeBeatGood || attackedWithinRangeAfterBeatGood)
+        {
+            return OnBeatAccuracy.Good;
+        }
+        return OnBeatAccuracy.Miss;
     }
 
 

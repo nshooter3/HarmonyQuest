@@ -298,15 +298,23 @@ public class TestPlayer : MonoBehaviour
             TestEnemy enemy = cols[i].GetComponent<TestEnemy>();
             if (enemy != null)
             {
-                bool attackedOnBeat = enemy.TakeDamageAndCheckForOnBeatAttack(attackDamage * attackMultiplier);
-                if (attackedOnBeat)
+                TestBeatTracker.OnBeatAccuracy attackedOnBeatAccuracy = enemy.TakeDamageAndCheckForOnBeatAttack(attackDamage * attackMultiplier);
+                if (attackedOnBeatAccuracy == TestBeatTracker.OnBeatAccuracy.Great)
                 {
-                    //print("GOOD! ON BEAT ATTACK!");
+                    //print("1. GREAT! ON BEAT ATTACK!");
                     tonalAttackSound.Play();
                     FmodParamData[] attackParamData = { new FmodParamData("global_melody_attack_hit", (float)AttackFmodParamValues.GreatHit) };
                     attackConnectSounds.Play(attackParamData);
                     AddToMultiplierProgress(1);
                     harmonyCharge = Mathf.Min(maxHarmonyCharge, harmonyCharge + 2);
+                    playerUI.SetHarmonyChargeBar(harmonyCharge, maxHarmonyCharge);
+                }
+                else if (attackedOnBeatAccuracy == TestBeatTracker.OnBeatAccuracy.Good)
+                {
+                    //print("2. GOOD! ALMOST ON BEAT ATTACK!");
+                    FmodParamData[] attackParamData = { new FmodParamData("global_melody_attack_hit", (float)AttackFmodParamValues.GoodHit) };
+                    attackConnectSounds.Play(attackParamData);
+                    harmonyCharge = Mathf.Min(maxHarmonyCharge, harmonyCharge + 1);
                     playerUI.SetHarmonyChargeBar(harmonyCharge, maxHarmonyCharge);
                 }
                 else

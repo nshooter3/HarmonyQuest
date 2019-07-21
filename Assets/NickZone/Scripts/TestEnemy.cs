@@ -252,14 +252,18 @@ public class TestEnemy : BeatTrackerObject
     /// </summary>
     /// <param name="damage"> How much damage to take </param>
     /// <returns> Whether or not the player attacked the enemy on beat </returns>
-    public bool TakeDamageAndCheckForOnBeatAttack(int damage)
+    public TestBeatTracker.OnBeatAccuracy TakeDamageAndCheckForOnBeatAttack(int damage)
     {
-        bool wasAttackedOnBeat = WasAttackedOnBeat(true);
-        if (wasAttackedOnBeat)
+        TestBeatTracker.OnBeatAccuracy attackedOnBeatAccuracy = WasAttackedOnBeat();
+        if (attackedOnBeatAccuracy == TestBeatTracker.OnBeatAccuracy.Great)
         {
             TakeDamage(damage);
         }
-        return wasAttackedOnBeat;
+        else if(attackedOnBeatAccuracy == TestBeatTracker.OnBeatAccuracy.Good)
+        {
+            TakeDamage(Mathf.Max(damage/2, 1));
+        }
+        return attackedOnBeatAccuracy;
     }
 
     void TransitionToPhase2()
@@ -281,8 +285,8 @@ public class TestEnemy : BeatTrackerObject
     }
 
     //Allow a little bit of wiggle room both before and after the beat for determing whether or not the enemy was attacked on beat.
-    bool WasAttackedOnBeat(bool debug = false)
+    TestBeatTracker.OnBeatAccuracy WasAttackedOnBeat()
     {
-        return TestBeatTracker.instance.WasActionOnBeat(debug);
+        return TestBeatTracker.instance.WasActionOnBeat();
     }
 }
