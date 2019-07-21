@@ -482,6 +482,7 @@ public class TestPlayer : MonoBehaviour
             }
             else if (receivedAttacks[i].attacker.IsAttacking() == false)
             {
+                receivedAttacks[i].attacker.PlayAttackConnectSFX(receivedAttacks[i].parryable);
                 TakeDamage(receivedAttacks[i].damage);
                 receivedAttacks.RemoveAt(i);
             }

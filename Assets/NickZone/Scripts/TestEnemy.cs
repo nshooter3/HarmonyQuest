@@ -26,7 +26,14 @@ public class TestEnemy : BeatTrackerObject
     [SerializeField]
     private ParticleSystem getHitParticles;
     [SerializeField]
-    private AudioSource getHitSound, charge1Sound, charge2Sound, attack1Sound, attack2Sound;
+    private FmodSfxPlayer chargeSound, attackSwingSound, attackConnectSound, attackTonalSound;
+
+    public enum EnemyAttackFmodParamValues
+    {
+        None = 0,
+        Regular = 1,
+        Unblockable = 2,
+    };
 
     [SerializeField]
     private TestEnemyHealthbar healthBar;
@@ -180,12 +187,14 @@ public class TestEnemy : BeatTrackerObject
                     if (attackType == 1)
                     {
                         enemyMat.color = windUpColor1;
-                        charge1Sound.Play();
+                        FmodParamData[] attackParamData = { new FmodParamData("global_enemy_attack_charge", (float)EnemyAttackFmodParamValues.Regular) };
+                        chargeSound.Play(attackParamData);
                     }
                     else
                     {
                         enemyMat.color = windUpColor2;
-                        charge2Sound.Play();
+                        FmodParamData[] attackParamData = { new FmodParamData("global_enemy_attack_charge", (float)EnemyAttackFmodParamValues.Unblockable) };
+                        chargeSound.Play(attackParamData);
                     }
                     break;
                 case 8:
@@ -198,12 +207,14 @@ public class TestEnemy : BeatTrackerObject
                     if (attackType == 1)
                     {
                         Attack(true);
-                        attack1Sound.Play();
+                        FmodParamData[] attackParamData = { new FmodParamData("global_enemy_attack_swing", (float)EnemyAttackFmodParamValues.Regular) };
+                        attackSwingSound.Play(attackParamData);
                     }
                     else
                     {
                         Attack(false);
-                        attack2Sound.Play();
+                        FmodParamData[] attackParamData = { new FmodParamData("global_enemy_attack_swing", (float)EnemyAttackFmodParamValues.Unblockable) };
+                        attackSwingSound.Play(attackParamData);
                     }
                     break;
             }
@@ -227,6 +238,22 @@ public class TestEnemy : BeatTrackerObject
         }
     }
 
+    public void PlayAttackConnectSFX(bool parryable = true)
+    {
+        if (parryable)
+        {
+            FmodParamData[] attackParamData = { new FmodParamData("global_enemy_attack_hit", (float)EnemyAttackFmodParamValues.Regular) };
+            attackConnectSound.Play(attackParamData);
+            attackTonalSound.Play();
+        }
+        else
+        {
+            FmodParamData[] attackParamData = { new FmodParamData("global_enemy_attack_hit", (float)EnemyAttackFmodParamValues.Unblockable) };
+            attackConnectSound.Play(attackParamData);
+            attackTonalSound.Play();
+        }
+    }
+
     public void TakeDamage(int damage)
     {
         health = Mathf.Max(0, health - damage);
@@ -235,7 +262,6 @@ public class TestEnemy : BeatTrackerObject
         healthBar.SetHealthBarSize(health, maxHealth);
 
         getHitParticles.Play();
-        getHitSound.Play();
 
         if (enemyState != EnemyState.Dead && health <= 0)
         {
