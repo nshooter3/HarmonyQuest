@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+/// <summary>
+/// Class that holds the information for playing and updating parameters on a specific fmod event, for both tonal and atonal events.
+/// Any time we need to play an fmod event, it should be accessed through a gameobject with an instance of this class.
+/// </summary>
 public class FmodSfxPlayer : MonoBehaviour
 {
     public string sfxEventName = "";
@@ -12,7 +16,7 @@ public class FmodSfxPlayer : MonoBehaviour
     //Used in the GlissUp and GlissDown behaviors to determine spacing between notes
     public float glissTimeBetweenNotes = 0.1f;
 
-    //Determines what this object does when it is told to play a musical SFX
+    //Determines what this object does when it is told to play an fmod event
     public enum TonalSfxMode
     {
         //No Tonal Sfx behavior
@@ -131,6 +135,11 @@ public class FmodSfxPlayer : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// The only public function in this class, which is used to play our fmod event.
+    /// This will behave in different ways depending on our sfx mode
+    /// </summary>
+    /// <param name="extraParams"> A list of parameter data to be passed into our event before playing it </param>
     public void Play(FmodParamData[] extraParams = null)
     {
         notesInChord = FmodChordInterpreter.instance.GetFmodChord();
@@ -217,7 +226,6 @@ public class FmodSfxPlayer : MonoBehaviour
 
     private void PlayNoteUpThenDown(FmodParamData[] extraParams = null)
     {
-        //Debug.Log("PLAY CHORD NOTE: " + noteIndex + ", WITH MIDI VALUE " + notesInChord[noteIndex].midiValue);
         PlayNoteAtIndex(noteIndex, extraParams);
         noteIndex = noteIndex + noteDirection;
 
@@ -274,7 +282,6 @@ public class FmodSfxPlayer : MonoBehaviour
     {
         for(int i = 0; i < notesInChord.Count; i ++)
         {
-            //Debug.Log("PLAY CHORD NOTE: " + i + ", WITH MIDI VALUE " + notesInChord[i].midiValue);
             float noteValue = ConvertMidiValueToFmodParamValue(notesInChord[i].midiValue);
             float noteOctave = notesInChord[i].octave;
             float delay = glissTimeBetweenNotes * i;

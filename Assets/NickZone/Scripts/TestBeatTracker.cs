@@ -122,7 +122,7 @@ public class TestBeatTracker : MonoBehaviour
         SixteenthNoteUpdate();
     }
 
-    //SoundController Calls this during the beat callback. 
+    //FmodMusicHandler calls this during the beat callback. 
     public void Beat()
     {
         
@@ -147,7 +147,7 @@ public class TestBeatTracker : MonoBehaviour
         bool attackedWithinRangeBeforeBeatGood = beatTimer > beatTimeDuration - (beatTimeDuration * onBeatPadding);
         bool attackedWithinRangeAfterBeatGood = beatTimer <= (beatTimeDuration * onBeatPadding);
 
-        //Half onBeatPadding range for great on beat
+        //Half onBeatPadding range for great on beat. This is half the window of good on beat.
         bool attackedWithinRangeBeforeBeatGreat = beatTimer > beatTimeDuration - (beatTimeDuration * (onBeatPadding / 2.0f));
         bool attackedWithinRangeAfterBeatGreat = beatTimer <= (beatTimeDuration * (onBeatPadding/2.0f));
 

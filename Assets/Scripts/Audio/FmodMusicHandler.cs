@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
@@ -149,7 +148,6 @@ public class FmodMusicHandler : MonoBehaviour
                     {
                         var parameter = (FMOD.Studio.TIMELINE_BEAT_PROPERTIES)Marshal.PtrToStructure(parameterPtr, typeof(FMOD.Studio.TIMELINE_BEAT_PROPERTIES));
                         //print("BEAT " + parameter.beat + " CALLBACK");
-                        //print("TEMPO = " + parameter.tempo);
                         timelineInfo.currentMusicBar = parameter.bar;
                         timelineInfo.currentMusicBeat = parameter.beat;
                         timelineInfo.currentMusicTempo = parameter.tempo;
