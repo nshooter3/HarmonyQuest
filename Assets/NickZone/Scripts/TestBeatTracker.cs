@@ -17,11 +17,16 @@ public class TestBeatTracker : MonoBehaviour
     public float bpm = 140;
     public int beatsPerMeasure = 4;
     public float onBeatPadding = 0;
+    [HideInInspector]
     public int sixteenthNoteCount;
 
     private float beatTimeDuration;
     private float beatTimer;
+    [HideInInspector]
     public int beatCount;
+
+    //Whether or not to consider degree of accuracy when determining if an action is on beat.
+    public bool useDegreesOfOnBeatAccuracy = false;
 
     public enum OnBeatAccuracy
     {
@@ -157,7 +162,14 @@ public class TestBeatTracker : MonoBehaviour
         }
         else if (attackedWithinRangeBeforeBeatGood || attackedWithinRangeAfterBeatGood)
         {
-            return OnBeatAccuracy.Good;
+            if (useDegreesOfOnBeatAccuracy)
+            {
+                return OnBeatAccuracy.Good;
+            }
+            else
+            {
+                return OnBeatAccuracy.Great;
+            }
         }
         return OnBeatAccuracy.Miss;
     }
