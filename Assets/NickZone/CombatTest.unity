@@ -254,6 +254,7 @@ MonoBehaviour:
   onBeatPadding: 0.25
   sixteenthNoteCount: 1
   beatCount: 0
+  useDegreesOfOnBeatAccuracy: 0
   playMetronome: 0
   metronomeSound: {fileID: 8132557}
 --- !u!4 &8132559
@@ -5784,11 +5785,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 153897606}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86a6da65ac159e04b88019d629aa5555, type: 3}
+  m_Script: {fileID: 11500000, guid: 2f1c4dffb4eeed64eb2865369f8f5ffa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   sfxEventName: event:/sfx/melody/melody_parry_tonal
-  sfxEventVolume: 0.3
+  sfxEventVolume: 0.5
   musicalSfxParamName: melody_parry_tonal
   glissTimeBetweenNotes: 0.1
   sfxMode: 7
@@ -11694,11 +11695,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 549607145}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86a6da65ac159e04b88019d629aa5555, type: 3}
+  m_Script: {fileID: 11500000, guid: 2f1c4dffb4eeed64eb2865369f8f5ffa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   sfxEventName: event:/sfx/melody/melody_attack_hit
-  sfxEventVolume: 0.3
+  sfxEventVolume: 0.5
   musicalSfxParamName: 
   glissTimeBetweenNotes: 0.1
   sfxMode: 0
@@ -12620,11 +12621,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 848042778}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86a6da65ac159e04b88019d629aa5555, type: 3}
+  m_Script: {fileID: 11500000, guid: 2f1c4dffb4eeed64eb2865369f8f5ffa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   sfxEventName: event:/sfx/melody/melody_harmony_mode
-  sfxEventVolume: 0.3
+  sfxEventVolume: 0.5
   musicalSfxParamName: 
   glissTimeBetweenNotes: 0.1
   sfxMode: 0
@@ -12851,11 +12852,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 946828982}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86a6da65ac159e04b88019d629aa5555, type: 3}
+  m_Script: {fileID: 11500000, guid: 2f1c4dffb4eeed64eb2865369f8f5ffa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   sfxEventName: event:/sfx/enemy/prototype_pill/protoype_pill_attack_hit
-  sfxEventVolume: 1
+  sfxEventVolume: 0.5
   musicalSfxParamName: 
   glissTimeBetweenNotes: 0.1
   sfxMode: 0
@@ -13254,81 +13255,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1073725858
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1073725859}
-  - component: {fileID: 1073725860}
-  - component: {fileID: 1073725862}
-  - component: {fileID: 1073725863}
-  m_Layer: 0
-  m_Name: FmodMusicHandler
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1073725859
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1073725858}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 15
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1073725860
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1073725858}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68c1bcd8e0aaa4b4681d180912059dda, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  musicEventName: event:/music/crystal_men/crystal_man_fight_pink
-  musicVolume: 1
-  startMusicOnAwake: 1
-  memoryDebug: 0
-  isMusicPlaying: 0
---- !u!114 &1073725862
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1073725858}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bafd768a39cc50947aa2a8621c27934a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1073725863
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1073725858}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4368f7d9db20be0438a3a30c0fea89c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debugOneShotEvents: 0
 --- !u!1 &1093293467
 GameObject:
   m_ObjectHideFlags: 0
@@ -14054,11 +13980,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1320218961}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86a6da65ac159e04b88019d629aa5555, type: 3}
+  m_Script: {fileID: 11500000, guid: 2f1c4dffb4eeed64eb2865369f8f5ffa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   sfxEventName: event:/sfx/enemy/prototype_pill/prototype_pill_attack_charge
-  sfxEventVolume: 1
+  sfxEventVolume: 0.5
   musicalSfxParamName: 
   glissTimeBetweenNotes: 0.1
   sfxMode: 0
@@ -14326,11 +14252,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1459011449}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86a6da65ac159e04b88019d629aa5555, type: 3}
+  m_Script: {fileID: 11500000, guid: 2f1c4dffb4eeed64eb2865369f8f5ffa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   sfxEventName: event:/sfx/melody/melody_attack_swing
-  sfxEventVolume: 0.3
+  sfxEventVolume: 0.5
   musicalSfxParamName: 
   glissTimeBetweenNotes: 0.1
   sfxMode: 0
@@ -14748,14 +14674,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1577324190}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86a6da65ac159e04b88019d629aa5555, type: 3}
+  m_Script: {fileID: 11500000, guid: 2f1c4dffb4eeed64eb2865369f8f5ffa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   sfxEventName: event:/sfx/enemy/prototype_pill/protoype_pill_attack_swing
-  sfxEventVolume: 1
+  sfxEventVolume: 0.5
   musicalSfxParamName: 
   glissTimeBetweenNotes: 0.1
-  sfxMode: 6
+  sfxMode: 0
   indexBehaviorOnNewChord: 0
   rb: {fileID: 1577324192}
   debugPrintVelocity: 0
@@ -15368,11 +15294,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1835457715}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86a6da65ac159e04b88019d629aa5555, type: 3}
+  m_Script: {fileID: 11500000, guid: 2f1c4dffb4eeed64eb2865369f8f5ffa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   sfxEventName: event:/sfx/melody/melody_heal
-  sfxEventVolume: 0.3
+  sfxEventVolume: 0.5
   musicalSfxParamName: 
   glissTimeBetweenNotes: 0.1
   sfxMode: 0
@@ -20565,11 +20491,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1922830679}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86a6da65ac159e04b88019d629aa5555, type: 3}
+  m_Script: {fileID: 11500000, guid: 2f1c4dffb4eeed64eb2865369f8f5ffa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   sfxEventName: event:/sfx/melody/melody_attack_tonal
-  sfxEventVolume: 0.3
+  sfxEventVolume: 0.5
   musicalSfxParamName: melody_attack_tonal
   glissTimeBetweenNotes: 0.1
   sfxMode: 2
@@ -20663,15 +20589,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 2010561932}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86a6da65ac159e04b88019d629aa5555, type: 3}
+  m_Script: {fileID: 11500000, guid: 2f1c4dffb4eeed64eb2865369f8f5ffa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   sfxEventName: event:/sfx/enemy/prototype_pill/prototype_pill_attack_tonal
-  sfxEventVolume: 1
+  sfxEventVolume: 0.5
   musicalSfxParamName: melody_attack_tonal
   glissTimeBetweenNotes: 0.1
   sfxMode: 1
-  indexBehaviorOnNewChord: 2
+  indexBehaviorOnNewChord: 0
   rb: {fileID: 2010561934}
   debugPrintVelocity: 0
 --- !u!1 &2016110640
@@ -26325,3 +26251,72 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!1001 &3804077895730654561
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3804077894893776067, guid: a92c764d6d7856e489b32ab5ecc141ff,
+        type: 3}
+      propertyPath: m_Name
+      value: FmodHandler
+      objectReference: {fileID: 0}
+    - target: {fileID: 3804077894893776066, guid: a92c764d6d7856e489b32ab5ecc141ff,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3804077894893776066, guid: a92c764d6d7856e489b32ab5ecc141ff,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3804077894893776066, guid: a92c764d6d7856e489b32ab5ecc141ff,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3804077894893776066, guid: a92c764d6d7856e489b32ab5ecc141ff,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3804077894893776066, guid: a92c764d6d7856e489b32ab5ecc141ff,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3804077894893776066, guid: a92c764d6d7856e489b32ab5ecc141ff,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3804077894893776066, guid: a92c764d6d7856e489b32ab5ecc141ff,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3804077894893776066, guid: a92c764d6d7856e489b32ab5ecc141ff,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3804077894893776066, guid: a92c764d6d7856e489b32ab5ecc141ff,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3804077894893776066, guid: a92c764d6d7856e489b32ab5ecc141ff,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3804077894893776066, guid: a92c764d6d7856e489b32ab5ecc141ff,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a92c764d6d7856e489b32ab5ecc141ff, type: 3}

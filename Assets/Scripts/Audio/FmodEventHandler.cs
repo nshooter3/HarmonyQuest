@@ -5,9 +5,10 @@ using UnityEngine;
 
 /// <summary>
 /// Class that holds the information for playing and updating parameters on a specific fmod event, for both tonal and atonal events.
+/// The actual playing of the fmod event will occur through the fmod event pool based on the information stored in this class.
 /// Any time we need to play an fmod event, it should be accessed through a gameobject with an instance of this class.
 /// </summary>
-public class FmodSfxPlayer : MonoBehaviour
+public class FmodEventHandler : MonoBehaviour
 {
     public string sfxEventName = "";
     public float sfxEventVolume = 1.0f;
@@ -188,7 +189,7 @@ public class FmodSfxPlayer : MonoBehaviour
 
     private void PlayNonTonalNote(FmodParamData[] extraParams = null)
     {
-        FmodFacade.instance.CreateAndRunOneShotFmodEvent(sfxEventName, sfxEventVolume, gameObject, rb, extraParams);
+        PlayPooledFmodEvent(sfxEventName, sfxEventVolume, extraParams);
     }
 
     private void PlayRootNote(FmodParamData[] extraParams = null)
@@ -200,7 +201,7 @@ public class FmodSfxPlayer : MonoBehaviour
             float noteOctave = rootNote.octave;
 
             FmodParamData[] paramData = GenerateParamData(musicalSfxParamName, noteValue, octaveParamName, noteOctave, extraParams);
-            FmodFacade.instance.CreateAndRunOneShotFmodEvent(sfxEventName, sfxEventVolume, gameObject, rb, paramData);
+            PlayPooledFmodEvent(sfxEventName, sfxEventVolume, paramData);
         }
         else
         {
@@ -253,7 +254,7 @@ public class FmodSfxPlayer : MonoBehaviour
         float noteOctave = FmodChordInterpreter.instance.GetFmodNoteAtIndex(index).octave;
 
         FmodParamData[] paramData = GenerateParamData(musicalSfxParamName, noteValue, octaveParamName, noteOctave, extraParams);
-        FmodFacade.instance.CreateAndRunOneShotFmodEvent(sfxEventName, sfxEventVolume, gameObject, rb, paramData);
+        PlayPooledFmodEvent(sfxEventName, sfxEventVolume, paramData);
         lastPlayedNoteIndex = index;
     }
 
@@ -263,7 +264,7 @@ public class FmodSfxPlayer : MonoBehaviour
         float noteOctave = FmodChordInterpreter.instance.GetFmodRandomNote().octave;
 
         FmodParamData[] paramData = GenerateParamData(musicalSfxParamName, noteValue, octaveParamName, noteOctave, extraParams);
-        FmodFacade.instance.CreateAndRunOneShotFmodEvent(sfxEventName, sfxEventVolume, gameObject, rb, paramData);
+        PlayPooledFmodEvent(sfxEventName, sfxEventVolume, paramData);
     }
 
     private void PlayChord(FmodParamData[] extraParams = null)
@@ -274,7 +275,7 @@ public class FmodSfxPlayer : MonoBehaviour
             float noteOctave = note.octave;
 
             FmodParamData[] paramData = GenerateParamData(musicalSfxParamName, noteValue, octaveParamName, noteOctave, extraParams);
-            FmodFacade.instance.CreateAndRunOneShotFmodEvent(sfxEventName, sfxEventVolume, gameObject, rb, paramData);
+            PlayPooledFmodEvent(sfxEventName, sfxEventVolume, paramData);
         }
     }
 
@@ -309,7 +310,7 @@ public class FmodSfxPlayer : MonoBehaviour
     IEnumerator PlayNoteDelayed(float delay, string sfxEventName, float sfxEventVolume, FmodParamData[] paramData)
     {
         yield return new WaitForSeconds(delay);
-        FmodFacade.instance.CreateAndRunOneShotFmodEvent(sfxEventName, sfxEventVolume, gameObject, rb, paramData);
+        PlayPooledFmodEvent(sfxEventName, sfxEventVolume, paramData);
     }
 
     private float ConvertMidiValueToFmodParamValue(int midiValue)
@@ -325,5 +326,10 @@ public class FmodSfxPlayer : MonoBehaviour
             paramData = paramData.Concat(extraParamData).ToArray();
         }
         return paramData;
+    }
+
+    private void PlayPooledFmodEvent(string sfxEventName, float sfxEventVolume, FmodParamData[] paramData)
+    {
+        FmodFacade.instance.PlayPooledFmodEvent(sfxEventName, sfxEventVolume, gameObject, rb, paramData);
     }
 }

@@ -14,7 +14,7 @@ public class TestPlayer : MonoBehaviour
 
     //References to the scripts we'll be using to play musical sounds.
     [SerializeField]
-    private FmodSfxPlayer attackConnectSounds, harmonyMeterSounds, attackSwingSound, healSound, tonalAttackSound, tonalParrySound;
+    private FmodEventHandler attackConnectSounds, harmonyMeterSounds, attackSwingSound, healSound, tonalAttackSound, tonalParrySound;
 
     //Used to tell attackConnectSounds what happened when passing in fmod param values.
     public enum AttackFmodParamValues

@@ -150,4 +150,17 @@ public class FmodFacade : MonoBehaviour
         FMOD.Studio.EventInstance fmodEvent = CreateFmodEventInstance(eventName, parent, rb);
         PlayOneShotFmodEvent(fmodEvent, volume, paramData);
     }
+
+    /// <summary>
+    /// Plays an fmod event using our object pool. This saves cpu performance since we aren't creating/destroying events every time we play one.
+    /// </summary>
+    /// <param name="eventName"> The name of the event we want to play </param>
+    /// <param name="volume"> The volume of the event we want to play </param>
+    /// <param name="parent"> The gameobject our sound should be parented to. Used for fmod to track 3D sound properties </param>
+    /// <param name="rb"> The rigidbody that our sound should follow the velocity of. Used for fmod to track 3D sound properties </param>
+    /// <param name="paramData"> An array of param data that should be passed to our fmod event before playing it </param>
+    public void PlayPooledFmodEvent(string eventName, float volume = 1.0f, GameObject parent = null, Rigidbody rb = null, FmodParamData[] paramData = null)
+    {
+        FmodEventPool.instance.PlayEvent(eventName, volume, parent, rb, paramData);
+    }
 }

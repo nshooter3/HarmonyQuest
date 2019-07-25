@@ -26,7 +26,7 @@ public class TestEnemy : BeatTrackerObject
     [SerializeField]
     private ParticleSystem getHitParticles;
     [SerializeField]
-    private FmodSfxPlayer chargeSound, attackSwingSound, attackConnectSound, attackTonalSound;
+    private FmodEventHandler chargeSound, attackSwingSound, attackConnectSound, attackTonalSound;
 
     public enum EnemyAttackFmodParamValues
     {
