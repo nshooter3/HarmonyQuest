@@ -137,7 +137,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!82 &8132557
 AudioSource:
   m_ObjectHideFlags: 0
@@ -15523,7 +15523,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1224216815}
-  distanceFromPlayer: {x: 0, y: 9.5, z: -10}
+  direction: {x: 0, y: 0, z: 0}
+  distance: 10
+  minHeight: 0.5
+  maxHeight: 10
+  lowAngle: {x: 10, y: 0, z: 0}
+  highAngle: {x: 45, y: 0, z: 0}
+  cameraOffset: {x: 0, y: 0, z: 1.6}
   followBias: 2
 --- !u!114 &1469208763
 MonoBehaviour:
@@ -15553,6 +15559,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1224216815}
+  direction: {x: 0, y: 0, z: 0}
   targetPoint: {fileID: 0}
   distanceFromPlayer: {x: 0, y: 9.5, z: -10}
 --- !u!1 &1494763813
@@ -16921,7 +16928,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1887438312
 MonoBehaviour:
   m_ObjectHideFlags: 0

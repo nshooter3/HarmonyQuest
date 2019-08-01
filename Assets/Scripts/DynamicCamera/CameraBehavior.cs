@@ -7,9 +7,12 @@
         [SerializeField]
         private TestPlayer player;
         private CharacterController characterController;
+        
+        protected Vector3 targetAngles;
 
         protected float bias = 1f;
         protected bool active = false;
+        [SerializeField]
         protected Vector3 direction;
 
         protected void Init()
@@ -27,6 +30,7 @@
                 // Logarithmic?
                 // transform.position = transform.position - (transform.position -  direction) * Mathf.Pow(Time.deltaTime,  bias);
             }
+            transform.eulerAngles = Vector3.Lerp(transform.eulerAngles, targetAngles, bias * Time.deltaTime);
         }
 
         public void ToggleActive()

@@ -11,6 +11,7 @@
         {
             base.Init();
             bias = 1.5f;
+            targetAngles = new Vector3(45, 0, 0);
         }
 
         void Update()
