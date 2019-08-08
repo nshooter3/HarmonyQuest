@@ -27,8 +27,6 @@
             if (!Vector3.Equals(direction, Vector3.zero))
             {
                 transform.position = Vector3.Lerp(transform.position, direction, bias * Time.deltaTime);
-                // Logarithmic?
-                // transform.position = transform.position - (transform.position -  direction) * Mathf.Pow(Time.deltaTime,  bias);
             }
             transform.eulerAngles = Vector3.Lerp(transform.eulerAngles, targetAngles, bias * Time.deltaTime);
         }
