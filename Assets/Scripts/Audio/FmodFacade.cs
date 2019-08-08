@@ -163,4 +163,25 @@ public class FmodFacade : MonoBehaviour
     {
         FmodEventPool.instance.PlayEvent(eventName, volume, parent, rb, paramData);
     }
+
+    /*public void GetDSPData()
+    {
+        FMOD.RESULT result;
+        uint blocksize;
+        int numblocks;
+        int frequency;
+        float ms;
+
+        FMOD.SPEAKERMODE speakerMode;
+        int numSpeakers;
+
+        result = FMOD.System.getDSPBufferSize(out blocksize, out numblocks);
+        result = FMOD.System.getSoftwareFormat(out frequency, out speakerMode, out numSpeakers);
+
+        ms = (float)blocksize * 1000.0f / (float)frequency;
+
+        print("Mixer blocksize        = " + ms + " ms\n");
+        print("Mixer Total buffersize = " + ms * numblocks + " ms\n");
+        print("Mixer Average Latency  = " + ms * ((float)numblocks - 1.5f) + " ms\n");
+    }*/
 }

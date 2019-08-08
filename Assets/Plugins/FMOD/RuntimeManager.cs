@@ -238,8 +238,29 @@ retry:
             result = studioSystem.getLowLevelSystem(out lowlevelSystem);
             CheckInitResult(result, "FMOD.Studio.System.getLowLevelSystem");
 
+            result = lowlevelSystem.setDSPBufferSize(256, 2);
+            CheckInitResult(result, "FMOD.Studio.setDSPBufferSize");
+
             result = lowlevelSystem.setOutput(outputType);
             CheckInitResult(result, "FMOD.System.setOutput");
+
+            /*
+            uint bufferLength;
+            int numBuffers;
+            int mySampleRate;
+            FMOD.SPEAKERMODE mySpeakerMode;
+            int numSpeakers;
+            float ms;
+
+            lowlevelSystem.getDSPBufferSize(out bufferLength, out numBuffers);
+            lowlevelSystem.getSoftwareFormat(out mySampleRate, out mySpeakerMode, out numSpeakers);
+
+            ms = (float)bufferLength * 1000.0f / (float)mySampleRate;
+
+            print("Mixer blocksize        = " + ms + " ms\n");
+            print("Mixer Total buffersize = " + ms * numBuffers + " ms\n");
+            print("Mixer Average Latency  = " + ms * ((float)numBuffers - 1.5f) + " ms\n");
+            */
 
             result = lowlevelSystem.setSoftwareChannels(realChannels);
             CheckInitResult(result, "FMOD.System.setSoftwareChannels");
