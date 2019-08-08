@@ -57,7 +57,7 @@
 
         protected bool IsLockedOn()
         {
-            return player.IsLockedOn();
+            return false;
         }
 
         protected bool IsFollowingPOI()
