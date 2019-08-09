@@ -223,7 +223,7 @@ public class TestPlayer : MonoBehaviour
         }
         if (TestPlayerInputManager.instance.HarmonyModeButtonDown() && harmonyCharge >= maxHarmonyCharge / 2.0f && isInHarmonyMode == false)
         {
-            FmodParamData[] harmonyModeParamData = { new FmodParamData("global_melody_harmony", (float) HarmonyModeFmodParamValues.HarmonyModeActivated) };
+            FmodParamData[] harmonyModeParamData = { new FmodParamData("global_melody_harmony_mode", (float) HarmonyModeFmodParamValues.HarmonyModeActivated) };
             harmonyMeterSounds.Play(harmonyModeParamData);
             playerUI.ToggleHarmonyMode(true);
             isInHarmonyMode = true;
