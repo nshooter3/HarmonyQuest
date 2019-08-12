@@ -1,7 +1,10 @@
-﻿public class FmodNote
+﻿namespace HarmonyQuest.Audio
 {
-    public int midiValue;
-    public string note;
-    public int octave;
-    public bool isRootNote;
+    public class FmodNote
+    {
+        public int midiValue;
+        public string note;
+        public int octave;
+        public bool isRootNote;
+    }
 }

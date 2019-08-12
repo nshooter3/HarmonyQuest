@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using HarmonyQuest.Audio;
 
 public class TestEnemy : BeatTrackerObject
 {
@@ -26,7 +27,7 @@ public class TestEnemy : BeatTrackerObject
     [SerializeField]
     private ParticleSystem getHitParticles;
     [SerializeField]
-    private FmodEventHandler chargeSound, attackSwingSound, attackConnectSound, attackTonalSound;
+    private HarmonyQuest.Audio.FmodEventHandler chargeSound, attackSwingSound, attackConnectSound, attackTonalSound;
 
     public enum EnemyAttackFmodParamValues
     {

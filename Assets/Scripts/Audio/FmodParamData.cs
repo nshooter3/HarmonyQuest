@@ -1,12 +1,15 @@
-﻿using UnityEngine;
-public class FmodParamData : MonoBehaviour
+﻿namespace HarmonyQuest.Audio
 {
-    public string paramName;
-    public float paramValue;
-
-    public FmodParamData(string paramName, float paramValue)
+    using UnityEngine;
+    public class FmodParamData : MonoBehaviour
     {
-        this.paramName = paramName;
-        this.paramValue = paramValue;
+        public string paramName;
+        public float paramValue;
+
+        public FmodParamData(string paramName, float paramValue)
+        {
+            this.paramName = paramName;
+            this.paramValue = paramValue;
+        }
     }
 }

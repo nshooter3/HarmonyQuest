@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using HarmonyQuest.Audio;
 
 public class TestPlayer : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class TestPlayer : MonoBehaviour
 
     //References to the scripts we'll be using to play musical sounds.
     [SerializeField]
-    private FmodEventHandler attackConnectSounds, harmonyMeterSounds, attackSwingSound, healSound, tonalAttackSound, tonalParrySound;
+    private HarmonyQuest.Audio.FmodEventHandler attackConnectSounds, harmonyMeterSounds, attackSwingSound, healSound, tonalAttackSound, tonalParrySound;
 
     //Used to tell attackConnectSounds what happened when passing in fmod param values.
     public enum AttackFmodParamValues
