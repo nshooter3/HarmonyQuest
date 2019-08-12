@@ -33,6 +33,8 @@
         private int octaveMidiValue = 12;
         private int octaveOffset = 1;
 
+        private FmodNote noteStruct;
+
         private void Awake()
         {
             if (instance == null)
@@ -99,7 +101,7 @@
                 {
                     string noteInfo = delimitedNotesInfo[i].Trim();
 
-                    FmodNote noteStruct = new FmodNote();
+                    noteStruct = new FmodNote();
 
                     if (noteInfo[0] == fmodRootNoteChar)
                     {
@@ -138,7 +140,7 @@
 
         public void ResetFmodChord()
         {
-            fmodChord = new List<FmodNote>();
+            fmodChord.Clear();
         }
 
         public List<FmodNote> GetFmodChord()
