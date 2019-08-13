@@ -21,6 +21,10 @@ Shader "Unlit/Sky"
         _HorizonColorDay ("Horizon Day Color", Color) = (0, 0, 0)
         _HorizonPower ("Power of the Horizon", Range(0, 4)) = 1.0
         _StarsSpeed ("Speed of Star Movement", Float) = 0.5
+        _CloudColorDayEdge ("Cloud Color Day Edge", Color) = (0, 0, 0)
+        _CloudColorDayMain ("Cloud Color Day Main", Color) = (0, 0, 0)
+        _CloudCutoff ("Cloud Cutoff", Float) = 1.0
+        _Fuzziness ("Fuzziness", Float) = 1.0
         _Scale ("Scale of clouds", Float) = 1.0
     }
     SubShader
@@ -63,12 +67,16 @@ Shader "Unlit/Sky"
             fixed4 _NightBottomColor;
             fixed4 _NightTopColor;
             fixed4 _HorizonColorDay;
+            fixed4 _CloudColorDayEdge;
+            fixed4 _CloudColorDayMain;
             half  _SunRadius;
             half  _MoonRadius;
             half  _MoonOffset;
             half _HorizonPower;
             half _Scale;
             half _StarsSpeed;
+            half _CloudCutoff;
+            half _Fuzziness;
 
             v2f vert (appdata v)
             {
@@ -115,8 +123,10 @@ Shader "Unlit/Sky"
                 float noise1 = tex2D(_Distort, ((skyUV + baseNoise) - scrollSpeed) * _Scale);
                 float noise2 = tex2D(_SecNoise, ((skyUV + noise1 )  - scrollSpeed) * _Scale);
 
-                // float finalNoise = saturate(noise1 * noise2) * saturate(i.worldPos.y);
-
+                float finalNoise = saturate(noise1 * noise2) * saturate(i.worldPos.y);
+                float clouds = saturate(smoothstep(_CloudCutoff, _CloudCutoff + _Fuzziness, finalNoise));
+                float4 cloudsColored = lerp(_CloudColorDayEdge, _CloudColorDayMain , clouds) * clouds;
+                return cloudsColored;
                 return saturate(sunDisc * _SunColor + newMoonDisc * _MoonColor ) + fixed4(skyGradients, 1.0) + horizonGlowDay + fixed4(stars, 1.0);
             }
             ENDCG
