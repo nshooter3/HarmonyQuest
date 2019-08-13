@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Text;
     using UnityEngine;
 
     public class FmodChordInterpreter : MonoBehaviour
@@ -34,6 +35,7 @@
         private int octaveOffset = 1;
 
         private FmodNote noteStruct;
+        private StringBuilder noteInfo = new StringBuilder();
 
         private void Awake()
         {
@@ -99,7 +101,8 @@
                 string[] delimitedNotesInfo = marker.Split(fmodNoteDelimitterChar);
                 for (int i = 0; i < delimitedNotesInfo.Length; i++)
                 {
-                    string noteInfo = delimitedNotesInfo[i].Trim();
+                    noteInfo.Clear();
+                    noteInfo.Append(delimitedNotesInfo[i].Trim());
 
                     noteStruct = new FmodNote();
 
@@ -107,7 +110,7 @@
                     {
                         noteStruct.isRootNote = true;
                         //Remove fmodRootNoteChar from the start of the note when we no longer need it.
-                        noteInfo = noteInfo.Substring(1);
+                        noteInfo.Remove(0, 1);
                     }
                     else
                     {
@@ -118,10 +121,10 @@
                     noteStruct.octave = int.Parse("" + noteInfo[noteInfo.Length - 1]);
 
                     //Trim octave from end of note name when we no longer need it
-                    noteInfo = noteInfo.Substring(0, noteInfo.Length - 1);
+                    noteInfo.Remove(noteInfo.Length - 1, 1);
 
                     //At this point, the leftover bits of noteInfo should just be the note name.
-                    noteStruct.note = noteInfo;
+                    noteStruct.note = noteInfo.ToString();
 
                     //Calculate our note's midi value based on the note name and the octave.
                     int midiValue = 0;
