@@ -3,7 +3,8 @@
     using System;
     using UnityEngine;
 
-    public class FmodEventPoolableObject : MonoBehaviour
+    [CreateAssetMenu(fileName = "FmodEventData", menuName = "ScriptableObjects/FmodEventPoolableObject", order = 1)]
+    public class FmodEventPoolableObject : ScriptableObject
     {
         public string eventName;
         [HideInInspector]

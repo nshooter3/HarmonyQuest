@@ -1,7 +1,6 @@
 ﻿namespace HarmonyQuest.Audio
 {
-    using UnityEngine;
-    public class FmodParamData : MonoBehaviour
+    public class FmodParamData
     {
         public string paramName;
         public float paramValue;
