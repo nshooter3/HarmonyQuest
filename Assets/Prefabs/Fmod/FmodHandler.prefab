@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3804077894893776067
+--- !u!1 &6384125495003974059
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,11 +8,10 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3804077894893776066}
-  - component: {fileID: 3804077894893776070}
-  - component: {fileID: 3804077894893776069}
-  - component: {fileID: 3804077894893776071}
-  - component: {fileID: 3804077894893776068}
+  - component: {fileID: 6384125495003974058}
+  - component: {fileID: 6384125495003974062}
+  - component: {fileID: 6384125495003974061}
+  - component: {fileID: 6384125495003974063}
   m_Layer: 0
   m_Name: FmodHandler
   m_TagString: Untagged
@@ -20,13 +19,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3804077894893776066
+--- !u!4 &6384125495003974058
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3804077894893776067}
+  m_GameObject: {fileID: 6384125495003974059}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -34,26 +33,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3804077894893776070
+--- !u!114 &6384125495003974062
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3804077894893776067}
+  m_GameObject: {fileID: 6384125495003974059}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4368f7d9db20be0438a3a30c0fea89c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   debugOneShotEvents: 0
---- !u!114 &3804077894893776069
+--- !u!114 &6384125495003974061
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3804077894893776067}
+  m_GameObject: {fileID: 6384125495003974059}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 68c1bcd8e0aaa4b4681d180912059dda, type: 3}
@@ -64,39 +63,15 @@ MonoBehaviour:
   startMusicOnAwake: 1
   memoryDebug: 0
   isMusicPlaying: 0
---- !u!114 &3804077894893776071
+--- !u!114 &6384125495003974063
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3804077894893776067}
+  m_GameObject: {fileID: 6384125495003974059}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bafd768a39cc50947aa2a8621c27934a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3804077894893776068
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3804077894893776067}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a623301b71337164d9a25bd993a40595, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  events:
-  - {fileID: 2496834092678278974, guid: 4717edec469584341848dff1f210308b, type: 3}
-  - {fileID: 8607589851993433171, guid: 1397fd7725c3654488bd064bc2ea675e, type: 3}
-  - {fileID: 4893317949516367062, guid: 471a20785dcc221469f9cb224b7fc6e4, type: 3}
-  - {fileID: 811540451147720191, guid: e4024b9acb30b6540affaa223f483eb6, type: 3}
-  - {fileID: 5458321334195060293, guid: d7ed1605fa3c5ce4ea2b9130a77699e5, type: 3}
-  - {fileID: 2786486354588189098, guid: 6af8bb35ce57c734d9fc1780550dec27, type: 3}
-  - {fileID: 7917363880397624239, guid: 872db18664740d84d9737ecc86baaf1c, type: 3}
-  - {fileID: 8137581704550863405, guid: 2dd80217323f6954db5d1f758221d310, type: 3}
-  - {fileID: 1969019446383682940, guid: 91eb43be0d2c29c44a4a3b105bdfbaf3, type: 3}
-  - {fileID: 9096910714245747249, guid: daff4643ddcb81743bd015b4d5493da8, type: 3}
-  eventPoolSizes: 0500000005000000050000000500000005000000050000000500000005000000050000000c000000

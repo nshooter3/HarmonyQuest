@@ -10,6 +10,9 @@
     {
         public static FmodFacade instance;
 
+        //Our pooling system for preloading fmod events. Helps reduce latency when playing sounds when used.
+        private FmodEventPool fmodEventPool;
+
         [SerializeField]
         private bool debugOneShotEvents = false;
 
@@ -23,6 +26,7 @@
             {
                 Destroy(gameObject);
             }
+            fmodEventPool = new FmodEventPool();
         }
 
         /// <summary>
@@ -163,7 +167,7 @@
         /// <param name="paramData"> An array of param data that should be passed to our fmod event before playing it </param>
         public void PlayPooledFmodEvent(string eventName, float volume = 1.0f, GameObject parent = null, Rigidbody rb = null, FmodParamData[] paramData = null)
         {
-            FmodEventPool.instance.PlayEvent(eventName, volume, parent, rb, paramData);
+            fmodEventPool.PlayEvent(eventName, volume, parent, rb, paramData);
         }
 
         /*public void GetDSPData()

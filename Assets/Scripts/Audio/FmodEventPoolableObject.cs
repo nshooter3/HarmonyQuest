@@ -1,21 +1,18 @@
 ﻿namespace HarmonyQuest.Audio
 {
-    using System;
     using UnityEngine;
 
-    [CreateAssetMenu(fileName = "FmodEventData", menuName = "ScriptableObjects/FmodEventPoolableObject", order = 1)]
-    public class FmodEventPoolableObject : ScriptableObject
+    public class FmodEventPoolableObject
     {
         public string eventName;
-        [HideInInspector]
         public int index = -1;
-        [HideInInspector]
         public bool isReadyToPlay = false;
 
         private FMOD.Studio.EventInstance fmodEvent;
 
-        public void Init(int index)
+        public FmodEventPoolableObject(string eventName, int index)
         {
+            this.eventName = eventName;
             this.index = index;
             this.fmodEvent = FmodFacade.instance.CreateFmodEventInstance(eventName);
             isReadyToPlay = true;

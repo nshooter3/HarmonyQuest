@@ -2,42 +2,42 @@
 {
     using System.Collections.Generic;
     using UnityEngine;
+    using System.Linq;
 
-    public class FmodEventPool : MonoBehaviour
+    public class FmodEventPool
     {
-        public static FmodEventPool instance;
-
-        public FmodEventPoolableObject[] events;
-        public int[] eventPoolSizes;
+        //eventData gets loaded automatically by grabbing the FmodEventPoolableData components attached to the scriptable objects
+        //in the Resources folder defined by fmodEventPoolDataFolderPath.
+        private string fmodEventPoolDataFolderPath = "ScriptableObjects/Fmod";
+        private FmodEventPoolableData[] eventData;
 
         private Dictionary<string, List<FmodEventPoolableObject>> eventPools;
 
-        private void Awake()
+        //Variables used to retrieve and use data from eventData for populating eventPools.  
+        private string initEventName = "";
+        private int initEventPoolCount = 0;
+
+        public FmodEventPool()
         {
-            if (instance == null)
-            {
-                instance = this;
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
             InitPools();
         }
 
         void InitPools()
         {
+            eventData = Resources.LoadAll(fmodEventPoolDataFolderPath, typeof(FmodEventPoolableData)).Cast<FmodEventPoolableData>().ToArray();
             eventPools = new Dictionary<string, List<FmodEventPoolableObject>>();
-            for (int i = 0; i < events.Length; i++)
+
+            for (int i = 0; i < eventData.Length; i++)
             {
+                initEventName = eventData[i].eventName;
+                initEventPoolCount = eventData[i].poolableObjectCount;
                 List<FmodEventPoolableObject> eventPool = new List<FmodEventPoolableObject>();
-                for (int j = 0; j < eventPoolSizes[i]; j++)
+                for (int j = 0; j < initEventPoolCount; j++)
                 {
-                    FmodEventPoolableObject eventGameobject = Instantiate(events[i], transform);
-                    eventGameobject.Init(j);
+                    FmodEventPoolableObject eventGameobject = new FmodEventPoolableObject(initEventName, j);
                     eventPool.Add(eventGameobject);
                 }
-                eventPools.Add(events[i].eventName, eventPool);
+                eventPools.Add(initEventName, eventPool);
             }
         }
 
