@@ -8,7 +8,18 @@
     /// </summary>
     public class FmodFacade : MonoBehaviour
     {
-        public static FmodFacade instance;
+        private static FmodFacade inst;
+        public static FmodFacade instance
+        {
+            get
+            {
+                if (inst == null)
+                {
+                    inst = GameObject.FindObjectOfType<FmodFacade>();
+                }
+                return inst;
+            }
+        }
 
         //Our pooling system for preloading fmod events. Helps reduce latency when playing sounds when used.
         private FmodEventPool fmodEventPool;
@@ -18,14 +29,15 @@
 
         private void Awake()
         {
-            if (instance == null)
+            if (inst == null)
             {
-                instance = this;
+                inst = this;
             }
-            else
+            else if (inst != this)
             {
                 Destroy(gameObject);
             }
+
             fmodEventPool = new FmodEventPool();
         }
 

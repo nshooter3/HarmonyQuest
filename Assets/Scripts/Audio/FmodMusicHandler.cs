@@ -7,7 +7,18 @@
 
     public class FmodMusicHandler : MonoBehaviour
     {
-        public static FmodMusicHandler instance;
+        private static FmodMusicHandler inst;
+        public static FmodMusicHandler instance
+        {
+            get
+            {
+                if (inst == null)
+                {
+                    inst = GameObject.FindObjectOfType<FmodMusicHandler>();
+                }
+                return inst;
+            }
+        }
 
         public string musicEventName;
         public float musicVolume;
@@ -55,11 +66,11 @@
 
         private void Awake()
         {
-            if (instance == null)
+            if (inst == null)
             {
-                instance = this;
+                inst = this;
             }
-            else
+            else if(inst != this)
             {
                 Destroy(gameObject);
             }

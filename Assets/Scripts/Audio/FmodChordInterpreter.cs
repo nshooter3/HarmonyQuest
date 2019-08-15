@@ -7,7 +7,18 @@
 
     public class FmodChordInterpreter : MonoBehaviour
     {
-        public static FmodChordInterpreter instance;
+        private static FmodChordInterpreter inst;
+        public static FmodChordInterpreter instance
+        {
+            get
+            {
+                if (inst == null)
+                {
+                    inst = GameObject.FindObjectOfType<FmodChordInterpreter>();
+                }
+                return inst;
+            }
+        }
 
         private List<FmodNote> fmodChord = new List<FmodNote>();
 
@@ -39,11 +50,11 @@
 
         private void Awake()
         {
-            if (instance == null)
+            if (inst == null)
             {
-                instance = this;
+                inst = this;
             }
-            else
+            else if (inst != this)
             {
                 Destroy(gameObject);
             }
