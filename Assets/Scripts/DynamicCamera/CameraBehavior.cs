@@ -4,7 +4,6 @@
 
     public abstract class CameraBehavior : MonoBehaviour
     {
-        [SerializeField]
         private TestPlayer player;
         private CharacterController characterController;
         
@@ -17,6 +16,7 @@
 
         protected void Init()
         {
+            player = GameObject.FindObjectOfType<TestPlayer>();
             characterController = player.GetComponent<CharacterController>();
         }
 
@@ -31,11 +31,10 @@
             transform.eulerAngles = Vector3.Lerp(transform.eulerAngles, targetAngles, bias * Time.deltaTime);
         }
 
-        public void ToggleActive()
+        public void ToggleActive(bool value)
         {
-            active = !active;
+            active = value;
         }
-
         
         protected Vector3 PlayerLocation()
         {
@@ -44,25 +43,12 @@
 
         protected Vector3 PlayerVelocity()
         {
-            if (!IsFollowingPOI())
-                return characterController.velocity;
-            else
-                return Vector3.zero;
+            return characterController.velocity;
         }
 
         protected Vector3 TargetLocation()
         {
             return player.lockOnTarget.transform.position;
-        }
-
-        protected bool IsLockedOn()
-        {
-            return false;
-        }
-
-        protected bool IsFollowingPOI()
-        {
-            return CameraController.instance.GetCameraBehavior<CameraFollowPointOfInterest>().targetPoint;
         }
 
         protected Vector3 ScaleVectorComponents(Vector3 v, float xScale, float yScale, float zScale)

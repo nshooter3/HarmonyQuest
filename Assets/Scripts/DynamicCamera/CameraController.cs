@@ -5,10 +5,7 @@
 
     public class CameraController : MonoBehaviour
     {
-        [SerializeField]
         private List<CameraBehavior> behaviors = new List<CameraBehavior>();
-
-        private Vector3 target;
 
         private static CameraController inst;
         public static CameraController instance
@@ -30,7 +27,21 @@
 
         void Awake()
         {
-            ToggleCamera<CameraFollowPlayer>();
+            if (!inst)
+            {
+                inst = this;
+            }
+            else if (inst != this)
+            {
+                Destroy(this);
+            }
+            // Fill behaviors list with camera behaviors attached to the camera
+            GetComponents<CameraBehavior>(behaviors);
+            // Activate the first behavior
+            if (behaviors[0] != null)
+            {
+                behaviors[0].ToggleActive(true);
+            }
         }
 
         void LateUpdate()
@@ -43,9 +54,9 @@
             behaviors.ForEach(b => b.Move());
         }
 
-        public void ToggleCamera<T>()
+        public void ToggleCamera<T>(bool value)
         {
-            behaviors.Find(x => x is T).ToggleActive();
+            behaviors.Find(x => x is T).ToggleActive(value);
         }
 
         /**

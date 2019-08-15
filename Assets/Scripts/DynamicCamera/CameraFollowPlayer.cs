@@ -17,6 +17,10 @@
         private float exponentFactor = 0.5f;
         private float exponentBase = 1.5f;
         private float cameraOffset = 3.2f;
+        private float fastVelocityScale = 5f;
+        private float slowVelocityScale = 1.2f;
+        private float wideFOV = 73f;
+        private float narrowFOV = 65f;
 
         void Awake()
         {
@@ -33,8 +37,8 @@
             direction.y = exponentialHeight;
             direction.z -= cameraOffset;
             targetAngles = Vector3.Lerp(lowAngle, highAngle, exponentialHeight / maxHeight);
-            direction += PlayerLocation() + PlayerVelocity() / Mathf.Lerp(5f, 1.2f, transform.position.y / maxHeight);
-            Camera.main.fieldOfView = Mathf.Lerp(73f, 65f, exponentialHeight / maxHeight);
+            direction += PlayerLocation() + PlayerVelocity() / Mathf.Lerp(fastVelocityScale, slowVelocityScale, transform.position.y / maxHeight);
+            Camera.main.fieldOfView = Mathf.Lerp(wideFOV, narrowFOV, exponentialHeight / maxHeight);
         }
     }
 }

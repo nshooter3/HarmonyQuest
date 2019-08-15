@@ -5,7 +5,6 @@
     public class CameraPointOfInterest : MonoBehaviour
     {
         private int playerLayer;
-        private CameraFollowPointOfInterest POICamera;
 
         void Awake()
         {
@@ -16,7 +15,7 @@
         {
             if (col.gameObject.layer == playerLayer)
             {
-                CameraController.instance.ToggleCamera<CameraFollowPointOfInterest>();
+                CameraController.instance.ToggleCamera<CameraFollowPointOfInterest>(true);
                 CameraController.instance.GetCameraBehavior<CameraFollowPointOfInterest>().targetPoint = this.transform;
             }
         }
@@ -25,7 +24,7 @@
         {
             if (col.gameObject.layer == playerLayer)
             {
-                CameraController.instance.ToggleCamera<CameraFollowPointOfInterest>();
+                CameraController.instance.ToggleCamera<CameraFollowPointOfInterest>(false);
                 CameraController.instance.GetCameraBehavior<CameraFollowPointOfInterest>().targetPoint = null;
             }
         }
