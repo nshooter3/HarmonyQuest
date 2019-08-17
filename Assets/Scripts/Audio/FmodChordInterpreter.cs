@@ -46,7 +46,7 @@
         private int octaveOffset = 1;
 
         private FmodNote noteStruct;
-        private StringBuilder noteInfo = new StringBuilder();
+        private StringBuilder myStringBuilder = new StringBuilder();
 
         private void Awake()
         {
@@ -97,6 +97,19 @@
             return marker[0] == fmodFlagChar;
         }
 
+        // TODO: Relocate this to some sort of string builder util class.
+        private StringBuilder RemoveSpacesFromStringBuilder(StringBuilder str)
+        {
+            for (int i = str.Length - 1; i >= 0; i--)
+            {
+                if (str[i] == ' ')
+                {
+                    str.Remove(i, 1);
+                }
+            }
+            return str;
+        }
+
         /// <summary>
         /// Convert the fmod chord marker string into a list of FmodNotes, then store the active notes in fmodChord.
         /// </summary>
@@ -106,22 +119,27 @@
             try
             {
                 ResetFmodChord();
+                
+                myStringBuilder.Clear();
+                myStringBuilder.Append(marker);
+                RemoveSpacesFromStringBuilder(myStringBuilder);
                 //Remove fmodFlagChar from the front of our marker
-                marker = marker.Substring(1);
+                myStringBuilder.Remove(0, 1);
 
-                string[] delimitedNotesInfo = marker.Split(fmodNoteDelimitterChar);
+                string[] delimitedNotesInfo = myStringBuilder.ToString().Split(fmodNoteDelimitterChar);
+
                 for (int i = 0; i < delimitedNotesInfo.Length; i++)
                 {
-                    noteInfo.Clear();
-                    noteInfo.Append(delimitedNotesInfo[i].Trim());
+                    myStringBuilder.Clear();
+                    myStringBuilder.Append(delimitedNotesInfo[i]);
 
                     noteStruct = new FmodNote();
 
-                    if (noteInfo[0] == fmodRootNoteChar)
+                    if (myStringBuilder[0] == fmodRootNoteChar)
                     {
                         noteStruct.isRootNote = true;
                         //Remove fmodRootNoteChar from the start of the note when we no longer need it.
-                        noteInfo.Remove(0, 1);
+                        myStringBuilder.Remove(0, 1);
                     }
                     else
                     {
@@ -129,13 +147,13 @@
                     }
 
                     //Grab the int of the end of our note name for our octave value (i.e. "C3" grabs a 3)
-                    noteStruct.octave = int.Parse("" + noteInfo[noteInfo.Length - 1]);
+                    noteStruct.octave = int.Parse("" + myStringBuilder[myStringBuilder.Length - 1]);
 
                     //Trim octave from end of note name when we no longer need it
-                    noteInfo.Remove(noteInfo.Length - 1, 1);
+                    myStringBuilder.Remove(myStringBuilder.Length - 1, 1);
 
                     //At this point, the leftover bits of noteInfo should just be the note name.
-                    noteStruct.note = noteInfo.ToString();
+                    noteStruct.note = myStringBuilder.ToString();
 
                     //Calculate our note's midi value based on the note name and the octave.
                     int midiValue = 0;
