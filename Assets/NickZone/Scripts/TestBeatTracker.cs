@@ -1,6 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using HarmonyQuest.Audio;
 
 public class TestBeatTracker : MonoBehaviour
 {
@@ -10,16 +13,31 @@ public class TestBeatTracker : MonoBehaviour
     //List of objects that subscribe to TestBeatTracker updates
     public List<BeatTrackerObject> beatTrackerObjects;
 
-    public int bpm = 120;
-    private float sixteenthNoteDuration;
+    public Image debugImage;
+
+    public float bpm = 140;
+    public int beatsPerMeasure = 4;
+    public float onBeatPadding = 0;
     [HideInInspector]
-    public int sixteenthNoteCount = 1;
-    //Our beat based update cycle for now simply lasts 16 16th notes, which equals 4 beats, which equals 1 measure. Music, yeah!
-    private int maxSixteenthNoteCount = 16;
+    public int sixteenthNoteCount;
 
-    private float timeUntilNextSixteenthNote = 0;
+    private float beatTimeDuration;
+    private float beatTimer;
+    [HideInInspector]
+    public int beatCount;
 
-    public bool playMetronome = false;
+    //Whether or not to consider degree of accuracy when determining if an action is on beat.
+    public bool useDegreesOfOnBeatAccuracy = false;
+
+    public enum OnBeatAccuracy
+    {
+        Great = 1,
+        Good = 2,
+        Miss = 3,
+    }
+
+    [SerializeField]
+    private bool playMetronome = false;
     [SerializeField]
     private AudioSource metronomeSound;
 
@@ -33,15 +51,23 @@ public class TestBeatTracker : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        FmodMusicHandler.instance.AssignFunctionToOnBeatDelegate(Beat);
     }
 
     // Start is called before the first frame update
     void Start()
     {
         InitBeatTrackerObjects();
-        sixteenthNoteDuration = (60.0f / bpm)/4.0f;
-        SixteenthNoteUpdate();
-        timeUntilNextSixteenthNote = sixteenthNoteDuration;
+        beatTimeDuration = 1.0f / (bpm / 60.0f);
+        beatTimer = 0.0f;
+        beatCount = 1;
+    }
+
+    public void SetTempo(float newBpm)
+    {
+        bpm = newBpm;
+        beatTimeDuration = 1.0f / (bpm / 60.0f);
     }
 
     void InitBeatTrackerObjects()
@@ -62,6 +88,8 @@ public class TestBeatTracker : MonoBehaviour
                 i--;
             }
         }
+
+
     }
 
     public void RemoveBeatTrackerAtIndex(int index)
@@ -72,59 +100,101 @@ public class TestBeatTracker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UpdateCounts();
+        if (FmodMusicHandler.instance.isMusicPlaying)
+        {
+            UpdateCounts();
+
+            //Make multiplier image change colors during the "on beat" window
+            if (beatTimer > beatTimeDuration - (beatTimeDuration * 0.05) ||
+                beatTimer <= (beatTimeDuration * 0.05))
+            {
+                debugImage.color = Color.red;
+            }
+            else if (beatTimer > beatTimeDuration - (beatTimeDuration * onBeatPadding) /*||
+           beatTimer <= (beatTimeDuration * onBeatPadding)*/)
+            {
+                debugImage.color = Color.yellow;
+            }
+            else
+            {
+                debugImage.color = Color.white;
+            }
+        }
     }
 
     void UpdateCounts()
     {
-        timeUntilNextSixteenthNote -= Time.deltaTime;
-        if (timeUntilNextSixteenthNote <= 0)
-        {
-            timeUntilNextSixteenthNote = sixteenthNoteDuration;
-            //Once we pass our max 16th note count, reset to 1 instead of 0.
-            sixteenthNoteCount = Mathf.Max((sixteenthNoteCount + 1) % (maxSixteenthNoteCount + 1), 1);
-            SixteenthNoteUpdate();
-        }
+        beatTimer += Time.deltaTime;
+        SixteenthNoteUpdate();
     }
 
-    //Allow a little bit of wiggle room both before and after the beat for determing whether or not an action was on beat.
-    public bool WasActionOnBeat(bool debug = false)
+    //FmodMusicHandler calls this during the beat callback. 
+    public void Beat()
     {
-        //An attack within a 32nd note before the beat will count as on beat.
-        bool attackedWithinRangeBeforeBeat = (sixteenthNoteCount % 4 == 0) && (timeUntilNextSixteenthNote <= sixteenthNoteDuration / 2.0f);
-        //An attack within a 32nd note after the beat will count as on beat.
-        bool attackedWithinRangeAfterBeat = (sixteenthNoteCount % 4 == 1) && (timeUntilNextSixteenthNote >= sixteenthNoteDuration / 2.0f);
-        if (debug)
-        {
-            if (attackedWithinRangeBeforeBeat)
-            {
-                print("GOOD TIMING, BEFORE BEAT");
-            }
-            else if (attackedWithinRangeAfterBeat)
-            {
-                print("GOOD TIMING, AFTER BEAT");
-            }
-            else
-            {
-                print("BAD TIMING, OFF BEAT");
-            }
-        }
-        return attackedWithinRangeBeforeBeat || attackedWithinRangeAfterBeat;
-    }
-
-    void SixteenthNoteUpdate()
-    {
-        ClearNullBeatTrackerObjects();
-        if (playMetronome && sixteenthNoteCount % 4 == 1)
+        
+        if (playMetronome)
         {
             metronomeSound.Play();
         }
+        beatTimer = 0;
+        SetTempo(FmodMusicHandler.instance.GetCurrentMusicTempo());
+        beatCount = FmodMusicHandler.instance.GetCurrentBeat();
+        sixteenthNoteCount = 0;
         foreach (BeatTrackerObject beatTrackerObject in beatTrackerObjects)
         {
             beatTrackerObject.SixteenthNoteUpdate();
         }
     }
 
+    //Allow a little bit of wiggle room both before and after the beat for determining whether or not an action was on beat.
+    public OnBeatAccuracy WasActionOnBeat(bool debug = false)
+    {
+        //Full onBeatPadding range for good on beat
+        bool attackedWithinRangeBeforeBeatGood = beatTimer > beatTimeDuration - (beatTimeDuration * onBeatPadding);
+        bool attackedWithinRangeAfterBeatGood = beatTimer <= (beatTimeDuration * onBeatPadding);
+
+        //Half onBeatPadding range for great on beat. This is half the window of good on beat.
+        bool attackedWithinRangeBeforeBeatGreat = beatTimer > beatTimeDuration - (beatTimeDuration * (onBeatPadding / 2.0f));
+        bool attackedWithinRangeAfterBeatGreat = beatTimer <= (beatTimeDuration * (onBeatPadding/2.0f));
+
+        if (attackedWithinRangeBeforeBeatGreat || attackedWithinRangeAfterBeatGreat)
+        {
+            return OnBeatAccuracy.Great;
+        }
+        else if (attackedWithinRangeBeforeBeatGood || attackedWithinRangeAfterBeatGood)
+        {
+            if (useDegreesOfOnBeatAccuracy)
+            {
+                return OnBeatAccuracy.Good;
+            }
+            else
+            {
+                return OnBeatAccuracy.Great;
+            }
+        }
+        return OnBeatAccuracy.Miss;
+    }
+
+
+    void SixteenthNoteUpdate()
+    {
+        if (sixteenthNoteCount < 3)
+        {
+            ClearNullBeatTrackerObjects();
+            int newSixteenthNoteCount = (int)(beatTimer / (beatTimeDuration / 4.0f));
+            if (sixteenthNoteCount != newSixteenthNoteCount)
+            {
+                sixteenthNoteCount = newSixteenthNoteCount;
+                //print("@@@ sixteenth notes" + sixteenthNoteCount);
+                foreach (BeatTrackerObject beatTrackerObject in beatTrackerObjects)
+                {
+                    beatTrackerObject.SixteenthNoteUpdate();
+                }
+            }
+        }
+    }
+
+    /*
     void EighthNoteUpdate()
     {
         ClearNullBeatTrackerObjects();
@@ -160,4 +230,5 @@ public class TestBeatTracker : MonoBehaviour
             beatTrackerObject.EighthTripletNoteUpdate();
         }
     }
+    */
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using HarmonyQuest.Audio;
 
 public class TestPlayer : MonoBehaviour
 {
@@ -12,8 +13,39 @@ public class TestPlayer : MonoBehaviour
     [SerializeField]
     private ParticleSystem parryParticles, getHitParticles, healParticles;
 
+    //References to the scripts we'll be using to play musical sounds.
     [SerializeField]
-    private AudioSource parrySound, getHitSound, whiffSound, harmonyModeActivateSound, attackSound, comboUpSound, healSound;
+    private HarmonyQuest.Audio.FmodEventHandler attackConnectSounds, harmonyMeterSounds, attackSwingSound, healSound, tonalAttackSound, tonalParrySound;
+
+    //Used to tell attackConnectSounds what happened when passing in fmod param values.
+    public enum AttackFmodParamValues
+    {
+        None = 0,
+        MissedAttack = 1,
+        GoodHit = 2,
+        GreatHit = 3,
+        Parry = 4,
+    };
+
+    //Used to tell harmonyMeterSounds what happened when passing in fmod param values.
+    public enum HarmonyModeFmodParamValues
+    {
+        None = 0,
+        ComboUp1 = 1,
+        ComboUp2 = 2,
+        ComboUp3 = 3,
+        ComboUp4 = 4,
+        HarmonyModeActivated = 5,
+    };
+
+    //Used to tell healSound what happened when passing in fmod param values.
+    public enum HealFmodParamValues
+    {
+        None = 0,
+        SmallHeal = 1,
+        MediumHeal = 2,
+        BigHeal = 3,
+    };
 
     [SerializeField]
     private TestPlayerUI playerUI;
@@ -192,7 +224,8 @@ public class TestPlayer : MonoBehaviour
         }
         if (TestPlayerInputManager.instance.HarmonyModeButtonDown() && harmonyCharge >= maxHarmonyCharge / 2.0f && isInHarmonyMode == false)
         {
-            harmonyModeActivateSound.Play();
+            FmodParamData[] harmonyModeParamData = { new FmodParamData("global_melody_harmony_mode", (float) HarmonyModeFmodParamValues.HarmonyModeActivated) };
+            harmonyMeterSounds.Play(harmonyModeParamData);
             playerUI.ToggleHarmonyMode(true);
             isInHarmonyMode = true;
             harmonyModeMultilpier = 2;
@@ -250,7 +283,8 @@ public class TestPlayer : MonoBehaviour
 
     void Attack()
     {
-        attackSound.Play();
+        FmodParamData[] swingParamData = { new FmodParamData("global_melody_attack_swing", 1.0f)};
+        attackSwingSound.Play(swingParamData);
         //The player can cancel out of a dash to attack
         if (IsDashing())
         {
@@ -265,18 +299,29 @@ public class TestPlayer : MonoBehaviour
             TestEnemy enemy = cols[i].GetComponent<TestEnemy>();
             if (enemy != null)
             {
-                bool attackedOnBeat = enemy.TakeDamageAndCheckForOnBeatAttack(attackDamage * attackMultiplier);
-                if (attackedOnBeat)
+                TestBeatTracker.OnBeatAccuracy attackedOnBeatAccuracy = enemy.TakeDamageAndCheckForOnBeatAttack(attackDamage * attackMultiplier);
+                if (attackedOnBeatAccuracy == TestBeatTracker.OnBeatAccuracy.Great)
                 {
-                    //print("GOOD! ON BEAT ATTACK!");
+                    //print("1. GREAT! ON BEAT ATTACK!");
+                    tonalAttackSound.Play();
+                    FmodParamData[] attackParamData = { new FmodParamData("global_melody_attack_hit", (float)AttackFmodParamValues.GreatHit) };
+                    attackConnectSounds.Play(attackParamData);
                     AddToMultiplierProgress(1);
                     harmonyCharge = Mathf.Min(maxHarmonyCharge, harmonyCharge + 2);
                     playerUI.SetHarmonyChargeBar(harmonyCharge, maxHarmonyCharge);
                 }
+                else if (attackedOnBeatAccuracy == TestBeatTracker.OnBeatAccuracy.Good)
+                {
+                    //print("2. GOOD! ALMOST ON BEAT ATTACK!");
+                    FmodParamData[] attackParamData = { new FmodParamData("global_melody_attack_hit", (float)AttackFmodParamValues.GoodHit) };
+                    attackConnectSounds.Play(attackParamData);
+                    harmonyCharge = Mathf.Min(maxHarmonyCharge, harmonyCharge + 1);
+                    playerUI.SetHarmonyChargeBar(harmonyCharge, maxHarmonyCharge);
+                }
                 else
                 {
-                    //print("BAD! OFF BEAT ATTACK!");
-                    whiffSound.Play();
+                    FmodParamData[] attackParamData = { new FmodParamData("global_melody_attack_hit", (float) AttackFmodParamValues.MissedAttack) };
+                    attackConnectSounds.Play(attackParamData);
                     nextMultiplierProgress = 0;
                     if (attackMultiplier == 4)
                     {
@@ -305,7 +350,8 @@ public class TestPlayer : MonoBehaviour
 
     void Heal()
     {
-        healSound.Play();
+        FmodParamData[] healParamData = { new FmodParamData("global_melody_heal", (float) HealFmodParamValues.SmallHeal)};
+        healSound.Play(healParamData);
         health = Mathf.Min(health + healingAmount, maxHealth);
         healingItems--;
         playerUI.SetHealthBar(health, maxHealth);
@@ -419,22 +465,25 @@ public class TestPlayer : MonoBehaviour
         {
             if (receivedAttacks[i].parryable && WasDamageParried(receivedAttacks[i].attacker.gameObject) == true)
             {
-                print("SUCCESSFUL PARRY!");
+                //print("SUCCESSFUL PARRY!");
+                tonalParrySound.Play();
                 AddToMultiplierProgress(2);
                 harmonyCharge = Mathf.Min(maxHarmonyCharge, harmonyCharge + 6);
                 playerUI.SetHarmonyChargeBar(harmonyCharge, maxHarmonyCharge);
                 parryParticles.Play();
-                parrySound.Play();
+                FmodParamData[] parryParamData = { new FmodParamData("global_melody_attack_hit", (float)AttackFmodParamValues.Parry) };
+                attackConnectSounds.Play(parryParamData);
                 receivedAttacks[i].attacker.TakeDamage(attackDamage * 4 * attackMultiplier);
                 receivedAttacks.RemoveAt(i);
             }
             else if (IsDashing())
             {
-                print("SUCCESSFUL LATE DODGE!");
+                //print("SUCCESSFUL LATE DODGE!");
                 receivedAttacks.RemoveAt(i);
             }
             else if (receivedAttacks[i].attacker.IsAttacking() == false)
             {
+                receivedAttacks[i].attacker.PlayAttackConnectSFX(receivedAttacks[i].parryable);
                 TakeDamage(receivedAttacks[i].damage);
                 receivedAttacks.RemoveAt(i);
             }
@@ -449,7 +498,23 @@ public class TestPlayer : MonoBehaviour
             if (nextMultiplierProgress >= 10 && attackMultiplier < 4)
             {
                 attackMultiplier++;
-                comboUpSound.Play();
+                HarmonyModeFmodParamValues paramVal = HarmonyModeFmodParamValues.None;
+                switch (attackMultiplier) {
+                    case 1:
+                        paramVal = HarmonyModeFmodParamValues.ComboUp1;
+                        break;
+                    case 2:
+                        paramVal = HarmonyModeFmodParamValues.ComboUp2;
+                        break;
+                    case 3:
+                        paramVal = HarmonyModeFmodParamValues.ComboUp3;
+                        break;
+                    case 4:
+                        paramVal = HarmonyModeFmodParamValues.ComboUp4;
+                        break;
+                }
+                FmodParamData[] harmonyMeterParamData = { new FmodParamData("global_melody_harmony_mode", (float) paramVal) };
+                harmonyMeterSounds.Play(harmonyMeterParamData);
                 if (attackMultiplier < 4)
                 {
                     nextMultiplierProgress = 0;
@@ -483,10 +548,9 @@ public class TestPlayer : MonoBehaviour
     //TODO: Hook this up to something and make sure that it works.
     void TakeDamage(int damage)
     {
-        print("Player takes " + damage + " damage!");
+        //print("Player takes " + damage + " damage!");
 
         getHitParticles.Play();
-        getHitSound.Play();
 
         LoseAttackMultiplierLevel();
 
