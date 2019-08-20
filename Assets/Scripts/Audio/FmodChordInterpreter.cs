@@ -97,19 +97,6 @@
             return marker[0] == fmodFlagChar;
         }
 
-        // TODO: Relocate this to some sort of string builder util class.
-        private StringBuilder RemoveSpacesFromStringBuilder(StringBuilder str)
-        {
-            for (int i = str.Length - 1; i >= 0; i--)
-            {
-                if (str[i] == ' ')
-                {
-                    str.Remove(i, 1);
-                }
-            }
-            return str;
-        }
-
         /// <summary>
         /// Convert the fmod chord marker string into a list of FmodNotes, then store the active notes in fmodChord.
         /// </summary>
@@ -122,7 +109,7 @@
                 
                 myStringBuilder.Clear();
                 myStringBuilder.Append(marker);
-                RemoveSpacesFromStringBuilder(myStringBuilder);
+                myStringBuilder.Replace(" ", "");
                 //Remove fmodFlagChar from the front of our marker
                 myStringBuilder.Remove(0, 1);
 
