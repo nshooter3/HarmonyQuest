@@ -11940,7 +11940,7 @@ SpriteRenderer:
   m_Size: {x: 0.2, y: 0.2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &506431037
@@ -13143,7 +13143,7 @@ SpriteRenderer:
   m_Size: {x: 0.2, y: 0.2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &801672355
@@ -15420,8 +15420,6 @@ GameObject:
   - component: {fileID: 1469208758}
   - component: {fileID: 1469208761}
   - component: {fileID: 1469208763}
-  - component: {fileID: 1469208762}
-  - component: {fileID: 1469208764}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -15508,29 +15506,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   followPlayer: 1
   distanceFromPlayer: {x: 0, y: 9.5, z: -10}
-  distanceFromCameraCenter: 0
   player: {fileID: 1224216815}
---- !u!114 &1469208762
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1469208757}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e87ba980ca2a2341a8df96e0ad6a6e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 1224216815}
-  direction: {x: 0, y: 0, z: 0}
-  distance: 10
-  minHeight: 0.5
-  maxHeight: 10
-  lowAngle: {x: 10, y: 0, z: 0}
-  highAngle: {x: 45, y: 0, z: 0}
-  cameraOffset: {x: 0, y: 0, z: 1.6}
-  followBias: 2
 --- !u!114 &1469208763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15543,25 +15519,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36424bd11d72c1d4e8334c16ecdb0b63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  behaviors:
-  - {fileID: 1469208762}
-  - {fileID: 1469208764}
---- !u!114 &1469208764
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1469208757}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e414f80af9c372b499da4681f9891295, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 1224216815}
-  direction: {x: 0, y: 0, z: 0}
-  targetPoint: {fileID: 0}
-  distanceFromPlayer: {x: 0, y: 9.5, z: -10}
 --- !u!1 &1494763813
 GameObject:
   m_ObjectHideFlags: 0
