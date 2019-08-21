@@ -5,16 +5,16 @@
     public class CameraFollowPointOfInterest : CameraBehavior
     {
         public Transform targetPoint;
-        public Vector3 distanceFromPlayer;
+        private Vector3 distanceFromPlayer = new Vector3(0, 9.5f, -10);
 
-        void Awake()
+        public override void Init(Transform cameraTransform)
         {
-            base.Init();
+            base.Init(cameraTransform);
             bias = 1.5f;
             targetAngles = new Vector3(45, 0, 0);
         }
 
-        void Update()
+        public override void Update()
         {
             if (targetPoint != null)
             {

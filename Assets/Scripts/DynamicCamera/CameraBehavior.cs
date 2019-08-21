@@ -2,22 +2,28 @@
 {
     using UnityEngine;
 
-    public abstract class CameraBehavior : MonoBehaviour
+    public abstract class CameraBehavior
     {
         private TestPlayer player;
         private CharacterController characterController;
         
+        protected Transform cameraTransform;
         protected Vector3 targetAngles;
 
         protected float bias = 1f;
         protected bool active = false;
-        [SerializeField]
         protected Vector3 direction;
 
-        protected void Init()
+        public virtual void Init(Transform cameraTransform)
         {
+            this.cameraTransform = cameraTransform;
             player = GameObject.FindObjectOfType<TestPlayer>();
             characterController = player.GetComponent<CharacterController>();
+        }
+
+        public virtual void Update()
+        {
+
         }
 
         public void Move()
@@ -26,9 +32,9 @@
                 return;
             if (!Vector3.Equals(direction, Vector3.zero))
             {
-                transform.position = Vector3.Lerp(transform.position, direction, bias * Time.deltaTime);
+                cameraTransform.position = Vector3.Lerp(cameraTransform.position, direction, bias * Time.deltaTime);
             }
-            transform.eulerAngles = Vector3.Lerp(transform.eulerAngles, targetAngles, bias * Time.deltaTime);
+            cameraTransform.eulerAngles = Vector3.Lerp(cameraTransform.eulerAngles, targetAngles, bias * Time.deltaTime);
         }
 
         public void ToggleActive(bool value)

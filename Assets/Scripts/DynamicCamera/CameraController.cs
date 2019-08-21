@@ -35,8 +35,10 @@
             {
                 Destroy(this);
             }
-            // Fill behaviors list with camera behaviors attached to the camera
-            GetComponents<CameraBehavior>(behaviors);
+            // Fill behaviors list with camera behaviors
+            behaviors.Add(new CameraFollowPlayer());
+            behaviors.Add(new CameraFollowPointOfInterest());
+            InitCamera();
             // Activate the first behavior
             if (behaviors[0] != null)
             {
@@ -47,11 +49,22 @@
         void LateUpdate()
         {
             MoveCamera();
+            UpdateCamera();
+        }
+
+        private void InitCamera()
+        {
+            behaviors.ForEach(b => b.Init(transform));
         }
 
         private void MoveCamera()
         {
             behaviors.ForEach(b => b.Move());
+        }
+
+        private void UpdateCamera()
+        {
+            behaviors.ForEach(b => b.Update());
         }
 
         public void ToggleCamera<T>(bool value)
