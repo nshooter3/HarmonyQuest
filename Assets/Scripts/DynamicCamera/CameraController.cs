@@ -54,7 +54,8 @@
 
         private void InitCamera()
         {
-            behaviors.ForEach(b => b.Init(transform));
+            TestPlayer player = GameObject.FindObjectOfType<TestPlayer>();
+            behaviors.ForEach(b => b.Init(transform, player));
         }
 
         private void MoveCamera()

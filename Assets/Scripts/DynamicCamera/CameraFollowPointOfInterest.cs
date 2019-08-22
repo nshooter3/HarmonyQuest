@@ -7,9 +7,9 @@
         public Transform targetPoint;
         private Vector3 distanceFromPlayer = new Vector3(0, 9.5f, -10);
 
-        public override void Init(Transform cameraTransform)
+        public override void Init(Transform cameraTransform, TestPlayer player)
         {
-            base.Init(cameraTransform);
+            base.Init(cameraTransform, player);
             bias = 1.5f;
             targetAngles = new Vector3(45, 0, 0);
         }

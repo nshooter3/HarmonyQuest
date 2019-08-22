@@ -14,10 +14,10 @@
         protected bool active = false;
         protected Vector3 direction;
 
-        public virtual void Init(Transform cameraTransform)
+        public virtual void Init(Transform cameraTransform, TestPlayer player)
         {
             this.cameraTransform = cameraTransform;
-            player = GameObject.FindObjectOfType<TestPlayer>();
+            this.player = player;
             characterController = player.GetComponent<CharacterController>();
         }
 
