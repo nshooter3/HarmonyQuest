@@ -2,7 +2,7 @@
 {
     using UnityEngine;
 
-    public class CameraFollowPointOfInterest : CameraBehavior
+    public class CameraBehaviorLookAt : CameraBehavior
     {
         public Transform targetPoint;
         private Vector3 distanceFromPlayer = new Vector3(0, 9.5f, -10);

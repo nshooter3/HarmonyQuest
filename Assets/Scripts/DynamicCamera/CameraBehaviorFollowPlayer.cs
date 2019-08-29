@@ -2,7 +2,7 @@
 {
     using UnityEngine;
 
-    public class CameraFollowPlayer : CameraBehavior
+    public class CameraBehaviorFollowPlayer : CameraBehavior
     {
         [Range(2.5f, 10)]
         private float distance = 10f;

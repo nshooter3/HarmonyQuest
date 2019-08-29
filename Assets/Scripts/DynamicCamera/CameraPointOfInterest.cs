@@ -15,8 +15,8 @@
         {
             if (col.gameObject.layer == playerLayer)
             {
-                CameraController.instance.ToggleCamera<CameraFollowPointOfInterest>(true);
-                CameraController.instance.GetCameraBehavior<CameraFollowPointOfInterest>().targetPoint = this.transform;
+                CameraController.instance.ToggleCamera<CameraBehaviorLookAt>(true);
+                CameraController.instance.GetCameraBehavior<CameraBehaviorLookAt>().targetPoint = this.transform;
             }
         }
 
@@ -24,8 +24,8 @@
         {
             if (col.gameObject.layer == playerLayer)
             {
-                CameraController.instance.ToggleCamera<CameraFollowPointOfInterest>(false);
-                CameraController.instance.GetCameraBehavior<CameraFollowPointOfInterest>().targetPoint = null;
+                CameraController.instance.ToggleCamera<CameraBehaviorLookAt>(false);
+                CameraController.instance.GetCameraBehavior<CameraBehaviorLookAt>().targetPoint = null;
             }
         }
     }

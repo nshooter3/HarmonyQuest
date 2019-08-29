@@ -36,8 +36,8 @@
                 Destroy(this);
             }
             // Fill behaviors list with camera behaviors
-            behaviors.Add(new CameraFollowPlayer());
-            behaviors.Add(new CameraFollowPointOfInterest());
+            behaviors.Add(new CameraBehaviorFollowPlayer());
+            behaviors.Add(new CameraBehaviorLookAt());
             InitCamera();
             // Activate the first behavior
             if (behaviors[0] != null)
