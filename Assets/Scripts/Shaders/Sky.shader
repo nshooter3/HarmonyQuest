@@ -119,15 +119,16 @@ Shader "Unlit/Sky"
 
                 // Cloud noise
                 float scrollSpeed = 1.0;
-                float baseNoise = tex2D(_BaseNoise, (skyUV -  scrollSpeed) * _Scale);
-                float noise1 = tex2D(_Distort, ((skyUV + baseNoise) - scrollSpeed) * _Scale);
-                float noise2 = tex2D(_SecNoise, ((skyUV + noise1 )  - scrollSpeed) * _Scale);
+                float baseNoise = tex2D(_BaseNoise, (skyUV -  _Time.x) * _Scale).x;
+                float noise1 = tex2D(_Distort, ((skyUV + baseNoise) - _Time.x * scrollSpeed) * _Scale);
+                float noise2 = tex2D(_SecNoise, ((skyUV + noise1 )  - _Time.x * scrollSpeed * 0.5) * _Scale);
+                float finalNoise = saturate(noise1 * noise2) * 3.0 * saturate(i.worldPos.y);
 
-                float finalNoise = saturate(noise1 * noise2) * saturate(i.worldPos.y);
                 float clouds = saturate(smoothstep(_CloudCutoff, _CloudCutoff + _Fuzziness, finalNoise));
+                clouds *= horizon;
                 float4 cloudsColored = lerp(_CloudColorDayEdge, _CloudColorDayMain , clouds) * clouds;
-                return cloudsColored;
-                return saturate(sunDisc * _SunColor + newMoonDisc * _MoonColor ) + fixed4(skyGradients, 1.0) + horizonGlowDay + fixed4(stars, 1.0);
+                // return cloudsColored;
+                return saturate(sunDisc * _SunColor + newMoonDisc * _MoonColor ) + fixed4(skyGradients, 1.0) + horizonGlowDay + fixed4(stars, 1.0) + cloudsColored;
             }
             ENDCG
         }
