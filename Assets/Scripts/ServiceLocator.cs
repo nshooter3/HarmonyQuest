@@ -11,7 +11,18 @@
     ///</summary>
     public class ServiceLocator : MonoBehaviour
     {
-        public static ServiceLocator instance;
+        private static ServiceLocator inst;
+        public static ServiceLocator instance
+        {
+            get
+            {
+                if (!inst)
+                {
+                    inst = GameObject.FindObjectOfType<ServiceLocator>();
+                }
+                return inst;
+            }
+        }
 
         //List of managers the ServiceLocator can provide
         IPlayerInputManager InputManager;
@@ -19,9 +30,9 @@
        
         void Awake()
         {
-            if (instance == null)
+            if (inst == null)
             {
-                instance = this;
+                inst = this;
             }
             else
             {
@@ -43,7 +54,7 @@
             }
             else
             {
-                Debug.Log("No Input Manager detected to handle request. Starting one up");
+                Debug.LogWarning("No Input Manager detected to handle request. Starting one up");
                 gameObject.AddComponent(typeof(BasicPlayerInputManager));
                 InputManager = GetComponent(typeof(IPlayerInputManager)) as IPlayerInputManager;
                 return InputManager;
