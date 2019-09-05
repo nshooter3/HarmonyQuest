@@ -1,4 +1,4 @@
-﻿namespace HarmonyQuest.Input
+﻿namespace HarmonyQuest.Input.Implementation
 {
     using UnityEngine;
 
