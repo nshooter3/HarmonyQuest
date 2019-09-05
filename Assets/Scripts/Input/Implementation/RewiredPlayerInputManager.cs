@@ -1,7 +1,5 @@
 ﻿namespace HarmonyQuest.Input.Implementation
-{ 
-    using System.Collections;
-    using System.Collections.Generic;
+{
     using UnityEngine;
     using Rewired;
 
