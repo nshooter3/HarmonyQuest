@@ -45,21 +45,24 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _AtmosphereThickness: 1
-    - _CloudCutoff: 1
+    - _CloudCutoff: -0.08
     - _Exposure: 1.81
-    - _Fuzziness: -4.78
+    - _Fuzziness: 0.73
     - _HorizonPower: 0.31
-    - _MoonOffset: 0.096
-    - _MoonRadius: 0.134
-    - _Scale: 0.3
+    - _MoonOffset: -0.073
+    - _MoonRadius: 0.077
+    - _Scale: 0.06
     - _StarsSpeed: 0
     - _SunDisk: 2
-    - _SunRadius: 0.158
+    - _SunRadius: 0.01
+    - _SunScatterInstensity: 1.04
     - _SunSize: 0.04
     - _SunSizeConvergence: 5
     m_Colors:
-    - _CloudColorDayEdge: {r: 0.8207547, g: 0.8207547, b: 0.8207547, a: 1}
-    - _CloudColorDayMain: {r: 0.5471698, g: 0.5471698, b: 0.5471698, a: 1}
+    - _CloudColorDayEdge: {r: 0.8962264, g: 0.866634, b: 0.866634, a: 1}
+    - _CloudColorDayMain: {r: 1, g: 0.6367924, b: 0.6367924, a: 1}
+    - _CloudColorNightEdge: {r: 0, g: 0, b: 0, a: 1}
+    - _CloudColorNightMain: {r: 0, g: 0, b: 0, a: 1}
     - _DayBottomColor: {r: 0, g: 0.15254715, b: 0.46226418, a: 1}
     - _DayTopColor: {r: 0.44495374, g: 0.8626802, b: 0.9339623, a: 1}
     - _GroundColor: {r: 0.369, g: 0.349, b: 0.341, a: 1}
