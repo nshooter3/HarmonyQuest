@@ -1,6 +1,7 @@
 ﻿namespace HarmonyQuest
 {
     using Input;
+    using Input.Implementation;
     using UnityEngine;
 
     ///<summary>
