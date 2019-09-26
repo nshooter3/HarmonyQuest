@@ -106,10 +106,12 @@ Shader "Hidden/OilPaintPostProcess"
 
         // depth
         float depth = SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, sampler_CameraDepthTexture, i.texcoordStereo);
+        depth = 1.0 - depth;
         // depth = Linear01Depth(depth);
+        // depth = pow(depth, 2.5);
 
         // float4 finalColor = float4(1,1,1,0);
-        float front = smoothstep(_Distance - _Thickness, _Distance, 1.0 - depth);
+        float front = lerp(_Distance - _Thickness, _Distance, depth);
 
         // if ( edge )
         float4 finalColor = lerp(normalColor, col, front);
