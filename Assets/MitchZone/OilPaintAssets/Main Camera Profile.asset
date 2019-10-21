@@ -78,6 +78,66 @@ MonoBehaviour:
   thickness:
     overrideState: 1
     value: 0.016
+--- !u!114 &-5223489669467994699
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: AnisotropicOilPaint
+  m_EditorClassIdentifier: Assembly-CSharp:HarmonyQuest.Effects.OilPaint:AnisotropicOilPaint
+  active: 1
+  enabled:
+    overrideState: 1
+    value: 1
+  radius:
+    overrideState: 1
+    value: 1.46
+  distance:
+    overrideState: 0
+    value: 1
+  thickness:
+    overrideState: 0
+    value: 0.094
+  alpha:
+    overrideState: 1
+    value: 0.8
+  q:
+    overrideState: 1
+    value: 0.58
+  k0123:
+    overrideState: 1
+    value: {fileID: 2800000, guid: 8ad75dc0af6a1fd4aa324d81c3a190e9, type: 3}
+    defaultState: 1
+--- !u!114 &-5132142049069407426
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: OilPaint
+  m_EditorClassIdentifier: Assembly-CSharp:HarmonyQuest.Effects.OilPaint:OilPaint
+  active: 0
+  enabled:
+    overrideState: 1
+    value: 1
+  radius:
+    overrideState: 1
+    value: 5
+  distance:
+    overrideState: 1
+    value: 1
+  thickness:
+    overrideState: 1
+    value: 0.5
 --- !u!114 &-3552868737519304333
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -118,7 +178,8 @@ MonoBehaviour:
   settings:
   - {fileID: 1829218495042040984}
   - {fileID: -6856752295875079624}
-  - {fileID: 5115454922428899597}
+  - {fileID: -5223489669467994699}
+  - {fileID: 6881236782784814455}
 --- !u!114 &305063869591556005
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -144,6 +205,41 @@ MonoBehaviour:
   thickness:
     overrideState: 1
     value: 0.146
+--- !u!114 &1189683554977604034
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: AnisotropicOilPaint
+  m_EditorClassIdentifier: Assembly-CSharp:HarmonyQuest.Effects.OilPaint:AnisotropicOilPaint
+  active: 1
+  enabled:
+    overrideState: 1
+    value: 1
+  radius:
+    overrideState: 1
+    value: 5
+  distance:
+    overrideState: 0
+    value: 1
+  thickness:
+    overrideState: 0
+    value: 0.5
+  alpha:
+    overrideState: 0
+    value: 1
+  q:
+    overrideState: 0
+    value: 1
+  k0123:
+    overrideState: 1
+    value: {fileID: 2800000, guid: 8ad75dc0af6a1fd4aa324d81c3a190e9, type: 3}
+    defaultState: 1
 --- !u!114 &1829218495042040984
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -188,7 +284,57 @@ MonoBehaviour:
   opacity:
     overrideState: 1
     value: 1
+--- !u!114 &3904143456075408736
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: OilPaint
+  m_EditorClassIdentifier: Assembly-CSharp:HarmonyQuest.Effects.OilPaint:OilPaint
+  active: 1
+  enabled:
+    overrideState: 1
+    value: 1
+  radius:
+    overrideState: 0
+    value: 5
+  distance:
+    overrideState: 0
+    value: 1
+  thickness:
+    overrideState: 0
+    value: 0.5
 --- !u!114 &5115454922428899597
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: OilPaint
+  m_EditorClassIdentifier: Assembly-CSharp:HarmonyQuest.Effects.OilPaint:OilPaint
+  active: 1
+  enabled:
+    overrideState: 1
+    value: 1
+  radius:
+    overrideState: 0
+    value: 5
+  distance:
+    overrideState: 0
+    value: 1
+  thickness:
+    overrideState: 0
+    value: 0.5
+--- !u!114 &6881236782784814455
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}

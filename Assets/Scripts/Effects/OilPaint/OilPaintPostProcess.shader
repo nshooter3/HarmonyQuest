@@ -1,10 +1,5 @@
 Shader "Hidden/OilPaintPostProcess"
 {
-    Properties
-    {
-        _Radius ("Size of the Strokes", Range(0, 10)) = 3
-    }
-
     HLSLINCLUDE
 
     #include "Packages/com.unity.postprocessing/PostProcessing/Shaders/StdLib.hlsl"
@@ -15,9 +10,9 @@ Shader "Hidden/OilPaintPostProcess"
     Texture2D _CameraDepthTexture; SamplerState sampler_CameraDepthTexture;
     float4 _CameraDepthTexture_ST;
 
-    uniform int _Radius;
-    uniform half _Distance;
-    uniform half _Thickness;
+    uniform int _Radius; // Size of the Strokes
+    uniform half _Distance; // Distance from camera
+    uniform half _Thickness; // How thick the falloff is
 
     struct region {
         int x1, y1, x2, y2;
