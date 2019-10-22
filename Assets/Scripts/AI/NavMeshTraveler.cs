@@ -49,7 +49,7 @@
             return nextWaypoint;
         }
 
-        public void NavMeshTravelerUpdate()
+        protected void Update()
         {
             if (isTraversalActive == true && target != null)
             {
@@ -75,7 +75,7 @@
         {
             if (Vector3.Distance(source.position, nextWaypoint) <= waypointReachedDistanceThreshold)
             {
-                if (waypoints.Count > 0)
+                if (waypoints != null && waypoints.Count > 0)
                 {
                     nextWaypoint = waypoints.Dequeue();
                     print("GENERATE NEW WAYPOINT: " + nextWaypoint);
@@ -83,7 +83,7 @@
             }
         }
 
-        void GeneratePathToTarget()
+        public void GeneratePathToTarget()
         {
             print("GeneratePathToTarget");
             path = NavMeshUtil.GeneratePath(source, target);
