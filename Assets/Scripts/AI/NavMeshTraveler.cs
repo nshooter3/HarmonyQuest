@@ -25,10 +25,10 @@
         /// How close we need to be to a waypoint for it to be considered reached.
         /// </summary>
         [SerializeField]
-        private float waypointReachedDistanceThreshold = 2.0f;
+        protected float waypointReachedDistanceThreshold = 2.0f;
 
-        private Transform source;
-        private Transform target;
+        protected Transform navigationAgent;
+        protected Transform navigationTarget;
         private Vector3 lastKnownTargetPos = new Vector3(float.MinValue, float.MinValue, float.MinValue);
 
         private NavMeshPath path;
@@ -38,10 +38,19 @@
 
         public void SetTarget(Transform source, Transform target)
         {
-            this.source = source;
-            this.target = target;
+            navigationAgent = source;
+            navigationTarget = target;
+            waypoints = null;
             isTraversalActive = true;
             GeneratePathToTarget();
+        }
+
+        public void CancelCurrentNavigation()
+        {
+            navigationAgent = null;
+            navigationTarget = null;
+            waypoints = null;
+            isTraversalActive = false;
         }
 
         public Vector3 GetNextWaypoint()
@@ -51,7 +60,7 @@
 
         protected void Update()
         {
-            if (isTraversalActive == true && target != null)
+            if (isTraversalActive == true && navigationTarget != null)
             {
                 CheckIfPathNeedsToBeRegenerated();
                 UpdateDestination();
@@ -64,7 +73,7 @@
             if (pathRefreshTimer > pathRefreshRate)
             {
                 pathRefreshTimer = 0;
-                if (Vector3.Distance(target.transform.position, lastKnownTargetPos) > pathRefreshDistanceThreshold)
+                if (Vector3.Distance(navigationTarget.transform.position, lastKnownTargetPos) > pathRefreshDistanceThreshold)
                 {
                     GeneratePathToTarget();
                 }
@@ -73,23 +82,21 @@
 
         void UpdateDestination()
         {
-            if (Vector3.Distance(source.position, nextWaypoint) <= waypointReachedDistanceThreshold)
+            if (Vector3.Distance(navigationAgent.position, nextWaypoint) <= waypointReachedDistanceThreshold)
             {
                 if (waypoints != null && waypoints.Count > 0)
                 {
                     nextWaypoint = waypoints.Dequeue();
-                    print("GENERATE NEW WAYPOINT: " + nextWaypoint);
                 }
             }
         }
 
-        public void GeneratePathToTarget()
+        private void GeneratePathToTarget()
         {
-            print("GeneratePathToTarget");
-            path = NavMeshUtil.GeneratePath(source, target);
+            path = NavMeshUtil.GeneratePath(navigationAgent, navigationTarget);
             waypoints = new Queue<Vector3>(path.corners);
             nextWaypoint = waypoints.Dequeue();
-            lastKnownTargetPos = target.transform.position;
+            lastKnownTargetPos = navigationTarget.transform.position;
         }
     }
 }

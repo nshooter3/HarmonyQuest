@@ -2696,12 +2696,12 @@ MonoBehaviour:
   waypointReachedDistanceThreshold: 0.2
   aggroState: 0
   aggroTarget: {fileID: 693083115}
+  sourceBottom: {fileID: 1209313103}
   aggroZone: {fileID: 1298411987}
   disengageWithDistance: 1
-  disengageDistance: 20
+  disengageDistance: 15
   checkForTargetObstructionRate: 0.5
-  navigateToTargetCooldownRate: 2
-  bottom: {fileID: 1209313103}
+  origin: {fileID: 1064529777}
   navPos: {fileID: 1025277659}
   speed: 270
   gravity: 10
@@ -2775,13 +2775,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 542868541}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.25, z: 0}
+  m_LocalPosition: {x: 0, y: -2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1025277663}
   - {fileID: 361448134}
   - {fileID: 1209313103}
   - {fileID: 1298411986}
+  - {fileID: 1064529777}
   m_Father: {fileID: 0}
   m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10507,6 +10508,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1054341498}
   m_CullTransparentMesh: 0
+--- !u!1 &1064529776
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1064529777}
+  m_Layer: 0
+  m_Name: Origin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1064529777
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1064529776}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 542868547}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1133605882
 GameObject:
   m_ObjectHideFlags: 0

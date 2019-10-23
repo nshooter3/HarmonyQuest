@@ -12,6 +12,8 @@
 
         public Transform aggroTarget;
 
+        public Transform sourceBottom;
+
         public CollisionWrapper aggroZone;
 
         public bool disengageWithDistance = true;
@@ -25,9 +27,13 @@
 
         private bool targetInLineOfSight = false;
 
+        [SerializeField]
+        private Transform origin;
+
         // Start is called before the first frame update
         protected void Start()
         {
+            origin.parent = null;
             if (aggroZone != null)
             {
                 aggroZone.AssignFunctionToTriggerStayDelegate(AggroZoneActivation);
@@ -67,9 +73,9 @@
 
         public virtual void NavigateToTargetEnter()
         {
+            SetTarget(sourceBottom, aggroTarget);
             targetInLineOfSight = false;
             checkForTargetObstructionTimer = 0;
-            base.GeneratePathToTarget();
             aggroState = AggroState.navigateToTarget;
         }
 
@@ -150,13 +156,19 @@
 
         public virtual void DeAggroEnter()
         {
+            SetTarget(sourceBottom, origin);
             targetInLineOfSight = false;
             aggroState = AggroState.deAggro;
         }
 
         public virtual void DeAggroUpdate()
         {
-
+            base.Update();
+            if (Vector3.Distance(sourceBottom.position, navigationTarget.position) <= waypointReachedDistanceThreshold)
+            {
+                deAggroState.Exit();
+                idleState.Enter();
+            }
         }
 
         public virtual void DeAggroExit()

@@ -4,8 +4,6 @@
 
     public class BasicNavMeshEnemy : AggroableEnemy
     {
-        public Transform bottom;
-
         public GameObject navPos;
 
         public float speed;
@@ -24,7 +22,6 @@
         new void Start()
         {
             base.Start();
-            SetTarget(bottom, aggroTarget);
             if (rb == null)
             {
                 rb = GetComponent<Rigidbody>();
@@ -42,50 +39,35 @@
 
         void Move()
         {
-            if (aggroState == AggroState.navigateToTarget)
-            {
-                Vector3 destination = GetNextWaypoint();
-                navPos.transform.position = destination;
-                //print("DESTINATION = " + destination);
-                //print("BOTTOM POS = " + bottom.position);
-                moveDirection = (destination - bottom.position).normalized;
-
-                moveDirectionNoGravity = moveDirection;
-
-                // Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below
-                // when the moveDirection is multiplied by deltaTime). This is because gravity should be applied
-                // as an acceleration (ms^-2)
-                moveDirection.y -= gravity * Time.deltaTime;
-
-                // Move the controller
-                rb.velocity = (moveDirection * Time.deltaTime) * speed;
-                //print("RB VELOCITY: " + rb.velocity);
-
-                RotateEnemy(1.0f);
-            }
-            else if (aggroState == AggroState.engageTarget)
-            {
-                navPos.transform.position = new Vector3(aggroTarget.transform.position.x, aggroTarget.transform.position.y + 2.25f, aggroTarget.transform.position.z);
-                moveDirection = (aggroTarget.transform.position - transform.position).normalized;
-
-                moveDirectionNoGravity = moveDirection;
-
-                // Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below
-                // when the moveDirection is multiplied by deltaTime). This is because gravity should be applied
-                // as an acceleration (ms^-2)
-                moveDirection.y -= gravity * Time.deltaTime;
-
-                // Move the controller
-                rb.velocity = (moveDirection * Time.deltaTime) * speed;
-
-                RotateEnemy(1.0f);
-            }
-            else if (aggroState == AggroState.idle || aggroState == AggroState.deAggro)
+            if (aggroState == AggroState.idle)
             {
                 rb.velocity = Vector3.zero;
+                return;
             }
 
-         }
+            Vector3 destination;
+
+            if (aggroState == AggroState.engageTarget)
+            {
+                destination = aggroTarget.transform.position;
+                navPos.transform.position = new Vector3(aggroTarget.transform.position.x, aggroTarget.transform.position.y + 2.25f, aggroTarget.transform.position.z);
+            }
+            else
+            {
+                destination = GetNextWaypoint();
+                navPos.transform.position = destination;
+            }
+
+            moveDirection = (destination - sourceBottom.position).normalized;
+            moveDirectionNoGravity = moveDirection;
+
+            // Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below
+            // when the moveDirection is multiplied by deltaTime). This is because gravity should be applied
+            // as an acceleration (ms^-2)
+            moveDirection.y -= gravity * Time.deltaTime;
+            rb.velocity = (moveDirection * Time.deltaTime) * speed;
+            RotateEnemy(1.0f);
+        }
 
         void RotateEnemy(float turnSpeedModifier)
         {
