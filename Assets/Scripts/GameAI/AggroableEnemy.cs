@@ -11,8 +11,6 @@
         public enum AggroState { idle, navigateToTarget, engageTarget, deAggro };
         protected AggroState aggroState = AggroState.idle;
 
-        private State idleState, navigateToTargetState, engageTargetState, deAggroState;
-
         /// <summary>
         /// The transform this enemy is attempting to reach when aggroed.
         /// </summary>
@@ -60,32 +58,53 @@
             {
                 aggroZone.AssignFunctionToTriggerStayDelegate(AggroZoneActivation);
             }
-            idleState = new State("idle", IdleEnter, IdleUpdate, IdleExit);
-            navigateToTargetState = new State("navigateToTarget", NavigateToTargetEnter, NavigateToTargetUpdate, NavigateToTargetExit);
-            engageTargetState = new State("engageTarget", EngageTargetEnter, EngageTargetUpdate, EngageTargetExit);
-            deAggroState = new State("deAggro", DeAggroEnter, DeAggroUpdate, DeAggroExit);
-            idleState.Enter();
+            IdleEnter();
         }
 
         // Update is called once per frame
         protected new void Update()
         {
             base.Update();
+            UpdateCurrentState();
+        }
+
+        private void UpdateCurrentState()
+        {
             if (aggroState == AggroState.navigateToTarget)
             {
-                navigateToTargetState.Update();
+                NavigateToTargetUpdate();
             }
             else if (aggroState == AggroState.engageTarget)
             {
-                engageTargetState.Update();
+                EngageTargetUpdate();
             }
-            else if(aggroState == AggroState.idle)
+            else if (aggroState == AggroState.idle)
             {
-                idleState.Update();
+                IdleUpdate();
             }
-            else if(aggroState == AggroState.deAggro)
+            else if (aggroState == AggroState.deAggro)
             {
-                deAggroState.Update();
+                DeAggroUpdate();
+            }
+        }
+
+        private void ExitCurrentState()
+        {
+            if (aggroState == AggroState.navigateToTarget)
+            {
+                NavigateToTargetExit();
+            }
+            else if (aggroState == AggroState.engageTarget)
+            {
+                EngageTargetExit();
+            }
+            else if (aggroState == AggroState.idle)
+            {
+                IdleExit();
+            }
+            else if (aggroState == AggroState.deAggro)
+            {
+                DeAggroExit();
             }
         }
 
@@ -106,8 +125,8 @@
         {
             if (ShouldDeAggro())
             {
-                navigateToTargetState.Exit();
-                deAggroState.Enter();
+                NavigateToTargetExit();
+                DeAggroEnter();
                 return;
             }
             checkForTargetObstructionTimer += Time.deltaTime;
@@ -116,8 +135,8 @@
                 checkForTargetObstructionTimer = 0;
                 if (!NavMeshUtil.IsTargetObstructed(transform, aggroTarget.transform))
                 {
-                    navigateToTargetState.Exit();
-                    engageTargetState.Enter();
+                    NavigateToTargetExit();
+                    EngageTargetEnter();
                 }
             }
         }
@@ -139,8 +158,8 @@
         {
             if (ShouldDeAggro())
             {
-                engageTargetState.Exit();
-                deAggroState.Enter();
+                EngageTargetExit();
+                DeAggroEnter();
                 return;
             }
             checkForTargetObstructionTimer += Time.deltaTime;
@@ -149,8 +168,8 @@
                 checkForTargetObstructionTimer = 0;
                 if (NavMeshUtil.IsTargetObstructed(transform, aggroTarget.transform))
                 {
-                    engageTargetState.Exit();
-                    navigateToTargetState.Enter();
+                    EngageTargetExit();
+                    NavigateToTargetEnter();
                 }
             }
         }
@@ -182,8 +201,8 @@
         {
             if (Vector3.Distance(navigationAgentBottom.position, navigationTarget.position) <= waypointReachedDistanceThreshold)
             {
-                deAggroState.Exit();
-                idleState.Enter();
+                DeAggroExit();
+                IdleEnter();
             }
         }
 
@@ -211,26 +230,9 @@
             //Make sure to set a mask in aggroZone to only react to the player
             if ((aggroState == AggroState.idle || aggroState == AggroState.deAggro) && !NavMeshUtil.IsTargetObstructed(transform, aggroTarget.transform))
             {
-                GetCurrentState().Exit();
-                engageTargetState.Enter();
+                ExitCurrentState();
+                EngageTargetEnter();
             }
-        }
-
-        private State GetCurrentState()
-        {
-            if (aggroState == AggroState.navigateToTarget)
-            {
-                return navigateToTargetState;
-            }
-            else if (aggroState == AggroState.engageTarget)
-            {
-                return engageTargetState;
-            }
-            else if (aggroState == AggroState.deAggro)
-            {
-                return deAggroState;
-            }
-            return idleState;
         }
     }
 }
