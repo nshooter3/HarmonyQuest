@@ -2690,22 +2690,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c20e4fb60796bfe4bb27b755eaf25c7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isTraversalActive: 0
+  isActivelyGeneratingPath: 0
   pathRefreshRate: 0.5
   pathRefreshDistanceThreshold: 2
   waypointReachedDistanceThreshold: 0.2
-  aggroState: 0
   aggroTarget: {fileID: 693083115}
-  sourceBottom: {fileID: 1209313103}
+  navigationAgentBottom: {fileID: 1209313103}
   aggroZone: {fileID: 1298411987}
   disengageWithDistance: 1
   disengageDistance: 15
   checkForTargetObstructionRate: 0.5
   origin: {fileID: 1064529777}
-  navPos: {fileID: 1025277659}
   speed: 270
   gravity: 10
   rotateSpeed: 25
+  navPos: {fileID: 1025277659}
   showDestination: 1
   rb: {fileID: 542868542}
 --- !u!136 &542868544

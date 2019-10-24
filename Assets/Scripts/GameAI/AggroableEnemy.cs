@@ -1,23 +1,41 @@
-﻿namespace AI
+﻿namespace GameAI
 {
     using UnityEngine;
     using GamePhysics;
 
     public class AggroableEnemy : NavMeshTraveler
     {
+        /// <summary>
+        /// Enum used to track AI state
+        /// </summary>
         public enum AggroState { idle, navigateToTarget, engageTarget, deAggro };
-        public AggroState aggroState = AggroState.idle;
+        protected AggroState aggroState = AggroState.idle;
 
         private State idleState, navigateToTargetState, engageTargetState, deAggroState;
 
+        /// <summary>
+        /// The transform this enemy is attempting to reach when aggroed.
+        /// </summary>
         public Transform aggroTarget;
 
-        public Transform sourceBottom;
+        /// <summary>
+        /// A Transform stuck to the bottom of our navigation agent. This ensures that the agent's position on the navmesh is tracked by a position that actually touches the navmesh.
+        /// </summary>
+        public Transform navigationAgentBottom;
 
+        /// <summary>
+        /// Collider that causes the enemy to aggro when the player enters it.
+        /// </summary>
         public CollisionWrapper aggroZone;
 
+        /// <summary>
+        /// Whether or not the enemy will lose aggro with distance.
+        /// </summary>
         public bool disengageWithDistance = true;
-        public float disengageDistance = 20.0f;
+        /// <summary>
+        /// Distance after which the enemy loses aggro if disengageWithDistance is true.
+        /// </summary>
+        public float disengageDistance = 15.0f;
 
         /// <summary>
         /// How frequently to check if this enemy has a clear path to the player. Determines whether to engage player or to navigate to a state where they can engage later.
@@ -27,6 +45,10 @@
 
         private bool targetInLineOfSight = false;
 
+        /// <summary>
+        /// A transform that determines where this enemy will return to once disengaged.
+        /// If this transform has a parent, it will automatically be unparented once the scene loads.
+        /// </summary>
         [SerializeField]
         private Transform origin;
 
@@ -38,16 +60,17 @@
             {
                 aggroZone.AssignFunctionToTriggerStayDelegate(AggroZoneActivation);
             }
-            idleState = new State(IdleEnter, IdleUpdate, IdleExit);
-            navigateToTargetState = new State(NavigateToTargetEnter, NavigateToTargetUpdate, NavigateToTargetExit);
-            engageTargetState = new State(EngageTargetEnter, EngageTargetUpdate, EngageTargetExit);
-            deAggroState = new State(DeAggroEnter, DeAggroUpdate, DeAggroExit);
+            idleState = new State("idle", IdleEnter, IdleUpdate, IdleExit);
+            navigateToTargetState = new State("navigateToTarget", NavigateToTargetEnter, NavigateToTargetUpdate, NavigateToTargetExit);
+            engageTargetState = new State("engageTarget", EngageTargetEnter, EngageTargetUpdate, EngageTargetExit);
+            deAggroState = new State("deAggro", DeAggroEnter, DeAggroUpdate, DeAggroExit);
             idleState.Enter();
         }
 
         // Update is called once per frame
         protected new void Update()
         {
+            base.Update();
             if (aggroState == AggroState.navigateToTarget)
             {
                 navigateToTargetState.Update();
@@ -73,7 +96,7 @@
 
         public virtual void NavigateToTargetEnter()
         {
-            SetTarget(sourceBottom, aggroTarget);
+            SetTarget(navigationAgentBottom, aggroTarget);
             targetInLineOfSight = false;
             checkForTargetObstructionTimer = 0;
             aggroState = AggroState.navigateToTarget;
@@ -81,7 +104,6 @@
 
         public virtual void NavigateToTargetUpdate()
         {
-            base.Update();
             if (ShouldDeAggro())
             {
                 navigateToTargetState.Exit();
@@ -92,7 +114,7 @@
             if (checkForTargetObstructionTimer > checkForTargetObstructionRate)
             {
                 checkForTargetObstructionTimer = 0;
-                if (NavMeshUtil.IsTargetUnobstructed(transform, aggroTarget.transform))
+                if (!NavMeshUtil.IsTargetObstructed(transform, aggroTarget.transform))
                 {
                     navigateToTargetState.Exit();
                     engageTargetState.Enter();
@@ -102,6 +124,7 @@
 
         public virtual void NavigateToTargetExit()
         {
+            CancelCurrentNavigation();
             checkForTargetObstructionTimer = 0;
         }
 
@@ -124,7 +147,7 @@
             if (checkForTargetObstructionTimer > checkForTargetObstructionRate)
             {
                 checkForTargetObstructionTimer = 0;
-                if (!NavMeshUtil.IsTargetUnobstructed(transform, aggroTarget.transform))
+                if (NavMeshUtil.IsTargetObstructed(transform, aggroTarget.transform))
                 {
                     engageTargetState.Exit();
                     navigateToTargetState.Enter();
@@ -144,27 +167,20 @@
             aggroState = AggroState.idle;
         }
 
-        public virtual void IdleUpdate()
-        {
+        public virtual void IdleUpdate(){ }
 
-        }
-
-        public virtual void IdleExit()
-        {
-
-        }
+        public virtual void IdleExit(){ }
 
         public virtual void DeAggroEnter()
         {
-            SetTarget(sourceBottom, origin);
+            SetTarget(navigationAgentBottom, origin);
             targetInLineOfSight = false;
             aggroState = AggroState.deAggro;
         }
 
         public virtual void DeAggroUpdate()
         {
-            base.Update();
-            if (Vector3.Distance(sourceBottom.position, navigationTarget.position) <= waypointReachedDistanceThreshold)
+            if (Vector3.Distance(navigationAgentBottom.position, navigationTarget.position) <= waypointReachedDistanceThreshold)
             {
                 deAggroState.Exit();
                 idleState.Enter();
@@ -173,7 +189,7 @@
 
         public virtual void DeAggroExit()
         {
-            
+            CancelCurrentNavigation();
         }
 
         public virtual void ShouldAggro()
@@ -193,7 +209,7 @@
         private void AggroZoneActivation(Collider other)
         {
             //Make sure to set a mask in aggroZone to only react to the player
-            if ((aggroState == AggroState.idle || aggroState == AggroState.deAggro) && NavMeshUtil.IsTargetUnobstructed(transform, aggroTarget.transform))
+            if ((aggroState == AggroState.idle || aggroState == AggroState.deAggro) && !NavMeshUtil.IsTargetObstructed(transform, aggroTarget.transform))
             {
                 GetCurrentState().Exit();
                 engageTargetState.Enter();

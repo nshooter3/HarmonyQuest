@@ -1,4 +1,4 @@
-﻿namespace AI
+﻿namespace GameAI
 {
     using System.Collections.Generic;
     using UnityEngine.AI;
@@ -7,13 +7,14 @@
     public class NavMeshTraveler : MonoBehaviour
     {
         [HideInInspector]
-        public bool isTraversalActive = false;
+        public bool isActivelyGeneratingPath = false;
         
         /// <summary>
         /// How frequently we check to see if our path to our target should change.
         /// </summary>
         [SerializeField]
         private float pathRefreshRate = 0.5f;
+        private float pathRefreshTimer = 0;
 
         /// <summary>
         /// How far our target must move from its last known position to warrant generating a new path.
@@ -34,14 +35,13 @@
         private NavMeshPath path;
         private Queue<Vector3> waypoints;
         private Vector3 nextWaypoint;
-        private float pathRefreshTimer = 0;
 
-        public void SetTarget(Transform source, Transform target)
+        public void SetTarget(Transform navigationAgent, Transform navigationTarget)
         {
-            navigationAgent = source;
-            navigationTarget = target;
+            this.navigationAgent = navigationAgent;
+            this.navigationTarget = navigationTarget;
             waypoints = null;
-            isTraversalActive = true;
+            isActivelyGeneratingPath = true;
             GeneratePathToTarget();
         }
 
@@ -50,7 +50,7 @@
             navigationAgent = null;
             navigationTarget = null;
             waypoints = null;
-            isTraversalActive = false;
+            isActivelyGeneratingPath = false;
         }
 
         public Vector3 GetNextWaypoint()
@@ -60,14 +60,14 @@
 
         protected void Update()
         {
-            if (isTraversalActive == true && navigationTarget != null)
+            if (isActivelyGeneratingPath == true && navigationTarget != null)
             {
                 CheckIfPathNeedsToBeRegenerated();
                 UpdateDestination();
             }
         }
 
-        void CheckIfPathNeedsToBeRegenerated()
+        private void CheckIfPathNeedsToBeRegenerated()
         {
             pathRefreshTimer += Time.deltaTime;
             if (pathRefreshTimer > pathRefreshRate)
@@ -80,7 +80,7 @@
             }
         }
 
-        void UpdateDestination()
+        private void UpdateDestination()
         {
             if (Vector3.Distance(navigationAgent.position, nextWaypoint) <= waypointReachedDistanceThreshold)
             {

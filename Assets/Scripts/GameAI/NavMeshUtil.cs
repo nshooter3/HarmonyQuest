@@ -1,4 +1,4 @@
-﻿namespace AI
+﻿namespace GameAI
 {
     using UnityEngine.AI;
     using UnityEngine;
@@ -28,10 +28,10 @@
             return length;
         }
 
-        public static bool IsTargetUnobstructed(Transform source, Transform target, int areaMask = NavMesh.AllAreas)
+        public static bool IsTargetObstructed(Transform source, Transform target, int areaMask = NavMesh.AllAreas)
         {
             NavMeshHit hit;
-            return !NavMesh.Raycast(source.position, target.position, out hit, areaMask);
+            return NavMesh.Raycast(source.position, target.position, out hit, areaMask);
         }
     }
 }

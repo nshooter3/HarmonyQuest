@@ -1,15 +1,33 @@
-﻿namespace AI
+﻿namespace GameAI
 {
     using UnityEngine;
 
     public class BasicNavMeshEnemy : AggroableEnemy
     {
-        public GameObject navPos;
 
+        /// <summary>
+        /// How fast this enemy moves.
+        /// </summary>
         public float speed;
+
+        /// <summary>
+        /// Gravity's effect on this enemy.
+        /// </summary>
         public float gravity;
+
+        /// <summary>
+        /// How fast this enemy rotates
+        /// </summary>
         public float rotateSpeed;
 
+        /// <summary>
+        /// Debug sphere gameobject to show where the enemy is attempting to navigate.
+        /// </summary>
+        public GameObject navPos;
+
+        /// <summary>
+        /// Whether or not to make navPos visible.
+        /// </summary>
         public bool showDestination = false;
 
         [SerializeField]
@@ -17,6 +35,8 @@
 
         private Vector3 moveDirection = Vector3.zero;
         private Vector3 moveDirectionNoGravity = Vector3.zero;
+
+        private RigidbodyConstraints defaultConstraints;
 
         // Start is called before the first frame update
         new void Start()
@@ -28,6 +48,8 @@
             }
             navPos.transform.parent = null;
             navPos.SetActive(showDestination);
+            defaultConstraints = rb.constraints;
+            rb.constraints = RigidbodyConstraints.FreezeAll;
         }
 
         // Update is called once per frame
@@ -41,24 +63,28 @@
         {
             if (aggroState == AggroState.idle)
             {
-                rb.velocity = Vector3.zero;
+                rb.constraints = RigidbodyConstraints.FreezeAll;
                 return;
             }
+            else
+            {
+                rb.constraints = defaultConstraints;
+            }
 
-            Vector3 destination;
+            Vector3 destination = transform.position;
 
             if (aggroState == AggroState.engageTarget)
             {
                 destination = aggroTarget.transform.position;
                 navPos.transform.position = new Vector3(aggroTarget.transform.position.x, aggroTarget.transform.position.y + 2.25f, aggroTarget.transform.position.z);
             }
-            else
+            else if (aggroState == AggroState.navigateToTarget || aggroState ==  AggroState.deAggro)
             {
                 destination = GetNextWaypoint();
                 navPos.transform.position = destination;
             }
 
-            moveDirection = (destination - sourceBottom.position).normalized;
+            moveDirection = (destination - navigationAgentBottom.position).normalized;
             moveDirectionNoGravity = moveDirection;
 
             // Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below
