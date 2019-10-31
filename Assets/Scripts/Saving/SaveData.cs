@@ -21,6 +21,7 @@
         // Which save file is active. If this param is set to -1, we have not loaded a save file yet.
         public int currentSaveFileActive = -1;
         public string currentScene = "";
+        public string gameVersion = "0.0";
         #endregion
     }
 }
