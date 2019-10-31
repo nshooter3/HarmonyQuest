@@ -24,6 +24,10 @@
         /// Debug sphere gameobject to show where the enemy is attempting to navigate.
         /// </summary>
         public GameObject navPos;
+        /// <summary>
+        /// How far above the player to position the navPos when tracking them
+        /// </summary>
+        private float navPosHeightOffset = 2.25f;
 
         /// <summary>
         /// Whether or not to make navPos visible.
@@ -76,7 +80,7 @@
             if (aggroState == AggroState.engageTarget)
             {
                 destination = aggroTarget.transform.position;
-                navPos.transform.position = new Vector3(aggroTarget.transform.position.x, aggroTarget.transform.position.y + 2.25f, aggroTarget.transform.position.z);
+                navPos.transform.position = new Vector3(aggroTarget.transform.position.x, aggroTarget.transform.position.y + navPosHeightOffset, aggroTarget.transform.position.z);
             }
             else if (aggroState == AggroState.navigateToTarget || aggroState ==  AggroState.deAggro)
             {
