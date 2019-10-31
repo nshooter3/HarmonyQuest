@@ -40,7 +40,9 @@
         {
             this.navigationAgent = navigationAgent;
             this.navigationTarget = navigationTarget;
+            path = null;
             waypoints = null;
+            lastKnownTargetPos = new Vector3(float.MinValue, float.MinValue, float.MinValue);
             isActivelyGeneratingPath = true;
             GeneratePathToTarget();
         }
@@ -49,7 +51,9 @@
         {
             navigationAgent = null;
             navigationTarget = null;
+            path = null;
             waypoints = null;
+            lastKnownTargetPos = new Vector3(float.MinValue, float.MinValue, float.MinValue);
             isActivelyGeneratingPath = false;
         }
 
@@ -62,8 +66,8 @@
         {
             if (isActivelyGeneratingPath == true && navigationTarget != null)
             {
-                CheckIfPathNeedsToBeRegenerated();
                 UpdateDestination();
+                CheckIfPathNeedsToBeRegenerated();
             }
         }
 
@@ -94,9 +98,27 @@
         private void GeneratePathToTarget()
         {
             path = NavMeshUtil.GeneratePath(navigationAgent, navigationTarget);
-            waypoints = new Queue<Vector3>(path.corners);
-            nextWaypoint = waypoints.Dequeue();
-            lastKnownTargetPos = navigationTarget.transform.position;
+
+            if (path.status != NavMeshPathStatus.PathInvalid)
+            {
+                waypoints = new Queue<Vector3>(path.corners);
+                nextWaypoint = waypoints.Dequeue();
+                lastKnownTargetPos = navigationTarget.transform.position;
+            }
+            else
+            {
+                //If we cannot reach the specified target using the navmesh, cancel navigation.
+                CancelCurrentNavigation();
+            }
+        }
+
+        protected bool IsPathToTargetValid()
+        {
+            if (path == null || path.status == NavMeshPathStatus.PathInvalid)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

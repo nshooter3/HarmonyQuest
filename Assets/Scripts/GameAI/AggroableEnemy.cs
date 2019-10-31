@@ -218,7 +218,8 @@
 
         public virtual bool ShouldDeAggro()
         {
-            if (disengageWithDistance && Vector3.Distance(transform.position, aggroTarget.transform.position) > disengageDistance)
+            if (disengageWithDistance && Vector3.Distance(transform.position, aggroTarget.transform.position) > disengageDistance || 
+                (aggroState == AggroState.navigateToTarget && IsPathToTargetValid() == false))
             {
                 return true;
             }
