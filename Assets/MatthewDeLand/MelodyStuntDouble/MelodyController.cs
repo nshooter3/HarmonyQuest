@@ -7,6 +7,7 @@ public class MelodyController : MonoBehaviour
     CharacterController mCharacterController;
     Animator mAnimator;
     IPlayerInputManager mInput;
+    Rigidbody mRigidBody;
 
     bool lockedInAnimation = false;
 
@@ -19,12 +20,14 @@ public class MelodyController : MonoBehaviour
     public IPlayerInputManager MInput { get => mInput; }
     public Animator MAnimator { get => mAnimator; }
     public CharacterController MCharacterController { get => mCharacterController; }
+    public Rigidbody MRigidBody { get => mRigidBody; }
     public Vector3 Move { get => move; set => move = value; }
 
     // Start is called before the first frame update
     void Start()
     {
-        mCharacterController = gameObject.GetComponent(typeof(CharacterController)) as CharacterController;
+        //mCharacterController = gameObject.GetComponent(typeof(CharacterController)) as CharacterController;
+        mRigidBody = gameObject.GetComponent(typeof(Rigidbody)) as Rigidbody;
         mAnimator = gameObject.GetComponent(typeof(Animator)) as Animator;
 
         mInput = ServiceLocator.instance.GetInputManager();

@@ -38,6 +38,7 @@ public class MovingState : MelodyState
         {
             AbleToExit = true;
             melodyController.MAnimator.SetFloat("Move", 0f);
+            melodyController.MRigidBody.velocity = Vector3.zero;
             mNextState = new IdleState(melodyController);
         }
 
@@ -45,7 +46,9 @@ public class MovingState : MelodyState
         melodyController.Move *= melodyController.MaxSpeed;
         RotatePlayer(3);
 
-        melodyController.MCharacterController.Move(melodyController.Move * time);
+        //melodyController.MCharacterController.Move(melodyController.Move * time);
+        melodyController.Move = melodyController.Move * time * 100;
+        melodyController.MRigidBody.velocity = new Vector3(melodyController.Move.x, melodyController.MRigidBody.velocity.y, melodyController.Move.z);
 
     }
 
