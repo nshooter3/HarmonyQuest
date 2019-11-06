@@ -14,7 +14,7 @@
         /// </summary>
         [SerializeField]
         private float pathRefreshRate = 0.5f;
-        private float pathRefreshTimer = 0;
+        private float pathRefreshTimer = 0.0f;
 
         /// <summary>
         /// How far our target must move from its last known position to warrant generating a new path.

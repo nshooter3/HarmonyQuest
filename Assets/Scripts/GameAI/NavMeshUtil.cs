@@ -16,7 +16,7 @@
         {
             if (path.status == NavMeshPathStatus.PathInvalid)
             {
-                return -1;
+                return -1.0f;
             }
 
             float length = 0.0f;
