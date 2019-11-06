@@ -54,6 +54,16 @@
         protected void Start()
         {
             origin.parent = null;
+            Vector3 navmeshPosBelowOrigin;
+            if (NavMeshUtil.IsNavMeshBelowAgent(origin, out navmeshPosBelowOrigin))
+            {
+                origin.transform.position = navmeshPosBelowOrigin;
+            }
+            else
+            {
+                Debug.LogWarning("WARNING: Enemy origin not located on or above navmesh.");
+            }
+
             if (aggroZone != null)
             {
                 aggroZone.AssignFunctionToTriggerStayDelegate(AggroZoneActivation);
@@ -133,7 +143,7 @@
             if (checkForTargetObstructionTimer > checkForTargetObstructionRate)
             {
                 checkForTargetObstructionTimer = 0;
-                if (!NavMeshUtil.IsTargetObstructed(transform, aggroTarget.transform))
+                if (!NavMeshUtil.IsTargetObstructed(navigationAgentBottom, aggroTarget.transform))
                 {
                     NavigateToTargetExit();
                     EngageTargetEnter();
@@ -166,7 +176,7 @@
             if (checkForTargetObstructionTimer > checkForTargetObstructionRate)
             {
                 checkForTargetObstructionTimer = 0;
-                if (NavMeshUtil.IsTargetObstructed(transform, aggroTarget.transform))
+                if (NavMeshUtil.IsTargetObstructed(navigationAgentBottom, aggroTarget.transform))
                 {
                     EngageTargetExit();
                     NavigateToTargetEnter();
@@ -229,7 +239,7 @@
         private void AggroZoneActivation(Collider other)
         {
             //Make sure to set a mask in aggroZone to only react to the player
-            if ((aggroState == AggroState.idle || aggroState == AggroState.deAggro) && !NavMeshUtil.IsTargetObstructed(transform, aggroTarget.transform))
+            if ((aggroState == AggroState.idle || aggroState == AggroState.deAggro) && !NavMeshUtil.IsTargetObstructed(navigationAgentBottom, aggroTarget.transform))
             {
                 ExitCurrentState();
                 EngageTargetEnter();

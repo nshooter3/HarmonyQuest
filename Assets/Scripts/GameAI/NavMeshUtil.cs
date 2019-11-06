@@ -5,10 +5,27 @@
 
     public static class NavMeshUtil
     {
+        private static LayerMask traversableGroundLayerMask = LayerMask.GetMask("TraversableGround");
+
         public static NavMeshPath GeneratePath(Transform source, Transform target, int areaMask = NavMesh.AllAreas)
         {
+            return GeneratePath(source.position, target.position, NavMesh.AllAreas);
+        }
+
+        public static NavMeshPath GeneratePath(Vector3 source, Transform target, int areaMask = NavMesh.AllAreas)
+        {
+            return GeneratePath(source, target.position, NavMesh.AllAreas);
+        }
+
+        public static NavMeshPath GeneratePath(Transform source, Vector3 target, int areaMask = NavMesh.AllAreas)
+        {
+            return GeneratePath(source.position, target, NavMesh.AllAreas);
+        }
+
+        public static NavMeshPath GeneratePath(Vector3 source, Vector3 target, int areaMask = NavMesh.AllAreas)
+        {
             NavMeshPath path = new NavMeshPath();
-            NavMesh.CalculatePath(source.position, target.transform.position, areaMask, path);
+            NavMesh.CalculatePath(source, target, areaMask, path);
             return path;
         }
 
@@ -28,10 +45,31 @@
             return length;
         }
 
+        public static bool IsNavMeshBelowAgent(Transform navigationAgent, out Vector3 raycastHitPosition)
+        {
+            RaycastHit raycastHit;
+            if (Physics.Raycast(navigationAgent.position, Vector3.down, out raycastHit, Mathf.Infinity, traversableGroundLayerMask))
+            {
+                raycastHitPosition = raycastHit.point;
+                return true;
+            }
+            else
+            {
+                raycastHitPosition = Vector3.zero;
+                return false;
+            }
+        }
+
         public static bool IsTargetObstructed(Transform source, Transform target, int areaMask = NavMesh.AllAreas)
         {
-            NavMeshHit hit;
-            return NavMesh.Raycast(source.position, target.position, out hit, areaMask);
+            Vector3 startPos = source.position;
+            Vector3 raycastHit;
+            if (IsNavMeshBelowAgent(source, out raycastHit))
+            {
+                startPos = raycastHit;
+            }
+            NavMeshHit navmeshRaycastHit;
+            return NavMesh.Raycast(startPos, target.position, out navmeshRaycastHit, areaMask);
         }
     }
 }

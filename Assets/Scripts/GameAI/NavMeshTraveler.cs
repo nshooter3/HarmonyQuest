@@ -36,6 +36,9 @@
         private Queue<Vector3> waypoints;
         private Vector3 nextWaypoint;
 
+        private RaycastHit raycastHit;
+        private Vector3 raycastHitPosition;
+
         public void SetTarget(Transform navigationAgent, Transform navigationTarget)
         {
             this.navigationAgent = navigationAgent;
@@ -97,15 +100,21 @@
 
         private void GeneratePathToTarget()
         {
-            path = NavMeshUtil.GeneratePath(navigationAgent, navigationTarget);
-
-            if (path.status != NavMeshPathStatus.PathInvalid)
+            bool pathFound = false;
+            if (NavMeshUtil.IsNavMeshBelowAgent(navigationAgent, out raycastHitPosition))
             {
-                waypoints = new Queue<Vector3>(path.corners);
-                nextWaypoint = waypoints.Dequeue();
-                lastKnownTargetPos = navigationTarget.transform.position;
+                path = NavMeshUtil.GeneratePath(raycastHitPosition, navigationTarget);
+
+                if (path.status != NavMeshPathStatus.PathInvalid)
+                {
+
+                    waypoints = new Queue<Vector3>(path.corners);
+                    nextWaypoint = waypoints.Dequeue();
+                    lastKnownTargetPos = navigationTarget.transform.position;
+                    pathFound = true;
+                }
             }
-            else
+            if(pathFound == false)
             {
                 //If we cannot reach the specified target using the navmesh, cancel navigation.
                 CancelCurrentNavigation();
