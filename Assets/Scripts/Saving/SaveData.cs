@@ -22,6 +22,7 @@
         public int currentSaveFileActive = -1;
         public string currentScene = "";
         public string gameVersion = "0.0";
+        public float totalPlaytime = 0.0f;
         #endregion
     }
 }

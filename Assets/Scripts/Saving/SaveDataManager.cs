@@ -22,8 +22,11 @@
         /// Initializes save file with default SaveData values. This function can be called to clear an existing save.
         /// </summary>
         /// <param name="fileNum"> Which file slot to initialize. </param>
-        public static void Init(int fileNum)
+        /// <param name="errorMessage"> If this function fails, this message will contain the error message </param>
+        public static bool Init(int fileNum, out string errorMessage)
         {
+            bool functionCompleted = true;
+            errorMessage = "";
             try
             {
                 //using keyword ensures that file gets disposed of even if exceptions are thrown, ensuring that the file isn't left open.
@@ -38,17 +41,29 @@
             }
             catch (Exception e)
             {
-                Debug.LogError("Error initializing file " + fileNum + "\n" + e.Message + "\n" + e.StackTrace);
-                throw e;
+                errorMessage = "Error initializing file " + fileNum + "\n" + e.Message + "\n" + e.StackTrace;
+                functionCompleted = false;
             }
+            return functionCompleted;
         }
 
         /// <summary>
         /// Saves variables in the SaveData class to a file.
         /// </summary>
         /// <param name="fileNum"> Which file slot to save to. </param>
-        public static void Save(int fileNum)
+        /// <param name="errorMessage"> If this function fails, this message will contain the error message </param>
+        public static bool Save(int fileNum, out string errorMessage)
         {
+            bool functionCompleted = true;
+            errorMessage = "";
+
+            if (saveData == null)
+            {
+                errorMessage = "Error saving file " + fileNum + ". saveData is null, meaning no save data has been created yet.";
+                functionCompleted = false;
+                return functionCompleted;
+            }
+
             try
             {
                 //using keyword ensures that file gets disposed of even if exceptions are thrown, ensuring that the file isn't left open.
@@ -61,9 +76,10 @@
             }
             catch (Exception e)
             {
-                Debug.LogError("Error saving file " + fileNum + "\n" + e.Message + "\n" + e.StackTrace);
-                throw e;
+                errorMessage = "Error saving file " + fileNum + "\n" + e.Message + "\n" + e.StackTrace;
+                functionCompleted = false;
             }
+            return functionCompleted;
         }
 
         /// <summary>
@@ -80,12 +96,20 @@
         /// Loads variables to the SaveData class from a file.
         /// </summary>
         /// <param name="fileNum"> Which file slot to load </param>
-        public static void Load(int fileNum)
+        /// <param name="errorMessage"> If this function fails, this message will contain the error message </param>
+        public static bool Load(int fileNum, out string errorMessage)
         {
+            bool functionCompleted = true;
+            errorMessage = "";
             //Create empty save file at this slot if one does not exist
             if (!DoesSaveFileExist(fileNum))
             {
-                Init(fileNum);
+                if (Init(fileNum, out errorMessage) == false)
+                {
+                    errorMessage = "Could not initialize new save in when loading file " + fileNum + " due to following error: " + errorMessage;
+                    functionCompleted = false;
+                    return functionCompleted;
+                }
             }
             try
             {
@@ -99,9 +123,10 @@
             }
             catch (Exception e)
             {
-                Debug.LogError("Error loading file " + fileNum + "\n" + e.Message + "\n" + e.StackTrace);
-                throw e;
+                errorMessage = "Error loading file " + fileNum + "\n" + e.Message + "\n" + e.StackTrace;
+                functionCompleted = false;
             }
+            return functionCompleted;
         }
     }
 }
