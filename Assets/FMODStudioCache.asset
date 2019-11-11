@@ -1,5 +1,22 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9216083340895709906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/protoype_pill_attack_hit/gloabl_master_fade_.25
+  m_EditorClassIdentifier: 
+  Name: gloabl_master_fade_.25
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
 --- !u!114 &-9165027957488705240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86,6 +103,23 @@ MonoBehaviour:
   FileSizes:
   - Name: Desktop
     Value: 859936
+  Exists: 1
+--- !u!114 &-8714960722451301957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/protoype_pill_attack_hit/global_enemy_attack_hit
+  m_EditorClassIdentifier: 
+  Name: global_enemy_attack_hit
+  Min: 0
+  Max: 10
+  Default: 0
   Exists: 1
 --- !u!114 &-8700650723821028682
 MonoBehaviour:
@@ -435,7 +469,7 @@ MonoBehaviour:
   m_Name: bank:/SFX.bank
   m_EditorClassIdentifier: 
   Path: C:\Users\Matthew\Documents\GameDev\HarmonyQuest\HarmonyQuest\FmodBuild\Desktop\SFX.bank
-  lastModified: 637074657895756260
+  lastModified: 637086779572082177
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -657,6 +691,23 @@ MonoBehaviour:
   MinDistance: 10000
   MaxDistance: 10000
   Length: 1406
+--- !u!114 &-7191733016034572745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/melody_parry_tonal/melody_parry_tonal
+  m_EditorClassIdentifier: 
+  Name: melody_parry_tonal
+  Min: 0
+  Max: 12
+  Default: 0
+  Exists: 1
 --- !u!114 &-7104795554994546085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -706,6 +757,23 @@ MonoBehaviour:
   m_Name: parameter:/melody_harmony_mode/global_melody_heal
   m_EditorClassIdentifier: 
   Name: global_melody_heal
+  Min: 0
+  Max: 10
+  Default: 0
+  Exists: 1
+--- !u!114 &-7045404631912692229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/melody_harmony_mode/global_melody_harmony_mode
+  m_EditorClassIdentifier: 
+  Name: global_melody_harmony_mode
   Min: 0
   Max: 10
   Default: 0
@@ -983,8 +1051,8 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: -3309566432868137287}
-  - {fileID: -5787098440900249920}
+  - {fileID: 6897713611133523706}
+  - {fileID: -1871998830294855812}
   MinDistance: 10000
   MaxDistance: 10000
   Length: 28000
@@ -1228,7 +1296,7 @@ MonoBehaviour:
   m_Name: bank:/Music.bank
   m_EditorClassIdentifier: 
   Path: C:\Users\Matthew\Documents\GameDev\HarmonyQuest\HarmonyQuest\FmodBuild\Desktop\Music.bank
-  lastModified: 637074657895476005
+  lastModified: 637086779571801922
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -1338,6 +1406,23 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 1
+--- !u!114 &-5532528819519814971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/crystal_man_fight_pink/global_phase1_idle
+  m_EditorClassIdentifier: 
+  Name: global_phase1_idle
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
 --- !u!114 &-5515428660366236605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1380,6 +1465,23 @@ MonoBehaviour:
   MinDistance: 10000
   MaxDistance: 10000
   Length: 1407
+--- !u!114 &-5469275447171055670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/crystal_man_fight_pink/global_dissonance_idle
+  m_EditorClassIdentifier: 
+  Name: global_dissonance_idle
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
 --- !u!114 &-5447071315013371223
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1546,6 +1648,40 @@ MonoBehaviour:
   - Name: Desktop
     Value: 3977600
   Exists: 1
+--- !u!114 &-5165096895282736452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/crystal_man_fight_pink/global_phase1
+  m_EditorClassIdentifier: 
+  Name: global_phase1
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
+--- !u!114 &-5072389450122214115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/crystal_man_fight_pink/global_dissonance
+  m_EditorClassIdentifier: 
+  Name: global_dissonance
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
 --- !u!114 &-5011518327144168135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1566,7 +1702,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: 1316313654534748880}
+  - {fileID: -7045404631912692229}
   MinDistance: 10000
   MaxDistance: 10000
   Length: 2617
@@ -1689,6 +1825,23 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 1
+--- !u!114 &-4729178319703789389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/melody_attack_tonal/melody_attack_tonal
+  m_EditorClassIdentifier: 
+  Name: melody_attack_tonal
+  Min: 0
+  Max: 12
+  Default: 0
+  Exists: 1
 --- !u!114 &-4704512242216771601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1749,6 +1902,23 @@ MonoBehaviour:
   Max: 12
   Default: 0
   Exists: 0
+--- !u!114 &-4612215297092779851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/melody_attack_hit/global_melody_attack_hit
+  m_EditorClassIdentifier: 
+  Name: global_melody_attack_hit
+  Min: 0
+  Max: 10
+  Default: 0
+  Exists: 1
 --- !u!114 &-4569288612744282973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1896,6 +2066,23 @@ MonoBehaviour:
   m_Name: parameter:/protoype_pill_attack_hit/global_enemy_attack_hit
   m_EditorClassIdentifier: 
   Name: global_enemy_attack_hit
+  Min: 0
+  Max: 10
+  Default: 0
+  Exists: 1
+--- !u!114 &-4054671852463473629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/prototype_pill_attack_charge/global_enemy_attack_charge
+  m_EditorClassIdentifier: 
+  Name: global_enemy_attack_charge
   Min: 0
   Max: 10
   Default: 0
@@ -2644,6 +2831,23 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 1
+--- !u!114 &-1871998830294855812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/prototype_pill_attack_tonal/global_octave
+  m_EditorClassIdentifier: 
+  Name: global_octave
+  Min: 0
+  Max: 7
+  Default: 0
+  Exists: 1
 --- !u!114 &-1813787047922550993
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2914,7 +3118,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: 1183849076304623219}
+  - {fileID: -4612215297092779851}
   MinDistance: 10000
   MaxDistance: 10000
   Length: 554
@@ -3169,7 +3373,7 @@ MonoBehaviour:
   - {fileID: 1085506955805098352}
   StringsBanks:
   - {fileID: 2997503746821541455}
-  stringsBankWriteTime: 637074657895315860
+  stringsBankWriteTime: 637086779571641780
   cacheVersion: 3
 --- !u!114 &13306004682667453
 MonoBehaviour:
@@ -3592,11 +3796,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: C:\Users\Matthew\Documents\GameDev\HarmonyQuest\HarmonyQuest\FmodBuild\Desktop\Master
     Bank.bank
-  lastModified: 637074657895315860
+  lastModified: 637086779571641780
   LoadResult: 0
   FileSizes:
   - Name: Desktop
     Value: 13118
+  Exists: 1
+--- !u!114 &1093133109859292842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/melody_attack_swing/global_melody_attack_swing
+  m_EditorClassIdentifier: 
+  Name: global_melody_attack_swing
+  Min: 0
+  Max: 10
+  Default: 0
   Exists: 1
 --- !u!114 &1097627315384946054
 MonoBehaviour:
@@ -3686,6 +3907,23 @@ MonoBehaviour:
   m_Name: parameter:/melody_harmony_mode/global_melody_harmony_mode
   m_EditorClassIdentifier: 
   Name: global_melody_harmony_mode
+  Min: 0
+  Max: 10
+  Default: 0
+  Exists: 1
+--- !u!114 &1339057288279304943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/melody_heal/global_melody_heal
+  m_EditorClassIdentifier: 
+  Name: global_melody_heal
   Min: 0
   Max: 10
   Default: 0
@@ -3829,8 +4067,8 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: -7723745144617741314}
-  - {fileID: 938367646058787505}
+  - {fileID: -4729178319703789389}
+  - {fileID: 4758149900488723533}
   MinDistance: 10000
   MaxDistance: 10000
   Length: 28000
@@ -3946,7 +4184,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: 934992220945850154}
+  - {fileID: 1339057288279304943}
   MinDistance: 10000
   MaxDistance: 10000
   Length: 645
@@ -4001,6 +4239,23 @@ MonoBehaviour:
   Max: 10
   Default: 0
   Exists: 0
+--- !u!114 &2373021826033110204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/protoype_pill_attack_swing/global_enemy_attack_swing
+  m_EditorClassIdentifier: 
+  Name: global_enemy_attack_swing
+  Min: 0
+  Max: 10
+  Default: 0
+  Exists: 1
 --- !u!114 &2379335013775849161
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4146,8 +4401,8 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: -5786573609181258791}
-  - {fileID: -4068603297495536327}
+  - {fileID: -9216083340895709906}
+  - {fileID: -8714960722451301957}
   MinDistance: 10000
   MaxDistance: 10000
   Length: 1407
@@ -4317,7 +4572,7 @@ MonoBehaviour:
   m_Name: bank:/Master Bank.strings.bank
   m_EditorClassIdentifier: 
   Path: FmodBuild\Desktop\Master Bank.strings.bank
-  lastModified: 637074657895315860
+  lastModified: 637086779571641780
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -4932,11 +5187,11 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: -1021793917137064954}
-  - {fileID: 1026738739326744156}
-  - {fileID: -1813787047922550993}
-  - {fileID: -2235344278441075033}
-  - {fileID: 4621760889982559865}
+  - {fileID: -5469275447171055670}
+  - {fileID: -5072389450122214115}
+  - {fileID: -5532528819519814971}
+  - {fileID: 8131277602803166942}
+  - {fileID: -5165096895282736452}
   MinDistance: 0
   MaxDistance: 0
   Length: 122571
@@ -5025,6 +5280,23 @@ MonoBehaviour:
   Max: 7
   Default: 0
   Exists: 1
+--- !u!114 &4758149900488723533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/melody_attack_tonal/global_octave
+  m_EditorClassIdentifier: 
+  Name: global_octave
+  Min: 0
+  Max: 7
+  Default: 0
+  Exists: 1
 --- !u!114 &4766533526996273255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5062,7 +5334,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: 2936167523114303444}
+  - {fileID: -4054671852463473629}
   MinDistance: 10000
   MaxDistance: 10000
   Length: 488
@@ -5181,8 +5453,8 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 7455091178662687374}
-  - {fileID: -2040148714778868120}
+  - {fileID: -7191733016034572745}
+  - {fileID: 6899841113902012352}
   MinDistance: 10000
   MaxDistance: 10000
   Length: 50000
@@ -5851,7 +6123,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: 4708350069074243083}
+  - {fileID: 1093133109859292842}
   MinDistance: 10000
   MaxDistance: 10000
   Length: 95
@@ -5916,6 +6188,40 @@ MonoBehaviour:
   MinDistance: 10000
   MaxDistance: 10000
   Length: 50000
+--- !u!114 &6897713611133523706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/prototype_pill_attack_tonal/melody_attack_tonal
+  m_EditorClassIdentifier: 
+  Name: melody_attack_tonal
+  Min: 0
+  Max: 12
+  Default: 0
+  Exists: 1
+--- !u!114 &6899841113902012352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/melody_parry_tonal/global_octave
+  m_EditorClassIdentifier: 
+  Name: global_octave
+  Min: 0
+  Max: 7
+  Default: 0
+  Exists: 1
 --- !u!114 &6915349514361488808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5989,7 +6295,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: 3061376834962657286}
+  - {fileID: 2373021826033110204}
   MinDistance: 10000
   MaxDistance: 10000
   Length: 202
@@ -6322,6 +6628,23 @@ MonoBehaviour:
   Name: global_melody_attack_swing
   Min: 0
   Max: 10
+  Default: 0
+  Exists: 1
+--- !u!114 &8131277602803166942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/crystal_man_fight_pink/global_fight_outro
+  m_EditorClassIdentifier: 
+  Name: global_fight_outro
+  Min: 0
+  Max: 1
   Default: 0
   Exists: 1
 --- !u!114 &8187342516248050014

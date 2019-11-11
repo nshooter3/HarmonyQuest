@@ -1,32 +1,24 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class AttackState : MelodyState
+﻿public class AttackState : MelodyState
 {
-    public AttackState(MelodyController controller) : base(controller)
-    {
-        Debug.Log("Entering AttackState");
-    }
+    public AttackState(MelodyController controller) : base(controller){}
 
     protected override void Enter()
     {
-        melodyController.MAnimator.SetTrigger("Attack");
-        
+        melodyController.animator.SetTrigger("Attack");
     }
 
     public override void OnUpdate(float time)
     {
         base.OnUpdate(time);
-        if (melodyController.MAnimator.IsInTransition(0) && melodyController.MAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
-        {
-            melodyController.MAnimator.ResetTrigger("Attack");
-            AbleToExit = true;
+        if (melodyController.animator.IsInTransition(0) && melodyController.animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+        {new IdleState(melodyController);
+            nextState = new IdleState(melodyController);
+            ableToExit = true;
         }
     }
 
-    public override MelodyState NextState()
-    {        
-        return new IdleState(melodyController);
+    public override void OnExit()
+    {
+        melodyController.animator.ResetTrigger("Attack");
     }
 }

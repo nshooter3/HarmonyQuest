@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class MelodyStateMachine
+﻿public class MelodyStateMachine
 {
     readonly MelodyController Controller;
     MelodyState CurrentState;

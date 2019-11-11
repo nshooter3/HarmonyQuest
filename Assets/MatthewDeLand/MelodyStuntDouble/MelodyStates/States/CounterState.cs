@@ -1,32 +1,22 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class CounterState : MelodyState
+﻿public class CounterState : MelodyState
 {
-    public CounterState(MelodyController controller) : base(controller)
-    {
-        Debug.Log("Entering CounterState");
-    }
+    public CounterState(MelodyController controller) : base(controller){}
 
     protected override void Enter()
     {
-        melodyController.MAnimator.SetTrigger("Counter");
+        melodyController.animator.SetTrigger("Counter");
 
     }
 
     public override void OnUpdate(float time)
     {
         base.OnUpdate(time);
-        if (melodyController.MAnimator.IsInTransition(0) && melodyController.MAnimator.GetCurrentAnimatorStateInfo(0).IsName("Counter"))
+        if (melodyController.animator.IsInTransition(0) && melodyController.animator.GetCurrentAnimatorStateInfo(0).IsName("Counter"))
         {
-            melodyController.MAnimator.ResetTrigger("Counter");
-            AbleToExit = true;
+            nextState = new IdleState(melodyController);
+            ableToExit = true;
         }
     }
 
-    public override MelodyState NextState()
-    {
-        return new IdleState(melodyController);
-    }
+    public override void OnExit() { }
 }

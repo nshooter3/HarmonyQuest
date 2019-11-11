@@ -1,44 +1,38 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class DodgeState : MelodyState
 {
 
-    Vector3 Dodge = Vector3.left;
+    protected Vector3 Dodge = Vector3.left;
 
     public DodgeState(MelodyController controller) : base(controller)
     {
-        Debug.Log("Entering DodgeState");
     }
 
     protected override void Enter()
     {
-        Debug.Log("DODGE");
-        melodyController.MAnimator.SetTrigger("Dodge");
-        melodyController.MRigidBody.useGravity = false;
+        melodyController.animator.SetTrigger("Dodge");
+        melodyController.rigidBody.useGravity = false;
         Dodge = new Vector3(1 * Mathf.Sin(Mathf.Deg2Rad * melodyController.transform.eulerAngles.y), 0, Mathf.Cos(Mathf.Deg2Rad * melodyController.transform.eulerAngles.y));
         Dodge *= 4;
-        Debug.Log(Dodge);
-        Debug.Log(melodyController.transform.eulerAngles.y);
     }
 
     public override void OnUpdate(float time)
     {
         base.OnUpdate(time);
 
-        melodyController.MRigidBody.velocity = Dodge;
-        if (melodyController.MAnimator.IsInTransition(0) && melodyController.MAnimator.GetCurrentAnimatorStateInfo(0).IsName("Dodge"))
+        melodyController.rigidBody.velocity = Dodge;
+        if (melodyController.animator.IsInTransition(0) && melodyController.animator.GetCurrentAnimatorStateInfo(0).IsName("Dodge"))
         {
-            melodyController.MRigidBody.useGravity = true;
-            melodyController.MRigidBody.velocity = Vector3.zero;
-            melodyController.MAnimator.ResetTrigger("Dodge");
-            AbleToExit = true;
+            nextState = new IdleState(melodyController);
+            ableToExit = true;
         }
     }
 
-    public override MelodyState NextState()
+    public override void OnExit()
     {
-        return new IdleState(melodyController);
+        melodyController.rigidBody.useGravity = true;
+        melodyController.rigidBody.velocity = Vector3.zero;
+        melodyController.animator.ResetTrigger("Dodge");
     }
 }

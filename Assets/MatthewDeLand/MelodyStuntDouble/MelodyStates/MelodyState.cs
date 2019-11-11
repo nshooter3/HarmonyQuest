@@ -1,35 +1,50 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public abstract class MelodyState
 {
-    private bool IsEntering;
-    protected bool AbleToExit;
+    private bool isEntering;
+
+    protected bool ableToExit;
+    protected MelodyState nextState;
     protected readonly MelodyController melodyController;
 
-    public MelodyState(MelodyController Controller)
+    public MelodyState(MelodyController controller)
     {
-        melodyController = Controller;
-        IsEntering = true;
-        AbleToExit = false;
+        melodyController = controller;
+        isEntering = true;
+        ableToExit = false;
     }
     
     protected abstract void Enter();
 
     public virtual void OnUpdate(float time)
     {
-        if (IsEntering)
+        if (isEntering)
         {
-            IsEntering = false;
+            isEntering = false;
             Enter();
         }
     }
 
+    public abstract void OnExit();
+
     public virtual bool CanExit()
     {
-        return AbleToExit;
+        if (ableToExit)
+        {
+            if (nextState == null)
+            {
+                Debug.LogError("State trying to exit, but 'nextState' is not set");
+                return false;
+            }
+            OnExit();
+            return true;
+        }
+        return ableToExit;
     }
 
-    public abstract MelodyState NextState();
+    public virtual MelodyState NextState() 
+    {
+        return nextState;
+    }
 }

@@ -1,36 +1,26 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MelodyController : MonoBehaviour
 {
-    CharacterController mCharacterController;
-    Animator mAnimator;
-    IPlayerInputManager mInput;
-    Rigidbody mRigidBody;
-
-    bool lockedInAnimation = false;
-
+    readonly CharacterController mCharacterController;
     MelodyStateMachine StateMachine;
 
     Vector3 move;
 
-    public float MaxSpeed = 2;
+    public float MaxSpeed = 5;
 
-    public IPlayerInputManager MInput { get => mInput; }
-    public Animator MAnimator { get => mAnimator; }
-    public CharacterController MCharacterController { get => mCharacterController; }
-    public Rigidbody MRigidBody { get => mRigidBody; }
+    public IPlayerInputManager input { get; private set; }
+    public Animator animator { get; private set; }
+    public Rigidbody rigidBody { get; private set; }
     public Vector3 Move { get => move; set => move = value; }
 
     // Start is called before the first frame update
     void Start()
     {
-        //mCharacterController = gameObject.GetComponent(typeof(CharacterController)) as CharacterController;
-        mRigidBody = gameObject.GetComponent(typeof(Rigidbody)) as Rigidbody;
-        mAnimator = gameObject.GetComponent(typeof(Animator)) as Animator;
+        rigidBody = gameObject.GetComponent(typeof(Rigidbody)) as Rigidbody;
+        animator = gameObject.GetComponent(typeof(Animator)) as Animator;
 
-        mInput = ServiceLocator.instance.GetInputManager();
+        input = ServiceLocator.instance.GetInputManager();
 
         StateMachine = new MelodyStateMachine(this);
 
@@ -40,25 +30,7 @@ public class MelodyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CheckInput();
-
-        move.Set(mInput.GetHorizontalMovement(), 0, mInput.GetVerticalMovement());
+        move.Set(input.GetHorizontalMovement(), 0, input.GetVerticalMovement());
         StateMachine.OnUpdate(Time.deltaTime);
-    }
-
-
-    void CheckInput()
-    {
-        /*
-        if (mInput.AttackButtonDown())
-        {
-            mAnimator.SetBool("Attack", true);
-        }
-
-        if (mInput.ParryButtonDown())
-        {
-            mAnimator.SetBool("Counter", true);
-        }
-        */
     }
 }

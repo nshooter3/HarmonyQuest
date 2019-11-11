@@ -1,76 +1,36 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class IdleState : MelodyState
+﻿public class IdleState : MelodyState
 {
-    private MelodyState mNextState;
 
-    public IdleState(MelodyController controller) : base(controller)
-    {
+    public IdleState(MelodyController controller) : base(controller){}
 
-    }
-
-    protected override void Enter()
-    {
-        Debug.Log(" Entering IdleState!");
-    }
+    protected override void Enter(){}
 
     public override void OnUpdate(float time)
     {
         base.OnUpdate(time);
-        //Check For Attack
-        if (melodyController.MInput.AttackButtonDown())
+
+        if (melodyController.input.AttackButtonDown())
         {
 
-            AbleToExit = true;
-            mNextState = new AttackState(melodyController);
+            ableToExit = true;
+            nextState = new AttackState(melodyController);
         }
-        else if (melodyController.MInput.ParryButtonDown())
+        else if (melodyController.input.ParryButtonDown())
         {
-            AbleToExit = true;
-            mNextState = new CounterState(melodyController);
+            ableToExit = true;
+            nextState = new CounterState(melodyController);
         }
-        else if (melodyController.MInput.DodgeButtonDown())
+        else if (melodyController.input.DodgeButtonDown())
         {
-            AbleToExit = true;
-            mNextState = new DodgeState(melodyController);
+            ableToExit = true;
+            nextState = new DodgeState(melodyController);
         }
-        else if (melodyController.MInput.GetHorizontalMovement() != 0 || melodyController.MInput.GetVerticalMovement() != 0)
+        else if (melodyController.input.GetHorizontalMovement() != 0 || melodyController.input.GetVerticalMovement() != 0)
         {
-            AbleToExit = true;
-            mNextState = new MovingState(melodyController);
+            ableToExit = true;
+            nextState = new MovingState(melodyController);
         }
     }
 
-    void RotatePlayer(float turnSpeedModifier)
-    {
-        //Rotate player to face movement direction
-        if (melodyController.Move.magnitude > 0)
-        {
-            Vector3 targetPos = melodyController.transform.position + melodyController.Move;
-            Vector3 targetDir = targetPos - melodyController.transform.position;
-            //If locked on, ignore movement direction and always attempt to face enemy
-            /*if (isLockedOn)
-            {
-                targetDir = lockOnTarget.transform.position - transform.position;
-            }*/
-
-            // The step size is equal to speed times frame time.
-            float step = 5 * turnSpeedModifier * Time.deltaTime;
-
-            Vector3 newDir = Vector3.RotateTowards(melodyController.transform.forward, targetDir, step, 0.0f);
-            Debug.DrawRay(melodyController.transform.position, newDir, Color.red);
-
-            // Move our position a step closer to the target.
-            melodyController.transform.rotation = Quaternion.LookRotation(newDir);
-        }
-        //Failsafe to ensure that x and z are always zero.
-        melodyController.transform.eulerAngles = new Vector3(0, melodyController.transform.eulerAngles.y, 0);
-    }
-
-    public override MelodyState NextState()
-    {
-        return mNextState;
-    }
+    public override void OnExit(){}
 }
