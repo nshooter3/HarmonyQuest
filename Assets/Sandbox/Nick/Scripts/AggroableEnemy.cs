@@ -3,7 +3,7 @@
     using UnityEngine;
     using GamePhysics;
 
-    public class AggroableEnemy : NavMeshTraveler
+    public class AggroableEnemy : AgentNavigator
     {
         /// <summary>
         /// Enum used to track AI state

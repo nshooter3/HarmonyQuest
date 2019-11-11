@@ -4,7 +4,7 @@
     using UnityEngine.AI;
     using UnityEngine;
 
-    public class NavMeshTraveler : MonoBehaviour
+    public class AgentNavigator : MonoBehaviour
     {
         [HideInInspector]
         public bool isActivelyGeneratingPath = false;

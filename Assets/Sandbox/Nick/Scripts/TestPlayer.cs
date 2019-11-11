@@ -17,6 +17,8 @@ public class TestPlayer : MonoBehaviour
     [SerializeField]
     private HarmonyQuest.Audio.FmodEventHandler attackConnectSounds, harmonyMeterSounds, attackSwingSound, healSound, tonalAttackSound, tonalParrySound;
 
+    public static TestPlayer instance;
+
     //Used to tell attackConnectSounds what happened when passing in fmod param values.
     public enum AttackFmodParamValues
     {
@@ -123,6 +125,18 @@ public class TestPlayer : MonoBehaviour
         playerUI.SetHarmonyChargeBar(harmonyCharge, maxHarmonyCharge);
         playerUI.SetMultiplierProgress(attackMultiplier * harmonyModeMultilpier, nextMultiplierProgress);
         playerUI.SetHealingItems(healingItems);
+    }
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     // Update is called once per frame
