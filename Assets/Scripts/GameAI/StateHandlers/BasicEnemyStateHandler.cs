@@ -6,8 +6,7 @@
     {
         public override void Init()
         {
-            states = new AIBehavior[]{ new IdleBehavior { }, new NavigateBehavior { }, new EngageBehavior { }, new DisengageBehavior { } };
-            currentState = states[0];
+            currentState = new IdleBehavior { };
         }
 
         protected override void CheckForStateChange(AIStateUpdateData updateData)

@@ -5,7 +5,7 @@
 
     public abstract class AIAgent : MonoBehaviour
     {
-        protected AIStateHandler states;
+        protected AIStateHandler stateHandler;
         protected AgentNavigator navigator;
 
         public abstract void Init();
@@ -14,7 +14,7 @@
 
         public void UpdateState()
         {
-            states.Update(new AIStateUpdateData(this, TestPlayer.instance, navigator));
+            stateHandler.Update(new AIStateUpdateData(this, TestPlayer.instance, navigator));
         }
     }
 }

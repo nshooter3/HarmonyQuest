@@ -37,7 +37,7 @@
 
         public void PopulateAgentsList()
         {
-            //TODO: Figure out how we wanna handle this.
+            agents = FindObjectsOfType<AIAgent>();
         }
     }
 }

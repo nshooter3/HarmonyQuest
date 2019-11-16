@@ -1,12 +1,11 @@
 ﻿namespace GameAI.StateHandlers
 {
     using Behaviors;
-    using System;
 
     public abstract class AIStateHandler
     {
         protected AIBehavior currentState;
-        protected AIBehavior[] states;
+        protected AIBehavior nextState;
 
         public abstract void Init();
         protected abstract void CheckForStateChange(AIStateUpdateData updateData);
@@ -14,27 +13,27 @@
         public void Update(AIStateUpdateData updateData)
         {
             CheckForStateChange(updateData);
-            currentState.Update(updateData);
+            if (nextState != null && currentState.readyForStateTransition)
+            {
+                currentState = nextState;
+                nextState = null;
+                currentState.Start(updateData);
+            }
+            else
+            {
+                currentState.Update(updateData);
+            }
         }
 
-        public string GetCurrentState()
+        public AIBehavior GetCurrentState()
         {
-            return currentState.GetName();
+            return currentState;
         }
 
-        protected void ChangeState(string newState, AIStateUpdateData updateData)
+        protected void RequestStateTransition(AIBehavior nextState, AIStateUpdateData updateData)
         {
             currentState.Abort(updateData);
-            foreach (AIBehavior state in states)
-            {
-                if (state.GetName() == newState)
-                {
-                    currentState = state;
-                    currentState.Start(updateData);
-                    return;
-                }
-            }
-            throw new Exception("AI STATE HANDLER ERROR: ChangeState request failed, no state by the name of " + newState + " found.");
+            this.nextState = nextState;
         }
     }
 }

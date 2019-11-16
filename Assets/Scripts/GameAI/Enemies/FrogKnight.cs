@@ -6,7 +6,7 @@
     {
         public override void Init()
         {
-            states = new BasicEnemyStateHandler();
+            stateHandler = new BasicEnemyStateHandler();
             navigator = new AgentNavigator();
             base.Init();
         }
