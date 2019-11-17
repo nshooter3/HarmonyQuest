@@ -1,6 +1,7 @@
 ﻿namespace GameAI
 {
     using GameAI.StateHandlers;
+    using Navigation;
     using UnityEngine;
 
     public abstract class AIAgent : MonoBehaviour
@@ -15,6 +16,11 @@
         public void UpdateState()
         {
             stateHandler.Update(new AIStateUpdateData(this, TestPlayer.instance, navigator));
+        }
+
+        public void NavigatorPathRefreshCheck()
+        {
+            navigator.CheckIfPathNeedsToBeRegenerated();
         }
     }
 }

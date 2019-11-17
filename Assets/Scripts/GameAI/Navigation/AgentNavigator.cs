@@ -1,4 +1,4 @@
-﻿namespace GameAI
+﻿namespace GameAI.Navigation
 {
     using System.Collections.Generic;
     using UnityEngine.AI;
@@ -8,8 +8,6 @@
     {
         [HideInInspector]
         public bool isActivelyGeneratingPath = false;
-        
-        private float pathRefreshTimer = 0.0f;
 
         protected Transform navigationAgent;
         protected Transform navigationTarget;
@@ -43,6 +41,17 @@
             isActivelyGeneratingPath = false;
         }
 
+        public void CheckIfPathNeedsToBeRegenerated()
+        {
+            if (isActivelyGeneratingPath == true && navigationTarget != null)
+            {
+                if (Vector3.Distance(navigationTarget.transform.position, lastKnownTargetPos) > NavigatorSettings.pathRefreshDistanceThreshold)
+                {
+                    GeneratePathToTarget();
+                }
+            }
+        }
+
         public Vector3 GetNextWaypoint()
         {
             return nextWaypoint;
@@ -53,20 +62,6 @@
             if (isActivelyGeneratingPath == true && navigationTarget != null)
             {
                 UpdateDestination();
-                CheckIfPathNeedsToBeRegenerated();
-            }
-        }
-
-        private void CheckIfPathNeedsToBeRegenerated()
-        {
-            pathRefreshTimer += Time.deltaTime;
-            if (pathRefreshTimer > NavigatorSettings.pathRefreshRate)
-            {
-                pathRefreshTimer = 0;
-                if (Vector3.Distance(navigationTarget.transform.position, lastKnownTargetPos) > NavigatorSettings.pathRefreshDistanceThreshold)
-                {
-                    GeneratePathToTarget();
-                }
             }
         }
 

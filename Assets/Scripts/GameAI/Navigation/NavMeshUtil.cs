@@ -1,4 +1,4 @@
-﻿namespace GameAI
+﻿namespace GameAI.Navigation
 {
     using UnityEngine.AI;
     using UnityEngine;

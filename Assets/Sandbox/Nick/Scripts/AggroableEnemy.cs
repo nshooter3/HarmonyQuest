@@ -2,6 +2,7 @@
 {
     using UnityEngine;
     using GamePhysics;
+    using Navigation;
 
     public class AggroableEnemy : AgentNavigator
     {

@@ -1,5 +1,6 @@
 ﻿namespace GameAI.StateHandlers
 {
+    using Navigation;
     public class AIStateUpdateData
     {
         public AIAgent agent;

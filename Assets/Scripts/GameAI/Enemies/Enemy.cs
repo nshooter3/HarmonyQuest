@@ -1,7 +1,8 @@
-﻿namespace GameAI
+﻿namespace GameAI.Enemies
 {
     using System;
     using UnityEngine;
+    using Navigation;
 
     public class Enemy : AIAgent
     {

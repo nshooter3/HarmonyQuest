@@ -1,4 +1,4 @@
-﻿namespace GameAI
+﻿namespace GameAI.Navigation
 {
     public static class NavigatorSettings
     {

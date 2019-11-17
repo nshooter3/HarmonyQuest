@@ -1,6 +1,7 @@
-﻿namespace GameAI
+﻿namespace GameAI.Enemies
 {
     using GameAI.StateHandlers;
+    using Navigation;
 
     public class FrogKnight : Enemy
     {
