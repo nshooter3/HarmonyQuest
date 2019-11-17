@@ -2,8 +2,6 @@
 {
     public static class NavigatorSettings
     {
-        //TODO: Feed this data into our navigator scripts
-
         /// <summary>
         /// How frequently our agent navigators check to see if their path to their target should change.
         /// </summary>
