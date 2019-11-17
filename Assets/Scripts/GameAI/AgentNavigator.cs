@@ -9,24 +9,7 @@
         [HideInInspector]
         public bool isActivelyGeneratingPath = false;
         
-        /// <summary>
-        /// How frequently we check to see if our path to our target should change.
-        /// </summary>
-        [SerializeField]
-        private float pathRefreshRate = 0.5f;
         private float pathRefreshTimer = 0.0f;
-
-        /// <summary>
-        /// How far our target must move from its last known position to warrant generating a new path.
-        /// </summary>
-        [SerializeField]
-        private float pathRefreshDistanceThreshold = 2.0f;
-
-        /// <summary>
-        /// How close we need to be to a waypoint for it to be considered reached.
-        /// </summary>
-        [SerializeField]
-        protected float waypointReachedDistanceThreshold = 2.0f;
 
         protected Transform navigationAgent;
         protected Transform navigationTarget;
@@ -77,10 +60,10 @@
         private void CheckIfPathNeedsToBeRegenerated()
         {
             pathRefreshTimer += Time.deltaTime;
-            if (pathRefreshTimer > pathRefreshRate)
+            if (pathRefreshTimer > NavigatorSettings.pathRefreshRate)
             {
                 pathRefreshTimer = 0;
-                if (Vector3.Distance(navigationTarget.transform.position, lastKnownTargetPos) > pathRefreshDistanceThreshold)
+                if (Vector3.Distance(navigationTarget.transform.position, lastKnownTargetPos) > NavigatorSettings.pathRefreshDistanceThreshold)
                 {
                     GeneratePathToTarget();
                 }
@@ -89,7 +72,7 @@
 
         private void UpdateDestination()
         {
-            if (Vector3.Distance(navigationAgent.position, nextWaypoint) <= waypointReachedDistanceThreshold)
+            if (Vector3.Distance(navigationAgent.position, nextWaypoint) <= NavigatorSettings.waypointReachedDistanceThreshold)
             {
                 if (waypoints != null && waypoints.Count > 0)
                 {

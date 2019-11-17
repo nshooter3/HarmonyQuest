@@ -209,7 +209,7 @@
 
         public virtual void DeAggroUpdate()
         {
-            if (Vector3.Distance(navigationAgentBottom.position, navigationTarget.position) <= waypointReachedDistanceThreshold)
+            if (Vector3.Distance(navigationAgentBottom.position, navigationTarget.position) <= NavigatorSettings.waypointReachedDistanceThreshold)
             {
                 DeAggroExit();
                 IdleEnter();

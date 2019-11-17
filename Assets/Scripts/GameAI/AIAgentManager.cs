@@ -5,7 +5,7 @@
 
     public class AIAgentManager : MonoBehaviour
     {
-        AIAgent[] agents;
+        private AIAgent[] agents;
 
         // Start is called before the first frame update
         void Start()
@@ -20,6 +20,17 @@
 
         // Update is called once per frame
         void Update()
+        {
+            AgentsFrameUpdate();
+            NavigationStepUpdate();
+        }
+
+        void NavigationStepUpdate()
+        {
+
+        }
+
+        void AgentsFrameUpdate()
         {
             foreach (AIAgent agent in agents)
             {
