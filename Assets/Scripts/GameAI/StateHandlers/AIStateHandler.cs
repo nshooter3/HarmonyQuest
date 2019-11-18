@@ -1,13 +1,14 @@
 ﻿namespace GameAI.StateHandlers
 {
     using Behaviors;
+    using UnityEngine;
 
     public abstract class AIStateHandler
     {
         protected AIBehavior currentState;
         protected AIBehavior nextState;
 
-        public abstract void Init();
+        public abstract void Init(AIStateUpdateData updateData);
         protected abstract void CheckForStateChange(AIStateUpdateData updateData);
 
         public void Update(AIStateUpdateData updateData)
@@ -30,10 +31,12 @@
             return currentState;
         }
 
-        protected void RequestStateTransition(AIBehavior nextState, AIStateUpdateData updateData)
+        public void RequestStateTransition(AIBehavior nextState, AIStateUpdateData updateData)
         {
             currentState.Abort(updateData);
             this.nextState = nextState;
         }
+
+        public abstract void AggroZoneActivation(Collider other);
     }
 }

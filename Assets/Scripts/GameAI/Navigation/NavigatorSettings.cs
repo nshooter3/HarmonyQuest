@@ -16,5 +16,10 @@
         /// How close we need to be to a waypoint for it to be considered reached.
         /// </summary>
         public static float waypointReachedDistanceThreshold = 2.0f;
+
+        /// <summary>
+        /// How frequently to check if this enemy has a clear path to the player. Determines whether to engage player or to navigate to a state where they can engage later.
+        /// </summary>
+        public static float checkForTargetObstructionRate = 0.5f;
     }
 }

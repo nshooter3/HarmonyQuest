@@ -4,13 +4,13 @@
     using UnityEngine.AI;
     using UnityEngine;
 
-    public class AgentNavigator
+    public class OldAgentNavigator: MonoBehaviour
     {
         [HideInInspector]
         public bool isActivelyGeneratingPath = false;
 
-        private Transform navigationAgent;
-        public Transform navigationTarget;
+        protected Transform navigationAgent;
+        protected Transform navigationTarget;
         private Vector3 lastKnownTargetPos = new Vector3(float.MinValue, float.MinValue, float.MinValue);
 
         private NavMeshPath path;
@@ -99,7 +99,7 @@
                     }
                 }
             }
-            if(pathFound == false)
+            if (pathFound == false)
             {
                 //If we cannot reach the specified target using the navmesh, cancel navigation.
                 CancelCurrentNavigation();
@@ -116,3 +116,4 @@
         }
     }
 }
+

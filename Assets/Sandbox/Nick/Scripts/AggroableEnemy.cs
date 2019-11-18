@@ -4,7 +4,7 @@
     using GamePhysics;
     using Navigation;
 
-    public class AggroableEnemy : AgentNavigator
+    public class AggroableEnemy : OldAgentNavigator
     {
         /// <summary>
         /// Enum used to track AI state
