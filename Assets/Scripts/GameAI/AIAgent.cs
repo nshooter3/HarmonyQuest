@@ -20,7 +20,10 @@
 
         public void NavigatorPathRefreshCheck()
         {
-            navigator.CheckIfPathNeedsToBeRegenerated();
+            if (navigator != null)
+            {
+                navigator.CheckIfPathNeedsToBeRegenerated();
+            }
         }
     }
 }

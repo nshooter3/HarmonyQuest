@@ -17,9 +17,6 @@
         private Queue<Vector3> waypoints;
         private Vector3 nextWaypoint;
 
-        private RaycastHit raycastHit;
-        private Vector3 raycastHitPosition;
-
         public void SetTarget(Transform navigationAgent, Transform navigationTarget)
         {
             this.navigationAgent = navigationAgent;
@@ -78,18 +75,28 @@
 
         private void GeneratePathToTarget()
         {
-            bool pathFound = false;
-            if (NavMeshUtil.IsNavMeshBelowAgent(navigationAgent, out raycastHitPosition))
+            if (navigationAgent == null || navigationTarget == null)
             {
-                path = NavMeshUtil.GeneratePath(raycastHitPosition, navigationTarget);
+                CancelCurrentNavigation();
+                return;
+            }
 
-                if (path.status != NavMeshPathStatus.PathInvalid)
+            bool pathFound = false;
+            //For both our agent and our target, raycast down to the navmesh before generating a path. This allows navigations to work even when they aren't both grounded.
+            if (NavMeshUtil.IsNavMeshBelowAgent(navigationAgent, out Vector3 agentRaycastDownPosition))
+            {
+                if (NavMeshUtil.IsNavMeshBelowAgent(navigationTarget, out Vector3 targetRaycastDownPosition))
                 {
+                    path = NavMeshUtil.GeneratePath(agentRaycastDownPosition, targetRaycastDownPosition);
 
-                    waypoints = new Queue<Vector3>(path.corners);
-                    nextWaypoint = waypoints.Dequeue();
-                    lastKnownTargetPos = navigationTarget.transform.position;
-                    pathFound = true;
+                    if (path.status != NavMeshPathStatus.PathInvalid)
+                    {
+
+                        waypoints = new Queue<Vector3>(path.corners);
+                        nextWaypoint = waypoints.Dequeue();
+                        lastKnownTargetPos = navigationTarget.transform.position;
+                        pathFound = true;
+                    }
                 }
             }
             if(pathFound == false)
@@ -99,7 +106,7 @@
             }
         }
 
-        protected bool IsPathToTargetValid()
+        public bool IsPathToTargetValid()
         {
             if (path == null || path.status == NavMeshPathStatus.PathInvalid)
             {
