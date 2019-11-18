@@ -83,9 +83,9 @@
 
             bool pathFound = false;
             //For both our agent and our target, raycast down to the navmesh before generating a path. This allows navigations to work even when they aren't both grounded.
-            if (NavMeshUtil.IsNavMeshBelowAgent(navigationAgent, out Vector3 agentRaycastDownPosition))
+            if (NavMeshUtil.IsNavMeshBelowTransform(navigationAgent, out Vector3 agentRaycastDownPosition))
             {
-                if (NavMeshUtil.IsNavMeshBelowAgent(navigationTarget, out Vector3 targetRaycastDownPosition))
+                if (NavMeshUtil.IsNavMeshBelowTransform(navigationTarget, out Vector3 targetRaycastDownPosition))
                 {
                     path = NavMeshUtil.GeneratePath(agentRaycastDownPosition, targetRaycastDownPosition);
 

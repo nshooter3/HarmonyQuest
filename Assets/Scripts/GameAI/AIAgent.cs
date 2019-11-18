@@ -40,7 +40,7 @@
         public virtual void Init()
         {
             origin.parent = null;
-            if (NavMeshUtil.IsNavMeshBelowAgent(transform, out Vector3 navmeshPosBelowOrigin))
+            if (NavMeshUtil.IsNavMeshBelowTransform(transform, out Vector3 navmeshPosBelowOrigin))
             {
                 origin.transform.position = navmeshPosBelowOrigin;
             }

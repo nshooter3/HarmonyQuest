@@ -56,7 +56,7 @@
         {
             origin.parent = null;
             Vector3 navmeshPosBelowOrigin;
-            if (NavMeshUtil.IsNavMeshBelowAgent(origin, out navmeshPosBelowOrigin))
+            if (NavMeshUtil.IsNavMeshBelowTransform(origin, out navmeshPosBelowOrigin))
             {
                 origin.transform.position = navmeshPosBelowOrigin;
             }

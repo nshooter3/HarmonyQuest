@@ -92,7 +92,7 @@
             {
                 updateData.agent.stateHandler.RequestStateTransition(new EngageBehavior { }, updateData);
             }
-            else if (Vector3.Distance(updateData.agent.aiAgentBottom.position, updateData.agent.aggroTarget.position) <= NavigatorSettings.waypointReachedDistanceThreshold)
+            else if (Vector3.Distance(updateData.agent.aiAgentBottom.position, updateData.agent.navigator.navigationTarget.position) <= NavigatorSettings.waypointReachedDistanceThreshold)
             {
                 updateData.agent.stateHandler.RequestStateTransition(new IdleBehavior { }, updateData);
             }
