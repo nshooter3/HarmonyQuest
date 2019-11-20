@@ -15,7 +15,7 @@
 
         public override void Start(AIStateUpdateData updateData)
         {
-            Debug.Log("ENTER ENGAGE STATE");
+            //Debug.Log("ENTER ENGAGE STATE");
             updateData.agent.targetInLineOfSight = true;
         }
 

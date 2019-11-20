@@ -12,7 +12,7 @@
 
         public override void Start(AIStateUpdateData updateData)
         {
-            Debug.Log("ENTER IDLE STATE");
+            //Debug.Log("ENTER IDLE STATE");
             updateData.agent.targetInLineOfSight = false;
         }
 

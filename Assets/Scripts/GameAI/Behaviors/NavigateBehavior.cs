@@ -12,7 +12,7 @@
 
         public override void Start(AIStateUpdateData updateData)
         {
-            Debug.Log("ENTER NAVIGATE STATE");
+            //Debug.Log("ENTER NAVIGATE STATE");
             updateData.agent.navigator.SetTarget(updateData.agent.aiAgentBottom, updateData.player.transform);
             updateData.agent.targetInLineOfSight = true;
         }

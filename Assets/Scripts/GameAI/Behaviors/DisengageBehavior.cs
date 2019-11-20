@@ -12,7 +12,7 @@
 
         public override void Start(AIStateUpdateData updateData)
         {
-            Debug.Log("ENTER DISENGAGE STATE");
+            //Debug.Log("ENTER DISENGAGE STATE");
             updateData.agent.navigator.SetTarget(updateData.agent.aiAgentBottom, updateData.agent.origin);
             updateData.agent.targetInLineOfSight = false;
         }
