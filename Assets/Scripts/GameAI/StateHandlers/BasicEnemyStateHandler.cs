@@ -66,7 +66,7 @@
 
         private void CheckForNavigateStateChange(AIStateUpdateData updateData)
         {
-            if (ShouldDeAggro(updateData))
+            if (ShouldDeAggro(updateData) || updateData.navigator.isActivelyGeneratingPath == false)
             {
                 checkForTargetObstructionTimer = 0;
                 updateData.agent.stateHandler.RequestStateTransition(new DisengageBehavior { }, updateData);
