@@ -5,9 +5,9 @@
     {
         public AIAgent agent;
         public TestPlayer player;
-        public AgentNavigator navigator;
+        public Navigator navigator;
 
-        public AIStateUpdateData(AIAgent agent, TestPlayer player, AgentNavigator navigator)
+        public AIStateUpdateData(AIAgent agent, TestPlayer player, Navigator navigator)
         {
             this.agent = agent;
             this.player = player;

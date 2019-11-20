@@ -4,14 +4,12 @@
     using Navigation;
     using UnityEngine;
 
-    public class FrogKnight : Enemy
+    public class FrogKnight : BasicGroundedEnemy
     {
         public override void Init()
         {
             stateHandler = new BasicEnemyStateHandler();
-            navigator = new AgentNavigator();
-
-            aggroTarget = TestPlayer.instance.transform;
+            navigator = new GroundedNavmeshNavigator();
 
             base.Init();
         }

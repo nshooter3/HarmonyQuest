@@ -4,20 +4,16 @@
     using UnityEngine.AI;
     using UnityEngine;
 
-    public class AgentNavigator
+    public class GroundedNavmeshNavigator : Navigator
     {
-        [HideInInspector]
-        public bool isActivelyGeneratingPath = false;
-
         private Transform navigationAgent;
-        public Transform navigationTarget;
         private Vector3 lastKnownTargetPos = new Vector3(float.MinValue, float.MinValue, float.MinValue);
 
         private NavMeshPath path;
         private Queue<Vector3> waypoints;
         private Vector3 nextWaypoint;
 
-        public void SetTarget(Transform navigationAgent, Transform navigationTarget)
+        public override void SetTarget(Transform navigationAgent, Transform navigationTarget)
         {
             this.navigationAgent = navigationAgent;
             this.navigationTarget = navigationTarget;
@@ -28,7 +24,7 @@
             GeneratePathToTarget();
         }
 
-        public void CancelCurrentNavigation()
+        public override void CancelCurrentNavigation()
         {
             navigationAgent = null;
             navigationTarget = null;
@@ -38,7 +34,7 @@
             isActivelyGeneratingPath = false;
         }
 
-        public void CheckIfPathNeedsToBeRegenerated()
+        public override void CheckIfPathNeedsToBeRegenerated()
         {
             if (isActivelyGeneratingPath == true && navigationTarget != null)
             {
@@ -49,12 +45,12 @@
             }
         }
 
-        public Vector3 GetNextWaypoint()
+        public override Vector3 GetNextWaypoint()
         {
             return nextWaypoint;
         }
 
-        public void Update()
+        public override void Update()
         {
             if (isActivelyGeneratingPath == true && navigationTarget != null)
             {
@@ -89,7 +85,7 @@
                 {
                     path = NavMeshUtil.GeneratePath(agentRaycastDownPosition, targetRaycastDownPosition);
 
-                    if (path.status != NavMeshPathStatus.PathInvalid)
+                    if (IsPathToTargetValid())
                     {
 
                         waypoints = new Queue<Vector3>(path.corners);
@@ -106,7 +102,7 @@
             }
         }
 
-        public bool IsPathToTargetValid()
+        private bool IsPathToTargetValid()
         {
             if (path == null || path.status == NavMeshPathStatus.PathInvalid)
             {

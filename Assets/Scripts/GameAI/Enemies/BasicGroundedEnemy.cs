@@ -1,7 +1,7 @@
 ﻿namespace GameAI.Enemies
 {
     using UnityEngine;
-    public class Enemy : AIAgent
+    public class BasicGroundedEnemy : AIAgent
     {
         /// <summary>
         /// How fast this enemy moves.
@@ -49,6 +49,8 @@
             navPos.transform.parent = null;
             navPos.SetActive(showDestination);
             defaultConstraints = rb.constraints;
+
+            aggroTarget = TestPlayer.instance.transform;
 
             base.Init();
         }

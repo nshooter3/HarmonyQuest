@@ -3,16 +3,15 @@
     using GameAI.StateHandlers;
     using GamePhysics;
     using Navigation;
-    using System;
     using UnityEngine;
 
     public class AIAgent : MonoBehaviour
     {
         public AIStateHandler stateHandler;
-        public AgentNavigator navigator;
+        public Navigator navigator;
 
         /// <summary>
-        /// The transform this enemy is attempting to reach when aggroed.
+        /// The transform this agent is attempting to reach when aggroed.
         /// </summary>
         public Transform aggroTarget;
 
@@ -23,7 +22,7 @@
         public Transform origin;
 
         /// <summary>
-        /// Collider that causes the agent to aggro when a target enters it.
+        /// Collider that causes the agent to aggro when a target enters it. Goes unused if null.
         /// </summary>
         public CollisionWrapper aggroZone;
 
