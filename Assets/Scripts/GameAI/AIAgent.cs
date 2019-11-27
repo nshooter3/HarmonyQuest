@@ -1,63 +1,35 @@
 ﻿namespace GameAI
 {
-    using GameAI.StateHandlers;
-    using GamePhysics;
-    using Navigation;
     using UnityEngine;
+    using StateHandlers;
+    using ComponentInterface;
+    using Navigation;
 
     public class AIAgent : MonoBehaviour
     {
-        public AIStateHandler stateHandler;
-        public Navigator navigator;
-
-        /// <summary>
-        /// The transform this agent is attempting to reach when aggroed.
-        /// </summary>
-        public Transform aggroTarget;
-
-        /// <summary>
-        /// A transform that determines where this enemy will return to once disengaged.
-        /// If this transform has a parent, it will automatically be unparented once the scene loads.
-        /// </summary>
-        public Transform origin;
-
-        /// <summary>
-        /// Collider that causes the agent to aggro when a target enters it. Goes unused if null.
-        /// </summary>
-        public CollisionWrapper aggroZone;
-
-        /// <summary>
-        /// A Transform stuck to the bottom of our AI agent. This is used to determine agent proximity to target positions.
-        /// </summary>
-        public Transform aiAgentBottom;
-
-        public bool disengageWithDistance = true;
-        public float disengageDistance = 15.0f;
-
-        public bool targetInLineOfSight = false;
+        public AIAgentComponentInterface aiAgentComponentInterface;
+        private AIStateHandler stateHandler;
+        private Navigator navigator;
 
         public virtual void Init()
         {
-            origin.parent = null;
-            if (NavMeshUtil.IsNavMeshBelowTransform(transform, out Vector3 navmeshPosBelowOrigin))
+            if (aiAgentComponentInterface == null && (aiAgentComponentInterface = GetComponentInChildren<AIAgentComponentInterface>()) == null)
             {
-                origin.transform.position = navmeshPosBelowOrigin;
+                Debug.LogError("AIAgent Init WARNING: Agent is missing a AgentComponentInterface component.");
             }
-            else
+            aiAgentComponentInterface.Init();
+            stateHandler = aiAgentComponentInterface.GetStateHandler();
+            navigator = aiAgentComponentInterface.GetNavigator();
+            stateHandler.Init(new AIStateUpdateData(aiAgentComponentInterface, TestPlayer.instance, navigator));
+            if (aiAgentComponentInterface.aggroZone != null)
             {
-                Debug.LogError("AIAgent Init WARNING: Agent origin not located on or above navmesh.");
-            }
-
-            stateHandler.Init(new AIStateUpdateData(this, TestPlayer.instance, navigator));
-            if (aggroZone != null)
-            {
-                aggroZone.AssignFunctionToTriggerStayDelegate(stateHandler.AggroZoneActivation);
+                aiAgentComponentInterface.aggroZone.AssignFunctionToTriggerStayDelegate(stateHandler.AggroZoneActivation);
             }
         }
 
         public virtual void AgentFrameUpdate()
         {
-            stateHandler.Update(new AIStateUpdateData(this, TestPlayer.instance, navigator));
+            stateHandler.Update(new AIStateUpdateData(aiAgentComponentInterface, TestPlayer.instance, navigator));
             if (navigator != null)
             {
                 navigator.Update();

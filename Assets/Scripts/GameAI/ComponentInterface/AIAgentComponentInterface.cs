@@ -1,8 +1,38 @@
-﻿namespace GameAI.Enemies
+﻿namespace GameAI.ComponentInterface
 {
+    using Navigation;
+    using GamePhysics;
     using UnityEngine;
-    public class BasicGroundedEnemy : AIAgent
+    using StateHandlers;
+
+    public abstract class AIAgentComponentInterface : MonoBehaviour
     {
+        /// <summary>
+        /// The transform this agent is attempting to reach when aggroed.
+        /// </summary>
+        public Transform aggroTarget;
+
+        /// <summary>
+        /// A transform that determines where this enemy will return to once disengaged.
+        /// If this transform has a parent, it will automatically be unparented once the scene loads.
+        /// </summary>
+        public Transform origin;
+
+        /// <summary>
+        /// Collider that causes the agent to aggro when a target enters it. Goes unused if null.
+        /// </summary>
+        public CollisionWrapper aggroZone;
+
+        /// <summary>
+        /// A Transform stuck to the bottom of our AI agent. This is used to determine agent proximity to target positions.
+        /// </summary>
+        public Transform aiAgentBottom;
+
+        public bool disengageWithDistance = true;
+        public float disengageDistance = 15.0f;
+
+        public bool targetInLineOfSight = false;
+
         /// <summary>
         /// How fast this enemy moves.
         /// </summary>
@@ -25,12 +55,12 @@
         /// <summary>
         /// How far above the player to position the navPos when tracking them
         /// </summary>
-        protected float navPosHeightOffset = 2.25f;
+        public float navPosHeightOffset = 2.25f;
 
         protected Vector3 moveDirection = Vector3.zero;
         protected Vector3 moveDirectionNoGravity = Vector3.zero;
 
-        protected RigidbodyConstraints defaultConstraints;
+        public RigidbodyConstraints defaultConstraints { get; private set; }
 
         /// <summary>
         /// Whether or not to make navPos visible.
@@ -40,22 +70,31 @@
         [SerializeField]
         protected Rigidbody rb;
 
-        public override void Init()
+        public virtual void Init()
         {
             if (rb == null)
             {
                 rb = GetComponent<Rigidbody>();
             }
+
+            origin.parent = null;
+            if (NavMeshUtil.IsNavMeshBelowTransform(transform, out Vector3 navmeshPosBelowOrigin))
+            {
+                origin.transform.position = navmeshPosBelowOrigin;
+            }
+            else
+            {
+                Debug.LogError("AgentComponentInterface Init WARNING: Agent origin not located on or above navmesh.");
+            }
+
             navPos.transform.parent = null;
             navPos.SetActive(showDestination);
             defaultConstraints = rb.constraints;
 
             aggroTarget = TestPlayer.instance.transform;
-
-            base.Init();
         }
 
-        protected virtual void Move(Vector3 destination)
+        public virtual void Move(Vector3 destination)
         {
             moveDirection = (destination - aiAgentBottom.position).normalized;
             moveDirectionNoGravity = moveDirection;
@@ -68,7 +107,7 @@
             Rotate(1.0f);
         }
 
-        protected virtual void Rotate(float turnSpeedModifier)
+        public virtual void Rotate(float turnSpeedModifier)
         {
             //Rotate enemy to face movement direction
             if (moveDirectionNoGravity.magnitude > 0)
@@ -88,5 +127,27 @@
             //Failsafe to ensure that x and z are always zero.
             transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
         }
+
+        public void SetVelocity(Vector3 velocity)
+        {
+            rb.velocity = velocity;
+        }
+
+        public void SetRigidbodyConstraints(RigidbodyConstraints constraints)
+        {
+            rb.constraints = constraints;
+        }
+
+        /// <summary>
+        /// Implement this in the child class to specify what kind of state machine this agent will use.
+        /// </summary>
+        /// <returns> A new instance of this agent's state machine </returns>
+        public abstract AIStateHandler GetStateHandler();
+
+        /// <summary>
+        /// Implement this in the child class to specify what kind of navigator this agent will use.
+        /// </summary>
+        /// <returns> A new instance of this agent's navigator </returns>
+        public abstract Navigator GetNavigator();
     }
 }

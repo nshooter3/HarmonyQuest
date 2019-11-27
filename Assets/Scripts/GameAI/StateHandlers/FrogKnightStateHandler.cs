@@ -1,17 +1,17 @@
 ﻿namespace GameAI.StateHandlers
 {
-    using Behaviors;
+    using Behaviors.FrogKnight;
     using GameAI.Navigation;
     using UnityEngine;
 
-    public class BasicEnemyStateHandler : AIStateHandler
+    public class FrogKnightStateHandler : AIStateHandler
     {
         private float checkForTargetObstructionTimer = 0.0f;
         private bool aggroZoneEntered = false;
 
         public override void Init(AIStateUpdateData updateData)
         {
-            currentState = new IdleBehavior { };
+            currentState = new FrogKnightIdleBehavior { };
             currentState.Start(updateData);
         }
 
@@ -37,9 +37,9 @@
 
         private void CheckForIdleStateChange(AIStateUpdateData updateData)
         {
-            if (aggroZoneEntered && !NavMeshUtil.IsTargetObstructed(updateData.agent.aiAgentBottom, updateData.player.transform))
+            if (aggroZoneEntered && !NavMeshUtil.IsTargetObstructed(updateData.agentComponentInterface.aiAgentBottom, updateData.player.transform))
             {
-                updateData.agent.stateHandler.RequestStateTransition(new EngageBehavior { }, updateData);
+                RequestStateTransition(new FrogKnightEngageBehavior { }, updateData);
             }
         }
 
@@ -48,7 +48,7 @@
             if (ShouldDeAggro(updateData))
             {
                 checkForTargetObstructionTimer = 0;
-                updateData.agent.stateHandler.RequestStateTransition(new DisengageBehavior { }, updateData);
+                RequestStateTransition(new FrogKnightDisengageBehavior { }, updateData);
             }
             else
             {
@@ -56,9 +56,9 @@
                 if (checkForTargetObstructionTimer > NavigatorSettings.checkForTargetObstructionRate)
                 {
                     checkForTargetObstructionTimer = 0;
-                    if (NavMeshUtil.IsTargetObstructed(updateData.agent.aiAgentBottom, updateData.player.transform))
+                    if (NavMeshUtil.IsTargetObstructed(updateData.agentComponentInterface.aiAgentBottom, updateData.player.transform))
                     {
-                        updateData.agent.stateHandler.RequestStateTransition(new NavigateBehavior { }, updateData);
+                        RequestStateTransition(new FrogKnightNavigateBehavior { }, updateData);
                     }
                 }
             }
@@ -69,7 +69,7 @@
             if (ShouldDeAggro(updateData) || updateData.navigator.isActivelyGeneratingPath == false)
             {
                 checkForTargetObstructionTimer = 0;
-                updateData.agent.stateHandler.RequestStateTransition(new DisengageBehavior { }, updateData);
+                RequestStateTransition(new FrogKnightDisengageBehavior { }, updateData);
             }
             else
             {
@@ -78,9 +78,9 @@
                 if (checkForTargetObstructionTimer > NavigatorSettings.checkForTargetObstructionRate)
                 {
                     checkForTargetObstructionTimer = 0;
-                    if (!NavMeshUtil.IsTargetObstructed(updateData.agent.aiAgentBottom, updateData.player.transform))
+                    if (!NavMeshUtil.IsTargetObstructed(updateData.agentComponentInterface.aiAgentBottom, updateData.player.transform))
                     {
-                        updateData.agent.stateHandler.RequestStateTransition(new EngageBehavior { }, updateData);
+                        RequestStateTransition(new FrogKnightEngageBehavior { }, updateData);
                     }
                 }
             }
@@ -88,19 +88,19 @@
 
         private void CheckForDisengageStateChange(AIStateUpdateData updateData)
         {
-            if (aggroZoneEntered && !NavMeshUtil.IsTargetObstructed(updateData.agent.aiAgentBottom, updateData.player.transform))
+            if (aggroZoneEntered && !NavMeshUtil.IsTargetObstructed(updateData.agentComponentInterface.aiAgentBottom, updateData.player.transform))
             {
-                updateData.agent.stateHandler.RequestStateTransition(new EngageBehavior { }, updateData);
+                RequestStateTransition(new FrogKnightEngageBehavior { }, updateData);
             }
-            else if (Vector3.Distance(updateData.agent.aiAgentBottom.position, updateData.agent.navigator.navigationTarget.position) <= NavigatorSettings.waypointReachedDistanceThreshold)
+            else if (Vector3.Distance(updateData.agentComponentInterface.aiAgentBottom.position, updateData.navigator.navigationTarget.position) <= NavigatorSettings.waypointReachedDistanceThreshold)
             {
-                updateData.agent.stateHandler.RequestStateTransition(new IdleBehavior { }, updateData);
+                RequestStateTransition(new FrogKnightIdleBehavior { }, updateData);
             }
         }
 
         private bool ShouldDeAggro(AIStateUpdateData updateData)
         {
-            return updateData.agent.disengageWithDistance && Vector3.Distance(updateData.agent.transform.position, updateData.player.transform.position) > updateData.agent.disengageDistance;
+            return updateData.agentComponentInterface.disengageWithDistance && Vector3.Distance(updateData.agentComponentInterface.transform.position, updateData.player.transform.position) > updateData.agentComponentInterface.disengageDistance;
         }
 
         public override void AggroZoneActivation(Collider other)

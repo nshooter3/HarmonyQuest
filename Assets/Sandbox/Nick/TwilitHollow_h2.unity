@@ -25425,6 +25425,7 @@ GameObject:
   - component: {fileID: 1900006365}
   - component: {fileID: 1900006364}
   - component: {fileID: 1900006363}
+  - component: {fileID: 1900006368}
   - component: {fileID: 1900006362}
   m_Layer: 0
   m_Name: FrogKnight
@@ -25445,7 +25446,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd99f87ec6500f749b637940d22e2d24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aggroTarget: {fileID: 0}
+  aggroTarget: {fileID: 693083115}
   origin: {fileID: 1287872361}
   aggroZone: {fileID: 530716735}
   aiAgentBottom: {fileID: 1892383167}
@@ -25456,6 +25457,7 @@ MonoBehaviour:
   gravity: 10
   rotateSpeed: 25
   navPos: {fileID: 722185965}
+  navPosHeightOffset: 2.25
   showDestination: 1
   rb: {fileID: 1900006363}
 --- !u!54 &1900006363
@@ -25552,6 +25554,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1900006368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1900006361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 437b4fa47c959e04186651694f15a528, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aiAgentComponentInterface: {fileID: 0}
 --- !u!1 &1903084612
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,27 +1,24 @@
-﻿namespace GameAI.Behaviors
+﻿namespace GameAI.Behaviors.FrogKnight
 {
-    using GameAI.Navigation;
     using GameAI.StateHandlers;
     using UnityEngine;
 
-    public class EngageBehavior : AIBehavior
+    public class FrogKnightIdleBehavior : AIBehavior
     {
-        private float checkForTargetObstructionTimer = 0.0f;
-
         public override string GetName()
         {
-            return "engage";
+            return "idle";
         }
 
         public override void Start(AIStateUpdateData updateData)
         {
-            //Debug.Log("ENTER ENGAGE STATE");
-            updateData.agent.targetInLineOfSight = true;
+            updateData.agentComponentInterface.targetInLineOfSight = false;
+            updateData.agentComponentInterface.SetRigidbodyConstraints(RigidbodyConstraints.FreezeAll);
         }
 
         public override void Update(AIStateUpdateData updateData)
         {
-            
+
         }
 
         public override void Abort(AIStateUpdateData updateData)
