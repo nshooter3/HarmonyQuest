@@ -3,10 +3,13 @@
     using UnityEngine;
     using HarmonyQuest.Audio;
     using Navigation;
+    using ComponentInterface;
+    using System.Collections.Generic;
 
     public class AIAgentManager : MonoBehaviour
     {
-        private AIAgent[] agents;
+        private AIAgentComponentInterface[] componentInterfaces;
+        private List<AIAgent> agents;
 
         private float pathRefreshTimer = 0.0f;
 
@@ -14,16 +17,17 @@
         void Start()
         {
             PopulateAgentsList();
-            foreach (AIAgent agent in agents)
-            {
-                agent.Init();
-            }
             FmodMusicHandler.instance.AssignFunctionToOnBeatDelegate(BeatUpdate);
         }
 
         public void PopulateAgentsList()
         {
-            agents = FindObjectsOfType<AIAgent>();
+            componentInterfaces = FindObjectsOfType<AIAgentComponentInterface>();
+            agents = new List<AIAgent>();
+            foreach (AIAgentComponentInterface componentInterface in componentInterfaces)
+            {
+                agents.Add(new AIAgent(componentInterface));
+            }
         }
 
         // Update is called once per frame

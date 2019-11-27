@@ -1,22 +1,21 @@
 ﻿namespace GameAI
 {
-    using UnityEngine;
     using StateHandlers;
     using ComponentInterface;
     using Navigation;
 
-    public class AIAgent : MonoBehaviour
+    public class AIAgent
     {
+        /// <summary>
+        /// Reference to the gameobject holding the enemy class script and component data, which be updated through this non-monobehavior class.
+        /// </summary>
         public AIAgentComponentInterface aiAgentComponentInterface;
         private AIStateHandler stateHandler;
         private Navigator navigator;
 
-        public virtual void Init()
+        public AIAgent(AIAgentComponentInterface newAIAgentComponentInterface)
         {
-            if (aiAgentComponentInterface == null && (aiAgentComponentInterface = GetComponentInChildren<AIAgentComponentInterface>()) == null)
-            {
-                Debug.LogError("AIAgent Init WARNING: Agent is missing a AgentComponentInterface component.");
-            }
+            aiAgentComponentInterface = newAIAgentComponentInterface;
             aiAgentComponentInterface.Init();
             stateHandler = aiAgentComponentInterface.GetStateHandler();
             navigator = aiAgentComponentInterface.GetNavigator();
@@ -27,7 +26,7 @@
             }
         }
 
-        public virtual void AgentFrameUpdate()
+        public void AgentFrameUpdate()
         {
             stateHandler.Update(new AIStateUpdateData(aiAgentComponentInterface, TestPlayer.instance, navigator));
             if (navigator != null)
@@ -36,7 +35,7 @@
             }
         }
 
-        public virtual void AgentBeatUpdate()
+        public void AgentBeatUpdate()
         {
 
         }
