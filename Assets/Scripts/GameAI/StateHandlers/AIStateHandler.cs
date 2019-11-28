@@ -26,6 +26,11 @@
             }
         }
 
+        public void FixedUpdate(AIStateUpdateData updateData)
+        {
+            currentState.FixedUpdate(updateData);
+        }
+
         public AIBehavior GetCurrentState()
         {
             return currentState;

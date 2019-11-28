@@ -22,6 +22,11 @@
             updateData.agentComponentInterface.Move(updateData.navigator.GetNextWaypoint());
         }
 
+        public override void FixedUpdate(AIStateUpdateData updateData)
+        {
+            updateData.agentComponentInterface.ApplyGravity();
+        }
+
         public override void Abort(AIStateUpdateData updateData)
         {
             updateData.navigator.CancelCurrentNavigation();

@@ -96,7 +96,7 @@
             aggroTarget = TestPlayer.instance.transform;
         }
 
-        public virtual void Move(Vector3 destination, bool ignoreYValue = true, bool applyGravityAfterwards = true)
+        public virtual void Move(Vector3 destination, bool ignoreYValue = true)
         {
             moveDirection = (destination - aiAgentBottom.position).normalized;
 
@@ -116,12 +116,6 @@
                 newVelocity = (moveDirection * Time.deltaTime) * speed;
             }
             rb.velocity = newVelocity;
-
-            //applyGravityAfterwards exists for instances where we don't want enemies to be affected by gravity. i.e. flying enemies.
-            if (applyGravityAfterwards)
-            {
-                ApplyGravity();
-            }
         }
 
         public virtual void ApplyGravity()

@@ -17,7 +17,7 @@
         void Start()
         {
             PopulateAgentsList();
-            FmodMusicHandler.instance.AssignFunctionToOnBeatDelegate(BeatUpdate);
+            FmodMusicHandler.instance.AssignFunctionToOnBeatDelegate(AgentsBeatUpdate);
         }
 
         public void PopulateAgentsList()
@@ -33,10 +33,15 @@
         // Update is called once per frame
         void Update()
         {
-            AgentsFrameUpdate();
+            AgentsUpdate();
         }
 
-        private void AgentsFrameUpdate()
+        void FixedUpdate()
+        {
+            AgentsFixedUpdate();
+        }
+
+        private void AgentsUpdate()
         {
             pathRefreshTimer += Time.deltaTime;
             if (pathRefreshTimer > NavigatorSettings.pathRefreshRate)
@@ -47,7 +52,15 @@
 
             foreach (AIAgent agent in agents)
             {
-                agent.AgentFrameUpdate();
+                agent.Update();
+            }
+        }
+
+        private void AgentsFixedUpdate()
+        {
+            foreach (AIAgent agent in agents)
+            {
+                agent.FixedUpdate();
             }
         }
 
@@ -59,11 +72,11 @@
             }
         }
 
-        private void BeatUpdate()
+        private void AgentsBeatUpdate()
         {
             foreach (AIAgent agent in agents)
             {
-                agent.AgentBeatUpdate();
+                agent.BeatUpdate();
             }
         }
     }

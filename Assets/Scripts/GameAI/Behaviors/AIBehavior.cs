@@ -9,6 +9,7 @@
         public abstract string GetName();
         public abstract void Start(AIStateUpdateData updateData);
         public abstract void Update(AIStateUpdateData updateData);
+        public abstract void FixedUpdate(AIStateUpdateData updateData);
         public abstract void Abort(AIStateUpdateData updateData);
     }
 }

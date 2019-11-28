@@ -21,6 +21,11 @@
             updateData.agentComponentInterface.ApplyGravity();
         }
 
+        public override void FixedUpdate(AIStateUpdateData updateData)
+        {
+            updateData.agentComponentInterface.ApplyGravity();
+        }
+
         public override void Abort(AIStateUpdateData updateData)
         {
             aborted = true;

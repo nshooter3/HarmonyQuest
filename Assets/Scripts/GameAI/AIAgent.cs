@@ -26,7 +26,7 @@
             }
         }
 
-        public void AgentFrameUpdate()
+        public void Update()
         {
             stateHandler.Update(new AIStateUpdateData(aiAgentComponentInterface, TestPlayer.instance, navigator));
             if (navigator != null)
@@ -35,7 +35,12 @@
             }
         }
 
-        public void AgentBeatUpdate()
+        public void FixedUpdate()
+        {
+            stateHandler.FixedUpdate(new AIStateUpdateData(aiAgentComponentInterface, TestPlayer.instance, navigator));
+        }
+
+        public void BeatUpdate()
         {
 
         }
