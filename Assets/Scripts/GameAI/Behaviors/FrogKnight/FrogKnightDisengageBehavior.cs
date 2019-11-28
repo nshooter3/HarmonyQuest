@@ -19,16 +19,18 @@
         public override void Update(AIStateUpdateData updateData)
         {
             updateData.agentComponentInterface.navPos.transform.position = updateData.navigator.GetNextWaypoint();
-            updateData.agentComponentInterface.Move(updateData.navigator.GetNextWaypoint());
+            updateData.agentComponentInterface.SetVelocity(updateData.navigator.GetNextWaypoint());
         }
 
         public override void FixedUpdate(AIStateUpdateData updateData)
         {
+            updateData.agentComponentInterface.ApplyVelocity();
             updateData.agentComponentInterface.ApplyGravity();
         }
 
         public override void Abort(AIStateUpdateData updateData)
         {
+            updateData.agentComponentInterface.ResetVelocity();
             updateData.navigator.CancelCurrentNavigation();
             aborted = true;
             readyForStateTransition = true;

@@ -39,6 +39,11 @@
         public float speed;
 
         /// <summary>
+        /// How much this enemy's velocity can change on the x or z axis per physics update.
+        /// </summary>
+        public float maxVelocityChange;
+
+        /// <summary>
         /// Gravity's effect on this enemy.
         /// </summary>
         public Vector3 gravity = new Vector3(0, -20, 0);
@@ -60,6 +65,7 @@
         protected Vector3 moveDirection = Vector3.zero;
         protected Vector3 rotationDirection = Vector3.zero;
         private Vector3 newVelocity = Vector3.zero;
+        private Vector3 velocityChange = Vector3.zero;
         private float prevYVel = 0;
 
         public RigidbodyConstraints defaultConstraints { get; private set; }
@@ -96,7 +102,7 @@
             aggroTarget = TestPlayer.instance.transform;
         }
 
-        public virtual void Move(Vector3 destination, bool ignoreYValue = true)
+        public virtual void SetVelocity(Vector3 destination, bool ignoreYValue = true)
         {
             moveDirection = (destination - aiAgentBottom.position).normalized;
 
@@ -115,13 +121,29 @@
             {
                 newVelocity = (moveDirection * Time.deltaTime) * speed;
             }
-            rb.velocity = newVelocity;
+        }
+
+        public virtual void ApplyVelocity(bool ignoreYValue = true)
+        {
+            velocityChange = newVelocity - rb.velocity;
+            velocityChange.x = Mathf.Clamp(velocityChange.x, -maxVelocityChange, maxVelocityChange);
+            velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocityChange, maxVelocityChange);
+            if (ignoreYValue)
+            {
+                velocityChange.y = 0;
+            }
+            rb.AddForce(velocityChange, ForceMode.VelocityChange);
         }
 
         public virtual void ApplyGravity()
         {
             // Apply a force directly so we can handle gravity on our own instead of relying on rigidbody gravity.
             rb.AddForce(gravity, ForceMode.Acceleration);
+        }
+
+        public virtual void ResetVelocity()
+        {
+            newVelocity = Vector3.zero;
         }
 
         public virtual void Rotate(Vector3 direction, float turnSpeedModifier)

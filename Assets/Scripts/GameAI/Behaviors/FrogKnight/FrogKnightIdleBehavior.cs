@@ -18,7 +18,7 @@
 
         public override void Update(AIStateUpdateData updateData)
         {
-            updateData.agentComponentInterface.ApplyGravity();
+            
         }
 
         public override void FixedUpdate(AIStateUpdateData updateData)
@@ -28,6 +28,7 @@
 
         public override void Abort(AIStateUpdateData updateData)
         {
+            updateData.agentComponentInterface.ResetVelocity();
             aborted = true;
             readyForStateTransition = true;
         }

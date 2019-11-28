@@ -22,16 +22,18 @@
             newNavPos.y += updateData.agentComponentInterface.navPosHeightOffset;
 
             updateData.agentComponentInterface.navPos.transform.position = newNavPos;
-            updateData.agentComponentInterface.Move(updateData.agentComponentInterface.aggroTarget.position);
+            updateData.agentComponentInterface.SetVelocity(updateData.agentComponentInterface.aggroTarget.position);
         }
 
         public override void FixedUpdate(AIStateUpdateData updateData)
         {
+            updateData.agentComponentInterface.ApplyVelocity();
             updateData.agentComponentInterface.ApplyGravity();
         }
 
         public override void Abort(AIStateUpdateData updateData)
         {
+            updateData.agentComponentInterface.ResetVelocity();
             aborted = true;
             readyForStateTransition = true;
         }
