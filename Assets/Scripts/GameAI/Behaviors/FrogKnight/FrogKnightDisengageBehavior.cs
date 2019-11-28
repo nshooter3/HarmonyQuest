@@ -11,14 +11,14 @@
 
         public override void Start(AIStateUpdateData updateData)
         {
-            updateData.navigator.SetTarget(updateData.agentComponentInterface.aiAgentBottom, updateData.agentComponentInterface.origin);
+            updateData.navigator.SetTarget(updateData.agentComponentInterface.AIAgentBottom, updateData.agentComponentInterface.Origin);
             updateData.agentComponentInterface.targetInLineOfSight = false;
             updateData.agentComponentInterface.SetRigidBodyConstraintsToDefault();
         }
 
         public override void Update(AIStateUpdateData updateData)
         {
-            updateData.agentComponentInterface.navPos.transform.position = updateData.navigator.GetNextWaypoint();
+            updateData.agentComponentInterface.NavPos.transform.position = updateData.navigator.GetNextWaypoint();
             updateData.agentComponentInterface.SetVelocity(updateData.navigator.GetNextWaypoint());
         }
 

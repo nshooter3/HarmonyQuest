@@ -10,73 +10,117 @@
         /// <summary>
         /// The transform this agent is attempting to reach when aggroed.
         /// </summary>
-        public Transform aggroTarget;
+        public Transform AggroTarget { get; private set; }
 
         /// <summary>
         /// A transform that determines where this enemy will return to once disengaged.
         /// If this transform has a parent, it will automatically be unparented once the scene loads.
         /// </summary>
-        public Transform origin;
+        [SerializeField]
+        [Tooltip("A transform that determines where this enemy will return to once disengaged. If this transform has a parent, it will automatically be unparented once the scene loads.")]
+        private Transform origin;
+        public Transform Origin { get => origin; private set => origin = value; }
 
         /// <summary>
         /// Collider that causes the agent to aggro when a target enters it. Goes unused if null.
         /// </summary>
-        public CollisionWrapper aggroZone;
+        [SerializeField]
+        [Tooltip("Collider that causes the agent to aggro when a target enters it. Goes unused if null.")]
+        private CollisionWrapper aggroZone;
+        public CollisionWrapper AggroZone { get => aggroZone; private set => aggroZone = value; }
 
         /// <summary>
         /// A Transform stuck to the bottom of our AI agent. This is used to determine agent proximity to target positions.
         /// </summary>
-        public Transform aiAgentBottom;
+        [SerializeField]
+        [Tooltip("A Transform stuck to the bottom of our AI agent. This is used to determine agent proximity to target positions.")]
+        private Transform aiAgentBottom;
+        public Transform AIAgentBottom { get => aiAgentBottom; private set => aiAgentBottom = value; }
 
-        public bool disengageWithDistance = true;
-        public float disengageDistance = 15.0f;
+        /// <summary>
+        /// The rigidbody for our agent
+        /// </summary>
+        [SerializeField]
+        [Tooltip("The rigidbody for our agent")]
+        protected Rigidbody rb;
 
-        public bool targetInLineOfSight = false;
+        /// <summary>
+        /// Whether or not the agent should deaggro once the player gets a certain distance away.
+        /// </summary>
+        [SerializeField]
+        [Tooltip("Whether or not the agent should deaggro once the player gets a certain distance away.")]
+        private bool disengageWithDistance = true;
+        public bool DisengageWithDistance { get => disengageWithDistance; private set => disengageWithDistance = value; }
+
+        /// <summary>
+        /// The distance at which the enemy will deaggro if disengageWithDistance is true.
+        /// </summary>
+        [SerializeField]
+        [Tooltip("The distance at which the enemy will deaggro if disengageWithDistance is true.")]
+        private float disengageDistance = 15.0f;
+        public float DisengageDistance { get => disengageDistance; private set => disengageDistance = value; }
 
         /// <summary>
         /// How fast this enemy moves.
         /// </summary>
-        public float speed;
+        [SerializeField]
+        [Tooltip("How fast this enemy moves.")]
+        private float speed;
 
         /// <summary>
         /// How much this enemy's velocity can change on the x or z axis per physics update.
         /// </summary>
-        public float maxVelocityChange;
+        [SerializeField]
+        [Tooltip("How much this enemy's velocity can change on the x or z axis per physics update.")]
+        private float maxVelocityChange;
 
         /// <summary>
         /// Gravity's effect on this enemy.
         /// </summary>
-        public Vector3 gravity = new Vector3(0, -20, 0);
+        [SerializeField]
+        [Tooltip("Gravity's effect on this enemy.")]
+        private Vector3 gravity = new Vector3(0, -20, 0);
 
         /// <summary>
         /// How fast this enemy rotates
         /// </summary>
-        public float rotateSpeed;
+        [SerializeField]
+        [Tooltip("How fast this enemy rotates")]
+        private float rotateSpeed;
 
         /// <summary>
-        /// Debug sphere gameobject to show where the enemy is attempting to navigate.
+        /// Whether or not to make navPos visible. This shows where the enemy is attempting to navigate.
         /// </summary>
-        public GameObject navPos;
+        [SerializeField]
+        [Tooltip("Whether or not to make navPos visible. This shows where the enemy is attempting to navigate.")]
+        private bool showDestination = false;
+
         /// <summary>
-        /// How far above the player to position the navPos when tracking them
+        /// Debug sphere gameobject to show where the enemy is attempting to navigate. Visible if showDestination is set to true.
         /// </summary>
-        public float navPosHeightOffset = 2.25f;
+        [SerializeField]
+        [Tooltip("Debug sphere gameobject to show where the enemy is attempting to navigate. Visible if showDestination is set to true.")]
+        private GameObject navPos;
+        public GameObject NavPos { get => navPos; private set => navPos = value; }
+
+        /// <summary>
+        /// How far above the player to position the navPos when tracking them.
+        /// </summary>
+        [SerializeField]
+        [Tooltip("How far above the player to position the navPos when tracking them.")]
+        private float navPosHeightOffset = 2.25f;
+        public float NavPosHeightOffset { get => navPosHeightOffset; private set => navPosHeightOffset = value; }
+
+        public RigidbodyConstraints DefaultConstraints { get; private set; }
+
+        [HideInInspector]
+        public bool targetInLineOfSight = false;
 
         protected Vector3 moveDirection = Vector3.zero;
         protected Vector3 rotationDirection = Vector3.zero;
         private Vector3 newVelocity = Vector3.zero;
         private Vector3 velocityChange = Vector3.zero;
         private float prevYVel = 0;
-
-        public RigidbodyConstraints defaultConstraints { get; private set; }
-
-        /// <summary>
-        /// Whether or not to make navPos visible.
-        /// </summary>
-        public bool showDestination = false;
-
-        [SerializeField]
-        protected Rigidbody rb;
 
         public virtual void Init()
         {
@@ -85,26 +129,26 @@
                 rb = GetComponent<Rigidbody>();
             }
 
-            origin.parent = null;
+            Origin.parent = null;
             if (NavMeshUtil.IsNavMeshBelowTransform(transform, out Vector3 navmeshPosBelowOrigin))
             {
-                origin.transform.position = navmeshPosBelowOrigin;
+                Origin.transform.position = navmeshPosBelowOrigin;
             }
             else
             {
                 Debug.LogError("AgentComponentInterface Init WARNING: Agent origin not located on or above navmesh.");
             }
 
-            navPos.transform.parent = null;
-            navPos.SetActive(showDestination);
-            defaultConstraints = rb.constraints;
+            NavPos.transform.parent = null;
+            NavPos.SetActive(showDestination);
+            DefaultConstraints = rb.constraints;
 
-            aggroTarget = TestPlayer.instance.transform;
+            AggroTarget = TestPlayer.instance.transform;
         }
 
         public virtual void SetVelocity(Vector3 destination, bool ignoreYValue = true)
         {
-            moveDirection = (destination - aiAgentBottom.position).normalized;
+            moveDirection = (destination - AIAgentBottom.position).normalized;
 
             rotationDirection = moveDirection;
             rotationDirection.y = 0;
@@ -174,7 +218,7 @@
 
         public void SetRigidBodyConstraintsToDefault()
         {
-            SetRigidbodyConstraints(defaultConstraints);
+            SetRigidbodyConstraints(DefaultConstraints);
         }
 
         public void SetRigidBodyConstraintsToLockAllButGravity()

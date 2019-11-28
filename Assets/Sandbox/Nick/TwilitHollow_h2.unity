@@ -25445,21 +25445,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd99f87ec6500f749b637940d22e2d24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aggroTarget: {fileID: 693083115}
   origin: {fileID: 1287872361}
   aggroZone: {fileID: 530716735}
   aiAgentBottom: {fileID: 1892383167}
+  rb: {fileID: 1900006363}
   disengageWithDistance: 1
   disengageDistance: 15
-  targetInLineOfSight: 0
   speed: 220
   maxVelocityChange: 220
   gravity: {x: 0, y: -20, z: 0}
   rotateSpeed: 25
+  showDestination: 1
   navPos: {fileID: 722185965}
   navPosHeightOffset: 2.25
-  showDestination: 1
-  rb: {fileID: 1900006363}
+  targetInLineOfSight: 0
 --- !u!54 &1900006363
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -20,9 +20,9 @@
             stateHandler = aiAgentComponentInterface.GetStateHandler();
             navigator = aiAgentComponentInterface.GetNavigator();
             stateHandler.Init(new AIStateUpdateData(aiAgentComponentInterface, TestPlayer.instance, navigator));
-            if (aiAgentComponentInterface.aggroZone != null)
+            if (aiAgentComponentInterface.AggroZone != null)
             {
-                aiAgentComponentInterface.aggroZone.AssignFunctionToTriggerStayDelegate(stateHandler.AggroZoneActivation);
+                aiAgentComponentInterface.AggroZone.AssignFunctionToTriggerStayDelegate(stateHandler.AggroZoneActivation);
             }
         }
 

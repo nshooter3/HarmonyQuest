@@ -18,11 +18,11 @@
 
         public override void Update(AIStateUpdateData updateData)
         {
-            Vector3 newNavPos = updateData.agentComponentInterface.aggroTarget.position;
-            newNavPos.y += updateData.agentComponentInterface.navPosHeightOffset;
+            Vector3 newNavPos = updateData.agentComponentInterface.AggroTarget.position;
+            newNavPos.y += updateData.agentComponentInterface.NavPosHeightOffset;
 
-            updateData.agentComponentInterface.navPos.transform.position = newNavPos;
-            updateData.agentComponentInterface.SetVelocity(updateData.agentComponentInterface.aggroTarget.position);
+            updateData.agentComponentInterface.NavPos.transform.position = newNavPos;
+            updateData.agentComponentInterface.SetVelocity(updateData.agentComponentInterface.AggroTarget.position);
         }
 
         public override void FixedUpdate(AIStateUpdateData updateData)
