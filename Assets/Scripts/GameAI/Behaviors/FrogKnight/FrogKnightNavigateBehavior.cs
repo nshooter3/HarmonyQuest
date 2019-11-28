@@ -13,7 +13,7 @@
         {
             updateData.navigator.SetTarget(updateData.agentComponentInterface.aiAgentBottom, updateData.player.transform);
             updateData.agentComponentInterface.targetInLineOfSight = true;
-            updateData.agentComponentInterface.SetRigidbodyConstraints(updateData.agentComponentInterface.defaultConstraints);
+            updateData.agentComponentInterface.SetRigidBodyConstraintsToDefault();
         }
 
         public override void Update(AIStateUpdateData updateData)

@@ -41,7 +41,7 @@
         /// <summary>
         /// Gravity's effect on this enemy.
         /// </summary>
-        public float gravity;
+        public Vector3 gravity = new Vector3(0, -20, 0);
 
         /// <summary>
         /// How fast this enemy rotates
@@ -58,7 +58,9 @@
         public float navPosHeightOffset = 2.25f;
 
         protected Vector3 moveDirection = Vector3.zero;
-        protected Vector3 moveDirectionNoGravity = Vector3.zero;
+        protected Vector3 rotationDirection = Vector3.zero;
+        private Vector3 newVelocity = Vector3.zero;
+        private float prevYVel = 0;
 
         public RigidbodyConstraints defaultConstraints { get; private set; }
 
@@ -94,25 +96,46 @@
             aggroTarget = TestPlayer.instance.transform;
         }
 
-        public virtual void Move(Vector3 destination)
+        public virtual void Move(Vector3 destination, bool ignoreYValue = true, bool applyGravityAfterwards = true)
         {
             moveDirection = (destination - aiAgentBottom.position).normalized;
-            moveDirectionNoGravity = moveDirection;
 
-            // Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below
-            // when the moveDirection is multiplied by deltaTime). This is because gravity should be applied
-            // as an acceleration (ms^-2)
-            moveDirection.y -= gravity * Time.deltaTime;
-            rb.velocity = (moveDirection * Time.deltaTime) * speed;
-            Rotate(1.0f);
+            rotationDirection = moveDirection;
+            rotationDirection.y = 0;
+            rotationDirection.Normalize();
+            Rotate(rotationDirection, 1.0f);
+
+            if (ignoreYValue)
+            {
+                prevYVel = rb.velocity.y;
+                newVelocity = (moveDirection * Time.deltaTime) * speed;
+                newVelocity.y = prevYVel;
+            }
+            else
+            {
+                newVelocity = (moveDirection * Time.deltaTime) * speed;
+            }
+            rb.velocity = newVelocity;
+
+            //applyGravityAfterwards exists for instances where we don't want enemies to be affected by gravity. i.e. flying enemies.
+            if (applyGravityAfterwards)
+            {
+                ApplyGravity();
+            }
         }
 
-        public virtual void Rotate(float turnSpeedModifier)
+        public virtual void ApplyGravity()
+        {
+            // Apply a force directly so we can handle gravity on our own instead of relying on rigidbody gravity.
+            rb.AddForce(gravity, ForceMode.Acceleration);
+        }
+
+        public virtual void Rotate(Vector3 direction, float turnSpeedModifier)
         {
             //Rotate enemy to face movement direction
-            if (moveDirectionNoGravity.magnitude > 0)
+            if (direction.magnitude > 0)
             {
-                Vector3 targetPos = transform.position + moveDirectionNoGravity;
+                Vector3 targetPos = transform.position + direction;
                 Vector3 targetDir = targetPos - transform.position;
 
                 // The step size is equal to speed times frame time.
@@ -128,14 +151,19 @@
             transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
         }
 
-        public void SetVelocity(Vector3 velocity)
-        {
-            rb.velocity = velocity;
-        }
-
         public void SetRigidbodyConstraints(RigidbodyConstraints constraints)
         {
             rb.constraints = constraints;
+        }
+
+        public void SetRigidBodyConstraintsToDefault()
+        {
+            SetRigidbodyConstraints(defaultConstraints);
+        }
+
+        public void SetRigidBodyConstraintsToLockAllButGravity()
+        {
+            SetRigidbodyConstraints(RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ);
         }
 
         /// <summary>

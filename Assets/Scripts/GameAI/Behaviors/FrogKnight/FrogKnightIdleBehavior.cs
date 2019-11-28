@@ -13,12 +13,12 @@
         public override void Start(AIStateUpdateData updateData)
         {
             updateData.agentComponentInterface.targetInLineOfSight = false;
-            updateData.agentComponentInterface.SetRigidbodyConstraints(RigidbodyConstraints.FreezeAll);
+            updateData.agentComponentInterface.SetRigidBodyConstraintsToLockAllButGravity();
         }
 
         public override void Update(AIStateUpdateData updateData)
         {
-
+            updateData.agentComponentInterface.ApplyGravity();
         }
 
         public override void Abort(AIStateUpdateData updateData)

@@ -13,7 +13,7 @@
         public override void Start(AIStateUpdateData updateData)
         {
             updateData.agentComponentInterface.targetInLineOfSight = true;
-            updateData.agentComponentInterface.SetRigidbodyConstraints(updateData.agentComponentInterface.defaultConstraints);
+            updateData.agentComponentInterface.SetRigidBodyConstraintsToDefault();
         }
 
         public override void Update(AIStateUpdateData updateData)
