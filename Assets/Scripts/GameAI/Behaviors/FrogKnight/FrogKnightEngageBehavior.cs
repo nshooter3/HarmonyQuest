@@ -10,13 +10,13 @@
             return "engage";
         }
 
-        public override void Start(AIStateUpdateData updateData)
+        public override void Init(AIStateUpdateData updateData)
         {
             updateData.aiGameObject.targetInLineOfSight = true;
             updateData.aiGameObject.SetRigidBodyConstraintsToDefault();
         }
 
-        public override void Update(AIStateUpdateData updateData)
+        public override void OnUpdate(AIStateUpdateData updateData)
         {
             Vector3 newNavPos = updateData.aiGameObject.AggroTarget.position;
             newNavPos.y += updateData.aiGameObject.NavPosHeightOffset;
@@ -25,7 +25,7 @@
             updateData.aiGameObject.SetVelocity(updateData.aiGameObject.AggroTarget.position);
         }
 
-        public override void FixedUpdate(AIStateUpdateData updateData)
+        public override void OnFixedUpdate(AIStateUpdateData updateData)
         {
             updateData.aiGameObject.ApplyVelocity();
             updateData.aiGameObject.ApplyGravity();

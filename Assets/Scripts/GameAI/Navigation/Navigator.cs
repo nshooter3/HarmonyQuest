@@ -13,6 +13,6 @@
         public abstract void CancelCurrentNavigation();
         public abstract void CheckIfPathNeedsToBeRegenerated();
         public abstract Vector3 GetNextWaypoint();
-        public abstract void Update();
+        public abstract void OnUpdate();
     }
 }

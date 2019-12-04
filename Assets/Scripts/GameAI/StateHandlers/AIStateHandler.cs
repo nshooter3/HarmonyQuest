@@ -11,24 +11,24 @@
         public abstract void Init(AIStateUpdateData updateData);
         protected abstract void CheckForStateChange(AIStateUpdateData updateData);
 
-        public void Update(AIStateUpdateData updateData)
+        public void OnUpdate(AIStateUpdateData updateData)
         {
             CheckForStateChange(updateData);
             if (nextState != null && currentState.readyForStateTransition)
             {
                 currentState = nextState;
                 nextState = null;
-                currentState.Start(updateData);
+                currentState.Init(updateData);
             }
             else
             {
-                currentState.Update(updateData);
+                currentState.OnUpdate(updateData);
             }
         }
 
-        public void FixedUpdate(AIStateUpdateData updateData)
+        public void OnFixedUpdate(AIStateUpdateData updateData)
         {
-            currentState.FixedUpdate(updateData);
+            currentState.OnFixedUpdate(updateData);
         }
 
         public AIBehavior GetCurrentState()

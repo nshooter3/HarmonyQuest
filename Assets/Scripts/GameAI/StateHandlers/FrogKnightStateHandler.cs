@@ -12,7 +12,7 @@
         public override void Init(AIStateUpdateData updateData)
         {
             currentState = new FrogKnightIdleBehavior { };
-            currentState.Start(updateData);
+            currentState.Init(updateData);
         }
 
         protected override void CheckForStateChange(AIStateUpdateData updateData)

@@ -50,7 +50,7 @@
             return nextWaypoint;
         }
 
-        public override void Update()
+        public override void OnUpdate()
         {
             if (isActivelyGeneratingPath == true && navigationTarget != null)
             {

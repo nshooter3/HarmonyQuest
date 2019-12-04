@@ -26,18 +26,18 @@
             }
         }
 
-        public void Update()
+        public void OnUpdate()
         {
-            stateHandler.Update(new AIStateUpdateData(aiGameObject, TestPlayer.instance, navigator));
+            stateHandler.OnUpdate(new AIStateUpdateData(aiGameObject, TestPlayer.instance, navigator));
             if (navigator != null)
             {
-                navigator.Update();
+                navigator.OnUpdate();
             }
         }
 
-        public void FixedUpdate()
+        public void OnFixedUpdate()
         {
-            stateHandler.FixedUpdate(new AIStateUpdateData(aiGameObject, TestPlayer.instance, navigator));
+            stateHandler.OnFixedUpdate(new AIStateUpdateData(aiGameObject, TestPlayer.instance, navigator));
         }
 
         public void BeatUpdate()

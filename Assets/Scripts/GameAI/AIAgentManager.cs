@@ -52,7 +52,7 @@
 
             foreach (AIAgent agent in agents)
             {
-                agent.Update();
+                agent.OnUpdate();
             }
         }
 
@@ -60,7 +60,7 @@
         {
             foreach (AIAgent agent in agents)
             {
-                agent.FixedUpdate();
+                agent.OnFixedUpdate();
             }
         }
 

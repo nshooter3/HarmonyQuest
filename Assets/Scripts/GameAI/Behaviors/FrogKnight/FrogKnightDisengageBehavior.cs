@@ -9,20 +9,20 @@
             return "disengage";
         }
 
-        public override void Start(AIStateUpdateData updateData)
+        public override void Init(AIStateUpdateData updateData)
         {
             updateData.navigator.SetTarget(updateData.aiGameObject.AIAgentBottom, updateData.aiGameObject.Origin);
             updateData.aiGameObject.targetInLineOfSight = false;
             updateData.aiGameObject.SetRigidBodyConstraintsToDefault();
         }
 
-        public override void Update(AIStateUpdateData updateData)
+        public override void OnUpdate(AIStateUpdateData updateData)
         {
             updateData.aiGameObject.NavPos.transform.position = updateData.navigator.GetNextWaypoint();
             updateData.aiGameObject.SetVelocity(updateData.navigator.GetNextWaypoint());
         }
 
-        public override void FixedUpdate(AIStateUpdateData updateData)
+        public override void OnFixedUpdate(AIStateUpdateData updateData)
         {
             updateData.aiGameObject.ApplyVelocity();
             updateData.aiGameObject.ApplyGravity();
