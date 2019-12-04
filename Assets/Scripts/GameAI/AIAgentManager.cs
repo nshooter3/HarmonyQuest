@@ -3,12 +3,12 @@
     using UnityEngine;
     using HarmonyQuest.Audio;
     using Navigation;
-    using ComponentInterface;
+    using AIGameObjects;
     using System.Collections.Generic;
 
     public class AIAgentManager : MonoBehaviour
     {
-        private AIAgentComponentInterface[] componentInterfaces;
+        private AIGameObject[] componentInterfaces;
         private List<AIAgent> agents;
 
         private float pathRefreshTimer = 0.0f;
@@ -22,9 +22,9 @@
 
         public void PopulateAgentsList()
         {
-            componentInterfaces = FindObjectsOfType<AIAgentComponentInterface>();
+            componentInterfaces = FindObjectsOfType<AIGameObject>();
             agents = new List<AIAgent>();
-            foreach (AIAgentComponentInterface componentInterface in componentInterfaces)
+            foreach (AIGameObject componentInterface in componentInterfaces)
             {
                 agents.Add(new AIAgent(componentInterface));
             }

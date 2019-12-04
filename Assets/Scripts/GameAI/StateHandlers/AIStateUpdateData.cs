@@ -1,16 +1,16 @@
 ﻿namespace GameAI.StateHandlers
 {
-    using ComponentInterface;
+    using AIGameObjects;
     using Navigation;
     public class AIStateUpdateData
     {
-        public AIAgentComponentInterface agentComponentInterface;
+        public AIGameObject aiGameObject;
         public TestPlayer player;
         public Navigator navigator;
 
-        public AIStateUpdateData(AIAgentComponentInterface agentComponentInterface, TestPlayer player, Navigator navigator)
+        public AIStateUpdateData(AIGameObject aiGameObject, TestPlayer player, Navigator navigator)
         {
-            this.agentComponentInterface = agentComponentInterface;
+            this.aiGameObject = aiGameObject;
             this.player = player;
             this.navigator = navigator;
         }

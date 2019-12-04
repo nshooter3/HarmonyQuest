@@ -12,8 +12,8 @@
 
         public override void Start(AIStateUpdateData updateData)
         {
-            updateData.agentComponentInterface.targetInLineOfSight = false;
-            updateData.agentComponentInterface.SetRigidBodyConstraintsToLockAllButGravity();
+            updateData.aiGameObject.targetInLineOfSight = false;
+            updateData.aiGameObject.SetRigidBodyConstraintsToLockAllButGravity();
         }
 
         public override void Update(AIStateUpdateData updateData)
@@ -23,12 +23,12 @@
 
         public override void FixedUpdate(AIStateUpdateData updateData)
         {
-            updateData.agentComponentInterface.ApplyGravity();
+            updateData.aiGameObject.ApplyGravity();
         }
 
         public override void Abort(AIStateUpdateData updateData)
         {
-            updateData.agentComponentInterface.ResetVelocity();
+            updateData.aiGameObject.ResetVelocity();
             aborted = true;
             readyForStateTransition = true;
         }

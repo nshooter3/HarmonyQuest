@@ -1,7 +1,7 @@
 ﻿namespace GameAI
 {
     using StateHandlers;
-    using ComponentInterface;
+    using AIGameObjects;
     using Navigation;
 
     public class AIAgent
@@ -9,11 +9,11 @@
         /// <summary>
         /// Reference to the gameobject holding the enemy class script and component data, which be updated through this non-monobehavior class.
         /// </summary>
-        public AIAgentComponentInterface aiAgentComponentInterface;
+        public AIGameObject aiAgentComponentInterface;
         private AIStateHandler stateHandler;
         private Navigator navigator;
 
-        public AIAgent(AIAgentComponentInterface newAIAgentComponentInterface)
+        public AIAgent(AIGameObject newAIAgentComponentInterface)
         {
             aiAgentComponentInterface = newAIAgentComponentInterface;
             aiAgentComponentInterface.Init();

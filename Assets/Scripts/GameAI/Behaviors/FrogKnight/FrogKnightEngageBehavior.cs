@@ -12,28 +12,28 @@
 
         public override void Start(AIStateUpdateData updateData)
         {
-            updateData.agentComponentInterface.targetInLineOfSight = true;
-            updateData.agentComponentInterface.SetRigidBodyConstraintsToDefault();
+            updateData.aiGameObject.targetInLineOfSight = true;
+            updateData.aiGameObject.SetRigidBodyConstraintsToDefault();
         }
 
         public override void Update(AIStateUpdateData updateData)
         {
-            Vector3 newNavPos = updateData.agentComponentInterface.AggroTarget.position;
-            newNavPos.y += updateData.agentComponentInterface.NavPosHeightOffset;
+            Vector3 newNavPos = updateData.aiGameObject.AggroTarget.position;
+            newNavPos.y += updateData.aiGameObject.NavPosHeightOffset;
 
-            updateData.agentComponentInterface.NavPos.transform.position = newNavPos;
-            updateData.agentComponentInterface.SetVelocity(updateData.agentComponentInterface.AggroTarget.position);
+            updateData.aiGameObject.NavPos.transform.position = newNavPos;
+            updateData.aiGameObject.SetVelocity(updateData.aiGameObject.AggroTarget.position);
         }
 
         public override void FixedUpdate(AIStateUpdateData updateData)
         {
-            updateData.agentComponentInterface.ApplyVelocity();
-            updateData.agentComponentInterface.ApplyGravity();
+            updateData.aiGameObject.ApplyVelocity();
+            updateData.aiGameObject.ApplyGravity();
         }
 
         public override void Abort(AIStateUpdateData updateData)
         {
-            updateData.agentComponentInterface.ResetVelocity();
+            updateData.aiGameObject.ResetVelocity();
             aborted = true;
             readyForStateTransition = true;
         }
