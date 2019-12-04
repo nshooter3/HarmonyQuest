@@ -13,13 +13,16 @@
         private AIStateHandler stateHandler;
         private Navigator navigator;
 
+        private AIStateUpdateData updateData;
+
         public AIAgent(AIGameObject newAIGameObject)
         {
             aiGameObject = newAIGameObject;
             aiGameObject.Init();
             stateHandler = aiGameObject.GetStateHandler();
             navigator = aiGameObject.GetNavigator();
-            stateHandler.Init(new AIStateUpdateData(aiGameObject, TestPlayer.instance, navigator));
+            updateData = new AIStateUpdateData(aiGameObject, TestPlayer.instance, navigator);
+            stateHandler.Init(updateData);
             if (aiGameObject.AggroZone != null)
             {
                 aiGameObject.AggroZone.AssignFunctionToTriggerStayDelegate(stateHandler.AggroZoneActivation);
@@ -28,7 +31,7 @@
 
         public void OnUpdate()
         {
-            stateHandler.OnUpdate(new AIStateUpdateData(aiGameObject, TestPlayer.instance, navigator));
+            stateHandler.OnUpdate(updateData);
             if (navigator != null)
             {
                 navigator.OnUpdate();
@@ -37,12 +40,12 @@
 
         public void OnFixedUpdate()
         {
-            stateHandler.OnFixedUpdate(new AIStateUpdateData(aiGameObject, TestPlayer.instance, navigator));
+            stateHandler.OnFixedUpdate(updateData);
         }
 
         public void OnBeatUpdate()
         {
-            stateHandler.OnBeatUpdate(new AIStateUpdateData(aiGameObject, TestPlayer.instance, navigator));
+            stateHandler.OnBeatUpdate(updateData);
         }
 
         public void NavigatorPathRefreshCheck()
