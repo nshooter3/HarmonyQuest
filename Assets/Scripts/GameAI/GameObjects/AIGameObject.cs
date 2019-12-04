@@ -136,7 +136,7 @@
             }
             else
             {
-                Debug.LogError("AgentComponentInterface Init WARNING: Agent origin not located on or above navmesh.");
+                Debug.LogError("AIGameObject Init WARNING: Agent origin not located on or above navmesh.");
             }
 
             NavPos.transform.parent = null;

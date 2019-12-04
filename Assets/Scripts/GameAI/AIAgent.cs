@@ -9,26 +9,26 @@
         /// <summary>
         /// Reference to the gameobject holding the enemy class script and component data, which be updated through this non-monobehavior class.
         /// </summary>
-        public AIGameObject aiAgentComponentInterface;
+        public AIGameObject aiGameObject;
         private AIStateHandler stateHandler;
         private Navigator navigator;
 
-        public AIAgent(AIGameObject newAIAgentComponentInterface)
+        public AIAgent(AIGameObject newAIGameObject)
         {
-            aiAgentComponentInterface = newAIAgentComponentInterface;
-            aiAgentComponentInterface.Init();
-            stateHandler = aiAgentComponentInterface.GetStateHandler();
-            navigator = aiAgentComponentInterface.GetNavigator();
-            stateHandler.Init(new AIStateUpdateData(aiAgentComponentInterface, TestPlayer.instance, navigator));
-            if (aiAgentComponentInterface.AggroZone != null)
+            aiGameObject = newAIGameObject;
+            aiGameObject.Init();
+            stateHandler = aiGameObject.GetStateHandler();
+            navigator = aiGameObject.GetNavigator();
+            stateHandler.Init(new AIStateUpdateData(aiGameObject, TestPlayer.instance, navigator));
+            if (aiGameObject.AggroZone != null)
             {
-                aiAgentComponentInterface.AggroZone.AssignFunctionToTriggerStayDelegate(stateHandler.AggroZoneActivation);
+                aiGameObject.AggroZone.AssignFunctionToTriggerStayDelegate(stateHandler.AggroZoneActivation);
             }
         }
 
         public void Update()
         {
-            stateHandler.Update(new AIStateUpdateData(aiAgentComponentInterface, TestPlayer.instance, navigator));
+            stateHandler.Update(new AIStateUpdateData(aiGameObject, TestPlayer.instance, navigator));
             if (navigator != null)
             {
                 navigator.Update();
@@ -37,7 +37,7 @@
 
         public void FixedUpdate()
         {
-            stateHandler.FixedUpdate(new AIStateUpdateData(aiAgentComponentInterface, TestPlayer.instance, navigator));
+            stateHandler.FixedUpdate(new AIStateUpdateData(aiGameObject, TestPlayer.instance, navigator));
         }
 
         public void BeatUpdate()

@@ -8,7 +8,7 @@
 
     public class AIAgentManager : MonoBehaviour
     {
-        private AIGameObject[] componentInterfaces;
+        private AIGameObject[] aiGameObjects;
         private List<AIAgent> agents;
 
         private float pathRefreshTimer = 0.0f;
@@ -22,11 +22,11 @@
 
         public void PopulateAgentsList()
         {
-            componentInterfaces = FindObjectsOfType<AIGameObject>();
+            aiGameObjects = FindObjectsOfType<AIGameObject>();
             agents = new List<AIAgent>();
-            foreach (AIGameObject componentInterface in componentInterfaces)
+            foreach (AIGameObject aiGameObject in aiGameObjects)
             {
-                agents.Add(new AIAgent(componentInterface));
+                agents.Add(new AIAgent(aiGameObject));
             }
         }
 
