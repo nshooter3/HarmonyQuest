@@ -92,7 +92,7 @@
             {
                 RequestStateTransition(new FrogKnightEngageBehavior { }, updateData);
             }
-            else if (Vector3.Distance(updateData.aiGameObject.AIAgentBottom.position, updateData.navigator.navigationTarget.position) <= NavigatorSettings.waypointReachedDistanceThreshold)
+            else if (updateData.navigator.navigationTarget == null || Vector3.Distance(updateData.aiGameObject.AIAgentBottom.position, updateData.navigator.navigationTarget.position) <= NavigatorSettings.waypointReachedDistanceThreshold)
             {
                 RequestStateTransition(new FrogKnightIdleBehavior { }, updateData);
             }
