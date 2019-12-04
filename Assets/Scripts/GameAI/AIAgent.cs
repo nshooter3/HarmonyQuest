@@ -40,9 +40,9 @@
             stateHandler.OnFixedUpdate(new AIStateUpdateData(aiGameObject, TestPlayer.instance, navigator));
         }
 
-        public void BeatUpdate()
+        public void OnBeatUpdate()
         {
-
+            stateHandler.OnBeatUpdate(new AIStateUpdateData(aiGameObject, TestPlayer.instance, navigator));
         }
 
         public void NavigatorPathRefreshCheck()

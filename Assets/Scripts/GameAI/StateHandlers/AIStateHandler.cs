@@ -31,6 +31,11 @@
             currentState.OnFixedUpdate(updateData);
         }
 
+        public void OnBeatUpdate(AIStateUpdateData updateData)
+        {
+            currentState.OnBeatUpdate(updateData);
+        }
+
         public AIBehavior GetCurrentState()
         {
             return currentState;

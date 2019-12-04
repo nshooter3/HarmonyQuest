@@ -31,6 +31,11 @@
             updateData.aiGameObject.ApplyGravity();
         }
 
+        public override void OnBeatUpdate(AIStateUpdateData updateData)
+        {
+
+        }
+
         public override void Abort(AIStateUpdateData updateData)
         {
             updateData.aiGameObject.ResetVelocity();

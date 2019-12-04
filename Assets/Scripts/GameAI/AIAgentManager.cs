@@ -76,7 +76,7 @@
         {
             foreach (AIAgent agent in agents)
             {
-                agent.BeatUpdate();
+                agent.OnBeatUpdate();
             }
         }
     }
