@@ -1,8 +1,8 @@
 ﻿namespace GameAI.AIGameObjects
 {
     using GameAI.Navigation;
-    using GameAI.Behaviors;
-    using GameAI.Behaviors.FrogKnight;
+    using GameAI.States;
+    using GameAI.States.FrogKnight;
 
     public class FrogKnight : Enemy
     {
@@ -11,9 +11,9 @@
             base.Init();
         }
 
-        public override AIBehavior GetInitState()
+        public override AIState GetInitState()
         {
-            return new FrogKnightIdleBehavior();
+            return new FrogKnightIdleState();
         }
 
         public override Navigator GetNavigator()

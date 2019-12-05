@@ -3,7 +3,7 @@
     using Navigation;
     using GamePhysics;
     using UnityEngine;
-    using GameAI.Behaviors;
+    using GameAI.States;
 
     public abstract class AIGameObject : MonoBehaviour
     {
@@ -230,7 +230,7 @@
         /// Implement this in the child class to specify which state the enemy will start in.
         /// </summary>
         /// <returns> A new instance of this agent's initial state </returns>
-        public abstract AIBehavior GetInitState();
+        public abstract AIState GetInitState();
 
         /// <summary>
         /// Implement this in the child class to specify what kind of navigator this agent will use.

@@ -1,10 +1,10 @@
-﻿namespace GameAI.Behaviors.FrogKnight
+﻿namespace GameAI.States.FrogKnight
 {
     using GameAI.Navigation;
     using GameAI.StateHandlers;
     using UnityEngine;
 
-    public class FrogKnightDisengageBehavior : AIBehavior
+    public class FrogKnightDisengageState : AIState
     {
         private bool aggroZoneEntered = false;
 
@@ -40,11 +40,11 @@
         {
             if (aggroZoneEntered && !NavMeshUtil.IsTargetObstructed(updateData.aiGameObject.AIAgentBottom, updateData.player.transform))
             {
-                updateData.stateHandler.RequestStateTransition(new FrogKnightEngageBehavior { }, updateData);
+                updateData.stateHandler.RequestStateTransition(new FrogKnightEngageState { }, updateData);
             }
             else if (updateData.navigator.navigationTarget == null || Vector3.Distance(updateData.aiGameObject.AIAgentBottom.position, updateData.navigator.navigationTarget.position) <= NavigatorSettings.waypointReachedDistanceThreshold)
             {
-                updateData.stateHandler.RequestStateTransition(new FrogKnightIdleBehavior { }, updateData);
+                updateData.stateHandler.RequestStateTransition(new FrogKnightIdleState { }, updateData);
             }
         }
 

@@ -1,8 +1,8 @@
-﻿namespace GameAI.Behaviors
+﻿namespace GameAI.States
 {
     using GameAI.StateHandlers;
 
-    public abstract class AIBehavior
+    public abstract class AIState
     {
         public bool readyForStateTransition = false;
         public bool aborted = false;

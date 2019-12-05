@@ -1,10 +1,10 @@
-﻿namespace GameAI.Behaviors.FrogKnight
+﻿namespace GameAI.States.FrogKnight
 {
     using GameAI.Navigation;
     using GameAI.StateHandlers;
     using UnityEngine;
 
-    public class FrogKnightIdleBehavior : AIBehavior
+    public class FrogKnightIdleState : AIState
     {
         private bool aggroZoneEntered = false;
 
@@ -37,7 +37,7 @@
         {
             if (aggroZoneEntered && !NavMeshUtil.IsTargetObstructed(updateData.aiGameObject.AIAgentBottom, updateData.player.transform))
             {
-                updateData.stateHandler.RequestStateTransition(new FrogKnightEngageBehavior { }, updateData);
+                updateData.stateHandler.RequestStateTransition(new FrogKnightEngageState { }, updateData);
             }
         }
 

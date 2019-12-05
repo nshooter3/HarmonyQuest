@@ -1,13 +1,13 @@
 ﻿namespace GameAI.StateHandlers
 {
-    using Behaviors;
+    using States;
 
     public class AIStateHandler
     {
-        protected AIBehavior currentState;
-        protected AIBehavior nextState;
+        protected AIState currentState;
+        protected AIState nextState;
 
-        public void Init(AIStateUpdateData updateData, AIBehavior initState)
+        public void Init(AIStateUpdateData updateData, AIState initState)
         {
             currentState = initState;
             initState.Init(updateData);
@@ -38,12 +38,12 @@
             currentState.OnBeatUpdate(updateData);
         }
 
-        public AIBehavior GetCurrentState()
+        public AIState GetCurrentState()
         {
             return currentState;
         }
 
-        public void RequestStateTransition(AIBehavior nextState, AIStateUpdateData updateData)
+        public void RequestStateTransition(AIState nextState, AIStateUpdateData updateData)
         {
             currentState.Abort(updateData);
             this.nextState = nextState;

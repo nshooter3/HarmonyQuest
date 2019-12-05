@@ -1,10 +1,10 @@
-﻿namespace GameAI.Behaviors.FrogKnight
+﻿namespace GameAI.States.FrogKnight
 {
     using GameAI.Navigation;
     using GameAI.StateHandlers;
     using UnityEngine;
 
-    public class FrogKnightNavigateBehavior : AIBehavior
+    public class FrogKnightNavigateState : AIState
     {
         private float checkForTargetObstructionTimer = 0.0f;
 
@@ -37,7 +37,7 @@
             if (ShouldDeAggro(updateData) || updateData.navigator.isActivelyGeneratingPath == false)
             {
                 checkForTargetObstructionTimer = 0;
-                updateData.stateHandler.RequestStateTransition(new FrogKnightDisengageBehavior { }, updateData);
+                updateData.stateHandler.RequestStateTransition(new FrogKnightDisengageState { }, updateData);
             }
             else
             {
@@ -48,7 +48,7 @@
                     checkForTargetObstructionTimer = 0;
                     if (!NavMeshUtil.IsTargetObstructed(updateData.aiGameObject.AIAgentBottom, updateData.player.transform))
                     {
-                        updateData.stateHandler.RequestStateTransition(new FrogKnightEngageBehavior { }, updateData);
+                        updateData.stateHandler.RequestStateTransition(new FrogKnightEngageState { }, updateData);
                     }
                 }
             }
