@@ -21,6 +21,7 @@
                 currentState = nextState;
                 nextState = null;
                 currentState.Init(updateData);
+                currentState.OnUpdate(updateData);
             }
             else
             {
