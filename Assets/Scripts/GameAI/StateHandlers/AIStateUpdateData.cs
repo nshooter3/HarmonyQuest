@@ -5,14 +5,16 @@
     public class AIStateUpdateData
     {
         public AIGameObject aiGameObject;
-        public TestPlayer player;
+        public AIStateHandler stateHandler;
         public Navigator navigator;
+        public TestPlayer player;
 
-        public AIStateUpdateData(AIGameObject aiGameObject, TestPlayer player, Navigator navigator)
+        public AIStateUpdateData(AIGameObject aiGameObject, AIStateHandler stateHandler, Navigator navigator, TestPlayer player)
         {
             this.aiGameObject = aiGameObject;
-            this.player = player;
+            this.stateHandler = stateHandler;
             this.navigator = navigator;
+            this.player = player;
         }
     }
 }

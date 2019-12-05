@@ -1,7 +1,7 @@
 ﻿namespace GameAI.AIGameObjects
 {
+    using GameAI.Behaviors;
     using GameAI.Navigation;
-    using GameAI.StateHandlers;
 
     public abstract class Enemy : AIGameObject
     {
@@ -11,10 +11,10 @@
         }
 
         /// <summary>
-        /// Implement this in the child class to specify what kind of state machine this agent will use.
+        /// Implement this in the child class to specify which state the enemy will start in.
         /// </summary>
-        /// <returns> A new instance of this agent's state machine </returns>
-        public abstract override AIStateHandler GetStateHandler();
+        /// <returns> A new instance of this agent's initial state </returns>
+        public override abstract AIBehavior GetInitState();
 
         /// <summary>
         /// Implement this in the child class to specify what kind of navigator this agent will use.

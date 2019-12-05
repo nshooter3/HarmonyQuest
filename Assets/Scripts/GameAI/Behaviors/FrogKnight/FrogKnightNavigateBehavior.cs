@@ -1,13 +1,12 @@
 ﻿namespace GameAI.Behaviors.FrogKnight
 {
+    using GameAI.Navigation;
     using GameAI.StateHandlers;
+    using UnityEngine;
 
     public class FrogKnightNavigateBehavior : AIBehavior
     {
-        public override string GetName()
-        {
-            return "navigate";
-        }
+        private float checkForTargetObstructionTimer = 0.0f;
 
         public override void Init(AIStateUpdateData updateData)
         {
@@ -33,12 +32,39 @@
             
         }
 
+        public override void CheckForStateChange(AIStateUpdateData updateData)
+        {
+            if (ShouldDeAggro(updateData) || updateData.navigator.isActivelyGeneratingPath == false)
+            {
+                checkForTargetObstructionTimer = 0;
+                updateData.stateHandler.RequestStateTransition(new FrogKnightDisengageBehavior { }, updateData);
+            }
+            else
+            {
+
+                checkForTargetObstructionTimer += Time.deltaTime;
+                if (checkForTargetObstructionTimer > NavigatorSettings.checkForTargetObstructionRate)
+                {
+                    checkForTargetObstructionTimer = 0;
+                    if (!NavMeshUtil.IsTargetObstructed(updateData.aiGameObject.AIAgentBottom, updateData.player.transform))
+                    {
+                        updateData.stateHandler.RequestStateTransition(new FrogKnightEngageBehavior { }, updateData);
+                    }
+                }
+            }
+        }
+
         public override void Abort(AIStateUpdateData updateData)
         {
             updateData.navigator.CancelCurrentNavigation();
             updateData.aiGameObject.ResetVelocity();
             aborted = true;
             readyForStateTransition = true;
+        }
+
+        private bool ShouldDeAggro(AIStateUpdateData updateData)
+        {
+            return updateData.aiGameObject.DisengageWithDistance && Vector3.Distance(updateData.aiGameObject.transform.position, updateData.player.transform.position) > updateData.aiGameObject.DisengageDistance;
         }
     }
 }

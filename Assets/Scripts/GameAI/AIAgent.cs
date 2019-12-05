@@ -19,14 +19,10 @@
         {
             aiGameObject = newAIGameObject;
             aiGameObject.Init();
-            stateHandler = aiGameObject.GetStateHandler();
+            stateHandler = new AIStateHandler();
             navigator = aiGameObject.GetNavigator();
-            updateData = new AIStateUpdateData(aiGameObject, TestPlayer.instance, navigator);
-            stateHandler.Init(updateData);
-            if (aiGameObject.AggroZone != null)
-            {
-                aiGameObject.AggroZone.AssignFunctionToTriggerStayDelegate(stateHandler.AggroZoneActivation);
-            }
+            updateData = new AIStateUpdateData(aiGameObject, stateHandler, navigator, TestPlayer.instance);
+            stateHandler.Init(updateData, aiGameObject.GetInitState());
         }
 
         public void OnUpdate()
