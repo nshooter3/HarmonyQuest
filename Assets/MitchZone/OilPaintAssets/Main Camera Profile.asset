@@ -260,7 +260,38 @@ MonoBehaviour:
   - {fileID: 1829218495042040984}
   - {fileID: -6856752295875079624}
   - {fileID: -2315105938987823276}
-  - {fileID: 4762100783632674735}
+  - {fileID: 261533009994237153}
+--- !u!114 &261533009994237153
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: OilPaint
+  m_EditorClassIdentifier: Assembly-CSharp:HarmonyQuest.Effects.OilPaint:OilPaint
+  active: 1
+  enabled:
+    overrideState: 1
+    value: 1
+  target:
+    overrideState: 1
+    value: 0
+  radius:
+    overrideState: 1
+    value: 4
+  distance:
+    overrideState: 1
+    value: 15
+  thickness:
+    overrideState: 1
+    value: 0.825
+  point:
+    overrideState: 1
+    value: {x: 0.01, y: 0, z: 0}
 --- !u!114 &305063869591556005
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -618,6 +649,37 @@ MonoBehaviour:
     value: 0.5
   point:
     overrideState: 0
+    value: {x: 0, y: 0, z: 0}
+--- !u!114 &5917447899067433183
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: OilPaint
+  m_EditorClassIdentifier: Assembly-CSharp:HarmonyQuest.Effects.OilPaint:OilPaint
+  active: 1
+  enabled:
+    overrideState: 1
+    value: 1
+  target:
+    overrideState: 1
+    value: 0
+  radius:
+    overrideState: 1
+    value: 4
+  distance:
+    overrideState: 1
+    value: 15
+  thickness:
+    overrideState: 1
+    value: 0.676
+  point:
+    overrideState: 1
     value: {x: 0, y: 0, z: 0}
 --- !u!114 &6752562688426428333
 MonoBehaviour:
