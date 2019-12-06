@@ -50,10 +50,7 @@
                 AllNavigatorsPathRefreshCheck();
             }
 
-            foreach (AIAgent agent in agents)
-            {
-                agent.OnUpdate();
-            }
+            agents.ForEach(agent => agent.OnUpdate());
         }
 
         private void AgentsFixedUpdate()
