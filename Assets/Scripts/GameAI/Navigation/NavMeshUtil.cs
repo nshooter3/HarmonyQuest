@@ -1,4 +1,4 @@
-﻿namespace GameAI
+﻿namespace GameAI.Navigation
 {
     using UnityEngine.AI;
     using UnityEngine;
@@ -45,10 +45,13 @@
             return length;
         }
 
-        public static bool IsNavMeshBelowAgent(Transform navigationAgent, out Vector3 raycastHitPosition)
+        public static bool IsNavMeshBelowTransform(Transform navigationTransform, out Vector3 raycastHitPosition)
         {
-            RaycastHit raycastHit;
-            if (Physics.Raycast(navigationAgent.position, Vector3.down, out raycastHit, Mathf.Infinity, traversableGroundLayerMask))
+            //Start our raycast a little bit above the navigationTransform, so it doesn't fail if it's already touching the navmesh.
+            float yOffset = 0.1f;
+            Vector3 offsetPosition = new Vector3(navigationTransform.position.x, navigationTransform.position.y + yOffset, navigationTransform.position.z);
+
+            if (Physics.Raycast(offsetPosition, Vector3.down, out RaycastHit raycastHit, Mathf.Infinity, traversableGroundLayerMask))
             {
                 raycastHitPosition = raycastHit.point;
                 return true;
@@ -63,13 +66,18 @@
         public static bool IsTargetObstructed(Transform source, Transform target, int areaMask = NavMesh.AllAreas)
         {
             Vector3 startPos = source.position;
+            Vector3 targetPos = target.position;
             Vector3 raycastHit;
-            if (IsNavMeshBelowAgent(source, out raycastHit))
+            if (IsNavMeshBelowTransform(source, out raycastHit))
             {
                 startPos = raycastHit;
             }
+            if (IsNavMeshBelowTransform(target, out raycastHit))
+            {
+                targetPos = raycastHit;
+            }
             NavMeshHit navmeshRaycastHit;
-            return NavMesh.Raycast(startPos, target.position, out navmeshRaycastHit, areaMask);
+            return NavMesh.Raycast(startPos, targetPos, out navmeshRaycastHit, areaMask);
         }
     }
 }
