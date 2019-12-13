@@ -5,27 +5,30 @@
 
     public class OilPaintPostProcessing : PostProcessEffectSettings
     {
-            public enum Target { ViewSpace, WorldSpace }
+        public enum Target { ViewSpace, WorldSpace }
 
-    [System.Serializable]
-    public sealed class TargetParameter : ParameterOverride<Target> {}
+        [System.Serializable]
+        public sealed class TargetParameter : ParameterOverride<Target> {}
+        [System.Serializable]
+        public sealed class TransformParameter : ParameterOverride<Transform> { }
 
-    public TargetParameter target = new TargetParameter();
+        public TargetParameter target = new TargetParameter();
         [Range(1f, 9f)]
         public FloatParameter radius = new FloatParameter() { value = 5.0f };
         [Range(0f, 15f)]
         public FloatParameter distance = new FloatParameter() { value = 1.0f };
         [Range(0f, 1f)]
         public FloatParameter thickness = new FloatParameter() { value = 0.5f };
-        public Vector3Parameter point = new Vector3Parameter();
+        // public TransformParameter point = new TransformParameter() { };
     }
 
     public class OilPaintPostProcessingRenderer<T> : PostProcessEffectRenderer<T> where T : OilPaintPostProcessing
     {
-        private int RobertsCrossDepthNormalsPass = 1;
         private int _RadiusID, _DistanceID, _ThicknessID, _InverseViewID, _PointID;
 
         private Shader shader;
+
+        private Transform point;
 
         public override void Init()
         {
@@ -36,6 +39,12 @@
             _ThicknessID = Shader.PropertyToID("_Thickness");
             _InverseViewID = Shader.PropertyToID("_InverseView");
             _PointID = Shader.PropertyToID("_Point");
+
+            // if (settings.point == null)
+            // {
+            //     settings.point = new OilPaintPostProcessing.TransformParameter() { value =  };
+            // }
+            point = GameObject.FindObjectOfType<OilPaintPoint>().transform;
         }
 
         public override void Render(PostProcessRenderContext context)
@@ -48,7 +57,7 @@
             sheet.properties.SetFloat(_DistanceID, settings.distance);
             sheet.properties.SetFloat(_ThicknessID, settings.thickness);
             sheet.properties.SetMatrix(_InverseViewID, context.camera.cameraToWorldMatrix);
-            sheet.properties.SetVector(_PointID, settings.point);
+            sheet.properties.SetVector(_PointID, point.position);
 
             var pass = (int)settings.target.value;
             cmd.BlitFullscreenTriangle(context.source, context.destination, sheet, pass);
