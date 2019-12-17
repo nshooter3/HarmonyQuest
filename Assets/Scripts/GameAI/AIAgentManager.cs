@@ -8,14 +8,19 @@
 
     public class AIAgentManager : MonoBehaviour
     {
+        public bool useFlocking = true;
+
         private AIGameObject[] aiGameObjects;
         private List<AIAgent> agents;
+
+        private AIFlockingHandler aiFlockingHandler;
 
         private float pathRefreshTimer = 0.0f;
 
         // Start is called before the first frame update
         void Start()
         {
+            aiFlockingHandler = new AIFlockingHandler();
             PopulateAgentsList();
             FmodMusicHandler.instance.AssignFunctionToOnBeatDelegate(AgentsBeatUpdate);
         }
@@ -33,6 +38,11 @@
         // Update is called once per frame
         void Update()
         {
+            if (useFlocking)
+            {
+                aiFlockingHandler.SetAgentCollisionAvoidanceForces(agents);
+            }
+
             AgentsUpdate();
         }
 

@@ -21,5 +21,20 @@
         /// How frequently to check if this enemy has a clear path to the player. Determines whether to engage player or to navigate to a state where they can engage later.
         /// </summary>
         public static float checkForTargetObstructionRate = 0.5f;
+
+        /// <summary>
+        /// Ratio of influence that an agent's collision avoidance force has relative to the movement force. 0.0 being zero control, and 1.0 being full control.
+        /// </summary>
+        public static float collisionAvoidanceWeight = 0.2f;
+
+        /// <summary>
+        /// Multiplier that gets applied to the scale of the collision avoidance force.
+        /// </summary>
+        public static float collisionAvoidanceScale = 2.0f;
+
+        /// <summary>
+        /// The maximum distance at which collision avoidance will be applied.
+        /// </summary>
+        public static float collisionAvoidanceMaxDistance = 3.0f;
     }
 }
