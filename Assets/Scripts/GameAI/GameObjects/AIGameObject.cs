@@ -45,6 +45,13 @@
         protected Rigidbody rb;
 
         /// <summary>
+        /// The collider for our agent
+        /// </summary>
+        [SerializeField]
+        [Tooltip("The collider for our agent")]
+        protected Collider agentCollider;
+
+        /// <summary>
         /// Whether or not the agent should deaggro once the player gets a certain distance away.
         /// </summary>
         [SerializeField]
@@ -132,6 +139,11 @@
             if (rb == null)
             {
                 rb = GetComponent<Rigidbody>();
+            }
+
+            if (agentCollider == null)
+            {
+                agentCollider = GetComponent<Collider>();
             }
 
             Origin.parent = null;
@@ -248,6 +260,11 @@
         public void SetRigidBodyConstraintsToLockAllButGravity()
         {
             SetRigidbodyConstraints(RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ);
+        }
+
+        public Collider GetCollider()
+        {
+            return agentCollider;
         }
 
         /// <summary>

@@ -25,7 +25,7 @@
         /// <summary>
         /// Multiplier that gets applied to the scale of the collision avoidance force.
         /// </summary>
-        public static float collisionAvoidanceScale = 0.4f;
+        public static float collisionAvoidanceScale = 0.2f;
 
         /// <summary>
         /// The maximum distance at which collision avoidance will be applied.
@@ -35,11 +35,11 @@
         /// <summary>
         /// Multiplier that gets applied to the scale of the obstacle avoidance force.
         /// </summary>
-        public static float obstacleAvoidanceScale = 0.4f;
+        public static float obstacleAvoidanceScale = 0.3f;
 
         /// <summary>
         /// The maximum distance at which obstacle avoidance will be applied.
         /// </summary>
-        public static float obstacleAvoidanceMaxDistance = 6.0f;
+        public static float obstacleAvoidanceMaxDistance = 3.0f;
     }
 }

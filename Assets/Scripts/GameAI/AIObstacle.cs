@@ -17,10 +17,9 @@
             }
         }
 
-        public float GetAgentDistanceFromBoundingBox(Vector3 agentPosition)
+        public Collider GetCollider()
         {
-            Vector3 closestPoint = colliderComponent.ClosestPointOnBounds(agentPosition);
-            return Vector3.Distance(closestPoint, agentPosition);
+            return colliderComponent;
         }
     }
 }

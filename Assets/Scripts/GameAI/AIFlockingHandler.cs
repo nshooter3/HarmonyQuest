@@ -6,6 +6,17 @@
 
     public class AIFlockingHandler
     {
+        private float[,] agentWeights;
+        private float[,] obstacleWeights;
+        private float distance;
+        private Vector3 sourceAgentPosition;
+        private Vector3 targetAgentPosition;
+        private Collider targetAgentBoundingBox;
+        private Vector3 obstaclePosition;
+        private Collider obstacleBoundingBox;
+        private Vector3 collisionAvoidanceForce;
+        private Vector3 obstacleAvoidanceForce;
+
         /*
             "Flocks, Herds, and Schools A distributed behavior model" - Craig Reynolds 1987
             Wij = max(dmax - dij, 0)     (Wij = 2d matrix for avoidance weights between all agents, dmax = max distance at which flocking will activate, dij = distance between two agents)
@@ -19,16 +30,6 @@
 
             Obstacle avoidance is the same thing, but between agents and obstacles instead of agents and other agents.
         */
-
-        private float[,] agentWeights;
-        private float[,] obstacleWeights;
-        private float distance;
-        private Vector3 sourceAgentPosition;
-        private Vector3 targetAgentPosition;
-        private Vector3 obstaclePosition;
-        private Vector3 collisionAvoidanceForce;
-        private Vector3 obstacleAvoidanceForce;
-
         public void SetAgentCollisionAvoidanceForces(List<AIAgent> agents)
         {
             agentWeights = new float[agents.Count, agents.Count];
@@ -37,18 +38,15 @@
             for (int i = 0; i < agents.Count; i++)
             {
                 sourceAgentPosition = agents[i].aiGameObject.transform.position;
-                //Since the agentWeights matrix will be symmetrical, we can optimize it by starting j at the current i value and setting [i, j] and [j, i] simultaneously.
-                for (int j = i; j < agents.Count; j++)
+                for (int j = 0; j < agents.Count; j++)
                 {
-                    targetAgentPosition = agents[j].aiGameObject.transform.position;
+                    targetAgentBoundingBox = agents[j].aiGameObject.GetCollider();
                     //Ensure that an agent does not apply a flocking force on itself in relation to itself.
                     if (i != j)
                     {
-                        distance = Vector3.Distance(sourceAgentPosition, targetAgentPosition);
+                        distance = GetAgentDistanceFromBoundingBox(sourceAgentPosition, targetAgentBoundingBox);
                         //Wij = max(dmax - dij, 0)
                         agentWeights[i, j] = Mathf.Max(NavigatorSettings.collisionAvoidanceMaxDistance - distance, 0);
-                        //Wji = max(dmax - dji, 0)
-                        agentWeights[j, i] = Mathf.Max(NavigatorSettings.collisionAvoidanceMaxDistance - distance, 0);
                     }
                 }
             }
@@ -74,6 +72,7 @@
             }
         }
 
+        // Pretty much the same as SetAgentCollisionAvoidanceForces, except between agents and obstacles instead of agents and other agents.
         public void SetAgentObstacleAvoidanceForces(List<AIAgent> agents, AIObstacle[] obstacles)
         {
             obstacleWeights = new float[agents.Count, obstacles.Length];
@@ -84,8 +83,8 @@
                 sourceAgentPosition = agents[i].aiGameObject.transform.position;
                 for (int j = 0; j < obstacles.Length; j++)
                 {
-                    obstaclePosition = obstacles[j].transform.position;
-                    distance = Vector3.Distance(sourceAgentPosition, obstaclePosition);
+                    obstacleBoundingBox = obstacles[j].GetCollider();
+                    distance = GetAgentDistanceFromBoundingBox(sourceAgentPosition, obstacleBoundingBox);
                     //Wij = max(dmax - dij, 0)
                     obstacleWeights[i, j] = Mathf.Max(NavigatorSettings.obstacleAvoidanceMaxDistance - distance, 0);
                 }
@@ -106,6 +105,12 @@
 
                 agents[i].aiGameObject.SetObstacleAvoidanceForce(obstacleAvoidanceForce);
             }
+        }
+
+        public float GetAgentDistanceFromBoundingBox(Vector3 agentPosition, Collider boundingBox)
+        {
+            Vector3 closestPoint = boundingBox.ClosestPointOnBounds(agentPosition);
+            return Vector3.Distance(closestPoint, agentPosition);
         }
     }
 }
