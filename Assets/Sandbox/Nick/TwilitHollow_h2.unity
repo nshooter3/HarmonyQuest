@@ -1063,7 +1063,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh15880
+  m_Name: pb_Mesh15932
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3243,7 +3243,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-17190
+  m_Name: pb_Mesh16608
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4314,8 +4314,8 @@ GameObject:
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
   m_IsActive: 1
---- !u!64 &758148603
-MeshCollider:
+--- !u!65 &758148603
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -4324,10 +4324,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 189380925}
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0.5, y: 0.5, z: -0.5}
 --- !u!114 &758148604
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4602,22 +4601,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!208 &758148608
-NavMeshObstacle:
+--- !u!114 &758148608
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 758148602}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 0
-  m_Extents: {x: 1.5, y: 1, z: 1.5}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0.5, y: 0.5, z: -0.5}
-  m_TimeToStationary: 0.5
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f0c5a85d9aa4714abf22d83d451161b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colliderComponent: {fileID: 758148603}
 --- !u!1 &799392874
 GameObject:
   m_ObjectHideFlags: 0
@@ -11764,15 +11760,15 @@ MonoBehaviour:
   rb: {fileID: 1368419119}
   disengageWithDistance: 1
   disengageDistance: 15
-  speed: 300
-  maxVelocityChange: 300
+  speed: 220
+  maxVelocityChange: 220
   gravity: {x: 0, y: -20, z: 0}
   rotateSpeed: 25
   showDestination: 1
   navPos: {fileID: 1377518902}
   navPosHeightOffset: 2.25
   targetInLineOfSight: 0
-  debugCollisionAvoidanceForce: 0
+  debugFlocking: 0
 --- !u!54 &1368419119
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -12177,6 +12173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useFlocking: 1
+  useObstacleRepulsion: 1
 --- !u!4 &1390680720
 Transform:
   m_ObjectHideFlags: 0
@@ -12383,15 +12380,15 @@ MonoBehaviour:
   rb: {fileID: 1426747764}
   disengageWithDistance: 1
   disengageDistance: 15
-  speed: 300
-  maxVelocityChange: 300
+  speed: 220
+  maxVelocityChange: 220
   gravity: {x: 0, y: -20, z: 0}
   rotateSpeed: 25
   showDestination: 1
   navPos: {fileID: 523627647}
   navPosHeightOffset: 2.25
   targetInLineOfSight: 0
-  debugCollisionAvoidanceForce: 0
+  debugFlocking: 0
 --- !u!54 &1426747764
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -13111,6 +13108,7 @@ GameObject:
   - component: {fileID: 1532033427}
   - component: {fileID: 1532033426}
   - component: {fileID: 1532033425}
+  - component: {fileID: 1532033429}
   - component: {fileID: 1532033424}
   m_Layer: 0
   m_Name: Crystal (4)
@@ -13119,20 +13117,19 @@ GameObject:
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
   m_IsActive: 1
---- !u!64 &1532033424
-MeshCollider:
+--- !u!114 &1532033424
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1532033423}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 1757285802}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f0c5a85d9aa4714abf22d83d451161b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colliderComponent: {fileID: 1532033429}
 --- !u!114 &1532033425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13407,6 +13404,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 29
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1532033429
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1532033423}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0.5, y: 0.5, z: -0.5}
 --- !u!1 &1543792850
 GameObject:
   m_ObjectHideFlags: 0
@@ -23539,15 +23549,15 @@ MonoBehaviour:
   rb: {fileID: 1654552454}
   disengageWithDistance: 1
   disengageDistance: 15
-  speed: 300
-  maxVelocityChange: 300
+  speed: 220
+  maxVelocityChange: 220
   gravity: {x: 0, y: -20, z: 0}
   rotateSpeed: 25
   showDestination: 1
   navPos: {fileID: 1307544182}
   navPosHeightOffset: 2.25
   targetInLineOfSight: 0
-  debugCollisionAvoidanceForce: 0
+  debugFlocking: 0
 --- !u!54 &1654552454
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -24355,7 +24365,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-18362
+  m_Name: pb_Mesh16284
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -27316,15 +27326,15 @@ MonoBehaviour:
   rb: {fileID: 1900006363}
   disengageWithDistance: 1
   disengageDistance: 15
-  speed: 300
-  maxVelocityChange: 300
+  speed: 220
+  maxVelocityChange: 220
   gravity: {x: 0, y: -20, z: 0}
   rotateSpeed: 25
   showDestination: 1
   navPos: {fileID: 722185965}
   navPosHeightOffset: 2.25
   targetInLineOfSight: 0
-  debugCollisionAvoidanceForce: 1
+  debugFlocking: 0
 --- !u!54 &1900006363
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -27918,15 +27928,15 @@ MonoBehaviour:
   rb: {fileID: 1974638766}
   disengageWithDistance: 1
   disengageDistance: 15
-  speed: 300
-  maxVelocityChange: 300
+  speed: 220
+  maxVelocityChange: 220
   gravity: {x: 0, y: -20, z: 0}
   rotateSpeed: 25
   showDestination: 1
   navPos: {fileID: 1543792850}
   navPosHeightOffset: 2.25
   targetInLineOfSight: 0
-  debugCollisionAvoidanceForce: 0
+  debugFlocking: 0
 --- !u!54 &1974638766
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -28192,6 +28202,7 @@ GameObject:
   - component: {fileID: 2020773360}
   - component: {fileID: 2020773359}
   - component: {fileID: 2020773358}
+  - component: {fileID: 2020773362}
   - component: {fileID: 2020773357}
   m_Layer: 0
   m_Name: Crystal (3)
@@ -28200,8 +28211,8 @@ GameObject:
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
   m_IsActive: 1
---- !u!64 &2020773357
-MeshCollider:
+--- !u!65 &2020773357
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -28210,10 +28221,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 656042055}
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0.5, y: 0.5, z: -0.5}
 --- !u!114 &2020773358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28488,6 +28498,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 28
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2020773362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2020773356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f0c5a85d9aa4714abf22d83d451161b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colliderComponent: {fileID: 2020773357}
 --- !u!1 &2023891407
 GameObject:
   m_ObjectHideFlags: 0

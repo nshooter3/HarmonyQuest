@@ -9,9 +9,11 @@
     public class AIAgentManager : MonoBehaviour
     {
         public bool useFlocking = true;
+        public bool useObstacleRepulsion = true;
 
         private AIGameObject[] aiGameObjects;
         private List<AIAgent> agents;
+        private AIObstacle[] aiObstacles;
 
         private AIFlockingHandler aiFlockingHandler;
 
@@ -22,6 +24,7 @@
         {
             aiFlockingHandler = new AIFlockingHandler();
             PopulateAgentsList();
+            PopulateObstaclesList();
             FmodMusicHandler.instance.AssignFunctionToOnBeatDelegate(AgentsBeatUpdate);
         }
 
@@ -35,12 +38,25 @@
             }
         }
 
+        public void PopulateObstaclesList()
+        {
+            aiObstacles = FindObjectsOfType<AIObstacle>();
+            foreach (AIObstacle aiObstacle in aiObstacles)
+            {
+                aiObstacle.Init();
+            }
+        }
+
         // Update is called once per frame
         void Update()
         {
             if (useFlocking)
             {
                 aiFlockingHandler.SetAgentCollisionAvoidanceForces(agents);
+            }
+            if (useObstacleRepulsion)
+            {
+                aiFlockingHandler.SetAgentObstacleAvoidanceForces(agents, aiObstacles);
             }
 
             AgentsUpdate();

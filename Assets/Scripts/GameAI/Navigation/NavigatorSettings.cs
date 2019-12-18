@@ -23,18 +23,23 @@
         public static float checkForTargetObstructionRate = 0.5f;
 
         /// <summary>
-        /// Ratio of influence that an agent's collision avoidance force has relative to the movement force. 0.0 being zero control, and 1.0 being full control.
-        /// </summary>
-        public static float collisionAvoidanceWeight = 0.2f;
-
-        /// <summary>
         /// Multiplier that gets applied to the scale of the collision avoidance force.
         /// </summary>
-        public static float collisionAvoidanceScale = 2.0f;
+        public static float collisionAvoidanceScale = 0.4f;
 
         /// <summary>
         /// The maximum distance at which collision avoidance will be applied.
         /// </summary>
         public static float collisionAvoidanceMaxDistance = 3.0f;
+
+        /// <summary>
+        /// Multiplier that gets applied to the scale of the obstacle avoidance force.
+        /// </summary>
+        public static float obstacleAvoidanceScale = 0.4f;
+
+        /// <summary>
+        /// The maximum distance at which obstacle avoidance will be applied.
+        /// </summary>
+        public static float obstacleAvoidanceMaxDistance = 6.0f;
     }
 }

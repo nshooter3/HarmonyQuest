@@ -123,8 +123,9 @@
         private float prevYVel = 0;
 
         protected Vector3 collisionAvoidanceForce = Vector3.zero;
+        protected Vector3 obstacleAvoidanceForce = Vector3.zero;
 
-        public bool debugCollisionAvoidanceForce = false;
+        public bool debugFlocking = false;
 
         public virtual void Init()
         {
@@ -170,14 +171,14 @@
                 newVelocity = (moveDirection * Time.deltaTime) * speed;
             }
 
-            if (debugCollisionAvoidanceForce)
+            if (debugFlocking)
             {
                 Debug.Log("VELOCITY FORCE: " + newVelocity.magnitude);
                 Debug.Log("COLLISION AVOIDANCE FORCE: " + collisionAvoidanceForce.magnitude);
+                Debug.Log("OBSTACLE AVOIDANCE FORCE: " + obstacleAvoidanceForce.magnitude);
             }
 
-            //Apply weighted collision avoidance (F = Wca * Fca + Wp * Fp)
-            newVelocity = (1.0f - NavigatorSettings.collisionAvoidanceWeight) * newVelocity + NavigatorSettings.collisionAvoidanceWeight * collisionAvoidanceForce;
+            newVelocity = newVelocity + collisionAvoidanceForce + obstacleAvoidanceForce;
         }
 
         public virtual void ApplyVelocity(bool ignoreYValue = true)
@@ -206,6 +207,11 @@
         public void SetCollisionAvoidanceForce(Vector3 collisionAvoidanceForce)
         {
             this.collisionAvoidanceForce = collisionAvoidanceForce;
+        }
+
+        public void SetObstacleAvoidanceForce(Vector3 obstacleAvoidanceForce)
+        {
+            this.obstacleAvoidanceForce = obstacleAvoidanceForce;
         }
 
         public virtual void Rotate(Vector3 direction, float turnSpeedModifier)
