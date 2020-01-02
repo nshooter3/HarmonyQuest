@@ -131,6 +131,11 @@
 
         protected Vector3 collisionAvoidanceForce = Vector3.zero;
         protected Vector3 obstacleAvoidanceForce = Vector3.zero;
+        protected Vector3 adjustedCollisionAvoidanceForce = Vector3.zero;
+        protected Vector3 adjustedObstacleAvoidanceForce = Vector3.zero;
+
+        private Vector3 adjustedForce;
+        private Vector3 difference;
 
         public bool debugFlocking = false;
 
@@ -183,14 +188,31 @@
                 newVelocity = (moveDirection * Time.deltaTime) * speed;
             }
 
+            adjustedCollisionAvoidanceForce = AdjustAvoidanceForceBasedOnMovementVelocity(collisionAvoidanceForce, newVelocity);
+            adjustedObstacleAvoidanceForce = AdjustAvoidanceForceBasedOnMovementVelocity(obstacleAvoidanceForce, newVelocity);
+
             if (debugFlocking)
             {
                 Debug.Log("VELOCITY FORCE: " + newVelocity.magnitude);
-                Debug.Log("COLLISION AVOIDANCE FORCE: " + collisionAvoidanceForce.magnitude);
-                Debug.Log("OBSTACLE AVOIDANCE FORCE: " + obstacleAvoidanceForce.magnitude);
+                Debug.Log("ADJUSTED COLLISION AVOIDANCE FORCE: " + adjustedCollisionAvoidanceForce.magnitude);
+                Debug.Log("ADJUSTED OBSTACLE AVOIDANCE FORCE: " + adjustedObstacleAvoidanceForce.magnitude);
             }
 
-            newVelocity = newVelocity + collisionAvoidanceForce + obstacleAvoidanceForce;
+            newVelocity = newVelocity + adjustedCollisionAvoidanceForce + adjustedObstacleAvoidanceForce;
+        }
+
+        /// <summary>
+        /// Scale down avoidance forces as the angle between them and the movement direction decreases.
+        /// This prevents redundant avoidance forces from speeding up the enemy rather than adjusting their path.
+        /// </summary>
+        /// <param name="avoidanceForce"></param>
+        /// <param name="movementVelocity"></param>
+        /// <returns></returns>
+        private Vector3 AdjustAvoidanceForceBasedOnMovementVelocity(Vector3 avoidanceForce, Vector3 movementVelocity)
+        {
+            adjustedForce = avoidanceForce * (Vector3.Angle(movementVelocity, avoidanceForce) / 180.0f);
+            difference = avoidanceForce - adjustedForce;
+            return avoidanceForce - difference * NavigatorSettings.avoidanceForceMovementVelocityAdjustmentScale;
         }
 
         public virtual void ApplyVelocity(bool ignoreYValue = true)

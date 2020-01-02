@@ -41,5 +41,15 @@
         /// The maximum distance at which obstacle avoidance will be applied.
         /// </summary>
         public static float obstacleAvoidanceMaxDistance = 3.0f;
+
+        /// <summary>
+        /// Value that determines how much avoidance forces get scaled down as they approach the same direction as the movement direction.
+        /// A value of 1.0f means that avoidance forces in the same direction as the movement direction will be nullified.
+        /// A value of 0.0f means that avoidance forces will not be decreased regardless of their angle from the the movement direction.
+        /// Anything in between will scale how much of a decrease the avoidance force will receive as it approaches the movement direction.
+        /// i.e a value of 0.5f means that any avoidance forces that push in the same direction as the movement force will be halved,
+        /// with the decrease becoming less dramatic as the angle between the avoidance force and the movement force increases.
+        /// </summary>
+        public static float avoidanceForceMovementVelocityAdjustmentScale = 0.5f;
     }
 }
