@@ -129,11 +129,15 @@
         private Vector3 velocityChange = Vector3.zero;
         private float prevYVel = 0;
 
+        //Additional movement forces that make an agent attempt to keep away from other agents and obstacles.
         protected Vector3 collisionAvoidanceForce = Vector3.zero;
         protected Vector3 obstacleAvoidanceForce = Vector3.zero;
+
+        //Adjusted avoidance forces that are decreased as the angle between them and the movement direction decreases.
         protected Vector3 adjustedCollisionAvoidanceForce = Vector3.zero;
         protected Vector3 adjustedObstacleAvoidanceForce = Vector3.zero;
 
+        //Private variables used in the AdjustAvoidanceForceBasedOnMovementVelocity to store intermediate results.
         private Vector3 adjustedForce;
         private Vector3 difference;
 
