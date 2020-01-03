@@ -10,6 +10,7 @@
     {
         public bool useFlocking = true;
         public bool useObstacleRepulsion = true;
+        public bool useWaypointBlockCheck = false;
 
         private AIGameObject[] aiGameObjects;
         private List<AIAgent> agents;
@@ -18,6 +19,7 @@
         private AIFlockingHandler aiFlockingHandler;
 
         private float pathRefreshTimer = 0.0f;
+        private float waypointBlockedCheckTimer = 0.0f;
 
         // Start is called before the first frame update
         void Start()
@@ -76,6 +78,16 @@
                 AllNavigatorsPathRefreshCheck();
             }
 
+            if (useWaypointBlockCheck)
+            {
+                waypointBlockedCheckTimer += Time.deltaTime;
+                if (waypointBlockedCheckTimer > NavigatorSettings.waypointBlockedCheckRate)
+                {
+                    waypointBlockedCheckTimer = 0;
+                    AllNavigatorsWaypointIsObstructedCheck();
+                }
+            }
+
             agents.ForEach(agent => agent.OnUpdate());
         }
 
@@ -92,6 +104,14 @@
             foreach (AIAgent agent in agents)
             {
                 agent.NavigatorPathRefreshCheck();
+            }
+        }
+
+        private void AllNavigatorsWaypointIsObstructedCheck()
+        {
+            foreach (AIAgent agent in agents)
+            {
+                agent.NavigatorsWaypointIsObstructedCheck();
             }
         }
 

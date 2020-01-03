@@ -51,5 +51,13 @@
                 navigator.CheckIfPathNeedsToBeRegenerated();
             }
         }
+
+        public void NavigatorsWaypointIsObstructedCheck()
+        {
+            if (navigator != null)
+            {
+                navigator.CheckIfWaypointIsObstructed();
+            }
+        }
     }
 }

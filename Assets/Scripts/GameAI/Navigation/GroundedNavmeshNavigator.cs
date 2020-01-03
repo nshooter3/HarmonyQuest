@@ -40,6 +40,19 @@
             {
                 if (Vector3.Distance(navigationTarget.transform.position, lastKnownTargetPos) > NavigatorSettings.pathRefreshDistanceThreshold)
                 {
+                    //If the target has moved far enough away from their previous position, generate a new path.
+                    GeneratePathToTarget();
+                }
+            }
+        }
+
+        public override void CheckIfWaypointIsObstructed()
+        {
+            if (isActivelyGeneratingPath == true && navigationTarget != null)
+            {
+                if (NavMeshUtil.IsTargetObstructed(navigationAgent.transform, nextWaypoint))
+                {
+                    //If this agent no longer has a direct path to its current waypoint, generate a new path.
                     GeneratePathToTarget();
                 }
             }

@@ -63,16 +63,49 @@
             }
         }
 
+        public static bool IsNavMeshBelowPosition(Vector3 navigationPosition, out Vector3 raycastHitPosition)
+        {
+            //Start our raycast a little bit above the navigationPosition, so it doesn't fail if it's already touching the navmesh.
+            float yOffset = 0.1f;
+            Vector3 offsetPosition = new Vector3(navigationPosition.x, navigationPosition.y + yOffset, navigationPosition.z);
+
+            if (Physics.Raycast(offsetPosition, Vector3.down, out RaycastHit raycastHit, Mathf.Infinity, traversableGroundLayerMask))
+            {
+                raycastHitPosition = raycastHit.point;
+                return true;
+            }
+            else
+            {
+                raycastHitPosition = Vector3.zero;
+                return false;
+            }
+        }
+
         public static bool IsTargetObstructed(Transform source, Transform target, int areaMask = NavMesh.AllAreas)
         {
-            Vector3 startPos = source.position;
-            Vector3 targetPos = target.position;
+            return IsTargetObstructed(source.position, target.position, areaMask);
+        }
+
+        public static bool IsTargetObstructed(Vector3 source, Transform target, int areaMask = NavMesh.AllAreas)
+        {
+            return IsTargetObstructed(source, target.position, areaMask);
+        }
+
+        public static bool IsTargetObstructed(Transform source, Vector3 target, int areaMask = NavMesh.AllAreas)
+        {
+            return IsTargetObstructed(source.position, target, areaMask);
+        }
+
+        public static bool IsTargetObstructed(Vector3 source, Vector3 target, int areaMask = NavMesh.AllAreas)
+        {
+            Vector3 startPos = source;
+            Vector3 targetPos = target;
             Vector3 raycastHit;
-            if (IsNavMeshBelowTransform(source, out raycastHit))
+            if (IsNavMeshBelowPosition(source, out raycastHit))
             {
                 startPos = raycastHit;
             }
-            if (IsNavMeshBelowTransform(target, out raycastHit))
+            if (IsNavMeshBelowPosition(target, out raycastHit))
             {
                 targetPos = raycastHit;
             }
