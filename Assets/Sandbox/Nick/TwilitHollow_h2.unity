@@ -11766,9 +11766,12 @@ MonoBehaviour:
   gravity: {x: 0, y: -20, z: 0}
   rotateSpeed: 25
   showDestination: 1
+  body: {fileID: 1368419121}
+  head: {fileID: 8583901}
   navPos: {fileID: 1377518902}
   navPosHeightOffset: 2.25
-  targetInLineOfSight: 0
+  isActivelyEngaged: 0
+  isAggroed: 0
   debugFlocking: 0
 --- !u!54 &1368419119
 Rigidbody:
@@ -12175,6 +12178,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   useFlocking: 1
   useObstacleRepulsion: 1
+  useWaypointBlockCheck: 0
 --- !u!4 &1390680720
 Transform:
   m_ObjectHideFlags: 0
@@ -12387,9 +12391,12 @@ MonoBehaviour:
   gravity: {x: 0, y: -20, z: 0}
   rotateSpeed: 25
   showDestination: 1
+  body: {fileID: 1426747766}
+  head: {fileID: 819174429}
   navPos: {fileID: 523627647}
   navPosHeightOffset: 2.25
-  targetInLineOfSight: 0
+  isActivelyEngaged: 0
+  isAggroed: 0
   debugFlocking: 0
 --- !u!54 &1426747764
 Rigidbody:
@@ -23557,9 +23564,12 @@ MonoBehaviour:
   gravity: {x: 0, y: -20, z: 0}
   rotateSpeed: 25
   showDestination: 1
+  body: {fileID: 1654552456}
+  head: {fileID: 2093127584}
   navPos: {fileID: 1307544182}
   navPosHeightOffset: 2.25
-  targetInLineOfSight: 0
+  isActivelyEngaged: 0
+  isAggroed: 0
   debugFlocking: 0
 --- !u!54 &1654552454
 Rigidbody:
@@ -25895,7 +25905,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_PolyMesh:
-    name: pb_Mesh16258
+    name: pb_Mesh16450
     vertices:
     - {x: 5.282608, y: 10, z: 0.5557207}
     - {x: 0.000000043169052, y: 10, z: -0.00000013844726}
@@ -27335,9 +27345,12 @@ MonoBehaviour:
   gravity: {x: 0, y: -20, z: 0}
   rotateSpeed: 25
   showDestination: 1
+  body: {fileID: 1900006365}
+  head: {fileID: 215967597}
   navPos: {fileID: 722185965}
   navPosHeightOffset: 2.25
-  targetInLineOfSight: 0
+  isActivelyEngaged: 0
+  isAggroed: 0
   debugFlocking: 0
 --- !u!54 &1900006363
 Rigidbody:
@@ -27938,9 +27951,12 @@ MonoBehaviour:
   gravity: {x: 0, y: -20, z: 0}
   rotateSpeed: 25
   showDestination: 1
+  body: {fileID: 1974638768}
+  head: {fileID: 1378133145}
   navPos: {fileID: 1543792850}
   navPosHeightOffset: 2.25
-  targetInLineOfSight: 0
+  isActivelyEngaged: 0
+  isAggroed: 0
   debugFlocking: 0
 --- !u!54 &1974638766
 Rigidbody:

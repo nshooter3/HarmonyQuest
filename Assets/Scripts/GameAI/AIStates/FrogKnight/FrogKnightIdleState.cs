@@ -10,7 +10,7 @@
 
         public override void Init(AIStateUpdateData updateData)
         {
-            updateData.aiGameObject.targetInLineOfSight = false;
+            updateData.aiGameObject.isAggroed = false;
             updateData.aiGameObject.SetRigidBodyConstraintsToLockAllButGravity();
             if (updateData.aiGameObject.AggroZone != null)
             {
@@ -37,7 +37,7 @@
         {
             if (aggroZoneEntered && !NavMeshUtil.IsTargetObstructed(updateData.aiGameObject.AIAgentBottom, updateData.player.transform))
             {
-                updateData.stateHandler.RequestStateTransition(new FrogKnightEngageState { }, updateData);
+                updateData.stateHandler.RequestStateTransition(new FrogKnightPassiveEngageState { }, updateData);
             }
         }
 

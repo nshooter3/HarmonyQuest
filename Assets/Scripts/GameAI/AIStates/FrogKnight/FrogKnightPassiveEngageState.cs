@@ -4,21 +4,23 @@
     using GameAI.StateHandlers;
     using UnityEngine;
 
-    public class FrogKnightNavigateState : AIState
+    public class FrogKnightPassiveEngageState : AIState
     {
         private float checkForTargetObstructionTimer = 0.0f;
 
         public override void Init(AIStateUpdateData updateData)
         {
-            updateData.navigator.SetTarget(updateData.aiGameObject.AIAgentBottom, updateData.player.transform);
             updateData.aiGameObject.isAggroed = true;
             updateData.aiGameObject.SetRigidBodyConstraintsToDefault();
         }
 
         public override void OnUpdate(AIStateUpdateData updateData)
         {
-            updateData.aiGameObject.NavPos.transform.position = updateData.navigator.GetNextWaypoint();
-            updateData.aiGameObject.SetVelocity(updateData.navigator.GetNextWaypoint());
+            Vector3 newNavPos = updateData.aiGameObject.AggroTarget.position;
+            newNavPos.y += updateData.aiGameObject.NavPosHeightOffset;
+
+            updateData.aiGameObject.NavPos.transform.position = newNavPos;
+            updateData.aiGameObject.SetVelocity(updateData.aiGameObject.AggroTarget.position);
         }
 
         public override void OnFixedUpdate(AIStateUpdateData updateData)
@@ -29,34 +31,37 @@
 
         public override void OnBeatUpdate(AIStateUpdateData updateData)
         {
-            
+
         }
 
         public override void CheckForStateChange(AIStateUpdateData updateData)
         {
-            if (ShouldDeAggro(updateData) || updateData.navigator.isActivelyGeneratingPath == false)
+            if (ShouldDeAggro(updateData))
             {
                 checkForTargetObstructionTimer = 0;
                 updateData.stateHandler.RequestStateTransition(new FrogKnightDisengageState { }, updateData);
             }
             else
             {
-
                 checkForTargetObstructionTimer += Time.deltaTime;
                 if (checkForTargetObstructionTimer > NavigatorSettings.checkForTargetObstructionRate)
                 {
                     checkForTargetObstructionTimer = 0;
-                    if (!NavMeshUtil.IsTargetObstructed(updateData.aiGameObject.AIAgentBottom, updateData.player.transform))
+                    if (NavMeshUtil.IsTargetObstructed(updateData.aiGameObject.AIAgentBottom, updateData.player.transform))
                     {
-                        updateData.stateHandler.RequestStateTransition(new FrogKnightPassiveEngageState { }, updateData);
+                        updateData.stateHandler.RequestStateTransition(new FrogKnightNavigateState { }, updateData);
                     }
                 }
+            }
+            //Check for abort since the FrogKnightNavigateState check outprioritizes this, but doesn't fire every frame.
+            if (updateData.aiGameObject.isActivelyEngaged == true && aborted == false)
+            {
+                updateData.stateHandler.RequestStateTransition(new FrogKnightActiveEngageState { }, updateData);
             }
         }
 
         public override void Abort(AIStateUpdateData updateData)
         {
-            updateData.navigator.CancelCurrentNavigation();
             updateData.aiGameObject.ResetVelocity();
             aborted = true;
             readyForStateTransition = true;

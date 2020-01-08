@@ -11,7 +11,7 @@
         public override void Init(AIStateUpdateData updateData)
         {
             updateData.navigator.SetTarget(updateData.aiGameObject.AIAgentBottom, updateData.aiGameObject.Origin);
-            updateData.aiGameObject.targetInLineOfSight = false;
+            updateData.aiGameObject.isAggroed = false;
             updateData.aiGameObject.SetRigidBodyConstraintsToDefault();
             if (updateData.aiGameObject.AggroZone != null)
             {
@@ -40,7 +40,7 @@
         {
             if (aggroZoneEntered && !NavMeshUtil.IsTargetObstructed(updateData.aiGameObject.AIAgentBottom, updateData.player.transform))
             {
-                updateData.stateHandler.RequestStateTransition(new FrogKnightEngageState { }, updateData);
+                updateData.stateHandler.RequestStateTransition(new FrogKnightPassiveEngageState { }, updateData);
             }
             else if (updateData.navigator.navigationTarget == null || Vector3.Distance(updateData.aiGameObject.AIAgentBottom.position, updateData.navigator.navigationTarget.position) <= NavigatorSettings.waypointReachedDistanceThreshold)
             {

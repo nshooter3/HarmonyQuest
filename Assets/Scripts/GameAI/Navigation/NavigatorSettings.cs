@@ -8,6 +8,11 @@
         public static float pathRefreshRate = 0.5f;
 
         /// <summary>
+        /// How frequently we check for which enemies should actively engage the player based on distance.
+        /// </summary>
+        public static float aiActiveEngagementRefreshRate = 2.0f;
+
+        /// <summary>
         /// How frequently our agent navigators check to see if their path to their current waypoint is blocked. In this case, they will generate a new path.
         /// </summary>
         public static float waypointBlockedCheckRate = 2.0f;

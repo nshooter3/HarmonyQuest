@@ -17,14 +17,17 @@
         private AIObstacle[] aiObstacles;
 
         private AIFlockingHandler aiFlockingHandler;
+        private AIActiveEngagementAgentSelector aiActiveEngagementAgentSelector;
 
         private float pathRefreshTimer = 0.0f;
         private float waypointBlockedCheckTimer = 0.0f;
+        private float aiActiveEngagementRefreshTimer = 0.0f;
 
         // Start is called before the first frame update
         void Start()
         {
             aiFlockingHandler = new AIFlockingHandler();
+            aiActiveEngagementAgentSelector = new AIActiveEngagementAgentSelector();
             PopulateAgentsList();
             PopulateObstaclesList();
             FmodMusicHandler.instance.AssignFunctionToOnBeatDelegate(AgentsBeatUpdate);
@@ -47,6 +50,11 @@
             {
                 aiObstacle.Init();
             }
+        }
+
+        public void DetermineActivelyEngagedEnemies()
+        {
+            aiActiveEngagementAgentSelector.AssignActivelyEngagedAgents(agents, TestPlayer.instance);
         }
 
         // Update is called once per frame
@@ -86,6 +94,13 @@
                     waypointBlockedCheckTimer = 0;
                     AllNavigatorsWaypointIsObstructedCheck();
                 }
+            }
+
+            aiActiveEngagementRefreshTimer += Time.deltaTime;
+            if (aiActiveEngagementRefreshTimer > NavigatorSettings.aiActiveEngagementRefreshRate)
+            {
+                aiActiveEngagementRefreshTimer = 0;
+                DetermineActivelyEngagedEnemies();
             }
 
             agents.ForEach(agent => agent.OnUpdate());

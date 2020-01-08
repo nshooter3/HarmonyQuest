@@ -102,6 +102,11 @@
         [Tooltip("Whether or not to make navPos visible. This shows where the enemy is attempting to navigate.")]
         private bool showDestination = false;
 
+        [SerializeField]
+        private MeshRenderer body;
+        [SerializeField]
+        private MeshRenderer head;
+
         /// <summary>
         /// Debug sphere gameobject to show where the enemy is attempting to navigate. Visible if showDestination is set to true.
         /// </summary>
@@ -120,8 +125,14 @@
 
         public RigidbodyConstraints DefaultConstraints { get; private set; }
 
+        /// <summary>
+        /// Whether this enemy is actively attempting to attack the player, or just hanging out in the player's vicinity.
+        /// </summary>
         [HideInInspector]
-        public bool targetInLineOfSight = false;
+        public bool isActivelyEngaged = false;
+
+        [HideInInspector]
+        public bool isAggroed = false;
 
         protected Vector3 moveDirection = Vector3.zero;
         protected Vector3 rotationDirection = Vector3.zero;
@@ -291,6 +302,17 @@
         public Collider GetCollider()
         {
             return agentCollider;
+        }
+
+        public float GetDistanceFromAggroTarget()
+        {
+            return Vector3.Distance(transform.position, AggroTarget.transform.position);
+        }
+
+        public void DebugChangeColor(Color color)
+        {
+            body.material.color = color;
+            head.material.color = color;
         }
 
         /// <summary>

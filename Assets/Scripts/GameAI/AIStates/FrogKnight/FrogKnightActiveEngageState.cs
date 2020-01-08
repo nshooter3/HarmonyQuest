@@ -4,14 +4,15 @@
     using GameAI.StateHandlers;
     using UnityEngine;
 
-    public class FrogKnightEngageState : AIState
+    public class FrogKnightActiveEngageState : AIState
     {
         private float checkForTargetObstructionTimer = 0.0f;
 
         public override void Init(AIStateUpdateData updateData)
         {
-            updateData.aiGameObject.targetInLineOfSight = true;
+            updateData.aiGameObject.isAggroed = true;
             updateData.aiGameObject.SetRigidBodyConstraintsToDefault();
+            updateData.aiGameObject.DebugChangeColor(Color.yellow);
         }
 
         public override void OnUpdate(AIStateUpdateData updateData)
@@ -53,11 +54,17 @@
                     }
                 }
             }
+            //Check for abort since the FrogKnightNavigateState check outprioritizes this, but doesn't fire every frame.
+            if (updateData.aiGameObject.isActivelyEngaged == false && aborted == false)
+            {
+                updateData.stateHandler.RequestStateTransition(new FrogKnightPassiveEngageState { }, updateData);
+            }
         }
 
         public override void Abort(AIStateUpdateData updateData)
         {
             updateData.aiGameObject.ResetVelocity();
+            updateData.aiGameObject.DebugChangeColor(Color.white);
             aborted = true;
             readyForStateTransition = true;
         }
