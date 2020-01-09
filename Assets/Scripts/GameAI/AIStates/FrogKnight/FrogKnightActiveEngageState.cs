@@ -26,19 +26,16 @@
 
             if (updateData.aiGameObject.GetDistanceFromAggroTarget() > upperDistanceBound)
             {
-                Debug.Log("MOVE CLOSER");
                 updateData.aiGameObject.SetRigidBodyConstraintsToDefault();
                 updateData.aiGameObject.SetVelocityTowardsDestination(updateData.aiGameObject.AggroTarget.position);
             }
             else if (updateData.aiGameObject.GetDistanceFromAggroTarget() < lowerDistanceBound)
             {
-                Debug.Log("BACK OFF");
                 updateData.aiGameObject.SetRigidBodyConstraintsToDefault();
                 updateData.aiGameObject.SetVelocityAwayFromDestination(updateData.aiGameObject.AggroTarget.position);
             }
             else
             {
-                Debug.Log("DON'T MOVE");
                 updateData.aiGameObject.SetRigidBodyConstraintsToLockAllButGravity();
             }
         }
