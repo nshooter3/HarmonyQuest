@@ -7,6 +7,8 @@
     public class FrogKnightPassiveEngageState : AIState
     {
         private float checkForTargetObstructionTimer = 0.0f;
+        private float lowerDistanceBound = 3.0f;
+        private float upperDistanceBound = 7.0f;
 
         public override void Init(AIStateUpdateData updateData)
         {
@@ -18,9 +20,22 @@
         {
             Vector3 newNavPos = updateData.aiGameObject.AggroTarget.position;
             newNavPos.y += updateData.aiGameObject.NavPosHeightOffset;
-
             updateData.aiGameObject.NavPos.transform.position = newNavPos;
-            updateData.aiGameObject.SetVelocity(updateData.aiGameObject.AggroTarget.position);
+
+            if (updateData.aiGameObject.GetDistanceFromAggroTarget() > upperDistanceBound)
+            {
+                updateData.aiGameObject.SetRigidBodyConstraintsToDefault();
+                updateData.aiGameObject.SetVelocityTowardsDestination(updateData.aiGameObject.AggroTarget.position);
+            }
+            else if (updateData.aiGameObject.GetDistanceFromAggroTarget() < lowerDistanceBound)
+            {
+                updateData.aiGameObject.SetRigidBodyConstraintsToDefault();
+                updateData.aiGameObject.SetVelocityAwayFromDestination(updateData.aiGameObject.AggroTarget.position);
+            }
+            else
+            {
+                updateData.aiGameObject.SetRigidBodyConstraintsToLockAllButGravity();
+            }
         }
 
         public override void OnFixedUpdate(AIStateUpdateData updateData)

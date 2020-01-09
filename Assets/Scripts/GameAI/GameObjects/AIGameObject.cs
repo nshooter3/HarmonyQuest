@@ -183,9 +183,19 @@
             AggroTarget = TestPlayer.instance.transform;
         }
 
-        public virtual void SetVelocity(Vector3 destination, bool ignoreYValue = true)
+        public virtual void SetVelocityTowardsDestination(Vector3 destination, bool ignoreYValue = true)
         {
-            moveDirection = (destination - AIAgentBottom.position).normalized;
+            SetVelocity((destination - AIAgentBottom.position).normalized, ignoreYValue);
+        }
+
+        public virtual void SetVelocityAwayFromDestination(Vector3 destination, bool ignoreYValue = true)
+        {
+            SetVelocity((AIAgentBottom.position - destination).normalized, ignoreYValue);
+        }
+
+        public virtual void SetVelocity(Vector3 velocity, bool ignoreYValue = true)
+        {
+            moveDirection = velocity.normalized;
 
             rotationDirection = moveDirection;
             rotationDirection.y = 0;
@@ -297,6 +307,12 @@
         public void SetRigidBodyConstraintsToLockAllButGravity()
         {
             SetRigidbodyConstraints(RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ);
+        }
+
+        public void SetRigidBodyConstraintsToLockMovement()
+        {
+            SetRigidbodyConstraints(RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ |
+                                    RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ);
         }
 
         public Collider GetCollider()
