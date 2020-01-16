@@ -40,7 +40,7 @@
         {
             if (aggroZoneEntered && !NavMeshUtil.IsTargetObstructed(updateData.aiGameObject.AIAgentBottom, updateData.player.transform))
             {
-                updateData.stateHandler.RequestStateTransition(new FrogKnightPassiveEngageState { }, updateData);
+                updateData.stateHandler.RequestStateTransition(new FrogKnightEngageState { }, updateData);
             }
             else if (updateData.navigator.navigationTarget == null || Vector3.Distance(updateData.aiGameObject.AIAgentBottom.position, updateData.navigator.navigationTarget.position) <= NavigatorSettings.waypointReachedDistanceThreshold)
             {

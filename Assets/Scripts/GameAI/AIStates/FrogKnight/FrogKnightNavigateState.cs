@@ -48,7 +48,7 @@
                     checkForTargetObstructionTimer = 0;
                     if (!NavMeshUtil.IsTargetObstructed(updateData.aiGameObject.AIAgentBottom, updateData.player.transform))
                     {
-                        updateData.stateHandler.RequestStateTransition(new FrogKnightPassiveEngageState { }, updateData);
+                        updateData.stateHandler.RequestStateTransition(new FrogKnightEngageState { }, updateData);
                     }
                 }
             }

@@ -15,7 +15,7 @@
             SortedSet<AIAgent> agentsSortedByDistance = new SortedSet<AIAgent>(new AgentDistanceComparer());
             foreach (AIAgent agent in agents)
             {
-                agent.aiGameObject.isActivelyEngaged = false;
+                //agent.aiGameObject.isActivelyEngaged = false;
                 if (agent.aiGameObject.isAggroed)
                 {
                     agentsSortedByDistance.Add(agent);
@@ -25,7 +25,7 @@
             int activeAgentCount = 0;
             foreach (AIAgent sortedAgent in agentsSortedByDistance)
             {
-                sortedAgent.aiGameObject.isActivelyEngaged = true;
+                //sortedAgent.aiGameObject.isActivelyEngaged = true;
                 activeAgentCount++;
                 if (activeAgentCount >= maxActiveAgentCount)
                 {

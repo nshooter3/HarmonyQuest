@@ -125,12 +125,6 @@
 
         public RigidbodyConstraints DefaultConstraints { get; private set; }
 
-        /// <summary>
-        /// Whether this enemy is actively attempting to attack the player, or just hanging out in the player's vicinity.
-        /// </summary>
-        [HideInInspector]
-        public bool isActivelyEngaged = false;
-
         [HideInInspector]
         public bool isAggroed = false;
 
@@ -152,7 +146,11 @@
         private Vector3 adjustedForce;
         private Vector3 difference;
 
+        public bool permissionToAttack = false;
+        public bool isAttacking = false;
+
         public bool debugFlocking = false;
+        public bool debugEngage = false;
 
         public virtual void Init()
         {
@@ -183,21 +181,28 @@
             AggroTarget = TestPlayer.instance.transform;
         }
 
-        public virtual void SetVelocityTowardsDestination(Vector3 destination, bool ignoreYValue = true)
+        public virtual void SetVelocityTowardsDestination(Vector3 destination, bool ignoreYValue = true, float speedModifier = 1.0f, bool alwaysFaceTarget = false)
         {
-            SetVelocity((destination - AIAgentBottom.position).normalized, ignoreYValue);
+            SetVelocity((destination - AIAgentBottom.position).normalized, ignoreYValue, speedModifier, alwaysFaceTarget);
         }
 
-        public virtual void SetVelocityAwayFromDestination(Vector3 destination, bool ignoreYValue = true)
+        public virtual void SetVelocityAwayFromDestination(Vector3 destination, bool ignoreYValue = true, float speedModifier = 1.0f, bool alwaysFaceTarget = false)
         {
-            SetVelocity((AIAgentBottom.position - destination).normalized, ignoreYValue);
+            SetVelocity((AIAgentBottom.position - destination).normalized, ignoreYValue, speedModifier, alwaysFaceTarget);
         }
 
-        public virtual void SetVelocity(Vector3 velocity, bool ignoreYValue = true)
+        public virtual void SetVelocity(Vector3 velocity, bool ignoreYValue = true, float speedModifier = 1.0f, bool alwaysFaceTarget = false)
         {
             moveDirection = velocity.normalized;
 
-            rotationDirection = moveDirection;
+            if (alwaysFaceTarget)
+            {
+                rotationDirection = AggroTarget.transform.position;
+            }
+            else
+            {
+                rotationDirection = moveDirection;
+            }
             rotationDirection.y = 0;
             rotationDirection.Normalize();
             Rotate(rotationDirection, 1.0f);
@@ -223,7 +228,7 @@
                 Debug.Log("ADJUSTED OBSTACLE AVOIDANCE FORCE: " + adjustedObstacleAvoidanceForce.magnitude);
             }
 
-            newVelocity = newVelocity + adjustedCollisionAvoidanceForce + adjustedObstacleAvoidanceForce;
+            newVelocity = (newVelocity + adjustedCollisionAvoidanceForce + adjustedObstacleAvoidanceForce) * speedModifier;
         }
 
         /// <summary>
@@ -261,6 +266,11 @@
         public virtual void ResetVelocity()
         {
             newVelocity = Vector3.zero;
+        }
+
+        public Vector3 GetCollisionAvoidanceForce()
+        {
+            return collisionAvoidanceForce;
         }
 
         public void SetCollisionAvoidanceForce(Vector3 collisionAvoidanceForce)
