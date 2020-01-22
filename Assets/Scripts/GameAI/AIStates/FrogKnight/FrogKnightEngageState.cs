@@ -19,7 +19,6 @@
         private float targetDistance;
 
         private bool inRangeThisFrame = false;
-        private bool inRangeLastFrame = false;
         private bool leavingRange = false;
         private bool enteringRange = false;
 
@@ -82,16 +81,18 @@
             Vector3 avoidanceForce = GetAvoidanceForce(updateData.aiGameObject);
 
             inRangeThisFrame = targetDistance <= targetedDistanceFromPlayer;
-            leavingRange = !inRangeThisFrame && inRangeLastFrame;
-            enteringRange = inRangeThisFrame && !inRangeLastFrame;
+            leavingRange = targetDistance > maxDistanceFromPlayer && hitTargetDistance;
+            enteringRange = inRangeThisFrame && hitTargetDistance == false;
 
-            if (leavingRange && hitTargetDistance == true)
+            if (leavingRange)
             {
+                Debug.Log("leavingRange");
                 hitTargetDistance = false;
                 RandomizeTargetedDistanceFromPlayer();
             }
-            else if (inRangeThisFrame)
+            else if (enteringRange)
             {
+                Debug.Log("enteringRange");
                 hitTargetDistance = true;
             }
 
@@ -146,6 +147,7 @@
                 {
                     Debug.Log("ENEMY APPROACH PLAYER");
                 }
+                Debug.DrawRay(updateData.aiGameObject.transform.position, (updateData.aiGameObject.AggroTarget.position - updateData.aiGameObject.transform.position) * 1.0f, Color.green);
                 updateData.aiGameObject.SetRigidBodyConstraintsToDefault();
                 SeekDestination(updateData.aiGameObject, updateData.aiGameObject.AggroTarget.position);
             }
@@ -157,7 +159,6 @@
                 }
                 updateData.aiGameObject.SetRigidBodyConstraintsToLockAllButGravity();
             }
-            inRangeLastFrame = inRangeThisFrame;
         }
 
         void AttackWindup(AIGameObject aiGameObject)
