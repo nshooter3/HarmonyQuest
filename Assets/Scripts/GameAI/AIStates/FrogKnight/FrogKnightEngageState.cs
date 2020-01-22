@@ -86,13 +86,19 @@
 
             if (leavingRange)
             {
-                Debug.Log("leavingRange");
+                if (updateData.aiGameObject.debugEngage)
+                {
+                    Debug.Log("leavingRange");
+                }
                 hitTargetDistance = false;
                 RandomizeTargetedDistanceFromPlayer();
             }
             else if (enteringRange)
             {
-                Debug.Log("enteringRange");
+                if (updateData.aiGameObject.debugEngage)
+                {
+                    Debug.Log("enteringRange");
+                }
                 hitTargetDistance = true;
             }
 
