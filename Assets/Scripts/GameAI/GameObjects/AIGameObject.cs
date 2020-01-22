@@ -197,7 +197,7 @@
 
             if (alwaysFaceTarget)
             {
-                rotationDirection = AggroTarget.transform.position;
+                rotationDirection = (AggroTarget.transform.position - transform.position).normalized;
             }
             else
             {

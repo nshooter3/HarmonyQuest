@@ -13,7 +13,7 @@
         //Is randomly generated between minDistanceFromPlayer and maxDistanceFromPlayer every time a range is requested.
         private float targetedDistanceFromPlayer = 3.0f;
         private float minDistanceFromPlayer = 1.5f;
-        private float maxDistanceFromPlayer = 8.0f;
+        private float maxDistanceFromPlayer = 9.0f;
 
         //Used to track the player's distance from this enemy
         private float targetDistance;
@@ -103,21 +103,21 @@
             {
                 if (updateData.aiGameObject.debugEngage)
                 {
-                    //Debug.Log("ENEMY WIND UP");
+                    Debug.Log("ENEMY WIND UP");
                 }
             }
             else if (isAttacking)
             {
                 if (updateData.aiGameObject.debugEngage)
                 {
-                    //Debug.Log("ENEMY ATTACK");
+                    Debug.Log("ENEMY ATTACK");
                 }
             }
             else if (shouldAttack)
             {
                 if (updateData.aiGameObject.debugEngage)
                 {
-                    //Debug.Log("ENEMY BEGIN WIND UP");
+                    Debug.Log("ENEMY BEGIN WIND UP");
                 }
                 isWindingUp = true;
             }
@@ -135,16 +135,16 @@
                 Vector3 strafeDir = GetStrafeVector(updateData.aiGameObject, updateData.aiGameObject.AggroTarget.transform.position);
                 if (updateData.aiGameObject.debugEngage)
                 {
-                    //Debug.Log("ENEMY STRAFE");
-                    Debug.DrawRay(updateData.aiGameObject.transform.position, strafeDir * 1.0f, Color.red);
+                    Debug.Log("ENEMY STRAFE");
                 }
+                Debug.DrawRay(updateData.aiGameObject.transform.position, strafeDir * 1.0f, Color.blue);
                 SeekDirection(updateData.aiGameObject, strafeDir, true, 0.35f);
             }
             else if (hitTargetDistance == false)
             {
                 if (updateData.aiGameObject.debugEngage)
                 {
-                    //Debug.Log("ENEMY APPROACH PLAYER");
+                    Debug.Log("ENEMY APPROACH PLAYER");
                 }
                 updateData.aiGameObject.SetRigidBodyConstraintsToDefault();
                 SeekDestination(updateData.aiGameObject, updateData.aiGameObject.AggroTarget.position);
@@ -153,7 +153,7 @@
             {
                 if (updateData.aiGameObject.debugEngage)
                 {
-                    //Debug.Log("ENEMY STAND STILL");
+                    Debug.Log("ENEMY STAND STILL");
                 }
                 updateData.aiGameObject.SetRigidBodyConstraintsToLockAllButGravity();
             }
@@ -245,10 +245,6 @@
         {
             bool strafedTooClose = strafeType == StrafeType.Towards && targetDistance <= minDistanceFromPlayer + strafeDistanceThreshold;
             bool strafedTooFar = strafeType == StrafeType.Away && targetDistance >= maxDistanceFromPlayer - strafeDistanceThreshold;
-            if (strafedTooFar)
-            {
-                Debug.Log("Strafed too FAR");
-            }
             if (strafedTooClose || strafedTooFar)
             {
                 strafeTimer = Random.Range(minStrafeCooldown, maxStrafeCooldown);
