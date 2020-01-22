@@ -9,19 +9,47 @@
     {
         private float checkForTargetObstructionTimer = 0.0f;
 
-        //The distance at which the enemy will stop attempting to get closer to the player
-        private float targetedDistanceFromPlayer = 2.0f;
+        //The distance at which the enemy will stop attempting to get closer to the player.
+        //Is randomly generated between minDistanceFromPlayer and maxDistanceFromPlayer every time a range is requested.
+        private float targetedDistanceFromPlayer = 3.0f;
+        private float minDistanceFromPlayer = 1.5f;
+        private float maxDistanceFromPlayer = 8.0f;
+
+        //Used to track the player's distance from this enemy
+        private float targetDistance;
+
+        private bool inRangeThisFrame = false;
+        private bool inRangeLastFrame = false;
+        private bool leavingRange = false;
+        private bool enteringRange = false;
+
+        private bool hitTargetDistance = false;
+
+        //Used to prevent the player from strafing in/out of range if they are within strafeDistanceThreshold of a distance threshold.
+        private float strafeDistanceThreshold = 1.0f;
         //The distance at which the enemy is available to attack the player
-        private float attackRange = 3.0f;
+        private float attackRange = 5.0f;
         //The distance at which enemies will actively attempt to separate themselves from one another
-        private float avoidRange = 4.0f;
+        private float avoidRange = 6.0f;
 
         //Used to determine when the enemy should recalculate strafeDirection.
         float strafeTimer = 0.0f;
-        float maxStrafeCooldown = 5.0f;
-        float minStrafeCooldown = 2.0f;
-        //Either 1 or -1, determines whether the enemy strafes clockwise or counterclockwise.
-        int strafeDirection = 1;
+        float maxStrafeCooldown = 4.0f;
+        float minStrafeCooldown = 1.0f;
+
+        //Determines what kind of strafe this enemy will perform.
+        enum StrafeType { Clockwise, Counterclockwise, Towards, Away, None};
+        StrafeType strafeType = StrafeType.None;
+
+        //Used to roll RNG for what kind of strafe gets activated.
+        int strafeClockwiseRNGRange = 1;
+        int strafeCounterClockwiseRNGRange = 2;
+        int strafeTowardsRNGRange = 3;
+        int strafeAwayRNGRange = 4;
+        int strafeNoneRNGRange = 6;
+        int strafeMinRNGValue = 1;
+        int strafeMaxRNGValue = 6;
+
         //Add slight variation to the direction the enemy strafes in to make movement less uniform.
         Vector3 strafeDeviation = Vector3.zero;
 
@@ -32,6 +60,8 @@
         {
             updateData.aiGameObject.isAggroed = true;
             updateData.aiGameObject.SetRigidBodyConstraintsToDefault();
+            RandomizeTargetedDistanceFromPlayer();
+            strafeType = GetRandomStrafeType();
         }
 
         public override void OnUpdate(AIStateUpdateData updateData)
@@ -48,59 +78,73 @@
             Think();
             React();
 
-            float targetDistance = updateData.aiGameObject.GetDistanceFromAggroTarget();
+            targetDistance = updateData.aiGameObject.GetDistanceFromAggroTarget();
             Vector3 avoidanceForce = GetAvoidanceForce(updateData.aiGameObject);
 
+            inRangeThisFrame = targetDistance <= targetedDistanceFromPlayer;
+            leavingRange = !inRangeThisFrame && inRangeLastFrame;
+            enteringRange = inRangeThisFrame && !inRangeLastFrame;
+
+            if (leavingRange && hitTargetDistance == true)
+            {
+                hitTargetDistance = false;
+                RandomizeTargetedDistanceFromPlayer();
+            }
+            else if (inRangeThisFrame)
+            {
+                hitTargetDistance = true;
+            }
+
             bool shouldAvoid = (targetDistance <= avoidRange && avoidanceForce.magnitude > 0.35f);
-            bool shouldStrafe = (targetDistance <= attackRange);
+            bool shouldStrafe = (hitTargetDistance);
             bool shouldAttack = (targetDistance <= attackRange && updateData.aiGameObject.permissionToAttack);
 
             if (isWindingUp)
             {
                 if (updateData.aiGameObject.debugEngage)
                 {
-                    Debug.Log("ENEMY WIND UP");
+                    //Debug.Log("ENEMY WIND UP");
                 }
             }
             else if (isAttacking)
             {
                 if (updateData.aiGameObject.debugEngage)
                 {
-                    Debug.Log("ENEMY ATTACK");
+                    //Debug.Log("ENEMY ATTACK");
                 }
             }
             else if (shouldAttack)
             {
                 if (updateData.aiGameObject.debugEngage)
                 {
-                    Debug.Log("ENEMY BEGIN WIND UP");
+                    //Debug.Log("ENEMY BEGIN WIND UP");
                 }
                 isWindingUp = true;
             }
-            else if (shouldAvoid)
+            /*else if (shouldAvoid)
             {
                 if (updateData.aiGameObject.debugEngage)
                 {
                     Debug.Log("ENEMY AVOID");
                 }
                 Avoid(updateData.aiGameObject, avoidanceForce);
-            }
+            }*/
             else if (shouldStrafe)
             {
                 updateData.aiGameObject.SetRigidBodyConstraintsToDefault();
                 Vector3 strafeDir = GetStrafeVector(updateData.aiGameObject, updateData.aiGameObject.AggroTarget.transform.position);
                 if (updateData.aiGameObject.debugEngage)
                 {
-                    Debug.Log("ENEMY STRAFE");
+                    //Debug.Log("ENEMY STRAFE");
                     Debug.DrawRay(updateData.aiGameObject.transform.position, strafeDir * 1.0f, Color.red);
                 }
                 SeekDirection(updateData.aiGameObject, strafeDir, true, 0.35f);
             }
-            else if (targetDistance > targetedDistanceFromPlayer)
+            else if (hitTargetDistance == false)
             {
                 if (updateData.aiGameObject.debugEngage)
                 {
-                    Debug.Log("ENEMY APPROACH PLAYER");
+                    //Debug.Log("ENEMY APPROACH PLAYER");
                 }
                 updateData.aiGameObject.SetRigidBodyConstraintsToDefault();
                 SeekDestination(updateData.aiGameObject, updateData.aiGameObject.AggroTarget.position);
@@ -109,10 +153,11 @@
             {
                 if (updateData.aiGameObject.debugEngage)
                 {
-                    Debug.Log("ENEMY STAND STILL");
+                    //Debug.Log("ENEMY STAND STILL");
                 }
                 updateData.aiGameObject.SetRigidBodyConstraintsToLockAllButGravity();
             }
+            inRangeLastFrame = inRangeThisFrame;
         }
 
         void AttackWindup(AIGameObject aiGameObject)
@@ -135,15 +180,50 @@
             SeekDirection(aiGameObject, avoidanceForce, true, 0.5f);
         }
 
-        void SetStrafeDirection()
+        StrafeType GetRandomStrafeType()
         {
-            //Will either be -1 or 1 to determine which direction we strafe in.
-            strafeDirection = Random.Range(0, 2) * 2 - 1;
+            int RNGResult = Random.Range(strafeMinRNGValue, strafeMaxRNGValue + 1);
+            if (RNGResult <= strafeClockwiseRNGRange)
+            {
+                return StrafeType.Clockwise;
+            }
+            else if (RNGResult <= strafeCounterClockwiseRNGRange)
+            {
+                return StrafeType.Counterclockwise;
+            }
+            else if (RNGResult <= strafeTowardsRNGRange && targetDistance > minDistanceFromPlayer + strafeDistanceThreshold)
+            {
+                return StrafeType.Towards;
+            }
+            else if (RNGResult <= strafeAwayRNGRange && targetDistance < maxDistanceFromPlayer - strafeDistanceThreshold)
+            {
+                return StrafeType.Away;
+            }
+            else
+            {
+                return StrafeType.None;
+            }
         }
 
         Vector3 GetStrafeVector(AIGameObject aiGameObject, Vector3 target)
         {
-            return Vector3.Cross(Vector3.up, target - aiGameObject.transform.position) * strafeDirection;
+            Vector3 result = Vector3.zero;
+            switch (strafeType)
+            {
+                case StrafeType.Clockwise:
+                    result = Vector3.Cross(Vector3.up, target - aiGameObject.transform.position);
+                    break;
+                case StrafeType.Counterclockwise:
+                    result = Vector3.Cross(Vector3.up, target - aiGameObject.transform.position) * -1;
+                    break;
+                case StrafeType.Towards:
+                    result = target - aiGameObject.transform.position;
+                    break;
+                case StrafeType.Away:
+                    result = aiGameObject.transform.position - target;
+                    break;
+            }
+            return result;
         }
 
         void SeekDestination(AIGameObject aiGameObject, Vector3 target, bool ignoreYValue = true, float speedModifier = 1.0f, bool alwaysFaceTarget = true)
@@ -156,12 +236,35 @@
             aiGameObject.SetVelocity(direction, ignoreYValue, speedModifier, alwaysFaceTarget);
         }
 
+        void RandomizeTargetedDistanceFromPlayer()
+        {
+            targetedDistanceFromPlayer = Random.Range(minDistanceFromPlayer + strafeDistanceThreshold, maxDistanceFromPlayer - strafeDistanceThreshold);
+        }
+
         void Think()
         {
-            if (strafeTimer <= 0.0f)
+            bool strafedTooClose = strafeType == StrafeType.Towards && targetDistance <= minDistanceFromPlayer + strafeDistanceThreshold;
+            bool strafedTooFar = strafeType == StrafeType.Away && targetDistance >= maxDistanceFromPlayer - strafeDistanceThreshold;
+            if (strafedTooFar)
+            {
+                Debug.Log("Strafed too FAR");
+            }
+            if (strafedTooClose || strafedTooFar)
             {
                 strafeTimer = Random.Range(minStrafeCooldown, maxStrafeCooldown);
-                SetStrafeDirection();
+                strafeType = StrafeType.None;
+            }
+            else if (strafeTimer <= 0.0f)
+            {
+                strafeTimer = Random.Range(minStrafeCooldown, maxStrafeCooldown);
+                if (strafeType == StrafeType.None)
+                {
+                    strafeType = GetRandomStrafeType();
+                }
+                else
+                {
+                    strafeType = StrafeType.None;
+                }
             }
         }
 
