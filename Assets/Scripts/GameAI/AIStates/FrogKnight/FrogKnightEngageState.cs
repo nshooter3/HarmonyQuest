@@ -13,7 +13,7 @@
         //Is randomly generated between minDistanceFromPlayer and maxDistanceFromPlayer every time a range is requested.
         private float targetedDistanceFromPlayer = 3.0f;
         private float minDistanceFromPlayer = 1.5f;
-        private float maxDistanceFromPlayer = 9.0f;
+        private float maxDistanceFromPlayer = 7.0f;
 
         //Used to track the player's distance from this enemy
         private float targetDistance;
@@ -60,7 +60,7 @@
             updateData.aiGameObject.isAggroed = true;
             updateData.aiGameObject.SetRigidBodyConstraintsToDefault();
             RandomizeTargetedDistanceFromPlayer();
-            strafeType = GetRandomStrafeType();
+            strafeType = GetRandomStrafeType(updateData.aiGameObject.StrafeHitBoxes);
         }
 
         public override void OnUpdate(AIStateUpdateData updateData)
@@ -74,8 +74,8 @@
                 strafeTimer -= Time.deltaTime;
             }
 
-            Think();
-            React();
+            Think(updateData);
+            React(updateData);
 
             targetDistance = updateData.aiGameObject.GetDistanceFromAggroTarget();
             Vector3 avoidanceForce = GetAvoidanceForce(updateData.aiGameObject);
@@ -187,22 +187,22 @@
             SeekDirection(aiGameObject, avoidanceForce, true, 0.5f);
         }
 
-        StrafeType GetRandomStrafeType()
+        StrafeType GetRandomStrafeType(StrafeHitboxes strafeHitBoxes)
         {
             int RNGResult = Random.Range(strafeMinRNGValue, strafeMaxRNGValue + 1);
-            if (RNGResult <= strafeClockwiseRNGRange)
+            if (RNGResult <= strafeClockwiseRNGRange && !strafeHitBoxes.leftCollision)
             {
                 return StrafeType.Clockwise;
             }
-            else if (RNGResult <= strafeCounterClockwiseRNGRange)
+            else if (RNGResult <= strafeCounterClockwiseRNGRange && !strafeHitBoxes.rightCollision)
             {
                 return StrafeType.Counterclockwise;
             }
-            else if (RNGResult <= strafeTowardsRNGRange && targetDistance > minDistanceFromPlayer + strafeDistanceThreshold)
+            else if (RNGResult <= strafeTowardsRNGRange && targetDistance > minDistanceFromPlayer + strafeDistanceThreshold && !strafeHitBoxes.frontCollision)
             {
                 return StrafeType.Towards;
             }
-            else if (RNGResult <= strafeAwayRNGRange && targetDistance < maxDistanceFromPlayer - strafeDistanceThreshold)
+            else if (RNGResult <= strafeAwayRNGRange && targetDistance < maxDistanceFromPlayer - strafeDistanceThreshold && !strafeHitBoxes.backCollision)
             {
                 return StrafeType.Away;
             }
@@ -233,6 +233,48 @@
             return result;
         }
 
+        public void CheckForStrafeInterupt(StrafeHitboxes strafeHitBoxes)
+        {
+            bool cancelStrafe = false;
+            switch (strafeType)
+            {
+                case StrafeType.Clockwise:
+                    if (strafeHitBoxes.leftCollision)
+                    {
+                        Debug.Log("CANCEL CLOCKWISE STRAFE DUE TO COLLISION");
+                        cancelStrafe = true;
+                    }
+                    break;
+                case StrafeType.Counterclockwise:
+                    if (strafeHitBoxes.rightCollision)
+                    {
+                        Debug.Log("CANCEL COUNTERCLOCKWISE STRAFE DUE TO COLLISION");
+                        cancelStrafe = true;
+                    }
+                    break;
+                case StrafeType.Towards:
+                    if (strafeHitBoxes.frontCollision)
+                    {
+                        Debug.Log("CANCEL FORWARDS STRAFE DUE TO COLLISION");
+                        cancelStrafe = true;
+                    }
+                    break;
+                case StrafeType.Away:
+                    if (strafeHitBoxes.backCollision)
+                    {
+                        Debug.Log("CANCEL BACKWARDS STRAFE DUE TO COLLISION");
+                        cancelStrafe = true;
+                    }
+                    break;
+            }
+            if (cancelStrafe)
+            {
+                strafeTimer = Random.Range(minStrafeCooldown, maxStrafeCooldown);
+                strafeType = StrafeType.None;
+            }
+            strafeHitBoxes.ResetCollisions();
+        }
+
         void SeekDestination(AIGameObject aiGameObject, Vector3 target, bool ignoreYValue = true, float speedModifier = 1.0f, bool alwaysFaceTarget = true)
         {
             aiGameObject.SetVelocityTowardsDestination(target, ignoreYValue, speedModifier, alwaysFaceTarget);
@@ -248,7 +290,7 @@
             targetedDistanceFromPlayer = Random.Range(minDistanceFromPlayer + strafeDistanceThreshold, maxDistanceFromPlayer - strafeDistanceThreshold);
         }
 
-        void Think()
+        void Think(AIStateUpdateData updateData)
         {
             bool strafedTooClose = strafeType == StrafeType.Towards && targetDistance <= minDistanceFromPlayer + strafeDistanceThreshold;
             bool strafedTooFar = strafeType == StrafeType.Away && targetDistance >= maxDistanceFromPlayer - strafeDistanceThreshold;
@@ -262,16 +304,18 @@
                 strafeTimer = Random.Range(minStrafeCooldown, maxStrafeCooldown);
                 if (strafeType == StrafeType.None)
                 {
-                    strafeType = GetRandomStrafeType();
+                    strafeType = GetRandomStrafeType(updateData.aiGameObject.StrafeHitBoxes);
                 }
                 else
                 {
                     strafeType = StrafeType.None;
                 }
             }
+
+            CheckForStrafeInterupt(updateData.aiGameObject.StrafeHitBoxes);
         }
 
-        void React()
+        void React(AIStateUpdateData updateData)
         {
 
         }

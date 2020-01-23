@@ -38,6 +38,14 @@
         public Transform AIAgentBottom { get => aiAgentBottom; private set => aiAgentBottom = value; }
 
         /// <summary>
+        /// Set of colliders that the enemy can use to determine which direction they can go when moving freely.
+        /// </summary>
+        [SerializeField]
+        [Tooltip("Set of colliders that the enemy can use to determine which direction they can go when moving freely.")]
+        private StrafeHitboxes strafeHitBoxes;
+        public StrafeHitboxes StrafeHitBoxes { get => strafeHitBoxes; private set => strafeHitBoxes = value; }
+
+        /// <summary>
         /// The rigidbody for our agent
         /// </summary>
         [SerializeField]
@@ -162,6 +170,11 @@
             if (agentCollider == null)
             {
                 agentCollider = GetComponent<Collider>();
+            }
+
+            if (strafeHitBoxes != null)
+            {
+                strafeHitBoxes.Init();
             }
 
             Origin.parent = null;
