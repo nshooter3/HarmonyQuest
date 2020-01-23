@@ -25,7 +25,7 @@
             else if (melodyController.input.DodgeButtonDown())
             {
                 ableToExit = true;
-                nextState = new DodgeState(melodyController);
+                nextState = new DashIntroState(melodyController);
             }
             else if (melodyController.input.GetHorizontalMovement() != 0 || melodyController.input.GetVerticalMovement() != 0)
             {

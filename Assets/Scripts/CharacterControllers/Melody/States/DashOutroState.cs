@@ -1,47 +1,45 @@
 ﻿namespace Melody.States
 {
+    using System;
     using UnityEngine;
 
-    public class MovingState : MelodyState
+    public class DashOutroState : MelodyState
     {
-        public MovingState(MelodyController controller) : base(controller) { }
 
-        protected override void Enter() { }
+        protected Vector3 dodge = Vector3.left;
+        protected float timer = 0;
+
+        public DashOutroState(MelodyController controller) : base(controller)
+        {
+        }
+
+        protected override void Enter()
+        {
+           
+            nextState = new IdleState(melodyController);
+            timer = 0;
+            melodyController.rigidBody.velocity = Vector3.zero;
+        }
 
         public override void OnUpdate(float time)
         {
             base.OnUpdate(time);
 
-            //Check For Attack
-            if (melodyController.input.AttackButtonDown())
-            {
 
-                ableToExit = true;
-                nextState = new AttackState(melodyController);
-            }
-            else if (melodyController.input.ParryButtonDown())
+            timer += time;
+            if (timer >= melodyController.config.DashOutroTime)
             {
-                ableToExit = true;
-                nextState = new CounterState(melodyController);
-            }
-            else if (melodyController.input.DodgeButtonDown())
-            {
-                ableToExit = true;
-                nextState = new DashIntroState(melodyController);
-            }
-            else if (melodyController.input.GetHorizontalMovement() == 0 && melodyController.input.GetVerticalMovement() == 0)
-            {
-                ableToExit = true;
                 nextState = new IdleState(melodyController);
+                ableToExit = true;
             }
 
-            melodyController.animator.SetFloat("Move", melodyController.Move.magnitude / 1);
+            melodyController.animator.SetTrigger("DashOutro");
+
             melodyController.Move *= melodyController.config.MaxSpeed;
             RotatePlayer(3);
 
-            melodyController.Move = melodyController.Move * time * 100;
+            melodyController.Move = melodyController.Move * time * 100 * 0.5f;
             melodyController.rigidBody.velocity = new Vector3(melodyController.Move.x, melodyController.rigidBody.velocity.y, melodyController.Move.z);
-
         }
 
         void RotatePlayer(float turnSpeedModifier)
@@ -66,7 +64,10 @@
 
         public override void OnExit()
         {
-            melodyController.animator.SetFloat("Move", 0f);
+            melodyController.rigidBody.useGravity = true;
+            
+            melodyController.animator.ResetTrigger("Dash");
+            melodyController.animator.ResetTrigger("DashOutro");
         }
     }
 }
