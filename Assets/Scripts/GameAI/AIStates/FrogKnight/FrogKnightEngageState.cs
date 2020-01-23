@@ -13,7 +13,7 @@
         //Is randomly generated between minDistanceFromPlayer and maxDistanceFromPlayer every time a range is requested.
         private float targetedDistanceFromPlayer = 3.0f;
         private float minDistanceFromPlayer = 1.5f;
-        private float maxDistanceFromPlayer = 7.0f;
+        private float maxDistanceFromPlayer = 8.0f;
 
         //Used to track the player's distance from this enemy
         private float targetDistance;
@@ -25,7 +25,7 @@
         private bool hitTargetDistance = false;
 
         //Used to prevent the player from strafing in/out of range if they are within strafeDistanceThreshold of a distance threshold.
-        private float strafeDistanceThreshold = 1.0f;
+        private float strafeDistanceThreshold = 0.5f;
         //The distance at which the enemy is available to attack the player
         private float attackRange = 5.0f;
         //The distance at which enemies will actively attempt to separate themselves from one another
@@ -218,10 +218,10 @@
             switch (strafeType)
             {
                 case StrafeType.Clockwise:
-                    result = Vector3.Cross(Vector3.up, target - aiGameObject.transform.position);
+                    result = Vector3.Cross(Vector3.up, target - aiGameObject.transform.position) * - 1.0f;
                     break;
                 case StrafeType.Counterclockwise:
-                    result = Vector3.Cross(Vector3.up, target - aiGameObject.transform.position) * -1;
+                    result = Vector3.Cross(Vector3.up, target - aiGameObject.transform.position);
                     break;
                 case StrafeType.Towards:
                     result = target - aiGameObject.transform.position;
@@ -241,28 +241,24 @@
                 case StrafeType.Clockwise:
                     if (strafeHitBoxes.leftCollision)
                     {
-                        Debug.Log("CANCEL CLOCKWISE STRAFE DUE TO COLLISION");
                         cancelStrafe = true;
                     }
                     break;
                 case StrafeType.Counterclockwise:
                     if (strafeHitBoxes.rightCollision)
                     {
-                        Debug.Log("CANCEL COUNTERCLOCKWISE STRAFE DUE TO COLLISION");
                         cancelStrafe = true;
                     }
                     break;
                 case StrafeType.Towards:
                     if (strafeHitBoxes.frontCollision)
                     {
-                        Debug.Log("CANCEL FORWARDS STRAFE DUE TO COLLISION");
                         cancelStrafe = true;
                     }
                     break;
                 case StrafeType.Away:
                     if (strafeHitBoxes.backCollision)
                     {
-                        Debug.Log("CANCEL BACKWARDS STRAFE DUE TO COLLISION");
                         cancelStrafe = true;
                     }
                     break;
