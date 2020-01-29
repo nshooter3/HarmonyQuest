@@ -23,7 +23,6 @@ public class TestScarf : MonoBehaviour
         Shader.SetGlobalVector("_BallLocation", ball.transform.position);
         Shader.SetGlobalVector("_PlayerLocation", player.transform.position);
         Shader.SetGlobalFloat("_Progress", dashProgress);
-        print(ball.transform.position);
     }
 
     public void Dash()
