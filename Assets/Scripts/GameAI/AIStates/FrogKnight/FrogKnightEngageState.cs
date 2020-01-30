@@ -3,6 +3,7 @@
     using GameAI.AIGameObjects;
     using GameAI.Navigation;
     using GameAI.StateHandlers;
+    using HarmonyQuest.Util;
     using UnityEngine;
 
     public class FrogKnightEngageState : AIState
@@ -40,18 +41,13 @@
         enum StrafeType { Clockwise, Counterclockwise, Towards, Away, None};
         StrafeType strafeType = StrafeType.None;
 
-        //Used to roll RNG for what kind of strafe gets activated.
-        int strafeClockwiseRNGRange = 1;
-        int strafeCounterClockwiseRNGRange = 2;
-        int strafeTowardsRNGRange = 3;
-        int strafeAwayRNGRange = 4;
-        int strafeNoneRNGRange = 6;
-        int strafeMinRNGValue = 1;
-        int strafeMaxRNGValue = 6;
+        WeightedList<StrafeType> strafeRandomizer;
 
+        //TODO: Implement this.
         //Add slight variation to the direction the enemy strafes in to make movement less uniform.
         Vector3 strafeDeviation = Vector3.zero;
 
+        //TODO: Implement this.
         private bool isWindingUp = false;
         private bool isAttacking = false;
 
@@ -60,7 +56,18 @@
             updateData.aiGameObject.isAggroed = true;
             updateData.aiGameObject.SetRigidBodyConstraintsToDefault();
             RandomizeTargetedDistanceFromPlayer();
+            InitStrafeRandomizer();
             strafeType = GetRandomStrafeType(updateData.aiGameObject.StrafeHitBoxes);
+        }
+
+        private void InitStrafeRandomizer()
+        {
+            strafeRandomizer = new WeightedList<StrafeType>();
+            strafeRandomizer.Add(StrafeType.Clockwise, 1);
+            strafeRandomizer.Add(StrafeType.Counterclockwise, 1);
+            strafeRandomizer.Add(StrafeType.Towards, 1);
+            strafeRandomizer.Add(StrafeType.Away, 1);
+            strafeRandomizer.Add(StrafeType.None, 2);
         }
 
         public override void OnUpdate(AIStateUpdateData updateData)
@@ -189,27 +196,27 @@
 
         StrafeType GetRandomStrafeType(StrafeHitboxes strafeHitBoxes)
         {
-            int RNGResult = Random.Range(strafeMinRNGValue, strafeMaxRNGValue + 1);
-            if (RNGResult <= strafeClockwiseRNGRange && !strafeHitBoxes.leftCollision)
-            {
-                return StrafeType.Clockwise;
-            }
-            else if (RNGResult <= strafeCounterClockwiseRNGRange && !strafeHitBoxes.rightCollision)
-            {
-                return StrafeType.Counterclockwise;
-            }
-            else if (RNGResult <= strafeTowardsRNGRange && targetDistance > minDistanceFromPlayer + strafeDistanceThreshold && !strafeHitBoxes.frontCollision)
-            {
-                return StrafeType.Towards;
-            }
-            else if (RNGResult <= strafeAwayRNGRange && targetDistance < maxDistanceFromPlayer - strafeDistanceThreshold && !strafeHitBoxes.backCollision)
-            {
-                return StrafeType.Away;
-            }
-            else
+            StrafeType RNGResult = strafeRandomizer.GetRandomWeightedEntry();
+
+            //Cancel strafe if it will result in a collision or move the enemy outside of the desired range from the player.
+            if (RNGResult == StrafeType.Clockwise && strafeHitBoxes.leftCollision)
             {
                 return StrafeType.None;
             }
+            else if (RNGResult == StrafeType.Counterclockwise && strafeHitBoxes.rightCollision)
+            {
+                return StrafeType.None;
+            }
+            else if (RNGResult == StrafeType.Towards && (targetDistance <= minDistanceFromPlayer + strafeDistanceThreshold || strafeHitBoxes.frontCollision))
+            {
+                return StrafeType.None;
+            }
+            else if (RNGResult == StrafeType.Away && (targetDistance > maxDistanceFromPlayer - strafeDistanceThreshold || strafeHitBoxes.backCollision))
+            {
+                return StrafeType.None;
+            }
+
+            return RNGResult;
         }
 
         Vector3 GetStrafeVector(AIGameObject aiGameObject, Vector3 target)
