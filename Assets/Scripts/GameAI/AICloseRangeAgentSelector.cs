@@ -1,33 +1,35 @@
-﻿namespace GameAI
+﻿/// <summary>
+/// NOT CURRENTLY IN USE. Keeping around anyway because it could be useful later though.
+/// </summary>
+namespace GameAI
 {
     using System.Collections.Generic;
 
-    public class AIActiveEngagementAgentSelector
+    public class AICloseRangeAgentSelector
     {
         /// <summary>
-        /// Function that assigns the closest aggroed enemies as actively engaged, meaning they will attack instead of just hanging around near the player.
-        /// maxActiveAgentCount determines how many enemies can be actively engaged at once.
+        /// Function that assigns the closest aggroed enemies as close range. maxCloseRangeAgentCount determines how many enemies can be actively engaged at once.
         /// </summary>
         /// <param name="agents"> A list of enemies </param>
         /// <param name="player"> The player </param>
-        public void AssignActivelyEngagedAgents(List<AIAgent> agents, TestPlayer player, int maxActiveAgentCount = 3)
+        public void AssignCloseRangeAgents(List<AIAgent> agents, TestPlayer player, int maxCloseRangeAgentCount = 3)
         {
             SortedSet<AIAgent> agentsSortedByDistance = new SortedSet<AIAgent>(new AgentDistanceComparer());
             foreach (AIAgent agent in agents)
             {
-                //agent.aiGameObject.isActivelyEngaged = false;
+                //agent.aiGameObject.isCloseRange = false;
                 if (agent.aiGameObject.isAggroed)
                 {
                     agentsSortedByDistance.Add(agent);
                 }
             }
 
-            int activeAgentCount = 0;
+            int closeRangeAgentCount = 0;
             foreach (AIAgent sortedAgent in agentsSortedByDistance)
             {
-                //sortedAgent.aiGameObject.isActivelyEngaged = true;
-                activeAgentCount++;
-                if (activeAgentCount >= maxActiveAgentCount)
+                //sortedAgent.aiGameObject.isCloseRange = true;
+                closeRangeAgentCount++;
+                if (closeRangeAgentCount >= maxCloseRangeAgentCount)
                 {
                     break;
                 }
