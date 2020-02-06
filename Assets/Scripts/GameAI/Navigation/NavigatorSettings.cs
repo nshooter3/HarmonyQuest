@@ -35,7 +35,7 @@
         /// <summary>
         /// The maximum distance at which collision avoidance will be applied.
         /// </summary>
-        public static float collisionAvoidanceMaxDistance = 3.0f;
+        public static float collisionAvoidanceDefaultMaxDistance = 3.0f;
 
         /// <summary>
         /// Multiplier that gets applied to the scale of the obstacle avoidance force.

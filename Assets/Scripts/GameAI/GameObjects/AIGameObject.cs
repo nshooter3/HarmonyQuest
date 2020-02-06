@@ -146,6 +146,12 @@
         protected Vector3 collisionAvoidanceForce = Vector3.zero;
         protected Vector3 obstacleAvoidanceForce = Vector3.zero;
 
+        //Multiplier for the collision avoidance force for this specific enemy
+        public float individualCollisionAvoidanceModifier = 1.0f;
+
+        //Multiplier for the collision avoidance force for this specific enemy
+        public float individualCollisionAvoidanceMaxDistance;
+
         //Adjusted avoidance forces that are decreased as the angle between them and the movement direction decreases.
         protected Vector3 adjustedCollisionAvoidanceForce = Vector3.zero;
         protected Vector3 adjustedObstacleAvoidanceForce = Vector3.zero;
@@ -186,6 +192,8 @@
             {
                 Debug.LogError("AIGameObject Init WARNING: Agent origin not located on or above navmesh.");
             }
+
+            individualCollisionAvoidanceMaxDistance = NavigatorSettings.collisionAvoidanceDefaultMaxDistance;
 
             NavPos.transform.parent = null;
             NavPos.SetActive(showDestination);

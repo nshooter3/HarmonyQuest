@@ -55,6 +55,8 @@
         {
             updateData.aiGameObject.isAggroed = true;
             updateData.aiGameObject.SetRigidBodyConstraintsToDefault();
+            updateData.aiGameObject.individualCollisionAvoidanceModifier = 3.5f;
+            updateData.aiGameObject.individualCollisionAvoidanceMaxDistance = 4.0f;
             RandomizeTargetedDistanceFromPlayer();
             InitStrafeRandomizer();
             strafeType = GetRandomStrafeType(updateData.aiGameObject.StrafeHitBoxes);
@@ -67,7 +69,7 @@
             strafeRandomizer.Add(StrafeType.Counterclockwise, 1);
             strafeRandomizer.Add(StrafeType.Towards, 1);
             strafeRandomizer.Add(StrafeType.Away, 1);
-            strafeRandomizer.Add(StrafeType.None, 2);
+            strafeRandomizer.Add(StrafeType.None, 3);
         }
 
         public override void OnUpdate(AIStateUpdateData updateData)
@@ -357,6 +359,8 @@
 
         public override void Abort(AIStateUpdateData updateData)
         {
+            updateData.aiGameObject.individualCollisionAvoidanceModifier = 1.0f;
+            updateData.aiGameObject.individualCollisionAvoidanceMaxDistance = NavigatorSettings.collisionAvoidanceDefaultMaxDistance;
             updateData.aiGameObject.ResetVelocity();
             aborted = true;
             readyForStateTransition = true;
