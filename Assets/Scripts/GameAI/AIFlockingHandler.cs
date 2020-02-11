@@ -18,7 +18,7 @@
         private Vector3 obstacleAvoidanceForce;
 
         /*
-            "Flocks, Herds, and Schools A distributed behavior model" - Craig Reynolds 1987
+            "Flocks, Herds, and Schools: A distributed behavior model" - Craig Reynolds 1987
             Wij = max(dmax - dij, 0)     (Wij = 2d matrix for avoidance weights between all agents, dmax = max distance at which flocking will activate, dij = distance between two agents)
             Fca = Sum(wi * Normalize(p - pi))      //(collision avoidance force) [wi = Wij, j is constant] p = my position pi = neighbor position
             F = Fp + Fca * Wca     (weight of collision avoidance [given]) Fp = already existing movement vector
