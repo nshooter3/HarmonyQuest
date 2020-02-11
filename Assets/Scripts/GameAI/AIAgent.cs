@@ -48,7 +48,7 @@
         {
             if (navigator != null)
             {
-                navigator.CheckIfPathNeedsToBeRegenerated();
+                navigator.RegeneratePathIfTargetHasMoved();
             }
         }
 
@@ -56,7 +56,7 @@
         {
             if (navigator != null)
             {
-                navigator.CheckIfWaypointIsObstructed();
+                navigator.RegeneratePathIfWaypointIsObstructed();
             }
         }
     }

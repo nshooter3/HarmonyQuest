@@ -34,7 +34,7 @@
             isActivelyGeneratingPath = false;
         }
 
-        public override void CheckIfPathNeedsToBeRegenerated()
+        public override void RegeneratePathIfTargetHasMoved()
         {
             if (isActivelyGeneratingPath == true && navigationTarget != null)
             {
@@ -46,7 +46,7 @@
             }
         }
 
-        public override void CheckIfWaypointIsObstructed()
+        public override void RegeneratePathIfWaypointIsObstructed()
         {
             if (isActivelyGeneratingPath == true && navigationTarget != null)
             {
