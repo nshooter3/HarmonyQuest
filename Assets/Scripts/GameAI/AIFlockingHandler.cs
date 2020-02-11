@@ -4,6 +4,9 @@
     using System.Collections.Generic;
     using GameAI.Navigation;
 
+    /// <summary>
+    /// Class that sets agent forces that allows them to separate from one another and objects marked as obstacles.
+    /// </summary>
     public class AIFlockingHandler
     {
         private float[,] agentWeights;
@@ -32,6 +35,7 @@
         */
         public void SetAgentCollisionAvoidanceForces(List<AIAgent> agents)
         {
+            //Optimization note: consider finding a way to do this without creating a new array every frame.
             agentWeights = new float[agents.Count, agents.Count];
 
             //Generate agentWeights, a two dimmensional array storing a weight based on every agent's distance from every other agent, and a collision avoidance max distance range.
@@ -75,6 +79,7 @@
         // Pretty much the same as SetAgentCollisionAvoidanceForces, except between agents and obstacles instead of agents and other agents.
         public void SetAgentObstacleAvoidanceForces(List<AIAgent> agents, AIObstacle[] obstacles)
         {
+            //Optimization note: consider finding a way to do this without creating a new array every frame.
             obstacleWeights = new float[agents.Count, obstacles.Length];
 
             //Generate obstacleWeights, a two dimmensional array storing a weight based on every agents's distance from every obstacle, and a collision avoidance max distance range.
