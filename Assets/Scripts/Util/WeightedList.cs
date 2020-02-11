@@ -3,6 +3,11 @@
     using UnityEngine;
     using System.Collections.Generic;
 
+    /// <summary>
+    /// List that accepts objects with an associated weight, and returns a random result.
+    /// Objects with higher weights are more likely to be chosen, as an object's odds are the object's weight versus the total weight of all objects.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class WeightedList<T>
     {
         private List<WeightedListNode> weightedList = new List<WeightedListNode>();
