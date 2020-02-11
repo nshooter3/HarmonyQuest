@@ -21,6 +21,10 @@
         private float pathRefreshTimer = 0.0f;
         private float waypointBlockedCheckTimer = 0.0f;
 
+        private float collisionAvoidanceTimer = 0.0f;
+
+        private float obstacleAvoidanceTimer = 0.0f;
+
         // Start is called before the first frame update
         void Start()
         {
@@ -54,11 +58,27 @@
         {
             if (useFlocking)
             {
-                aiFlockingHandler.SetAgentCollisionAvoidanceForces(agents);
+                if (collisionAvoidanceTimer > 0)
+                {
+                    collisionAvoidanceTimer -= Time.deltaTime;
+                }
+                else
+                {
+                    collisionAvoidanceTimer = NavigatorSettings.collisionAvoidanceUpdateRate;
+                    aiFlockingHandler.SetAgentCollisionAvoidanceForces(agents);
+                }
             }
             if (useObstacleRepulsion)
             {
-                aiFlockingHandler.SetAgentObstacleAvoidanceForces(agents, aiObstacles);
+                if (obstacleAvoidanceTimer > 0)
+                {
+                    obstacleAvoidanceTimer -= Time.deltaTime;
+                }
+                else
+                {
+                    obstacleAvoidanceTimer = NavigatorSettings.obstacleAvoidanceUpdateRate;
+                    aiFlockingHandler.SetAgentObstacleAvoidanceForces(agents, aiObstacles);
+                }
             }
 
             AgentsUpdate();

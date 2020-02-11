@@ -38,6 +38,11 @@
         public static float collisionAvoidanceDefaultMaxDistance = 3.0f;
 
         /// <summary>
+        /// How much time passes between collision avoidance calculation updates. A larger value leads to better performance.
+        /// </summary>
+        public static float collisionAvoidanceUpdateRate = 0.05f;
+
+        /// <summary>
         /// Multiplier that gets applied to the scale of the obstacle avoidance force.
         /// </summary>
         public static float obstacleAvoidanceScale = 0.3f;
@@ -46,6 +51,11 @@
         /// The maximum distance at which obstacle avoidance will be applied.
         /// </summary>
         public static float obstacleAvoidanceMaxDistance = 3.0f;
+
+        /// <summary>
+        /// How much time passes between obstacle avoidance calculation updates. A larger value leads to better performance.
+        /// </summary>
+        public static float obstacleAvoidanceUpdateRate = 0.05f;
 
         /// <summary>
         /// Value that determines how much avoidance forces get scaled down as they approach the same direction as the movement direction.
