@@ -11,7 +11,8 @@
 
         public abstract void SetTarget(Transform navigationAgent, Transform navigationTarget);
         public abstract void CancelCurrentNavigation();
-        public abstract void CheckIfPathNeedsToBeRegenerated();
+        public abstract void RegeneratePathIfTargetHasMoved();
+        public abstract void RegeneratePathIfWaypointIsObstructed();
         public abstract Vector3 GetNextWaypoint();
         public abstract void OnUpdate();
     }

@@ -12,8 +12,12 @@
     public class CollisionWrapper : MonoBehaviour
     {
         public Collider col;
+        public bool ignoreCollisionsWithOtherTriggers = true;
         public bool useLayerMask = true;
         public LayerMask mask;
+
+        public GameObject[] objectsToIgnore;
+        public string[] namesToIgnore;
 
         private bool isTrigger;
         private bool isActive = true;
@@ -47,10 +51,33 @@
             this.isActive = isActive;
         }
 
+        private bool ShouldIgnoreObject(GameObject obj)
+        {
+            foreach (GameObject objectToIgnore in objectsToIgnore)
+            {
+                if (objectToIgnore == obj)
+                {
+                    return true;
+                }
+            }
+            foreach (string nameToIgnore in namesToIgnore)
+            {
+                if (nameToIgnore == obj.name)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         private void OnTriggerEnter(Collider other)
         {
-            if (isActive && isTrigger)
+            if (isActive && isTrigger && ShouldIgnoreObject(other.gameObject) == false)
             {
+                if (ignoreCollisionsWithOtherTriggers == true && other.isTrigger == true)
+                {
+                    return;
+                }
                 if (useLayerMask == false || (mask == (mask | 1 << other.gameObject.layer)))
                 {
                     if (onTriggerEnterDelegate != null)
@@ -63,8 +90,12 @@
 
         private void OnTriggerStay(Collider other)
         {
-            if (isActive && isTrigger)
+            if (isActive && isTrigger && ShouldIgnoreObject(other.gameObject) == false)
             {
+                if (ignoreCollisionsWithOtherTriggers == true && other.isTrigger == true)
+                {
+                    return;
+                }
                 if (useLayerMask == false || (mask == (mask | 1 << other.gameObject.layer)))
                 {
                     if (onTriggerStayDelegate != null)
@@ -77,8 +108,12 @@
 
         private void OnTriggerExit(Collider other)
         {
-            if (isActive && isTrigger)
+            if (isActive && isTrigger && ShouldIgnoreObject(other.gameObject) == false)
             {
+                if (ignoreCollisionsWithOtherTriggers == true && other.isTrigger == true)
+                {
+                    return;
+                }
                 if (useLayerMask == false || (mask == (mask | 1 << other.gameObject.layer)))
                 {
                     if (onTriggerExitDelegate != null)
@@ -91,8 +126,12 @@
 
         void OnCollisionEnter(Collision other)
         {
-            if (isActive && isTrigger == false)
+            if (isActive && isTrigger == false && ShouldIgnoreObject(other.gameObject) == false)
             {
+                if (ignoreCollisionsWithOtherTriggers == true && other.collider.isTrigger == true)
+                {
+                    return;
+                }
                 if (useLayerMask == false || (mask == (mask | 1 << other.gameObject.layer)))
                 {
                     if (onCollisionEnterDelegate != null)
@@ -105,8 +144,12 @@
 
         void OnCollisionStay(Collision other)
         {
-            if (isActive && isTrigger == false)
+            if (isActive && isTrigger == false && ShouldIgnoreObject(other.gameObject) == false)
             {
+                if (ignoreCollisionsWithOtherTriggers == true && other.collider.isTrigger == true)
+                {
+                    return;
+                }
                 if (useLayerMask == false || (mask == (mask | 1 << other.gameObject.layer)))
                 {
                     if (onCollisionStayDelegate != null)
@@ -119,8 +162,12 @@
 
         void OnCollisionExit(Collision other)
         {
-            if (isActive && isTrigger == false)
+            if (isActive && isTrigger == false && ShouldIgnoreObject(other.gameObject) == false)
             {
+                if (ignoreCollisionsWithOtherTriggers == true && other.collider.isTrigger == true)
+                {
+                    return;
+                }
                 if (useLayerMask == false || (mask == (mask | 1 << other.gameObject.layer)))
                 {
                     if (onCollisionExitDelegate != null)

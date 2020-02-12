@@ -38,11 +38,26 @@
         public Transform AIAgentBottom { get => aiAgentBottom; private set => aiAgentBottom = value; }
 
         /// <summary>
+        /// Set of colliders that the enemy can use to determine which direction they can go when moving freely.
+        /// </summary>
+        [SerializeField]
+        [Tooltip("Set of colliders that the enemy can use to determine which direction they can go when moving freely.")]
+        private StrafeHitboxes strafeHitBoxes;
+        public StrafeHitboxes StrafeHitBoxes { get => strafeHitBoxes; private set => strafeHitBoxes = value; }
+
+        /// <summary>
         /// The rigidbody for our agent
         /// </summary>
         [SerializeField]
         [Tooltip("The rigidbody for our agent")]
         protected Rigidbody rb;
+
+        /// <summary>
+        /// The collider for our agent
+        /// </summary>
+        [SerializeField]
+        [Tooltip("The collider for our agent")]
+        protected Collider agentCollider;
 
         /// <summary>
         /// Whether or not the agent should deaggro once the player gets a certain distance away.
@@ -95,6 +110,11 @@
         [Tooltip("Whether or not to make navPos visible. This shows where the enemy is attempting to navigate.")]
         private bool showDestination = false;
 
+        [SerializeField]
+        private MeshRenderer body;
+        [SerializeField]
+        private MeshRenderer head;
+
         /// <summary>
         /// Debug sphere gameobject to show where the enemy is attempting to navigate. Visible if showDestination is set to true.
         /// </summary>
@@ -114,7 +134,7 @@
         public RigidbodyConstraints DefaultConstraints { get; private set; }
 
         [HideInInspector]
-        public bool targetInLineOfSight = false;
+        public bool isAggroed = false;
 
         protected Vector3 moveDirection = Vector3.zero;
         protected Vector3 rotationDirection = Vector3.zero;
@@ -122,11 +142,45 @@
         private Vector3 velocityChange = Vector3.zero;
         private float prevYVel = 0;
 
+        //Additional movement forces that make an agent attempt to keep away from other agents and obstacles.
+        protected Vector3 collisionAvoidanceForce = Vector3.zero;
+        protected Vector3 obstacleAvoidanceForce = Vector3.zero;
+
+        //Multiplier for the collision avoidance force for this specific enemy
+        public float individualCollisionAvoidanceModifier = 1.0f;
+
+        //Multiplier for the collision avoidance force for this specific enemy
+        public float individualCollisionAvoidanceMaxDistance;
+
+        //Adjusted avoidance forces that are decreased as the angle between them and the movement direction decreases.
+        protected Vector3 adjustedCollisionAvoidanceForce = Vector3.zero;
+        protected Vector3 adjustedObstacleAvoidanceForce = Vector3.zero;
+
+        //Private variables used in the AdjustAvoidanceForceBasedOnMovementVelocity to store intermediate results.
+        private Vector3 adjustedForce;
+        private Vector3 difference;
+
+        public bool permissionToAttack = false;
+        public bool isAttacking = false;
+
+        public bool debugFlocking = false;
+        public bool debugEngage = false;
+
         public virtual void Init()
         {
             if (rb == null)
             {
                 rb = GetComponent<Rigidbody>();
+            }
+
+            if (agentCollider == null)
+            {
+                agentCollider = GetComponent<Collider>();
+            }
+
+            if (strafeHitBoxes != null)
+            {
+                strafeHitBoxes.Init();
             }
 
             Origin.parent = null;
@@ -139,6 +193,8 @@
                 Debug.LogError("AIGameObject Init WARNING: Agent origin not located on or above navmesh.");
             }
 
+            individualCollisionAvoidanceMaxDistance = NavigatorSettings.collisionAvoidanceDefaultMaxDistance;
+
             NavPos.transform.parent = null;
             NavPos.SetActive(showDestination);
             DefaultConstraints = rb.constraints;
@@ -146,11 +202,28 @@
             AggroTarget = TestPlayer.instance.transform;
         }
 
-        public virtual void SetVelocity(Vector3 destination, bool ignoreYValue = true)
+        public virtual void SetVelocityTowardsDestination(Vector3 destination, bool ignoreYValue = true, float speedModifier = 1.0f, bool alwaysFaceTarget = false)
         {
-            moveDirection = (destination - AIAgentBottom.position).normalized;
+            SetVelocity((destination - AIAgentBottom.position).normalized, ignoreYValue, speedModifier, alwaysFaceTarget);
+        }
 
-            rotationDirection = moveDirection;
+        public virtual void SetVelocityAwayFromDestination(Vector3 destination, bool ignoreYValue = true, float speedModifier = 1.0f, bool alwaysFaceTarget = false)
+        {
+            SetVelocity((AIAgentBottom.position - destination).normalized, ignoreYValue, speedModifier, alwaysFaceTarget);
+        }
+
+        public virtual void SetVelocity(Vector3 velocity, bool ignoreYValue = true, float speedModifier = 1.0f, bool alwaysFaceTarget = false)
+        {
+            moveDirection = velocity.normalized;
+
+            if (alwaysFaceTarget)
+            {
+                rotationDirection = (AggroTarget.transform.position - transform.position).normalized;
+            }
+            else
+            {
+                rotationDirection = moveDirection;
+            }
             rotationDirection.y = 0;
             rotationDirection.Normalize();
             Rotate(rotationDirection, 1.0f);
@@ -165,6 +238,32 @@
             {
                 newVelocity = (moveDirection * Time.deltaTime) * speed;
             }
+
+            adjustedCollisionAvoidanceForce = AdjustAvoidanceForceBasedOnMovementVelocity(collisionAvoidanceForce, newVelocity);
+            adjustedObstacleAvoidanceForce = AdjustAvoidanceForceBasedOnMovementVelocity(obstacleAvoidanceForce, newVelocity);
+
+            if (debugFlocking)
+            {
+                Debug.Log("VELOCITY FORCE: " + newVelocity.magnitude);
+                Debug.Log("ADJUSTED COLLISION AVOIDANCE FORCE: " + adjustedCollisionAvoidanceForce.magnitude);
+                Debug.Log("ADJUSTED OBSTACLE AVOIDANCE FORCE: " + adjustedObstacleAvoidanceForce.magnitude);
+            }
+
+            newVelocity = (newVelocity + adjustedCollisionAvoidanceForce + adjustedObstacleAvoidanceForce) * speedModifier;
+        }
+
+        /// <summary>
+        /// Scale down avoidance forces as the angle between them and the movement direction decreases.
+        /// This prevents redundant avoidance forces from speeding up the enemy rather than adjusting their path.
+        /// </summary>
+        /// <param name="avoidanceForce"></param>
+        /// <param name="movementVelocity"></param>
+        /// <returns></returns>
+        private Vector3 AdjustAvoidanceForceBasedOnMovementVelocity(Vector3 avoidanceForce, Vector3 movementVelocity)
+        {
+            adjustedForce = avoidanceForce * (Vector3.Angle(movementVelocity, avoidanceForce) / 180.0f);
+            difference = avoidanceForce - adjustedForce;
+            return avoidanceForce - difference * NavigatorSettings.avoidanceForceMovementVelocityAdjustmentScale;
         }
 
         public virtual void ApplyVelocity(bool ignoreYValue = true)
@@ -188,6 +287,21 @@
         public virtual void ResetVelocity()
         {
             newVelocity = Vector3.zero;
+        }
+
+        public Vector3 GetCollisionAvoidanceForce()
+        {
+            return collisionAvoidanceForce;
+        }
+
+        public void SetCollisionAvoidanceForce(Vector3 collisionAvoidanceForce)
+        {
+            this.collisionAvoidanceForce = collisionAvoidanceForce;
+        }
+
+        public void SetObstacleAvoidanceForce(Vector3 obstacleAvoidanceForce)
+        {
+            this.obstacleAvoidanceForce = obstacleAvoidanceForce;
         }
 
         public virtual void Rotate(Vector3 direction, float turnSpeedModifier)
@@ -224,6 +338,28 @@
         public void SetRigidBodyConstraintsToLockAllButGravity()
         {
             SetRigidbodyConstraints(RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ);
+        }
+
+        public void SetRigidBodyConstraintsToLockMovement()
+        {
+            SetRigidbodyConstraints(RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ |
+                                    RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ);
+        }
+
+        public Collider GetCollider()
+        {
+            return agentCollider;
+        }
+
+        public float GetDistanceFromAggroTarget()
+        {
+            return Vector3.Distance(transform.position, AggroTarget.transform.position);
+        }
+
+        public void DebugChangeColor(Color color)
+        {
+            body.material.color = color;
+            head.material.color = color;
         }
 
         /// <summary>
