@@ -10,11 +10,11 @@
 
         public override void Init(AIStateUpdateData updateData)
         {
-            updateData.aiGameObject.isAggroed = false;
-            updateData.aiGameObject.SetRigidBodyConstraintsToLockAllButGravity();
-            if (updateData.aiGameObject.AggroZone != null)
+            updateData.aiGameObjectFacade.data.isAggroed = false;
+            updateData.aiGameObjectFacade.SetRigidBodyConstraintsToLockAllButGravity();
+            if (updateData.aiGameObjectFacade.data.aggroZone != null)
             {
-                updateData.aiGameObject.AggroZone.AssignFunctionToTriggerStayDelegate(AggroZoneActivation);
+                updateData.aiGameObjectFacade.data.aggroZone.AssignFunctionToTriggerStayDelegate(AggroZoneActivation);
             }
         }
 
@@ -25,7 +25,7 @@
 
         public override void OnFixedUpdate(AIStateUpdateData updateData)
         {
-            updateData.aiGameObject.ApplyGravity();
+            updateData.aiGameObjectFacade.ApplyGravity();
         }
 
         public override void OnBeatUpdate(AIStateUpdateData updateData)
@@ -35,7 +35,7 @@
 
         public override void CheckForStateChange(AIStateUpdateData updateData)
         {
-            if (aggroZoneEntered && !NavMeshUtil.IsTargetObstructed(updateData.aiGameObject.AIAgentBottom, updateData.player.transform))
+            if (aggroZoneEntered && !NavMeshUtil.IsTargetObstructed(updateData.aiGameObjectFacade.data.aiAgentBottom, updateData.player.transform))
             {
                 updateData.stateHandler.RequestStateTransition(new FrogKnightEngageState { }, updateData);
             }
@@ -43,12 +43,12 @@
 
         public override void Abort(AIStateUpdateData updateData)
         {
-            updateData.aiGameObject.ResetVelocity();
+            updateData.aiGameObjectFacade.ResetVelocity();
             aborted = true;
             readyForStateTransition = true;
-            if (updateData.aiGameObject.AggroZone != null)
+            if (updateData.aiGameObjectFacade.data.aggroZone != null)
             {
-                updateData.aiGameObject.AggroZone.RemoveFunctionFromCollisionStayDelegate(AggroZoneActivation);
+                updateData.aiGameObjectFacade.data.aggroZone.RemoveFunctionFromCollisionStayDelegate(AggroZoneActivation);
             }
         }
 

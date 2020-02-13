@@ -1,17 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class AICollision : MonoBehaviour
+﻿namespace GameAI.AIGameObjects
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    using System.Collections;
+    using System.Collections.Generic;
+    using UnityEngine;
+    using GamePhysics;
+    using GameAI.States;
 
-    // Update is called once per frame
-    void Update()
+    public class AICollision
     {
         
     }

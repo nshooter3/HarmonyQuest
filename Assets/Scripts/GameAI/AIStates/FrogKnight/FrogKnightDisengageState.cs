@@ -10,25 +10,25 @@
 
         public override void Init(AIStateUpdateData updateData)
         {
-            updateData.navigator.SetTarget(updateData.aiGameObject.AIAgentBottom, updateData.aiGameObject.Origin);
-            updateData.aiGameObject.isAggroed = false;
-            updateData.aiGameObject.SetRigidBodyConstraintsToDefault();
-            if (updateData.aiGameObject.AggroZone != null)
+            updateData.navigator.SetTarget(updateData.aiGameObjectFacade.data.aiAgentBottom, updateData.aiGameObjectFacade.data.origin);
+            updateData.aiGameObjectFacade.data.isAggroed = false;
+            updateData.aiGameObjectFacade.SetRigidBodyConstraintsToDefault();
+            if (updateData.aiGameObjectFacade.data.aggroZone != null)
             {
-                updateData.aiGameObject.AggroZone.AssignFunctionToTriggerStayDelegate(AggroZoneActivation);
+                updateData.aiGameObjectFacade.data.aggroZone.AssignFunctionToTriggerStayDelegate(AggroZoneActivation);
             }
         }
 
         public override void OnUpdate(AIStateUpdateData updateData)
         {
-            updateData.aiGameObject.NavPos.transform.position = updateData.navigator.GetNextWaypoint();
-            updateData.aiGameObject.SetVelocityTowardsDestination(updateData.navigator.GetNextWaypoint());
+            updateData.aiGameObjectFacade.data.navPos.transform.position = updateData.navigator.GetNextWaypoint();
+            updateData.aiGameObjectFacade.SetVelocityTowardsDestination(updateData.navigator.GetNextWaypoint());
         }
 
         public override void OnFixedUpdate(AIStateUpdateData updateData)
         {
-            updateData.aiGameObject.ApplyVelocity();
-            updateData.aiGameObject.ApplyGravity();
+            updateData.aiGameObjectFacade.ApplyVelocity();
+            updateData.aiGameObjectFacade.ApplyGravity();
         }
 
         public override void OnBeatUpdate(AIStateUpdateData updateData)
@@ -38,11 +38,11 @@
 
         public override void CheckForStateChange(AIStateUpdateData updateData)
         {
-            if (aggroZoneEntered && !NavMeshUtil.IsTargetObstructed(updateData.aiGameObject.AIAgentBottom, updateData.player.transform))
+            if (aggroZoneEntered && !NavMeshUtil.IsTargetObstructed(updateData.aiGameObjectFacade.data.aiAgentBottom, updateData.player.transform))
             {
                 updateData.stateHandler.RequestStateTransition(new FrogKnightEngageState { }, updateData);
             }
-            else if (updateData.navigator.navigationTarget == null || Vector3.Distance(updateData.aiGameObject.AIAgentBottom.position, updateData.navigator.navigationTarget.position) <= NavigatorSettings.waypointReachedDistanceThreshold)
+            else if (updateData.navigator.navigationTarget == null || Vector3.Distance(updateData.aiGameObjectFacade.data.aiAgentBottom.position, updateData.navigator.navigationTarget.position) <= NavigatorSettings.waypointReachedDistanceThreshold)
             {
                 updateData.stateHandler.RequestStateTransition(new FrogKnightIdleState { }, updateData);
             }
@@ -50,13 +50,13 @@
 
         public override void Abort(AIStateUpdateData updateData)
         {
-            updateData.aiGameObject.ResetVelocity();
+            updateData.aiGameObjectFacade.ResetVelocity();
             updateData.navigator.CancelCurrentNavigation();
             aborted = true;
             readyForStateTransition = true;
-            if (updateData.aiGameObject.AggroZone != null)
+            if (updateData.aiGameObjectFacade.data.aggroZone != null)
             {
-                updateData.aiGameObject.AggroZone.RemoveFunctionFromCollisionStayDelegate(AggroZoneActivation);
+                updateData.aiGameObjectFacade.data.aggroZone.RemoveFunctionFromCollisionStayDelegate(AggroZoneActivation);
             }
         }
 

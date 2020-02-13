@@ -50,7 +50,7 @@
                     {
                         distance = GetAgentDistanceFromBoundingBox(sourceAgentPosition, targetAgentBoundingBox);
                         //Wij = max(dmax - dij, 0)
-                        agentWeights[i, j] = Mathf.Max(agents[i].aiGameObject.individualCollisionAvoidanceMaxDistance - distance, 0);
+                        agentWeights[i, j] = Mathf.Max(agents[i].aiGameObject.data.individualCollisionAvoidanceMaxDistance - distance, 0);
                     }
                 }
             }
@@ -72,7 +72,7 @@
                     }
                 }
 
-                agents[i].aiGameObject.SetCollisionAvoidanceForce(collisionAvoidanceForce * NavigatorSettings.collisionAvoidanceScale * agents[i].aiGameObject.individualCollisionAvoidanceModifier);
+                agents[i].aiGameObject.SetCollisionAvoidanceForce(collisionAvoidanceForce * NavigatorSettings.collisionAvoidanceScale * agents[i].aiGameObject.data.individualCollisionAvoidanceModifier);
             }
         }
 

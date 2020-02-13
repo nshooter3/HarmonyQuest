@@ -18,7 +18,7 @@ namespace GameAI
             foreach (AIAgent agent in agents)
             {
                 //agent.aiGameObject.isCloseRange = false;
-                if (agent.aiGameObject.isAggroed)
+                if (agent.aiGameObject.data.isAggroed)
                 {
                     agentsSortedByDistance.Add(agent);
                 }

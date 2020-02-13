@@ -53,13 +53,13 @@
 
         public override void Init(AIStateUpdateData updateData)
         {
-            updateData.aiGameObject.isAggroed = true;
-            updateData.aiGameObject.SetRigidBodyConstraintsToDefault();
-            updateData.aiGameObject.individualCollisionAvoidanceModifier = 3.5f;
-            updateData.aiGameObject.individualCollisionAvoidanceMaxDistance = 4.0f;
+            updateData.aiGameObjectFacade.data.isAggroed = true;
+            updateData.aiGameObjectFacade.SetRigidBodyConstraintsToDefault();
+            updateData.aiGameObjectFacade.data.individualCollisionAvoidanceModifier = 3.5f;
+            updateData.aiGameObjectFacade.data.individualCollisionAvoidanceMaxDistance = 4.0f;
             RandomizeTargetedDistanceFromPlayer();
             InitStrafeRandomizer();
-            strafeType = GetRandomStrafeType(updateData.aiGameObject.StrafeHitBoxes);
+            strafeType = GetRandomStrafeType(updateData.aiGameObjectFacade.data.strafeHitBoxes);
         }
 
         private void InitStrafeRandomizer()
@@ -74,9 +74,9 @@
 
         public override void OnUpdate(AIStateUpdateData updateData)
         {
-            Vector3 newNavPos = updateData.aiGameObject.AggroTarget.position;
-            newNavPos.y += updateData.aiGameObject.NavPosHeightOffset;
-            updateData.aiGameObject.NavPos.transform.position = newNavPos;
+            Vector3 newNavPos = updateData.aiGameObjectFacade.data.aggroTarget.position;
+            newNavPos.y += updateData.aiGameObjectFacade.data.navPosHeightOffset;
+            updateData.aiGameObjectFacade.data.navPos.transform.position = newNavPos;
 
             if (strafeTimer > 0.0f)
             {
@@ -86,8 +86,8 @@
             Think(updateData);
             React(updateData);
 
-            targetDistance = updateData.aiGameObject.GetDistanceFromAggroTarget();
-            Vector3 avoidanceForce = GetAvoidanceForce(updateData.aiGameObject);
+            targetDistance = updateData.aiGameObjectFacade.GetDistanceFromAggroTarget();
+            Vector3 avoidanceForce = GetAvoidanceForce(updateData.aiGameObjectFacade);
 
             inRangeThisFrame = targetDistance <= targetedDistanceFromPlayer;
             leavingRange = targetDistance > maxDistanceFromPlayer && hitTargetDistance;
@@ -95,7 +95,7 @@
 
             if (leavingRange)
             {
-                if (updateData.aiGameObject.debugEngage)
+                if (updateData.aiGameObjectFacade.data.debugEngage)
                 {
                     Debug.Log("leavingRange");
                 }
@@ -104,7 +104,7 @@
             }
             else if (enteringRange)
             {
-                if (updateData.aiGameObject.debugEngage)
+                if (updateData.aiGameObjectFacade.data.debugEngage)
                 {
                     Debug.Log("enteringRange");
                 }
@@ -113,25 +113,25 @@
 
             bool shouldAvoid = (targetDistance <= avoidRange && avoidanceForce.magnitude > 0.35f);
             bool shouldStrafe = (hitTargetDistance);
-            bool shouldAttack = (targetDistance <= attackRange && updateData.aiGameObject.permissionToAttack);
+            bool shouldAttack = (targetDistance <= attackRange && updateData.aiGameObjectFacade.data.permissionToAttack);
 
             if (isWindingUp)
             {
-                if (updateData.aiGameObject.debugEngage)
+                if (updateData.aiGameObjectFacade.data.debugEngage)
                 {
                     Debug.Log("ENEMY WIND UP");
                 }
             }
             else if (isAttacking)
             {
-                if (updateData.aiGameObject.debugEngage)
+                if (updateData.aiGameObjectFacade.data.debugEngage)
                 {
                     Debug.Log("ENEMY ATTACK");
                 }
             }
             else if (shouldAttack)
             {
-                if (updateData.aiGameObject.debugEngage)
+                if (updateData.aiGameObjectFacade.data.debugEngage)
                 {
                     Debug.Log("ENEMY BEGIN WIND UP");
                 }
@@ -147,32 +147,32 @@
             }*/
             else if (shouldStrafe)
             {
-                updateData.aiGameObject.SetRigidBodyConstraintsToDefault();
-                Vector3 strafeDir = GetStrafeVector(updateData.aiGameObject, updateData.aiGameObject.AggroTarget.transform.position);
-                if (updateData.aiGameObject.debugEngage)
+                updateData.aiGameObjectFacade.SetRigidBodyConstraintsToDefault();
+                Vector3 strafeDir = GetStrafeVector(updateData.aiGameObjectFacade, updateData.aiGameObjectFacade.data.aggroTarget.transform.position);
+                if (updateData.aiGameObjectFacade.data.debugEngage)
                 {
                     Debug.Log("ENEMY STRAFE");
                 }
-                Debug.DrawRay(updateData.aiGameObject.transform.position, strafeDir * 1.0f, Color.blue);
-                SeekDirection(updateData.aiGameObject, strafeDir, true, 0.35f);
+                Debug.DrawRay(updateData.aiGameObjectFacade.transform.position, strafeDir * 1.0f, Color.blue);
+                SeekDirection(updateData.aiGameObjectFacade, strafeDir, true, 0.35f);
             }
             else if (hitTargetDistance == false)
             {
-                if (updateData.aiGameObject.debugEngage)
+                if (updateData.aiGameObjectFacade.data.debugEngage)
                 {
                     Debug.Log("ENEMY APPROACH PLAYER");
                 }
-                Debug.DrawRay(updateData.aiGameObject.transform.position, (updateData.aiGameObject.AggroTarget.position - updateData.aiGameObject.transform.position) * 1.0f, Color.green);
-                updateData.aiGameObject.SetRigidBodyConstraintsToDefault();
-                SeekDestination(updateData.aiGameObject, updateData.aiGameObject.AggroTarget.position);
+                Debug.DrawRay(updateData.aiGameObjectFacade.transform.position, (updateData.aiGameObjectFacade.data.aggroTarget.position - updateData.aiGameObjectFacade.transform.position) * 1.0f, Color.green);
+                updateData.aiGameObjectFacade.SetRigidBodyConstraintsToDefault();
+                SeekDestination(updateData.aiGameObjectFacade, updateData.aiGameObjectFacade.data.aggroTarget.position);
             }
             else
             {
-                if (updateData.aiGameObject.debugEngage)
+                if (updateData.aiGameObjectFacade.data.debugEngage)
                 {
                     Debug.Log("ENEMY STAND STILL");
                 }
-                updateData.aiGameObject.SetRigidBodyConstraintsToLockAllButGravity();
+                updateData.aiGameObjectFacade.SetRigidBodyConstraintsToLockAllButGravity();
             }
         }
 
@@ -309,7 +309,7 @@
                 strafeTimer = Random.Range(minStrafeCooldown, maxStrafeCooldown);
                 if (strafeType == StrafeType.None)
                 {
-                    strafeType = GetRandomStrafeType(updateData.aiGameObject.StrafeHitBoxes);
+                    strafeType = GetRandomStrafeType(updateData.aiGameObjectFacade.data.strafeHitBoxes);
                 }
                 else
                 {
@@ -317,7 +317,7 @@
                 }
             }
 
-            CheckForStrafeInterupt(updateData.aiGameObject.StrafeHitBoxes);
+            CheckForStrafeInterupt(updateData.aiGameObjectFacade.data.strafeHitBoxes);
         }
 
         void React(AIStateUpdateData updateData)
@@ -327,8 +327,8 @@
 
         public override void OnFixedUpdate(AIStateUpdateData updateData)
         {
-            updateData.aiGameObject.ApplyVelocity();
-            updateData.aiGameObject.ApplyGravity();
+            updateData.aiGameObjectFacade.ApplyVelocity();
+            updateData.aiGameObjectFacade.ApplyGravity();
         }
 
         public override void OnBeatUpdate(AIStateUpdateData updateData)
@@ -349,7 +349,7 @@
                 if (checkForTargetObstructionTimer > NavigatorSettings.checkForTargetObstructionRate)
                 {
                     checkForTargetObstructionTimer = 0;
-                    if (NavMeshUtil.IsTargetObstructed(updateData.aiGameObject.AIAgentBottom, updateData.player.transform))
+                    if (NavMeshUtil.IsTargetObstructed(updateData.aiGameObjectFacade.data.aiAgentBottom, updateData.player.transform))
                     {
                         updateData.stateHandler.RequestStateTransition(new FrogKnightNavigateState { }, updateData);
                     }
@@ -359,16 +359,16 @@
 
         public override void Abort(AIStateUpdateData updateData)
         {
-            updateData.aiGameObject.individualCollisionAvoidanceModifier = 1.0f;
-            updateData.aiGameObject.individualCollisionAvoidanceMaxDistance = NavigatorSettings.collisionAvoidanceDefaultMaxDistance;
-            updateData.aiGameObject.ResetVelocity();
+            updateData.aiGameObjectFacade.data.individualCollisionAvoidanceModifier = 1.0f;
+            updateData.aiGameObjectFacade.data.individualCollisionAvoidanceMaxDistance = NavigatorSettings.collisionAvoidanceDefaultMaxDistance;
+            updateData.aiGameObjectFacade.ResetVelocity();
             aborted = true;
             readyForStateTransition = true;
         }
 
         private bool ShouldDeAggro(AIStateUpdateData updateData)
         {
-            return updateData.aiGameObject.DisengageWithDistance && Vector3.Distance(updateData.aiGameObject.transform.position, updateData.player.transform.position) > updateData.aiGameObject.DisengageDistance;
+            return updateData.aiGameObjectFacade.data.disengageWithDistance && Vector3.Distance(updateData.aiGameObjectFacade.transform.position, updateData.player.transform.position) > updateData.aiGameObjectFacade.data.disengageDistance;
         }
     }
 }
