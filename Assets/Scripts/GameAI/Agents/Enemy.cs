@@ -1,9 +1,10 @@
-﻿namespace GameAI.AIGameObjects
+﻿namespace GameAI.Agents
 {
     using GameAI.States;
     using GameAI.Navigation;
+    using GameAI.AIGameObjects;
 
-    public abstract class Enemy : AIGameObject
+    public abstract class Enemy : AIGameObjectFacade
     {
         public override void Init()
         {

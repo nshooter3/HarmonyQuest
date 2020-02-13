@@ -12,7 +12,7 @@
         public bool useObstacleRepulsion = true;
         public bool useWaypointBlockCheck = false;
 
-        private AIGameObject[] aiGameObjects;
+        private AIGameObjectFacade[] aiGameObjects;
         private List<AIAgent> agents;
         private AIObstacle[] aiObstacles;
 
@@ -36,9 +36,9 @@
 
         public void PopulateAgentsList()
         {
-            aiGameObjects = FindObjectsOfType<AIGameObject>();
+            aiGameObjects = FindObjectsOfType<AIGameObjectFacade>();
             agents = new List<AIAgent>();
-            foreach (AIGameObject aiGameObject in aiGameObjects)
+            foreach (AIGameObjectFacade aiGameObject in aiGameObjects)
             {
                 agents.Add(new AIAgent(aiGameObject));
             }

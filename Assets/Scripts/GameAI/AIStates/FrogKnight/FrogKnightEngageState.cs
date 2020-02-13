@@ -176,22 +176,22 @@
             }
         }
 
-        void AttackWindup(AIGameObject aiGameObject)
+        void AttackWindup(AIGameObjectFacade aiGameObject)
         {
             aiGameObject.DebugChangeColor(Color.yellow);
         }
 
-        void Attack(AIGameObject aiGameObject)
+        void Attack(AIGameObjectFacade aiGameObject)
         {
             aiGameObject.DebugChangeColor(Color.red);
         }
 
-        Vector3 GetAvoidanceForce(AIGameObject aiGameObject)
+        Vector3 GetAvoidanceForce(AIGameObjectFacade aiGameObject)
         {
             return aiGameObject.GetCollisionAvoidanceForce();
         }
 
-        void Avoid(AIGameObject aiGameObject, Vector3 avoidanceForce)
+        void Avoid(AIGameObjectFacade aiGameObject, Vector3 avoidanceForce)
         {
             SeekDirection(aiGameObject, avoidanceForce, true, 0.5f);
         }
@@ -221,7 +221,7 @@
             return RNGResult;
         }
 
-        Vector3 GetStrafeVector(AIGameObject aiGameObject, Vector3 target)
+        Vector3 GetStrafeVector(AIGameObjectFacade aiGameObject, Vector3 target)
         {
             Vector3 result = Vector3.zero;
             switch (strafeType)
@@ -280,12 +280,12 @@
             strafeHitBoxes.ResetCollisions();
         }
 
-        void SeekDestination(AIGameObject aiGameObject, Vector3 target, bool ignoreYValue = true, float speedModifier = 1.0f, bool alwaysFaceTarget = true)
+        void SeekDestination(AIGameObjectFacade aiGameObject, Vector3 target, bool ignoreYValue = true, float speedModifier = 1.0f, bool alwaysFaceTarget = true)
         {
             aiGameObject.SetVelocityTowardsDestination(target, ignoreYValue, speedModifier, alwaysFaceTarget);
         }
 
-        void SeekDirection(AIGameObject aiGameObject, Vector3 direction, bool ignoreYValue = true, float speedModifier = 1.0f, bool alwaysFaceTarget = true)
+        void SeekDirection(AIGameObjectFacade aiGameObject, Vector3 direction, bool ignoreYValue = true, float speedModifier = 1.0f, bool alwaysFaceTarget = true)
         {
             aiGameObject.SetVelocity(direction, ignoreYValue, speedModifier, alwaysFaceTarget);
         }

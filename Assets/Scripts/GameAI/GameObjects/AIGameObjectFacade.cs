@@ -5,7 +5,7 @@
     using UnityEngine;
     using GameAI.States;
 
-    public abstract class AIGameObject : MonoBehaviour
+    public abstract class AIGameObjectFacade : MonoBehaviour
     {
         /// <summary>
         /// The transform this agent is attempting to reach when aggroed.
