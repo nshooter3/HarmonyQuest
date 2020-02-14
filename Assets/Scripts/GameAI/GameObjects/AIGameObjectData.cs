@@ -8,7 +8,7 @@
     public class AIGameObjectData
     {
         // ****************************
-        // Inspectoer Exposed Parameters
+        // Inspector Exposed Parameters
         // ****************************
 
         /// <summary>
@@ -71,12 +71,6 @@
         /// </summary>
         [Tooltip("How fast this enemy moves.")]
         public float speed;
-
-        /// <summary>
-        /// How much this enemy's velocity can change on the x or z axis per physics update.
-        /// </summary>
-        [Tooltip("How much this enemy's velocity can change on the x or z axis per physics update.")]
-        public float maxVelocityChange;
 
         /// <summary>
         /// Gravity's effect on this enemy.

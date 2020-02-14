@@ -10,7 +10,7 @@
         public Vector3 moveDirection = Vector3.zero;
         public Vector3 rotationDirection = Vector3.zero;
         private Vector3 newVelocity = Vector3.zero;
-        private Vector3 velocityChange = Vector3.zero;
+        private Vector3 modifiedVelocity = Vector3.zero;
         private float prevYVel = 0;
 
         //Additional movement forces that make an agent attempt to keep away from other agents and obstacles.
@@ -44,10 +44,10 @@
             }
             rotationDirection.y = 0;
             rotationDirection.Normalize();
-            Rotate(rotationDirection, 1.0f);
 
             if (ignoreYValue)
             {
+                //Whatever the y value was before, keep it. This allows the AI to still fall off of things while ignoring y velocity on their movement vector.
                 prevYVel = data.rb.velocity.y;
                 newVelocity = (moveDirection * Time.deltaTime) * data.speed;
                 newVelocity.y = prevYVel;
@@ -86,14 +86,13 @@
 
         public virtual void ApplyVelocity(bool ignoreYValue = true)
         {
-            velocityChange = newVelocity - data.rb.velocity;
-            velocityChange.x = Mathf.Clamp(velocityChange.x, -data.maxVelocityChange, data.maxVelocityChange);
-            velocityChange.z = Mathf.Clamp(velocityChange.z, -data.maxVelocityChange, data.maxVelocityChange);
+            Rotate(rotationDirection, 1.0f);
+            modifiedVelocity = newVelocity;
             if (ignoreYValue)
             {
-                velocityChange.y = 0;
+                modifiedVelocity.y = 0;
             }
-            data.rb.AddForce(velocityChange, ForceMode.VelocityChange);
+            data.rb.velocity = modifiedVelocity;
         }
 
         public virtual void ApplyGravity()
