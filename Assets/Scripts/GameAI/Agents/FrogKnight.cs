@@ -2,8 +2,8 @@
 {
     using GameAI.AIGameObjects;
     using GameAI.Navigation;
-    using GameAI.States;
-    using GameAI.States.FrogKnight;
+    using GameAI.AIStates;
+    using GameAI.AIStates.FrogKnight;
 
     public class FrogKnight : Enemy
     {

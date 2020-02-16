@@ -1,6 +1,6 @@
 ﻿namespace GameAI.Agents
 {
-    using GameAI.States;
+    using GameAI.AIStates;
     using GameAI.Navigation;
     using GameAI.AIGameObjects;
 

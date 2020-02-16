@@ -1,4 +1,4 @@
-﻿namespace GameAI.States.FrogKnight
+﻿namespace GameAI.AIStates.FrogKnight
 {
     using GameAI.Navigation;
     using GameAI.StateHandlers;

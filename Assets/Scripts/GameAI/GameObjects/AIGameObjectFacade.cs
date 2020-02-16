@@ -2,7 +2,7 @@
 {
     using Navigation;
     using UnityEngine;
-    using GameAI.States;
+    using GameAI.AIStates;
 
     public abstract class AIGameObjectFacade : MonoBehaviour
     {

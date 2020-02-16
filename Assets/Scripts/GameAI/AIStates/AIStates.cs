@@ -1,4 +1,4 @@
-﻿namespace GameAI.States
+﻿namespace GameAI.AIStates
 {
     using GameAI.StateHandlers;
 

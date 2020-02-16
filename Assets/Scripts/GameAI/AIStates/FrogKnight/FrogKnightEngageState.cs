@@ -1,4 +1,4 @@
-﻿namespace GameAI.States.FrogKnight
+﻿namespace GameAI.AIStates.FrogKnight
 {
     using GameAI.AIGameObjects;
     using GameAI.Navigation;
@@ -8,6 +8,7 @@
 
     public class FrogKnightEngageState : AIState
     {
+        //How frequently to check if our target is obstructed. If so, switch to the navigation state.
         private float checkForTargetObstructionTimer = 0.0f;
 
         //The distance at which the enemy will stop attempting to get closer to the player.
@@ -15,22 +16,25 @@
         private float targetedDistanceFromPlayer = 3.0f;
         private float minDistanceFromPlayer = 1.5f;
         private float maxDistanceFromPlayer = 8.0f;
+        //Used to prevent the player from strafing in/out of range if they are within strafeDistanceThreshold of a distance threshold.
+        //Also used to prevent targetedDistanceFromPlayer from being too close to minDistanceFromPlayer or maxDistanceFromPlayer.
+        private float strafeDistanceThreshold = 0.5f;
 
         //Used to track the player's distance from this enemy
         private float targetDistance;
 
+        //Whether or not the target is in targetedDistanceFromPlayer range
         private bool inRangeThisFrame = false;
+        //Whether or not the target left maxDistanceFromPlayer range while hitTargetDistance is true this frame
         private bool leavingRange = false;
+        //Whether or not the target entered targetedDistanceFromPlayer range while hitTargetDistance is false this frame
         private bool enteringRange = false;
-
+        //Once we hit targetedDistanceFromPlayer, stays true until we exit maxDistanceFromPlayer
+        //This ensures that once targetedDistanceFromPlayer range is reached, the enemy will switch to staying between minDistanceFromPlayer and maxDistanceFromPlayer range.
         private bool hitTargetDistance = false;
 
-        //Used to prevent the player from strafing in/out of range if they are within strafeDistanceThreshold of a distance threshold.
-        private float strafeDistanceThreshold = 0.5f;
         //The distance at which the enemy is available to attack the player
         private float attackRange = 5.0f;
-        //The distance at which enemies will actively attempt to separate themselves from one another
-        private float avoidRange = 6.0f;
 
         //Used to determine when the enemy should recalculate strafeDirection.
         float strafeTimer = 0.0f;
@@ -41,6 +45,7 @@
         enum StrafeType { Clockwise, Counterclockwise, Towards, Away, None};
         StrafeType strafeType = StrafeType.None;
 
+        //Weighted List used to generate a random strafe direction.
         WeightedList<StrafeType> strafeRandomizer;
 
         //TODO: Implement this.
@@ -111,7 +116,6 @@
                 hitTargetDistance = true;
             }
 
-            bool shouldAvoid = (targetDistance <= avoidRange && avoidanceForce.magnitude > 0.35f);
             bool shouldStrafe = (hitTargetDistance);
             bool shouldAttack = (targetDistance <= attackRange && updateData.aiGameObjectFacade.data.permissionToAttack);
 
