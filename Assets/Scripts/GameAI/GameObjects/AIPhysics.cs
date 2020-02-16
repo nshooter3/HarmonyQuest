@@ -162,5 +162,10 @@
             SetRigidbodyConstraints(RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ |
                                     RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ);
         }
+
+        public virtual float GetDistanceFromAggroTarget()
+        {
+            return Vector3.Distance(data.gameObject.transform.position, data.aggroTarget.transform.position);
+        }
     }
 }

@@ -1,18 +1,21 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class AIDebug : MonoBehaviour
+﻿namespace GameAI.AIGameObjects
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    using UnityEngine;
 
-    // Update is called once per frame
-    void Update()
+    public class AIDebug
     {
-        
+        private AIGameObjectData data;
+
+        public void Init(AIGameObjectData data)
+        {
+            this.data = data;
+        }
+
+        public virtual void DebugChangeColor(Color color)
+        {
+            data.body.material.color = color;
+            data.head.material.color = color;
+        }
     }
 }
+

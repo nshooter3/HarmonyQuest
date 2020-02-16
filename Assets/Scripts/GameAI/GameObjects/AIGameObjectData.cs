@@ -49,10 +49,16 @@
         public Rigidbody rb;
 
         /// <summary>
-        /// The collider for our agent.
+        /// The hurtboxes for our agent.
         /// </summary>
-        [Tooltip("The collider for our agent.")]
-        public Collider agentCollider;
+        [Tooltip("The hurtboxes for our agent.")]
+        public Collider[] hurtboxes;
+
+        /// <summary>
+        /// The hitbox used for collision avoidance distance calculations.
+        /// </summary>
+        [Tooltip("The hitbox used for collision avoidance distance calculations.")]
+        public Collider collisionAvoidanceHitbox;
 
         /// <summary>
         /// Whether or not the agent should deaggro once the player gets a certain distance away.

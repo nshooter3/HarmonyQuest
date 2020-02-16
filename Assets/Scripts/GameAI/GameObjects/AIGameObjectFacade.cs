@@ -10,6 +10,8 @@
         public AIGameObjectData data;
 
         private AIPhysics aiPhysics = new AIPhysics();
+        private AICollision aiCollision = new AICollision();
+        private AIDebug aiDebug = new AIDebug();
 
         // ****************************
         // CHILD OVERRIDE FUNCTIONS
@@ -39,11 +41,6 @@
                 data.rb = GetComponent<Rigidbody>();
             }
 
-            if (data.agentCollider == null)
-            {
-                data.agentCollider = GetComponent<Collider>();
-            }
-
             if (data.strafeHitBoxes != null)
             {
                 data.strafeHitBoxes.Init();
@@ -66,6 +63,8 @@
             data.aggroTarget = TestPlayer.instance.transform;
 
             aiPhysics.Init(data);
+            aiCollision.Init(data);
+            aiDebug.Init(data);
         }
 
         // ****************************
@@ -140,6 +139,25 @@
         public virtual void SetRigidBodyConstraintsToLockMovement()
         {
             aiPhysics.SetRigidBodyConstraintsToLockMovement();
+
+        }
+
+        public virtual float GetDistanceFromAggroTarget()
+        {
+            return aiPhysics.GetDistanceFromAggroTarget();
+        }
+
+        // ****************************
+        // COLLISION FUNCTIONS
+        // ****************************
+        public virtual Collider[] GetHurtboxes()
+        {
+            return aiCollision.GetHurtboxes();
+        }
+
+        public virtual Collider GetCollisionAvoidanceHitbox()
+        {
+            return aiCollision.GetCollisionAvoidanceHitbox();
         }
 
         // ****************************
@@ -148,21 +166,7 @@
 
         public virtual void DebugChangeColor(Color color)
         {
-            data.body.material.color = color;
-            data.head.material.color = color;
-        }
-
-        // ****************************
-        // DATA GETTER FUNCTIONS
-        // ****************************
-        public virtual Collider GetCollider()
-        {
-            return data.agentCollider;
-        }
-
-        public virtual float GetDistanceFromAggroTarget()
-        {
-            return Vector3.Distance(transform.position, data.aggroTarget.transform.position);
+            aiDebug.DebugChangeColor(color);
         }
     }
 }

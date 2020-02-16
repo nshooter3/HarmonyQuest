@@ -44,7 +44,7 @@
                 sourceAgentPosition = agents[i].aiGameObject.transform.position;
                 for (int j = 0; j < agents.Count; j++)
                 {
-                    targetAgentBoundingBox = agents[j].aiGameObject.GetCollider();
+                    targetAgentBoundingBox = agents[j].aiGameObject.GetCollisionAvoidanceHitbox();
                     //Ensure that an agent does not apply a flocking force on itself in relation to itself.
                     if (i != j)
                     {
