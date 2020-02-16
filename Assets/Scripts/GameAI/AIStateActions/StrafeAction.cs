@@ -62,7 +62,7 @@
             }
         }
 
-        StrafeType GetRandomStrafeType(AIStateUpdateData updateData, float targetDistance, float minDistanceFromPlayer, float maxDistanceFromPlayer)
+        private StrafeType GetRandomStrafeType(AIStateUpdateData updateData, float targetDistance, float minDistanceFromPlayer, float maxDistanceFromPlayer)
         {
             StrafeType RNGResult = strafeRandomizer.GetRandomWeightedEntry();
 
