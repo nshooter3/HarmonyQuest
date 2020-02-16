@@ -1,6 +1,5 @@
 ﻿namespace GameAI.AIStates.FrogKnight
 {
-    using GameAI.AIGameObjects;
     using GameAI.AIStateActions;
     using GameAI.Navigation;
     using GameAI.StateHandlers;
