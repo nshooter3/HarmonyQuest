@@ -1,5 +1,6 @@
 ﻿namespace GameAI.AIStates.FrogKnight
 {
+    using GameAI.AIStateActions;
     using GameAI.Navigation;
     using GameAI.StateHandlers;
     using UnityEngine;
@@ -7,6 +8,8 @@
     public class FrogKnightIdleState : AIState
     {
         private bool aggroZoneEntered = false;
+
+        private DebugAction debugAction = new DebugAction();
 
         public override void Init(AIStateUpdateData updateData)
         {

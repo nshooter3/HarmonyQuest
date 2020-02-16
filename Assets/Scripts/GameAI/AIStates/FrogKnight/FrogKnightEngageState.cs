@@ -1,6 +1,7 @@
 ﻿namespace GameAI.AIStates.FrogKnight
 {
     using GameAI.AIGameObjects;
+    using GameAI.AIStateActions;
     using GameAI.Navigation;
     using GameAI.StateHandlers;
     using HarmonyQuest.Util;
@@ -11,50 +12,23 @@
         //How frequently to check if our target is obstructed. If so, switch to the navigation state.
         private float checkForTargetObstructionTimer = 0.0f;
 
-        //The distance at which the enemy will stop attempting to get closer to the player.
-        //Is randomly generated between minDistanceFromPlayer and maxDistanceFromPlayer every time a range is requested.
-        private float targetedDistanceFromPlayer = 3.0f;
-        private float minDistanceFromPlayer = 1.5f;
-        private float maxDistanceFromPlayer = 8.0f;
-        //Used to prevent the player from strafing in/out of range if they are within strafeDistanceThreshold of a distance threshold.
-        //Also used to prevent targetedDistanceFromPlayer from being too close to minDistanceFromPlayer or maxDistanceFromPlayer.
-        private float strafeDistanceThreshold = 0.5f;
-
         //Used to track the player's distance from this enemy
         private float targetDistance;
-
-        //Whether or not the target is in targetedDistanceFromPlayer range
-        private bool inRangeThisFrame = false;
-        //Whether or not the target left maxDistanceFromPlayer range while hitTargetDistance is true this frame
-        private bool leavingRange = false;
-        //Whether or not the target entered targetedDistanceFromPlayer range while hitTargetDistance is false this frame
-        private bool enteringRange = false;
-        //Once we hit targetedDistanceFromPlayer, stays true until we exit maxDistanceFromPlayer
-        //This ensures that once targetedDistanceFromPlayer range is reached, the enemy will switch to staying between minDistanceFromPlayer and maxDistanceFromPlayer range.
-        private bool hitTargetDistance = false;
 
         //The distance at which the enemy is available to attack the player
         private float attackRange = 5.0f;
 
-        //Used to determine when the enemy should recalculate strafeDirection.
-        float strafeTimer = 0.0f;
-        float maxStrafeCooldown = 4.0f;
-        float minStrafeCooldown = 1.0f;
+        private bool shouldStrafe = false;
+        private bool shouldAttack = false;
 
-        //Determines what kind of strafe this enemy will perform.
-        enum StrafeType { Clockwise, Counterclockwise, Towards, Away, None};
-        StrafeType strafeType = StrafeType.None;
-
-        //Weighted List used to generate a random strafe direction.
-        WeightedList<StrafeType> strafeRandomizer;
-
-        //TODO: Implement this.
-        //Add slight variation to the direction the enemy strafes in to make movement less uniform.
-        Vector3 strafeDeviation = Vector3.zero;
-
-        //TODO: Implement this.
         private bool isWindingUp = false;
         private bool isAttacking = false;
+
+        private MoveAction moveAction = new MoveAction();
+        private TargetDistanceAction targetDistanceAction = new TargetDistanceAction();
+        private StrafeAction strafeAction = new StrafeAction();
+        private AttackAction attackAction = new AttackAction();
+        private DebugAction debugAction = new DebugAction();
 
         public override void Init(AIStateUpdateData updateData)
         {
@@ -62,63 +36,55 @@
             updateData.aiGameObjectFacade.SetRigidBodyConstraintsToDefault();
             updateData.aiGameObjectFacade.data.individualCollisionAvoidanceModifier = 3.5f;
             updateData.aiGameObjectFacade.data.individualCollisionAvoidanceMaxDistance = 4.0f;
-            RandomizeTargetedDistanceFromPlayer();
-            InitStrafeRandomizer();
-            strafeType = GetRandomStrafeType(updateData.aiGameObjectFacade.data.strafeHitBoxes);
+            targetDistanceAction.Init();
+            strafeAction.Init(updateData, GetFrogKnightStrafeRandomizer(), 4.0f, 1.0f);
         }
 
-        private void InitStrafeRandomizer()
+        //Set up our Frog Knight strafe type odds before passing in the weighted list to the StrafeAction class.
+        private WeightedList<StrafeAction.StrafeType> GetFrogKnightStrafeRandomizer()
         {
-            strafeRandomizer = new WeightedList<StrafeType>();
-            strafeRandomizer.Add(StrafeType.Clockwise, 1);
-            strafeRandomizer.Add(StrafeType.Counterclockwise, 1);
-            strafeRandomizer.Add(StrafeType.Towards, 1);
-            strafeRandomizer.Add(StrafeType.Away, 1);
-            strafeRandomizer.Add(StrafeType.None, 3);
+            WeightedList<StrafeAction.StrafeType> strafeRandomizer = new WeightedList<StrafeAction.StrafeType>();
+            strafeRandomizer.Add(StrafeAction.StrafeType.Clockwise, 1);
+            strafeRandomizer.Add(StrafeAction.StrafeType.Counterclockwise, 1);
+            strafeRandomizer.Add(StrafeAction.StrafeType.Towards, 1);
+            strafeRandomizer.Add(StrafeAction.StrafeType.Away, 1);
+            strafeRandomizer.Add(StrafeAction.StrafeType.None, 3);
+            return strafeRandomizer;
         }
 
         public override void OnUpdate(AIStateUpdateData updateData)
         {
-            Vector3 newNavPos = updateData.aiGameObjectFacade.data.aggroTarget.position;
-            newNavPos.y += updateData.aiGameObjectFacade.data.navPosHeightOffset;
-            updateData.aiGameObjectFacade.data.navPos.transform.position = newNavPos;
-
-            if (strafeTimer > 0.0f)
-            {
-                strafeTimer -= Time.deltaTime;
-            }
-
             Think(updateData);
-            React(updateData);
+            Act(updateData);
+        }
+
+        public override void OnFixedUpdate(AIStateUpdateData updateData)
+        {
+            updateData.aiGameObjectFacade.ApplyVelocity();
+            updateData.aiGameObjectFacade.ApplyGravity();
+        }
+
+        public override void OnBeatUpdate(AIStateUpdateData updateData)
+        {
+
+        }
+
+        private void Think(AIStateUpdateData updateData)
+        {
+            //Update navpos graphic for debug. Shows where the agent is focusing.
+            debugAction.NavPosTrackTarget(updateData);
 
             targetDistance = updateData.aiGameObjectFacade.GetDistanceFromAggroTarget();
-            Vector3 avoidanceForce = GetAvoidanceForce(updateData.aiGameObjectFacade);
 
-            inRangeThisFrame = targetDistance <= targetedDistanceFromPlayer;
-            leavingRange = targetDistance > maxDistanceFromPlayer && hitTargetDistance;
-            enteringRange = inRangeThisFrame && hitTargetDistance == false;
+            targetDistanceAction.Update(targetDistance);
+            strafeAction.Update(updateData, targetDistance, targetDistanceAction.minDistanceFromPlayer, targetDistanceAction.maxDistanceFromPlayer);
 
-            if (leavingRange)
-            {
-                if (updateData.aiGameObjectFacade.data.debugEngage)
-                {
-                    Debug.Log("leavingRange");
-                }
-                hitTargetDistance = false;
-                RandomizeTargetedDistanceFromPlayer();
-            }
-            else if (enteringRange)
-            {
-                if (updateData.aiGameObjectFacade.data.debugEngage)
-                {
-                    Debug.Log("enteringRange");
-                }
-                hitTargetDistance = true;
-            }
+            shouldStrafe = (targetDistanceAction.hitTargetDistance);
+            shouldAttack = (targetDistance <= attackRange && updateData.aiGameObjectFacade.data.permissionToAttack);
+        }
 
-            bool shouldStrafe = (hitTargetDistance);
-            bool shouldAttack = (targetDistance <= attackRange && updateData.aiGameObjectFacade.data.permissionToAttack);
-
+        private void Act(AIStateUpdateData updateData)
+        {
             if (isWindingUp)
             {
                 if (updateData.aiGameObjectFacade.data.debugEngage)
@@ -141,26 +107,18 @@
                 }
                 isWindingUp = true;
             }
-            /*else if (shouldAvoid)
-            {
-                if (updateData.aiGameObject.debugEngage)
-                {
-                    Debug.Log("ENEMY AVOID");
-                }
-                Avoid(updateData.aiGameObject, avoidanceForce);
-            }*/
             else if (shouldStrafe)
             {
                 updateData.aiGameObjectFacade.SetRigidBodyConstraintsToDefault();
-                Vector3 strafeDir = GetStrafeVector(updateData.aiGameObjectFacade, updateData.aiGameObjectFacade.data.aggroTarget.transform.position);
+                Vector3 strafeDir = strafeAction.GetStrafeVector(updateData, updateData.aiGameObjectFacade.data.aggroTarget.transform.position);
                 if (updateData.aiGameObjectFacade.data.debugEngage)
                 {
                     Debug.Log("ENEMY STRAFE");
                 }
                 Debug.DrawRay(updateData.aiGameObjectFacade.transform.position, strafeDir * 1.0f, Color.blue);
-                SeekDirection(updateData.aiGameObjectFacade, strafeDir, true, 0.35f);
+                moveAction.SeekDirection(updateData.aiGameObjectFacade, strafeDir, true, 0.35f);
             }
-            else if (hitTargetDistance == false)
+            else if (targetDistanceAction.hitTargetDistance == false)
             {
                 if (updateData.aiGameObjectFacade.data.debugEngage)
                 {
@@ -168,7 +126,7 @@
                 }
                 Debug.DrawRay(updateData.aiGameObjectFacade.transform.position, (updateData.aiGameObjectFacade.data.aggroTarget.position - updateData.aiGameObjectFacade.transform.position) * 1.0f, Color.green);
                 updateData.aiGameObjectFacade.SetRigidBodyConstraintsToDefault();
-                SeekDestination(updateData.aiGameObjectFacade, updateData.aiGameObjectFacade.data.aggroTarget.position);
+                moveAction.SeekDestination(updateData.aiGameObjectFacade, updateData.aiGameObjectFacade.data.aggroTarget.position);
             }
             else
             {
@@ -178,166 +136,6 @@
                 }
                 updateData.aiGameObjectFacade.SetRigidBodyConstraintsToLockAllButGravity();
             }
-        }
-
-        void AttackWindup(AIGameObjectFacade aiGameObject)
-        {
-            aiGameObject.DebugChangeColor(Color.yellow);
-        }
-
-        void Attack(AIGameObjectFacade aiGameObject)
-        {
-            aiGameObject.DebugChangeColor(Color.red);
-        }
-
-        Vector3 GetAvoidanceForce(AIGameObjectFacade aiGameObject)
-        {
-            return aiGameObject.GetCollisionAvoidanceForce();
-        }
-
-        void Avoid(AIGameObjectFacade aiGameObject, Vector3 avoidanceForce)
-        {
-            SeekDirection(aiGameObject, avoidanceForce, true, 0.5f);
-        }
-
-        StrafeType GetRandomStrafeType(StrafeHitboxes strafeHitBoxes)
-        {
-            StrafeType RNGResult = strafeRandomizer.GetRandomWeightedEntry();
-
-            //Cancel strafe if it will result in a collision or move the enemy outside of the desired range from the player.
-            if (RNGResult == StrafeType.Clockwise && strafeHitBoxes.leftCollision)
-            {
-                return StrafeType.None;
-            }
-            else if (RNGResult == StrafeType.Counterclockwise && strafeHitBoxes.rightCollision)
-            {
-                return StrafeType.None;
-            }
-            else if (RNGResult == StrafeType.Towards && (targetDistance <= minDistanceFromPlayer + strafeDistanceThreshold || strafeHitBoxes.frontCollision))
-            {
-                return StrafeType.None;
-            }
-            else if (RNGResult == StrafeType.Away && (targetDistance > maxDistanceFromPlayer - strafeDistanceThreshold || strafeHitBoxes.backCollision))
-            {
-                return StrafeType.None;
-            }
-
-            return RNGResult;
-        }
-
-        Vector3 GetStrafeVector(AIGameObjectFacade aiGameObject, Vector3 target)
-        {
-            Vector3 result = Vector3.zero;
-            switch (strafeType)
-            {
-                case StrafeType.Clockwise:
-                    result = Vector3.Cross(Vector3.up, target - aiGameObject.transform.position) * - 1.0f;
-                    break;
-                case StrafeType.Counterclockwise:
-                    result = Vector3.Cross(Vector3.up, target - aiGameObject.transform.position);
-                    break;
-                case StrafeType.Towards:
-                    result = target - aiGameObject.transform.position;
-                    break;
-                case StrafeType.Away:
-                    result = aiGameObject.transform.position - target;
-                    break;
-            }
-            return result;
-        }
-
-        public void CheckForStrafeInterupt(StrafeHitboxes strafeHitBoxes)
-        {
-            bool cancelStrafe = false;
-            switch (strafeType)
-            {
-                case StrafeType.Clockwise:
-                    if (strafeHitBoxes.leftCollision)
-                    {
-                        cancelStrafe = true;
-                    }
-                    break;
-                case StrafeType.Counterclockwise:
-                    if (strafeHitBoxes.rightCollision)
-                    {
-                        cancelStrafe = true;
-                    }
-                    break;
-                case StrafeType.Towards:
-                    if (strafeHitBoxes.frontCollision)
-                    {
-                        cancelStrafe = true;
-                    }
-                    break;
-                case StrafeType.Away:
-                    if (strafeHitBoxes.backCollision)
-                    {
-                        cancelStrafe = true;
-                    }
-                    break;
-            }
-            if (cancelStrafe)
-            {
-                strafeTimer = Random.Range(minStrafeCooldown, maxStrafeCooldown);
-                strafeType = StrafeType.None;
-            }
-            strafeHitBoxes.ResetCollisions();
-        }
-
-        void SeekDestination(AIGameObjectFacade aiGameObject, Vector3 target, bool ignoreYValue = true, float speedModifier = 1.0f, bool alwaysFaceTarget = true)
-        {
-            aiGameObject.SetVelocityTowardsDestination(target, ignoreYValue, speedModifier, alwaysFaceTarget);
-        }
-
-        void SeekDirection(AIGameObjectFacade aiGameObject, Vector3 direction, bool ignoreYValue = true, float speedModifier = 1.0f, bool alwaysFaceTarget = true)
-        {
-            aiGameObject.SetVelocity(direction, ignoreYValue, speedModifier, alwaysFaceTarget);
-        }
-
-        void RandomizeTargetedDistanceFromPlayer()
-        {
-            targetedDistanceFromPlayer = Random.Range(minDistanceFromPlayer + strafeDistanceThreshold, maxDistanceFromPlayer - strafeDistanceThreshold);
-        }
-
-        void Think(AIStateUpdateData updateData)
-        {
-            bool strafedTooClose = strafeType == StrafeType.Towards && targetDistance <= minDistanceFromPlayer + strafeDistanceThreshold;
-            bool strafedTooFar = strafeType == StrafeType.Away && targetDistance >= maxDistanceFromPlayer - strafeDistanceThreshold;
-            if (strafedTooClose || strafedTooFar)
-            {
-                strafeTimer = Random.Range(minStrafeCooldown, maxStrafeCooldown);
-                strafeType = StrafeType.None;
-            }
-            else if (strafeTimer <= 0.0f)
-            {
-                strafeTimer = Random.Range(minStrafeCooldown, maxStrafeCooldown);
-                if (strafeType == StrafeType.None)
-                {
-                    strafeType = GetRandomStrafeType(updateData.aiGameObjectFacade.data.strafeHitBoxes);
-                }
-                else
-                {
-                    strafeType = StrafeType.None;
-                }
-            }
-
-            CheckForStrafeInterupt(updateData.aiGameObjectFacade.data.strafeHitBoxes);
-        }
-
-        void React(AIStateUpdateData updateData)
-        {
-
-        }
-
-        public override void OnFixedUpdate(AIStateUpdateData updateData)
-        {
-            updateData.aiGameObjectFacade.ApplyVelocity();
-            updateData.aiGameObjectFacade.ApplyGravity();
-        }
-
-        public override void OnBeatUpdate(AIStateUpdateData updateData)
-        {
-
         }
 
         public override void CheckForStateChange(AIStateUpdateData updateData)

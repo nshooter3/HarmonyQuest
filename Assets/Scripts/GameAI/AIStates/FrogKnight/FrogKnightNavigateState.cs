@@ -1,5 +1,6 @@
 ﻿namespace GameAI.AIStates.FrogKnight
 {
+    using GameAI.AIStateActions;
     using GameAI.Navigation;
     using GameAI.StateHandlers;
     using UnityEngine;
@@ -7,6 +8,8 @@
     public class FrogKnightNavigateState : AIState
     {
         private float checkForTargetObstructionTimer = 0.0f;
+
+        private DebugAction debugAction = new DebugAction();
 
         public override void Init(AIStateUpdateData updateData)
         {
@@ -17,7 +20,7 @@
 
         public override void OnUpdate(AIStateUpdateData updateData)
         {
-            updateData.aiGameObjectFacade.data.navPos.transform.position = updateData.navigator.GetNextWaypoint();
+            debugAction.NavPosSetPosition(updateData, updateData.navigator.GetNextWaypoint());
             updateData.aiGameObjectFacade.SetVelocityTowardsDestination(updateData.navigator.GetNextWaypoint());
         }
 
