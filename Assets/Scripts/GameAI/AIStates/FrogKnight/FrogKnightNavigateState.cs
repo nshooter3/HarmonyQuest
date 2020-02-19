@@ -1,5 +1,6 @@
-﻿namespace GameAI.States.FrogKnight
+﻿namespace GameAI.AIStates.FrogKnight
 {
+    using GameAI.AIStateActions;
     using GameAI.Navigation;
     using GameAI.StateHandlers;
     using UnityEngine;
@@ -8,23 +9,25 @@
     {
         private float checkForTargetObstructionTimer = 0.0f;
 
+        private DebugAction debugAction = new DebugAction();
+
         public override void Init(AIStateUpdateData updateData)
         {
-            updateData.navigator.SetTarget(updateData.aiGameObject.AIAgentBottom, updateData.player.transform);
-            updateData.aiGameObject.isAggroed = true;
-            updateData.aiGameObject.SetRigidBodyConstraintsToDefault();
+            updateData.navigator.SetTarget(updateData.aiGameObjectFacade.data.aiAgentBottom, updateData.player.transform);
+            updateData.aiGameObjectFacade.data.isAggroed = true;
+            updateData.aiGameObjectFacade.SetRigidBodyConstraintsToDefault();
         }
 
         public override void OnUpdate(AIStateUpdateData updateData)
         {
-            updateData.aiGameObject.NavPos.transform.position = updateData.navigator.GetNextWaypoint();
-            updateData.aiGameObject.SetVelocityTowardsDestination(updateData.navigator.GetNextWaypoint());
+            debugAction.NavPosSetPosition(updateData, updateData.navigator.GetNextWaypoint());
+            updateData.aiGameObjectFacade.SetVelocityTowardsDestination(updateData.navigator.GetNextWaypoint());
         }
 
         public override void OnFixedUpdate(AIStateUpdateData updateData)
         {
-            updateData.aiGameObject.ApplyVelocity();
-            updateData.aiGameObject.ApplyGravity();
+            updateData.aiGameObjectFacade.ApplyVelocity();
+            updateData.aiGameObjectFacade.ApplyGravity();
         }
 
         public override void OnBeatUpdate(AIStateUpdateData updateData)
@@ -46,7 +49,7 @@
                 if (checkForTargetObstructionTimer > NavigatorSettings.checkForTargetObstructionRate)
                 {
                     checkForTargetObstructionTimer = 0;
-                    if (!NavMeshUtil.IsTargetObstructed(updateData.aiGameObject.AIAgentBottom, updateData.player.transform))
+                    if (!NavMeshUtil.IsTargetObstructed(updateData.aiGameObjectFacade.data.aiAgentBottom, updateData.player.transform))
                     {
                         updateData.stateHandler.RequestStateTransition(new FrogKnightEngageState { }, updateData);
                     }
@@ -57,14 +60,14 @@
         public override void Abort(AIStateUpdateData updateData)
         {
             updateData.navigator.CancelCurrentNavigation();
-            updateData.aiGameObject.ResetVelocity();
+            updateData.aiGameObjectFacade.ResetVelocity();
             aborted = true;
             readyForStateTransition = true;
         }
 
         private bool ShouldDeAggro(AIStateUpdateData updateData)
         {
-            return updateData.aiGameObject.DisengageWithDistance && Vector3.Distance(updateData.aiGameObject.transform.position, updateData.player.transform.position) > updateData.aiGameObject.DisengageDistance;
+            return updateData.aiGameObjectFacade.data.disengageWithDistance && Vector3.Distance(updateData.aiGameObjectFacade.transform.position, updateData.player.transform.position) > updateData.aiGameObjectFacade.data.disengageDistance;
         }
     }
 }

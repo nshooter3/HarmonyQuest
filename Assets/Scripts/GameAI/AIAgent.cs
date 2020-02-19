@@ -9,13 +9,13 @@
         /// <summary>
         /// Reference to the gameobject holding the enemy class script and component data, which be updated through this non-monobehavior class.
         /// </summary>
-        public AIGameObject aiGameObject;
+        public AIGameObjectFacade aiGameObject;
         private AIStateHandler stateHandler;
         private Navigator navigator;
 
         private AIStateUpdateData updateData;
 
-        public AIAgent(AIGameObject newAIGameObject)
+        public AIAgent(AIGameObjectFacade newAIGameObject)
         {
             aiGameObject = newAIGameObject;
             aiGameObject.Init();

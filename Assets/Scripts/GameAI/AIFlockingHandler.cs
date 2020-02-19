@@ -44,13 +44,13 @@
                 sourceAgentPosition = agents[i].aiGameObject.transform.position;
                 for (int j = 0; j < agents.Count; j++)
                 {
-                    targetAgentBoundingBox = agents[j].aiGameObject.GetCollider();
+                    targetAgentBoundingBox = agents[j].aiGameObject.GetCollisionAvoidanceHitbox();
                     //Ensure that an agent does not apply a flocking force on itself in relation to itself.
                     if (i != j)
                     {
                         distance = GetAgentDistanceFromBoundingBox(sourceAgentPosition, targetAgentBoundingBox);
                         //Wij = max(dmax - dij, 0)
-                        agentWeights[i, j] = Mathf.Max(agents[i].aiGameObject.individualCollisionAvoidanceMaxDistance - distance, 0);
+                        agentWeights[i, j] = Mathf.Max(agents[i].aiGameObject.data.individualCollisionAvoidanceMaxDistance - distance, 0);
                     }
                 }
             }
@@ -72,7 +72,7 @@
                     }
                 }
 
-                agents[i].aiGameObject.SetCollisionAvoidanceForce(collisionAvoidanceForce * NavigatorSettings.collisionAvoidanceScale * agents[i].aiGameObject.individualCollisionAvoidanceModifier);
+                agents[i].aiGameObject.SetCollisionAvoidanceForce(collisionAvoidanceForce * NavigatorSettings.collisionAvoidanceScale * agents[i].aiGameObject.data.individualCollisionAvoidanceModifier);
             }
         }
 

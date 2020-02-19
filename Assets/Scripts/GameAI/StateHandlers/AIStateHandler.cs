@@ -1,6 +1,6 @@
 ﻿namespace GameAI.StateHandlers
 {
-    using States;
+    using AIStates;
 
     public class AIStateHandler
     {
