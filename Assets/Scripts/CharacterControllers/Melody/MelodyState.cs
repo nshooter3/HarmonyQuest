@@ -28,6 +28,10 @@
             }
         }
 
+        public virtual void OnFixedUpdate()
+        {
+        }
+
         public abstract void OnExit();
 
         public virtual bool CanExit()

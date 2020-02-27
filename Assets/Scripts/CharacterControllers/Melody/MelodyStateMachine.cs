@@ -24,5 +24,10 @@
                 NextState = null;
             }
         }
+
+        public void OnFixedUpdate()
+        {
+            CurrentState.OnFixedUpdate();
+        }
     }
 }

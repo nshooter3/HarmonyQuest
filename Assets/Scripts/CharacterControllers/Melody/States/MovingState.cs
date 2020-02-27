@@ -8,6 +8,8 @@
 
         protected override void Enter() { }
 
+        public Vector3 velocity = Vector2.zero;
+
         public override void OnUpdate(float time)
         {
             base.OnUpdate(time);
@@ -29,19 +31,59 @@
                 ableToExit = true;
                 nextState = new DashIntroState(melodyController);
             }
-            else if (melodyController.input.GetHorizontalMovement() == 0 && melodyController.input.GetVerticalMovement() == 0)
+            else if (melodyController.Move.magnitude == 0 && velocity.magnitude == 0)
             {
                 ableToExit = true;
                 nextState = new IdleState(melodyController);
             }
 
-            melodyController.animator.SetFloat("Move", melodyController.Move.magnitude / 1);
-            melodyController.Move *= melodyController.config.MaxSpeed;
-            RotatePlayer(3);
+            
+            //Debug.Log("time: " + time + " melodyController.Move.magnitude: " + melodyController.Move.magnitude);
+            
+        }
 
-            melodyController.Move = melodyController.Move * time * 100;
-            melodyController.rigidBody.velocity = new Vector3(melodyController.Move.x, melodyController.rigidBody.velocity.y, melodyController.Move.z);
+        public override void OnFixedUpdate()
+        {
+            
+            RotatePlayer(melodyController.config.TurningSpeed);
+            Vector3 movement = new Vector3(melodyController.Move.x,0, melodyController.Move.z);
+            //Debug.Log("movement: " + movement.x);
+            movement *= melodyController.config.MaxAcceleration;
+            //Debug.Log("acceleration: " + movement.x);
+            movement *= Time.fixedDeltaTime;
+            //Debug.Log("new: " + oldVelocity);
+            //Debug.Log("fixed delta:  " + Time.fixedDeltaTime);
+            //Debug.Log("movement: " + movement);
 
+
+            /* Debug.Log("Movement Magnitude: " + movement.magnitude);
+             Debug.Log("velocity Magnitude: " + velocity.magnitude);
+             if (movement.magnitude > velocity.magnitude)
+             {
+                 //movement *= Time.fixedDeltaTime;
+                 Debug.Log("test: " + velocity);
+
+                 velocity = velocity * (velocity.magnitude + movement.magnitude);
+                 Debug.Log("test1: " + velocity);
+             }
+             else
+             {
+                 velocity = velocity.normalized * (movement.magnitude);
+             }*/
+
+            //melodyController.rigidBody.AddForce(movement);
+            velocity = movement.normalized * (movement.magnitude + velocity.magnitude);
+            velocity = Vector3.ClampMagnitude(velocity, melodyController.config.MaxSpeed * melodyController.Move.magnitude);
+            Debug.Log("test: " + velocity);
+            Debug.Log("cap: " + melodyController.config.MaxSpeed * melodyController.Move.magnitude);
+            melodyController.rigidBody.velocity = velocity;
+
+
+            melodyController.animator.SetFloat("Move", velocity.magnitude / melodyController.config.MaxSpeed);
+
+            
+            //Debug.Log("Velocity: " + melodyController.rigidBody.velocity);
+          
         }
 
         void RotatePlayer(float turnSpeedModifier)

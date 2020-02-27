@@ -35,7 +35,13 @@
         void Update()
         {
             move.Set(input.GetHorizontalMovement(), 0, input.GetVerticalMovement());
+            move = Vector3.ClampMagnitude(move, 1f);
             StateMachine.OnUpdate(Time.deltaTime);
+        }
+
+        void FixedUpdate()
+        {
+            StateMachine.OnFixedUpdate();
         }
     }
 }
