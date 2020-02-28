@@ -18,6 +18,15 @@
         [SerializeField]
         private DamageHitbox overrideID;
 
+        /// <summary>
+        /// The debug mesh renderer associated with this hitbox. Used to visualize hitboxes if showDebugRenderer is set to true.
+        /// </summary>
+        [SerializeField]
+        private MeshRenderer debugRenderer;
+
+        [SerializeField]
+        private bool showDebugRenderer = false;
+
         private int damage;
 
         //Variables pertaining to the delay between when EnableHitbox is called and when the hitbox becomes active
@@ -38,6 +47,11 @@
             {
                 id = overrideID.id;
             }
+            if (debugRenderer != null)
+            {
+                debugRenderer.enabled = false;
+            }
+            col.enabled = false;
         }
 
         public void EnableHitbox(float delay, float lifetime, int damage)
@@ -62,6 +76,7 @@
                     hitboxDelayed = false;
                     hitboxActive = true;
                     col.enabled = true;
+                    ToggleDebugRenderer(true);
                 }
             }
             else if (hitboxActive)
@@ -81,6 +96,7 @@
             hitboxDelayTimer = 0.0f;
             hitboxActive = false;
             hitboxLifetimeTimer = 0.0f;
+            ToggleDebugRenderer(false);
         }
 
         public Guid GetId()
@@ -96,6 +112,14 @@
         public bool IsActive()
         {
             return hitboxDelayed || hitboxActive;
+        }
+
+        private void ToggleDebugRenderer(bool enabled)
+        {
+            if (debugRenderer != null && showDebugRenderer)
+            {
+                debugRenderer.enabled = enabled;
+            }
         }
     }
 }
