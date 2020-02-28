@@ -10,7 +10,7 @@
         public AIGameObjectData data;
 
         private AIPhysics aiPhysics = new AIPhysics();
-        private AICollision aiCollision = new AICollision();
+        private AIHitboxes aiHitboxes = new AIHitboxes();
         private AIDebug aiDebug = new AIDebug();
 
         // ****************************
@@ -63,8 +63,13 @@
             data.aggroTarget = TestPlayer.instance.transform;
 
             aiPhysics.Init(data);
-            aiCollision.Init(data);
+            aiHitboxes.Init(data);
             aiDebug.Init(data);
+        }
+
+        public void UpdateSubclasses()
+        {
+            UpdateHitboxes();
         }
 
         // ****************************
@@ -152,12 +157,32 @@
         // ****************************
         public virtual Collider[] GetHurtboxes()
         {
-            return aiCollision.GetHurtboxes();
+            return aiHitboxes.GetHurtboxes();
         }
 
         public virtual Collider GetCollisionAvoidanceHitbox()
         {
-            return aiCollision.GetCollisionAvoidanceHitbox();
+            return aiHitboxes.GetCollisionAvoidanceHitbox();
+        }
+
+        public virtual void ActivateHitbox(string name, float delay, float lifetime, int damage)
+        {
+            aiHitboxes.ActivateHitbox(name, delay, lifetime, damage);
+        }
+
+        public virtual void CancelHitbox(string name)
+        {
+            aiHitboxes.CancelHitbox(name);
+        }
+
+        public virtual void CancelAllHitboxes()
+        {
+            aiHitboxes.CancelAllHitboxes();
+        }
+
+        private void UpdateHitboxes()
+        {
+            aiHitboxes.UpdateHitboxes();
         }
 
         // ****************************

@@ -6,7 +6,7 @@
     public class DamageHitbox : MonoBehaviour
     {
         [SerializeField]
-        public string hitboxName { get; private set; }
+        private string hitboxName;
 
         [SerializeField]
         private Collider col;
@@ -54,7 +54,7 @@
             col.enabled = false;
         }
 
-        public void EnableHitbox(float delay, float lifetime, int damage)
+        public void ActivateHitbox(float delay, float lifetime, int damage)
         {
             col.enabled = false;
             hitboxDelayed = true;
@@ -84,12 +84,12 @@
                 hitboxLifetimeTimer += Time.deltaTime;
                 if (hitboxLifetimeTimer >= hitboxLifetime)
                 {
-                    DisableHitbox();
+                    CancelHitbox();
                 }
             }
         }
 
-        public void DisableHitbox()
+        public void CancelHitbox()
         {
             col.enabled = false;
             hitboxDelayed = false;
@@ -107,6 +107,11 @@
         public int GetDamage()
         {
             return damage;
+        }
+
+        public string GetHitboxName()
+        {
+            return hitboxName;
         }
 
         public bool IsActive()

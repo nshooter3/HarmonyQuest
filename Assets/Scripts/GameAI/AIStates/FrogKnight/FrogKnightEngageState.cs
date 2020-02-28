@@ -26,7 +26,6 @@
         private MoveAction moveAction = new MoveAction();
         private TargetDistanceAction targetDistanceAction = new TargetDistanceAction();
         private StrafeAction strafeAction = new StrafeAction();
-        private AttackAction attackAction = new AttackAction();
         private DebugAction debugAction = new DebugAction();
 
         public override void Init(AIStateUpdateData updateData)
