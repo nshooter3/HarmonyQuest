@@ -12,13 +12,6 @@
         private Collider col;
 
         /// <summary>
-        /// If this field is not null, this class's id will be overwritten by the overrideID object's id.
-        /// This allows for multiple hitboxes to be treated as one hitbox, so that damage receivers do not perceive themselves as getting hit more than once.
-        /// </summary>
-        [SerializeField]
-        private DamageHitbox overrideID;
-
-        /// <summary>
         /// The debug mesh renderer associated with this hitbox. Used to visualize hitboxes if showDebugRenderer is set to true.
         /// </summary>
         [SerializeField]
@@ -43,10 +36,6 @@
 
         public void Start()
         {
-            if (overrideID != null)
-            {
-                id = overrideID.id;
-            }
             if (debugRenderer != null)
             {
                 debugRenderer.enabled = false;
@@ -56,6 +45,7 @@
 
         public void ActivateHitbox(float delay, float lifetime, int damage)
         {
+            Debug.Log("ACTIVATE HITBOX OF ID " + id.ToString());
             col.enabled = false;
             hitboxDelayed = true;
             hitboxDelay = delay;
@@ -102,6 +92,11 @@
         public Guid GetId()
         {
             return id;
+        }
+
+        public void SetId(Guid newId)
+        {
+            id = newId;
         }
 
         public int GetDamage()

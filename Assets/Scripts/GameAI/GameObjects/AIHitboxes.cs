@@ -39,6 +39,8 @@
             {
                 if (hitboxDictionary.TryGetValue(hitbox.GetHitboxName(), out tempValue))
                 {
+                    //Ensure that grouped hitboxes in our hitbox dictionary share an id.
+                    hitbox.SetId(tempValue[0].GetId());
                     tempValue.Add(hitbox);
                 }
                 else
