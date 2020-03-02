@@ -57,7 +57,6 @@
 
             if (StrafedTooClose(targetDistance, minDistanceFromPlayer) || StrafedTooFar(targetDistance, maxDistanceFromPlayer))
             {
-                Debug.Log("CANCEL STRAFE DUE TO DISTANCE");
                 CancelStrafe();
             }
         }
