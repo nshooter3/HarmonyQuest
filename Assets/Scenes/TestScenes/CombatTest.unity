@@ -1863,7 +1863,7 @@ GameObject:
   - component: {fileID: 453015462}
   - component: {fileID: 453015464}
   - component: {fileID: 453015463}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: HealSound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3211,7 +3211,7 @@ GameObject:
   - component: {fileID: 693083117}
   - component: {fileID: 693083114}
   - component: {fileID: 693083116}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3230,7 +3230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26a38a4b8f8ae5d48a9b7946e6a85591, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackBox: {fileID: 1721065935}
+  attackHitbox: {fileID: 1721065940}
   parryBox: {fileID: 1666410594}
   parryParticles: {fileID: 1624816043}
   getHitParticles: {fileID: 925513893}
@@ -3437,7 +3437,7 @@ GameObject:
   - component: {fileID: 699461928}
   - component: {fileID: 699461927}
   - component: {fileID: 699461926}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: AttackHitbox (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3472,7 +3472,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitboxName: BasicAttack
   col: {fileID: 699461927}
-  overrideID: {fileID: 0}
   debugRenderer: {fileID: 699461928}
   showDebugRenderer: 1
 --- !u!65 &699461927
@@ -4185,7 +4184,7 @@ GameObject:
   - component: {fileID: 819857430}
   - component: {fileID: 819857432}
   - component: {fileID: 819857431}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: AttackTonalSound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4253,7 +4252,7 @@ GameObject:
   - component: {fileID: 856614668}
   - component: {fileID: 856614670}
   - component: {fileID: 856614669}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5059,7 +5058,7 @@ GameObject:
   - component: {fileID: 925513891}
   - component: {fileID: 925513893}
   - component: {fileID: 925513892}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GetHitParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9879,7 +9878,7 @@ GameObject:
   - component: {fileID: 963047728}
   - component: {fileID: 963047730}
   - component: {fileID: 963047729}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: HarmonyMeterSounds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11058,7 +11057,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1390306807}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: SFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11369,7 +11368,7 @@ GameObject:
   - component: {fileID: 1465986224}
   - component: {fileID: 1465986226}
   - component: {fileID: 1465986225}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: AttackSwingSound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11729,7 +11728,7 @@ GameObject:
   - component: {fileID: 1490084681}
   - component: {fileID: 1490084680}
   - component: {fileID: 1490084679}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: AttackHitbox (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11764,7 +11763,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitboxName: BasicAttack2
   col: {fileID: 1490084680}
-  overrideID: {fileID: 0}
   debugRenderer: {fileID: 1490084681}
   showDebugRenderer: 1
 --- !u!65 &1490084680
@@ -12308,7 +12306,7 @@ GameObject:
   - component: {fileID: 1547876377}
   - component: {fileID: 1547876375}
   - component: {fileID: 1547876376}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ParryTonalSound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17460,7 +17458,7 @@ GameObject:
   - component: {fileID: 1615620092}
   - component: {fileID: 1615620094}
   - component: {fileID: 1615620093}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: AttackConnectSounds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17528,7 +17526,7 @@ GameObject:
   - component: {fileID: 1624816041}
   - component: {fileID: 1624816043}
   - component: {fileID: 1624816042}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ParryParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22280,7 +22278,7 @@ GameObject:
   - component: {fileID: 1666410595}
   - component: {fileID: 1666410597}
   - component: {fileID: 1666410596}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: ParryEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22908,13 +22906,14 @@ GameObject:
   - component: {fileID: 1721065939}
   - component: {fileID: 1721065938}
   - component: {fileID: 1721065937}
+  - component: {fileID: 1721065940}
   m_Layer: 10
   m_Name: AttackHitBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1721065936
 Transform:
   m_ObjectHideFlags: 0
@@ -22987,6 +22986,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1721065935}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1721065940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1721065935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 257f42f368e14594fb3db735dd3ffaf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitboxName: PlayerAttack
+  col: {fileID: 1721065937}
+  debugRenderer: {fileID: 1721065938}
+  showDebugRenderer: 1
 --- !u!1 &1723413115
 GameObject:
   m_ObjectHideFlags: 0
@@ -23074,7 +23089,7 @@ GameObject:
   - component: {fileID: 1731904595}
   - component: {fileID: 1731904594}
   - component: {fileID: 1731904593}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: AttackHitbox (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23109,7 +23124,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitboxName: BasicAttack
   col: {fileID: 1731904594}
-  overrideID: {fileID: 0}
   debugRenderer: {fileID: 1731904595}
   showDebugRenderer: 1
 --- !u!65 &1731904594
@@ -23233,7 +23247,7 @@ GameObject:
   - component: {fileID: 1768257071}
   - component: {fileID: 1768257070}
   - component: {fileID: 1768257076}
-  m_Layer: 11
+  m_Layer: 8
   m_Name: Room
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26359,7 +26373,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1973962497}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: ParticleEffects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26874,7 +26888,7 @@ GameObject:
   - component: {fileID: 2023891408}
   - component: {fileID: 2023891410}
   - component: {fileID: 2023891409}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: HealParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31864,6 +31878,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FrogKnight
       objectReference: {fileID: 0}
+    - target: {fileID: 3047223838859579938, guid: 43c0d925baab30144b61aed83056c044,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 3047223838859579940, guid: 43c0d925baab30144b61aed83056c044,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -31918,6 +31937,60 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3047223838156240662, guid: 43c0d925baab30144b61aed83056c044,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 3047223837963273733, guid: 43c0d925baab30144b61aed83056c044,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3047223838498488774, guid: 43c0d925baab30144b61aed83056c044,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 3047223838815518353, guid: 43c0d925baab30144b61aed83056c044,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 3047223838881833029, guid: 43c0d925baab30144b61aed83056c044,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 3047223839888983699, guid: 43c0d925baab30144b61aed83056c044,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 3047223837820303901, guid: 43c0d925baab30144b61aed83056c044,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3047223837891863349, guid: 43c0d925baab30144b61aed83056c044,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3047223838871435738, guid: 43c0d925baab30144b61aed83056c044,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3047223839770494682, guid: 43c0d925baab30144b61aed83056c044,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1274407406, guid: 43c0d925baab30144b61aed83056c044, type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 1274407411, guid: 43c0d925baab30144b61aed83056c044, type: 3}
       propertyPath: showDebugRenderer

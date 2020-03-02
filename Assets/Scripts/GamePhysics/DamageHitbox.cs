@@ -45,7 +45,6 @@
 
         public void ActivateHitbox(float delay, float lifetime, int damage)
         {
-            Debug.Log("ACTIVATE HITBOX OF ID " + id.ToString());
             col.enabled = false;
             hitboxDelayed = true;
             hitboxDelay = delay;
