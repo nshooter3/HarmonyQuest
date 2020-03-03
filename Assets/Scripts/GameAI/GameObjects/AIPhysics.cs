@@ -49,12 +49,12 @@
             {
                 //Whatever the y value was before, keep it. This allows the AI to still fall off of things while ignoring y velocity on their movement vector.
                 prevYVel = data.rb.velocity.y;
-                newVelocity = (moveDirection * Time.deltaTime) * data.speed;
+                newVelocity = (moveDirection * Time.deltaTime) * data.aiStats.speed;
                 newVelocity.y = prevYVel;
             }
             else
             {
-                newVelocity = (moveDirection * Time.deltaTime) * data.speed;
+                newVelocity = (moveDirection * Time.deltaTime) * data.aiStats.speed;
             }
 
             adjustedCollisionAvoidanceForce = AdjustAvoidanceForceBasedOnMovementVelocity(collisionAvoidanceForce, newVelocity);
@@ -98,7 +98,7 @@
         public virtual void ApplyGravity()
         {
             // Apply a force directly so we can handle gravity on our own instead of relying on rigidbody gravity.
-            data.rb.AddForce(data.gravity, ForceMode.Acceleration);
+            data.rb.AddForce(data.aiStats.gravity, ForceMode.Acceleration);
         }
 
         public virtual void ResetVelocity()
@@ -130,7 +130,7 @@
                 Vector3 targetDir = targetPos - data.gameObject.transform.position;
 
                 // The step size is equal to speed times frame time.
-                float step = data.rotateSpeed * turnSpeedModifier * Time.deltaTime;
+                float step = data.aiStats.rotateSpeed * turnSpeedModifier * Time.deltaTime;
 
                 Vector3 newDir = Vector3.RotateTowards(data.gameObject.transform.forward, targetDir, step, 0.0f);
                 Debug.DrawRay(data.gameObject.transform.position, newDir, Color.red);

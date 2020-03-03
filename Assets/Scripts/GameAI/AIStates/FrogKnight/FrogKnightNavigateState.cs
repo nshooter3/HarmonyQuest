@@ -67,7 +67,7 @@
 
         private bool ShouldDeAggro(AIStateUpdateData updateData)
         {
-            return updateData.aiGameObjectFacade.data.disengageWithDistance && Vector3.Distance(updateData.aiGameObjectFacade.transform.position, updateData.player.transform.position) > updateData.aiGameObjectFacade.data.disengageDistance;
+            return updateData.aiGameObjectFacade.data.aiStats.disengageWithDistance && Vector3.Distance(updateData.aiGameObjectFacade.transform.position, updateData.player.transform.position) > updateData.aiGameObjectFacade.data.aiStats.disengageDistance;
         }
     }
 }

@@ -66,5 +66,10 @@
         /// with the decrease becoming less dramatic as the angle between the avoidance force and the movement force increases.
         /// </summary>
         public static float avoidanceForceMovementVelocityAdjustmentScale = 0.5f;
+
+        /// <summary>
+        /// How far above the player to position the navPos when tracking them.
+        /// </summary>
+        public static float navPosHeightOffset;
     }
 }
