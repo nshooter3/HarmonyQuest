@@ -1,5 +1,6 @@
 ﻿namespace GameAI.AIGameObjects
 {
+    using System;
     using System.Collections.Generic;
     using GamePhysics;
     using UnityEngine;
@@ -16,11 +17,6 @@
         {
             this.data = data;
             InitHitboxDictionary();
-        }
-
-        public virtual Collider[] GetHurtboxes()
-        {
-            return data.hurtboxes;
         }
 
         public virtual Collider GetCollisionAvoidanceHitbox()
@@ -56,7 +52,7 @@
             {
                 foreach (DamageHitbox hitbox in tempValue)
                 {
-                    hitbox.ActivateHitbox(delay, lifetime, damage);
+                    hitbox.ActivateHitbox(delay, lifetime, damage, Guid.NewGuid());
                 }
             }
         }

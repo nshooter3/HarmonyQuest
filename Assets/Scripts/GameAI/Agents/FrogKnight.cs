@@ -1,6 +1,5 @@
 ﻿namespace GameAI.Agents
 {
-    using GameAI.AIGameObjects;
     using GameAI.Navigation;
     using GameAI.AIStates;
     using GameAI.AIStates.FrogKnight;

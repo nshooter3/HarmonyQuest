@@ -3,6 +3,7 @@
     using Navigation;
     using UnityEngine;
     using GameAI.AIStates;
+    using GamePhysics;
 
     public abstract class AIGameObjectFacade : MonoBehaviour
     {
@@ -11,6 +12,7 @@
 
         private AIPhysics aiPhysics = new AIPhysics();
         private AIHitboxes aiHitboxes = new AIHitboxes();
+        private AIHealth aiHealth = new AIHealth();
         private AIDebug aiDebug = new AIDebug();
 
         // ****************************
@@ -64,12 +66,23 @@
 
             aiPhysics.Init(data);
             aiHitboxes.Init(data);
+            aiHealth.Init(data);
             aiDebug.Init(data);
+
+            DamageReceiver damageReceiver;
+
+            foreach (Collider hurtbox in data.hurtboxes)
+            {
+                //Create and attach a DamageReceiver to all our hurtboxes at runtime
+                damageReceiver = hurtbox.gameObject.AddComponent<DamageReceiver>();
+                damageReceiver.AssignFunctionToReceiveDamageDelegate(aiHealth.ReceiveDamageHitbox);
+            }
         }
 
         public void UpdateSubclasses()
         {
             UpdateHitboxes();
+            RemoveInactiveReceivedDamageHitboxes();
         }
 
         // ****************************
@@ -155,10 +168,6 @@
         // ****************************
         // COLLISION FUNCTIONS
         // ****************************
-        public virtual Collider[] GetHurtboxes()
-        {
-            return aiHitboxes.GetHurtboxes();
-        }
 
         public virtual Collider GetCollisionAvoidanceHitbox()
         {
@@ -183,6 +192,15 @@
         private void UpdateHitboxes()
         {
             aiHitboxes.UpdateHitboxes();
+        }
+
+        // ****************************
+        // AIReceivedDamageHitboxTracker Functions
+        // ****************************
+
+        private void RemoveInactiveReceivedDamageHitboxes()
+        {
+            aiHealth.RemoveInactiveReceivedDamageHitboxes();
         }
 
         // ****************************

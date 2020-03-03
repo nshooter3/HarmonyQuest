@@ -11,6 +11,9 @@
         [SerializeField]
         private Collider col;
 
+        [SerializeField]
+        private CollisionWrapper collisionWrapper;
+
         /// <summary>
         /// The debug mesh renderer associated with this hitbox. Used to visualize hitboxes if showDebugRenderer is set to true.
         /// </summary>
@@ -32,7 +35,7 @@
         private float hitboxLifetime;
         private float hitboxLifetimeTimer;
 
-        private Guid id = Guid.NewGuid();
+        private Guid id;
 
         public void Start()
         {
@@ -41,9 +44,10 @@
                 debugRenderer.enabled = false;
             }
             col.enabled = false;
+            collisionWrapper.AssignFunctionToTriggerEnterDelegate(OnHitboxEnter);
         }
 
-        public void ActivateHitbox(float delay, float lifetime, int damage)
+        public void ActivateHitbox(float delay, float lifetime, int damage, Guid id)
         {
             col.enabled = false;
             hitboxDelayed = true;
@@ -53,6 +57,7 @@
             hitboxLifetime = lifetime;
             hitboxLifetimeTimer = 0.0f;
             this.damage = damage;
+            this.id = id;
         }
 
         public void UpdateHitbox()
@@ -86,6 +91,15 @@
             hitboxActive = false;
             hitboxLifetimeTimer = 0.0f;
             ToggleDebugRenderer(false);
+        }
+
+        private void OnHitboxEnter(Collider other)
+        {
+            DamageReceiver damageReceiver = other.GetComponent<DamageReceiver>();
+            if (damageReceiver != null)
+            {
+                damageReceiver.ReceiveDamage(this);
+            }
         }
 
         public Guid GetId()

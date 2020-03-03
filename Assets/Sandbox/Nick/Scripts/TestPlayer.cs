@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using HarmonyQuest.Audio;
 using GamePhysics;
+using System;
 
 public class TestPlayer : MonoBehaviour
 {
@@ -309,7 +310,7 @@ public class TestPlayer : MonoBehaviour
         {
             EndDash();
         }
-        attackHitbox.ActivateHitbox(0.0f, 0.5f, 1);
+        attackHitbox.ActivateHitbox(0.0f, 0.1f, 20, Guid.NewGuid());
         attackTimer = maxAttackTimer;
         /*Collider boxCol = attackBox.GetComponent<BoxCollider>();
         Collider[] cols = Physics.OverlapBox(boxCol.bounds.center, boxCol.bounds.extents, boxCol.transform.rotation, LayerMask.GetMask("Enemy"));

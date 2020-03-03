@@ -12,6 +12,12 @@
         // ****************************
 
         /// <summary>
+        /// The AIStats scriptable object associated with this enemy. Holds onto data like health bars, drops, etc.
+        /// </summary>
+        [Tooltip("The AIStats scriptable object associated with this enemy. Holds onto data like health bars, drops, etc.")]
+        public AIStats aiStats;
+
+        /// <summary>
         /// This agent's gameobject.
         /// </summary>
         [Tooltip("This agent's gameobject.")]
