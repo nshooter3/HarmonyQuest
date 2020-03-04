@@ -48,6 +48,11 @@
             }
         }
 
+        public void ResetMeter()
+        {
+            SetMeterValue(1, 1);
+        }
+
         public void SetMeterValue(int currentValue, int maxValue)
         {
             float newXScale = ((float) currentValue) / maxValue;

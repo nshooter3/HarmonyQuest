@@ -22,11 +22,9 @@
             //Create instance of our scriptable object so we don't edit the original file when changing health values.
             aiStats = Object.Instantiate(this.data.aiStats);
             curHealthBarMaxHealth = aiStats.healthBars[0];
-            //TODO: Set up a meter pooling system to grab this from.
-            healthBarUI = Object.FindObjectOfType<AgentHealthBar>();
+
             //TODO: Make this use Mitch's camera.
-            healthBarUI.InitTrackingVars(data.gameObject.transform, Object.FindObjectOfType<Camera>());
-            healthBarUI.SetNumHealthBarNotches(aiStats.healthBars.Length);
+            healthBarUI = AgentHealthBarPool.instance.GetAgentHealthBar(aiStats.healthBars.Length, data.gameObject.transform, Object.FindObjectOfType<Camera>());
         }
 
         private void TakeDamage(int damage)
