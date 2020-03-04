@@ -3,19 +3,19 @@
     using System.Collections.Generic;
     using UnityEngine;
 
-    public class AgentHealthBarPool : MonoBehaviour
+    public class AgentHealthBarsPool : MonoBehaviour
     {
-        public static AgentHealthBarPool instance;
+        public static AgentHealthBarsPool instance;
 
         [SerializeField]
-        private AgentHealthBar healthBarPrefab;
+        private AgentHealthBars healthBarPrefab;
 
         [SerializeField]
         private int healthBarPoolSize;
 
-        private List<AgentHealthBar> healthBarPool = new List<AgentHealthBar>();
+        private List<AgentHealthBars> healthBarPool = new List<AgentHealthBars>();
 
-        private AgentHealthBar tempHealthbar;
+        private AgentHealthBars tempHealthbar;
 
         private void Awake()
         {
@@ -39,7 +39,7 @@
             }
         }
 
-        private AgentHealthBar AddAgentHealthBarToPool()
+        private AgentHealthBars AddAgentHealthBarToPool()
         {
             tempHealthbar = Instantiate(healthBarPrefab);
             tempHealthbar.transform.parent = transform;
@@ -48,7 +48,7 @@
             return tempHealthbar;
         }
 
-        public AgentHealthBar GetAgentHealthBar(int numHealthBars, Transform target, Camera cam, float yOffset = 65.0f)
+        public AgentHealthBars GetAgentHealthBar(int numHealthBars, Transform target, Camera cam, float yOffset = 65.0f)
         {
             for (int i = 0; i < healthBarPoolSize; i++)
             {
@@ -64,15 +64,15 @@
                 tempHealthbar = AddAgentHealthBarToPool();
             }
 
-            tempHealthbar.ResetMeter();
+            tempHealthbar.ResetMeters();
             tempHealthbar.InitTrackingVars(target, cam, yOffset);
-            tempHealthbar.SetNumHealthBarNotches(numHealthBars);
+            tempHealthbar.SetNumHealthBars(numHealthBars);
             tempHealthbar.gameObject.SetActive(true);
 
             return tempHealthbar;
         }
 
-        public void ReturnAgentHealthBarToPool(AgentHealthBar agentHealthBar)
+        public void ReturnAgentHealthBarToPool(AgentHealthBars agentHealthBar)
         {
             agentHealthBar.gameObject.SetActive(false);
         }

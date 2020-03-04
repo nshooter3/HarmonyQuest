@@ -14,17 +14,18 @@
         private int curHealthBarMaxHealth;
         private bool dead = false;
         private List<DamageHitbox> receivedDamageHitboxes = new List<DamageHitbox>();
-        private AgentHealthBar healthBarUI;
+        private AgentHealthBars agentHealthBarsUI;
 
         public void Init(AIGameObjectData data)
         {
             this.data = data;
             //Create instance of our scriptable object so we don't edit the original file when changing health values.
             aiStats = Object.Instantiate(this.data.aiStats);
-            curHealthBarMaxHealth = aiStats.healthBars[0];
+            curHealthBar = aiStats.healthBars.Length - 1;
+            curHealthBarMaxHealth = aiStats.healthBars[curHealthBar];
 
             //TODO: Make this use Mitch's camera.
-            healthBarUI = AgentHealthBarPool.instance.GetAgentHealthBar(aiStats.healthBars.Length, data.gameObject.transform, Object.FindObjectOfType<Camera>());
+            agentHealthBarsUI = AgentHealthBarsPool.instance.GetAgentHealthBar(aiStats.healthBars.Length, data.gameObject.transform, Object.FindObjectOfType<Camera>());
         }
 
         private void TakeDamage(int damage)
@@ -32,18 +33,28 @@
             aiStats.healthBars[curHealthBar] = Mathf.Max(0, aiStats.healthBars[curHealthBar] - damage);
             if (aiStats.healthBars[curHealthBar] <= 0)
             {
-                if (curHealthBar < aiStats.healthBars.Length - 1)
+                if (curHealthBar > 0)
                 {
-                    curHealthBar++;
+                    curHealthBar--;
                     curHealthBarMaxHealth = aiStats.healthBars[curHealthBar];
                 }
                 else
                 {
-                    dead = true;
+                    Die();
                 }
             }
-            healthBarUI.SetMeterValue(aiStats.healthBars[curHealthBar], curHealthBarMaxHealth);
-            healthBarUI.SetNumHealthBarNotches(aiStats.healthBars.Length - curHealthBar);
+            agentHealthBarsUI.SetMeterValue(curHealthBar, aiStats.healthBars[curHealthBar], curHealthBarMaxHealth);
+            if (dead)
+            {
+                AgentHealthBarsPool.instance.ReturnAgentHealthBarToPool(agentHealthBarsUI);
+            }
+        }
+
+        private void Die()
+        {
+            //TODO: Figure out what I want to do with dead enemies.
+            dead = true;
+            //data.gameObject.SetActive(false);
         }
 
         public void ReceiveDamageHitbox(DamageHitbox damageHitbox)

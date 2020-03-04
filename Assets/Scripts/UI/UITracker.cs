@@ -2,7 +2,7 @@
 {
     using UnityEngine;
 
-    public class UITrackingMeter : UIMeter
+    public class UITracker : MonoBehaviour
     {
         Transform target;
         float yOffset;
@@ -17,10 +17,9 @@
         }
 
         // Update is called once per frame
-        new void Update()
+        void Update()
         {
             TrackTarget();
-            base.Update();
         }
 
         private void TrackTarget()
