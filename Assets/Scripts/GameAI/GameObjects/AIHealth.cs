@@ -52,9 +52,7 @@
 
         private void Die()
         {
-            //TODO: Figure out what I want to do with dead enemies.
             dead = true;
-            //data.gameObject.SetActive(false);
         }
 
         public void ReceiveDamageHitbox(DamageHitbox damageHitbox)
@@ -94,6 +92,11 @@
                     i--;
                 }
             }
+        }
+
+        public bool IsDead()
+        {
+            return dead;
         }
     }
 }

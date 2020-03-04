@@ -81,8 +81,11 @@
 
         public void UpdateSubclasses()
         {
-            UpdateHitboxes();
-            RemoveInactiveReceivedDamageHitboxes();
+            if (IsDead() == false)
+            {
+                UpdateHitboxes();
+                RemoveInactiveReceivedDamageHitboxes();
+            }
         }
 
         // ****************************
@@ -104,9 +107,9 @@
             aiPhysics.SetVelocity(velocity, ignoreYValue, speedModifier, alwaysFaceTarget);
         }
 
-        public virtual void ApplyVelocity(bool ignoreYValue = true)
+        public virtual void ApplyVelocity(bool ignoreYValue = true, bool applyRotation = true)
         {
-            aiPhysics.ApplyVelocity(ignoreYValue);
+            aiPhysics.ApplyVelocity(ignoreYValue, applyRotation);
         }
 
         public virtual void ApplyGravity()
@@ -157,12 +160,21 @@
         public virtual void SetRigidBodyConstraintsToLockMovement()
         {
             aiPhysics.SetRigidBodyConstraintsToLockMovement();
+        }
 
+        public void SetRigidBodyConstraintsToNone()
+        {
+            aiPhysics.SetRigidBodyConstraintsToNone();
         }
 
         public virtual float GetDistanceFromAggroTarget()
         {
             return aiPhysics.GetDistanceFromAggroTarget();
+        }
+
+        public virtual void LaunchAgent(Vector3 direction, float yForce, float launchSpeed, float rotationSpeed)
+        {
+            aiPhysics.LaunchAgent(direction, yForce, launchSpeed, rotationSpeed);
         }
 
         // ****************************
@@ -195,8 +207,13 @@
         }
 
         // ****************************
-        // AIReceivedDamageHitboxTracker Functions
+        // AIHealth Functions
         // ****************************
+
+        public bool IsDead()
+        {
+            return aiHealth.IsDead();
+        }
 
         private void RemoveInactiveReceivedDamageHitboxes()
         {

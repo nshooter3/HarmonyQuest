@@ -56,6 +56,7 @@
         // Update is called once per frame
         void Update()
         {
+            aiFlockingHandler.SetLivingAgents(agents);
             if (useFlocking)
             {
                 if (collisionAvoidanceTimer > 0)
@@ -65,7 +66,7 @@
                 else
                 {
                     collisionAvoidanceTimer = NavigatorSettings.collisionAvoidanceUpdateRate;
-                    aiFlockingHandler.SetAgentCollisionAvoidanceForces(agents);
+                    aiFlockingHandler.SetAgentCollisionAvoidanceForces();
                 }
             }
             if (useObstacleRepulsion)
@@ -77,7 +78,7 @@
                 else
                 {
                     obstacleAvoidanceTimer = NavigatorSettings.obstacleAvoidanceUpdateRate;
-                    aiFlockingHandler.SetAgentObstacleAvoidanceForces(agents, aiObstacles);
+                    aiFlockingHandler.SetAgentObstacleAvoidanceForces(aiObstacles);
                 }
             }
 

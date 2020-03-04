@@ -70,6 +70,6 @@
         /// <summary>
         /// How far above the player to position the navPos when tracking them.
         /// </summary>
-        public static float navPosHeightOffset;
+        public static float navPosHeightOffset = 2.25f;
     }
 }

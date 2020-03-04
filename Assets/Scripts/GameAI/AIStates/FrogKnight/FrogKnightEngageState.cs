@@ -138,7 +138,11 @@
 
         public override void CheckForStateChange(AIStateUpdateData updateData)
         {
-            if (ShouldDeAggro(updateData))
+            if (updateData.aiGameObjectFacade.IsDead() == true)
+            {
+                updateData.stateHandler.RequestStateTransition(new FrogKnightDeadState { }, updateData);
+            }
+            else if (ShouldDeAggro(updateData))
             {
                 checkForTargetObstructionTimer = 0;
                 updateData.stateHandler.RequestStateTransition(new FrogKnightDisengageState { }, updateData);

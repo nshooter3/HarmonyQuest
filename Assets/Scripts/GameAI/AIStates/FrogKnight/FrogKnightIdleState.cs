@@ -38,7 +38,11 @@
 
         public override void CheckForStateChange(AIStateUpdateData updateData)
         {
-            if (aggroZoneEntered && !NavMeshUtil.IsTargetObstructed(updateData.aiGameObjectFacade.data.aiAgentBottom, updateData.player.transform))
+            if (updateData.aiGameObjectFacade.IsDead() == true)
+            {
+                updateData.stateHandler.RequestStateTransition(new FrogKnightDeadState { }, updateData);
+            }
+            else if (aggroZoneEntered && !NavMeshUtil.IsTargetObstructed(updateData.aiGameObjectFacade.data.aiAgentBottom, updateData.player.transform))
             {
                 updateData.stateHandler.RequestStateTransition(new FrogKnightEngageState { }, updateData);
             }

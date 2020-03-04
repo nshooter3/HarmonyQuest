@@ -19,6 +19,7 @@
         private Collider obstacleBoundingBox;
         private Vector3 collisionAvoidanceForce;
         private Vector3 obstacleAvoidanceForce;
+        private List<AIAgent> livingAgents;
 
         /*
             "Flocks, Herds, and Schools: A distributed behavior model" - Craig Reynolds 1987
@@ -33,59 +34,59 @@
 
             Obstacle avoidance is the same thing, but between agents and obstacles instead of agents and other agents.
         */
-        public void SetAgentCollisionAvoidanceForces(List<AIAgent> agents)
+        public void SetAgentCollisionAvoidanceForces()
         {
             //Optimization note: consider finding a way to do this without creating a new array every frame.
-            agentWeights = new float[agents.Count, agents.Count];
+            agentWeights = new float[livingAgents.Count, livingAgents.Count];
 
             //Generate agentWeights, a two dimmensional array storing a weight based on every agent's distance from every other agent, and a collision avoidance max distance range.
-            for (int i = 0; i < agents.Count; i++)
+            for (int i = 0; i < livingAgents.Count; i++)
             {
-                sourceAgentPosition = agents[i].aiGameObject.transform.position;
-                for (int j = 0; j < agents.Count; j++)
+                sourceAgentPosition = livingAgents[i].aiGameObject.transform.position;
+                for (int j = 0; j < livingAgents.Count; j++)
                 {
-                    targetAgentBoundingBox = agents[j].aiGameObject.GetCollisionAvoidanceHitbox();
+                    targetAgentBoundingBox = livingAgents[j].aiGameObject.GetCollisionAvoidanceHitbox();
                     //Ensure that an agent does not apply a flocking force on itself in relation to itself.
                     if (i != j)
                     {
                         distance = GetAgentDistanceFromBoundingBox(sourceAgentPosition, targetAgentBoundingBox);
                         //Wij = max(dmax - dij, 0)
-                        agentWeights[i, j] = Mathf.Max(agents[i].aiGameObject.data.individualCollisionAvoidanceMaxDistance - distance, 0);
+                        agentWeights[i, j] = Mathf.Max(livingAgents[i].aiGameObject.data.individualCollisionAvoidanceMaxDistance - distance, 0);
                     }
                 }
             }
 
             //Use the weight array to create collision avoidance forces for each agent.
-            for (int i = 0; i < agents.Count; i++)
+            for (int i = 0; i < livingAgents.Count; i++)
             {
-                sourceAgentPosition = agents[i].aiGameObject.transform.position;
+                sourceAgentPosition = livingAgents[i].aiGameObject.transform.position;
                 collisionAvoidanceForce = Vector3.zero;
-                
-                for (int j = 0; j < agents.Count; j++)
+
+                for (int j = 0; j < livingAgents.Count; j++)
                 {
                     //Ensure that an agent does not apply a flocking force on itself in relation to itself.
                     if (i != j)
                     {
-                        targetAgentPosition = agents[j].aiGameObject.transform.position;
+                        targetAgentPosition = livingAgents[j].aiGameObject.transform.position;
                         //Fca = Sum(wi * Normalize(p - pi))
                         collisionAvoidanceForce += agentWeights[i, j] * (sourceAgentPosition - targetAgentPosition).normalized;
                     }
                 }
 
-                agents[i].aiGameObject.SetCollisionAvoidanceForce(collisionAvoidanceForce * NavigatorSettings.collisionAvoidanceScale * agents[i].aiGameObject.data.individualCollisionAvoidanceModifier);
+                livingAgents[i].aiGameObject.SetCollisionAvoidanceForce(collisionAvoidanceForce * NavigatorSettings.collisionAvoidanceScale * livingAgents[i].aiGameObject.data.individualCollisionAvoidanceModifier);
             }
         }
 
         // Pretty much the same as SetAgentCollisionAvoidanceForces, except between agents and obstacles instead of agents and other agents.
-        public void SetAgentObstacleAvoidanceForces(List<AIAgent> agents, AIObstacle[] obstacles)
+        public void SetAgentObstacleAvoidanceForces(AIObstacle[] obstacles)
         {
             //Optimization note: consider finding a way to do this without creating a new array every frame.
-            obstacleWeights = new float[agents.Count, obstacles.Length];
+            obstacleWeights = new float[livingAgents.Count, obstacles.Length];
 
             //Generate obstacleWeights, a two dimmensional array storing a weight based on every agents's distance from every obstacle, and a collision avoidance max distance range.
-            for (int i = 0; i < agents.Count; i++)
+            for (int i = 0; i < livingAgents.Count; i++)
             {
-                sourceAgentPosition = agents[i].aiGameObject.transform.position;
+                sourceAgentPosition = livingAgents[i].aiGameObject.transform.position;
                 for (int j = 0; j < obstacles.Length; j++)
                 {
                     obstacleBoundingBox = obstacles[j].GetCollider();
@@ -96,9 +97,9 @@
             }
 
             //Use the weight array to create obstacle avoidance forces for each agent.
-            for (int i = 0; i < agents.Count; i++)
+            for (int i = 0; i < livingAgents.Count; i++)
             {
-                sourceAgentPosition = agents[i].aiGameObject.transform.position;
+                sourceAgentPosition = livingAgents[i].aiGameObject.transform.position;
                 obstacleAvoidanceForce = Vector3.zero;
 
                 for (int j = 0; j < obstacles.Length; j++)
@@ -108,7 +109,7 @@
                     obstacleAvoidanceForce += obstacleWeights[i, j] * (sourceAgentPosition - obstaclePosition).normalized;
                 }
 
-                agents[i].aiGameObject.SetObstacleAvoidanceForce(obstacleAvoidanceForce);
+                livingAgents[i].aiGameObject.SetObstacleAvoidanceForce(obstacleAvoidanceForce);
             }
         }
 
@@ -116,6 +117,18 @@
         {
             Vector3 closestPoint = boundingBox.ClosestPointOnBounds(agentPosition);
             return Vector3.Distance(closestPoint, agentPosition);
+        }
+
+        public void SetLivingAgents(List<AIAgent> agents)
+        {
+            livingAgents = new List<AIAgent>();
+            foreach (AIAgent agent in agents)
+            {
+                if (agent.aiGameObject.IsDead() == false)
+                {
+                    livingAgents.Add(agent);
+                }
+            }
         }
     }
 }
