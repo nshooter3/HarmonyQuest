@@ -37,7 +37,11 @@
 
         public override void CheckForStateChange(AIStateUpdateData updateData)
         {
-            if (ShouldDeAggro(updateData) || updateData.navigator.isActivelyGeneratingPath == false)
+            if (updateData.aiGameObjectFacade.IsDead() == true)
+            {
+                updateData.stateHandler.RequestStateTransition(new FrogKnightDeadState { }, updateData);
+            }
+            else if (ShouldDeAggro(updateData) || updateData.navigator.isActivelyGeneratingPath == false)
             {
                 checkForTargetObstructionTimer = 0;
                 updateData.stateHandler.RequestStateTransition(new FrogKnightDisengageState { }, updateData);
@@ -67,7 +71,7 @@
 
         private bool ShouldDeAggro(AIStateUpdateData updateData)
         {
-            return updateData.aiGameObjectFacade.data.disengageWithDistance && Vector3.Distance(updateData.aiGameObjectFacade.transform.position, updateData.player.transform.position) > updateData.aiGameObjectFacade.data.disengageDistance;
+            return updateData.aiGameObjectFacade.data.aiStats.disengageWithDistance && Vector3.Distance(updateData.aiGameObjectFacade.transform.position, updateData.player.transform.position) > updateData.aiGameObjectFacade.data.aiStats.disengageDistance;
         }
     }
 }

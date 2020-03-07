@@ -49,12 +49,12 @@
             {
                 //Whatever the y value was before, keep it. This allows the AI to still fall off of things while ignoring y velocity on their movement vector.
                 prevYVel = data.rb.velocity.y;
-                newVelocity = (moveDirection * Time.deltaTime) * data.speed;
+                newVelocity = (moveDirection * Time.deltaTime) * data.aiStats.speed;
                 newVelocity.y = prevYVel;
             }
             else
             {
-                newVelocity = (moveDirection * Time.deltaTime) * data.speed;
+                newVelocity = (moveDirection * Time.deltaTime) * data.aiStats.speed;
             }
 
             adjustedCollisionAvoidanceForce = AdjustAvoidanceForceBasedOnMovementVelocity(collisionAvoidanceForce, newVelocity);
@@ -71,6 +71,24 @@
         }
 
         /// <summary>
+        /// One frame function that suddenly launches the enemy in a particular direction.
+        /// Intended to juice up enemy deaths and such.
+        /// </summary>
+        /// <param name="direction"> Which direction the enemy goes flying in. </param>
+        /// <param name="yForce"> How high up the enemy gets launched. </param>
+        /// <param name="launchSpeed"> How quickly the enemy is launched. </param>
+        /// <param name="rotationSpeed"> How quickly the enemy spins around in the air. </param>
+        public virtual void LaunchAgent(Vector3 direction, float yForce, float launchSpeed, float rotationSpeed)
+        {
+            moveDirection = direction.normalized;
+            moveDirection = new Vector3(moveDirection.x, yForce, moveDirection.z);
+
+            data.rb.angularVelocity = new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)).normalized * rotationSpeed;
+
+            newVelocity = moveDirection * launchSpeed;
+        }
+
+        /// <summary>
         /// Scale down avoidance forces as the angle between them and the movement direction decreases.
         /// This prevents redundant avoidance forces from speeding up the enemy rather than adjusting their path.
         /// </summary>
@@ -84,9 +102,12 @@
             return avoidanceForce - difference * NavigatorSettings.avoidanceForceMovementVelocityAdjustmentScale;
         }
 
-        public virtual void ApplyVelocity(bool ignoreYValue = true)
+        public virtual void ApplyVelocity(bool ignoreYValue = true, bool applyRotation = true)
         {
-            Rotate(rotationDirection, 1.0f);
+            if (applyRotation)
+            {
+                Rotate(rotationDirection, 1.0f);
+            }
             modifiedVelocity = newVelocity;
             if (ignoreYValue)
             {
@@ -98,7 +119,7 @@
         public virtual void ApplyGravity()
         {
             // Apply a force directly so we can handle gravity on our own instead of relying on rigidbody gravity.
-            data.rb.AddForce(data.gravity, ForceMode.Acceleration);
+            data.rb.AddForce(data.aiStats.gravity, ForceMode.Acceleration);
         }
 
         public virtual void ResetVelocity()
@@ -130,7 +151,7 @@
                 Vector3 targetDir = targetPos - data.gameObject.transform.position;
 
                 // The step size is equal to speed times frame time.
-                float step = data.rotateSpeed * turnSpeedModifier * Time.deltaTime;
+                float step = data.aiStats.rotateSpeed * turnSpeedModifier * Time.deltaTime;
 
                 Vector3 newDir = Vector3.RotateTowards(data.gameObject.transform.forward, targetDir, step, 0.0f);
                 Debug.DrawRay(data.gameObject.transform.position, newDir, Color.red);
@@ -161,6 +182,11 @@
         {
             SetRigidbodyConstraints(RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ |
                                     RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ);
+        }
+
+        public void SetRigidBodyConstraintsToNone()
+        {
+            SetRigidbodyConstraints(RigidbodyConstraints.None);
         }
 
         public virtual float GetDistanceFromAggroTarget()

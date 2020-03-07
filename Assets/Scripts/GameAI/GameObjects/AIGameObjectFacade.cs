@@ -3,6 +3,7 @@
     using Navigation;
     using UnityEngine;
     using GameAI.AIStates;
+    using GamePhysics;
 
     public abstract class AIGameObjectFacade : MonoBehaviour
     {
@@ -10,7 +11,8 @@
         public AIGameObjectData data;
 
         private AIPhysics aiPhysics = new AIPhysics();
-        private AICollision aiCollision = new AICollision();
+        private AIHitboxes aiHitboxes = new AIHitboxes();
+        private AIHealth aiHealth = new AIHealth();
         private AIDebug aiDebug = new AIDebug();
 
         // ****************************
@@ -63,8 +65,27 @@
             data.aggroTarget = TestPlayer.instance.transform;
 
             aiPhysics.Init(data);
-            aiCollision.Init(data);
+            aiHitboxes.Init(data);
+            aiHealth.Init(data);
             aiDebug.Init(data);
+
+            DamageReceiver damageReceiver;
+
+            foreach (Collider hurtbox in data.hurtboxes)
+            {
+                //Create and attach a DamageReceiver to all our hurtboxes at runtime
+                damageReceiver = hurtbox.gameObject.AddComponent<DamageReceiver>();
+                damageReceiver.AssignFunctionToReceiveDamageDelegate(aiHealth.ReceiveDamageHitbox);
+            }
+        }
+
+        public void UpdateSubclasses()
+        {
+            if (IsDead() == false)
+            {
+                UpdateHitboxes();
+                RemoveInactiveReceivedDamageHitboxes();
+            }
         }
 
         // ****************************
@@ -86,9 +107,9 @@
             aiPhysics.SetVelocity(velocity, ignoreYValue, speedModifier, alwaysFaceTarget);
         }
 
-        public virtual void ApplyVelocity(bool ignoreYValue = true)
+        public virtual void ApplyVelocity(bool ignoreYValue = true, bool applyRotation = true)
         {
-            aiPhysics.ApplyVelocity(ignoreYValue);
+            aiPhysics.ApplyVelocity(ignoreYValue, applyRotation);
         }
 
         public virtual void ApplyGravity()
@@ -139,7 +160,11 @@
         public virtual void SetRigidBodyConstraintsToLockMovement()
         {
             aiPhysics.SetRigidBodyConstraintsToLockMovement();
+        }
 
+        public void SetRigidBodyConstraintsToNone()
+        {
+            aiPhysics.SetRigidBodyConstraintsToNone();
         }
 
         public virtual float GetDistanceFromAggroTarget()
@@ -147,17 +172,52 @@
             return aiPhysics.GetDistanceFromAggroTarget();
         }
 
+        public virtual void LaunchAgent(Vector3 direction, float yForce, float launchSpeed, float rotationSpeed)
+        {
+            aiPhysics.LaunchAgent(direction, yForce, launchSpeed, rotationSpeed);
+        }
+
         // ****************************
         // COLLISION FUNCTIONS
         // ****************************
-        public virtual Collider[] GetHurtboxes()
-        {
-            return aiCollision.GetHurtboxes();
-        }
 
         public virtual Collider GetCollisionAvoidanceHitbox()
         {
-            return aiCollision.GetCollisionAvoidanceHitbox();
+            return aiHitboxes.GetCollisionAvoidanceHitbox();
+        }
+
+        public virtual void ActivateHitbox(string name, float delay, float lifetime, int damage)
+        {
+            aiHitboxes.ActivateHitbox(name, delay, lifetime, damage);
+        }
+
+        public virtual void CancelHitbox(string name)
+        {
+            aiHitboxes.CancelHitbox(name);
+        }
+
+        public virtual void CancelAllHitboxes()
+        {
+            aiHitboxes.CancelAllHitboxes();
+        }
+
+        private void UpdateHitboxes()
+        {
+            aiHitboxes.UpdateHitboxes();
+        }
+
+        // ****************************
+        // AIHealth Functions
+        // ****************************
+
+        public bool IsDead()
+        {
+            return aiHealth.IsDead();
+        }
+
+        private void RemoveInactiveReceivedDamageHitboxes()
+        {
+            aiHealth.RemoveInactiveReceivedDamageHitboxes();
         }
 
         // ****************************

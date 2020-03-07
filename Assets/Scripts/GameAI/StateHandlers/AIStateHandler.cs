@@ -21,12 +21,9 @@
                 currentState = nextState;
                 nextState = null;
                 currentState.Init(updateData);
-                currentState.OnUpdate(updateData);
             }
-            else
-            {
-                currentState.OnUpdate(updateData);
-            }
+            currentState.OnUpdate(updateData);
+            updateData.aiGameObjectFacade.UpdateSubclasses();
         }
 
         public void OnFixedUpdate(AIStateUpdateData updateData)

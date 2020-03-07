@@ -26,7 +26,6 @@
         private MoveAction moveAction = new MoveAction();
         private TargetDistanceAction targetDistanceAction = new TargetDistanceAction();
         private StrafeAction strafeAction = new StrafeAction();
-        private AttackAction attackAction = new AttackAction();
         private DebugAction debugAction = new DebugAction();
 
         public override void Init(AIStateUpdateData updateData)
@@ -139,7 +138,11 @@
 
         public override void CheckForStateChange(AIStateUpdateData updateData)
         {
-            if (ShouldDeAggro(updateData))
+            if (updateData.aiGameObjectFacade.IsDead() == true)
+            {
+                updateData.stateHandler.RequestStateTransition(new FrogKnightDeadState { }, updateData);
+            }
+            else if (ShouldDeAggro(updateData))
             {
                 checkForTargetObstructionTimer = 0;
                 updateData.stateHandler.RequestStateTransition(new FrogKnightDisengageState { }, updateData);
@@ -169,7 +172,7 @@
 
         private bool ShouldDeAggro(AIStateUpdateData updateData)
         {
-            return updateData.aiGameObjectFacade.data.disengageWithDistance && Vector3.Distance(updateData.aiGameObjectFacade.transform.position, updateData.player.transform.position) > updateData.aiGameObjectFacade.data.disengageDistance;
+            return updateData.aiGameObjectFacade.data.aiStats.disengageWithDistance && Vector3.Distance(updateData.aiGameObjectFacade.transform.position, updateData.player.transform.position) > updateData.aiGameObjectFacade.data.aiStats.disengageDistance;
         }
     }
 }

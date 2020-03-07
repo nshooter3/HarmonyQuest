@@ -1,5 +1,6 @@
 ﻿namespace GameAI.AIStateActions
 {
+    using GameAI.Navigation;
     using GameAI.StateHandlers;
     using UnityEngine;
 
@@ -8,7 +9,7 @@
         public void NavPosTrackTarget(AIStateUpdateData updateData)
         {
             Vector3 newNavPos = updateData.aiGameObjectFacade.data.aggroTarget.position;
-            newNavPos.y += updateData.aiGameObjectFacade.data.navPosHeightOffset;
+            newNavPos.y += NavigatorSettings.navPosHeightOffset;
             updateData.aiGameObjectFacade.data.navPos.transform.position = newNavPos;
         }
 

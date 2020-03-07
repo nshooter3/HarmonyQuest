@@ -2,13 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using HarmonyQuest.Audio;
+using GamePhysics;
+using System;
 
 public class TestPlayer : MonoBehaviour
 {
     CharacterController characterController;
 
     [SerializeField]
-    private GameObject attackBox, parryBox;
+    private DamageHitbox attackHitbox;
+
+    [SerializeField]
+    private GameObject parryBox;
 
     [SerializeField]
     private ParticleSystem parryParticles, getHitParticles, healParticles;
@@ -142,6 +147,7 @@ public class TestPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        attackHitbox.UpdateHitbox();
         if (isLockedOn && lockOnTarget == null)
         {
             isLockedOn = false;
@@ -304,9 +310,9 @@ public class TestPlayer : MonoBehaviour
         {
             EndDash();
         }
-        attackBox.SetActive(true);
+        attackHitbox.ActivateHitbox(0.0f, 0.1f, 20, Guid.NewGuid());
         attackTimer = maxAttackTimer;
-        Collider boxCol = attackBox.GetComponent<BoxCollider>();
+        /*Collider boxCol = attackBox.GetComponent<BoxCollider>();
         Collider[] cols = Physics.OverlapBox(boxCol.bounds.center, boxCol.bounds.extents, boxCol.transform.rotation, LayerMask.GetMask("Enemy"));
         for (int i = 0; i < cols.Length; i++)
         {
@@ -344,7 +350,7 @@ public class TestPlayer : MonoBehaviour
                     playerUI.SetMultiplierProgress(attackMultiplier * harmonyModeMultilpier, nextMultiplierProgress);
                 }
             }
-        }
+        }*/
     }
 
     void Dash()
@@ -382,7 +388,7 @@ public class TestPlayer : MonoBehaviour
 
     void EndAttack()
     {
-        attackBox.SetActive(false);
+        //attackBox.SetActive(false);
         attackCooldownTimer = maxAttackCooldownTimer;
     }
 
