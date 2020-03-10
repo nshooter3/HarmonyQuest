@@ -28,7 +28,7 @@ namespace DitzelGames.FastIK
             StartRotation = transform.rotation;
         }
 
-        void Update()
+        void FixedUpdate()
         {
             if (Target == null)
                 return;
