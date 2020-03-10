@@ -32,7 +32,7 @@ public class ClothPoints : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         // LeftScarfIK.position = transform.TransformPoint(cloth.vertices[61]); //4
         // RightScarfIK.position = transform.TransformPoint(cloth.vertices[95]); //140
