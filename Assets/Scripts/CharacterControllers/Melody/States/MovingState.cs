@@ -51,31 +51,10 @@
             movement *= melodyController.config.MaxAcceleration;
             //Debug.Log("acceleration: " + movement.x);
             movement *= Time.fixedDeltaTime;
-            //Debug.Log("new: " + oldVelocity);
-            //Debug.Log("fixed delta:  " + Time.fixedDeltaTime);
-            //Debug.Log("movement: " + movement);
 
-
-            /* Debug.Log("Movement Magnitude: " + movement.magnitude);
-             Debug.Log("velocity Magnitude: " + velocity.magnitude);
-             if (movement.magnitude > velocity.magnitude)
-             {
-                 //movement *= Time.fixedDeltaTime;
-                 Debug.Log("test: " + velocity);
-
-                 velocity = velocity * (velocity.magnitude + movement.magnitude);
-                 Debug.Log("test1: " + velocity);
-             }
-             else
-             {
-                 velocity = velocity.normalized * (movement.magnitude);
-             }*/
-
-            //melodyController.rigidBody.AddForce(movement);
             velocity = movement.normalized * (movement.magnitude + velocity.magnitude);
             velocity = Vector3.ClampMagnitude(velocity, melodyController.config.MaxSpeed * melodyController.Move.magnitude);
-            Debug.Log("test: " + velocity);
-            Debug.Log("cap: " + melodyController.config.MaxSpeed * melodyController.Move.magnitude);
+            velocity.Set(velocity.x, melodyController.rigidBody.velocity.y, velocity.z);
             melodyController.rigidBody.velocity = velocity;
 
 

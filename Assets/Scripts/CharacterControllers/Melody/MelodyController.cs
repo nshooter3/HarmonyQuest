@@ -17,6 +17,10 @@
         public Vector3 Move { get => move; set => move = value; }
         public MelodyConfig config { get; private set; }
 
+        //Drag References
+        public Renderer melodyRenderer;
+        public Renderer scarfRenderer;
+
         // Start is called before the first frame update
         void Start()
         {

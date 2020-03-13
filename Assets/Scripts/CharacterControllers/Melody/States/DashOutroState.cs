@@ -33,7 +33,9 @@
                 ableToExit = true;
             }
 
-            melodyController.animator.SetTrigger("DashOutro");
+            //melodyController.animator.SetTrigger("DashOutro");
+            melodyController.melodyRenderer.enabled = true;
+            melodyController.scarfRenderer.enabled = false;
 
             melodyController.Move *= melodyController.config.MaxSpeed;
             RotatePlayer(3);

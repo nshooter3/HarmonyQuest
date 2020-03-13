@@ -15,7 +15,9 @@
 
         protected override void Enter()
         {
-            melodyController.animator.SetTrigger("Dash");
+            //melodyController.animator.SetTrigger("Dash");
+            melodyController.melodyRenderer.enabled = false;
+            melodyController.scarfRenderer.enabled = true;
             melodyController.rigidBody.useGravity = false;
             if (Math.Abs(melodyController.rigidBody.velocity.magnitude) > 0)
             {
