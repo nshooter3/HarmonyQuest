@@ -16,8 +16,18 @@
         public float DashOutroTime = 0.3f;
         public float DashTime = 0.3f;
 
+        /// <summary>
+        /// If Melody is colliding with something that has a contact normal y value greater than groundedYNormalThreshold, we consider her grounded.
+        /// </summary>
+        [Header("Advanced Movement")]
+        [Tooltip("If Melody is colliding with something that has a contact normal y value greater than groundedYNormalThreshold, we consider her grounded.")]
+        public float groundedYNormalThreshold = 0.5f;
 
-
+        /// <summary>
+        /// If Melody is colliding with something that has a contact normal y value greater than slidingYNormalThreshold, we consider her sliding.
+        /// </summary>
+        [Tooltip("If Melody is colliding with something that has a contact normal y value greater than slidingYNormalThreshold, we consider her sliding.")]
+        public float slidingYNormalThreshold = 0.01f;
 
         void Start()
         {

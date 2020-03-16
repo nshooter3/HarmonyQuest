@@ -29,11 +29,11 @@
         public delegate void OnTriggerExitDelegate(Collider other);
         OnTriggerExitDelegate onTriggerExitDelegate;
 
-        public delegate void OnCollisionEnterDelegate(Collider other);
+        public delegate void OnCollisionEnterDelegate(Collision other);
         OnCollisionEnterDelegate onCollisionEnterDelegate;
-        public delegate void OnCollisionStayDelegate(Collider other);
+        public delegate void OnCollisionStayDelegate(Collision other);
         OnCollisionStayDelegate onCollisionStayDelegate;
-        public delegate void OnCollisionExitDelegate(Collider other);
+        public delegate void OnCollisionExitDelegate(Collision other);
         OnCollisionExitDelegate onCollisionExitDelegate;
 
         // Start is called before the first frame update
@@ -136,7 +136,7 @@
                 {
                     if (onCollisionEnterDelegate != null)
                     {
-                        onCollisionEnterDelegate(other.collider);
+                        onCollisionEnterDelegate(other);
                     }
                 }
             }
@@ -154,7 +154,7 @@
                 {
                     if (onCollisionStayDelegate != null)
                     {
-                        onCollisionStayDelegate(other.collider);
+                        onCollisionStayDelegate(other);
                     }
                 }
             }
@@ -172,7 +172,7 @@
                 {
                     if (onCollisionExitDelegate != null)
                     {
-                        onCollisionExitDelegate(other.collider);
+                        onCollisionExitDelegate(other);
                     }
                 }
             }

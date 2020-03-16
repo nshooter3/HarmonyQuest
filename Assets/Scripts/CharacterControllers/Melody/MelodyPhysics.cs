@@ -4,16 +4,12 @@
 
     public class MelodyPhysics
     {
-        //********************************************
-        // ***************** PHYSICS *****************
-        //********************************************
+        private MelodyController controller;
 
         public Vector3 velocity = Vector3.zero;
         private Vector3 desiredVelocity = Vector3.zero;
         private Vector3 acceleration = Vector3.zero;
         private float maxSpeedChange;
-
-        private MelodyController controller;
 
         public MelodyPhysics(MelodyController controller)
         {

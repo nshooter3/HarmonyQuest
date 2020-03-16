@@ -55,7 +55,7 @@
             readyForStateTransition = true;
             if (updateData.aiGameObjectFacade.data.aggroZone != null)
             {
-                updateData.aiGameObjectFacade.data.aggroZone.RemoveFunctionFromCollisionStayDelegate(AggroZoneActivation);
+                updateData.aiGameObjectFacade.data.aggroZone.RemoveFunctionFromTriggerStayDelegate(AggroZoneActivation);
             }
         }
 
