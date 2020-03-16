@@ -38,12 +38,7 @@
 
         public override void OnFixedUpdate()
         {
-            ApplyGravity();
-        }
-
-        void ApplyGravity()
-        {
-            melodyController.rigidBody.AddForce(melodyController.config.Gravity, ForceMode.Acceleration);
+            melodyController.melodyPhysics.ApplyGravity();
         }
 
         public override void OnExit() { }

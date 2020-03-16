@@ -17,6 +17,9 @@
         public Vector3 Move { get => move; set => move = value; }
         public MelodyConfig config { get; private set; }
 
+        //Utility classes
+        public MelodyPhysics melodyPhysics;
+
         //Drag References
         public Renderer melodyRenderer;
         public Renderer scarfRenderer;
@@ -24,6 +27,7 @@
         // Start is called before the first frame update
         void Start()
         {
+            melodyPhysics = new MelodyPhysics(this);
             rigidBody = gameObject.GetComponent<Rigidbody>();
             animator = gameObject.GetComponent<Animator>();
             config = gameObject.GetComponent<MelodyConfig>();
