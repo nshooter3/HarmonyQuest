@@ -1,5 +1,7 @@
 ﻿namespace Melody.States
 {
+    using UnityEngine;
+
     public class IdleState : MelodyState
     {
 
@@ -32,6 +34,16 @@
                 ableToExit = true;
                 nextState = new MovingState(melodyController);
             }
+        }
+
+        public override void OnFixedUpdate()
+        {
+            ApplyGravity();
+        }
+
+        void ApplyGravity()
+        {
+            melodyController.rigidBody.AddForce(melodyController.config.Gravity, ForceMode.Acceleration);
         }
 
         public override void OnExit() { }

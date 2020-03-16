@@ -20,7 +20,6 @@
             //Check For Attack
             if (melodyController.input.AttackButtonDown())
             {
-
                 ableToExit = true;
                 nextState = new AttackState(melodyController);
             }
@@ -40,23 +39,27 @@
                 nextState = new IdleState(melodyController);
             }
 
-
-            ApplyMovement();
+            CalculateVelocity();
         }
 
         public override void OnFixedUpdate()
         {
-
+            ApplyVelocity();
+            ApplyGravity();
         }
 
-        void ApplyMovement()
+        void CalculateVelocity()
         {
             desiredVelocity = new Vector3(melodyController.Move.x, 0, melodyController.Move.z) * melodyController.config.MaxSpeed;
             maxSpeedChange = melodyController.config.MaxAcceleration * Time.deltaTime;
-
             velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
             velocity.z = Mathf.MoveTowards(velocity.z, desiredVelocity.z, maxSpeedChange);
+            //Keep whatever our rigidbody y velocity was on the last frame to ensure that gravity works properly.
+            velocity.y = melodyController.rigidBody.velocity.y;
+        }
 
+        void ApplyVelocity()
+        {
             RotatePlayer(melodyController.config.TurningSpeed);
             melodyController.rigidBody.velocity = velocity;
             melodyController.animator.SetFloat("Move", desiredVelocity.magnitude / melodyController.config.MaxSpeed);
@@ -64,7 +67,7 @@
 
         void ApplyGravity()
         {
-
+            melodyController.rigidBody.AddForce(melodyController.config.Gravity, ForceMode.Acceleration);
         }
 
         void RotatePlayer(float turnSpeedModifier)

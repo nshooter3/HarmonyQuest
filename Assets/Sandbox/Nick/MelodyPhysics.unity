@@ -421,7 +421,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 553355892}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.05, y: 5, z: 6.06}
+  m_LocalPosition: {x: -11.05, y: 5, z: 6.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -664,7 +664,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1121173920}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.66, y: 5, z: 5.3999996}
+  m_LocalPosition: {x: 2.66, y: 5, z: 5.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1016,10 +1016,20 @@ PrefabInstance:
       propertyPath: m_Constraints
       value: 112
       objectReference: {fileID: 0}
+    - target: {fileID: 6661829350256221801, guid: 35f60c03bc07f234e916d414f3f8ea20,
+        type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2994222325263661086, guid: 35f60c03bc07f234e916d414f3f8ea20,
         type: 3}
       propertyPath: MaxAcceleration
       value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 2994222325263661086, guid: 35f60c03bc07f234e916d414f3f8ea20,
+        type: 3}
+      propertyPath: Gravity.y
+      value: -30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35f60c03bc07f234e916d414f3f8ea20, type: 3}
