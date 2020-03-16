@@ -35,7 +35,10 @@
 
         public void ApplyGravity()
         {
-            controller.rigidBody.AddForce(controller.config.Gravity, ForceMode.Acceleration);
+            if (controller.melodyCollision.IsGrounded() == false)
+            {
+                controller.rigidBody.AddForce(controller.config.Gravity, ForceMode.Acceleration);
+            }
         }
 
         public void RotatePlayer(float turnSpeedModifier)
