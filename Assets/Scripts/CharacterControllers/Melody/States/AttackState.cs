@@ -14,7 +14,6 @@
             base.OnUpdate(time);
             if (melodyController.animator.IsInTransition(0) && melodyController.animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
             {
-                new IdleState(melodyController);
                 nextState = new IdleState(melodyController);
                 ableToExit = true;
             }

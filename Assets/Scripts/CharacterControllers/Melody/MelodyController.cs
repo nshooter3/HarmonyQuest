@@ -24,9 +24,9 @@
         // Start is called before the first frame update
         void Start()
         {
-            rigidBody = gameObject.GetComponent(typeof(Rigidbody)) as Rigidbody;
-            animator = gameObject.GetComponent(typeof(Animator)) as Animator;
-            config = gameObject.GetComponent(typeof(MelodyConfig)) as MelodyConfig;
+            rigidBody = gameObject.GetComponent<Rigidbody>();
+            animator = gameObject.GetComponent<Animator>();
+            config = gameObject.GetComponent<MelodyConfig>();
 
             input = ServiceLocator.instance.GetInputManager();
 
