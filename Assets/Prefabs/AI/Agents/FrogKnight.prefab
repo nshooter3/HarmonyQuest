@@ -1053,7 +1053,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3047223838859579938}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 420df2dc990394940a18c8e1e0747f28, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
@@ -1100,16 +1100,10 @@ MonoBehaviour:
     - {fileID: 3047223838859579943}
     - {fileID: 3047223838815518359}
     collisionAvoidanceHitbox: {fileID: 3047223838859579943}
-    disengageWithDistance: 1
-    disengageDistance: 15
-    speed: 220
-    gravity: {x: 0, y: -20, z: 0}
-    rotateSpeed: 25
     showDestination: 1
     body: {fileID: 3047223838859579942}
     head: {fileID: 3047223838815518358}
     navPos: {fileID: 3047223838156240662}
-    navPosHeightOffset: 2.25
     debugFlocking: 0
     debugEngage: 0
     aggroTarget: {fileID: 0}
