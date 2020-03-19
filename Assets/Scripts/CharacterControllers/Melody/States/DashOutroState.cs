@@ -37,19 +37,19 @@
             melodyController.melodyRenderer.enabled = true;
             melodyController.scarfRenderer.enabled = false;
 
-            melodyController.Move *= melodyController.config.MaxSpeed;
+            melodyController.move *= melodyController.config.MaxSpeed;
             RotatePlayer(3);
 
-            melodyController.Move = melodyController.Move * time * 100 * 0.5f;
-            melodyController.rigidBody.velocity = new Vector3(melodyController.Move.x, melodyController.rigidBody.velocity.y, melodyController.Move.z);
+            melodyController.move = melodyController.move * time * 100 * 0.5f;
+            melodyController.rigidBody.velocity = new Vector3(melodyController.move.x, melodyController.rigidBody.velocity.y, melodyController.move.z);
         }
 
         void RotatePlayer(float turnSpeedModifier)
         {
             //Rotate player to face movement direction
-            if (melodyController.Move.magnitude > 0)
+            if (melodyController.move.magnitude > 0)
             {
-                Vector3 targetPos = melodyController.transform.position + melodyController.Move;
+                Vector3 targetPos = melodyController.transform.position + melodyController.move;
                 Vector3 targetDir = targetPos - melodyController.transform.position;
 
                 float step = 5 * turnSpeedModifier * Time.deltaTime;

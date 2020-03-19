@@ -18,7 +18,7 @@
 
         public void CalculateVelocity()
         {
-            desiredVelocity = new Vector3(controller.Move.x, 0, controller.Move.z) * controller.config.MaxSpeed;
+            desiredVelocity = new Vector3(controller.move.x, 0, controller.move.z) * controller.config.MaxSpeed;
             maxSpeedChange = controller.config.MaxAcceleration * Time.deltaTime;
             velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
             velocity.z = Mathf.MoveTowards(velocity.z, desiredVelocity.z, maxSpeedChange);
@@ -44,9 +44,9 @@
         public void RotatePlayer(float turnSpeedModifier)
         {
             //Rotate player to face movement direction
-            if (controller.Move.magnitude > 0.0f)
+            if (controller.move.magnitude > 0.0f)
             {
-                Vector3 targetPos = controller.transform.position + controller.Move;
+                Vector3 targetPos = controller.transform.position + controller.move;
                 Vector3 targetDir = targetPos - controller.transform.position;
 
                 float step = controller.config.TurningSpeed * turnSpeedModifier * Time.deltaTime;

@@ -10,8 +10,6 @@
     {
         MelodyStateMachine StateMachine;
 
-        Vector3 move;
-
         public IPlayerInputManager input { get; private set; }
 
         public Animator animator { get; private set; }
@@ -21,7 +19,7 @@
         [SerializeField]
         public MelodyConfig config;
 
-        public Vector3 Move { get => move; set => move = value; }
+        public Vector3 move;
 
         //Utility classes
         public MelodyPhysics melodyPhysics;
