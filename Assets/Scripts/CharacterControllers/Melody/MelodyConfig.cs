@@ -14,8 +14,12 @@
         [Header("Dash Settings")]
         public float DashLength = 7.0f;
         public float DashIntroTime = 0.0f;
-        public float DashOutroTime = 0.1f;
+        public float DashOutroTime = 0.35f;
         public float DashTime = 0.25f;
+
+        public float DashOutroMaxSpeed = 6.0f;
+        public float DashOutroTurningSpeed = 3.0f;
+        public Vector3 DashOutroGravity = new Vector3(0.0f, -20.0f, 0.0f);
 
         /// <summary>
         /// If Melody is colliding with something that has a contact normal y value greater than groundedYNormalThreshold, we consider her grounded.

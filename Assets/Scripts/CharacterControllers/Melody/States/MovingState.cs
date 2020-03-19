@@ -34,13 +34,13 @@
                 nextState = new IdleState(melodyController);
             }
 
-            melodyController.melodyPhysics.CalculateVelocity();
+            melodyController.melodyPhysics.CalculateVelocity(melodyController.config.MaxSpeed, melodyController.config.MaxAcceleration);
         }
 
         public override void OnFixedUpdate()
         {
-            melodyController.melodyPhysics.ApplyVelocity();
-            melodyController.melodyPhysics.ApplyGravity();
+            melodyController.melodyPhysics.ApplyVelocity(melodyController.config.MaxSpeed, melodyController.config.TurningSpeed);
+            melodyController.melodyPhysics.ApplyGravity(melodyController.config.Gravity);
         }
 
         public override void OnExit()

@@ -6,7 +6,7 @@
     public class DashState : MelodyState
     {
 
-        protected Vector3 dodgeVector = Vector3.left;
+        protected Vector3 dodgeVector;
         protected float timer = 0;
         private Vector3 shift;
 

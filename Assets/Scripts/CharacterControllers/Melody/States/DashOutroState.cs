@@ -1,17 +1,14 @@
 ﻿namespace Melody.States
 {
-    using System;
     using UnityEngine;
 
     public class DashOutroState : MelodyState
     {
 
-        protected Vector3 dodge = Vector3.left;
+        protected Vector3 dodge;
         protected float timer = 0;
 
-        public DashOutroState(MelodyController controller) : base(controller)
-        {
-        }
+        public DashOutroState(MelodyController controller) : base(controller) { }
 
         protected override void Enter()
         {
@@ -25,7 +22,6 @@
         {
             base.OnUpdate(time);
 
-
             timer += time;
             if (timer >= melodyController.config.DashOutroTime)
             {
@@ -37,31 +33,13 @@
             melodyController.melodyRenderer.enabled = true;
             melodyController.scarfRenderer.enabled = false;
 
-            melodyController.move *= melodyController.config.MaxSpeed;
-            RotatePlayer(3);
-
-            melodyController.move = melodyController.move * time * 100 * 0.5f;
-            melodyController.rigidBody.velocity = new Vector3(melodyController.move.x, melodyController.rigidBody.velocity.y, melodyController.move.z);
+            melodyController.melodyPhysics.CalculateVelocity(melodyController.config.DashOutroMaxSpeed, melodyController.config.MaxAcceleration);
         }
 
-        void RotatePlayer(float turnSpeedModifier)
+        public override void OnFixedUpdate()
         {
-            //Rotate player to face movement direction
-            if (melodyController.move.magnitude > 0)
-            {
-                Vector3 targetPos = melodyController.transform.position + melodyController.move;
-                Vector3 targetDir = targetPos - melodyController.transform.position;
-
-                float step = 5 * turnSpeedModifier * Time.deltaTime;
-
-                Vector3 newDir = Vector3.RotateTowards(melodyController.transform.forward, targetDir, step, 0.0f);
-                Debug.DrawRay(melodyController.transform.position, newDir, Color.red);
-
-                // Move our position a step closer to the target.
-                melodyController.transform.rotation = Quaternion.LookRotation(newDir);
-            }
-            //Failsafe to ensure that x and z are always zero.
-            melodyController.transform.eulerAngles = new Vector3(0, melodyController.transform.eulerAngles.y, 0);
+            melodyController.melodyPhysics.ApplyVelocity(melodyController.config.DashOutroMaxSpeed, melodyController.config.DashOutroTurningSpeed);
+            melodyController.melodyPhysics.ApplyGravity(melodyController.config.DashOutroGravity);
         }
 
         public override void OnExit()

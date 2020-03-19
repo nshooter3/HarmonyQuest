@@ -222,7 +222,7 @@ GameObject:
   - component: {fileID: 290198821}
   - component: {fileID: 290198822}
   m_Layer: 0
-  m_Name: melody 1
+  m_Name: melody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -311,13 +311,17 @@ MonoBehaviour:
     MaxSpeed: 10
     MaxAcceleration: 80
     TurningSpeed: 5
+    DashOutroMaxSpeed: 6
+    DashOutroTurningSpeed: 3
     Gravity: {x: 0, y: -40, z: 0}
+    DashOutroGravity: {x: 0, y: -20, z: 0}
     DashLength: 7
     DashIntroTime: 0
-    DashOutroTime: 0.1
+    DashOutroTime: 0.35
     DashTime: 0.25
     groundedYNormalThreshold: 0.5
     slidingYNormalThreshold: 0.01
+  move: {x: 0, y: 0, z: 0}
   melodyRenderer: {fileID: 8387241254795185922}
   scarfRenderer: {fileID: 8776026943385123194}
 --- !u!114 &290198821
