@@ -10,6 +10,7 @@
         private Vector3 desiredVelocity = Vector3.zero;
         private Vector3 acceleration = Vector3.zero;
         private float maxSpeedChange;
+        private RaycastHit hit;
 
         public MelodyPhysics(MelodyController controller)
         {
@@ -59,6 +60,14 @@
             }
             //Failsafe to ensure that x and z are always zero.
             controller.transform.eulerAngles = new Vector3(0.0f, controller.transform.eulerAngles.y, 0.0f);
+        }
+
+        public void SnapToGround()
+        {
+            if (Physics.Raycast(controller.transform.position, Vector3.down, out hit, controller.config.snapToGroundRaycastDistance, controller.config.snapToGroundLayerMask))
+            {
+                controller.transform.position = hit.point + controller.config.snapOffset;
+            }
         }
     }
 }

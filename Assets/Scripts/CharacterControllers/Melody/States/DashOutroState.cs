@@ -37,6 +37,7 @@
         {
             melodyController.melodyPhysics.ApplyVelocity(melodyController.config.DashOutroMaxSpeed, melodyController.config.DashOutroTurningSpeed);
             melodyController.melodyPhysics.ApplyGravity(melodyController.config.DashOutroGravity);
+            base.OnFixedUpdate();
         }
 
         public override void OnExit()

@@ -41,6 +41,8 @@
         {
             melodyController.melodyPhysics.ApplyVelocity(melodyController.config.MaxSpeed, melodyController.config.TurningSpeed);
             melodyController.melodyPhysics.ApplyGravity(melodyController.config.Gravity);
+            melodyController.melodyPhysics.SnapToGround();
+            base.OnFixedUpdate();
         }
 
         public override void OnExit()

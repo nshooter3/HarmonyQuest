@@ -1,25 +1,22 @@
 ﻿namespace Melody.States
 {
-    using System;
     using UnityEngine;
 
     public class DashState : MelodyState
     {
 
-        protected Vector3 dodgeVector;
-        protected float timer = 0;
-        private Vector3 shift;
+        protected Vector3 dodge;
+        protected float timer = 0.0f;
 
-        public DashState(MelodyController controller, Vector3 dodgeVector) : base(controller)
+        public DashState(MelodyController controller, Vector3 dodge) : base(controller)
         {
-            this.dodgeVector = dodgeVector;
-            shift = new Vector3( 0f, 0.05f, 0 );
+            this.dodge = dodge;
         }
 
         protected override void Enter()
         {
             nextState = new DashOutroState(melodyController);
-            timer = 0;
+            timer = 0.0f;
         }
 
         public override void OnUpdate(float time)
@@ -35,27 +32,14 @@
 
         public override void OnFixedUpdate()
         {
-            RaycastHit[] hits = Physics.RaycastAll(melodyController.transform.position, Vector3.down, 1f);
-            Vector3 closest = melodyController.transform.position;
-            float min = 1000;
-            foreach (RaycastHit h in hits)
-            {
-                if (min > Math.Abs(melodyController.transform.position.y - h.point.y))
-                {
-                    min = Math.Abs(melodyController.transform.position.y - h.point.y);
-                    closest = h.point+ shift;
-                }
-            }
-            if(min > 0.3f)
-            {
-                melodyController.transform.position = closest;
-            }
-            melodyController.rigidBody.velocity = dodgeVector;
+            melodyController.melodyPhysics.SnapToGround();
+            melodyController.rigidBody.velocity = dodge;
             base.OnFixedUpdate();
         }
 
         public override void OnExit()
         {
+
         }
     }
 }

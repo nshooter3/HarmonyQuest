@@ -39,6 +39,7 @@
         public override void OnFixedUpdate()
         {
             melodyController.melodyPhysics.ApplyGravity(melodyController.config.Gravity);
+            base.OnFixedUpdate();
         }
 
         public override void OnExit() { }

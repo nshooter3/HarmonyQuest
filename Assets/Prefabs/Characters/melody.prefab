@@ -311,14 +311,19 @@ MonoBehaviour:
     MaxSpeed: 10
     MaxAcceleration: 80
     TurningSpeed: 5
-    DashOutroMaxSpeed: 6
-    DashOutroTurningSpeed: 3
     Gravity: {x: 0, y: -40, z: 0}
-    DashOutroGravity: {x: 0, y: -20, z: 0}
     DashLength: 7
     DashIntroTime: 0
     DashOutroTime: 0.35
     DashTime: 0.25
+    DashOutroMaxSpeed: 6
+    DashOutroTurningSpeed: 3
+    DashOutroGravity: {x: 0, y: -20, z: 0}
+    snapToGroundRaycastDistance: 0.35
+    snapOffset: {x: 0, y: 0.05, z: 0}
+    snapToGroundLayerMask:
+      serializedVersion: 2
+      m_Bits: 257
     groundedYNormalThreshold: 0.5
     slidingYNormalThreshold: 0.01
   move: {x: 0, y: 0, z: 0}
