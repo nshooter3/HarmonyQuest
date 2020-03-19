@@ -4,15 +4,16 @@
 
     public class DashOutroState : MelodyState
     {
-
-        protected Vector3 dodge;
         protected float timer = 0;
 
         public DashOutroState(MelodyController controller) : base(controller) { }
 
         protected override void Enter()
         {
-           
+            //melodyController.animator.SetTrigger("DashOutro");
+            melodyController.melodyRenderer.enabled = true;
+            melodyController.scarfRenderer.enabled = false;
+
             nextState = new IdleState(melodyController);
             timer = 0;
             melodyController.rigidBody.velocity = Vector3.zero;
@@ -28,10 +29,6 @@
                 nextState = new IdleState(melodyController);
                 ableToExit = true;
             }
-
-            //melodyController.animator.SetTrigger("DashOutro");
-            melodyController.melodyRenderer.enabled = true;
-            melodyController.scarfRenderer.enabled = false;
 
             melodyController.melodyPhysics.CalculateVelocity(melodyController.config.DashOutroMaxSpeed, melodyController.config.MaxAcceleration);
         }
