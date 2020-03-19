@@ -17,6 +17,8 @@
         private Vector3 lowerColliderOffset;
         //The radius of Melody's collider, added to her velocity when determing the distance to check for wall collisions.
         private float colliderRadius;
+        //Used to determine how far from the center of our collider that the upper and lower raycasts should be. 0 for no separation, 1 for the very top and bottom of Melody's collider.
+        private float upperLowerYHeightScale = 0.5f;
 
         private RaycastHit hit;
 
@@ -25,9 +27,9 @@
             this.controller = controller;
             colliderOffset = controller.capsuleCollider.center;
             upperColliderOffset = colliderOffset;
-            upperColliderOffset.y = (controller.capsuleCollider.height / 2.0f) * 0.9f;
+            upperColliderOffset.y += (controller.capsuleCollider.height / 2.0f) * upperLowerYHeightScale;
             lowerColliderOffset = colliderOffset;
-            lowerColliderOffset.y = (-controller.capsuleCollider.height / 2.0f) * 0.9f;
+            lowerColliderOffset.y += (-controller.capsuleCollider.height / 2.0f) * upperLowerYHeightScale;
             colliderRadius = controller.capsuleCollider.radius;
         }
 
@@ -77,7 +79,9 @@
                 //If so, stop the horizontal movement
                 IgnoreHorizontalMovementInput();
             }
-            Debug.DrawRay(colliderCenterPosition, velocity.normalized, Color.blue);
+            Debug.DrawRay(colliderCenterPosition, velocity.normalized, Color.yellow);
+            Debug.DrawRay(colliderUpperPosition, velocity.normalized, Color.blue);
+            Debug.DrawRay(colliderLowerPosition, velocity.normalized, Color.green);
         }
 
         private void SetVelocityToSlide()
