@@ -219,7 +219,6 @@ GameObject:
   - component: {fileID: 6661829350256221801}
   - component: {fileID: 6661829350256221803}
   - component: {fileID: 6661829350256221800}
-  - component: {fileID: 2994222325263661086}
   - component: {fileID: 290198821}
   - component: {fileID: 290198822}
   m_Layer: 0
@@ -308,30 +307,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b269c5af4e70bfd419e61d48f3cd0ce9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  config:
+    MaxSpeed: 10
+    MaxAcceleration: 80
+    TurningSpeed: 5
+    Gravity: {x: 0, y: -40, z: 0}
+    DashLength: 7
+    DashIntroTime: 0
+    DashOutroTime: 0.1
+    DashTime: 0.25
+    groundedYNormalThreshold: 0.5
+    slidingYNormalThreshold: 0.01
   melodyRenderer: {fileID: 8387241254795185922}
   scarfRenderer: {fileID: 8776026943385123194}
---- !u!114 &2994222325263661086
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3451171655387926694}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 005deac89f55bc7499eb98734ba9b196, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MaxSpeed: 10
-  MaxAcceleration: 80
-  TurningSpeed: 5
-  Gravity: {x: 0, y: -30, z: 0}
-  DashLength: 7
-  DashIntroTime: 0
-  DashOutroTime: 0.1
-  DashTime: 0.25
-  groundedYNormalThreshold: 0.8
-  slidingYNormalThreshold: 0.3
 --- !u!114 &290198821
 MonoBehaviour:
   m_ObjectHideFlags: 0

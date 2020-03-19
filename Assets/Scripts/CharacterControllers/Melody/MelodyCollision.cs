@@ -29,7 +29,6 @@
             for (int i = 0; i < collision.contactCount; i++)
             {
                 Vector3 normal = collision.GetContact(i).normal;
-                Debug.Log("Y NORMAL: " + normal.y);
                 //If Melody is colliding with something that has a contact normal y value greater than groundedYNormalThreshold, we consider her grounded.
                 isGrounded |= normal.y >= controller.config.groundedYNormalThreshold;
                 isSliding |= normal.y >= controller.config.slidingYNormalThreshold;
