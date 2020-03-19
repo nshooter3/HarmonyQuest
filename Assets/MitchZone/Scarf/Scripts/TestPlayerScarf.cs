@@ -349,7 +349,7 @@ public class TestPlayerScarf : MonoBehaviour
             //If the player isn't moving when they dash, make them dash backwards.
             dashDirection = transform.forward * -1;
         }
-        scarf.Dash();
+        // scarf.Dash();
     }
 
     void Heal()

@@ -45,13 +45,13 @@ public class ClothPoints : MonoBehaviour
 
     void OnDrawGizmos()
     { //4 and
-        for(int i = 0; i < cloth.vertices.Length; ++i)
-        {
-            Gizmos.color = Color.red;
-            if (i == ball1 || i == ball2)
-                Gizmos.color = Color.blue;
-            Gizmos.DrawSphere(transform.TransformPoint(cloth.vertices[i]), 0.07f);
-        }
+        // for(int i = 0; i < cloth.vertices.Length; ++i)
+        // {
+        //     Gizmos.color = Color.red;
+        //     if (i == ball1 || i == ball2)
+        //         Gizmos.color = Color.blue;
+        //     Gizmos.DrawSphere(transform.TransformPoint(cloth.vertices[i]), 0.07f);
+        // }
         // foreach(Transform t in LeftScarfBones)
         //     Gizmos.DrawSphere(t.position, 0.07f);
         // foreach(Transform t in RightScarfBones)
