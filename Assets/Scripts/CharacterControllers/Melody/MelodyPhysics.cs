@@ -49,7 +49,7 @@
                 Vector3 targetPos = controller.transform.position + controller.Move;
                 Vector3 targetDir = targetPos - controller.transform.position;
 
-                float step = 5 * turnSpeedModifier * Time.deltaTime;
+                float step = controller.config.TurningSpeed * turnSpeedModifier * Time.deltaTime;
 
                 Vector3 newDir = Vector3.RotateTowards(controller.transform.forward, targetDir, step, 0.0f);
                 Debug.DrawRay(controller.transform.position, newDir, Color.red);
