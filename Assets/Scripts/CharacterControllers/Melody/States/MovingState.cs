@@ -1,7 +1,5 @@
 ﻿namespace Melody.States
 {
-    using UnityEngine;
-
     public class MovingState : MelodyState
     {
         public MovingState(MelodyController controller) : base(controller) { }

@@ -44,5 +44,10 @@
         {
             return isSliding && !isGrounded;
         }
+
+        public bool IsInAir()
+        {
+            return !isGrounded && !isSliding;
+        }
     }
 }

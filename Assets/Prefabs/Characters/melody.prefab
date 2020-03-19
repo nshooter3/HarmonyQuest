@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 367550021}
   - component: {fileID: 367550022}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: TrailRenderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,6 +126,51 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!1 &1096691630
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1096691631}
+  - component: {fileID: 1096691632}
+  m_Layer: 9
+  m_Name: NoFrictionCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1096691631
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1096691630}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1855025155950879413}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &1096691632
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1096691630}
+  m_Material: {fileID: 13400000, guid: 420df2dc990394940a18c8e1e0747f28, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.55
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.29, z: 0}
 --- !u!1 &2651184686205003569
 GameObject:
   m_ObjectHideFlags: 0
@@ -136,7 +181,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2143504941127927994}
   - component: {fileID: 8387241254795185922}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Mesh Renderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -221,7 +266,7 @@ GameObject:
   - component: {fileID: 6661829350256221800}
   - component: {fileID: 290198821}
   - component: {fileID: 290198822}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: melody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -243,6 +288,7 @@ Transform:
   - {fileID: 8776026943385123172}
   - {fileID: 367550021}
   - {fileID: 6206599972034421266}
+  - {fileID: 1096691631}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -288,7 +334,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3451171655387926694}
-  m_Material: {fileID: 13400000, guid: 420df2dc990394940a18c8e1e0747f28, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
@@ -318,14 +364,18 @@ MonoBehaviour:
     DashTime: 0.25
     DashOutroMaxSpeed: 6
     DashOutroTurningSpeed: 3
-    DashOutroGravity: {x: 0, y: -20, z: 0}
-    snapToGroundRaycastDistance: 0.35
+    DashOutroGravity: {x: 0, y: -40, z: 0}
+    SlideSpeed: 10
+    snapToGroundRaycastDistance: 0.4
     snapOffset: {x: 0, y: 0.05, z: 0}
     snapToGroundLayerMask:
       serializedVersion: 2
       m_Bits: 257
-    groundedYNormalThreshold: 0.5
+    groundedYNormalThreshold: 0.55
     slidingYNormalThreshold: 0.01
+    prohibitMovementIntoWallsLayerMask:
+      serializedVersion: 2
+      m_Bits: 2305
   move: {x: 0, y: 0, z: 0}
   melodyRenderer: {fileID: 8387241254795185922}
   scarfRenderer: {fileID: 8776026943385123194}
@@ -374,7 +424,7 @@ GameObject:
   - component: {fileID: 1612914952545502838}
   - component: {fileID: 3549545054407967353}
   - component: {fileID: 8776026941745739884}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GroundedChecker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -481,8 +531,7 @@ GameObject:
   - component: {fileID: 8776026943385123172}
   - component: {fileID: 8776026943385123195}
   - component: {fileID: 8776026943385123194}
-  - component: {fileID: 8776026943385123173}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Dash Scarf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -548,16 +597,3 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &8776026943385123173
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8776026943385123175}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}

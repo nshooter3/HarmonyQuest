@@ -15,10 +15,12 @@
         public Animator animator { get; private set; }
         public Rigidbody rigidBody { get; private set; }
         public CollisionWrapper melodyColliderWrapper { get; private set; }
+        public CapsuleCollider capsuleCollider { get; private set; }
 
         [SerializeField]
         public MelodyConfig config;
 
+        [HideInInspector]
         public Vector3 move;
 
         //Utility classes
@@ -35,6 +37,7 @@
             rigidBody = gameObject.GetComponent<Rigidbody>();
             animator = gameObject.GetComponent<Animator>();
             melodyColliderWrapper = gameObject.GetComponent<CollisionWrapper>();
+            capsuleCollider = gameObject.GetComponent<CapsuleCollider>();
 
             input = ServiceLocator.instance.GetInputManager();
 
