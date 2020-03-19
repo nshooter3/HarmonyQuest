@@ -65,9 +65,7 @@
         }
 
         public override void OnExit()
-        {
-            melodyController.rigidBody.useGravity = true;
-            
+        {            
             melodyController.animator.ResetTrigger("Dash");
             melodyController.animator.ResetTrigger("DashOutro");
         }

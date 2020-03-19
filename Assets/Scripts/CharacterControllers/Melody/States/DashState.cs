@@ -14,7 +14,6 @@
         {
             this.dodgeVector = dodgeVector;
             shift = new Vector3( 0f, 0.05f, 0 );
-            Debug.Log("DashState");
         }
 
         protected override void Enter()
