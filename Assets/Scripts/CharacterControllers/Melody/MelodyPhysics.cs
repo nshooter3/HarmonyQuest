@@ -106,8 +106,9 @@
 
         private void SetVelocityToSlide()
         {
-            //TODO: Any other custom behavior we want for sliding.
-            IgnoreHorizontalMovementInput();
+            velocity = new Vector3( velocity.x * controller.config.slidingSpeedAdjusmentRatio.x,
+                                    velocity.y * controller.config.slidingSpeedAdjusmentRatio.y,
+                                    velocity.z * controller.config.slidingSpeedAdjusmentRatio.z);
         }
 
         private void IgnoreHorizontalMovementInput()

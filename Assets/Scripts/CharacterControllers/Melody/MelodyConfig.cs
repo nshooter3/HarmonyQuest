@@ -23,10 +23,15 @@
 
         //Radian values used to cap the y angle on the player's dash once they leave the ground.
         //Ensures that they always travel a little bit upwards, but prevents them from dashing straight up.
-        [Range(0.0f, 1.0f)]
-        public float dashYRadianLowerRange;
-        [Range(0.0f, 1.0f)]
-        public float dashYRadianUpperRange;
+        [Range(-1.0f, 1.0f)]
+        public float dashYRadianGroundedLowerRange;
+        [Range(-1.0f, 1.0f)]
+        public float dashYRadianGroundedUpperRange;
+
+        [Range(-1.0f, 1.0f)]
+        public float dashYRadianAirLowerRange;
+        [Range(-1.0f, 1.0f)]
+        public float dashYRadianAirUpperRange;
 
         [Header("Snap to Ground")]
         /// <summary>
@@ -47,7 +52,7 @@
         [Tooltip("Which surfaces Melody will snap to.")]
         public LayerMask snapToGroundLayerMask;
 
-        [Header("Contact Normal Thresholds")]
+        [Header("Contact Normal Logic")]
         /// <summary>
         /// If Melody is colliding with something that has a contact normal y value greater than groundedYNormalThreshold, we consider her grounded.
         /// </summary>
@@ -59,6 +64,12 @@
         /// </summary>
         [Tooltip("If Melody is colliding with something that has a contact normal y value greater than slidingYNormalThreshold, we consider her sliding.")]
         public float slidingYNormalThreshold = 0.01f;
+
+        /// <summary>
+        /// What to scale Melody's speed by when she is sliding.
+        /// </summary>
+        [Tooltip("What to scale Melody's speed by when she is sliding.")]
+        public Vector3 slidingSpeedAdjusmentRatio = new Vector3(0.25f, 2.0f, 0.25f);
 
         [Header("Prohibit Movement Into Walls")]
 

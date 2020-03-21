@@ -364,9 +364,11 @@ MonoBehaviour:
     DashTime: 0.25
     DashOutroMaxSpeed: 6
     DashOutroTurningSpeed: 3
-    DashOutroGravity: {x: 0, y: -40, z: 0}
-    dashYRadianLowerRange: 0.025
-    dashYRadianUpperRange: 0.5
+    DashOutroGravity: {x: 0, y: -20, z: 0}
+    dashYRadianGroundedLowerRange: -1
+    dashYRadianGroundedUpperRange: 0.3
+    dashYRadianAirLowerRange: 0.025
+    dashYRadianAirUpperRange: 0.3
     snapToGroundRaycastDistance: 0.4
     snapOffset: {x: 0, y: 0.05, z: 0}
     snapToGroundLayerMask:
