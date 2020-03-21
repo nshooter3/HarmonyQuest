@@ -65,6 +65,11 @@
             controller.rigidBody.velocity = velocity;
         }
 
+        public void CapSpeed(float maxSpeed)
+        {
+            velocity = velocity.normalized * maxSpeed;
+        }
+
         /// <summary>
         /// Used to prevent the player from walking into walls and halting their descent during a fall.
         /// We shoot three raycasts out from various heights on Melody, using her velocity and collider radius to predict where she will be on the next frame.

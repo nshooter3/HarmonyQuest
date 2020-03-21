@@ -47,7 +47,7 @@
 
         public override void OnExit()
         {
-
+            melodyController.melodyPhysics.CapSpeed(melodyController.config.MaxSpeed);
         }
     }
 }
