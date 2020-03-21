@@ -21,6 +21,13 @@
         public float DashOutroTurningSpeed = 3.0f;
         public Vector3 DashOutroGravity = new Vector3(0.0f, -20.0f, 0.0f);
 
+        //Radian values used to cap the y angle on the player's dash once they leave the ground.
+        //Ensures that they always travel a little bit upwards, but prevents them from dashing straight up.
+        [Range(0.0f, 1.0f)]
+        public float dashYRadianLowerRange;
+        [Range(0.0f, 1.0f)]
+        public float dashYRadianUpperRange;
+
         [Header("Snap to Ground")]
         /// <summary>
         /// The distance threshold within which Melody will snap to the ground if she is close enough.

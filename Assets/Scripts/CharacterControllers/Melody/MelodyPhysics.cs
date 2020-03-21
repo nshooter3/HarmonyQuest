@@ -58,12 +58,19 @@
             controller.animator.SetFloat("Move", desiredVelocity.magnitude / maxSpeed);
         }
 
+        public void ApplyDashVelocity(Vector3 dashVelocity)
+        {
+            velocity = dashVelocity;
+            ProhibitMovementIntoWalls(true);
+            controller.rigidBody.velocity = velocity;
+        }
+
         /// <summary>
         /// Used to prevent the player from walking into walls and halting their descent during a fall.
         /// We shoot three raycasts out from various heights on Melody, using her velocity and collider radius to predict where she will be on the next frame.
         /// If any of these raycast hit an object in prohibitMovementIntoWallsLayerMask, cancel all horizontal movement.
         /// </summary>
-        private void ProhibitMovementIntoWalls()
+        private void ProhibitMovementIntoWalls(bool isDash = false)
         {
             //Calculate the approximate distance that will be traversed, accounting for the radius of our collider.
             float distance = velocity.magnitude * Time.deltaTime + colliderRadius;
@@ -76,12 +83,20 @@
                 Physics.Raycast(colliderUpperPosition,  velocity.normalized, out hit, distance, controller.config.prohibitMovementIntoWallsLayerMask) ||
                 Physics.Raycast(colliderLowerPosition,  velocity.normalized, out hit, distance, controller.config.prohibitMovementIntoWallsLayerMask) )
             {
-                //If so, stop the horizontal movement
-                IgnoreHorizontalMovementInput();
+                if (isDash)
+                {
+                    //If the player dashes into a wall, cancel their movement for the remainder of the dash.
+                    velocity = Vector3.zero;
+                }
+                else
+                {
+                    //If the player walks into a wall, stop the horizontal movement
+                    IgnoreHorizontalMovementInput();
+                }
             }
-            Debug.DrawRay(colliderCenterPosition, velocity.normalized, Color.yellow);
-            Debug.DrawRay(colliderUpperPosition, velocity.normalized, Color.blue);
-            Debug.DrawRay(colliderLowerPosition, velocity.normalized, Color.green);
+            Debug.DrawRay(colliderCenterPosition, velocity.normalized * distance, Color.yellow);
+            Debug.DrawRay(colliderUpperPosition, velocity.normalized * distance, Color.blue);
+            Debug.DrawRay(colliderLowerPosition, velocity.normalized * distance, Color.green);
         }
 
         private void SetVelocityToSlide()
