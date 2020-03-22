@@ -112,7 +112,7 @@
                                               velocity.y * controller.config.slidingSpeedAdjusmentRatio.y,
                                               controller.melodyCollision.steepestSlopeDirection.z * controller.config.slidingSpeedAdjusmentRatio.z);
 
-            if (controller.input.GetHorizontalMovement() == 0 && controller.input.GetVerticalMovement() == 0)
+            if (controller.input.GetHorizontalMovement() != 0 || controller.input.GetVerticalMovement() != 0)
             {
                 //Give the player some influence over their movement while sliding if they try to move
                 velocity.x = Mathf.Lerp(slideVelocity.x, velocity.x, controller.config.slidingControllerInfluenceRatio);
