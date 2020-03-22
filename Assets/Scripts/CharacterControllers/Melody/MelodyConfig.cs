@@ -66,10 +66,18 @@
         public float slidingYNormalThreshold = 0.01f;
 
         /// <summary>
-        /// What to scale Melody's speed by when she is sliding.
+        /// Scaling values for the x, y and z axis of Melody's sliding force.
         /// </summary>
-        [Tooltip("What to scale Melody's speed by when she is sliding.")]
-        public Vector3 slidingSpeedAdjusmentRatio = new Vector3(0.25f, 2.0f, 0.25f);
+        [Tooltip("Scaling values for the x, y and z axis of Melody's sliding force.")]
+        public Vector3 slidingSpeedAdjusmentRatio = new Vector3(1.0f, 1.5f, 1.0f);
+
+        /// <summary>
+        /// Ratio that detemines how much influence the player's input has over the sliding force.
+        /// For instance, a value of 0.2 would give a split of 20% input force and 80% sliding force.
+        /// </summary>
+        [Tooltip("Ratio that detemines how much influence the player's input has over the sliding force.")]
+        [Range(0.0f, 1.0f)]
+        public float slidingControllerInfluenceRatio;
 
         [Header("Prohibit Movement Into Walls")]
 

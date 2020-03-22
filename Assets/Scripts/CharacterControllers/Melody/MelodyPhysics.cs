@@ -11,6 +11,8 @@
         private Vector3 acceleration = Vector3.zero;
         private float maxSpeedChange;
 
+        private Vector3 slideVelocity;
+
         //Create three offsets from Melody's pivot point for generating an upper, central, and lower point to raycast from when checking for wall collisions.
         private Vector3 colliderOffset;
         private Vector3 upperColliderOffset;
@@ -106,9 +108,22 @@
 
         private void SetVelocityToSlide()
         {
-            velocity = new Vector3( velocity.x * controller.config.slidingSpeedAdjusmentRatio.x,
-                                    velocity.y * controller.config.slidingSpeedAdjusmentRatio.y,
-                                    velocity.z * controller.config.slidingSpeedAdjusmentRatio.z);
+            slideVelocity = new Vector3(controller.melodyCollision.steepestSlopeDirection.x * controller.config.slidingSpeedAdjusmentRatio.x,
+                                              velocity.y * controller.config.slidingSpeedAdjusmentRatio.y,
+                                              controller.melodyCollision.steepestSlopeDirection.z * controller.config.slidingSpeedAdjusmentRatio.z);
+
+            if (controller.input.GetHorizontalMovement() == 0 && controller.input.GetVerticalMovement() == 0)
+            {
+                //Give the player some influence over their movement while sliding if they try to move
+                velocity.x = Mathf.Lerp(slideVelocity.x, velocity.x, controller.config.slidingControllerInfluenceRatio);
+                velocity.y = slideVelocity.y;
+                velocity.z = Mathf.Lerp(slideVelocity.z, velocity.z, controller.config.slidingControllerInfluenceRatio);
+            }
+            else
+            {
+                velocity = slideVelocity;
+            }
+            Debug.DrawRay(controller.transform.position + colliderOffset, velocity * 2.0f, Color.cyan);
         }
 
         private void IgnoreHorizontalMovementInput()
