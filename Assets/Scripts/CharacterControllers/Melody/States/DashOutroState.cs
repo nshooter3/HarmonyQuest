@@ -16,7 +16,6 @@
 
             nextState = new IdleState(melodyController);
             timer = 0;
-            melodyController.rigidBody.velocity = Vector3.zero;
         }
 
         public override void OnUpdate(float time)
@@ -26,9 +25,17 @@
             timer += time;
             if (timer >= melodyController.config.DashOutroTime)
             {
-                nextState = new IdleState(melodyController);
+                if (melodyController.melodyPhysics.velocity.magnitude >= 0.0f)
+                {
+                    nextState = new MovingState(melodyController);
+                }
+                else
+                {
+                    nextState = new IdleState(melodyController);
+                }
                 ableToExit = true;
             }
+
 
             melodyController.melodyPhysics.CalculateVelocity(melodyController.config.DashOutroMaxSpeed, melodyController.config.MaxAcceleration);
         }
