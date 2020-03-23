@@ -7,6 +7,7 @@
         protected override void Enter()
         {
             melodyController.animator.SetTrigger("Attack");
+            melodyController.melodyHitboxes.ActivateHitbox("PlayerAttack", 0.0f, 0.25f, MelodyStats.attackDamage);
         }
 
         public override void OnUpdate(float time)

@@ -17,6 +17,12 @@
         public CollisionWrapper melodyColliderWrapper { get; private set; }
         public CapsuleCollider capsuleCollider { get; private set; }
 
+        /// <summary>
+        /// The hurtboxes for Melody.
+        /// </summary>
+        [Tooltip("The hurtboxes for Melody.")]
+        public Collider[] hurtboxes;
+
         [SerializeField]
         public MelodyConfig config;
 
@@ -26,6 +32,8 @@
         //Utility classes
         public MelodyPhysics melodyPhysics;
         public MelodyCollision melodyCollision;
+        public MelodyHealth melodyHealth;
+        public MelodyHitboxes melodyHitboxes;
 
         //Drag References
         public Renderer melodyRenderer;
@@ -47,6 +55,8 @@
 
             melodyPhysics = new MelodyPhysics(this);
             melodyCollision = new MelodyCollision(this);
+            melodyHealth = new MelodyHealth(this);
+            melodyHitboxes = new MelodyHitboxes(this);
         }
 
         // Update is called once per frame
@@ -54,6 +64,8 @@
         {
             move.Set(input.GetHorizontalMovement(), 0, input.GetVerticalMovement());
             move = Vector3.ClampMagnitude(move, 1f);
+            melodyHitboxes.UpdateHitboxes();
+            melodyHealth.OnUpdate(Time.deltaTime);
             StateMachine.OnUpdate(Time.deltaTime);
         }
 

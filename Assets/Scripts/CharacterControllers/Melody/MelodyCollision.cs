@@ -4,7 +4,6 @@
 
     public class MelodyCollision
     {
-
         private MelodyController controller;
 
         private bool isGrounded;
