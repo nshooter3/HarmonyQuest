@@ -3,6 +3,8 @@
     using UnityEngine;
     using UnityEngine.Rendering.PostProcessing;
 
+    [System.Serializable]
+    [PostProcess(typeof(OilPaintPostProcessingRenderer), PostProcessEvent.AfterStack, "Harmony Quest/Oil Paint")]
     public class OilPaintPostProcessing : PostProcessEffectSettings
     {
         public enum Target { ViewSpace, WorldSpace }
@@ -74,10 +76,6 @@
             // return base.GetCameraFlags();
         }
     }
-
-    [System.Serializable]
-    [PostProcess(typeof(OilPaintPostProcessingRenderer), PostProcessEvent.AfterStack, "Harmony Quest/Oil Paint")]
-    public sealed class OilPaint : OilPaintPostProcessing { }
 
     public sealed class OilPaintPostProcessingRenderer : OilPaintPostProcessingRenderer<OilPaintPostProcessing> { }
 }
