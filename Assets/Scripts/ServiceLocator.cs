@@ -3,6 +3,7 @@
     using HarmonyQuest.Input.Implementation;
     using Input;
     using Input.Implementation;
+    using Melody;
     using UnityEngine;
 
     ///<summary>
@@ -28,6 +29,7 @@
 
         //List of managers the ServiceLocator can provide
         IPlayerInputManager InputManager;
+        MelodyController melodyController;
         //End List of managers
        
         void Awake()
@@ -40,6 +42,7 @@
             {
                 Destroy(gameObject);
             }
+            melodyController = FindObjectOfType<MelodyController>();
         }
 
         void Start()
@@ -61,6 +64,22 @@
                 InputManager = GetComponent(typeof(IPlayerInputManager)) as IPlayerInputManager;
                 return InputManager;
             }
+        }
+
+        public MelodyController GetMelodyController()
+        {
+            if (melodyController == null)
+            {
+                //If GetMelodyController gets called before we have a chance to set melodyController, do so here.
+                melodyController = FindObjectOfType<MelodyController>();
+                if (melodyController == null)
+                {
+                    //If melodyController is still null, we have a problem.
+                    Debug.LogError("No MelodyController detected in scene.");
+                    return null;
+                }
+            }
+            return melodyController;
         }
     }
 }

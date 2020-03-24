@@ -4,6 +4,7 @@
     using UnityEngine;
     using GameAI.AIStates;
     using GamePhysics;
+    using HarmonyQuest;
 
     public abstract class AIGameObjectFacade : MonoBehaviour
     {
@@ -62,7 +63,7 @@
             data.navPos.SetActive(data.showDestination);
             data.defaultConstraints = data.rb.constraints;
 
-            data.aggroTarget = TestPlayer.instance.transform;
+            data.aggroTarget = ServiceLocator.instance.GetMelodyController().transform;
 
             aiPhysics.Init(data);
             aiHitboxes.Init(data);

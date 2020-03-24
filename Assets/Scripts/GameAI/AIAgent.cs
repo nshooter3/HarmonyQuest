@@ -3,6 +3,7 @@
     using StateHandlers;
     using AIGameObjects;
     using Navigation;
+    using HarmonyQuest;
 
     public class AIAgent
     {
@@ -21,7 +22,7 @@
             aiGameObject.Init();
             stateHandler = new AIStateHandler();
             navigator = aiGameObject.GetNavigator();
-            updateData = new AIStateUpdateData(aiGameObject, stateHandler, navigator, TestPlayer.instance);
+            updateData = new AIStateUpdateData(aiGameObject, stateHandler, navigator, ServiceLocator.instance.GetMelodyController());
             stateHandler.Init(updateData, aiGameObject.GetInitState());
         }
 
