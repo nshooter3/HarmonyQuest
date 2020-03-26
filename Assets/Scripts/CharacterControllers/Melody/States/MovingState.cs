@@ -45,7 +45,7 @@
 
         public override void OnExit()
         {
-            melodyController.animator.SetFloat("Move", 0.0f);
+            melodyController.melodyAnimator.SetWalkRun(0.0f);
         }
     }
 }

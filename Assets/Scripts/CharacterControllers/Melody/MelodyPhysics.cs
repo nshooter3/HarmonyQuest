@@ -57,7 +57,8 @@
             }
             RotatePlayer(turningSpeed);
             controller.rigidBody.velocity = velocity;
-            controller.animator.SetFloat("Move", desiredVelocity.magnitude / maxSpeed);
+            controller.melodyAnimator.SetWalkRun(desiredVelocity.magnitude / maxSpeed);
+
         }
 
         public void ApplyDashVelocity(Vector3 dashVelocity)

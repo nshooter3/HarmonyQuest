@@ -12,10 +12,8 @@
 
         protected override void Enter()
         {
-            //melodyController.animator.SetTrigger("Dash");
-            melodyController.melodyRenderer.enabled = false;
-            melodyController.scarfRenderer.enabled = true;
-            
+            melodyController.melodyAnimator.EnterDash();
+
             //If there's no controller input, dodge backwards.
             if (melodyController.input.GetHorizontalMovement() == 0 && melodyController.input.GetVerticalMovement() == 0)
             {

@@ -34,6 +34,7 @@
         public MelodyCollision melodyCollision;
         public MelodyHealth melodyHealth;
         public MelodyHitboxes melodyHitboxes;
+        public MelodyAnimator melodyAnimator;
 
         //Drag References
         public Renderer melodyRenderer;
@@ -57,6 +58,7 @@
             melodyCollision = new MelodyCollision(this);
             melodyHealth = new MelodyHealth(this);
             melodyHitboxes = new MelodyHitboxes(this);
+            melodyAnimator = new MelodyAnimator(this);
         }
 
         // Update is called once per frame

@@ -10,9 +10,7 @@
 
         protected override void Enter()
         {
-            //melodyController.animator.SetTrigger("DashOutro");
-            melodyController.melodyRenderer.enabled = true;
-            melodyController.scarfRenderer.enabled = false;
+            melodyController.melodyAnimator.ExitDash();
 
             nextState = new IdleState(melodyController);
             timer = 0;
@@ -47,10 +45,6 @@
             base.OnFixedUpdate();
         }
 
-        public override void OnExit()
-        {            
-            melodyController.animator.ResetTrigger("Dash");
-            melodyController.animator.ResetTrigger("DashOutro");
-        }
+        public override void OnExit(){}
     }
 }
