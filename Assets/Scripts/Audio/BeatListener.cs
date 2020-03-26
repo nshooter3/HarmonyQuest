@@ -4,12 +4,6 @@
 
     public class BeatListener : MonoBehaviour
     {
-        //Singleton for this object
-        public static BeatListener instance;
-
-        //Beats per minute
-        public float bpm { get; private set; }
-
         public float OnBeatPadding { get => onBeatPadding; private set { onBeatPadding = value; } }
         /// <summary>
         /// What percentage before and after the beat is considered on beat. i.e. 0.25 would mean 50% of the time we're considered on beat.
@@ -25,11 +19,8 @@
         private bool useDegreesOfOnBeatAccuracy;
 
         //Timer vars used to track how far we are from the beat callback.
-        private float beatTimeDuration;
-        private float beatTimer;
-
-        //Which beat we're on within the measure.
-        public int beatCount { get; private set; }
+        private float beatDuration;
+        private float beatTimer = 0.0f;
 
         //Enum used to quantify how close an action is to the beat.
         public enum OnBeatAccuracy
@@ -47,20 +38,7 @@
 
         private void Awake()
         {
-            if (instance == null)
-            {
-                instance = this;
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
-
             FmodMusicHandler.instance.AssignFunctionToOnBeatDelegate(Beat);
-
-            beatTimeDuration = 1.0f / (bpm / 60.0f);
-            beatTimer = 0.0f;
-            beatCount = 1;
         }
 
         //FmodMusicHandler calls this during the beat callback. 
@@ -72,26 +50,19 @@
                 metronomeSound.Play();
             }
             beatTimer = 0;
-            SetTempo(FmodMusicHandler.instance.GetCurrentMusicTempo());
-            beatCount = FmodMusicHandler.instance.GetCurrentBeat();
-        }
-
-        public void SetTempo(float newBpm)
-        {
-            bpm = newBpm;
-            beatTimeDuration = 1.0f / (bpm / 60.0f);
+            beatDuration = FmodMusicHandler.instance.GetBeatDuration();
         }
 
         //Allow a little bit of wiggle room both before and after the beat for determining whether or not an action was on beat.
         public OnBeatAccuracy WasActionOnBeat()
         {
             //Full onBeatPadding range for good on beat
-            bool attackedWithinRangeBeforeBeatGood = beatTimer > beatTimeDuration - (beatTimeDuration * onBeatPadding);
-            bool attackedWithinRangeAfterBeatGood = beatTimer <= (beatTimeDuration * onBeatPadding);
+            bool attackedWithinRangeBeforeBeatGood = beatTimer > beatDuration - (beatDuration * onBeatPadding);
+            bool attackedWithinRangeAfterBeatGood = beatTimer <= (beatDuration * onBeatPadding);
 
             //Half onBeatPadding range for great on beat. This is half the window of good on beat.
-            bool attackedWithinRangeBeforeBeatGreat = beatTimer > beatTimeDuration - (beatTimeDuration * (onBeatPadding / 2.0f));
-            bool attackedWithinRangeAfterBeatGreat = beatTimer <= (beatTimeDuration * (onBeatPadding / 2.0f));
+            bool attackedWithinRangeBeforeBeatGreat = beatTimer > beatDuration - (beatDuration * (onBeatPadding / 2.0f));
+            bool attackedWithinRangeAfterBeatGreat = beatTimer <= (beatDuration * (onBeatPadding / 2.0f));
 
             if (attackedWithinRangeBeforeBeatGreat || attackedWithinRangeAfterBeatGreat)
             {

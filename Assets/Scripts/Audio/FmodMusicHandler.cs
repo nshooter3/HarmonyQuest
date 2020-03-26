@@ -128,6 +128,11 @@
             return timelineInfo.currentMusicBeat;
         }
 
+        public float GetBeatDuration()
+        {
+            return 60.0f / timelineInfo.currentMusicTempo;
+        }
+
         public float GetCurrentMusicTempo()
         {
             return timelineInfo.currentMusicTempo;
