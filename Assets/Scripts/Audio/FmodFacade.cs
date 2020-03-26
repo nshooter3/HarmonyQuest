@@ -182,25 +182,34 @@
             fmodEventPool.PlayEvent(eventName, volume, parent, rb, paramData);
         }
 
-        /*public void GetDSPData()
+        /// <summary>
+        /// Function that returns how close to on beat we currently are. Accuracy is determined based on FmodOnBeatAccuracyChecker's onBeatPadding param.
+        /// </summary>
+        /// <returns> An OnBeatAccuracy value based on close to the beat we are right now </returns>
+        public FmodOnBeatAccuracyChecker.OnBeatAccuracy WasActionOnBeat()
         {
-            FMOD.RESULT result;
-            uint blocksize;
-            int numblocks;
-            int frequency;
-            float ms;
+            return FmodOnBeatAccuracyChecker.instance.WasActionOnBeat();
+        }
 
-            FMOD.SPEAKERMODE speakerMode;
-            int numSpeakers;
+            /*public void GetDSPData()
+            {
+                FMOD.RESULT result;
+                uint blocksize;
+                int numblocks;
+                int frequency;
+                float ms;
 
-            result = FMOD.System.getDSPBufferSize(out blocksize, out numblocks);
-            result = FMOD.System.getSoftwareFormat(out frequency, out speakerMode, out numSpeakers);
+                FMOD.SPEAKERMODE speakerMode;
+                int numSpeakers;
 
-            ms = (float)blocksize * 1000.0f / (float)frequency;
+                result = FMOD.System.getDSPBufferSize(out blocksize, out numblocks);
+                result = FMOD.System.getSoftwareFormat(out frequency, out speakerMode, out numSpeakers);
 
-            print("Mixer blocksize        = " + ms + " ms\n");
-            print("Mixer Total buffersize = " + ms * numblocks + " ms\n");
-            print("Mixer Average Latency  = " + ms * ((float)numblocks - 1.5f) + " ms\n");
-        }*/
+                ms = (float)blocksize * 1000.0f / (float)frequency;
+
+                print("Mixer blocksize        = " + ms + " ms\n");
+                print("Mixer Total buffersize = " + ms * numblocks + " ms\n");
+                print("Mixer Average Latency  = " + ms * ((float)numblocks - 1.5f) + " ms\n");
+            }*/
     }
 }
