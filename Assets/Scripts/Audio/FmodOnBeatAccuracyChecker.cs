@@ -2,8 +2,10 @@
 {
     using UnityEngine;
 
-    public class BeatListener : MonoBehaviour
+    public class FmodOnBeatAccuracyChecker : MonoBehaviour
     {
+        public static FmodOnBeatAccuracyChecker instance;
+
         public float OnBeatPadding { get => onBeatPadding; private set { onBeatPadding = value; } }
         /// <summary>
         /// What percentage before and after the beat is considered on beat. i.e. 0.25 would mean 50% of the time we're considered on beat.
@@ -38,6 +40,14 @@
 
         private void Awake()
         {
+            if (instance == null)
+            {
+                instance = this;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
             FmodMusicHandler.instance.AssignFunctionToOnBeatDelegate(Beat);
         }
 
