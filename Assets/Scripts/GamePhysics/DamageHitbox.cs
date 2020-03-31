@@ -17,6 +17,9 @@
         [SerializeField]
         private CounterDamageReceiver counterDamageReceiver;
 
+        [SerializeField]
+        private GameObject agent;
+
         /// <summary>
         /// The debug mesh renderer associated with this hitbox. Used to visualize hitboxes if showDebugRenderer is set to true.
         /// </summary>
@@ -132,6 +135,11 @@
         public string GetHitboxName()
         {
             return hitboxName;
+        }
+
+        public GameObject GetAgent()
+        {
+            return agent;
         }
 
         public bool IsActive()

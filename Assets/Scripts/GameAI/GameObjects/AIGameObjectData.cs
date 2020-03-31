@@ -73,6 +73,12 @@
         public Collider collisionAvoidanceHitbox;
 
         /// <summary>
+        /// If the damage comes a direction within CounterDegreeRange degrees of where the enemy is facing, we consider it a successful parry. (CounterDegreeRange * 2 degrees total range).
+        /// </summary>
+        [Tooltip("If the damage comes a direction within CounterDegreeRange degrees of where the enemy is facing, we consider it a successful parry. (CounterDegreeRange * 2 degrees total range).")]
+        public int CounterDegreeRange = 60;
+
+        /// <summary>
         /// Whether or not to make navPos visible. This shows where the enemy is attempting to navigate.
         /// </summary>
         [Tooltip("Whether or not to make navPos visible. This shows where the enemy is attempting to navigate.")]

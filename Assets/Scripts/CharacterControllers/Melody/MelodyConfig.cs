@@ -23,6 +23,12 @@
         public float CounterTurningSpeed = 1.0f;
         public Vector3 CounterGravity = new Vector3(0.0f, -20.0f, 0.0f);
 
+        /// <summary>
+        /// If the damage comes a direction within CounterDegreeRange degrees of where the player is facing, we consider it a successful parry. (CounterDegreeRange * 2 degrees total range).
+        /// </summary>
+        [Tooltip("If the damage comes a direction within CounterDegreeRange degrees of where the player is facing, we consider it a successful parry. (CounterDegreeRange * 2 degrees total range).")]
+        public int CounterDegreeRange = 60;
+
         [Header("Dash Settings")]
         public float DashLength = 7.0f;
         public float DashIntroTime = 0.0f;

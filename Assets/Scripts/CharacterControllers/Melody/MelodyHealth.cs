@@ -54,7 +54,7 @@
                 {
                     if (IsDamageHitboxCurrentlyReceived(damageHitbox) == false)
                     {
-                        if (isCountering && damageHitbox.counterable == true)
+                        if (isCountering && damageHitbox.counterable == true && WasDamageCountered(damageHitbox.GetAgent()))
                         {
                             DealCounterDamage(damageHitbox);
                         }
@@ -114,6 +114,19 @@
         public bool IsDead()
         {
             return dead;
+        }
+
+        bool WasDamageCountered(GameObject attacker)
+        {
+            //Calculate the angle of the absorbed attack by getting the angle between where the damage came from relative to the player, and the direction the player is facing.
+            Vector3 sourceDirection = attacker.transform.position - controller.transform.position;
+            float damageAngle = Vector3.Angle(controller.transform.forward, sourceDirection);
+            //If the damage comes a direction within CounterDegreeRange degrees of where the player is facing, we consider it a successful counter. (CounterDegreeRange * 2 degrees total range)
+            if (damageAngle <= controller.config.CounterDegreeRange)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
