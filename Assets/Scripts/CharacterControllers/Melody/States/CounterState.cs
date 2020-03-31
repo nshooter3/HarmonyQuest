@@ -19,6 +19,7 @@
             melodyController.melodyAnimator.Counter();
             melodyController.counterHurtbox.enabled = true;
             melodyController.counterHurtboxMesh.enabled = true;
+            melodyController.melodyHealth.isCountering = true;
         }
 
         public override void OnUpdate(float time)
@@ -30,8 +31,7 @@
                 if (counterActiveTimer <= 0.0f)
                 {
                     counterActive = false;
-                    melodyController.counterHurtbox.enabled = false;
-                    melodyController.counterHurtboxMesh.enabled = false;
+                    EndCounter();
                 }
                 else
                 {
@@ -58,8 +58,14 @@
 
         public override void OnExit()
         {
+            EndCounter();
+        }
+
+        private void EndCounter()
+        {
             melodyController.counterHurtbox.enabled = false;
             melodyController.counterHurtboxMesh.enabled = false;
+            melodyController.melodyHealth.isCountering = false;
         }
     }
 }
