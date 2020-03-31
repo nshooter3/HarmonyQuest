@@ -22,6 +22,8 @@
         /// </summary>
         [Tooltip("The hurtboxes for Melody.")]
         public Collider[] hurtboxes;
+        public Collider counterHurtbox;
+        public MeshRenderer counterHurtboxMesh;
 
         [SerializeField]
         public MelodyConfig config;

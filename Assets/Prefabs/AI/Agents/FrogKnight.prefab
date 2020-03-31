@@ -531,7 +531,7 @@ GameObject:
   - component: {fileID: 3047223837820303900}
   - component: {fileID: 3047223837820303890}
   - component: {fileID: 3047223837820303891}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -579,10 +579,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   col: {fileID: 3047223837820303890}
   ignoreCollisionsWithOtherTriggers: 1
-  useLayerMask: 0
+  useLayerMask: 1
   mask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2817
   objectsToIgnore:
   - {fileID: 3047223838859579938}
   - {fileID: 3047223838498488774}
@@ -600,7 +600,7 @@ GameObject:
   - component: {fileID: 3047223837891863348}
   - component: {fileID: 3047223837891863338}
   - component: {fileID: 3047223837891863339}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Back
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -648,10 +648,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   col: {fileID: 3047223837891863338}
   ignoreCollisionsWithOtherTriggers: 1
-  useLayerMask: 0
+  useLayerMask: 1
   mask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2817
   objectsToIgnore:
   - {fileID: 3047223838859579938}
   - {fileID: 3047223838498488774}
@@ -720,7 +720,6 @@ GameObject:
   - component: {fileID: 3047223838156240661}
   - component: {fileID: 3047223838156240650}
   - component: {fileID: 3047223838156240651}
-  - component: {fileID: 3047223838156240660}
   m_Layer: 11
   m_Name: EnemyNavPos
   m_TagString: Untagged
@@ -787,19 +786,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &3047223838156240660
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3047223838156240662}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3047223838498488774
 GameObject:
   m_ObjectHideFlags: 0
@@ -811,7 +797,7 @@ GameObject:
   - component: {fileID: 3047223838498488773}
   - component: {fileID: 3047223838498488763}
   - component: {fileID: 3047223838498488772}
-  m_Layer: 11
+  m_Layer: 13
   m_Name: AggroTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1124,7 +1110,7 @@ GameObject:
   - component: {fileID: 3047223838871435737}
   - component: {fileID: 3047223838871435736}
   - component: {fileID: 3047223838871435743}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Front
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1172,10 +1158,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   col: {fileID: 3047223838871435736}
   ignoreCollisionsWithOtherTriggers: 1
-  useLayerMask: 0
+  useLayerMask: 1
   mask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2817
   objectsToIgnore:
   - {fileID: 3047223838859579938}
   - {fileID: 3047223838498488774}
@@ -1223,7 +1209,7 @@ GameObject:
   - component: {fileID: 3047223839770494681}
   - component: {fileID: 3047223839770494687}
   - component: {fileID: 3047223839770494680}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1271,10 +1257,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   col: {fileID: 3047223839770494687}
   ignoreCollisionsWithOtherTriggers: 1
-  useLayerMask: 0
+  useLayerMask: 1
   mask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2817
   objectsToIgnore:
   - {fileID: 3047223838859579938}
   - {fileID: 3047223838498488774}

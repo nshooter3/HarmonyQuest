@@ -11,6 +11,18 @@
         public float TurningSpeed = 5.0f;
         public Vector3 Gravity = new Vector3(0.0f, -40.0f, 0.0f);
 
+        [Header("Attack Settings")]
+        public float AttackMaxSpeed = 5.0f;         //Unity Units Per Second
+        public float AttackMaxAcceleration = 80.0f;  //Unity Units Per Second
+        public float AttackTurningSpeed = 1.0f;
+        public Vector3 AttackGravity = new Vector3(0.0f, -20.0f, 0.0f);
+
+        [Header("Counter Settings")]
+        public float CounterMaxSpeed = 5.0f;         //Unity Units Per Second
+        public float CounterMaxAcceleration = 80.0f;  //Unity Units Per Second
+        public float CounterTurningSpeed = 1.0f;
+        public Vector3 CounterGravity = new Vector3(0.0f, -20.0f, 0.0f);
+
         [Header("Dash Settings")]
         public float DashLength = 7.0f;
         public float DashIntroTime = 0.0f;
