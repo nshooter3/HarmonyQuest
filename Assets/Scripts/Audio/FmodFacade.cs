@@ -199,25 +199,42 @@
             return FmodOnBeatAccuracyChecker.instance.WasActionOnBeat();
         }
 
-            /*public void GetDSPData()
-            {
-                FMOD.RESULT result;
-                uint blocksize;
-                int numblocks;
-                int frequency;
-                float ms;
+        /// <summary>
+        /// Used to let FmodOnBeatAccuracyChecker know that we've attempted an on beat action this beat.
+        /// </summary>
+        public void PerformOnBeatAction()
+        {
+            FmodOnBeatAccuracyChecker.instance.PerformOnBeatAction();
+        }
 
-                FMOD.SPEAKERMODE speakerMode;
-                int numSpeakers;
+        /// <summary>
+        /// Check FmodOnBeatAccuracyChecker to see if we've already tried an on beat action this beat. If so, don't allow any more on beat actions until the next beat.
+        /// </summary>
+        /// <returns></returns>
+        public bool HasPerformedActionThisBeat()
+        {
+            return FmodOnBeatAccuracyChecker.instance.HasPerformedActionThisBeat();
+        }
 
-                result = FMOD.System.getDSPBufferSize(out blocksize, out numblocks);
-                result = FMOD.System.getSoftwareFormat(out frequency, out speakerMode, out numSpeakers);
+        /*public void GetDSPData()
+        {
+            FMOD.RESULT result;
+            uint blocksize;
+            int numblocks;
+            int frequency;
+            float ms;
 
-                ms = (float)blocksize * 1000.0f / (float)frequency;
+            FMOD.SPEAKERMODE speakerMode;
+            int numSpeakers;
 
-                print("Mixer blocksize        = " + ms + " ms\n");
-                print("Mixer Total buffersize = " + ms * numblocks + " ms\n");
-                print("Mixer Average Latency  = " + ms * ((float)numblocks - 1.5f) + " ms\n");
-            }*/
+            result = FMOD.System.getDSPBufferSize(out blocksize, out numblocks);
+            result = FMOD.System.getSoftwareFormat(out frequency, out speakerMode, out numSpeakers);
+
+            ms = (float)blocksize * 1000.0f / (float)frequency;
+
+            print("Mixer blocksize        = " + ms + " ms\n");
+            print("Mixer Total buffersize = " + ms * numblocks + " ms\n");
+            print("Mixer Average Latency  = " + ms * ((float)numblocks - 1.5f) + " ms\n");
+        }*/
     }
 }

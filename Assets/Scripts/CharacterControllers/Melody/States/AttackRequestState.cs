@@ -25,6 +25,7 @@
                 nextState = new AttackMissState(melodyController);
             }
             ableToExit = true;
+            FmodFacade.instance.PerformOnBeatAction();
         }
 
         public override void OnExit()

@@ -1,5 +1,7 @@
 ﻿namespace Melody.States
 {
+    using HarmonyQuest.Audio;
+
     public class MovingState : MelodyState
     {
         public MovingState(MelodyController controller) : base(controller) { }
@@ -11,7 +13,7 @@
             base.OnUpdate(time);
 
             //Check For Attack
-            if (melodyController.input.AttackButtonDown())
+            if (melodyController.input.AttackButtonDown() && FmodFacade.instance.HasPerformedActionThisBeat() == false)
             {
                 ableToExit = true;
                 nextState = new AttackRequestState(melodyController);

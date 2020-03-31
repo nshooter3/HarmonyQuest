@@ -1,5 +1,7 @@
 ﻿namespace Melody.States
 {
+    using HarmonyQuest.Audio;
+
     public class IdleState : MelodyState
     {
 
@@ -11,7 +13,7 @@
         {
             base.OnUpdate(time);
 
-            if (melodyController.input.AttackButtonDown())
+            if (melodyController.input.AttackButtonDown() && FmodFacade.instance.HasPerformedActionThisBeat() == false)
             {
 
                 ableToExit = true;
