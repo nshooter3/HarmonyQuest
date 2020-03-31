@@ -2,9 +2,9 @@
 {
     using UnityEngine;
 
-    public class AttackState : MelodyState
+    public class AttackSuccessState : MelodyState
     {
-        public AttackState(MelodyController controller) : base(controller) { }
+        public AttackSuccessState(MelodyController controller) : base(controller) { }
 
         //Since the placeholder animation is so long, use a timer to exit this state sooner.
         float tempTimer = 0.2f;

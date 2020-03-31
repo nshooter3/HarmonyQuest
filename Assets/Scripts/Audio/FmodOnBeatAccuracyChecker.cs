@@ -24,14 +24,6 @@
         private float beatDuration;
         private float beatTimer = 0.0f;
 
-        //Enum used to quantify how close an action is to the beat.
-        public enum OnBeatAccuracy
-        {
-            Great = 1,
-            Good = 2,
-            Miss = 3,
-        }
-
         //Debug vars that allow us to play a metronome sound on beat.
         [SerializeField]
         private bool playMetronome = false;
@@ -51,6 +43,14 @@
             FmodMusicHandler.instance.AssignFunctionToOnBeatDelegate(Beat);
         }
 
+        void Update()
+        {
+            if (FmodMusicHandler.instance.isMusicPlaying)
+            {
+                beatTimer += Time.deltaTime;
+            }
+        }
+
         //FmodMusicHandler calls this during the beat callback. 
         public void Beat()
         {
@@ -64,7 +64,7 @@
         }
 
         //Allow a little bit of wiggle room both before and after the beat for determining whether or not an action was on beat.
-        public OnBeatAccuracy WasActionOnBeat()
+        public FmodFacade.OnBeatAccuracy WasActionOnBeat()
         {
             //Full onBeatPadding range for good on beat
             bool attackedWithinRangeBeforeBeatGood = beatTimer > beatDuration - (beatDuration * onBeatPadding);
@@ -76,20 +76,20 @@
 
             if (attackedWithinRangeBeforeBeatGreat || attackedWithinRangeAfterBeatGreat)
             {
-                return OnBeatAccuracy.Great;
+                return FmodFacade.OnBeatAccuracy.Great;
             }
             else if (attackedWithinRangeBeforeBeatGood || attackedWithinRangeAfterBeatGood)
             {
                 if (useDegreesOfOnBeatAccuracy)
                 {
-                    return OnBeatAccuracy.Good;
+                    return FmodFacade.OnBeatAccuracy.Good;
                 }
                 else
                 {
-                    return OnBeatAccuracy.Great;
+                    return FmodFacade.OnBeatAccuracy.Great;
                 }
             }
-            return OnBeatAccuracy.Miss;
+            return FmodFacade.OnBeatAccuracy.Miss;
         }
     }
 }

@@ -15,7 +15,7 @@
             {
 
                 ableToExit = true;
-                nextState = new AttackState(melodyController);
+                nextState = new AttackRequestState(melodyController);
             }
             else if (melodyController.input.ParryButtonDown())
             {

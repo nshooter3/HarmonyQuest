@@ -8,6 +8,14 @@
     /// </summary>
     public class FmodFacade : MonoBehaviour
     {
+        //Enum used to quantify how close an action is to the beat.
+        public enum OnBeatAccuracy
+        {
+            Great = 1,
+            Good = 2,
+            Miss = 3,
+        }
+
         private static FmodFacade inst;
         public static FmodFacade instance
         {
@@ -186,7 +194,7 @@
         /// Function that returns how close to on beat we currently are. Accuracy is determined based on FmodOnBeatAccuracyChecker's onBeatPadding param.
         /// </summary>
         /// <returns> An OnBeatAccuracy value based on close to the beat we are right now </returns>
-        public FmodOnBeatAccuracyChecker.OnBeatAccuracy WasActionOnBeat()
+        public OnBeatAccuracy WasActionOnBeat()
         {
             return FmodOnBeatAccuracyChecker.instance.WasActionOnBeat();
         }
