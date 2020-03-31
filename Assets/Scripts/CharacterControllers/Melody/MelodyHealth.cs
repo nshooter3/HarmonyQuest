@@ -8,6 +8,8 @@
     {
         private MelodyController controller;
 
+        public bool isCountering = false;
+
         private int currentHealth;
         private bool dead = false;
         private List<DamageHitbox> receivedDamageHitboxes = new List<DamageHitbox>();
@@ -15,6 +17,7 @@
         public MelodyHealth(MelodyController controller)
         {
             this.controller = controller;
+            this.controller.counterDamageReceiver.AssignFunctionToReceiveCounterDamageDelegate(ReceiveDirectDamage);
 
             currentHealth = MelodyStats.maxHealth;
 
@@ -40,6 +43,7 @@
             {
                 Die();
             }
+            Debug.Log("MELODY TAKE DAMAGE. CURRENT HEALTH: " + currentHealth);
         }
 
         public void ReceiveDamageHitbox(DamageHitbox damageHitbox)
@@ -50,10 +54,31 @@
                 {
                     if (IsDamageHitboxCurrentlyReceived(damageHitbox) == false)
                     {
+                        if (isCountering && damageHitbox.counterable == true)
+                        {
+                            DealCounterDamage(damageHitbox);
+                        }
+                        else
+                        {
+                            TakeDamage(damageHitbox.GetDamage());
+                        }
                         receivedDamageHitboxes.Add(damageHitbox);
-                        TakeDamage(damageHitbox.GetDamage());
                     }
                 }
+            }
+        }
+
+        private void DealCounterDamage(DamageHitbox damageHitbox)
+        {
+            damageHitbox.ReturnCounterDamageToSource(MelodyStats.counterDamage);
+        }
+
+        //Used to receive counter damage and other things not tied to damage hitboxes.
+        public void ReceiveDirectDamage(int damage)
+        {
+            if (dead == false)
+            {
+                TakeDamage(damage);
             }
         }
 

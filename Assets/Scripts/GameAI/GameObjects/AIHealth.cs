@@ -16,6 +16,8 @@
         private List<DamageHitbox> receivedDamageHitboxes = new List<DamageHitbox>();
         private AgentHealthBars agentHealthBarsUI;
 
+        public bool isCountering = false;
+
         public void Init(AIGameObjectData data)
         {
             this.data = data;
@@ -23,6 +25,8 @@
             aiStats = Object.Instantiate(this.data.aiStats);
             curHealthBar = aiStats.healthBars.Length - 1;
             curHealthBarMaxHealth = aiStats.healthBars[curHealthBar];
+
+            this.data.CounterDamageReceiver.AssignFunctionToReceiveCounterDamageDelegate(ReceiveDirectDamage);
 
             //TODO: Make this use Mitch's camera.
             agentHealthBarsUI = AgentHealthBarsPool.instance.GetAgentHealthBar(aiStats.healthBars.Length, data.gameObject.transform, Object.FindObjectOfType<Camera>());
@@ -63,10 +67,31 @@
                 {
                     if (IsDamageHitboxCurrentlyReceived(damageHitbox) == false)
                     {
+                        if (isCountering && damageHitbox.counterable == true)
+                        {
+                            DealCounterDamage(damageHitbox);
+                        }
+                        else
+                        {
+                            TakeDamage(damageHitbox.GetDamage());
+                        }
                         receivedDamageHitboxes.Add(damageHitbox);
-                        TakeDamage(damageHitbox.GetDamage());
                     }
                 }
+            }
+        }
+
+        private void DealCounterDamage(DamageHitbox damageHitbox)
+        {
+            damageHitbox.ReturnCounterDamageToSource(data.aiStats.counterDamage);
+        }
+
+        //Used to receive counter damage and other things not tied to damage hitboxes.
+        public void ReceiveDirectDamage(int damage)
+        {
+            if (dead == false)
+            {
+                TakeDamage(damage);
             }
         }
 

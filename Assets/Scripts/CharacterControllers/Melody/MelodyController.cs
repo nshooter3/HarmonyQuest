@@ -25,6 +25,12 @@
         public Collider counterHurtbox;
         public MeshRenderer counterHurtboxMesh;
 
+        /// <summary>
+        /// The CounterDamageReceiver for the player. Handles taking counter damage without needing a damage hitbox.
+        /// </summary>
+        [Tooltip("The CounterDamageReceiver for the player. Handles taking counter damage without needing a damage hitbox.")]
+        public CounterDamageReceiver counterDamageReceiver;
+
         [SerializeField]
         public MelodyConfig config;
 

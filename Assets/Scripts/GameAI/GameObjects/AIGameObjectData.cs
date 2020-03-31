@@ -61,6 +61,12 @@
         public Collider[] hurtboxes;
 
         /// <summary>
+        /// The CounterDamageReceiver for our agent. Handles taking counter damage without needing a damage hitbox.
+        /// </summary>
+        [Tooltip("The CounterDamageReceiver for our agent. Handles taking counter damage without needing a damage hitbox.")]
+        public CounterDamageReceiver CounterDamageReceiver;
+
+        /// <summary>
         /// The hitbox used for collision avoidance distance calculations.
         /// </summary>
         [Tooltip("The hitbox used for collision avoidance distance calculations.")]

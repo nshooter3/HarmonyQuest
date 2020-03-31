@@ -14,6 +14,9 @@
         [SerializeField]
         private CollisionWrapper collisionWrapper;
 
+        [SerializeField]
+        private CounterDamageReceiver counterDamageReceiver;
+
         /// <summary>
         /// The debug mesh renderer associated with this hitbox. Used to visualize hitboxes if showDebugRenderer is set to true.
         /// </summary>
@@ -25,7 +28,7 @@
 
         private int damage;
 
-        //Variables pertaining to the delay between when EnableHitbox is called and when the hitbox becomes active
+        //Variables pertaining to the delay between when EnableHitbox is called and when the hitbox becomes active.
         private bool hitboxDelayed = false;
         private float hitboxDelay;
         private float hitboxDelayTimer;
@@ -34,6 +37,9 @@
         private bool hitboxActive = false;
         private float hitboxLifetime;
         private float hitboxLifetimeTimer;
+
+        //Whether or not this hitbox can be countered.
+        public bool counterable = true;
 
         private Guid id;
 
@@ -47,7 +53,7 @@
             collisionWrapper.AssignFunctionToTriggerEnterDelegate(OnHitboxEnter);
         }
 
-        public void ActivateHitbox(float delay, float lifetime, int damage, Guid id)
+        public void ActivateHitbox(float delay, float lifetime, int damage, Guid id, bool counterable = true)
         {
             col.enabled = false;
             hitboxDelayed = true;
@@ -58,6 +64,7 @@
             hitboxLifetimeTimer = 0.0f;
             this.damage = damage;
             this.id = id;
+            this.counterable = counterable;
         }
 
         public void UpdateHitbox()
@@ -100,6 +107,11 @@
             {
                 damageReceiver.ReceiveDamage(this);
             }
+        }
+
+        public void ReturnCounterDamageToSource(int counterDamage)
+        {
+            counterDamageReceiver.ReceiveCounterDamage(counterDamage);
         }
 
         public Guid GetId()

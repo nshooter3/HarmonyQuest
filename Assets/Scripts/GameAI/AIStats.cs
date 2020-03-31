@@ -36,5 +36,11 @@
         /// </summary>
         [Tooltip("The distance at which the enemy will deaggro if disengageWithDistance is true.")]
         public float disengageDistance;
+
+        /// <summary>
+        /// The amount of damage this enemy deals upon countering the player, if they have that capability.
+        /// </summary>
+        [Tooltip("The amount of damage this enemy deals upon countering the player, if they have that capability.")]
+        public int counterDamage = 0;
     }
 }

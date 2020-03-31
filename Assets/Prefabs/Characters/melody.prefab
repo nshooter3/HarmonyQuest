@@ -391,8 +391,10 @@ MonoBehaviour:
   hitboxName: PlayerCounterattack
   col: {fileID: 1099340934}
   collisionWrapper: {fileID: 1099340932}
+  counterDamageReceiver: {fileID: 3451171655387926695}
   debugRenderer: {fileID: 1099340935}
   showDebugRenderer: 1
+  counterable: 1
 --- !u!114 &1099340932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -507,6 +509,7 @@ GameObject:
   - component: {fileID: 6661829350256221803}
   - component: {fileID: 6661829350256221800}
   - component: {fileID: 290198821}
+  - component: {fileID: 3451171655387926695}
   m_Layer: 9
   m_Name: melody
   m_TagString: Untagged
@@ -602,6 +605,7 @@ MonoBehaviour:
   - {fileID: 740095499}
   counterHurtbox: {fileID: 740095499}
   counterHurtboxMesh: {fileID: 740095500}
+  counterDamageReceiver: {fileID: 3451171655387926695}
   config:
     MaxSpeed: 10
     MaxAcceleration: 80
@@ -661,6 +665,18 @@ MonoBehaviour:
     m_Bits: 2305
   objectsToIgnore: []
   namesToIgnore: []
+--- !u!114 &3451171655387926695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3451171655387926694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 577cd1f25c32c464f9efc99ab90ced69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7953737029954448956
 GameObject:
   m_ObjectHideFlags: 0
@@ -955,8 +971,10 @@ MonoBehaviour:
   hitboxName: PlayerAttack
   col: {fileID: 6470157789000818781}
   collisionWrapper: {fileID: 8776026941745739885}
+  counterDamageReceiver: {fileID: 3451171655387926695}
   debugRenderer: {fileID: 6243765508836038269}
   showDebugRenderer: 1
+  counterable: 1
 --- !u!114 &8776026941745739885
 MonoBehaviour:
   m_ObjectHideFlags: 0
