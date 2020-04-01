@@ -33,6 +33,16 @@
             return player.GetAxis("MoveVertical");
         }
 
+        public float GetHorizontalMovement2()
+        {
+            return player.GetAxis("MoveHorizontal2");
+        }
+
+        public float GetVerticalMovement2()
+        {
+            return player.GetAxis("MoveVertical2");
+        }
+
         public bool AttackButtonDown()
         {
             return player.GetButtonDown("Attack");

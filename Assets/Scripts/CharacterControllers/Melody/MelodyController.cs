@@ -37,6 +37,9 @@
         [HideInInspector]
         public Vector3 move;
 
+        [HideInInspector]
+        public Vector2 rightStickMove;
+
         //Utility classes
         public MelodyPhysics melodyPhysics;
         public MelodyCollision melodyCollision;
@@ -92,9 +95,19 @@
             move.Set(input.GetHorizontalMovement(), 0, input.GetVerticalMovement());
             move = Vector3.ClampMagnitude(move, 1f);
 
+            rightStickMove.Set(input.GetHorizontalMovement2(), input.GetVerticalMovement2());
+
             if (input.LockonButtonDown())
             {
                 melodyLockOn.LockonButtonPressed();
+            }
+            else if (melodyLockOn.HasLockonTarget() == true && rightStickMove.magnitude > 0.5f)
+            {
+                melodyLockOn.ChangeLockonTargetRightStick(rightStickMove);
+            }
+            if (rightStickMove.magnitude <= 0.25f)
+            {
+                melodyLockOn.RightStickResetToNeutral();
             }
         }
     }

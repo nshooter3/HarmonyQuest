@@ -11,14 +11,20 @@
     {
         private MelodyController controller;
 
-        AIAgent lockonTarget;
-        int curTargetIndex = -1;
-        List<AIAgent> potentialLockOnTargets;
-        AIAgentManager aiAgentManager;
-        UITracker lockOnReticule;
-        Image lockOnImage;
+        private AIAgent lockonTarget;
+        private int curTargetIndex = -1;
+        private List<AIAgent> potentialLockOnTargets;
 
-        float maxLockonDistance = 25f;
+        private AIAgentManager aiAgentManager;
+        private UITracker lockOnReticule;
+        private Image lockOnImage;
+        private Camera cam;
+
+        private float maxLockonDistance = 30f;
+        private float maxScreenSpaceDistance;
+
+        //To prevent jitteryness, only allow the player to select a new target with the right analogue stick after it's been reset to a neutral position.
+        private bool canChangeLockOnTarget = true;
 
         public MelodyLockOn(MelodyController controller)
         {
@@ -26,6 +32,7 @@
             aiAgentManager = ServiceLocator.instance.GetAIAgentManager();
             lockOnReticule = ServiceLocator.instance.GetUIManager().lockOnReticule;
             lockOnImage = ServiceLocator.instance.GetUIManager().lockOnImage;
+            cam = ServiceLocator.instance.GetCamera();
         }
 
         public void OnUpdate(float deltaTime)
@@ -34,7 +41,7 @@
             {
                 if (lockonTarget.aiGameObject.IsDead() == true || 
                     Vector3.Distance(lockonTarget.aiGameObject.transform.position, controller.transform.position) > maxLockonDistance ||
-                    lockonTarget.aiGameObject.IsAgentBeingRendered() == false)
+                    lockonTarget.aiGameObject.IsAgentWithinCameraBounds() == false)
                 {
                     CancelLockon();
                     GetHighestScoredLockonTarget();
@@ -62,14 +69,14 @@
             for (int i = 0; i < potentialLockOnTargets.Count; i++)
             {
                 distance = Vector3.Distance(potentialLockOnTargets[i].aiGameObject.transform.position, controller.transform.position);
-                //If this enemy is too far away or not being rendered on screen, don't lock onto them.
-                if (distance > maxLockonDistance || potentialLockOnTargets[i].aiGameObject.IsAgentBeingRendered() == false)
+                //If this enemy is too far away or not within the camera bounds, don't lock onto them.
+                if (distance > maxLockonDistance || potentialLockOnTargets[i].aiGameObject.IsAgentWithinCameraBounds() == false)
                 {
                     break;
                 }
                 distanceScore = (Mathf.Max(maxLockonDistance - distance, 0f) / maxLockonDistance) * distanceScoreWeight;
 
-                angle = GetTargetAngle(potentialLockOnTargets[i].aiGameObject.transform.position);
+                angle = GetPotentialTargetAngleWorldSpace(potentialLockOnTargets[i].aiGameObject.transform.position);
                 angleScore = ((maxAngle - angle) / maxAngle) * angleScoreWeight;
 
                 score = angleScore + distanceScore;
@@ -89,16 +96,100 @@
             }
         }
 
-        public float GetTargetAngle(Vector3 targetPos)
+        public float GetPotentialTargetAngleWorldSpace(Vector3 targetPos)
         {
             //Calculate the angle of the target by getting the angle between the target position relative to the player, and the direction the player is facing.
             Vector3 sourceDirection = targetPos - controller.transform.position;
             return Vector3.Angle(controller.transform.forward, sourceDirection);
         }
 
-        public void ChangeLockonTargetRightStick(int xAxis, int yAxis)
+        //If the player taps the right analogue stick while locked on, attempt to target a new enemy in the direction of the tap.
+        //We convert enemy world spaces to screen spaces in order to perform these calculations.
+        public void ChangeLockonTargetRightStick(Vector2 inputDirection)
         {
+            if (canChangeLockOnTarget == false)
+            {
+                return;
+            }
 
+            inputDirection.Normalize();
+
+            float highestScore = 0f;
+            float score = 0f;
+
+            float angle = 0f;
+            float maxAngle = 180f;
+            float angleScore = 0f;
+            float angleScoreWeight = 0.4f;
+
+            float worldSpaceDistance = 0f;
+            float screenSpaceDistance = 0f;
+            float distanceScore = 0f;
+            float distanceScoreWeight = 0.6f;
+
+            //The max possible distance two points can be apart in screen space is the hypotenuse of the triangle formed by the screen width and height.
+            //Therefore, we will use this value a max value for calculationg our distance score.
+            maxScreenSpaceDistance = Mathf.Sqrt(Mathf.Pow(Screen.width, 2) + Mathf.Pow(Screen.height, 2));
+
+            potentialLockOnTargets = aiAgentManager.GetLivingAgents();
+
+            //Use screen space instead of world space to calculate where other enemies are relative to our current target.
+            Vector2 lockonTargetScreenPoint = cam.WorldToScreenPoint(lockonTarget.aiGameObject.transform.position);
+            Vector2 potentialLockonTargetScreenPoint;
+
+            for (int i = 0; i < potentialLockOnTargets.Count; i++)
+            {
+                //Only check new targets
+                if (potentialLockOnTargets[i] != lockonTarget)
+                {
+                    worldSpaceDistance = Vector3.Distance(potentialLockOnTargets[i].aiGameObject.transform.position, controller.transform.position);
+                    //If this enemy is too far away or not within the camera bounds, don't lock onto them.
+                    if (worldSpaceDistance > maxLockonDistance || potentialLockOnTargets[i].aiGameObject.IsAgentWithinCameraBounds() == false)
+                    {
+                        break;
+                    }
+
+                    potentialLockonTargetScreenPoint = cam.WorldToScreenPoint(potentialLockOnTargets[i].aiGameObject.transform.position);
+
+                    screenSpaceDistance = Vector2.Distance(potentialLockonTargetScreenPoint, lockonTargetScreenPoint);
+                    distanceScore = (Mathf.Max(maxScreenSpaceDistance - screenSpaceDistance, 0f) / maxScreenSpaceDistance) * distanceScoreWeight;
+
+                    angle = GetPotentialTargetAngleScreenSpace(potentialLockonTargetScreenPoint, lockonTargetScreenPoint, inputDirection);
+                    angleScore = ((maxAngle - angle) / maxAngle) * angleScoreWeight;
+
+                    score = angleScore + distanceScore;
+
+                    if (score > highestScore)
+                    {
+                        highestScore = score;
+                        curTargetIndex = i;
+                    }
+                }
+            }
+
+            lockonTarget = potentialLockOnTargets[curTargetIndex];
+
+            if (lockonTarget != null)
+            {
+                lockOnReticule.SetTarget(lockonTarget.aiGameObject.transform);
+                lockOnImage.enabled = true;
+            }
+
+            canChangeLockOnTarget = false;
+        }
+
+        //To prevent jitteryness, only allow the player to select a new target with the right analogue stick after it's been reset to a neutral position.
+        public void RightStickResetToNeutral()
+        {
+            canChangeLockOnTarget = true;
+        }
+
+        public float GetPotentialTargetAngleScreenSpace(Vector2 potentialTarget, Vector2 currentTarget, Vector2 inputDirection)
+        {
+            //Calculate the angle of the target by getting the angle between the potential target position relative to the current target position, and the direction of the right stick input.
+            //This is all done using screenspace coordinates.
+            Vector2 potentialTargetDirection = potentialTarget - currentTarget;
+            return Vector2.Angle(inputDirection, potentialTargetDirection);
         }
 
         public AIAgent GetLockonTarget()

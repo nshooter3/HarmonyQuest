@@ -6,6 +6,10 @@
 
         float GetVerticalMovement();
 
+        float GetHorizontalMovement2();
+
+        float GetVerticalMovement2();
+
         bool AttackButtonDown();
 
         bool ParryButtonDown();

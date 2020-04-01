@@ -42,6 +42,16 @@
             return movement;
         }
 
+        public float GetHorizontalMovement2()
+        {
+            return 0f;
+        }
+
+        public float GetVerticalMovement2()
+        {
+            return 0f;
+        }
+
         public bool HarmonyModeButtonDown()
         {
             return Input.GetKey(KeyCode.J);

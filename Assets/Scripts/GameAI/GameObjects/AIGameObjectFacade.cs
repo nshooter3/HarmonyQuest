@@ -227,7 +227,7 @@
         // UTIL FUNCTIONS
         // ****************************
 
-        public virtual bool IsAgentBeingRendered()
+        public virtual bool IsAgentWithinCameraBounds()
         {
             return aiUtil.IsAgentWithinCameraBounds();
         }
