@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Unlit_Sky
+  m_Shader: {fileID: 4800000, guid: bbca2ab0040e8fb4b8a8c24885c37d64, type: 3}
+  m_ShaderKeywords: _SUNDISK_HIGH_QUALITY
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BaseNoise:
+        m_Texture: {fileID: 2800000, guid: e6fccf55ab431a9499ac2e15602c13ed, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Distort:
+        m_Texture: {fileID: 2800000, guid: 20805e26769320b49aeaaae8b0ddcd79, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SecNoise:
+        m_Texture: {fileID: 2800000, guid: 94c36ed0da903e6498bdcd9ee0034bcb, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _StarTex:
+        m_Texture: {fileID: 2800000, guid: 10ec6f79c67a16640b7741f1b50f623b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _StarsTex:
+        m_Texture: {fileID: 2800000, guid: 10ec6f79c67a16640b7741f1b50f623b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _AtmosphereThickness: 1
+    - _CloudCutoff: -0.08
+    - _Exposure: 1.81
+    - _Fuzziness: 0.73
+    - _HorizonPower: 0.31
+    - _MoonOffset: -0.073
+    - _MoonRadius: 0.077
+    - _Scale: 0.06
+    - _StarsSpeed: 0
+    - _SunDisk: 2
+    - _SunRadius: 0
+    - _SunScatterInstensity: 0.75
+    - _SunSize: 0.04
+    - _SunSizeConvergence: 5
+    m_Colors:
+    - _CloudColorDayEdge: {r: 0.8962264, g: 0.866634, b: 0.866634, a: 1}
+    - _CloudColorDayMain: {r: 1, g: 0.6367924, b: 0.6367924, a: 1}
+    - _CloudColorNightEdge: {r: 0, g: 0, b: 0, a: 1}
+    - _CloudColorNightMain: {r: 0, g: 0, b: 0, a: 1}
+    - _DayBottomColor: {r: 0, g: 0.15254715, b: 0.46226418, a: 1}
+    - _DayTopColor: {r: 0.44495374, g: 0.8626802, b: 0.9339623, a: 1}
+    - _GroundColor: {r: 0.369, g: 0.349, b: 0.341, a: 1}
+    - _HorizonColorDay: {r: 0.6226415, g: 0.44978964, b: 0.44348523, a: 1}
+    - _MoonColor: {r: 0.8, g: 0.8, b: 0.1, a: 1}
+    - _NightBottomColor: {r: 0.20711844, g: 0, b: 0.3962264, a: 1}
+    - _NightTopColor: {r: 0, g: 0, b: 0, a: 1}
+    - _SkyTint: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _SunColor: {r: 0.8773585, g: 0.8399958, b: 0.8070043, a: 1}
