@@ -18,6 +18,8 @@
         UITracker lockOnReticule;
         Image lockOnImage;
 
+        float maxLockonDistance = 25f;
+
         public MelodyLockOn(MelodyController controller)
         {
             this.controller = controller;
@@ -30,9 +32,12 @@
         {
             if (HasLockonTarget())
             {
-                if (lockonTarget.aiGameObject.IsDead() == true)
+                if (lockonTarget.aiGameObject.IsDead() == true || 
+                    Vector3.Distance(lockonTarget.aiGameObject.transform.position, controller.transform.position) > maxLockonDistance ||
+                    lockonTarget.aiGameObject.IsAgentBeingRendered() == false)
                 {
                     CancelLockon();
+                    GetHighestScoredLockonTarget();
                 }
             }
         }
@@ -49,7 +54,6 @@
             float angleScoreWeight = 0.4f;
 
             float distance = 0f;
-            float maxDistance = 30f;
             float distanceScore = 0f;
             float distanceScoreWeight = 0.6f;
 
@@ -59,11 +63,11 @@
             {
                 distance = Vector3.Distance(potentialLockOnTargets[i].aiGameObject.transform.position, controller.transform.position);
                 //If this enemy is too far away or not being rendered on screen, don't lock onto them.
-                if (distance > maxDistance || potentialLockOnTargets[i].aiGameObject.IsAgentBeingRendered() == false)
+                if (distance > maxLockonDistance || potentialLockOnTargets[i].aiGameObject.IsAgentBeingRendered() == false)
                 {
                     break;
                 }
-                distanceScore = (Mathf.Max(maxDistance - distance, 0f) / maxDistance) * distanceScoreWeight;
+                distanceScore = (Mathf.Max(maxLockonDistance - distance, 0f) / maxLockonDistance) * distanceScoreWeight;
 
                 angle = GetTargetAngle(potentialLockOnTargets[i].aiGameObject.transform.position);
                 angleScore = ((maxAngle - angle) / maxAngle) * angleScoreWeight;
