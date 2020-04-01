@@ -162,8 +162,16 @@
             //Rotate player to face movement direction
             if (controller.move.magnitude > 0.0f)
             {
-                Vector3 targetPos = controller.transform.position + controller.move;
-                Vector3 targetDir = targetPos - controller.transform.position;
+                Vector3 targetDir;
+
+                if (controller.melodyLockOn.HasLockonTarget() == true)
+                {
+                    targetDir = controller.melodyLockOn.GetLockonTargetPosition() - controller.transform.position;
+                }
+                else
+                {
+                    targetDir = controller.move;
+                }
 
                 float step = controller.config.TurningSpeed * turningSpeed * Time.deltaTime;
 

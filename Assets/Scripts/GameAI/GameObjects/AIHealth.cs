@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using UnityEngine;
     using UI;
+    using HarmonyQuest;
 
     public class AIHealth
     {
@@ -18,8 +19,12 @@
 
         public bool isCountering = false;
 
+        UIManager uiManager;
+
         public void Init(AIGameObjectData data)
         {
+            uiManager = ServiceLocator.instance.GetUIManager();
+
             this.data = data;
             //Create instance of our scriptable object so we don't edit the original file when changing health values.
             aiStats = Object.Instantiate(this.data.aiStats);
@@ -28,8 +33,7 @@
 
             this.data.CounterDamageReceiver.AssignFunctionToReceiveCounterDamageDelegate(ReceiveDirectDamage);
 
-            //TODO: Make this use Mitch's camera.
-            agentHealthBarsUI = AgentHealthBarsPool.instance.GetAgentHealthBar(aiStats.healthBars.Length, data.gameObject.transform, Object.FindObjectOfType<Camera>());
+            agentHealthBarsUI = uiManager.agentHealthBarsPool.GetAgentHealthBar(aiStats.healthBars.Length, ServiceLocator.instance.GetCamera(), data.gameObject.transform);
         }
 
         private void TakeDamage(int damage)
@@ -50,7 +54,7 @@
             agentHealthBarsUI.SetMeterValue(curHealthBar, aiStats.healthBars[curHealthBar], curHealthBarMaxHealth);
             if (dead)
             {
-                AgentHealthBarsPool.instance.ReturnAgentHealthBarToPool(agentHealthBarsUI);
+                uiManager.agentHealthBarsPool.ReturnAgentHealthBarToPool(agentHealthBarsUI);
             }
         }
 

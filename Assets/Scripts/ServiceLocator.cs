@@ -1,10 +1,11 @@
 ﻿namespace HarmonyQuest
 {
+    using GameAI;
     using HarmonyQuest.Input.Implementation;
     using Input;
-    using Input.Implementation;
     using Melody;
     using UnityEngine;
+    using UI;
 
     ///<summary>
     ///The ServiceLocator is a Singleton that points scripts to whatever is managing each of the game's major subsystems.
@@ -30,8 +31,13 @@
         //List of managers the ServiceLocator can provide
         IPlayerInputManager InputManager;
         MelodyController melodyController;
+        AIAgentManager aiAgentManager;
+        UIManager uiManager;
         //End List of managers
-       
+
+        //TODO: Make this use Mitch's camera.
+        Camera cam;
+
         void Awake()
         {
             if (inst == null)
@@ -43,6 +49,9 @@
                 Destroy(gameObject);
             }
             melodyController = FindObjectOfType<MelodyController>();
+            aiAgentManager = FindObjectOfType<AIAgentManager>();
+            uiManager = FindObjectOfType<UIManager>();
+            cam = Object.FindObjectOfType<Camera>();
         }
 
         void Start()
@@ -53,7 +62,7 @@
 
         public IPlayerInputManager GetInputManager()
         {
-            if(InputManager != null)
+            if (InputManager != null)
             {
                 return InputManager;
             }
@@ -80,6 +89,54 @@
                 }
             }
             return melodyController;
+        }
+
+        public AIAgentManager GetAIAgentManager()
+        {
+            if (aiAgentManager == null)
+            {
+                //If GetAIAgentManager gets called before we have a chance to set aiAgentManager, do so here.
+                aiAgentManager = FindObjectOfType<AIAgentManager>();
+                if (aiAgentManager == null)
+                {
+                    //If aiAgentManager is still null, we have a problem.
+                    Debug.LogError("No AIAgentManager detected in scene.");
+                    return null;
+                }
+            }
+            return aiAgentManager;
+        }
+
+        public UIManager GetUIManager()
+        {
+            if (uiManager == null)
+            {
+                //If GetUIManager gets called before we have a chance to set uiManager, do so here.
+                uiManager = FindObjectOfType<UIManager>();
+                if (uiManager == null)
+                {
+                    //If uiManager is still null, we have a problem.
+                    Debug.LogError("No UIManager detected in scene.");
+                    return null;
+                }
+            }
+            return uiManager;
+        }
+
+        public Camera GetCamera()
+        {
+            if (cam == null)
+            {
+                //If GetCamera gets called before we have a chance to set cam, do so here.
+                cam = FindObjectOfType<Camera>();
+                if (cam == null)
+                {
+                    //If cam is still null, we have a problem.
+                    Debug.LogError("No Camera detected in scene.");
+                    return null;
+                }
+            }
+            return cam;
         }
     }
 }

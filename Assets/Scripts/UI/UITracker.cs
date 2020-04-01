@@ -1,5 +1,6 @@
 ﻿namespace UI
 {
+    using HarmonyQuest;
     using UnityEngine;
 
     public class UITracker : MonoBehaviour
@@ -9,11 +10,21 @@
 
         Camera cam;
 
-        public void InitTrackingVars(Transform target, Camera cam, float yOffset = 65.0f)
+        public void Start()
+        {
+            cam = ServiceLocator.instance.GetCamera();
+        }
+
+        public void SetTarget(Transform target, float yOffset = 0.0f)
         {
             this.target = target;
-            this.cam = cam;
             this.yOffset = yOffset;
+        }
+
+        public void ClearTarget()
+        {
+            target = null;
+            yOffset = 0.0f;
         }
 
         // Update is called once per frame
@@ -24,9 +35,12 @@
 
         private void TrackTarget()
         {
-            Vector3 newPos = cam.WorldToScreenPoint(target.position);
-            newPos.y += yOffset;
-            transform.position = newPos;
+            if (target != null)
+            {
+                Vector3 newPos = cam.WorldToScreenPoint(target.position);
+                newPos.y += yOffset;
+                transform.position = newPos;
+            }
         }
     }
 }

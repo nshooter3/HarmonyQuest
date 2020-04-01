@@ -55,9 +55,9 @@
             }
         }
 
-        public void InitTrackingVars(Transform target, Camera cam, float yOffset = 65.0f)
+        public void InitTrackingVars(Camera cam, Transform target, float yOffset = 65.0f)
         {
-            tracker.InitTrackingVars(target, cam, yOffset);
+            tracker.SetTarget(target, yOffset);
         }
     }
 }

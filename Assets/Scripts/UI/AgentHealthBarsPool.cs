@@ -5,8 +5,6 @@
 
     public class AgentHealthBarsPool : MonoBehaviour
     {
-        public static AgentHealthBarsPool instance;
-
         [SerializeField]
         private AgentHealthBars healthBarPrefab;
 
@@ -19,15 +17,6 @@
 
         private void Awake()
         {
-            if (instance == null)
-            {
-                instance = this;
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
-
             InitPool();
         }
 
@@ -48,7 +37,7 @@
             return tempHealthbar;
         }
 
-        public AgentHealthBars GetAgentHealthBar(int numHealthBars, Transform target, Camera cam, float yOffset = 65.0f)
+        public AgentHealthBars GetAgentHealthBar(int numHealthBars, Camera cam, Transform target, float yOffset = 65.0f)
         {
             for (int i = 0; i < healthBarPoolSize; i++)
             {
@@ -65,7 +54,7 @@
             }
 
             tempHealthbar.ResetMeters();
-            tempHealthbar.InitTrackingVars(target, cam, yOffset);
+            tempHealthbar.InitTrackingVars(cam, target, yOffset);
             tempHealthbar.SetNumHealthBars(numHealthBars);
             tempHealthbar.gameObject.SetActive(true);
 

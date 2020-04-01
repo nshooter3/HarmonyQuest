@@ -43,6 +43,7 @@
         public MelodyHealth melodyHealth;
         public MelodyHitboxes melodyHitboxes;
         public MelodyAnimator melodyAnimator;
+        public MelodyLockOn melodyLockOn;
 
         //Drag References
         public Renderer melodyRenderer;
@@ -67,15 +68,16 @@
             melodyHealth = new MelodyHealth(this);
             melodyHitboxes = new MelodyHitboxes(this);
             melodyAnimator = new MelodyAnimator(this);
+            melodyLockOn = new MelodyLockOn(this);
         }
 
         // Update is called once per frame
         void Update()
         {
-            move.Set(input.GetHorizontalMovement(), 0, input.GetVerticalMovement());
-            move = Vector3.ClampMagnitude(move, 1f);
+            CheckInputs();
             melodyHitboxes.UpdateHitboxes();
             melodyHealth.OnUpdate(Time.deltaTime);
+            melodyLockOn.OnUpdate(Time.deltaTime);
             StateMachine.OnUpdate(Time.deltaTime);
         }
 
@@ -83,6 +85,17 @@
         {
             StateMachine.OnFixedUpdate();
             melodyCollision.OnFixedUpdate();
+        }
+
+        void CheckInputs()
+        {
+            move.Set(input.GetHorizontalMovement(), 0, input.GetVerticalMovement());
+            move = Vector3.ClampMagnitude(move, 1f);
+
+            if (input.LockonButtonDown())
+            {
+                melodyLockOn.LockonButtonPressed();
+            }
         }
     }
 }

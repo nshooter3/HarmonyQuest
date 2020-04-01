@@ -143,5 +143,18 @@
                 agent.OnBeatUpdate();
             }
         }
+
+        public List<AIAgent> GetLivingAgents()
+        {
+            List<AIAgent> livingAgents = new List<AIAgent>();
+            foreach (AIAgent agent in agents)
+            {
+                if (agent.aiGameObject.IsDead() == false)
+                {
+                    livingAgents.Add(agent);
+                }
+            }
+            return livingAgents;
+        }
     }
 }
