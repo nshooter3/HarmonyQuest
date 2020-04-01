@@ -37,22 +37,51 @@
             }
         }
 
-        public void GetNearestLockonTarget()
+        //Use a scoring system based on which enemies the player is facing and how close they are.
+        public void GetHighestScoredLockonTarget()
         {
-            float closestAngle = int.MaxValue;
-            float curAngle;
+            float highestScore = 0f;
+            float score = 0f;
+
+            float angle = 0f;
+            float maxAngle = 180f;
+            float angleScore = 0f;
+            float angleScoreWeight = 0.4f;
+
+            float distance = 0f;
+            float maxDistance = 20f;
+            float distanceScore = 0f;
+            float distanceScoreWeight = 0.6f;
+
             potentialLockOnTargets = aiAgentManager.GetLivingAgents();
-            for (int i = 0; i < potentialLockOnTargets.Count; i++) {
-                curAngle = GetTargetAngle(potentialLockOnTargets[i].aiGameObject.transform.position);
-                if (curAngle < closestAngle)
+
+            for (int i = 0; i < potentialLockOnTargets.Count; i++)
+            {
+                distance = Vector3.Distance(potentialLockOnTargets[i].aiGameObject.transform.position, controller.transform.position);
+                if (distance > maxDistance)
                 {
-                    closestAngle = curAngle;
+                    break;
+                }
+                distanceScore = (Mathf.Max(maxDistance - distance, 0f) / maxDistance) * distanceScoreWeight;
+
+                angle = GetTargetAngle(potentialLockOnTargets[i].aiGameObject.transform.position);
+                angleScore = ((maxAngle - angle) / maxAngle) * angleScoreWeight;
+
+                score = angleScore + distanceScore;
+
+                if (score > highestScore)
+                {
+                    highestScore = score;
                     lockonTarget = potentialLockOnTargets[i];
                     curTargetIndex = i;
                 }
             }
-            lockOnReticule.SetTarget(lockonTarget.aiGameObject.transform);
-            lockOnImage.enabled = true;
+
+            if (lockonTarget != null)
+            {
+                lockOnReticule.SetTarget(lockonTarget.aiGameObject.transform);
+                lockOnImage.enabled = true;
+            }
         }
 
         public float GetTargetAngle(Vector3 targetPos)
@@ -97,7 +126,7 @@
             }
             else
             {
-                GetNearestLockonTarget();
+                GetHighestScoredLockonTarget();
             }
         }
     }
