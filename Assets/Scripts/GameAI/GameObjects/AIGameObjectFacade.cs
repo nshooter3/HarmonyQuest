@@ -15,6 +15,7 @@
         private AIHitboxes aiHitboxes = new AIHitboxes();
         private AIHealth aiHealth = new AIHealth();
         private AIDebug aiDebug = new AIDebug();
+        private AIUtil aiUtil = new AIUtil();
 
         // ****************************
         // CHILD OVERRIDE FUNCTIONS
@@ -69,6 +70,7 @@
             aiHitboxes.Init(data);
             aiHealth.Init(data);
             aiDebug.Init(data);
+            aiUtil.Init(data);
 
             DamageReceiver damageReceiver;
 
@@ -219,6 +221,15 @@
         private void RemoveInactiveReceivedDamageHitboxes()
         {
             aiHealth.RemoveInactiveReceivedDamageHitboxes();
+        }
+
+        // ****************************
+        // UTIL FUNCTIONS
+        // ****************************
+
+        public virtual bool IsAgentBeingRendered()
+        {
+            return aiUtil.IsAgentWithinCameraBounds();
         }
 
         // ****************************

@@ -55,6 +55,12 @@
         public Rigidbody rb;
 
         /// <summary>
+        /// The renderers for our agent. Used for things like determining whether or not the enemy is being rendered on screen.
+        /// </summary>
+        [Tooltip("The renderers for our agent. Used for things like determining whether or not the enemy is being rendered on screen.")]
+        public Renderer[] renderers;
+
+        /// <summary>
         /// The hurtboxes for our agent.
         /// </summary>
         [Tooltip("The hurtboxes for our agent.")]

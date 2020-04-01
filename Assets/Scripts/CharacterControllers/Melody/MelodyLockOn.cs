@@ -49,7 +49,7 @@
             float angleScoreWeight = 0.4f;
 
             float distance = 0f;
-            float maxDistance = 20f;
+            float maxDistance = 30f;
             float distanceScore = 0f;
             float distanceScoreWeight = 0.6f;
 
@@ -58,7 +58,8 @@
             for (int i = 0; i < potentialLockOnTargets.Count; i++)
             {
                 distance = Vector3.Distance(potentialLockOnTargets[i].aiGameObject.transform.position, controller.transform.position);
-                if (distance > maxDistance)
+                //If this enemy is too far away or not being rendered on screen, don't lock onto them.
+                if (distance > maxDistance || potentialLockOnTargets[i].aiGameObject.IsAgentBeingRendered() == false)
                 {
                     break;
                 }
