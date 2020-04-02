@@ -17,6 +17,8 @@
 
         public override void Init(AIStateUpdateData updateData)
         {
+            updateData.aiGameObjectFacade.DebugChangeColor(Color.white);
+
             updateData.aiGameObjectFacade.data.navPos.SetActive(false);
             updateData.aiGameObjectFacade.data.isAggroed = false;
 

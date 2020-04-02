@@ -28,6 +28,10 @@
         private StrafeAction strafeAction = new StrafeAction();
         private DebugAction debugAction = new DebugAction();
 
+        enum AttackOption { DoNothing, NormalAttack };
+        AttackOption attackOption;
+        private WeightedList<AttackOption> attackRandomizer = new WeightedList<AttackOption>();
+
         public override void Init(AIStateUpdateData updateData)
         {
             updateData.aiGameObjectFacade.data.isAggroed = true;
@@ -36,6 +40,7 @@
             updateData.aiGameObjectFacade.data.individualCollisionAvoidanceMaxDistance = 4.0f;
             targetDistanceAction.Init();
             strafeAction.Init(updateData, GetFrogKnightStrafeRandomizer(), 4.0f, 1.0f);
+            InitAttackRandomizer();
         }
 
         //Set up our Frog Knight strafe type odds before passing in the weighted list to the StrafeAction class.
@@ -48,6 +53,12 @@
             strafeRandomizer.Add(StrafeAction.StrafeType.Away, 1);
             strafeRandomizer.Add(StrafeAction.StrafeType.None, 3);
             return strafeRandomizer;
+        }
+
+        private void InitAttackRandomizer()
+        {
+            attackRandomizer.Add(AttackOption.DoNothing, 4);
+            attackRandomizer.Add(AttackOption.NormalAttack, 1);
         }
 
         public override void OnUpdate(AIStateUpdateData updateData)
@@ -64,7 +75,16 @@
 
         public override void OnBeatUpdate(AIStateUpdateData updateData)
         {
+            RandomAttack(updateData);
+        }
 
+        private void RandomAttack(AIStateUpdateData updateData)
+        {
+            attackOption = attackRandomizer.GetRandomWeightedEntry();
+            if (attackOption == AttackOption.NormalAttack)
+            {
+                updateData.stateHandler.RequestStateTransition(new FrogKnightWindup1State { }, updateData);
+            }
         }
 
         private void Think(AIStateUpdateData updateData)
