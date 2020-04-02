@@ -122,6 +122,10 @@
             float angleScore = 0f;
             float angleScoreWeight = 0.4f;
 
+            //Any potential lock on targets that are further than this range are skipped.
+            //This prevents the lock on reticule from moving if the player pushes a direction that doesn't come close to lining up with another enemy.
+            float angleRange = 60.0f;
+
             float worldSpaceDistance = 0f;
             float screenSpaceDistance = 0f;
             float distanceScore = 0f;
@@ -151,18 +155,22 @@
 
                     potentialLockonTargetScreenPoint = cam.WorldToScreenPoint(potentialLockOnTargets[i].aiGameObject.transform.position);
 
-                    screenSpaceDistance = Vector2.Distance(potentialLockonTargetScreenPoint, lockonTargetScreenPoint);
-                    distanceScore = (Mathf.Max(maxScreenSpaceDistance - screenSpaceDistance, 0f) / maxScreenSpaceDistance) * distanceScoreWeight;
-
                     angle = GetPotentialTargetAngleScreenSpace(potentialLockonTargetScreenPoint, lockonTargetScreenPoint, inputDirection);
-                    angleScore = ((maxAngle - angle) / maxAngle) * angleScoreWeight;
-
-                    score = angleScore + distanceScore;
-
-                    if (score > highestScore)
+                    
+                    if (angle <= angleRange)
                     {
-                        highestScore = score;
-                        curTargetIndex = i;
+                        angleScore = ((maxAngle - angle) / maxAngle) * angleScoreWeight;
+
+                        screenSpaceDistance = Vector2.Distance(potentialLockonTargetScreenPoint, lockonTargetScreenPoint);
+                        distanceScore = (Mathf.Max(maxScreenSpaceDistance - screenSpaceDistance, 0f) / maxScreenSpaceDistance) * distanceScoreWeight;
+
+                        score = angleScore + distanceScore;
+
+                        if (score > highestScore)
+                        {
+                            highestScore = score;
+                            curTargetIndex = i;
+                        }
                     }
                 }
             }
