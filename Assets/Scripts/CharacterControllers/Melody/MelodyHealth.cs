@@ -1,6 +1,8 @@
 ﻿namespace Melody
 {
     using GamePhysics;
+    using HarmonyQuest;
+    using UI;
     using System.Collections.Generic;
     using UnityEngine;
 
@@ -13,6 +15,8 @@
         private int currentHealth;
         private bool dead = false;
         private List<DamageHitbox> receivedDamageHitboxes = new List<DamageHitbox>();
+
+        public UIMeter playerHealth;
 
         public MelodyHealth(MelodyController controller)
         {
@@ -29,6 +33,8 @@
                 damageReceiver = hurtbox.gameObject.AddComponent<DamageReceiver>();
                 damageReceiver.AssignFunctionToReceiveDamageDelegate(ReceiveDamageHitbox);
             }
+
+            playerHealth = ServiceLocator.instance.GetUIManager().playerHealth;
         }
 
         public void OnUpdate(float deltaTime)
@@ -39,6 +45,7 @@
         private void TakeDamage(int damage)
         {
             currentHealth = Mathf.Max(0, currentHealth - damage);
+            playerHealth.SetMeterValue(currentHealth, MelodyStats.maxHealth);
             if (currentHealth <= 0)
             {
                 Die();

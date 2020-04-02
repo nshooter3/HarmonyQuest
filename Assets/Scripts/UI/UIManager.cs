@@ -11,6 +11,8 @@
 
         public AgentHealthBarsPool agentHealthBarsPool;
 
+        public UIMeter playerHealth;
+
         //TODO: Other UI functions, yeah!
     }
 }
