@@ -39,6 +39,10 @@
         public override void OnFixedUpdate()
         {
             melodyController.melodyPhysics.ApplyGravity(melodyController.config.Gravity);
+            if (melodyController.melodyLockOn.HasLockonTarget() == true)
+            {
+                melodyController.melodyPhysics.RotatePlayer(melodyController.config.TurningSpeed, true);
+            }
             base.OnFixedUpdate();
         }
 

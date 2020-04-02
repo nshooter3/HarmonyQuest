@@ -157,10 +157,10 @@
             }
         }
 
-        public void RotatePlayer(float turningSpeed)
+        public void RotatePlayer(float turningSpeed, bool stationaryTurn = false)
         {
             //Rotate player to face movement direction
-            if (controller.move.magnitude > 0.0f)
+            if (controller.move.magnitude > 0.0f || stationaryTurn == true)
             {
                 Vector3 targetDir;
 
