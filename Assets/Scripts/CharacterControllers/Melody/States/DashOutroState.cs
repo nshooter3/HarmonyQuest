@@ -14,6 +14,7 @@
 
             nextState = new IdleState(melodyController);
             timer = 0;
+            melodyController.melodyHealth.isDashing = false;
         }
 
         public override void OnUpdate(float time)

@@ -11,6 +11,7 @@
         private MelodyController controller;
 
         public bool isCountering = false;
+        public bool isDashing = false;
 
         private int currentHealth;
         private bool dead = false;
@@ -55,7 +56,7 @@
 
         public void ReceiveDamageHitbox(DamageHitbox damageHitbox)
         {
-            if (dead == false)
+            if (dead == false && isDashing == false)
             {
                 if (damageHitbox != null)
                 {

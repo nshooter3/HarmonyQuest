@@ -28,6 +28,7 @@
             melodyController.rigidBody.velocity = Vector3.zero;
 
             timer = 0;
+            melodyController.melodyHealth.isDashing = true;
         }
 
         public override void OnUpdate(float time)

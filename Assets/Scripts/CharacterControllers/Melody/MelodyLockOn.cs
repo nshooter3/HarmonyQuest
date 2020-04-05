@@ -72,20 +72,23 @@
                 //If this enemy is too far away or not within the camera bounds, don't lock onto them.
                 if (distance > maxLockonDistance || potentialLockOnTargets[i].aiGameObject.IsAgentWithinCameraBounds() == false)
                 {
-                    break;
+                    //Do nothing
                 }
-                distanceScore = (Mathf.Max(maxLockonDistance - distance, 0f) / maxLockonDistance) * distanceScoreWeight;
-
-                angle = GetPotentialTargetAngleWorldSpace(potentialLockOnTargets[i].aiGameObject.transform.position);
-                angleScore = ((maxAngle - angle) / maxAngle) * angleScoreWeight;
-
-                score = angleScore + distanceScore;
-
-                if (score > highestScore)
+                else
                 {
-                    highestScore = score;
-                    lockonTarget = potentialLockOnTargets[i];
-                    curTargetIndex = i;
+                    distanceScore = (Mathf.Max(maxLockonDistance - distance, 0f) / maxLockonDistance) * distanceScoreWeight;
+
+                    angle = GetPotentialTargetAngleWorldSpace(potentialLockOnTargets[i].aiGameObject.transform.position);
+                    angleScore = ((maxAngle - angle) / maxAngle) * angleScoreWeight;
+
+                    score = angleScore + distanceScore;
+
+                    if (score > highestScore)
+                    {
+                        highestScore = score;
+                        lockonTarget = potentialLockOnTargets[i];
+                        curTargetIndex = i;
+                    }
                 }
             }
 
@@ -150,26 +153,29 @@
                     //If this enemy is too far away or not within the camera bounds, don't lock onto them.
                     if (worldSpaceDistance > maxLockonDistance || potentialLockOnTargets[i].aiGameObject.IsAgentWithinCameraBounds() == false)
                     {
-                        break;
+                        //Do nothing
                     }
-
-                    potentialLockonTargetScreenPoint = cam.WorldToScreenPoint(potentialLockOnTargets[i].aiGameObject.transform.position);
-
-                    angle = GetPotentialTargetAngleScreenSpace(potentialLockonTargetScreenPoint, lockonTargetScreenPoint, inputDirection);
-                    
-                    if (angle <= angleRange)
+                    else
                     {
-                        angleScore = ((maxAngle - angle) / maxAngle) * angleScoreWeight;
 
-                        screenSpaceDistance = Vector2.Distance(potentialLockonTargetScreenPoint, lockonTargetScreenPoint);
-                        distanceScore = (Mathf.Max(maxScreenSpaceDistance - screenSpaceDistance, 0f) / maxScreenSpaceDistance) * distanceScoreWeight;
+                        potentialLockonTargetScreenPoint = cam.WorldToScreenPoint(potentialLockOnTargets[i].aiGameObject.transform.position);
 
-                        score = angleScore + distanceScore;
+                        angle = GetPotentialTargetAngleScreenSpace(potentialLockonTargetScreenPoint, lockonTargetScreenPoint, inputDirection);
 
-                        if (score > highestScore)
+                        if (angle <= angleRange)
                         {
-                            highestScore = score;
-                            curTargetIndex = i;
+                            angleScore = ((maxAngle - angle) / maxAngle) * angleScoreWeight;
+
+                            screenSpaceDistance = Vector2.Distance(potentialLockonTargetScreenPoint, lockonTargetScreenPoint);
+                            distanceScore = (Mathf.Max(maxScreenSpaceDistance - screenSpaceDistance, 0f) / maxScreenSpaceDistance) * distanceScoreWeight;
+
+                            score = angleScore + distanceScore;
+
+                            if (score > highestScore)
+                            {
+                                highestScore = score;
+                                curTargetIndex = i;
+                            }
                         }
                     }
                 }
