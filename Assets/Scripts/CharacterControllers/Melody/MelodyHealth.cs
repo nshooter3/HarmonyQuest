@@ -50,7 +50,7 @@
             {
                 Die();
             }
-            Debug.Log("MELODY TAKE DAMAGE. CURRENT HEALTH: " + currentHealth);
+            //Debug.Log("MELODY TAKE DAMAGE. CURRENT HEALTH: " + currentHealth);
         }
 
         public void ReceiveDamageHitbox(DamageHitbox damageHitbox)
@@ -64,7 +64,7 @@
                     {
                         if (WasDamageCountered(damageHitbox.GetAgent()))
                         {
-                            Debug.Log("EARLY COUNTER");
+                            //Debug.Log("EARLY COUNTER SUCCESS");
                             DealCounterDamage(damageHitbox);
                         }
                         else
@@ -89,7 +89,7 @@
             {
                 if (receivedDamageHitboxes[i].applyDamageWhenHitboxEnds == true)
                 {
-                    Debug.Log("LATE COUNTER");
+                    //Debug.Log("LATE COUNTER SUCCESS");
                     receivedDamageHitboxes[i].applyDamageWhenHitboxEnds = false;
                     DealCounterDamage(receivedDamageHitboxes[i]);
                     receivedDamageHitboxes.RemoveAt(i);
@@ -132,7 +132,6 @@
                 {
                     if (receivedDamageHitboxes[i].applyDamageWhenHitboxEnds == true)
                     {
-                        Debug.Log("RECEIVE LATE DAMAGE");
                         receivedDamageHitboxes[i].applyDamageWhenHitboxEnds = false;
                         TakeDamage(receivedDamageHitboxes[i].GetDamage());
                     }

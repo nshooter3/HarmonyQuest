@@ -20,7 +20,7 @@
         private Image lockOnImage;
         private Camera cam;
 
-        private float maxLockonDistance = 30f;
+        private float maxLockonDistance;
         private float maxScreenSpaceDistance;
 
         //To prevent jitteryness, only allow the player to select a new target with the right analogue stick after it's been reset to a neutral position.
@@ -29,6 +29,7 @@
         public MelodyLockOn(MelodyController controller)
         {
             this.controller = controller;
+            maxLockonDistance = this.controller.config.maxLockonDistance;
             aiAgentManager = ServiceLocator.instance.GetAIAgentManager();
             lockOnReticule = ServiceLocator.instance.GetUIManager().lockOnReticule;
             lockOnImage = ServiceLocator.instance.GetUIManager().lockOnImage;

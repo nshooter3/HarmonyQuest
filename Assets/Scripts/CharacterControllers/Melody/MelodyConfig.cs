@@ -22,6 +22,11 @@
         public float CounterMaxAcceleration = 80.0f;  //Unity Units Per Second
         public float CounterTurningSpeed = 1.0f;
         public Vector3 CounterGravity = new Vector3(0.0f, -20.0f, 0.0f);
+        /// <summary>
+        /// The amount of time before and after an enemy attack activates that our counter is considered successful.
+        /// Therefore, the total time window for a counter is CounterGracePeriod times two.
+        /// </summary>
+        public float CounterGracePeriod = 0.2f;
 
         /// <summary>
         /// If the damage comes a direction within CounterDegreeRange degrees of where the player is facing, we consider it a successful parry. (CounterDegreeRange * 2 degrees total range).
@@ -104,6 +109,9 @@
         /// </summary>
         [Tooltip("Which surfaces will cancel Melody's horizontal velocity if she walks into them. Used to prevent sticking to objects by walking into them when falling.")]
         public LayerMask prohibitMovementIntoWallsLayerMask;
+
+        [Header("Lock On")]
+        public float maxLockonDistance = 30.0f;
 
         void Start()
         {
