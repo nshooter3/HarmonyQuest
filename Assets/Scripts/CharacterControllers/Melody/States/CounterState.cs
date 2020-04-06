@@ -10,7 +10,7 @@
         float tempTimer = 0.5f;
 
         //How long the counter is active. During this time, the counter hurtbox is active, and any recieved damage will be turned back on the enemy.
-        float counterActiveTimer = 0.25f;
+        float counterActiveTimer = 0.15f;
 
         bool counterActive = true;
 
@@ -20,6 +20,7 @@
             melodyController.counterHurtbox.enabled = true;
             melodyController.counterHurtboxMesh.enabled = true;
             melodyController.melodyHealth.isCountering = true;
+            melodyController.melodyHealth.CheckForLateCounters();
         }
 
         public override void OnUpdate(float time)

@@ -16,7 +16,6 @@
         private int currentHealth;
         private bool dead = false;
         private List<DamageHitbox> receivedDamageHitboxes = new List<DamageHitbox>();
-
         public UIMeter playerHealth;
 
         public MelodyHealth(MelodyController controller)
@@ -56,22 +55,45 @@
 
         public void ReceiveDamageHitbox(DamageHitbox damageHitbox)
         {
-            if (dead == false && isDashing == false)
+            if (dead == false && isDashing == false && damageHitbox != null)
             {
-                if (damageHitbox != null)
+                //Only pay attention to this hitbox if we haven't been hit by it yet.
+                if (IsDamageHitboxCurrentlyReceived(damageHitbox) == false)
                 {
-                    if (IsDamageHitboxCurrentlyReceived(damageHitbox) == false)
+                    if (damageHitbox.counterable == true)
                     {
-                        if (isCountering && damageHitbox.counterable == true && WasDamageCountered(damageHitbox.GetAgent()))
+                        if (WasDamageCountered(damageHitbox.GetAgent()))
                         {
+                            Debug.Log("EARLY COUNTER");
                             DealCounterDamage(damageHitbox);
                         }
                         else
                         {
-                            TakeDamage(damageHitbox.GetDamage());
+                            //If the player gets hit by a counterable attack, give them until the end of the hitbox to react.
+                            damageHitbox.applyDamageWhenHitboxEnds = true;
                         }
-                        receivedDamageHitboxes.Add(damageHitbox);
                     }
+                    else
+                    {
+                        TakeDamage(damageHitbox.GetDamage());
+                    }
+                    receivedDamageHitboxes.Add(damageHitbox);
+                }
+            }
+        }
+
+        //If melody has already been hit by a counterable attack, but counters before the hitbox goes away, we still consider it a successful counter.
+        public void CheckForLateCounters()
+        {
+            for (int i = 0; i < receivedDamageHitboxes.Count; i++)
+            {
+                if (receivedDamageHitboxes[i].applyDamageWhenHitboxEnds == true)
+                {
+                    Debug.Log("LATE COUNTER");
+                    receivedDamageHitboxes[i].applyDamageWhenHitboxEnds = false;
+                    DealCounterDamage(receivedDamageHitboxes[i]);
+                    receivedDamageHitboxes.RemoveAt(i);
+                    i--;
                 }
             }
         }
@@ -108,6 +130,12 @@
             {
                 if (receivedDamageHitboxes[i].IsActive() == false)
                 {
+                    if (receivedDamageHitboxes[i].applyDamageWhenHitboxEnds == true)
+                    {
+                        Debug.Log("RECEIVE LATE DAMAGE");
+                        receivedDamageHitboxes[i].applyDamageWhenHitboxEnds = false;
+                        TakeDamage(receivedDamageHitboxes[i].GetDamage());
+                    }
                     receivedDamageHitboxes.RemoveAt(i);
                     i--;
                 }
@@ -126,6 +154,12 @@
 
         bool WasDamageCountered(GameObject attacker)
         {
+            //First, check to see if the player is countering.
+            if (isCountering == false)
+            {
+                return false;
+            }
+
             //Calculate the angle of the absorbed attack by getting the angle between where the damage came from relative to the player, and the direction the player is facing.
             Vector3 sourceDirection = attacker.transform.position - controller.transform.position;
             float damageAngle = Vector3.Angle(controller.transform.forward, sourceDirection);
