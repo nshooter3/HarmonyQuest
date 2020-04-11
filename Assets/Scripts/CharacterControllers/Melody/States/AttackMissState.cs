@@ -11,14 +11,14 @@
 
         protected override void Enter()
         {
-            melodyController.melodyAnimator.Attack();
+            melodyController.melodyAnimator.PlayAnimation(MelodyAnimator.Animations.Attack);
         }
 
         public override void OnUpdate(float time)
         {
             base.OnUpdate(time);
             tempTimer -= Time.deltaTime;
-            if (melodyController.melodyAnimator.IsAttackFinishedPlaying() || tempTimer <= 0.0f)
+            if (melodyController.melodyAnimator.IsAnimationDonePlaying(MelodyAnimator.Animations.Attack) || tempTimer <= 0.0f)
             {
                 nextState = new IdleState(melodyController);
                 ableToExit = true;

@@ -1,48 +1,50 @@
 ﻿namespace Melody
 {
+    using System;
     using UnityEngine;
 
     public class MelodyAnimator
     {
         private MelodyController controller;
 
+        private readonly int[] animationHashes;
+
+        //These names must match the name of the animation in the AnimationController.
+        public enum Animations
+        {
+            Move =    0,
+            Attack =  1,
+            Counter = 2, 
+        }
+
         public MelodyAnimator(MelodyController controller)
         {
             this.controller = controller;
+
+            string[] names = Enum.GetNames(typeof(Animations));
+            animationHashes = new int[names.Length];
+            for(int i = 0; i < names.Length; i++)
+            {
+                animationHashes[i] = Animator.StringToHash(names[i]);
+            }
         }
 
         public void SetWalkRun(float percentageOfMax)
         {
-            controller.animator.SetFloat("Move", percentageOfMax);
+            controller.animator.SetFloat(animationHashes[(int) Animations.Move], percentageOfMax);
         }
 
-        public void Attack()
+        public void PlayAnimation(Animations animation)
         {
-            controller.animator.SetTrigger("Attack");
+            controller.animator.SetTrigger(animationHashes[(int) animation]);
         }
 
-        public bool IsAttackFinishedPlaying()
+        public bool IsAnimationDonePlaying(Animations animation)
         {
-            bool isFinished = controller.animator.IsInTransition(0) && controller.animator.GetCurrentAnimatorStateInfo(0).IsName("Attack");
+            bool isFinished = controller.animator.IsInTransition(0) && controller.animator.GetCurrentAnimatorStateInfo(0).shortNameHash == (int) animation;
             if (isFinished)
             {
-                controller.animator.ResetTrigger("Attack");
-
-            }
-            return isFinished;
-        }
-
-        public void Counter()
-        {
-            controller.animator.SetTrigger("Counter");
-        }
-
-        public bool IsCounterFinishedPlaying()
-        {
-            bool isFinished = controller.animator.IsInTransition(0) && controller.animator.GetCurrentAnimatorStateInfo(0).IsName("Counter");
-            if (isFinished)
-            {
-                controller.animator.ResetTrigger("Counter");
+                controller.animator.ResetTrigger(animationHashes[(int) animation]);
 
             }
             return isFinished;

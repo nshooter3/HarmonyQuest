@@ -11,7 +11,7 @@
 
         protected override void Enter()
         {
-            melodyController.melodyAnimator.Attack();
+            melodyController.melodyAnimator.PlayAnimation(MelodyAnimator.Animations.Attack);
             melodyController.melodyHitboxes.ActivateHitbox("PlayerAttack", 0.0f, 0.15f, MelodyStats.attackDamage);
         }
 
@@ -19,7 +19,7 @@
         {
             base.OnUpdate(time);
             tempTimer -= Time.deltaTime;
-            if (melodyController.melodyAnimator.IsAttackFinishedPlaying() || tempTimer <= 0.0f)
+            if (melodyController.melodyAnimator.IsAnimationDonePlaying(MelodyAnimator.Animations.Attack) || tempTimer <= 0.0f)
             {
                 nextState = new IdleState(melodyController);
                 ableToExit = true;

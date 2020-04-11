@@ -17,7 +17,7 @@
         protected override void Enter()
         {
             counterActiveTimer = melodyController.config.CounterGracePeriod;
-            melodyController.melodyAnimator.Counter();
+            melodyController.melodyAnimator.PlayAnimation(MelodyAnimator.Animations.Counter);
             melodyController.counterHurtbox.enabled = true;
             melodyController.counterHurtboxMesh.enabled = true;
             melodyController.melodyHealth.isCountering = true;
@@ -42,7 +42,7 @@
             }
 
             tempTimer -= Time.deltaTime;
-            if (melodyController.melodyAnimator.IsCounterFinishedPlaying() || tempTimer <= 0.0f)
+            if (melodyController.melodyAnimator.IsAnimationDonePlaying(MelodyAnimator.Animations.Counter) || tempTimer <= 0.0f)
             {
                 nextState = new IdleState(melodyController);
                 ableToExit = true;
