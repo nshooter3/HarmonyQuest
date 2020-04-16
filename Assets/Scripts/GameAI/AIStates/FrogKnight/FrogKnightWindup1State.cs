@@ -11,32 +11,40 @@
         //The distance at which we are close enough, and stop trying to approach the target.
         float attackApproachCutoffRange = 4.0f;
 
-        private bool willMoveIntoRangeThisFrame = false;
+        private bool inAttackRange = false;
 
         public override void Init(AIStateUpdateData updateData)
         {
             updateData.aiGameObjectFacade.DebugChangeColor(Color.yellow);
+            updateData.aiGameObjectFacade.SetRigidBodyConstraintsToDefault();
         }
 
         public override void OnUpdate(AIStateUpdateData updateData)
         {
-            if (moveAction.SeekDestinationIfOutOfRange(updateData.aiGameObjectFacade, updateData.aiGameObjectFacade.data.aggroTarget.position, attackApproachCutoffRange, true, 0.5f, true))
+            if (updateData.aiGameObjectFacade.GetDistanceFromAggroTarget() > attackApproachCutoffRange)
             {
-                updateData.aiGameObjectFacade.SetRigidBodyConstraintsToDefault();
-                willMoveIntoRangeThisFrame = true;
+                moveAction.SeekDestination(updateData.aiGameObjectFacade, updateData.aiGameObjectFacade.data.aggroTarget.position, true, 0.5f, true);
+                if (inAttackRange == true)
+                {
+                    updateData.aiGameObjectFacade.SetRigidBodyConstraintsToDefault();
+                    inAttackRange = false;
+                }
             }
             else
             {
-                updateData.aiGameObjectFacade.SetVelocity(Vector3.zero);
-                updateData.aiGameObjectFacade.SetRigidBodyConstraintsToLockAllButGravity();
-                willMoveIntoRangeThisFrame = false;
+                if (inAttackRange == false)
+                {
+                    updateData.aiGameObjectFacade.SetVelocity(Vector3.zero);
+                    updateData.aiGameObjectFacade.SetRigidBodyConstraintsToLockAllButGravity();
+                    inAttackRange = true;
+                }
                 updateData.aiGameObjectFacade.SetRotationDirection(true);
             }
         }
 
         public override void OnFixedUpdate(AIStateUpdateData updateData)
         {
-            if (willMoveIntoRangeThisFrame)
+            if (inAttackRange == false)
             {
                 updateData.aiGameObjectFacade.ApplyVelocity(true, true, 0.5f);
             }

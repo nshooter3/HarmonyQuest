@@ -11,11 +11,14 @@
         //The distance at which we are close enough, and stop trying to approach the target when flying at them.
         float attackSnapCutoffRange = 3.0f;
 
+        private bool inAttackRange = false;
+
         float attackSnapWaitTime = FmodMusicHandler.instance.GetBeatDuration() * 0.65f;
 
         public override void Init(AIStateUpdateData updateData)
         {
             updateData.aiGameObjectFacade.DebugChangeColor(new Color(1f, 0.5f, 0f));
+            updateData.aiGameObjectFacade.SetRigidBodyConstraintsToDefault();
         }
 
         public override void OnUpdate(AIStateUpdateData updateData)
@@ -27,14 +30,24 @@
             }
             else
             {
-                if (moveAction.SeekDestinationIfOutOfRange(updateData.aiGameObjectFacade, updateData.aiGameObjectFacade.data.aggroTarget.position, attackSnapCutoffRange, true, 2.0f, true))
+                if (updateData.aiGameObjectFacade.GetDistanceFromAggroTarget() > attackSnapCutoffRange)
                 {
-                    updateData.aiGameObjectFacade.SetRigidBodyConstraintsToDefault();
+                    moveAction.SeekDestination(updateData.aiGameObjectFacade, updateData.aiGameObjectFacade.data.aggroTarget.position, true, 2.0f, true);
+                    if (inAttackRange == true)
+                    {
+                        inAttackRange = false;
+                        updateData.aiGameObjectFacade.SetRigidBodyConstraintsToDefault();
+                    }
                 }
                 else
                 {
                     updateData.aiGameObjectFacade.SetVelocity(Vector3.zero);
-                    updateData.aiGameObjectFacade.SetRigidBodyConstraintsToLockAllButGravity();
+                    updateData.aiGameObjectFacade.SetRotationDirection(true);
+                    if (inAttackRange == false)
+                    {
+                        inAttackRange = true;
+                        updateData.aiGameObjectFacade.SetRigidBodyConstraintsToLockAllButGravity();
+                    }
                 }
             }
         }
