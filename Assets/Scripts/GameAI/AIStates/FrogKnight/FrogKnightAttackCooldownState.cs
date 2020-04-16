@@ -7,7 +7,7 @@
     {
         public override void Init(AIStateUpdateData updateData)
         {
-            updateData.aiGameObjectFacade.DebugChangeColor(Color.blue);
+            
         }
 
         public override void OnUpdate(AIStateUpdateData updateData)

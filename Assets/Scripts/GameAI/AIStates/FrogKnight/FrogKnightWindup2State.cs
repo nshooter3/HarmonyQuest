@@ -1,10 +1,18 @@
 ﻿namespace GameAI.AIStates.FrogKnight
 {
+    using GameAI.AIStateActions;
     using GameAI.StateHandlers;
+    using HarmonyQuest.Audio;
     using UnityEngine;
 
     public class FrogKnightWindup2State : AIState
     {
+        private MoveAction moveAction = new MoveAction();
+        //The distance at which we are close enough, and stop trying to approach the target when flying at them.
+        float attackSnapCutoffRange = 3.0f;
+
+        float attackSnapWaitTime = FmodMusicHandler.instance.GetBeatDuration() * 0.65f;
+
         public override void Init(AIStateUpdateData updateData)
         {
             updateData.aiGameObjectFacade.DebugChangeColor(new Color(1f, 0.5f, 0f));
@@ -12,13 +20,36 @@
 
         public override void OnUpdate(AIStateUpdateData updateData)
         {
-
+            if (attackSnapWaitTime > 0.0f)
+            {
+                attackSnapWaitTime -= Time.deltaTime;
+                updateData.aiGameObjectFacade.SetRotationDirection(true);
+            }
+            else
+            {
+                if (moveAction.SeekDestinationIfOutOfRange(updateData.aiGameObjectFacade, updateData.aiGameObjectFacade.data.aggroTarget.position, attackSnapCutoffRange, true, 2.0f, true))
+                {
+                    updateData.aiGameObjectFacade.SetRigidBodyConstraintsToDefault();
+                }
+                else
+                {
+                    updateData.aiGameObjectFacade.SetVelocity(Vector3.zero);
+                    updateData.aiGameObjectFacade.SetRigidBodyConstraintsToLockAllButGravity();
+                }
+            }
         }
 
         public override void OnFixedUpdate(AIStateUpdateData updateData)
         {
-            //updateData.aiGameObjectFacade.ApplyVelocity();
-            //updateData.aiGameObjectFacade.ApplyGravity();
+            if (attackSnapWaitTime > 0.0f)
+            {
+                updateData.aiGameObjectFacade.Rotate(updateData.aiGameObjectFacade.GetRotationDirection(), 0.15f);
+            }
+            else
+            {
+                updateData.aiGameObjectFacade.ApplyVelocity(true, true, 0.35f);
+            }
+            updateData.aiGameObjectFacade.ApplyGravity();
         }
 
         public override void OnBeatUpdate(AIStateUpdateData updateData)
@@ -38,6 +69,8 @@
         {
             aborted = true;
             readyForStateTransition = true;
+            updateData.aiGameObjectFacade.SetVelocity(Vector3.zero);
+            updateData.aiGameObjectFacade.SetRigidBodyConstraintsToLockAllButGravity();
         }
     }
 }

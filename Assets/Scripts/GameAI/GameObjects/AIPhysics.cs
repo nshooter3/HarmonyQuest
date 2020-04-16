@@ -34,16 +34,7 @@
         {
             moveDirection = velocity.normalized;
 
-            if (alwaysFaceTarget)
-            {
-                rotationDirection = (data.aggroTarget.transform.position - data.gameObject.transform.position).normalized;
-            }
-            else
-            {
-                rotationDirection = moveDirection;
-            }
-            rotationDirection.y = 0;
-            rotationDirection.Normalize();
+            SetRotationDirection(alwaysFaceTarget);
 
             if (ignoreYValue)
             {
@@ -68,6 +59,20 @@
             }
 
             newVelocity = (newVelocity + adjustedCollisionAvoidanceForce + adjustedObstacleAvoidanceForce) * speedModifier;
+        }
+
+        public void SetRotationDirection(bool alwaysFaceTarget = false)
+        {
+            if (alwaysFaceTarget)
+            {
+                rotationDirection = (data.aggroTarget.transform.position - data.gameObject.transform.position).normalized;
+            }
+            else
+            {
+                rotationDirection = moveDirection;
+            }
+            rotationDirection.y = 0;
+            rotationDirection.Normalize();
         }
 
         /// <summary>
@@ -102,11 +107,11 @@
             return avoidanceForce - difference * NavigatorSettings.avoidanceForceMovementVelocityAdjustmentScale;
         }
 
-        public virtual void ApplyVelocity(bool ignoreYValue = true, bool applyRotation = true)
+        public virtual void ApplyVelocity(bool ignoreYValue = true, bool applyRotation = true, float turnSpeedModifier = 1.0f)
         {
             if (applyRotation)
             {
-                Rotate(rotationDirection, 1.0f);
+                Rotate(rotationDirection, turnSpeedModifier);
             }
             modifiedVelocity = newVelocity;
             if (ignoreYValue)
@@ -189,9 +194,19 @@
             SetRigidbodyConstraints(RigidbodyConstraints.None);
         }
 
-        public virtual float GetDistanceFromAggroTarget()
+        public float GetDistanceFromAggroTarget()
         {
             return Vector3.Distance(data.gameObject.transform.position, data.aggroTarget.transform.position);
+        }
+
+        public Vector3 GetMoveDirection()
+        {
+            return moveDirection;
+        }
+
+        public Vector3 GetRotationDirection()
+        {
+            return rotationDirection;
         }
     }
 }

@@ -18,10 +18,6 @@
         private float attackRange = 5.0f;
 
         private bool shouldStrafe = false;
-        private bool shouldAttack = false;
-
-        private bool isWindingUp = false;
-        private bool isAttacking = false;
 
         private MoveAction moveAction = new MoveAction();
         private TargetDistanceAction targetDistanceAction = new TargetDistanceAction();
@@ -98,34 +94,11 @@
             strafeAction.Update(updateData, targetDistance, targetDistanceAction.minDistanceFromPlayer, targetDistanceAction.maxDistanceFromPlayer);
 
             shouldStrafe = (targetDistanceAction.hitTargetDistance);
-            shouldAttack = (targetDistance <= attackRange && updateData.aiGameObjectFacade.data.permissionToAttack);
         }
 
         private void Act(AIStateUpdateData updateData)
         {
-            if (isWindingUp)
-            {
-                if (updateData.aiGameObjectFacade.data.debugEngage)
-                {
-                    Debug.Log("ENEMY WIND UP");
-                }
-            }
-            else if (isAttacking)
-            {
-                if (updateData.aiGameObjectFacade.data.debugEngage)
-                {
-                    Debug.Log("ENEMY ATTACK");
-                }
-            }
-            else if (shouldAttack)
-            {
-                if (updateData.aiGameObjectFacade.data.debugEngage)
-                {
-                    Debug.Log("ENEMY BEGIN WIND UP");
-                }
-                isWindingUp = true;
-            }
-            else if (shouldStrafe)
+            if (shouldStrafe)
             {
                 updateData.aiGameObjectFacade.SetRigidBodyConstraintsToDefault();
                 Vector3 strafeDir = strafeAction.GetStrafeVector(updateData, updateData.aiGameObjectFacade.data.aggroTarget.transform.position);
