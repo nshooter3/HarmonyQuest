@@ -53,7 +53,7 @@
 
         private void InitAttackRandomizer()
         {
-            attackRandomizer.Add(AttackOption.DoNothing, 4);
+            attackRandomizer.Add(AttackOption.DoNothing, 2);
             attackRandomizer.Add(AttackOption.NormalAttack, 1);
         }
 
@@ -79,7 +79,7 @@
             attackOption = attackRandomizer.GetRandomWeightedEntry();
             if (attackOption == AttackOption.NormalAttack)
             {
-                updateData.stateHandler.RequestStateTransition(new FrogKnightWindup1State { }, updateData);
+                updateData.aiGameObjectFacade.requestingAttackPermission = true;
             }
         }
 
@@ -98,7 +98,13 @@
 
         private void Act(AIStateUpdateData updateData)
         {
-            if (shouldStrafe)
+            if (updateData.aiGameObjectFacade.attackPermissionGranted == true)
+            {
+                updateData.aiGameObjectFacade.attackPermissionGranted = false;
+                updateData.aiGameObjectFacade.attacking = true;
+                updateData.stateHandler.RequestStateTransition(new FrogKnightWindup1State { }, updateData);
+            }
+            else if (shouldStrafe)
             {
                 updateData.aiGameObjectFacade.SetRigidBodyConstraintsToDefault();
                 Vector3 strafeDir = strafeAction.GetStrafeVector(updateData, updateData.aiGameObjectFacade.data.aggroTarget.transform.position);

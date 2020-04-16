@@ -29,8 +29,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1274407406}
   m_LocalRotation: {x: -0, y: 0.70710677, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.00000023841858, y: 0.25, z: 2.5000002}
-  m_LocalScale: {x: 3, y: 2, z: 3}
+  m_LocalPosition: {x: 0, y: 0.25, z: 1.75}
+  m_LocalScale: {x: 2, y: 2, z: 1.5}
   m_Children: []
   m_Father: {fileID: 3047223838859579940}
   m_RootOrder: 6
@@ -113,6 +113,7 @@ MonoBehaviour:
   debugRenderer: {fileID: 1274407409}
   showDebugRenderer: 1
   counterable: 1
+  applyDamageWhenHitboxEnds: 0
 --- !u!114 &1274407412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -715,6 +716,9 @@ MonoBehaviour:
     isAttacking: 0
     individualCollisionAvoidanceModifier: 1
     individualCollisionAvoidanceMaxDistance: 3
+  requestingAttackPermission: 0
+  attackPermissionGranted: 0
+  attacking: 0
 --- !u!114 &5600415224650793353
 MonoBehaviour:
   m_ObjectHideFlags: 0

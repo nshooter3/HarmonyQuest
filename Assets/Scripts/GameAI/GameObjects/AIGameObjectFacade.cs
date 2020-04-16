@@ -17,6 +17,10 @@
         private AIDebug aiDebug = new AIDebug();
         private AIUtil aiUtil = new AIUtil();
 
+        public bool requestingAttackPermission = false;
+        public bool attackPermissionGranted = false;
+        public bool attacking = false;
+
         // ****************************
         // CHILD OVERRIDE FUNCTIONS
         // ****************************

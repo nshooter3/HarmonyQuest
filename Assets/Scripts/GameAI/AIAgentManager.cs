@@ -14,9 +14,11 @@
 
         private AIGameObjectFacade[] aiGameObjects;
         private List<AIAgent> agents;
+        private List<AIAgent> livingAgents;
         private AIObstacle[] aiObstacles;
 
-        private AIFlockingHandler aiFlockingHandler;
+        private AIFlockingHandler aiFlockingHandler = new AIFlockingHandler();
+        private AIAttackRequestHandler aIAttackRequestHandler = new AIAttackRequestHandler();
 
         private float pathRefreshTimer = 0.0f;
         private float waypointBlockedCheckTimer = 0.0f;
@@ -28,7 +30,6 @@
         // Start is called before the first frame update
         void Start()
         {
-            aiFlockingHandler = new AIFlockingHandler();
             PopulateAgentsList();
             PopulateObstaclesList();
             FmodMusicHandler.instance.AssignFunctionToOnBeatDelegate(AgentsBeatUpdate);
@@ -56,6 +57,7 @@
         // Update is called once per frame
         void Update()
         {
+            livingAgents = GetLivingAgents();
             aiFlockingHandler.SetLivingAgents(agents);
             if (useFlocking)
             {
@@ -80,6 +82,12 @@
                     obstacleAvoidanceTimer = NavigatorSettings.obstacleAvoidanceUpdateRate;
                     aiFlockingHandler.SetAgentObstacleAvoidanceForces(aiObstacles);
                 }
+            }
+
+            if (aIAttackRequestHandler.AgentIsCurrentlyAttacking(livingAgents) == false)
+            {
+                aIAttackRequestHandler.GrantAttackPermission(aIAttackRequestHandler.GetAgentsRequestingAttackPermission(livingAgents));
+                aIAttackRequestHandler.ResetAttackPermissionRequests(livingAgents);
             }
 
             AgentsUpdate();
