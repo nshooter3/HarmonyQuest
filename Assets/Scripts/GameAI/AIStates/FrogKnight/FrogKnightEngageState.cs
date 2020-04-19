@@ -23,10 +23,15 @@
         private TargetDistanceAction targetDistanceAction = new TargetDistanceAction();
         private StrafeAction strafeAction = new StrafeAction();
         private DebugAction debugAction = new DebugAction();
+        private AttackRNGCoefficientGenerator attackRNGCoefficientGenerator = new AttackRNGCoefficientGenerator();
 
         enum AttackOption { DoNothing, NormalAttack };
         AttackOption attackOption;
         private WeightedList<AttackOption> attackRandomizer = new WeightedList<AttackOption>();
+
+        //Coefficient used to improve odds of attacking when the enemy is in favorable conditions.
+        //This includes being the lock on target, being in front of the player, being close to the player, having line of sight, etc.
+        private int attackRootOdds = 0;
 
         public override void Init(AIStateUpdateData updateData)
         {
@@ -35,8 +40,8 @@
             updateData.aiGameObjectFacade.data.individualCollisionAvoidanceModifier = 3.5f;
             updateData.aiGameObjectFacade.data.individualCollisionAvoidanceMaxDistance = 4.0f;
             targetDistanceAction.Init();
+            attackRNGCoefficientGenerator.Init(updateData.player);
             strafeAction.Init(updateData, GetFrogKnightStrafeRandomizer(), 4.0f, 1.0f);
-            InitAttackRandomizer();
         }
 
         //Set up our Frog Knight strafe type odds before passing in the weighted list to the StrafeAction class.
@@ -49,12 +54,6 @@
             strafeRandomizer.Add(StrafeAction.StrafeType.Away, 1);
             strafeRandomizer.Add(StrafeAction.StrafeType.None, 3);
             return strafeRandomizer;
-        }
-
-        private void InitAttackRandomizer()
-        {
-            attackRandomizer.Add(AttackOption.DoNothing, 2);
-            attackRandomizer.Add(AttackOption.NormalAttack, 1);
         }
 
         public override void OnUpdate(AIStateUpdateData updateData)
@@ -71,7 +70,17 @@
 
         public override void OnBeatUpdate(AIStateUpdateData updateData)
         {
+            InitAttackRandomizerWithRNGCoefficient(updateData);
             RandomAttack(updateData);
+        }
+
+        private void InitAttackRandomizerWithRNGCoefficient(AIStateUpdateData updateData)
+        {
+            attackRandomizer.Clear();
+            Debug.Log(updateData.aiGameObjectFacade.name + " AttackRootOdds: " + attackRootOdds);
+            attackRootOdds = (int)(attackRNGCoefficientGenerator.GetAttackRNGCoefficient(updateData) * 100);
+            attackRandomizer.Add(AttackOption.DoNothing, 200);
+            attackRandomizer.Add(AttackOption.NormalAttack, attackRootOdds);
         }
 
         private void RandomAttack(AIStateUpdateData updateData)

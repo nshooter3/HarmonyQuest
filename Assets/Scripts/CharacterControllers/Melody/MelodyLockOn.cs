@@ -222,6 +222,15 @@
             return lockonTarget != null;
         }
 
+        public bool IsLockonTargetAttacking()
+        {
+            if (HasLockonTarget() == true && lockonTarget.aiGameObject.attacking == true)
+            {
+                return true;
+            }
+            return false;
+        }
+
         public void CancelLockon()
         {
             lockonTarget = null;
