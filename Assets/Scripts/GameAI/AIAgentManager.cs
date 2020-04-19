@@ -5,6 +5,8 @@
     using Navigation;
     using AIGameObjects;
     using System.Collections.Generic;
+    using Melody;
+    using HarmonyQuest;
 
     public class AIAgentManager : MonoBehaviour
     {
@@ -16,6 +18,7 @@
         private List<AIAgent> agents;
         private List<AIAgent> livingAgents;
         private AIObstacle[] aiObstacles;
+        private MelodyController melodyController;
 
         private AIFlockingHandler aiFlockingHandler = new AIFlockingHandler();
         private AIAttackRequestHandler aIAttackRequestHandler = new AIAttackRequestHandler();
@@ -33,6 +36,8 @@
             PopulateAgentsList();
             PopulateObstaclesList();
             FmodMusicHandler.instance.AssignFunctionToOnBeatDelegate(AgentsBeatUpdate);
+            melodyController = ServiceLocator.instance.GetMelodyController();
+            aIAttackRequestHandler.Init(melodyController);
         }
 
         public void PopulateAgentsList()

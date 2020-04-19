@@ -107,6 +107,11 @@
             return weightedListHighestPriority;
         }
 
+        public int GetLength()
+        {
+            return weightedList.Count;
+        }
+
         public override string ToString()
         {
             string str = "Start Print Weighted List\n";
