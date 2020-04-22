@@ -396,6 +396,7 @@ MonoBehaviour:
   debugRenderer: {fileID: 1099340935}
   showDebugRenderer: 1
   counterable: 1
+  applyDamageWhenHitboxEnds: 0
 --- !u!114 &1099340932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -621,6 +622,7 @@ MonoBehaviour:
     CounterMaxAcceleration: 80
     CounterTurningSpeed: 0
     CounterGravity: {x: 0, y: -20, z: 0}
+    CounterGracePeriod: 0.2
     CounterDegreeRange: 60
     DashLength: 7
     DashIntroTime: 0
@@ -645,6 +647,8 @@ MonoBehaviour:
     prohibitMovementIntoWallsLayerMask:
       serializedVersion: 2
       m_Bits: 2305
+    maxLockonDistance: 30
+    maxLockonAngle: 180
   move: {x: 0, y: 0, z: 0}
   rightStickMove: {x: 0, y: 0}
   melodyRenderer: {fileID: 8387241254795185922}
@@ -1071,6 +1075,7 @@ MonoBehaviour:
   debugRenderer: {fileID: 6243765508836038269}
   showDebugRenderer: 1
   counterable: 1
+  applyDamageWhenHitboxEnds: 0
 --- !u!114 &8776026941745739885
 MonoBehaviour:
   m_ObjectHideFlags: 0

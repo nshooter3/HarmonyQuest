@@ -21,6 +21,7 @@
         private Camera cam;
 
         private float maxLockonDistance;
+        private float maxLockonAngle;
         private float maxScreenSpaceDistance;
 
         //To prevent jitteryness, only allow the player to select a new target with the right analogue stick after it's been reset to a neutral position.
@@ -30,6 +31,7 @@
         {
             this.controller = controller;
             maxLockonDistance = this.controller.config.maxLockonDistance;
+            maxLockonAngle = this.controller.config.maxLockonAngle;
             aiAgentManager = ServiceLocator.instance.GetAIAgentManager();
             lockOnReticule = ServiceLocator.instance.GetUIManager().lockOnReticule;
             lockOnImage = ServiceLocator.instance.GetUIManager().lockOnImage;
@@ -57,7 +59,6 @@
             float score = 0f;
 
             float angle = 0f;
-            float maxAngle = 180f;
             float angleScore = 0f;
             float angleScoreWeight = 0.4f;
 
@@ -80,7 +81,7 @@
                     distanceScore = (Mathf.Max(maxLockonDistance - distance, 0f) / maxLockonDistance) * distanceScoreWeight;
 
                     angle = GetPotentialTargetAngleWorldSpace(potentialLockOnTargets[i].aiGameObject.transform.position);
-                    angleScore = ((maxAngle - angle) / maxAngle) * angleScoreWeight;
+                    angleScore = ((maxLockonAngle - angle) / maxLockonAngle) * angleScoreWeight;
 
                     score = angleScore + distanceScore;
 
@@ -122,7 +123,6 @@
             float score = 0f;
 
             float angle = 0f;
-            float maxAngle = 180f;
             float angleScore = 0f;
             float angleScoreWeight = 0.4f;
 
@@ -165,7 +165,7 @@
 
                         if (angle <= angleRange)
                         {
-                            angleScore = ((maxAngle - angle) / maxAngle) * angleScoreWeight;
+                            angleScore = ((maxLockonAngle - angle) / maxLockonAngle) * angleScoreWeight;
 
                             screenSpaceDistance = Vector2.Distance(potentialLockonTargetScreenPoint, lockonTargetScreenPoint);
                             distanceScore = (Mathf.Max(maxScreenSpaceDistance - screenSpaceDistance, 0f) / maxScreenSpaceDistance) * distanceScoreWeight;

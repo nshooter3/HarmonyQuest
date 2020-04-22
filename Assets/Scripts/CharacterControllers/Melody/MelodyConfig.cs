@@ -112,6 +112,7 @@
 
         [Header("Lock On")]
         public float maxLockonDistance;
+        public float maxLockonAngle;
 
         void Start()
         {
