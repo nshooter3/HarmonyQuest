@@ -4,57 +4,55 @@
     using Melody;
     using UnityEngine;
 
+    /// <summary>
+    /// This class is used to generate and Attack RNG Coefficient for a specific enemy.
+    /// This is a modifier that can be applied to an enemy's attack RNG odds to make an enemy more likely to attack if they are in a favorable position to do so.
+    /// </summary>
     public class GenerateAttackRNGCoefficientAction
     {
         private MelodyController melodyController;
 
+        float totalScore = 0;
+
+        float angle;
+        float maxAngle;
+        float angleScore;
+
+        float distance;
+        float distanceScore;
+        float maxAttackDistance;
+
+        //The weights used to determine how much of each sub score affects the enemy's total score.
+        float angleScoreWeight = 0.8f;
+        float distanceScoreWeight = 0.2f;
+
         public void Init(MelodyController melodyController)
         {
             this.melodyController = melodyController;
+            maxAngle = AIStateConfig.attackScoreMaxAngle;
+            maxAttackDistance = AIStateConfig.attackScoreMaxDistance;
         }
 
-        public float GetAttackRNGCoefficient(AIStateUpdateData updateData)
+        //Returns a value used to scale up enemy attack odds if conditions are favorable.
+        public float GetEnemyAttackRNGCoefficient(AIStateUpdateData updateData)
         {
-            float score = 0;
+            totalScore = 0;
+            angle = 0f;
+            angleScore = 0f;
+            distance = 0f;
+            distanceScore = 0f;
 
-            float lockOnTargetRatio = 0.6f;
-            float lockOnTargetScore = 0f;
-
-            float angle = 0f;
-            float maxAngle = 180f;
-            float angleScore = 0f;
-            float angleScoreWeight = 0.8f;
-
-            float distanceScore = 0f;
-            float distanceScoreWeight = 0.2f;
-            float maxAttackDistance = 15.0f;
-
-            if (melodyController.melodyLockOn.HasLockonTarget() == true && melodyController.melodyLockOn.IsLockonTargetAttacking() == false)
-            {
-                angleScoreWeight = angleScoreWeight * (1f - lockOnTargetRatio);
-                distanceScoreWeight = distanceScoreWeight * (1f - lockOnTargetRatio);
-                if (melodyController.melodyLockOn.GetLockonTarget().aiGameObject == updateData.aiGameObjectFacade)
-                {
-                    lockOnTargetScore = lockOnTargetRatio;
-                }
-            }
-
-            float distance = Vector3.Distance(updateData.aiGameObjectFacade.transform.position, melodyController.transform.position);
-            if (distance > maxAttackDistance)
-            {
-                return 0;
-            }
+            //Calculate a distance score based on how close to the player the enemy is.
+            distance = Vector3.Distance(updateData.aiGameObjectFacade.transform.position, melodyController.transform.position);
             distanceScore = (Mathf.Max(maxAttackDistance - distance, 0f) / maxAttackDistance) * distanceScoreWeight;
 
+            //Calculate an angle score based on how close to the player's line of sight the enemy is.
             angle = GetEnemyAngleWorldSpace(updateData.aiGameObjectFacade.transform.position);
             angleScore = ((maxAngle - angle) / maxAngle) * angleScoreWeight;
 
-            score = lockOnTargetScore + distanceScore + angleScore;
+            totalScore = distanceScore + angleScore;
 
-            /*Debug.Log("Agent " + updateData.aiGameObjectFacade.name + " with lockon score of " + lockOnTargetScore + ", distance score of " +
-                      distanceScore + ", angle score of " + angleScore + ". Total score: " + score);*/
-
-            return score;
+            return totalScore;
         }
 
         public float GetEnemyAngleWorldSpace(Vector3 targetPos)

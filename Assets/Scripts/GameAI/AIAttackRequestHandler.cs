@@ -5,14 +5,39 @@
     using System.Collections.Generic;
     using UnityEngine;
 
+    /// <summary>
+    /// This class looks at attack requests from enemies, and determines which ones get to actually attack.
+    /// This responsibility includes resolving simultaneous attack requests, in which case a scoring algorithm will select an enemy based on various factors.
+    /// </summary>
     public class AIAttackRequestHandler
     {
         private MelodyController melodyController;
         private WeightedList<AIAgent> enemyList = new WeightedList<AIAgent>();
 
+        float totalScore;
+
+        float lockOnTargetScore;
+
+        float angle;
+        float maxAngle;
+        float angleScore;
+
+        float distance;
+        float distanceScore;
+        float maxAttackDistance;
+
+        //How many points get added to the enemy's score if the player is locked onto them.
+        float lockOnTargetPoints = 0.8f;
+
+        //The weights used to determine how much of each sub score affects the enemy's total score.
+        float angleScoreWeight = 0.12f;
+        float distanceScoreWeight = 0.08f;
+
         public void Init(MelodyController melodyController)
         {
             this.melodyController = melodyController;
+            maxAngle = AIStateConfig.attackScoreMaxAngle;
+            maxAttackDistance = AIStateConfig.attackScoreMaxDistance;
         }
 
         public bool AgentIsCurrentlyAttacking(List<AIAgent> livingAgents)
@@ -45,7 +70,7 @@
             enemyList.Clear();
             foreach (AIAgent agent in agentsRequestingAttackPermission)
             {
-                enemyList.Add(agent, AssignEnemyScore(agent));
+                enemyList.Add(agent, (int) (AssignEnemyAttackRequestScore(agent) * AIStateConfig.floatToIntConversionScale));
             }
             if (enemyList.GetLength() > 0)
             {
@@ -66,39 +91,32 @@
         /// </summary>
         /// <param name="agent"> The agent to evaluate </param>
         /// <returns> The agent's score </returns>
-        public int AssignEnemyScore(AIAgent agent)
+        public float AssignEnemyAttackRequestScore(AIAgent agent)
         {
-            float score = 0;
+            totalScore = 0;
+            lockOnTargetScore = 0f;
+            angle = 0f;
+            angleScore = 0f;
+            distance = 0f;
+            distanceScore = 0f;
 
-            float lockOnTargetPoints = 0.8f;
-            float lockOnTargetScore = 0f;
-
-            float angle = 0f;
-            float maxAngle = 180f;
-            float angleScore = 0f;
-            float angleScoreWeight = 0.12f;
-
-            float distanceScore = 0f;
-            float distanceScoreWeight = 0.08f;
-            float maxAttackDistance = 10.0f;
-
+            //Heavily prioritize an enemy if they are the player's lock on target.
             if (melodyController.melodyLockOn.GetLockonTarget() == agent)
             {
                 lockOnTargetScore = lockOnTargetPoints;
             }
 
-            float distance = Vector3.Distance(agent.aiGameObject.transform.position, melodyController.transform.position);
+            //Calculate a distance score based on how close to the player the enemy is.
+            distance = Vector3.Distance(agent.aiGameObject.transform.position, melodyController.transform.position);
             distanceScore = (Mathf.Max(maxAttackDistance - distance, 0f) / maxAttackDistance) * distanceScoreWeight;
 
+            //Calculate an angle score based on how close to the player's line of sight the enemy is.
             angle = GetEnemyAngleWorldSpace(agent.aiGameObject.transform.position);
             angleScore = ((maxAngle - angle) / maxAngle) * angleScoreWeight;
 
-            score = lockOnTargetScore + distanceScore + angleScore;
+            totalScore = lockOnTargetScore + distanceScore + angleScore;
 
-            /*Debug.Log("Agent " + agent.aiGameObject.name + " with lockon score of " + lockOnTargetScore + ", distance score of " +
-                      distanceScore + ", angle score of " + angleScore + ". Total score: " + score);*/
-
-            return (int) score;
+            return totalScore;
         }
 
         public float GetEnemyAngleWorldSpace(Vector3 targetPos)

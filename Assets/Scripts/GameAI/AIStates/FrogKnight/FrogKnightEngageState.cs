@@ -30,8 +30,8 @@
         private WeightedList<AttackOption> attackRandomizer = new WeightedList<AttackOption>();
 
         //Coefficient used to improve odds of attacking when the enemy is in favorable conditions.
-        //This includes being the lock on target, being in front of the player, being close to the player, having line of sight, etc.
-        private int attackRootOdds = 0;
+        //This includes being the lock on target, being in front of the player, being close to the player, etc.
+        private float attackOddsCoefficient = 0;
 
         public override void Init(AIStateUpdateData updateData)
         {
@@ -70,16 +70,23 @@
 
         public override void OnBeatUpdate(AIStateUpdateData updateData)
         {
-            InitAttackRandomizerWithRNGCoefficient(updateData);
-            RandomAttack(updateData);
+            //This particular enemy should only attack if they're within standard attacking distance.
+            if (updateData.aiGameObjectFacade.GetDistanceFromAggroTarget() < AIStateConfig.standardAttackMaxDistance)
+            {
+                InitAttackRandomizerWithRNGCoefficient(updateData);
+                RandomAttack(updateData);
+            }
         }
 
         private void InitAttackRandomizerWithRNGCoefficient(AIStateUpdateData updateData)
         {
             attackRandomizer.Clear();
-            attackRootOdds = (int)(attackRNGCoefficientGenerator.GetAttackRNGCoefficient(updateData) * 100);
-            attackRandomizer.Add(AttackOption.DoNothing, 200);
-            attackRandomizer.Add(AttackOption.NormalAttack, attackRootOdds);
+            attackOddsCoefficient = attackRNGCoefficientGenerator.GetEnemyAttackRNGCoefficient(updateData);
+
+            attackRandomizer.Add(AttackOption.DoNothing,    2 * AIStateConfig.floatToIntConversionScale);
+            //Since attackOddsCoefficient is a float, we multiply all our RNG odds by large number (AIStateConfig.floatToIntConversionScale) then convert it to an int.
+            //This ensures that the odds work with our weighted list, which only accepts ints.
+            attackRandomizer.Add(AttackOption.NormalAttack, 1 * (int) (attackOddsCoefficient * AIStateConfig.floatToIntConversionScale));
         }
 
         private void RandomAttack(AIStateUpdateData updateData)
