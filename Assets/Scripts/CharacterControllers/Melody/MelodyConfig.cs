@@ -6,43 +6,43 @@
     public class MelodyConfig
     {
         [Header("Basic Movement")]
-        public float MaxSpeed = 10.0f;         //Unity Units Per Second
-        public float MaxAcceleration = 80.0f;  //Unity Units Per Second
-        public float TurningSpeed = 5.0f;
-        public Vector3 Gravity = new Vector3(0.0f, -40.0f, 0.0f);
+        public float MaxSpeed;         //Unity Units Per Second
+        public float MaxAcceleration;  //Unity Units Per Second
+        public float TurningSpeed;
+        public Vector3 Gravity;
 
         [Header("Attack Settings")]
-        public float AttackMaxSpeed = 5.0f;         //Unity Units Per Second
-        public float AttackMaxAcceleration = 80.0f;  //Unity Units Per Second
-        public float AttackTurningSpeed = 1.0f;
-        public Vector3 AttackGravity = new Vector3(0.0f, -20.0f, 0.0f);
+        public float AttackMaxSpeed;         //Unity Units Per Second
+        public float AttackMaxAcceleration;  //Unity Units Per Second
+        public float AttackTurningSpeed;
+        public Vector3 AttackGravity;
 
         [Header("Counter Settings")]
-        public float CounterMaxSpeed = 5.0f;         //Unity Units Per Second
-        public float CounterMaxAcceleration = 80.0f;  //Unity Units Per Second
-        public float CounterTurningSpeed = 1.0f;
-        public Vector3 CounterGravity = new Vector3(0.0f, -20.0f, 0.0f);
+        public float CounterMaxSpeed;         //Unity Units Per Second
+        public float CounterMaxAcceleration;  //Unity Units Per Second
+        public float CounterTurningSpeed;
+        public Vector3 CounterGravity;
         /// <summary>
         /// The amount of time before and after an enemy attack activates that our counter is considered successful.
         /// Therefore, the total time window for a counter is CounterGracePeriod times two.
         /// </summary>
-        public float CounterGracePeriod = 0.2f;
+        public float CounterGracePeriod;
 
         /// <summary>
         /// If the damage comes a direction within CounterDegreeRange degrees of where the player is facing, we consider it a successful parry. (CounterDegreeRange * 2 degrees total range).
         /// </summary>
         [Tooltip("If the damage comes a direction within CounterDegreeRange degrees of where the player is facing, we consider it a successful parry. (CounterDegreeRange * 2 degrees total range).")]
-        public int CounterDegreeRange = 60;
+        public int CounterDegreeRange;
 
         [Header("Dash Settings")]
-        public float DashLength = 7.0f;
-        public float DashIntroTime = 0.0f;
-        public float DashOutroTime = 0.35f;
-        public float DashTime = 0.25f;
+        public float DashLength;
+        public float DashIntroTime;
+        public float DashOutroTime;
+        public float DashTime;
 
-        public float DashOutroMaxSpeed = 6.0f;
-        public float DashOutroTurningSpeed = 3.0f;
-        public Vector3 DashOutroGravity = new Vector3(0.0f, -20.0f, 0.0f);
+        public float DashOutroMaxSpeed;
+        public float DashOutroTurningSpeed;
+        public Vector3 DashOutroGravity;
 
         //Radian values used to cap the y angle on the player's dash once they leave the ground.
         //Ensures that they always travel a little bit upwards, but prevents them from dashing straight up.
@@ -61,13 +61,13 @@
         /// The distance threshold within which Melody will snap to the ground if she is close enough.
         /// </summary>
         [Tooltip("The distance threshold within which Melody will snap to the ground if she is close enough.")]
-        public float snapToGroundRaycastDistance = 0.5f;
+        public float snapToGroundRaycastDistance;
 
         /// <summary>
         /// Value that gets added to Melody's position when she snaps to the ground to prevent her from clipping into it.
         /// </summary>
         [Tooltip("Value that gets added to Melody's position when she snaps to the ground to prevent her from clipping into it.")]
-        public Vector3 snapOffset = new Vector3(0.0f, 0.05f, 0.0f);
+        public Vector3 snapOffset;
 
         /// <summary>
         /// Which surfaces Melody will snap to.
@@ -80,19 +80,19 @@
         /// If Melody is colliding with something that has a contact normal y value greater than groundedYNormalThreshold, we consider her grounded.
         /// </summary>
         [Tooltip("If Melody is colliding with something that has a contact normal y value greater than groundedYNormalThreshold, we consider her grounded.")]
-        public float groundedYNormalThreshold = 0.5f;
+        public float groundedYNormalThreshold;
 
         /// <summary>
         /// If Melody is colliding with something that has a contact normal y value greater than slidingYNormalThreshold, we consider her sliding.
         /// </summary>
         [Tooltip("If Melody is colliding with something that has a contact normal y value greater than slidingYNormalThreshold, we consider her sliding.")]
-        public float slidingYNormalThreshold = 0.01f;
+        public float slidingYNormalThreshold;
 
         /// <summary>
         /// Scaling values for the x, y and z axis of Melody's sliding force.
         /// </summary>
         [Tooltip("Scaling values for the x, y and z axis of Melody's sliding force.")]
-        public Vector3 slidingSpeedAdjusmentRatio = new Vector3(1.0f, 1.5f, 1.0f);
+        public Vector3 slidingSpeedAdjusmentRatio;
 
         /// <summary>
         /// Ratio that detemines how much influence the player's input has over the sliding force.
@@ -111,7 +111,7 @@
         public LayerMask prohibitMovementIntoWallsLayerMask;
 
         [Header("Lock On")]
-        public float maxLockonDistance = 30.0f;
+        public float maxLockonDistance;
 
         void Start()
         {

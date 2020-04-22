@@ -4,7 +4,7 @@
     using Melody;
     using UnityEngine;
 
-    public class AttackRNGCoefficientGenerator
+    public class GenerateAttackRNGCoefficientAction
     {
         private MelodyController melodyController;
 

@@ -23,7 +23,7 @@
         private TargetDistanceAction targetDistanceAction = new TargetDistanceAction();
         private StrafeAction strafeAction = new StrafeAction();
         private DebugAction debugAction = new DebugAction();
-        private AttackRNGCoefficientGenerator attackRNGCoefficientGenerator = new AttackRNGCoefficientGenerator();
+        private GenerateAttackRNGCoefficientAction attackRNGCoefficientGenerator = new GenerateAttackRNGCoefficientAction();
 
         enum AttackOption { DoNothing, NormalAttack };
         AttackOption attackOption;
@@ -77,7 +77,6 @@
         private void InitAttackRandomizerWithRNGCoefficient(AIStateUpdateData updateData)
         {
             attackRandomizer.Clear();
-            Debug.Log(updateData.aiGameObjectFacade.name + " AttackRootOdds: " + attackRootOdds);
             attackRootOdds = (int)(attackRNGCoefficientGenerator.GetAttackRNGCoefficient(updateData) * 100);
             attackRandomizer.Add(AttackOption.DoNothing, 200);
             attackRandomizer.Add(AttackOption.NormalAttack, attackRootOdds);
