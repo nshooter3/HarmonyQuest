@@ -7,7 +7,7 @@
         public CounterState(MelodyController controller) : base(controller) { }
 
         //Since the placeholder animation is so long, use a timer to exit this state sooner.
-        float tempTimer = 0.5f;
+        float tempTimer = 0.6f;
 
         //How long the counter is active. During this time, the counter hurtbox is active, and any recieved damage will be turned back on the enemy.
         float counterActiveTimer;
@@ -21,12 +21,20 @@
             melodyController.counterHurtbox.enabled = true;
             melodyController.counterHurtboxMesh.enabled = true;
             melodyController.melodyHealth.isCountering = true;
+            melodyController.melodyHealth.dealtCounterDamage = false;
             melodyController.melodyHealth.CheckForLateCounters();
         }
 
         public override void OnUpdate(float time)
         {
             base.OnUpdate(time);
+
+            if (melodyController.melodyHealth.dealtCounterDamage == true)
+            {
+                nextState = new SuccessfulCounterState(melodyController);
+                ableToExit = true;
+                return;
+            }
 
             if (counterActive == true)
             {
@@ -68,6 +76,7 @@
             melodyController.counterHurtbox.enabled = false;
             melodyController.counterHurtboxMesh.enabled = false;
             melodyController.melodyHealth.isCountering = false;
+            melodyController.melodyHealth.dealtCounterDamage = false;
         }
     }
 }

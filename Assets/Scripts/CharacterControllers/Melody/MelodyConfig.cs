@@ -34,6 +34,16 @@
         [Tooltip("If the damage comes a direction within CounterDegreeRange degrees of where the player is facing, we consider it a successful parry. (CounterDegreeRange * 2 degrees total range).")]
         public int CounterDegreeRange;
 
+        /// <summary>
+        /// The cooldown after a successful counter before Melody can move again.
+        /// </summary>
+        public float SuccessfulCounterCooldownTime;
+
+        /// <summary>
+        /// The amount of time after a successful counter that Melody is invincible.
+        /// </summary>
+        public float SuccessfulCounterInvincibilityTime;
+
         [Header("Dash Settings")]
         public float DashLength;
         public float DashIntroTime;

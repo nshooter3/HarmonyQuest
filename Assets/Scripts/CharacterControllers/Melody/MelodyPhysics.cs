@@ -61,6 +61,12 @@
 
         }
 
+        public void ApplyStationaryVelocity()
+        {
+            velocity = Vector3.zero;
+            controller.rigidBody.velocity = velocity;
+        }
+
         public void ApplyDashVelocity(Vector3 dashVelocity)
         {
             velocity = dashVelocity;

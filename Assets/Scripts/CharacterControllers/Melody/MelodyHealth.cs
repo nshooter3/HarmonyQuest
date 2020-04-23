@@ -11,7 +11,10 @@
         private MelodyController controller;
 
         public bool isCountering = false;
+        public bool dealtCounterDamage = false;
         public bool isDashing = false;
+
+        private float postSuccessfulCounterTimer;
 
         private int currentHealth;
         private bool dead = false;
@@ -40,6 +43,10 @@
         public void OnUpdate(float deltaTime)
         {
             RemoveInactiveReceivedDamageHitboxes();
+            if (postSuccessfulCounterTimer > 0)
+            {
+                postSuccessfulCounterTimer -= Time.deltaTime;
+            }
         }
 
         private void TakeDamage(int damage)
@@ -66,20 +73,35 @@
                         {
                             //Debug.Log("EARLY COUNTER SUCCESS");
                             DealCounterDamage(damageHitbox);
+                            dealtCounterDamage = true;
                         }
                         else
                         {
+                            //Only apply incoming hitbox damage if we're not just coming off a successful counter.
+                            if (postSuccessfulCounterTimer <= 0)
+                            {
+                                damageHitbox.applyDamageWhenHitboxEnds = true;
+                            }
                             //If the player gets hit by a counterable attack, give them until the end of the hitbox to react.
-                            damageHitbox.applyDamageWhenHitboxEnds = true;
+                            damageHitbox.checkForLateCounter = true;
                         }
                     }
                     else
                     {
-                        TakeDamage(damageHitbox.GetDamage());
+                        //Ignore incoming hitbox damage for a little bit if we're just coming off a successful counter
+                        if (postSuccessfulCounterTimer <= 0)
+                        {
+                            TakeDamage(damageHitbox.GetDamage());
+                        }
                     }
                     receivedDamageHitboxes.Add(damageHitbox);
                 }
             }
+        }
+
+        public void SetPostSuccessfulCounterTimer()
+        {
+            postSuccessfulCounterTimer = controller.config.SuccessfulCounterInvincibilityTime;
         }
 
         //If melody has already been hit by a counterable attack, but counters before the hitbox goes away, we still consider it a successful counter.
@@ -87,11 +109,13 @@
         {
             for (int i = 0; i < receivedDamageHitboxes.Count; i++)
             {
-                if (receivedDamageHitboxes[i].applyDamageWhenHitboxEnds == true)
+                if (receivedDamageHitboxes[i].checkForLateCounter == true)
                 {
                     //Debug.Log("LATE COUNTER SUCCESS");
+                    receivedDamageHitboxes[i].checkForLateCounter = false;
                     receivedDamageHitboxes[i].applyDamageWhenHitboxEnds = false;
                     DealCounterDamage(receivedDamageHitboxes[i]);
+                    dealtCounterDamage = true;
                     receivedDamageHitboxes.RemoveAt(i);
                     i--;
                 }

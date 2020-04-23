@@ -43,8 +43,9 @@
 
         //Whether or not this hitbox can be countered.
         public bool counterable = true;
-        //Bool that gets set to true when the player is hit by a counterable attack, but still has a chance to counter late.
+        //Bools that get set to true when the player is hit by a counterable attack, but still has a chance to counter late.
         //Hitboxes with this param set to true will apply damage once the hitbox deactivates if it hasn't been countered before then.
+        public bool checkForLateCounter = false;
         public bool applyDamageWhenHitboxEnds = false;
 
         private Guid id;
@@ -68,6 +69,7 @@
             hitboxActive = false;
             hitboxLifetime = lifetime;
             hitboxLifetimeTimer = 0.0f;
+            checkForLateCounter = false;
             applyDamageWhenHitboxEnds = false;
             this.damage = damage;
             this.id = id;
