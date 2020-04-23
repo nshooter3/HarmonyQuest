@@ -71,7 +71,7 @@
         public override void OnBeatUpdate(AIStateUpdateData updateData)
         {
             //This particular enemy should only attack if they're within standard attacking distance.
-            if (updateData.aiGameObjectFacade.GetDistanceFromAggroTarget() < AIStateConfig.standardAttackMaxDistance)
+            if (updateData.aiGameObjectFacade.isAvailableToAttack == true)
             {
                 InitAttackRandomizerWithRNGCoefficient(updateData);
                 RandomAttack(updateData);
@@ -98,6 +98,11 @@
             }
         }
 
+        private void UpdateAttackAvailability(AIStateUpdateData updateData)
+        {
+            updateData.aiGameObjectFacade.isAvailableToAttack = updateData.aiGameObjectFacade.GetDistanceFromAggroTarget() < AIStateConfig.standardAttackMaxDistance;
+        }
+
         private void Think(AIStateUpdateData updateData)
         {
             //Update navpos graphic for debug. Shows where the agent is focusing.
@@ -109,6 +114,8 @@
             strafeAction.Update(updateData, targetDistance, targetDistanceAction.minDistanceFromPlayer, targetDistanceAction.maxDistanceFromPlayer);
 
             shouldStrafe = (targetDistanceAction.hitTargetDistance);
+
+            UpdateAttackAvailability(updateData);
         }
 
         private void Act(AIStateUpdateData updateData)
@@ -180,9 +187,12 @@
             updateData.aiGameObjectFacade.data.individualCollisionAvoidanceModifier = 1.0f;
             updateData.aiGameObjectFacade.data.individualCollisionAvoidanceMaxDistance = NavigatorSettings.collisionAvoidanceDefaultMaxDistance;
             updateData.aiGameObjectFacade.ResetVelocity();
+            updateData.aiGameObjectFacade.requestingAttackPermission = false;
+            updateData.aiGameObjectFacade.attackPermissionGranted = false;
+            updateData.aiGameObjectFacade.attacking = false;
+            updateData.aiGameObjectFacade.isAvailableToAttack = false;
             aborted = true;
             readyForStateTransition = true;
-            updateData.aiGameObjectFacade.attackPermissionGranted = false;
         }
 
         private bool ShouldDeAggro(AIStateUpdateData updateData)

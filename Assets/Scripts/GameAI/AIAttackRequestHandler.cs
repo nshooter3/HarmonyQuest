@@ -74,7 +74,14 @@
             }
             if (enemyList.GetLength() > 0)
             {
-                enemyList.GetRandomWeightedEntry().aiGameObject.attackPermissionGranted = true;
+                if (CheckForRandomLockOnTargetAttackOverride() == true)
+                {
+                    melodyController.melodyLockOn.GetLockonTarget().aiGameObject.attackPermissionGranted = true;
+                }
+                else
+                {
+                    enemyList.GetRandomWeightedEntry().aiGameObject.attackPermissionGranted = true;
+                }
             }
         }
 
@@ -84,6 +91,19 @@
             {
                 agent.aiGameObject.requestingAttackPermission = false;
             }
+        }
+
+        /// <summary>
+        /// If the player has a lock on target and it's available to attack, give it a random chance to attack instead of whatever enemy was going to attack.
+        /// </summary>
+        /// <returns> Whether or not the lock on target will attack instead of the intended attacker </returns>
+        public bool CheckForRandomLockOnTargetAttackOverride()
+        {
+            if (melodyController.melodyLockOn.HasLockonTarget() && melodyController.melodyLockOn.GetLockonTarget().aiGameObject.isAvailableToAttack == true)
+            {
+                return Random.Range(0.0f, 1.0f) < AIStateConfig.lockonTargetAttackOverrideChance;
+            }
+            return false;
         }
 
         /// <summary>

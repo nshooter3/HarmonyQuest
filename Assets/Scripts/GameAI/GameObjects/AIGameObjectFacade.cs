@@ -20,6 +20,7 @@
         public bool requestingAttackPermission = false;
         public bool attackPermissionGranted = false;
         public bool attacking = false;
+        public bool isAvailableToAttack = false;
 
         // ****************************
         // CHILD OVERRIDE FUNCTIONS
