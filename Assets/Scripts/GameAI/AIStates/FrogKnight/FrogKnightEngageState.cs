@@ -83,10 +83,10 @@
             attackRandomizer.Clear();
             attackOddsCoefficient = attackRNGCoefficientGenerator.GetEnemyAttackRNGCoefficient(updateData);
 
-            attackRandomizer.Add(AttackOption.DoNothing,    2 * AIStateConfig.floatToIntConversionScale);
+            attackRandomizer.AddFloatWeightThenConvertToInt(AttackOption.DoNothing, 2f);
             //Since attackOddsCoefficient is a float, we multiply all our RNG odds by large number (AIStateConfig.floatToIntConversionScale) then convert it to an int.
-            //This ensures that the odds work with our weighted list, which only accepts ints.
-            attackRandomizer.Add(AttackOption.NormalAttack, 1 * (int) (attackOddsCoefficient * AIStateConfig.floatToIntConversionScale));
+            //This happens through the AddFloatWeightThenConvertToInt function.
+            attackRandomizer.AddFloatWeightThenConvertToInt(AttackOption.NormalAttack, 1f * attackOddsCoefficient);
         }
 
         private void RandomAttack(AIStateUpdateData updateData)

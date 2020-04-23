@@ -70,7 +70,7 @@
             enemyList.Clear();
             foreach (AIAgent agent in agentsRequestingAttackPermission)
             {
-                enemyList.Add(agent, (int) (AssignEnemyAttackRequestScore(agent) * AIStateConfig.floatToIntConversionScale));
+                enemyList.AddFloatWeightThenConvertToInt(agent, AssignEnemyAttackRequestScore(agent));
             }
             if (enemyList.GetLength() > 0)
             {

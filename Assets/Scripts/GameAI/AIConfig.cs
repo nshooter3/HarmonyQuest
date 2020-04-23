@@ -16,10 +16,5 @@
         /// Range within a which standard enemies can attempt to attack Melody.
         /// </summary>
         public static float standardAttackMaxDistance = 15f;
-
-        /// <summary>
-        /// Constant used to convert floats to larger ints. This is needed because our weighted list only accepts integers, and some RNG calculates float values that need to be converted.
-        /// </summary>
-        public static int floatToIntConversionScale = 100;
     }
 }

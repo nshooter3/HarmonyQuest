@@ -2,6 +2,7 @@
 {
     using UnityEngine;
     using System.Collections.Generic;
+    using GameAI;
 
     /// <summary>
     /// List that accepts objects with an associated weight, and returns a random result.
@@ -11,6 +12,11 @@
     public class WeightedList<T>
     {
         private List<WeightedListNode> weightedList = new List<WeightedListNode>();
+
+        /// <summary>
+        /// Constant used to convert floats to larger ints. This is needed because our weighted list only accepts integers, and some RNG calculates float values that need to be converted.
+        /// </summary>
+        private int defaultFloatToIntConversionScale = 100;
 
         /// <summary>
         /// Int storing the highest priority value that has been added to this list.
@@ -43,6 +49,23 @@
             {
                 highestPriority = priority;
             }
+        }
+
+        /// <summary>
+        /// Add function that takes a float weight, multiplies it by floatToIntConversionScale, then truncates the decimals. If this function is used for one value,
+        /// it should be used for all values in a list since it significantly scales up weight values.
+        /// </summary>
+        /// <param name="entry"> The entry to add </param>
+        /// <param name="weight"> The entry's weight. The higher it is, the more likely this entry is to be selected </param>
+        /// <param name="floatToIntConversionScale"> Constant used to convert floats to larger ints. This is needed because our weighted list only accepts integers. </param>
+        /// <param name="priority"> The entry's priority. When selecting a random outcome, only the highest priority options will be considered </param>
+        public void AddFloatWeightThenConvertToInt(T entry, float weight = 1, int floatToIntConversionScale = -1, int priority = 1)
+        {
+            if (floatToIntConversionScale < 1)
+            {
+                floatToIntConversionScale = defaultFloatToIntConversionScale;
+            }
+            Add(entry, (int) (weight * floatToIntConversionScale), priority);
         }
 
         /// <summary>
