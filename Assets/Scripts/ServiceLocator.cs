@@ -28,6 +28,8 @@
             }
         }
 
+        public GameObject DefaultUIManager;
+
         //List of managers the ServiceLocator can provide
         IPlayerInputManager InputManager;
         MelodyController melodyController;
@@ -100,8 +102,11 @@
                 if (aiAgentManager == null)
                 {
                     //If aiAgentManager is still null, we have a problem.
-                    Debug.LogError("No AIAgentManager detected in scene.");
-                    return null;
+                    Debug.LogWarning("No AIAgentManager detected in scene. A Default one will be created.");
+                    GameObject aam = new GameObject();
+                    aam.AddComponent(typeof(AIAgentManager));
+                    aiAgentManager = aam.GetComponent(typeof(AIAgentManager)) as AIAgentManager;
+                    return aiAgentManager;
                 }
             }
             return aiAgentManager;
@@ -116,8 +121,10 @@
                 if (uiManager == null)
                 {
                     //If uiManager is still null, we have a problem.
-                    Debug.LogError("No UIManager detected in scene.");
-                    return null;
+                    Debug.LogWarning("No UIManager detected in scene. A Default one will be created.");
+                    GameObject go = Instantiate(DefaultUIManager);
+                    uiManager = go.GetComponent(typeof(UIManager)) as UIManager;
+                    return uiManager;
                 }
             }
             return uiManager;
