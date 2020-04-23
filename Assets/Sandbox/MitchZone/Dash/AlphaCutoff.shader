@@ -11,7 +11,7 @@
         Tags { "Queue"="Transparent" "IgnoreProjector"="True" "RenderType"="Transparent" "PreviewType"="Plane" }
         Blend SrcAlpha OneMinusSrcAlpha
         ColorMask RGB
-        Cull Off Lighting Off ZWrite Off
+        Cull Off Lighting On ZWrite Off
 
         Pass {
             CGPROGRAM
@@ -64,10 +64,10 @@
                 float2 uv = i.uv;
                 uv += _Time.y * _PanningSpeed.xy;
                 fixed4 colA = tex2D(_MainTex, uv);
-                float alpha = saturate((colA.r + 1.0) - 2.0 * i.age);
+                float alpha = /* saturate(0.6 * (colA.r)) - 0.25 - */ i.age * 0.5;
                 fixed4 col = i.color + _TintColor;
-                col.a = i.color.a * alpha * _TintColor.a;
-                clip(alpha - 1.0)
+                col.a = alpha;
+                clip(alpha)
                 UNITY_APPLY_FOG(i.fogCoord, col);
                 return col;
             }

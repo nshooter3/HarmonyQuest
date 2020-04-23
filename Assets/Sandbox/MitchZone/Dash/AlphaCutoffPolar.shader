@@ -11,8 +11,8 @@
     SubShader {
         Tags { "Queue"="Transparent" "IgnoreProjector"="True" "RenderType"="Transparent" "PreviewType"="Plane" }
         Blend SrcAlpha OneMinusSrcAlpha
-        ColorMask RGB
-        Cull Off Lighting Off ZWrite Off
+
+        Cull Off Lighting On ZWrite Off
 
         Pass {
             CGPROGRAM
@@ -67,11 +67,11 @@
                 float2 uv = float2(atan2(mappedUV.y, mappedUV.x) / UNITY_PI / 2.0 + 0.5, length(mappedUV));
                 uv += _Time.y * _PanningSpeed.xy;
                 fixed4 colA = tex2D(_MainTex, uv);
-                float alpha = saturate((colA.r + 1.0) - 2.0 * _CutOff);
+                float alpha = saturate(_CutOff * colA.r) - 0.25;
                 fixed4 col = i.color + _TintColor;
-                col.a = i.color.a * alpha * _TintColor.a;
-                clip(alpha - 1.0)
+                col.a = alpha;
                 UNITY_APPLY_FOG(i.fogCoord, col);
+                clip(alpha);
                 return col;
             }
 
