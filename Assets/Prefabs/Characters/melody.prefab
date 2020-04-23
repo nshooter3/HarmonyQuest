@@ -396,6 +396,7 @@ MonoBehaviour:
   debugRenderer: {fileID: 1099340935}
   showDebugRenderer: 1
   counterable: 1
+  checkForLateCounter: 0
   applyDamageWhenHitboxEnds: 0
 --- !u!114 &1099340932
 MonoBehaviour:
@@ -605,7 +606,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hurtboxes:
   - {fileID: 6661829350256221803}
-  - {fileID: 740095499}
   counterHurtbox: {fileID: 740095499}
   counterHurtboxMesh: {fileID: 740095500}
   counterDamageReceiver: {fileID: 3451171655387926695}
@@ -624,6 +624,8 @@ MonoBehaviour:
     CounterGravity: {x: 0, y: -20, z: 0}
     CounterGracePeriod: 0.2
     CounterDegreeRange: 60
+    SuccessfulCounterCooldownTime: 0.025
+    SuccessfulCounterInvincibilityTime: 0.05
     DashLength: 7
     DashIntroTime: 0
     DashOutroTime: 0.35
@@ -1075,6 +1077,7 @@ MonoBehaviour:
   debugRenderer: {fileID: 6243765508836038269}
   showDebugRenderer: 1
   counterable: 1
+  checkForLateCounter: 0
   applyDamageWhenHitboxEnds: 0
 --- !u!114 &8776026941745739885
 MonoBehaviour:

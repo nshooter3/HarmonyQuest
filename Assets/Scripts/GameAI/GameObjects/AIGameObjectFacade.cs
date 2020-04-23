@@ -209,9 +209,9 @@
             return aiHitboxes.GetCollisionAvoidanceHitbox();
         }
 
-        public virtual void ActivateHitbox(string name, float delay, float lifetime, int damage)
+        public virtual void ActivateHitbox(string name, float delay, float lifetime, int damage, bool counterable = true)
         {
-            aiHitboxes.ActivateHitbox(name, delay, lifetime, damage);
+            aiHitboxes.ActivateHitbox(name, delay, lifetime, damage, counterable);
         }
 
         public virtual void CancelHitbox(string name)

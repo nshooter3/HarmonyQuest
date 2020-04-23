@@ -37,6 +37,10 @@
                 damageReceiver.AssignFunctionToReceiveDamageDelegate(ReceiveDamageHitbox);
             }
 
+            //Set up our counter hurtbox a bit differently, since it should ignore unblockable attacks.
+            damageReceiver = controller.counterHurtbox.gameObject.AddComponent<DamageReceiver>();
+            damageReceiver.AssignFunctionToReceiveDamageDelegate(CounterHurtboxReceiveDamageHitbox);
+
             playerHealth = ServiceLocator.instance.GetUIManager().playerHealth;
         }
 
@@ -96,6 +100,15 @@
                     }
                     receivedDamageHitboxes.Add(damageHitbox);
                 }
+            }
+        }
+
+        public void CounterHurtboxReceiveDamageHitbox(DamageHitbox damageHitbox)
+        {
+            //Our counter hurtbox should only pay attention to counterable hitboxes.
+            if (damageHitbox.counterable == true)
+            {
+                ReceiveDamageHitbox(damageHitbox);
             }
         }
 
