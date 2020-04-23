@@ -8,6 +8,8 @@
     public class FrogKnightWindup2State : AIState
     {
         private MoveAction moveAction = new MoveAction();
+        private DebugAction debugAction = new DebugAction();
+
         //The distance at which we are close enough, and stop trying to approach the target when flying at them.
         float attackSnapCutoffRange = 3.0f;
 
@@ -23,6 +25,9 @@
 
         public override void OnUpdate(AIStateUpdateData updateData)
         {
+            //Update navpos graphic for debug. Shows where the agent is focusing.
+            debugAction.NavPosTrackTarget(updateData);
+
             if (attackSnapWaitTime > 0.0f)
             {
                 attackSnapWaitTime -= Time.deltaTime;

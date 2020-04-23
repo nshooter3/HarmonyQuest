@@ -182,6 +182,7 @@
             updateData.aiGameObjectFacade.ResetVelocity();
             aborted = true;
             readyForStateTransition = true;
+            updateData.aiGameObjectFacade.attackPermissionGranted = false;
         }
 
         private bool ShouldDeAggro(AIStateUpdateData updateData)

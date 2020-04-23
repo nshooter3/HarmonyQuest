@@ -1,10 +1,13 @@
 ﻿namespace GameAI.AIStates.FrogKnight
 {
+    using GameAI.AIStateActions;
     using GameAI.StateHandlers;
     using UnityEngine;
 
     public class FrogKnightAttackState : AIState
     {
+        private DebugAction debugAction = new DebugAction();
+
         public override void Init(AIStateUpdateData updateData)
         {
             updateData.aiGameObjectFacade.DebugChangeColor(Color.white);
@@ -14,7 +17,8 @@
 
         public override void OnUpdate(AIStateUpdateData updateData)
         {
-
+            //Update navpos graphic for debug. Shows where the agent is focusing.
+            debugAction.NavPosTrackTarget(updateData);
         }
 
         public override void OnFixedUpdate(AIStateUpdateData updateData)
