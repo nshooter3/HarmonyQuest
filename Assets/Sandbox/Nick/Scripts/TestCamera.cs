@@ -1,6 +1,5 @@
-﻿using Melody;
-using System.Collections;
-using System.Collections.Generic;
+﻿using HarmonyQuest;
+using Melody;
 using UnityEngine;
 
 public class TestCamera : MonoBehaviour
@@ -8,13 +7,12 @@ public class TestCamera : MonoBehaviour
     public bool followPlayer = true;
     public Vector3 distanceFromPlayer;
 
-    [SerializeField]
-    private MelodyController player;
+    private IMelodyInfo player;
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        player = ServiceLocator.instance.GetMelodyInfo();
     }
 
     // Update is called once per frame
@@ -22,7 +20,7 @@ public class TestCamera : MonoBehaviour
     {
         if (followPlayer)
         {
-            transform.position = player.transform.position + distanceFromPlayer;
+            transform.position = player.GetTransform().position + distanceFromPlayer;
         }
     }
 }

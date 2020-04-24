@@ -11,7 +11,7 @@
     /// </summary>
     public class AIAttackRequestHandler
     {
-        private MelodyController melodyController;
+        private IMelodyInfo melodyInfo;
         private WeightedList<AIAgent> enemyList = new WeightedList<AIAgent>();
 
         float totalScore;
@@ -33,9 +33,9 @@
         float angleScoreWeight = 0.12f;
         float distanceScoreWeight = 0.08f;
 
-        public void Init(MelodyController melodyController)
+        public void Init(IMelodyInfo melodyInfo)
         {
-            this.melodyController = melodyController;
+            this.melodyInfo = melodyInfo;
             maxAngle = AIStateConfig.attackScoreMaxAngle;
             maxAttackDistance = AIStateConfig.attackScoreMaxDistance;
         }
@@ -101,13 +101,13 @@
             distanceScore = 0f;
 
             //Heavily prioritize an enemy if they are the player's lock on target.
-            if (melodyController.melodyLockOn.GetLockonTarget() == agent)
+            if (melodyInfo.GetLockonTarget() == agent)
             {
                 lockOnTargetScore = lockOnTargetPoints;
             }
 
             //Calculate a distance score based on how close to the player the enemy is.
-            distance = Vector3.Distance(agent.aiGameObject.transform.position, melodyController.transform.position);
+            distance = Vector3.Distance(agent.aiGameObject.transform.position, melodyInfo.GetTransform().position);
             distanceScore = (Mathf.Max(maxAttackDistance - distance, 0f) / maxAttackDistance) * distanceScoreWeight;
 
             //Calculate an angle score based on how close to the player's line of sight the enemy is.
@@ -122,8 +122,8 @@
         public float GetEnemyAngleWorldSpace(Vector3 targetPos)
         {
             //Calculate the angle of the target by getting the angle between the player position relative to the player, and the direction the player is facing.
-            Vector3 sourceDirection = targetPos - melodyController.transform.position;
-            return Vector3.Angle(melodyController.transform.forward, sourceDirection);
+            Vector3 sourceDirection = targetPos - melodyInfo.GetTransform().position;
+            return Vector3.Angle(melodyInfo.GetTransform().forward, sourceDirection);
         }
     }
 }
