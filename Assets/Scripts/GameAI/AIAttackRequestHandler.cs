@@ -76,7 +76,7 @@
             {
                 if (CheckForRandomLockOnTargetAttackOverride() == true)
                 {
-                    melodyController.melodyLockOn.GetLockonTarget().aiGameObject.attackPermissionGranted = true;
+                    melodyInfo.GetLockonTarget().aiGameObject.attackPermissionGranted = true;
                 }
                 else
                 {
@@ -99,7 +99,7 @@
         /// <returns> Whether or not the lock on target will attack instead of the intended attacker </returns>
         public bool CheckForRandomLockOnTargetAttackOverride()
         {
-            if (melodyController.melodyLockOn.HasLockonTarget() && melodyController.melodyLockOn.GetLockonTarget().aiGameObject.isAvailableToAttack == true)
+            if (melodyInfo.HasLockonTarget() && melodyInfo.GetLockonTarget().aiGameObject.isAvailableToAttack == true)
             {
                 return Random.Range(0.0f, 1.0f) < AIStateConfig.lockonTargetAttackOverrideChance;
             }

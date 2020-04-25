@@ -23,6 +23,11 @@ namespace Melody
         {
             return lockonTarget;
         }
+
+        public bool HasLockonTarget()
+        {
+            return false;
+        }
     }
 
 }

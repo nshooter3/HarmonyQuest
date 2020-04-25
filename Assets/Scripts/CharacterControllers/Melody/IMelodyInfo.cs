@@ -10,5 +10,7 @@ namespace Melody
         MelodyConfig GetConfig();
 
         AIAgent GetLockonTarget();
+
+        bool HasLockonTarget();
     }
 }

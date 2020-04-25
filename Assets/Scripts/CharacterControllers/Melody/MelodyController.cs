@@ -126,5 +126,10 @@
         {
             return melodyLockOn.GetLockonTarget();
         }
+
+        public bool HasLockonTarget()
+        {
+            return melodyLockOn.HasLockonTarget();
+        }
     }
 }

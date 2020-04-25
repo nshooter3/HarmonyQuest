@@ -594,7 +594,7 @@ PrefabInstance:
     - target: {fileID: 3047223838859579938, guid: 43c0d925baab30144b61aed83056c044,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3047223838859579940, guid: 43c0d925baab30144b61aed83056c044,
         type: 3}
@@ -1573,7 +1573,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   followPlayer: 1
   distanceFromPlayer: {x: 0, y: 14.5, z: -15}
-  player: {fileID: 844150528}
 --- !u!81 &573170874
 AudioListener:
   m_ObjectHideFlags: 0
@@ -2904,18 +2903,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 835395191}
   m_CullTransparentMesh: 0
---- !u!114 &844150528 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6661829350256221800, guid: bd40639b99d3cf94890b1e031f9a7d0c,
-    type: 3}
-  m_PrefabInstance: {fileID: 970288991}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b269c5af4e70bfd419e61d48f3cd0ce9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &845012163
 GameObject:
   m_ObjectHideFlags: 0
@@ -4504,7 +4491,7 @@ PrefabInstance:
     - target: {fileID: 3047223838859579938, guid: 43c0d925baab30144b61aed83056c044,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3047223838859579940, guid: 43c0d925baab30144b61aed83056c044,
         type: 3}
@@ -7405,7 +7392,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_PolyMesh:
-    name: pb_Mesh16790
+    name: pb_Mesh16794
     vertices:
     - {x: 5.282608, y: 10, z: 0.5557207}
     - {x: 0.000000043169052, y: 10, z: -0.00000013844726}
