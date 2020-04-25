@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using UnityEngine;
     using UI;
+    using HarmonyQuest;
 
     public class AIHealth
     {
@@ -16,16 +17,23 @@
         private List<DamageHitbox> receivedDamageHitboxes = new List<DamageHitbox>();
         private AgentHealthBars agentHealthBarsUI;
 
+        public bool isCountering = false;
+
+        UIManager uiManager;
+
         public void Init(AIGameObjectData data)
         {
+            uiManager = ServiceLocator.instance.GetUIManager();
+
             this.data = data;
             //Create instance of our scriptable object so we don't edit the original file when changing health values.
             aiStats = Object.Instantiate(this.data.aiStats);
             curHealthBar = aiStats.healthBars.Length - 1;
             curHealthBarMaxHealth = aiStats.healthBars[curHealthBar];
 
-            //TODO: Make this use Mitch's camera.
-            agentHealthBarsUI = AgentHealthBarsPool.instance.GetAgentHealthBar(aiStats.healthBars.Length, data.gameObject.transform, Object.FindObjectOfType<Camera>());
+            this.data.CounterDamageReceiver.AssignFunctionToReceiveCounterDamageDelegate(ReceiveDirectDamage);
+
+            agentHealthBarsUI = uiManager.agentHealthBarsPool.GetAgentHealthBar(aiStats.healthBars.Length, ServiceLocator.instance.GetCamera(), data.gameObject.transform);
         }
 
         private void TakeDamage(int damage)
@@ -46,7 +54,7 @@
             agentHealthBarsUI.SetMeterValue(curHealthBar, aiStats.healthBars[curHealthBar], curHealthBarMaxHealth);
             if (dead)
             {
-                AgentHealthBarsPool.instance.ReturnAgentHealthBarToPool(agentHealthBarsUI);
+                uiManager.agentHealthBarsPool.ReturnAgentHealthBarToPool(agentHealthBarsUI);
             }
         }
 
@@ -63,10 +71,31 @@
                 {
                     if (IsDamageHitboxCurrentlyReceived(damageHitbox) == false)
                     {
+                        if (isCountering && damageHitbox.counterable == true && WasDamageCountered(damageHitbox.GetAgent()))
+                        {
+                            DealCounterDamage(damageHitbox);
+                        }
+                        else
+                        {
+                            TakeDamage(damageHitbox.GetDamage());
+                        }
                         receivedDamageHitboxes.Add(damageHitbox);
-                        TakeDamage(damageHitbox.GetDamage());
                     }
                 }
+            }
+        }
+
+        private void DealCounterDamage(DamageHitbox damageHitbox)
+        {
+            damageHitbox.ReturnCounterDamageToSource(data.aiStats.counterDamage);
+        }
+
+        //Used to receive counter damage and other things not tied to damage hitboxes.
+        public void ReceiveDirectDamage(int damage)
+        {
+            if (dead == false)
+            {
+                TakeDamage(damage);
             }
         }
 
@@ -92,6 +121,19 @@
                     i--;
                 }
             }
+        }
+
+        bool WasDamageCountered(GameObject attacker)
+        {
+            //Calculate the angle of the absorbed attack by getting the angle between where the damage came from relative to the enemy, and the direction the enemy is facing.
+            Vector3 sourceDirection = attacker.transform.position - data.gameObject.transform.position;
+            float damageAngle = Vector3.Angle(data.gameObject.transform.forward, sourceDirection);
+            //If the damage comes a direction within CounterDegreeRange degrees of where the enemy is facing, we consider it a successful counter. (CounterDegreeRange * 2 degrees total range)
+            if (damageAngle <= data.CounterDegreeRange)
+            {
+                return true;
+            }
+            return false;
         }
 
         public bool IsDead()

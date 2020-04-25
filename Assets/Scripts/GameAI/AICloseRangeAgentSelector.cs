@@ -3,6 +3,7 @@
 /// </summary>
 namespace GameAI
 {
+    using Melody;
     using System.Collections.Generic;
 
     public class AICloseRangeAgentSelector
@@ -12,7 +13,7 @@ namespace GameAI
         /// </summary>
         /// <param name="agents"> A list of enemies </param>
         /// <param name="player"> The player </param>
-        public void AssignCloseRangeAgents(List<AIAgent> agents, TestPlayer player, int maxCloseRangeAgentCount = 3)
+        public void AssignCloseRangeAgents(List<AIAgent> agents, MelodyController player, int maxCloseRangeAgentCount = 3)
         {
             SortedSet<AIAgent> agentsSortedByDistance = new SortedSet<AIAgent>(new AgentDistanceComparer());
             foreach (AIAgent agent in agents)

@@ -45,7 +45,7 @@
             {
                 updateData.stateHandler.RequestStateTransition(new FrogKnightDeadState { }, updateData);
             }
-            else if (aggroZoneEntered && !NavMeshUtil.IsTargetObstructed(updateData.aiGameObjectFacade.data.aiAgentBottom, updateData.player.transform))
+            else if (aggroZoneEntered && !NavMeshUtil.IsTargetObstructed(updateData.aiGameObjectFacade.data.aiAgentBottom, updateData.player.GetTransform()))
             {
                 updateData.stateHandler.RequestStateTransition(new FrogKnightEngageState { }, updateData);
             }
@@ -63,7 +63,7 @@
             readyForStateTransition = true;
             if (updateData.aiGameObjectFacade.data.aggroZone != null)
             {
-                updateData.aiGameObjectFacade.data.aggroZone.RemoveFunctionFromCollisionStayDelegate(AggroZoneActivation);
+                updateData.aiGameObjectFacade.data.aggroZone.RemoveFunctionFromTriggerStayDelegate(AggroZoneActivation);
             }
         }
 

@@ -18,15 +18,20 @@
         private float attackRange = 5.0f;
 
         private bool shouldStrafe = false;
-        private bool shouldAttack = false;
-
-        private bool isWindingUp = false;
-        private bool isAttacking = false;
 
         private MoveAction moveAction = new MoveAction();
         private TargetDistanceAction targetDistanceAction = new TargetDistanceAction();
         private StrafeAction strafeAction = new StrafeAction();
         private DebugAction debugAction = new DebugAction();
+        private GenerateAttackRNGCoefficientAction attackRNGCoefficientGenerator = new GenerateAttackRNGCoefficientAction();
+
+        enum AttackOption { DoNothing, NormalAttack };
+        AttackOption attackOption;
+        private WeightedList<AttackOption> attackRandomizer = new WeightedList<AttackOption>();
+
+        //Coefficient used to improve odds of attacking when the enemy is in favorable conditions.
+        //This includes being the lock on target, being in front of the player, being close to the player, etc.
+        private float attackOddsCoefficient = 0;
 
         public override void Init(AIStateUpdateData updateData)
         {
@@ -35,6 +40,7 @@
             updateData.aiGameObjectFacade.data.individualCollisionAvoidanceModifier = 3.5f;
             updateData.aiGameObjectFacade.data.individualCollisionAvoidanceMaxDistance = 4.0f;
             targetDistanceAction.Init();
+            attackRNGCoefficientGenerator.Init(updateData.player);
             strafeAction.Init(updateData, GetFrogKnightStrafeRandomizer(), 4.0f, 1.0f);
         }
 
@@ -64,7 +70,37 @@
 
         public override void OnBeatUpdate(AIStateUpdateData updateData)
         {
+            //This particular enemy should only attack if they're within standard attacking distance.
+            if (updateData.aiGameObjectFacade.isAvailableToAttack == true)
+            {
+                InitAttackRandomizerWithRNGCoefficient(updateData);
+                RandomAttack(updateData);
+            }
+        }
 
+        private void InitAttackRandomizerWithRNGCoefficient(AIStateUpdateData updateData)
+        {
+            attackRandomizer.Clear();
+            attackOddsCoefficient = attackRNGCoefficientGenerator.GetEnemyAttackRNGCoefficient(updateData);
+
+            attackRandomizer.AddFloatWeightThenConvertToInt(AttackOption.DoNothing, 2f);
+            //Since attackOddsCoefficient is a float, we multiply all our RNG odds by large number (AIStateConfig.floatToIntConversionScale) then convert it to an int.
+            //This happens through the AddFloatWeightThenConvertToInt function.
+            attackRandomizer.AddFloatWeightThenConvertToInt(AttackOption.NormalAttack, 1f * attackOddsCoefficient);
+        }
+
+        private void RandomAttack(AIStateUpdateData updateData)
+        {
+            attackOption = attackRandomizer.GetRandomWeightedEntry();
+            if (attackOption == AttackOption.NormalAttack)
+            {
+                updateData.aiGameObjectFacade.requestingAttackPermission = true;
+            }
+        }
+
+        private void UpdateAttackAvailability(AIStateUpdateData updateData)
+        {
+            updateData.aiGameObjectFacade.isAvailableToAttack = updateData.aiGameObjectFacade.GetDistanceFromAggroTarget() < AIStateConfig.standardAttackMaxDistance;
         }
 
         private void Think(AIStateUpdateData updateData)
@@ -78,32 +114,17 @@
             strafeAction.Update(updateData, targetDistance, targetDistanceAction.minDistanceFromPlayer, targetDistanceAction.maxDistanceFromPlayer);
 
             shouldStrafe = (targetDistanceAction.hitTargetDistance);
-            shouldAttack = (targetDistance <= attackRange && updateData.aiGameObjectFacade.data.permissionToAttack);
+
+            UpdateAttackAvailability(updateData);
         }
 
         private void Act(AIStateUpdateData updateData)
         {
-            if (isWindingUp)
+            if (updateData.aiGameObjectFacade.attackPermissionGranted == true)
             {
-                if (updateData.aiGameObjectFacade.data.debugEngage)
-                {
-                    Debug.Log("ENEMY WIND UP");
-                }
-            }
-            else if (isAttacking)
-            {
-                if (updateData.aiGameObjectFacade.data.debugEngage)
-                {
-                    Debug.Log("ENEMY ATTACK");
-                }
-            }
-            else if (shouldAttack)
-            {
-                if (updateData.aiGameObjectFacade.data.debugEngage)
-                {
-                    Debug.Log("ENEMY BEGIN WIND UP");
-                }
-                isWindingUp = true;
+                updateData.aiGameObjectFacade.attackPermissionGranted = false;
+                updateData.aiGameObjectFacade.attacking = true;
+                updateData.stateHandler.RequestStateTransition(new FrogKnightWindup1State { }, updateData);
             }
             else if (shouldStrafe)
             {
@@ -153,7 +174,7 @@
                 if (checkForTargetObstructionTimer > NavigatorSettings.checkForTargetObstructionRate)
                 {
                     checkForTargetObstructionTimer = 0;
-                    if (NavMeshUtil.IsTargetObstructed(updateData.aiGameObjectFacade.data.aiAgentBottom, updateData.player.transform))
+                    if (NavMeshUtil.IsTargetObstructed(updateData.aiGameObjectFacade.data.aiAgentBottom, updateData.player.GetTransform()))
                     {
                         updateData.stateHandler.RequestStateTransition(new FrogKnightNavigateState { }, updateData);
                     }
@@ -166,13 +187,17 @@
             updateData.aiGameObjectFacade.data.individualCollisionAvoidanceModifier = 1.0f;
             updateData.aiGameObjectFacade.data.individualCollisionAvoidanceMaxDistance = NavigatorSettings.collisionAvoidanceDefaultMaxDistance;
             updateData.aiGameObjectFacade.ResetVelocity();
+            updateData.aiGameObjectFacade.requestingAttackPermission = false;
+            updateData.aiGameObjectFacade.attackPermissionGranted = false;
+            updateData.aiGameObjectFacade.attacking = false;
+            updateData.aiGameObjectFacade.isAvailableToAttack = false;
             aborted = true;
             readyForStateTransition = true;
         }
 
         private bool ShouldDeAggro(AIStateUpdateData updateData)
         {
-            return updateData.aiGameObjectFacade.data.aiStats.disengageWithDistance && Vector3.Distance(updateData.aiGameObjectFacade.transform.position, updateData.player.transform.position) > updateData.aiGameObjectFacade.data.aiStats.disengageDistance;
+            return updateData.aiGameObjectFacade.data.aiStats.disengageWithDistance && Vector3.Distance(updateData.aiGameObjectFacade.transform.position, updateData.player.GetTransform().position) > updateData.aiGameObjectFacade.data.aiStats.disengageDistance;
         }
     }
 }

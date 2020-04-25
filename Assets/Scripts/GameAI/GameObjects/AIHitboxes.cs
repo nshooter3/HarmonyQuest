@@ -46,13 +46,13 @@
             }
         }
 
-        public void ActivateHitbox(string name, float delay, float lifetime, int damage)
+        public void ActivateHitbox(string name, float delay, float lifetime, int damage, bool counterable = true)
         {
             if (hitboxDictionary.TryGetValue(name, out tempValue))
             {
                 foreach (DamageHitbox hitbox in tempValue)
                 {
-                    hitbox.ActivateHitbox(delay, lifetime, damage, Guid.NewGuid());
+                    hitbox.ActivateHitbox(delay, lifetime, damage, Guid.NewGuid(), counterable);
                 }
             }
         }

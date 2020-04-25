@@ -1,0 +1,25 @@
+﻿namespace GameAI
+{
+    public static class AIStateConfig
+    {
+        /// <summary>
+        /// Maximum angle from facing the player that awards the enemy points towards improving their attack odds, and getting selected for attacks when more than one enemy requests to do so. 
+        /// </summary>
+        public static float attackScoreMaxAngle = 180f;
+
+        /// <summary>
+        /// Maximum distance from the player that awards the enemy points towards improving their attack odds, and getting selected for attacks when more than one enemy requests to do so. 
+        /// </summary>
+        public static float attackScoreMaxDistance = 15f;
+
+        /// <summary>
+        /// Range within a which standard enemies can attempt to attack Melody.
+        /// </summary>
+        public static float standardAttackMaxDistance = 15f;
+
+        /// <summary>
+        /// The chance that your lock on target will override the current enemy attack if they're available to attack. Odds are out of 1.0f
+        /// </summary>
+        public static float lockonTargetAttackOverrideChance = 0.5f;
+    }
+}

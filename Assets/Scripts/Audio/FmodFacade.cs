@@ -8,6 +8,14 @@
     /// </summary>
     public class FmodFacade : MonoBehaviour
     {
+        //Enum used to quantify how close an action is to the beat.
+        public enum OnBeatAccuracy
+        {
+            Great = 1,
+            Good = 2,
+            Miss = 3,
+        }
+
         private static FmodFacade inst;
         public static FmodFacade instance
         {
@@ -180,6 +188,32 @@
         public void PlayPooledFmodEvent(string eventName, float volume = 1.0f, GameObject parent = null, Rigidbody rb = null, FmodParamData[] paramData = null)
         {
             fmodEventPool.PlayEvent(eventName, volume, parent, rb, paramData);
+        }
+
+        /// <summary>
+        /// Function that returns how close to on beat we currently are. Accuracy is determined based on FmodOnBeatAccuracyChecker's onBeatPadding param.
+        /// </summary>
+        /// <returns> An OnBeatAccuracy value based on close to the beat we are right now </returns>
+        public OnBeatAccuracy WasActionOnBeat()
+        {
+            return FmodOnBeatAccuracyChecker.instance.WasActionOnBeat();
+        }
+
+        /// <summary>
+        /// Used to let FmodOnBeatAccuracyChecker know that we've attempted an on beat action this beat.
+        /// </summary>
+        public void PerformOnBeatAction()
+        {
+            FmodOnBeatAccuracyChecker.instance.PerformOnBeatAction();
+        }
+
+        /// <summary>
+        /// Check FmodOnBeatAccuracyChecker to see if we've already tried an on beat action this beat. If so, don't allow any more on beat actions until the next beat.
+        /// </summary>
+        /// <returns></returns>
+        public bool HasPerformedActionThisBeat()
+        {
+            return FmodOnBeatAccuracyChecker.instance.HasPerformedActionThisBeat();
         }
 
         /*public void GetDSPData()

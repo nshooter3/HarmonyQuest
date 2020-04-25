@@ -1,26 +1,24 @@
 ﻿namespace Melody.States
 {
-    using System;
     using UnityEngine;
 
     public class DashState : MelodyState
     {
 
-        protected Vector3 dodgeVector = Vector3.left;
-        protected float timer = 0;
-        private Vector3 shift;
+        protected Vector3 dodge;
+        protected float timer = 0.0f;
+        private float dodgeMultiplier;
 
-        public DashState(MelodyController controller, Vector3 dodgeVector) : base(controller)
+        public DashState(MelodyController controller, Vector3 dodge) : base(controller)
         {
-            this.dodgeVector = dodgeVector;
-            shift = new Vector3( 0f, 0.05f, 0 );
-            Debug.Log("DashState");
+            this.dodge = dodge;
+            dodgeMultiplier = (melodyController.config.DashLength / melodyController.config.DashTime);
         }
 
         protected override void Enter()
         {
             nextState = new DashOutroState(melodyController);
-            timer = 0;
+            timer = 0.0f;
         }
 
         public override void OnUpdate(float time)
@@ -32,31 +30,28 @@
             {
                 ableToExit = true;
             }
+            //Restrict the Y axis range of Melody's dash once she leaves the ground.
+            if (melodyController.melodyCollision.IsInAir())
+            {
+                dodge.y = Mathf.Clamp(dodge.y / dodgeMultiplier, melodyController.config.dashYRadianAirLowerRange, melodyController.config.dashYRadianAirUpperRange) * dodgeMultiplier;
+            }
+            else
+            {
+                dodge.y = Mathf.Clamp(dodge.y / dodgeMultiplier, melodyController.config.dashYRadianGroundedLowerRange, melodyController.config.dashYRadianGroundedUpperRange) * dodgeMultiplier;
+            }
+            //Debug.Log("DODGE RADIANS: " + dodge / dodgeMultiplier);
         }
 
         public override void OnFixedUpdate()
         {
-            RaycastHit[] hits = Physics.RaycastAll(melodyController.transform.position, Vector3.down, 1f);
-            Vector3 closest = melodyController.transform.position;
-            float min = 1000;
-            foreach (RaycastHit h in hits)
-            {
-                if (min > Math.Abs(melodyController.transform.position.y - h.point.y))
-                {
-                    min = Math.Abs(melodyController.transform.position.y - h.point.y);
-                    closest = h.point+ shift;
-                }
-            }
-            if(min > 0.3f)
-            {
-                melodyController.transform.position = closest;
-            }
-            melodyController.rigidBody.velocity = dodgeVector;
+            melodyController.melodyPhysics.ApplyDashVelocity(dodge);
+            melodyController.melodyPhysics.SnapToGround();
             base.OnFixedUpdate();
         }
 
         public override void OnExit()
         {
+            melodyController.melodyPhysics.CapSpeed(melodyController.config.MaxSpeed);
         }
     }
 }

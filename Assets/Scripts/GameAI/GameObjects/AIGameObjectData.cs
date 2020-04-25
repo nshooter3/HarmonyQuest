@@ -55,16 +55,34 @@
         public Rigidbody rb;
 
         /// <summary>
+        /// The renderers for our agent. Used for things like determining whether or not the enemy is being rendered on screen.
+        /// </summary>
+        [Tooltip("The renderers for our agent. Used for things like determining whether or not the enemy is being rendered on screen.")]
+        public Renderer[] renderers;
+
+        /// <summary>
         /// The hurtboxes for our agent.
         /// </summary>
         [Tooltip("The hurtboxes for our agent.")]
         public Collider[] hurtboxes;
 
         /// <summary>
+        /// The CounterDamageReceiver for our agent. Handles taking counter damage without needing a damage hitbox.
+        /// </summary>
+        [Tooltip("The CounterDamageReceiver for our agent. Handles taking counter damage without needing a damage hitbox.")]
+        public CounterDamageReceiver CounterDamageReceiver;
+
+        /// <summary>
         /// The hitbox used for collision avoidance distance calculations.
         /// </summary>
         [Tooltip("The hitbox used for collision avoidance distance calculations.")]
         public Collider collisionAvoidanceHitbox;
+
+        /// <summary>
+        /// If the damage comes a direction within CounterDegreeRange degrees of where the enemy is facing, we consider it a successful parry. (CounterDegreeRange * 2 degrees total range).
+        /// </summary>
+        [Tooltip("If the damage comes a direction within CounterDegreeRange degrees of where the enemy is facing, we consider it a successful parry. (CounterDegreeRange * 2 degrees total range).")]
+        public int CounterDegreeRange = 60;
 
         /// <summary>
         /// Whether or not to make navPos visible. This shows where the enemy is attempting to navigate.

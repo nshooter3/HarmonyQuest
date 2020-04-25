@@ -1,5 +1,7 @@
 ﻿namespace Melody.States
 {
+    using HarmonyQuest.Audio;
+
     public class IdleState : MelodyState
     {
 
@@ -11,11 +13,11 @@
         {
             base.OnUpdate(time);
 
-            if (melodyController.input.AttackButtonDown())
+            if (melodyController.input.AttackButtonDown() && FmodFacade.instance.HasPerformedActionThisBeat() == false)
             {
 
                 ableToExit = true;
-                nextState = new AttackState(melodyController);
+                nextState = new AttackRequestState(melodyController);
             }
             else if (melodyController.input.ParryButtonDown())
             {
@@ -32,6 +34,16 @@
                 ableToExit = true;
                 nextState = new MovingState(melodyController);
             }
+        }
+
+        public override void OnFixedUpdate()
+        {
+            melodyController.melodyPhysics.ApplyGravity(melodyController.config.Gravity);
+            if (melodyController.melodyLockOn.HasLockonTarget() == true)
+            {
+                melodyController.melodyPhysics.RotatePlayer(melodyController.config.TurningSpeed, true);
+            }
+            base.OnFixedUpdate();
         }
 
         public override void OnExit() { }

@@ -4,6 +4,7 @@
     using UnityEngine;
     using GameAI.AIStates;
     using GamePhysics;
+    using HarmonyQuest;
 
     public abstract class AIGameObjectFacade : MonoBehaviour
     {
@@ -14,6 +15,12 @@
         private AIHitboxes aiHitboxes = new AIHitboxes();
         private AIHealth aiHealth = new AIHealth();
         private AIDebug aiDebug = new AIDebug();
+        private AIUtil aiUtil = new AIUtil();
+
+        public bool requestingAttackPermission = false;
+        public bool attackPermissionGranted = false;
+        public bool attacking = false;
+        public bool isAvailableToAttack = false;
 
         // ****************************
         // CHILD OVERRIDE FUNCTIONS
@@ -62,12 +69,13 @@
             data.navPos.SetActive(data.showDestination);
             data.defaultConstraints = data.rb.constraints;
 
-            data.aggroTarget = TestPlayer.instance.transform;
+            data.aggroTarget = ServiceLocator.instance.GetMelodyInfo().GetTransform();
 
             aiPhysics.Init(data);
             aiHitboxes.Init(data);
             aiHealth.Init(data);
             aiDebug.Init(data);
+            aiUtil.Init(data);
 
             DamageReceiver damageReceiver;
 
@@ -107,9 +115,9 @@
             aiPhysics.SetVelocity(velocity, ignoreYValue, speedModifier, alwaysFaceTarget);
         }
 
-        public virtual void ApplyVelocity(bool ignoreYValue = true, bool applyRotation = true)
+        public virtual void ApplyVelocity(bool ignoreYValue = true, bool applyRotation = true, float turnSpeedModifier = 1.0f)
         {
-            aiPhysics.ApplyVelocity(ignoreYValue, applyRotation);
+            aiPhysics.ApplyVelocity(ignoreYValue, applyRotation, turnSpeedModifier);
         }
 
         public virtual void ApplyGravity()
@@ -135,6 +143,11 @@
         public virtual void SetObstacleAvoidanceForce(Vector3 obstacleAvoidanceForce)
         {
             aiPhysics.SetObstacleAvoidanceForce(obstacleAvoidanceForce);
+        }
+
+        public virtual void SetRotationDirection(bool alwaysFaceTarget = false)
+        {
+            aiPhysics.SetRotationDirection(alwaysFaceTarget);
         }
 
         public virtual void Rotate(Vector3 direction, float turnSpeedModifier)
@@ -177,6 +190,16 @@
             aiPhysics.LaunchAgent(direction, yForce, launchSpeed, rotationSpeed);
         }
 
+        public virtual Vector3 GetMoveDirection()
+        {
+            return aiPhysics.GetMoveDirection();
+        }
+
+        public virtual Vector3 GetRotationDirection()
+        {
+            return aiPhysics.GetRotationDirection();
+        }
+
         // ****************************
         // COLLISION FUNCTIONS
         // ****************************
@@ -186,9 +209,9 @@
             return aiHitboxes.GetCollisionAvoidanceHitbox();
         }
 
-        public virtual void ActivateHitbox(string name, float delay, float lifetime, int damage)
+        public virtual void ActivateHitbox(string name, float delay, float lifetime, int damage, bool counterable = true)
         {
-            aiHitboxes.ActivateHitbox(name, delay, lifetime, damage);
+            aiHitboxes.ActivateHitbox(name, delay, lifetime, damage, counterable);
         }
 
         public virtual void CancelHitbox(string name)
@@ -218,6 +241,15 @@
         private void RemoveInactiveReceivedDamageHitboxes()
         {
             aiHealth.RemoveInactiveReceivedDamageHitboxes();
+        }
+
+        // ****************************
+        // UTIL FUNCTIONS
+        // ****************************
+
+        public virtual bool IsAgentWithinCameraBounds()
+        {
+            return aiUtil.IsAgentWithinCameraBounds();
         }
 
         // ****************************
