@@ -26,7 +26,7 @@
 
             updateData.aiGameObjectFacade.ResetVelocity();
 
-            Vector3 forceAwayFromPlayer = (updateData.aiGameObjectFacade.transform.position - updateData.player.transform.position).normalized;
+            Vector3 forceAwayFromPlayer = (updateData.aiGameObjectFacade.transform.position - updateData.player.GetTransform().position).normalized;
             updateData.aiGameObjectFacade.LaunchAgent(forceAwayFromPlayer, Random.Range(launchYForceLower, launchYForceUpper),
                                                       Random.Range(launchSpeedLower, launchSpeedUpper), Random.Range(launchRotationSpeedLower, launchRotationSpeedUpper));
             updateData.aiGameObjectFacade.ApplyVelocity(false, false);

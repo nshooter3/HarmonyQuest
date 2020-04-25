@@ -10,7 +10,7 @@
     /// </summary>
     public class GenerateAttackRNGCoefficientAction
     {
-        private MelodyController melodyController;
+        private IMelodyInfo melodyInfo;
 
         float totalScore = 0;
 
@@ -26,9 +26,9 @@
         float angleScoreWeight = 0.8f;
         float distanceScoreWeight = 0.2f;
 
-        public void Init(MelodyController melodyController)
+        public void Init(IMelodyInfo melodyInfo)
         {
-            this.melodyController = melodyController;
+            this.melodyInfo = melodyInfo;
             maxAngle = AIStateConfig.attackScoreMaxAngle;
             maxAttackDistance = AIStateConfig.attackScoreMaxDistance;
         }
@@ -43,7 +43,7 @@
             distanceScore = 0f;
 
             //Calculate a distance score based on how close to the player the enemy is.
-            distance = Vector3.Distance(updateData.aiGameObjectFacade.transform.position, melodyController.transform.position);
+            distance = Vector3.Distance(updateData.aiGameObjectFacade.transform.position, melodyInfo.GetTransform().position);
             distanceScore = (Mathf.Max(maxAttackDistance - distance, 0f) / maxAttackDistance) * distanceScoreWeight;
 
             //Calculate an angle score based on how close to the player's line of sight the enemy is.
@@ -58,8 +58,8 @@
         public float GetEnemyAngleWorldSpace(Vector3 targetPos)
         {
             //Calculate the angle of the target by getting the angle between the player position relative to the player, and the direction the player is facing.
-            Vector3 sourceDirection = targetPos - melodyController.transform.position;
-            return Vector3.Angle(melodyController.transform.forward, sourceDirection);
+            Vector3 sourceDirection = targetPos - melodyInfo.GetTransform().position;
+            return Vector3.Angle(melodyInfo.GetTransform().forward, sourceDirection);
         }
     }
 }

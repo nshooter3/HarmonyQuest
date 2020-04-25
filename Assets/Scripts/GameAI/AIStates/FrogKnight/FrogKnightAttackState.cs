@@ -11,7 +11,7 @@
         public override void Init(AIStateUpdateData updateData)
         {
             updateData.aiGameObjectFacade.DebugChangeColor(Color.white);
-            updateData.aiGameObjectFacade.ActivateHitbox("BasicAttack", 0f, updateData.player.config.CounterGracePeriod, 10);
+            updateData.aiGameObjectFacade.ActivateHitbox("BasicAttack", 0f, updateData.player.GetConfig().CounterGracePeriod, 10);
             updateData.aiGameObjectFacade.attacking = false;
         }
 

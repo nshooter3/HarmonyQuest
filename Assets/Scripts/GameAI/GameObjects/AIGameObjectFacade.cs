@@ -69,7 +69,7 @@
             data.navPos.SetActive(data.showDestination);
             data.defaultConstraints = data.rb.constraints;
 
-            data.aggroTarget = ServiceLocator.instance.GetMelodyController().transform;
+            data.aggroTarget = ServiceLocator.instance.GetMelodyInfo().GetTransform();
 
             aiPhysics.Init(data);
             aiHitboxes.Init(data);

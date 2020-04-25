@@ -1,12 +1,13 @@
 ﻿namespace Melody
 {
+    using GameAI;
     using GamePhysics;
     using HarmonyQuest;
     using HarmonyQuest.Input;
     using Melody.States;
     using UnityEngine;
 
-    public class MelodyController : MonoBehaviour
+    public class MelodyController : MonoBehaviour, IMelodyInfo
     {
         MelodyStateMachine StateMachine;
 
@@ -109,6 +110,21 @@
             {
                 melodyLockOn.RightStickResetToNeutral();
             }
+        }
+
+        public Transform GetTransform()
+        {
+            return transform;
+        }
+
+        public MelodyConfig GetConfig()
+        {
+            return config;
+        }
+
+        public AIAgent GetLockonTarget()
+        {
+            return melodyLockOn.GetLockonTarget();
         }
     }
 }

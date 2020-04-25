@@ -29,10 +29,13 @@
         }
 
         public GameObject DefaultUIManager;
+        public GameObject DefaultMelodyController;
+        public GameObject DefaultMelodyInfo;
 
         //List of managers the ServiceLocator can provide
         IPlayerInputManager InputManager;
         MelodyController melodyController;
+        IMelodyInfo melodyInfo;
         AIAgentManager aiAgentManager;
         UIManager uiManager;
         //End List of managers
@@ -53,7 +56,7 @@
             melodyController = FindObjectOfType<MelodyController>();
             aiAgentManager = FindObjectOfType<AIAgentManager>();
             uiManager = FindObjectOfType<UIManager>();
-            cam = Object.FindObjectOfType<Camera>();
+            cam = FindObjectOfType<Camera>();
         }
 
         void Start()
@@ -85,12 +88,34 @@
                 melodyController = FindObjectOfType<MelodyController>();
                 if (melodyController == null)
                 {
-                    //If melodyController is still null, we have a problem.
-                    Debug.LogError("No MelodyController detected in scene.");
-                    return null;
+                    Debug.LogWarning("No MelodyController detected in scene. A Default one will be created.");
+                    GameObject go = Instantiate(DefaultMelodyController);
+                    melodyController = go.GetComponent(typeof(MelodyController)) as MelodyController;
+                    melodyInfo = melodyController;
+                    return melodyController;
                 }
             }
+            melodyInfo = melodyController;
             return melodyController;
+        }
+
+        public IMelodyInfo GetMelodyInfo()
+        {
+            if (melodyInfo == null)
+            {
+                if (melodyController == null && FindObjectOfType<MelodyController>() == null)
+                {
+                    Debug.LogWarning("No MelodyInfo detected in scene. A Default one will be created.");
+                    GameObject go = Instantiate(DefaultMelodyController);
+                    melodyInfo = go.GetComponent(typeof(IMelodyInfo)) as IMelodyInfo;
+                    return melodyInfo;
+                }
+                else
+                {
+                    return GetMelodyController();
+                }
+            }
+            return melodyInfo;
         }
 
         public AIAgentManager GetAIAgentManager()
