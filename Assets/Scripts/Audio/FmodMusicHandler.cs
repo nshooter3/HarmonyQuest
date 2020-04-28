@@ -96,7 +96,7 @@
             musicEventName = name;
             musicVolume = volume;
 
-            musicEvent = FmodFacade.instance.CreateFmodEventInstance(name);
+            musicEvent = FmodFacade.instance.CreateFmodEventInstance(FmodFacade.instance.GetFmodMusicEventFromDictionary(name));
 
             musicEvent.setCallback(beatCallback,
                   FMOD.Studio.EVENT_CALLBACK_TYPE.TIMELINE_BEAT

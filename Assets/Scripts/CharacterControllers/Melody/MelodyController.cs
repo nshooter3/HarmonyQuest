@@ -48,6 +48,8 @@
         public MelodyHitboxes melodyHitboxes;
         public MelodyAnimator melodyAnimator;
         public MelodyLockOn melodyLockOn;
+        //MelodySound is actually a monobehavior, so it will be assigned via drag reference.
+        public MelodySound melodySound;
 
         //Drag References
         public Renderer melodyRenderer;

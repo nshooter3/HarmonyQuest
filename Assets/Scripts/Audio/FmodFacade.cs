@@ -1,6 +1,8 @@
 ﻿namespace HarmonyQuest.Audio
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using UnityEngine;
 
     /// <summary>
@@ -16,36 +18,28 @@
             Miss = 3,
         }
 
-        private static FmodFacade inst;
-        public static FmodFacade instance
-        {
-            get
-            {
-                if (inst == null)
-                {
-                    inst = GameObject.FindObjectOfType<FmodFacade>();
-                }
-                return inst;
-            }
-        }
+        public static FmodFacade instance;
 
         //Our pooling system for preloading fmod events. Helps reduce latency when playing sounds when used.
         private FmodEventPool fmodEventPool;
+
+        //Dictionary used to convert our fmod event and parameter names into the values fmod will actually use.
+        private FmodDictionary fmodDictionary;
 
         [SerializeField]
         private bool debugOneShotEvents = false;
 
         private void Awake()
         {
-            if (inst == null)
+            if (instance == null)
             {
-                inst = this;
+                instance = this;
             }
-            else if (inst != this)
+            else if (instance != this)
             {
                 Destroy(gameObject);
             }
-
+            fmodDictionary = new FmodDictionary();
             fmodEventPool = new FmodEventPool();
         }
 
@@ -149,13 +143,13 @@
         /// <summary>
         /// Creates a new instance of an fmod event based on the even path passed in
         /// </summary>
-        /// <param name="eventName"> A path to the fmod event we want to create an instance of </param>
+        /// <param name="eventPath"> A path to the fmod event we want to create an instance of </param>
         /// <param name="parent"> The gameobject our sound should be parented to. Used for fmod to track 3D sound properties </param>
         /// <param name="rb"> The rigidbody that our sound should follow the velocity of. Used for fmod to track 3D sound properties </param>
         /// <returns> A reference to the newly created fmod event </returns>
-        public FMOD.Studio.EventInstance CreateFmodEventInstance(string eventName, GameObject parent = null, Rigidbody rb = null)
+        public FMOD.Studio.EventInstance CreateFmodEventInstance(string eventPath, GameObject parent = null, Rigidbody rb = null)
         {
-            FMOD.Studio.EventInstance fmodEvent = FMODUnity.RuntimeManager.CreateInstance(eventName);
+            FMOD.Studio.EventInstance fmodEvent = FMODUnity.RuntimeManager.CreateInstance(eventPath);
             if (parent != null && rb != null)
             {
                 FMODUnity.RuntimeManager.AttachInstanceToGameObject(fmodEvent, parent.transform, rb);
@@ -166,14 +160,14 @@
         /// <summary>
         /// Creates a new instance of an fmod event, and runs it as a one shot event that releases when it is complete.
         /// </summary>
-        /// <param name="eventName"> The name of the event we want to create and play as a one shot event </param>
+        /// <param name="eventPath"> The name of the event we want to create and play as a one shot event </param>
         /// <param name="volume"> The volume of the event we want to create and play as a one shot event </param>
         /// <param name="parent"> The gameobject our sound should be parented to. Used for fmod to track 3D sound properties </param>
         /// <param name="rb"> The rigidbody that our sound should follow the velocity of. Used for fmod to track 3D sound properties </param>
         /// <param name="paramData"> An array of param data that should be passed to our fmod event before playing it </param>
-        public void CreateAndRunOneShotFmodEvent(string eventName, float volume = 1.0f, GameObject parent = null, Rigidbody rb = null, FmodParamData[] paramData = null)
+        public void CreateAndRunOneShotFmodEvent(string eventPath, float volume = 1.0f, GameObject parent = null, Rigidbody rb = null, FmodParamData[] paramData = null)
         {
-            FMOD.Studio.EventInstance fmodEvent = CreateFmodEventInstance(eventName, parent, rb);
+            FMOD.Studio.EventInstance fmodEvent = CreateFmodEventInstance(eventPath, parent, rb);
             PlayOneShotFmodEvent(fmodEvent, volume, paramData);
         }
 
@@ -214,6 +208,51 @@
         public bool HasPerformedActionThisBeat()
         {
             return FmodOnBeatAccuracyChecker.instance.HasPerformedActionThisBeat();
+        }
+
+        /// <summary>
+        /// Used to convert our music key into an fmod path.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public string GetFmodMusicEventFromDictionary(string key)
+        {
+            string val;
+            fmodDictionary.fmodMusicEventDictionary.TryGetValue(key, out val);
+            return val;
+        }
+
+        /// <summary>
+        /// Used to convert our sfx key into an fmod path.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public string GetFmodSFXEventFromDictionary(string key)
+        {
+            string val;
+            fmodDictionary.fmodSFXEventDictionary.TryGetValue(key, out val);
+            return val;
+        }
+
+        /// <summary>
+        /// Used to convert our stand in param name into an fmod param name.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public string GetFmodParamFromDictionary(string key)
+        {
+            string val;
+            fmodDictionary.fmodParamDictionary.TryGetValue(key, out val);
+            return val;
+        }
+
+        /// <summary>
+        /// Returns a list of all of our fmod sfx names
+        /// </summary>
+        /// <returns></returns>
+        public List<string> GetFmodSFXEventNames()
+        {
+            return fmodDictionary.fmodSFXEventDictionary.Keys.ToList();
         }
 
         /*public void GetDSPData()

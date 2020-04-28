@@ -13,6 +13,7 @@
         {
             melodyController.melodyAnimator.PlayAnimation(MelodyAnimator.Animations.Attack);
             melodyController.melodyHitboxes.ActivateHitbox("PlayerAttack", 0.0f, 0.15f, MelodyStats.attackDamage);
+            melodyController.melodySound.AttackSwing();
         }
 
         public override void OnUpdate(float time)

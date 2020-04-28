@@ -12,6 +12,7 @@
         protected override void Enter()
         {
             melodyController.melodyAnimator.PlayAnimation(MelodyAnimator.Animations.Attack);
+            melodyController.melodySound.AttackMiss();
         }
 
         public override void OnUpdate(float time)
