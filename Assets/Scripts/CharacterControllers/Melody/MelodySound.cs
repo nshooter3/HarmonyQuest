@@ -6,55 +6,149 @@
     public class MelodySound : MonoBehaviour
     {
         [SerializeField]
-        private FmodEventHandler attackHitEvent, attackTonalEvent, parryTonalEvent, healEvent;
+        private FmodEventHandler attackFailEvent;
 
-        private FmodParamData[] attackHitParamData;
+        [SerializeField]
+        private FmodEventHandler attackFailTonalEvent;
 
-        private FmodParamData[] attackMissParamData;
+        [SerializeField]
+        private FmodEventHandler attackHitEvent;
 
-        private FmodParamData[] healParamData;
+        [SerializeField]
+        private FmodEventHandler attackTonalEvent;
 
-        private void Start()
+        [SerializeField]
+        private FmodEventHandler attackSwingEvent;
+
+        [SerializeField]
+        private FmodEventHandler takeDamageEvent;
+
+        [SerializeField]
+        private FmodEventHandler dashEvent;
+
+        [SerializeField]
+        private FmodEventHandler deathEvent;
+
+        [SerializeField]
+        private FmodEventHandler footstepEvent;
+
+        [SerializeField]
+        private FmodEventHandler footstepTonalEvent;
+
+        [SerializeField]
+        private FmodEventHandler harmonyModeActivateEvent;
+
+        [SerializeField]
+        private FmodEventHandler harmonyModeDeactivateEvent;
+
+        [SerializeField]
+        private FmodEventHandler healEvent;
+
+        [SerializeField]
+        private FmodEventHandler healTonalEvent;
+
+        [SerializeField]
+        private FmodEventHandler lockOffEvent;
+
+        [SerializeField]
+        private FmodEventHandler lockOnEvent;
+
+        [SerializeField]
+        private FmodEventHandler parryFailEvent;
+
+        [SerializeField]
+        private FmodEventHandler parryFailTonalEvent;
+
+        [SerializeField]
+        private FmodEventHandler parryEvent;
+
+        [SerializeField]
+        private FmodEventHandler parryTonalEvent;
+
+        public void AttackMiss()
         {
-            attackHitParamData = new FmodParamData[] { new FmodParamData(FmodFacade.instance.GetFmodParamFromDictionary("melody_attack_hit_param"),
-                                                       (float)FmodDictionary.melody_attack_hit_param_val.great_hit) };
+            attackFailEvent.Play();
+            attackFailTonalEvent.Play();
+        }
 
-            attackMissParamData = new FmodParamData[] { new FmodParamData(FmodFacade.instance.GetFmodParamFromDictionary("melody_attack_hit_param"),
-                                                           (float)FmodDictionary.melody_attack_hit_param_val.missed_attack) };
-
-            healParamData = new FmodParamData[] { new FmodParamData(FmodFacade.instance.GetFmodParamFromDictionary("melody_heal_param"),
-                                                           (float)FmodDictionary.melody_heal_param_val.small) };
+        //ADD THIS
+        public void AttackConnect()
+        {
+            attackHitEvent.Play();
+            attackTonalEvent.Play();
         }
 
         public void AttackSwing()
         {
-            AttackConnect();
+            attackSwingEvent.Play();
         }
 
-        public void AttackConnect()
+        public void TakeDamage()
         {
-            attackHitEvent.Play(attackHitParamData);
-            attackTonalEvent.Play();
+            takeDamageEvent.Play();
         }
 
-        public void AttackMiss()
+        public void Dash()
         {
-            attackHitEvent.Play(attackMissParamData);
+            dashEvent.Play();
         }
 
-        public void InitCounter()
+        public void Death()
         {
-            
+            deathEvent.Play();
+        }
+
+        //ADD THIS
+        public void Footstep()
+        {
+            footstepEvent.Play();
+            footstepTonalEvent.Play();
+        }
+
+        //Feature not implemented yet
+        public void HarmonyModeActivate()
+        {
+            harmonyModeActivateEvent.Play();
+        }
+
+        //Feature not implemented yet
+        public void HarmonyModeDeactivate()
+        {
+            harmonyModeDeactivateEvent.Play();
+        }
+
+        //Feature not implemented yet
+        public void Heal()
+        {
+            healEvent.Play();
+            healTonalEvent.Play();
+        }
+
+        public void LockOff()
+        {
+            lockOffEvent.Play();
+        }
+
+        public void LockOn()
+        {
+            lockOnEvent.Play();
+        }
+
+        //Feature not implemented yet
+        public void CounterFail()
+        {
+            parryFailEvent.Play();
+            parryFailTonalEvent.Play();
         }
 
         public void CounterSuccess()
         {
+            parryEvent.Play();
             parryTonalEvent.Play();
         }
 
-        public void Heal()
-        {
-            healEvent.Play(healParamData);
-        }
+        //Param value enums
+
+        public enum FootstepSurface {Standard = 0}
     }
 }
