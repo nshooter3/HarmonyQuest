@@ -15,7 +15,7 @@
         private FmodEventHandler attackHitEvent;
 
         [SerializeField]
-        private FmodEventHandler attackTonalEvent;
+        private FmodEventHandler attackHitTonalEvent;
 
         [SerializeField]
         private FmodEventHandler attackSwingEvent;
@@ -65,17 +65,33 @@
         [SerializeField]
         private FmodEventHandler parryTonalEvent;
 
+        private bool landedAttackThisFrame = false;
+
+        private void Update()
+        {
+            if (landedAttackThisFrame == true)
+            {
+                AttackConnectSound();
+                landedAttackThisFrame = false;
+            }
+        }
+
         public void AttackMiss()
         {
             attackFailEvent.Play();
             attackFailTonalEvent.Play();
         }
 
-        //ADD THIS
         public void AttackConnect()
         {
+            //Set a flag instead of playing the sound directly so that if multiple enemies are hit by a player attack, we only play one sound.
+            landedAttackThisFrame = true;
+        }
+
+        public void AttackConnectSound()
+        {
             attackHitEvent.Play();
-            attackTonalEvent.Play();
+            attackHitTonalEvent.Play();
         }
 
         public void AttackSwing()

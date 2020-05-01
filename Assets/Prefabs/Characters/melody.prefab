@@ -463,6 +463,11 @@ MonoBehaviour:
   agent: {fileID: 3451171655387926694}
   debugRenderer: {fileID: 1099340935}
   showDebugRenderer: 1
+  callbacks:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   counterable: 1
   checkForLateCounter: 0
   applyDamageWhenHitboxEnds: 0
@@ -566,7 +571,7 @@ GameObject:
   - component: {fileID: 1542162478}
   - component: {fileID: 1542162477}
   m_Layer: 9
-  m_Name: melody_attack_tonal
+  m_Name: melody_attack_hit_tonal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -598,7 +603,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f1c4dffb4eeed64eb2865369f8f5ffa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sfxEventName: melody_attack_tonal
+  sfxEventName: melody_attack_hit_tonal
   sfxEventVolume: 1
   musicalSfxParamName: global_pitch
   glissTimeBetweenNotes: 0.1
@@ -688,7 +693,7 @@ MonoBehaviour:
   attackFailEvent: {fileID: 623565496357654579}
   attackFailTonalEvent: {fileID: 5779603656552516782}
   attackHitEvent: {fileID: 188226127}
-  attackTonalEvent: {fileID: 1542162478}
+  attackHitTonalEvent: {fileID: 1542162478}
   attackSwingEvent: {fileID: 4952744238694180668}
   takeDamageEvent: {fileID: 4604967487606487039}
   dashEvent: {fileID: 5191816217983218458}
@@ -2453,6 +2458,22 @@ MonoBehaviour:
   agent: {fileID: 3451171655387926694}
   debugRenderer: {fileID: 6243765508836038269}
   showDebugRenderer: 1
+  callbacks:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1874589546}
+        m_MethodName: AttackConnect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   counterable: 1
   checkForLateCounter: 0
   applyDamageWhenHitboxEnds: 0
