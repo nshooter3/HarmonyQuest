@@ -44,7 +44,7 @@
             }
             else if (aggroZoneEntered && !NavMeshUtil.IsTargetObstructed(updateData.aiGameObjectFacade.data.aiAgentBottom, updateData.player.GetTransform()))
             {
-                updateData.stateHandler.RequestStateTransition(new FrogKnightEngageState { }, updateData);
+                updateData.stateHandler.RequestStateTransition(new FrogKnightAggroState { }, updateData);
             }
         }
 

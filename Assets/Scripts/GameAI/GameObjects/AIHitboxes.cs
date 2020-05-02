@@ -13,6 +13,10 @@
         private Dictionary<string, List<DamageHitbox>> hitboxDictionary;
         private List<DamageHitbox> tempValue;
 
+        //Callback that fires when this agent's hitbox connects with something that can receive it.
+        public delegate void DamageHitboxFmodCallback(string fmodEventName);
+        public DamageHitboxFmodCallback damageHitboxFmodCallback;
+
         public void Init(AIGameObjectData data)
         {
             this.data = data;
@@ -88,6 +92,21 @@
                     hitbox.CancelHitbox();
                 }
             }
+        }
+
+        public void AssignFunctionToDamageHitboxFmodCallback(DamageHitboxFmodCallback func)
+        {
+            damageHitboxFmodCallback += func;
+        }
+
+        public void RemoveFunctionFromDamageHitboxFmodCallback(DamageHitboxFmodCallback func)
+        {
+            damageHitboxFmodCallback -= func;
+        }
+
+        public void ClearDamageHitboxFmodCallback()
+        {
+            damageHitboxFmodCallback = null;
         }
     }
 }

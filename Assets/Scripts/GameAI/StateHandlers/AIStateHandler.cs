@@ -6,6 +6,7 @@
     {
         protected AIState currentState;
         protected AIState nextState;
+        protected AIState prevState;
 
         public void Init(AIStateUpdateData updateData, AIState initState)
         {
@@ -18,6 +19,7 @@
             currentState.CheckForStateChange(updateData);
             if (nextState != null && currentState.readyForStateTransition)
             {
+                prevState = currentState;
                 currentState = nextState;
                 nextState = null;
                 currentState.Init(updateData);
@@ -39,6 +41,11 @@
         public AIState GetCurrentState()
         {
             return currentState;
+        }
+
+        public AIState GetPrevState()
+        {
+            return prevState;
         }
 
         public void RequestStateTransition(AIState nextState, AIStateUpdateData updateData)
