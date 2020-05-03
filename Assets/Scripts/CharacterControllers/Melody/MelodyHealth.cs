@@ -208,5 +208,10 @@
             }
             return false;
         }
+
+        public float GetCurrentHealth()
+        {
+            return currentHealth;
+        }
     }
 }

@@ -103,7 +103,7 @@ public class TestEnemy : BeatTrackerObject
             if (Vector3.Distance(transform.position, player.transform.position) <= aggroRange)
             {
                 enemyState = EnemyState.Phase1;
-                FmodFacade.instance.SetMusicEventParameterValue("global_phase1", 1.0f);
+                FmodFacade.instance.SetMusicParam("global_phase1", 1.0f);
             }
         }
     }
@@ -295,15 +295,15 @@ public class TestEnemy : BeatTrackerObject
 
     void TransitionToPhase2()
     {
-        FmodFacade.instance.SetMusicEventParameterValue("global_phase1_idle", 1.0f);
-        FmodFacade.instance.SetMusicEventParameterValue("global_dissonance", 1.0f);
+        FmodFacade.instance.SetMusicParam("global_phase1_idle", 1.0f);
+        FmodFacade.instance.SetMusicParam("global_dissonance", 1.0f);
         enemyState = EnemyState.Phase2;
     }
 
     void Die()
     {
-        FmodFacade.instance.SetMusicEventParameterValue("global_dissonance_idle", 1.0f);
-        FmodFacade.instance.SetMusicEventParameterValue("global_fight_outro", 1.0f);
+        FmodFacade.instance.SetMusicParam("global_dissonance_idle", 1.0f);
+        FmodFacade.instance.SetMusicParam("global_fight_outro", 1.0f);
         TestGameState.instance.Win();
         TestBeatTracker.instance.RemoveBeatTrackerAtIndex(beatTrackerIndex);
         enemyState = EnemyState.Dead;

@@ -1,5 +1,6 @@
 ﻿namespace Melody
 {
+    using GameAI;
     using HarmonyQuest.Audio;
     using UnityEngine;
 
@@ -67,13 +68,32 @@
 
         private bool landedAttackThisFrame = false;
 
-        private void Update()
+        private string global_combat_proximity_param = "global_combat_proximity_param";
+        private string global_health_param = "global_health_param";
+
+        //Param value enums
+        public enum FootstepSurface { Standard = 0 }
+
+        private float maxHealthValueFmod = 100f;
+
+        private IMelodyInfo melodyInfo;
+        private AIAgentManager aiAgentManager;
+
+        public void Init(IMelodyInfo melodyInfo, AIAgentManager aiAgentManager)
+        {
+            this.melodyInfo = melodyInfo;
+            this.aiAgentManager = aiAgentManager;
+        }
+
+        public void OnUpdate()
         {
             if (landedAttackThisFrame == true)
             {
                 AttackConnectSound();
                 landedAttackThisFrame = false;
             }
+            SetHealthParam();
+            SetCombatProximityParam();
         }
 
         public void AttackMiss()
@@ -163,8 +183,21 @@
             parryTonalEvent.Play();
         }
 
-        //Param value enums
+        //Param setting functions
+        public void SetHealthParam()
+        {
+            FmodFacade.instance.SetMusicParam(global_health_param, (melodyInfo.GetCurrentHealth()/ melodyInfo.GetMaxHealth()) * maxHealthValueFmod);
+        }
 
-        public enum FootstepSurface {Standard = 0}
+        //Scale our fmod combat proximity param from 0 to combatProximityFmodParamMaxValue based on the distance of the closest living ai agent.
+        //Clamp this distance value between combatProximatoryMaxVolumeDistance and combatProximatoryMinVolumeDistance to ensure that our fmod param value only changes when enemies are a certain distance away from the player.
+        public void SetCombatProximityParam()
+        {
+            float clampedProximity = Mathf.Clamp(aiAgentManager.aiAgentsUtil.GetClosestAgentDistance(), AIStateConfig.combatProximityMinRange, AIStateConfig.combatProximityMaxRange);
+            float proximityRange = AIStateConfig.combatProximityMaxRange - AIStateConfig.combatProximityMinRange;
+            float proximityParam = (1.0f - ((clampedProximity - AIStateConfig.combatProximityMinRange) / proximityRange)) * AIStateConfig.combatProximityFmodParamMaxValue;
+
+            FmodFacade.instance.SetMusicParam(global_combat_proximity_param, proximityParam);
+        }
     }
 }

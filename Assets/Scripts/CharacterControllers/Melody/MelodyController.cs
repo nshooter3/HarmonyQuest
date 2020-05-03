@@ -75,6 +75,7 @@
             melodyHitboxes = new MelodyHitboxes(this);
             melodyAnimator = new MelodyAnimator(this);
             melodyLockOn = new MelodyLockOn(this);
+            melodySound.Init(this, ServiceLocator.instance.GetAIAgentManager());
         }
 
         // Update is called once per frame
@@ -85,6 +86,7 @@
             melodyHealth.OnUpdate(Time.deltaTime);
             melodyLockOn.OnUpdate(Time.deltaTime);
             StateMachine.OnUpdate(Time.deltaTime);
+            melodySound.OnUpdate();
         }
 
         void FixedUpdate()
@@ -132,6 +134,16 @@
         public bool HasLockonTarget()
         {
             return melodyLockOn.HasLockonTarget();
+        }
+
+        public float GetCurrentHealth()
+        {
+            return melodyHealth.GetCurrentHealth();
+        }
+
+        public float GetMaxHealth()
+        {
+            return MelodyStats.maxHealth;
         }
     }
 }

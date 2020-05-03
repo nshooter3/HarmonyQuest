@@ -61,7 +61,7 @@
 
         private bool firstPlayRequest = true;
 
-        private string octaveParamName = "global_octave";
+        private string octaveParamName = "global_octave_param";
 
         private void Awake()
         {

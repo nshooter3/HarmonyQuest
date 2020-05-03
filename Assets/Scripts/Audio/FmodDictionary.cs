@@ -76,9 +76,15 @@
             //{ "", "" },
 
             #region Global
-            {"global_pitch", "global_pitch" },
-            {"global_octave", "global_octave" },
-            {"global_footstep_surface", "global_footstep_surface" },
+            {"global_area_phase_param", "global_area_phase" },
+            {"global_combat_proximity_param", "global_combat_proximity" },
+            {"global_puzzle_proximity_param", "global_puzzle_proximity" },
+            {"global_health_param", "global_health" },
+            {"global_master_fade_.5_param", "global_master_fade_.5" },
+
+            {"global_pitch_param", "global_pitch" },
+            {"global_octave_param", "global_octave" },
+            {"global_footstep_surface_param", "global_footstep_surface" },
             #endregion
 
             #region Melody

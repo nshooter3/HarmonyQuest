@@ -62,6 +62,44 @@
         }
 
         /// <summary>
+        /// Sets a param for the current fmod music event.
+        /// </summary>
+        /// <param name="param"> The name of the param </param>
+        /// <param name="value">The new param value </param>
+        public void SetMusicParam(string param, float value)
+        {
+            FmodMusicHandler.instance.SetMusicParam(param, value);
+        }
+
+        /// <summary>
+        /// Starts an fmod ambience event
+        /// </summary>
+        /// <param name="name"> The name of the fmod ambience event </param>
+        /// <param name="volume"> The volume of the fmod ambience event </param>
+        public void StartAmbience(string name, float volume)
+        {
+            FmodMusicHandler.instance.StartAmbience(name, volume);
+        }
+
+        /// <summary>
+        /// Stops the active fmod ambience event if there is one.
+        /// </summary>
+        public void StopAmbience()
+        {
+            FmodMusicHandler.instance.StopAmbience();
+        }
+
+        /// <summary>
+        /// Sets a param for the current fmod ambience event.
+        /// </summary>
+        /// <param name="param"> The name of the param </param>
+        /// <param name="value">The new param value </param>
+        public void SetAmbienceParam(string param, float value)
+        {
+            FmodMusicHandler.instance.SetAmbienceParam(param, value);
+        }
+
+        /// <summary>
         /// Sets a param for the passed in fmod event
         /// </summary>
         /// <param name="fmodEvent"> The name of the fmod event we want to access </param>
@@ -69,18 +107,8 @@
         /// <param name="value"> The value we want to set our param to </param>
         public void SetFmodParameterValue(FMOD.Studio.EventInstance fmodEvent, string parameter, float value)
         {
-            fmodEvent.setParameterValue(parameter, value);
-        }
-
-        /// <summary>
-        /// Sets a param for our fmod music event. Same logic as SetFmodParameterValue, except it will grab the currently active fmod music event on its own.
-        /// </summary>
-        /// <param name="parameter"> The name of the param in our fmod event </param>
-        /// <param name="value"> The value we want to set our param to </param>
-        public void SetMusicEventParameterValue(string parameter, float value)
-        {
-            FMOD.Studio.EventInstance fmodEvent = FmodMusicHandler.instance.GetMusicEvent();
-            fmodEvent.setParameterValue(parameter, value);
+            //print("Set param " + parameter + ", dict value " + GetFmodParamFromDictionary(parameter) + " TO " + value);
+            fmodEvent.setParameterValue(GetFmodParamFromDictionary(parameter), value);
         }
 
         /// <summary>
