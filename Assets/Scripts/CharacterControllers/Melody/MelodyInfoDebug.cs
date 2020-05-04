@@ -38,6 +38,11 @@ namespace Melody
         {
             return 0f;
         }
+
+        public MelodySound GetMelodySound()
+        {
+            return null;
+        }
     }
 
 }

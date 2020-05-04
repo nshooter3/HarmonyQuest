@@ -93,6 +93,7 @@
         {
             StateMachine.OnFixedUpdate();
             melodyCollision.OnFixedUpdate();
+            melodySound.OnFixedUpdate();
         }
 
         void CheckInputs()
@@ -144,6 +145,11 @@
         public float GetMaxHealth()
         {
             return MelodyStats.maxHealth;
+        }
+
+        public MelodySound GetMelodySound()
+        {
+            return melodySound;
         }
     }
 }

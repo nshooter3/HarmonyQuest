@@ -38,6 +38,7 @@
             { "melody_attack_swing", "event:/sfx/melody/melody_attack_swing" },
             { "melody_damage", "event:/sfx/melody/melody_damage" },
             { "melody_dash", "event:/sfx/melody/melody_dash" },
+            { "melody_dash_tonal", "event:/sfx/melody/melody_dash_tonal" },
             { "melody_death", "event:/sfx/melody/melody_death" },
             { "melody_footstep", "event:/sfx/melody/melody_footstep" },
             { "melody_footstep_tonal", "event:/sfx/melody/melody_footstep_tonal" },

@@ -28,6 +28,9 @@
         private FmodEventHandler dashEvent;
 
         [SerializeField]
+        private FmodEventHandler dashTonalEvent;
+
+        [SerializeField]
         private FmodEventHandler deathEvent;
 
         [SerializeField]
@@ -69,6 +72,7 @@
         private bool landedAttackThisFrame = false;
 
         private string global_combat_proximity_param = "global_combat_proximity_param";
+        private string global_puzzle_proximity_param = "global_puzzle_proximity_param";
         private string global_health_param = "global_health_param";
 
         //Param value enums
@@ -76,13 +80,22 @@
 
         private float maxHealthValueFmod = 100f;
 
+        private float maxPuzzleProximityValueFmod = 100f;
+
         private IMelodyInfo melodyInfo;
         private AIAgentManager aiAgentManager;
+
+        private bool isInPuzzleZone = false;
 
         public void Init(IMelodyInfo melodyInfo, AIAgentManager aiAgentManager)
         {
             this.melodyInfo = melodyInfo;
             this.aiAgentManager = aiAgentManager;
+        }
+
+        public void OnFixedUpdate()
+        {
+            isInPuzzleZone = false;
         }
 
         public void OnUpdate()
@@ -94,6 +107,14 @@
             }
             SetHealthParam();
             SetCombatProximityParam();
+            if (isInPuzzleZone == true)
+            {
+                FmodFacade.instance.SetMusicParam(global_puzzle_proximity_param, maxPuzzleProximityValueFmod);
+            }
+            else
+            {
+                FmodFacade.instance.SetMusicParam(global_puzzle_proximity_param, 0f);
+            }
         }
 
         public void AttackMiss()
@@ -127,6 +148,7 @@
         public void Dash()
         {
             dashEvent.Play();
+            dashTonalEvent.Play();
         }
 
         public void Death()
@@ -198,6 +220,11 @@
             float proximityParam = (1.0f - ((clampedProximity - AIStateConfig.combatProximityMinRange) / proximityRange)) * AIStateConfig.combatProximityFmodParamMaxValue;
 
             FmodFacade.instance.SetMusicParam(global_combat_proximity_param, proximityParam);
+        }
+
+        public void PuzzleZoneTriggerEntered()
+        {
+            isInPuzzleZone = true;
         }
     }
 }

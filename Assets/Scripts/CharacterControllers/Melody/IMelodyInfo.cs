@@ -16,5 +16,7 @@ namespace Melody
         float GetCurrentHealth();
 
         float GetMaxHealth();
+
+        MelodySound GetMelodySound();
     }
 }
