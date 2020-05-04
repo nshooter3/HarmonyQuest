@@ -137,7 +137,7 @@
             return melodyLockOn.HasLockonTarget();
         }
 
-        public float GetCurrentHealth()
+		public float GetCurrentHealth()
         {
             return melodyHealth.GetCurrentHealth();
         }
@@ -151,5 +151,9 @@
         {
             return melodySound;
         }
-    }
+
+		public Vector3 GetVelocity()
+        {
+            return melodyPhysics.velocity;
+        }    }
 }

@@ -1,5 +1,6 @@
 ﻿namespace HarmonyQuest.DynamicCamera
 {
+    using Melody;
     using UnityEngine;
 
     public class CameraBehaviorLookAt : CameraBehavior
@@ -7,7 +8,7 @@
         public Transform targetPoint;
         private Vector3 distanceFromPlayer = new Vector3(0, 9.5f, -10);
 
-        public override void Init(Transform cameraTransform, TestPlayer player)
+        public override void Init(Transform cameraTransform, IMelodyInfo player)
         {
             base.Init(cameraTransform, player);
             bias = 1.5f;
