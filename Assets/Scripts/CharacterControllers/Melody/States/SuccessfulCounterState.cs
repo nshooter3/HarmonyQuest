@@ -13,6 +13,7 @@ namespace Melody.States
             Debug.Log("Successful counter!");
             melodyController.melodyHealth.SetPostSuccessfulCounterTimer();
             cooldownTimer = melodyController.config.SuccessfulCounterCooldownTime;
+            melodyController.melodySound.CounterSuccess();
         }
 
         public override void OnUpdate(float time)

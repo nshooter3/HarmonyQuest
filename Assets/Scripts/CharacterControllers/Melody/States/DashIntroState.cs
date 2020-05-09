@@ -29,6 +29,7 @@
 
             timer = 0;
             melodyController.melodyHealth.isDashing = true;
+            melodyController.melodySound.Dash();
         }
 
         public override void OnUpdate(float time)

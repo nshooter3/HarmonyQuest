@@ -48,6 +48,8 @@
         public MelodyHitboxes melodyHitboxes;
         public MelodyAnimator melodyAnimator;
         public MelodyLockOn melodyLockOn;
+        //MelodySound is actually a monobehavior, so it will be assigned via drag reference.
+        public MelodySound melodySound;
 
         //Drag References
         public Renderer melodyRenderer;
@@ -73,6 +75,7 @@
             melodyHitboxes = new MelodyHitboxes(this);
             melodyAnimator = new MelodyAnimator(this);
             melodyLockOn = new MelodyLockOn(this);
+            melodySound.Init(this, ServiceLocator.instance.GetAIAgentManager());
         }
 
         // Update is called once per frame
@@ -83,12 +86,14 @@
             melodyHealth.OnUpdate(Time.deltaTime);
             melodyLockOn.OnUpdate(Time.deltaTime);
             StateMachine.OnUpdate(Time.deltaTime);
+            melodySound.OnUpdate();
         }
 
         void FixedUpdate()
         {
             StateMachine.OnFixedUpdate();
             melodyCollision.OnFixedUpdate();
+            melodySound.OnFixedUpdate();
         }
 
         void CheckInputs()
@@ -130,6 +135,21 @@
         public bool HasLockonTarget()
         {
             return melodyLockOn.HasLockonTarget();
+        }
+
+        public float GetCurrentHealth()
+        {
+            return melodyHealth.GetCurrentHealth();
+        }
+
+        public float GetMaxHealth()
+        {
+            return MelodyStats.maxHealth;
+        }
+
+        public MelodySound GetMelodySound()
+        {
+            return melodySound;
         }
     }
 }

@@ -28,6 +28,21 @@ namespace Melody
         {
             return false;
         }
+
+        public float GetCurrentHealth()
+        {
+            return 0f;
+        }
+
+        public float GetMaxHealth()
+        {
+            return 0f;
+        }
+
+        public MelodySound GetMelodySound()
+        {
+            return null;
+        }
     }
 
 }

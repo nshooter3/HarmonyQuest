@@ -12,5 +12,11 @@ namespace Melody
         AIAgent GetLockonTarget();
 
         bool HasLockonTarget();
+
+        float GetCurrentHealth();
+
+        float GetMaxHealth();
+
+        MelodySound GetMelodySound();
     }
 }

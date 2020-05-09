@@ -30,6 +30,9 @@
             updateData.aiGameObjectFacade.LaunchAgent(forceAwayFromPlayer, Random.Range(launchYForceLower, launchYForceUpper),
                                                       Random.Range(launchSpeedLower, launchSpeedUpper), Random.Range(launchRotationSpeedLower, launchRotationSpeedUpper));
             updateData.aiGameObjectFacade.ApplyVelocity(false, false);
+
+            updateData.aiGameObjectFacade.aiSound.PlayFmodEvent("enemy_death");
+            updateData.aiGameObjectFacade.aiSound.PlayFmodEvent("enemy_death_tonal");
         }
 
         public override void OnUpdate(AIStateUpdateData updateData)

@@ -12,6 +12,7 @@
         private MelodyController controller;
 
         private AIAgent lockonTarget;
+        private AIAgent prevLockonTarget;
         private int curTargetIndex = -1;
         private List<AIAgent> potentialLockOnTargets;
 
@@ -98,7 +99,12 @@
             {
                 lockOnReticule.SetTarget(lockonTarget.aiGameObject.transform);
                 lockOnImage.enabled = true;
+                if (lockonTarget != prevLockonTarget)
+                {
+                    controller.melodySound.LockOn();
+                }
             }
+            prevLockonTarget = lockonTarget;
         }
 
         public float GetPotentialTargetAngleWorldSpace(Vector3 targetPos)
@@ -188,7 +194,13 @@
             {
                 lockOnReticule.SetTarget(lockonTarget.aiGameObject.transform);
                 lockOnImage.enabled = true;
+                if (lockonTarget != prevLockonTarget)
+                {
+                    controller.melodySound.LockOn();
+                }
             }
+
+            prevLockonTarget = lockonTarget;
 
             canChangeLockOnTarget = false;
         }
@@ -236,6 +248,7 @@
             lockonTarget = null;
             curTargetIndex = -1;
             lockOnImage.enabled = false;
+            controller.melodySound.LockOff();
         }
 
         public void LockonButtonPressed()

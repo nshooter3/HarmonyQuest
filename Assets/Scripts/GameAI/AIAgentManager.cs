@@ -21,7 +21,9 @@
         private IMelodyInfo melodyInfo;
 
         private AIFlockingHandler aiFlockingHandler = new AIFlockingHandler();
-        private AIAttackRequestHandler aIAttackRequestHandler = new AIAttackRequestHandler();
+        private AIAttackRequestHandler aiAttackRequestHandler = new AIAttackRequestHandler();
+
+        public AIAgentsUtil aiAgentsUtil = new AIAgentsUtil();
 
         private float pathRefreshTimer = 0.0f;
         private float waypointBlockedCheckTimer = 0.0f;
@@ -37,7 +39,8 @@
             PopulateObstaclesList();
             FmodMusicHandler.instance.AssignFunctionToOnBeatDelegate(AgentsBeatUpdate);
             melodyInfo = ServiceLocator.instance.GetMelodyInfo();
-            aIAttackRequestHandler.Init(melodyInfo);
+            aiAttackRequestHandler.Init(melodyInfo);
+            aiAgentsUtil.Init(this);
         }
 
         public void PopulateAgentsList()
@@ -89,10 +92,10 @@
                 }
             }
 
-            if (aIAttackRequestHandler.AgentIsCurrentlyAttacking(livingAgents) == false)
+            if (aiAttackRequestHandler.AgentIsCurrentlyAttacking(livingAgents) == false)
             {
-                aIAttackRequestHandler.GrantAttackPermission(aIAttackRequestHandler.GetAgentsRequestingAttackPermission(livingAgents));
-                aIAttackRequestHandler.ResetAttackPermissionRequests(livingAgents);
+                aiAttackRequestHandler.GrantAttackPermission(aiAttackRequestHandler.GetAgentsRequestingAttackPermission(livingAgents));
+                aiAttackRequestHandler.ResetAttackPermissionRequests(livingAgents);
             }
 
             AgentsUpdate();

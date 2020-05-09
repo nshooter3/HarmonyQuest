@@ -2,20 +2,19 @@
 {
     using System.Collections.Generic;
     using UnityEngine;
-    using System.Linq;
 
     public class FmodEventPool
     {
-        //eventData gets loaded automatically by grabbing the FmodEventPoolableData components attached to the scriptable objects
+        //eventData gets loaded automatically by grabbing the fmodSFXEventDictionary keys from FmodDictionary
         //in the Resources folder defined by fmodEventPoolDataFolderPath.
-        private string fmodEventPoolDataFolderPath = "ScriptableObjects/Fmod";
-        private FmodEventPoolableData[] eventData;
+        private List<string> sfxEventPaths = new List<string>();
 
         private Dictionary<string, List<FmodEventPoolableObject>> eventPools;
 
+        private int poolSize = 5;
+
         //Variables used to retrieve and use data from eventData for populating eventPools.  
         private string initEventName = "";
-        private int initEventPoolCount = 0;
 
         public FmodEventPool()
         {
@@ -24,15 +23,14 @@
 
         void InitPools()
         {
-            eventData = Resources.LoadAll(fmodEventPoolDataFolderPath, typeof(FmodEventPoolableData)).Cast<FmodEventPoolableData>().ToArray();
+            sfxEventPaths = FmodFacade.instance.GetFmodSFXEventNames();
             eventPools = new Dictionary<string, List<FmodEventPoolableObject>>();
 
-            for (int i = 0; i < eventData.Length; i++)
+            for (int i = 0; i < sfxEventPaths.Count; i++)
             {
-                initEventName = eventData[i].eventName;
-                initEventPoolCount = eventData[i].poolableObjectCount;
+                initEventName = sfxEventPaths[i];
                 List<FmodEventPoolableObject> eventPool = new List<FmodEventPoolableObject>();
-                for (int j = 0; j < initEventPoolCount; j++)
+                for (int j = 0; j < poolSize; j++)
                 {
                     FmodEventPoolableObject eventGameobject = new FmodEventPoolableObject(initEventName, j);
                     eventPool.Add(eventGameobject);

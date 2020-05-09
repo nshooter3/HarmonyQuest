@@ -14,7 +14,7 @@
         {
             this.eventName = eventName;
             this.index = index;
-            this.fmodEvent = FmodFacade.instance.CreateFmodEventInstance(eventName);
+            fmodEvent = FmodFacade.instance.CreateFmodEventInstance(FmodFacade.instance.GetFmodSFXEventFromDictionary(eventName));
             isReadyToPlay = true;
         }
 

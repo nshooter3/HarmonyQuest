@@ -5,6 +5,7 @@
     using GameAI.AIStates;
     using GamePhysics;
     using HarmonyQuest;
+    using HarmonyQuest.Audio;
 
     public abstract class AIGameObjectFacade : MonoBehaviour
     {
@@ -16,6 +17,7 @@
         private AIHealth aiHealth = new AIHealth();
         private AIDebug aiDebug = new AIDebug();
         private AIUtil aiUtil = new AIUtil();
+        public AISound aiSound;
 
         public bool requestingAttackPermission = false;
         public bool attackPermissionGranted = false;
@@ -76,6 +78,18 @@
             aiHealth.Init(data);
             aiDebug.Init(data);
             aiUtil.Init(data);
+
+            if (aiSound == null)
+            {
+                aiSound = GetComponentInChildren<AISound>();
+                if (aiSound == null)
+                {
+                    Debug.LogError("AIGameObject Init WARNING: Agent does not have an aiSound component.");
+                }
+            }
+            aiSound.Init(data);
+
+            AssignFunctionToDamageHitboxFmodCallback(aiSound.PlayFmodEvent);
 
             DamageReceiver damageReceiver;
 
@@ -201,7 +215,7 @@
         }
 
         // ****************************
-        // COLLISION FUNCTIONS
+        // HITBOX FUNCTIONS
         // ****************************
 
         public virtual Collider GetCollisionAvoidanceHitbox()
@@ -229,8 +243,28 @@
             aiHitboxes.UpdateHitboxes();
         }
 
+        public void DamageHitboxFmodCallback(string fmodEventName)
+        {
+            aiHitboxes.damageHitboxFmodCallback(fmodEventName);
+        }
+
+        public void AssignFunctionToDamageHitboxFmodCallback(AIHitboxes.DamageHitboxFmodCallback func)
+        {
+            aiHitboxes.AssignFunctionToDamageHitboxFmodCallback(func);
+        }
+
+        public void RemoveFunctionFromDamageHitboxFmodCallback(AIHitboxes.DamageHitboxFmodCallback func)
+        {
+            aiHitboxes.RemoveFunctionFromDamageHitboxFmodCallback(func);
+        }
+
+        public void ClearDamageHitboxFmodCallback()
+        {
+            aiHitboxes.ClearDamageHitboxFmodCallback();
+        }
+
         // ****************************
-        // AIHealth Functions
+        // HEALTH FUNCTIONS
         // ****************************
 
         public bool IsDead()
@@ -250,6 +284,15 @@
         public virtual bool IsAgentWithinCameraBounds()
         {
             return aiUtil.IsAgentWithinCameraBounds();
+        }
+
+        // ****************************
+        // SOUND FUNCTIONS
+        // ****************************
+
+        public void PlayFmodEvent(string eventName, FmodParamData[] extraParams = null)
+        {
+            aiSound.PlayFmodEvent(eventName, extraParams);
         }
 
         // ****************************

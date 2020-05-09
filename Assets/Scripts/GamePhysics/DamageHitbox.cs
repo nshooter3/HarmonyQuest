@@ -2,6 +2,7 @@
 {
     using System;
     using UnityEngine;
+    using UnityEngine.Events;
 
     public class DamageHitbox : MonoBehaviour
     {
@@ -28,6 +29,10 @@
 
         [SerializeField]
         private bool showDebugRenderer = false;
+
+        [SerializeField]
+        private UnityEvent callbacks;
+        private bool callbacksInvoked = false;
 
         private int damage;
 
@@ -71,6 +76,7 @@
             hitboxLifetimeTimer = 0.0f;
             checkForLateCounter = false;
             applyDamageWhenHitboxEnds = false;
+            callbacksInvoked = false;
             this.damage = damage;
             this.id = id;
             this.counterable = counterable;
@@ -106,6 +112,7 @@
             hitboxDelayTimer = 0.0f;
             hitboxActive = false;
             hitboxLifetimeTimer = 0.0f;
+            callbacksInvoked = false;
             ToggleDebugRenderer(false);
         }
 
@@ -115,6 +122,11 @@
             if (damageReceiver != null)
             {
                 damageReceiver.ReceiveDamage(this);
+                if (callbacksInvoked == false)
+                {
+                    callbacks.Invoke();
+                    callbacksInvoked = true;
+                }
             }
         }
 

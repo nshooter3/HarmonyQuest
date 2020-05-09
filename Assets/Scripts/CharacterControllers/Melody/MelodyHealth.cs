@@ -57,6 +57,7 @@
         {
             currentHealth = Mathf.Max(0, currentHealth - damage);
             playerHealth.SetMeterValue(currentHealth, MelodyStats.maxHealth);
+            controller.melodySound.TakeDamage();
             if (currentHealth <= 0)
             {
                 Die();
@@ -180,6 +181,7 @@
 
         private void Die()
         {
+            controller.melodySound.Death();
             dead = true;
         }
 
@@ -205,6 +207,11 @@
                 return true;
             }
             return false;
+        }
+
+        public float GetCurrentHealth()
+        {
+            return currentHealth;
         }
     }
 }
