@@ -10,7 +10,7 @@
 
         public override void Init(AIStateUpdateData updateData)
         {
-            
+            updateData.animator.AttackComplete();
         }
 
         public override void OnUpdate(AIStateUpdateData updateData)

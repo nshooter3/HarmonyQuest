@@ -40,6 +40,12 @@
         /// <returns> A new instance of this agent's navigator </returns>
         public abstract Navigator GetNavigator();
 
+        /// <summary>
+        /// Implement this in the child class to specify what kind of navigator this agent will use.
+        /// </summary>
+        /// <returns> A new instance of this agent's navigator </returns>
+        public abstract AIAnimator GetAnimator();
+
         public virtual void Init()
         {
             if (data.gameObject == null)

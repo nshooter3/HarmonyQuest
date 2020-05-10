@@ -9,8 +9,9 @@
         public AIStateHandler stateHandler;
         public Navigator navigator;
         public IMelodyInfo player;
+        public AIAnimator animator;
 
-        public AIStateUpdateData(AIGameObjectFacade aiGameObjectFacade, AIStateHandler stateHandler, Navigator navigator, IMelodyInfo player)
+        public AIStateUpdateData(AIGameObjectFacade aiGameObjectFacade, AIStateHandler stateHandler, AIAnimator animator, Navigator navigator, IMelodyInfo player)
         {
             this.aiGameObjectFacade = aiGameObjectFacade;
             this.stateHandler = stateHandler;

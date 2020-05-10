@@ -4,6 +4,7 @@
     using AIGameObjects;
     using Navigation;
     using HarmonyQuest;
+    using UnityEngine;
 
     public class AIAgent
     {
@@ -13,6 +14,7 @@
         public AIGameObjectFacade aiGameObject;
         private AIStateHandler stateHandler;
         private Navigator navigator;
+        private AIAnimator animator;
 
         private AIStateUpdateData updateData;
 
@@ -22,7 +24,8 @@
             aiGameObject.Init();
             stateHandler = new AIStateHandler();
             navigator = aiGameObject.GetNavigator();
-            updateData = new AIStateUpdateData(aiGameObject, stateHandler, navigator, ServiceLocator.instance.GetMelodyInfo());
+            animator  = aiGameObject.GetAnimator();
+            updateData = new AIStateUpdateData(aiGameObject, stateHandler, animator, navigator, ServiceLocator.instance.GetMelodyInfo());
             stateHandler.Init(updateData, aiGameObject.GetInitState());
         }
 
