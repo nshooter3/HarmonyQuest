@@ -24,7 +24,7 @@
 
         public override AIAnimator GetAnimator()
         {
-            return new AIAnimator();
+            return aiAnimator;
         }
     }
 }

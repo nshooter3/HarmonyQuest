@@ -17,6 +17,7 @@
             this.stateHandler = stateHandler;
             this.navigator = navigator;
             this.player = player;
+            this.animator = animator;
         }
     }
 }

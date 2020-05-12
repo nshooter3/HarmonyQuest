@@ -17,7 +17,9 @@
         private AIHealth aiHealth = new AIHealth();
         private AIDebug aiDebug = new AIDebug();
         private AIUtil aiUtil = new AIUtil();
+        public AIAnimator aiAnimator;
         public AISound aiSound;
+        
 
         public bool requestingAttackPermission = false;
         public bool attackPermissionGranted = false;
@@ -105,6 +107,11 @@
                 damageReceiver = hurtbox.gameObject.AddComponent<DamageReceiver>();
                 damageReceiver.AssignFunctionToReceiveDamageDelegate(aiHealth.ReceiveDamageHitbox);
             }
+
+            if (aiAnimator == null)
+            {
+                aiAnimator = new AIAnimator(GetComponent<Animator>());
+            }
         }
 
         public void UpdateSubclasses()
@@ -137,6 +144,7 @@
 
         public virtual void ApplyVelocity(bool ignoreYValue = true, bool applyRotation = true, float turnSpeedModifier = 1.0f)
         {
+            aiAnimator.SetVelocity(aiPhysics.moveDirection, aiPhysics.rotationDirection, aiPhysics.newVelocity, data.aiStats.speed);
             aiPhysics.ApplyVelocity(ignoreYValue, applyRotation, turnSpeedModifier);
         }
 

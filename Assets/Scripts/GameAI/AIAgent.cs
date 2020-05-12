@@ -24,7 +24,7 @@
             aiGameObject.Init();
             stateHandler = new AIStateHandler();
             navigator = aiGameObject.GetNavigator();
-            animator  = aiGameObject.GetAnimator();
+            animator = aiGameObject.aiAnimator;
             updateData = new AIStateUpdateData(aiGameObject, stateHandler, animator, navigator, ServiceLocator.instance.GetMelodyInfo());
             stateHandler.Init(updateData, aiGameObject.GetInitState());
         }
