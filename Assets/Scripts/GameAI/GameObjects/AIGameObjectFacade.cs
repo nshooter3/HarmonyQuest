@@ -43,9 +43,9 @@
         public abstract Navigator GetNavigator();
 
         /// <summary>
-        /// Implement this in the child class to specify what kind of navigator this agent will use.
+        /// Implement this in the child class to specify what kind of animator this agent will use.
         /// </summary>
-        /// <returns> A new instance of this agent's navigator </returns>
+        /// <returns> A new instance of this agent's animator </returns>
         public abstract AIAnimator GetAnimator();
 
         public virtual void Init()
