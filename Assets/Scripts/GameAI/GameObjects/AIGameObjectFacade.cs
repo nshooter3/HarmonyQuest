@@ -120,6 +120,7 @@
             {
                 UpdateHitboxes();
                 RemoveInactiveReceivedDamageHitboxes();
+                UpdateAnimations();
             }
         }
 
@@ -307,6 +308,14 @@
         public void PlayFmodEvent(string eventName, FmodParamData[] extraParams = null)
         {
             aiSound.PlayFmodEvent(eventName, extraParams);
+        }
+
+        // ****************************
+        // ANIMATION FUNCTIONS
+        // ****************************
+        public void UpdateAnimations()
+        {
+            aiAnimator.OnUpdate();
         }
 
         // ****************************

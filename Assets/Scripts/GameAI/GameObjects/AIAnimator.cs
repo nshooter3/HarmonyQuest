@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using HarmonyQuest.Audio;
 
 public class AIAnimator
 {
@@ -12,7 +10,10 @@ public class AIAnimator
         this.animator = animator;
     }
 
-
+    public void OnUpdate()
+    {
+        animator.SetFloat("NormalizedTime", FmodFacade.instance.GetNormalizedBeatProgress());
+    }
 
     public void Attack()
     {
@@ -37,6 +38,7 @@ public class AIAnimator
 
     public void Die()
     {
+
     }
 
     internal void AttackComplete()

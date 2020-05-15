@@ -275,6 +275,15 @@
         }
 
         /// <summary>
+        /// Return a value from 0 to 1 gauging how far into a beat we are. i.e. 0 is the start of a beat, 0.5 is halfway through a beat, 1 is the end of a beat.
+        /// </summary>
+        /// <returns></returns>
+        public float GetNormalizedBeatProgress()
+        {
+            return FmodOnBeatAccuracyChecker.instance.GetNormalizedBeatProgress();
+        }
+
+        /// <summary>
         /// Used to convert our music key into an fmod path.
         /// </summary>
         /// <param name="key"></param>
