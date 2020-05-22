@@ -15,11 +15,6 @@ public class AIAnimator
         animator.SetFloat("NormalizedTime", FmodFacade.instance.GetNormalizedBeatProgress());
     }
 
-    public void Attack()
-    {
-        animator.SetTrigger("Attack");
-    }
-
     public void SetVelocity(Vector3 moveDirection, Vector3 rotation, Vector3 velocity, float maxSpeed)
     {
         Debug.Log("velocity.magnitude: " + velocity.magnitude/Time.deltaTime + "   max: " + maxSpeed);
@@ -36,13 +31,18 @@ public class AIAnimator
         //animator.SetFloat("Speed", 1f);
     }
 
-    public void Die()
+    public void SetTrigger(string trigger)
     {
-
+        animator.SetTrigger(trigger);
     }
 
-    internal void AttackComplete()
+    internal void ResetTrigger(string name)
     {
-        animator.ResetTrigger("Attack");
+        animator.ResetTrigger(name);
+    }
+
+    public void SetBool(string name, bool val)
+    {
+        animator.SetBool(name, val);
     }
 }

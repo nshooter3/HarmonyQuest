@@ -18,7 +18,6 @@
         {
             updateData.aiGameObjectFacade.DebugChangeColor(Color.yellow);
             updateData.aiGameObjectFacade.SetRigidBodyConstraintsToDefault();
-            updateData.animator.Attack();
         }
 
         public override void OnUpdate(AIStateUpdateData updateData)

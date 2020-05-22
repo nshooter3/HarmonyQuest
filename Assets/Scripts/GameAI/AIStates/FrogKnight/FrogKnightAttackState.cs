@@ -13,6 +13,7 @@
             updateData.aiGameObjectFacade.DebugChangeColor(Color.white);
             updateData.aiGameObjectFacade.ActivateHitbox("BasicAttack", 0f, updateData.player.GetConfig().CounterGracePeriod, 10);
             updateData.aiGameObjectFacade.attacking = false;
+            updateData.animator.SetBool("AttackBool", true);
         }
 
         public override void OnUpdate(AIStateUpdateData updateData)
@@ -45,6 +46,7 @@
             updateData.aiGameObjectFacade.CancelHitbox("BasicAttack");
             aborted = true;
             readyForStateTransition = true;
+            updateData.animator.SetBool("AttackBool", false);
         }
     }
 }
