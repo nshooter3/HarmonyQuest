@@ -31,9 +31,9 @@ public class AIAnimator
         //animator.SetFloat("Speed", 1f);
     }
 
-    public void SetTrigger(string trigger)
+    public void SetTrigger(string name)
     {
-        animator.SetTrigger(trigger);
+        animator.SetTrigger(name);
     }
 
     internal void ResetTrigger(string name)
