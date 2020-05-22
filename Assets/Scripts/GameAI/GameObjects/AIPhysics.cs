@@ -208,5 +208,10 @@
         {
             return rotationDirection;
         }
+
+        public Vector3 GetTransformForward()
+        {
+            return data.gameObject.transform.forward;
+        }
     }
 }

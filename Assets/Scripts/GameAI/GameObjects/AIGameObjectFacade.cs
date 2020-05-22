@@ -229,6 +229,11 @@
             return aiPhysics.GetRotationDirection();
         }
 
+        public virtual Vector3 GetTransformForward()
+        {
+            return aiPhysics.GetTransformForward();
+        }
+
         // ****************************
         // HITBOX FUNCTIONS
         // ****************************
