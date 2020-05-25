@@ -145,7 +145,7 @@
 
         public virtual void ApplyVelocity(bool ignoreYValue = true, bool applyRotation = true, float turnSpeedModifier = 1.0f)
         {
-            aiAnimator.SetVelocity(aiPhysics.moveDirection, aiPhysics.rotationDirection, aiPhysics.newVelocity, data.aiStats.speed);
+            aiAnimator.SetVelocity(transform.forward, aiPhysics.newVelocity, data.aiStats.speed);
             aiPhysics.ApplyVelocity(ignoreYValue, applyRotation, turnSpeedModifier);
         }
 
