@@ -103,7 +103,7 @@ BlendTree:
   - serializedVersion: 2
     m_Motion: {fileID: 7400000, guid: e91396103c014264e816c6a20856af10, type: 2}
     m_Threshold: 2
-    m_Position: {x: 1, y: 0}
+    m_Position: {x: -1, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: Blend
@@ -116,7 +116,7 @@ BlendTree:
     m_CycleOffset: 0
     m_DirectBlendParameter: Blend
     m_Mirror: 0
-  m_BlendParameter: LeftRight
+  m_BlendParameter: RightLeft
   m_BlendParameterY: UpDown
   m_MinThreshold: 0
   m_MaxThreshold: 3
@@ -526,7 +526,7 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: LeftRight
+  - m_Name: RightLeft
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
