@@ -31,20 +31,20 @@
 
         public void SetWalkRun(float percentageOfMax)
         {
-            controller.animator.SetFloat(animationHashes[(int) Animations.Move], percentageOfMax);
+            controller.Animator.SetFloat(animationHashes[(int) Animations.Move], percentageOfMax);
         }
 
         public void PlayAnimation(Animations animation)
         {
-            controller.animator.SetTrigger(animationHashes[(int) animation]);
+            controller.Animator.SetTrigger(animationHashes[(int) animation]);
         }
 
         public bool IsAnimationDonePlaying(Animations animation)
         {
-            bool isFinished = controller.animator.IsInTransition(0) && controller.animator.GetCurrentAnimatorStateInfo(0).shortNameHash == (int) animation;
+            bool isFinished = controller.Animator.IsInTransition(0) && controller.Animator.GetCurrentAnimatorStateInfo(0).shortNameHash == (int) animation;
             if (isFinished)
             {
-                controller.animator.ResetTrigger(animationHashes[(int) animation]);
+                controller.Animator.ResetTrigger(animationHashes[(int) animation]);
 
             }
             return isFinished;
@@ -52,13 +52,13 @@
 
         public void EnterDash()
         {
-            controller.melodyRenderer.enabled = false;
+            controller.melodyRenderer.SetActive(false);
             controller.scarfRenderer.enabled = true;
         }
 
         public void ExitDash()
         {
-            controller.melodyRenderer.enabled = true;
+            controller.melodyRenderer.SetActive(true);
             controller.scarfRenderer.enabled = false;
         }
     }

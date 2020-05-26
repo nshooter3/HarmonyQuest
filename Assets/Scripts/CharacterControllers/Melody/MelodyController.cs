@@ -13,7 +13,8 @@
 
         public IPlayerInputManager input { get; private set; }
 
-        public Animator animator { get; private set; }
+        public Animator animator;
+        public Animator Animator { get { return animator; } private set { animator = value; } }
         public Rigidbody rigidBody { get; private set; }
         public CollisionWrapper melodyColliderWrapper { get; private set; }
         public CapsuleCollider capsuleCollider { get; private set; }
@@ -52,14 +53,13 @@
         public MelodySound melodySound;
 
         //Drag References
-        public Renderer melodyRenderer;
+        public GameObject melodyRenderer;
         public Renderer scarfRenderer;
 
         // Start is called before the first frame update
         void Start()
         {
             rigidBody = gameObject.GetComponent<Rigidbody>();
-            animator = gameObject.GetComponent<Animator>();
             melodyColliderWrapper = gameObject.GetComponent<CollisionWrapper>();
             capsuleCollider = gameObject.GetComponent<CapsuleCollider>();
 
