@@ -21,6 +21,7 @@
         {
             updateData.aiGameObjectFacade.DebugChangeColor(new Color(1f, 0.5f, 0f));
             updateData.aiGameObjectFacade.SetRigidBodyConstraintsToDefault();
+            updateData.animator.SetBool("AttackStartBool", true);
         }
 
         public override void OnUpdate(AIStateUpdateData updateData)
@@ -89,6 +90,7 @@
             readyForStateTransition = true;
             updateData.aiGameObjectFacade.SetVelocity(Vector3.zero);
             updateData.aiGameObjectFacade.SetRigidBodyConstraintsToLockAllButGravity();
+            updateData.animator.SetBool("AttackStartBool", false);
         }
     }
 }

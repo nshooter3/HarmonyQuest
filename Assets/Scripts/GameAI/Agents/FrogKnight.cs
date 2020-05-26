@@ -3,6 +3,7 @@
     using GameAI.Navigation;
     using GameAI.AIStates;
     using GameAI.AIStates.FrogKnight;
+    using UnityEngine;
 
     public class FrogKnight : Enemy
     {
@@ -19,6 +20,11 @@
         public override Navigator GetNavigator()
         {
             return new GroundedNavmeshNavigator();
+        }
+
+        public override AIAnimator GetAnimator()
+        {
+            return aiAnimator;
         }
     }
 }

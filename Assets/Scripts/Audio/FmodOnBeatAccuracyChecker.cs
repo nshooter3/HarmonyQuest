@@ -120,5 +120,10 @@
         {
             return hasPerformedActionThisBeat;
         }
+
+        public float GetNormalizedBeatProgress()
+        {
+            return beatTimer/beatDuration;
+        }
     }
 }

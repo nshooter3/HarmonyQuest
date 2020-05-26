@@ -10,7 +10,7 @@
 
         public override void Init(AIStateUpdateData updateData)
         {
-            
+            updateData.animator.SetBool("AttackEndBool", true);
         }
 
         public override void OnUpdate(AIStateUpdateData updateData)
@@ -43,6 +43,7 @@
             updateData.aiGameObjectFacade.DebugChangeColor(Color.white);
             aborted = true;
             readyForStateTransition = true;
+            updateData.animator.SetBool("AttackEndBool", false);
         }
     }
 }

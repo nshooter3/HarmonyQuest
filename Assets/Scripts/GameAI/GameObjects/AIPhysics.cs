@@ -9,7 +9,7 @@
 
         public Vector3 moveDirection = Vector3.zero;
         public Vector3 rotationDirection = Vector3.zero;
-        private Vector3 newVelocity = Vector3.zero;
+        public Vector3 newVelocity = Vector3.zero;
         private Vector3 modifiedVelocity = Vector3.zero;
         private float prevYVel = 0;
 
@@ -207,6 +207,11 @@
         public Vector3 GetRotationDirection()
         {
             return rotationDirection;
+        }
+
+        public Vector3 GetTransformForward()
+        {
+            return data.gameObject.transform.forward;
         }
     }
 }

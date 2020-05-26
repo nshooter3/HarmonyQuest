@@ -17,7 +17,9 @@
         private AIHealth aiHealth = new AIHealth();
         private AIDebug aiDebug = new AIDebug();
         private AIUtil aiUtil = new AIUtil();
+        public AIAnimator aiAnimator;
         public AISound aiSound;
+        
 
         public bool requestingAttackPermission = false;
         public bool attackPermissionGranted = false;
@@ -39,6 +41,12 @@
         /// </summary>
         /// <returns> A new instance of this agent's navigator </returns>
         public abstract Navigator GetNavigator();
+
+        /// <summary>
+        /// Implement this in the child class to specify what kind of animator this agent will use.
+        /// </summary>
+        /// <returns> A new instance of this agent's animator </returns>
+        public abstract AIAnimator GetAnimator();
 
         public virtual void Init()
         {
@@ -99,6 +107,11 @@
                 damageReceiver = hurtbox.gameObject.AddComponent<DamageReceiver>();
                 damageReceiver.AssignFunctionToReceiveDamageDelegate(aiHealth.ReceiveDamageHitbox);
             }
+
+            if (aiAnimator == null)
+            {
+                aiAnimator = new AIAnimator(GetComponent<Animator>());
+            }
         }
 
         public void UpdateSubclasses()
@@ -107,6 +120,7 @@
             {
                 UpdateHitboxes();
                 RemoveInactiveReceivedDamageHitboxes();
+                UpdateAnimations();
             }
         }
 
@@ -131,6 +145,7 @@
 
         public virtual void ApplyVelocity(bool ignoreYValue = true, bool applyRotation = true, float turnSpeedModifier = 1.0f)
         {
+            aiAnimator.SetVelocity(transform.forward, aiPhysics.newVelocity, data.aiStats.speed);
             aiPhysics.ApplyVelocity(ignoreYValue, applyRotation, turnSpeedModifier);
         }
 
@@ -214,6 +229,11 @@
             return aiPhysics.GetRotationDirection();
         }
 
+        public virtual Vector3 GetTransformForward()
+        {
+            return aiPhysics.GetTransformForward();
+        }
+
         // ****************************
         // HITBOX FUNCTIONS
         // ****************************
@@ -293,6 +313,14 @@
         public void PlayFmodEvent(string eventName, FmodParamData[] extraParams = null)
         {
             aiSound.PlayFmodEvent(eventName, extraParams);
+        }
+
+        // ****************************
+        // ANIMATION FUNCTIONS
+        // ****************************
+        public void UpdateAnimations()
+        {
+            aiAnimator.OnUpdate();
         }
 
         // ****************************
