@@ -28,12 +28,12 @@ public class AIAnimator
         float speed = velocity.magnitude / Time.deltaTime / maxSpeed;
         if(speed > 0.0f)
         {
-            animator.SetFloat("UpDown", Mathf.Cos(Mathf.Deg2Rad * Vector2.SignedAngle(forward2D, velocity2D)));
+            animator.SetFloat("ForwardBackward", Mathf.Cos(Mathf.Deg2Rad * Vector2.SignedAngle(forward2D, velocity2D)));
             animator.SetFloat("RightLeft", Mathf.Sin(Mathf.Deg2Rad * Vector2.SignedAngle(forward2D, velocity2D)));            
         }
         else
         {
-            animator.SetFloat("UpDown", 0);
+            animator.SetFloat("ForwardBackward", 0);
             animator.SetFloat("RightLeft", 0);
         }
         animator.SetFloat("Speed", speed);

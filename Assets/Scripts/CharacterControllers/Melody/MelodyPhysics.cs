@@ -58,6 +58,7 @@
             RotatePlayer(turningSpeed);
             controller.rigidBody.velocity = velocity;
             controller.melodyAnimator.SetWalkRun(desiredVelocity.magnitude / maxSpeed);
+            controller.melodyAnimator.SetStrafeInfo(controller.transform.forward, velocity);
 
         }
 
