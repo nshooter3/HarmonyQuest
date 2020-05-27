@@ -19,7 +19,7 @@
             counterActiveTimer = melodyController.config.CounterGracePeriod;
             melodyController.melodyAnimator.PlayAnimation(MelodyAnimator.Animations.Counter);
             melodyController.counterHurtbox.enabled = true;
-            melodyController.counterHurtboxMesh.enabled = true;
+            //melodyController.counterHurtboxMesh.enabled = true;
             melodyController.melodyHealth.isCountering = true;
             melodyController.melodyHealth.dealtCounterDamage = false;
             melodyController.melodyHealth.CheckForLateCounters();
@@ -74,7 +74,7 @@
         private void EndCounter()
         {
             melodyController.counterHurtbox.enabled = false;
-            melodyController.counterHurtboxMesh.enabled = false;
+            //melodyController.counterHurtboxMesh.enabled = false;
             melodyController.melodyHealth.isCountering = false;
             melodyController.melodyHealth.dealtCounterDamage = false;
         }
