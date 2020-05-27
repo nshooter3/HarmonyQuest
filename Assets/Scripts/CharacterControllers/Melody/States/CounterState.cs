@@ -16,7 +16,7 @@
 
         protected override void Enter()
         {
-            counterActiveTimer = melodyController.config.CounterGracePeriod;
+            counterActiveTimer = melodyController.config.PreCounterGracePeriod;
             melodyController.melodyAnimator.PlayAnimation(MelodyAnimator.Animations.Counter);
             melodyController.counterHurtbox.enabled = true;
             //melodyController.counterHurtboxMesh.enabled = true;

@@ -1,6 +1,7 @@
 ﻿namespace Melody
 {
     using UnityEngine;
+    using HarmonyQuest.Audio;
 
     [System.Serializable]
     public class MelodyConfig
@@ -22,11 +23,19 @@
         public float CounterMaxAcceleration;  //Unity Units Per Second
         public float CounterTurningSpeed;
         public Vector3 CounterGravity;
+
         /// <summary>
-        /// The amount of time before and after an enemy attack activates that our counter is considered successful.
-        /// Therefore, the total time window for a counter is CounterGracePeriod times two.
+        /// The percentage of a beat before and after an enemy attack activates that our counter is considered successful.
+        /// Therefore, the total time window for a counter is (PreCounterGracePeriod * Beat) time + (PostCounterGracePeriod * Beat).
         /// </summary>
-        public float CounterGracePeriod;
+        [SerializeField]
+        [Range(0f, 1f)]
+        private float preCounterGracePeriod;
+        public float PreCounterGracePeriod { get { return preCounterGracePeriod * FmodFacade.instance.GetBeatDuration(); } private set { preCounterGracePeriod = value; } }
+        [SerializeField]
+        [Range(0f, 1f)]
+        private float postCounterGracePeriod;
+        public float PostCounterGracePeriod { get { return postCounterGracePeriod * FmodFacade.instance.GetBeatDuration(); } private set { postCounterGracePeriod = value; } }
 
         /// <summary>
         /// If the damage comes a direction within CounterDegreeRange degrees of where the player is facing, we consider it a successful parry. (CounterDegreeRange * 2 degrees total range).
