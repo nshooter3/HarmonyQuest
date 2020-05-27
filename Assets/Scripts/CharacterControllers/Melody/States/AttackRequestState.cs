@@ -26,11 +26,23 @@
             }
             ableToExit = true;
             FmodFacade.instance.PerformOnBeatAction();
+
+            melodyController.melodyAnimator.SwitchJabArm();
+
+            melodyController.melodyPhysics.CalculateVelocity(melodyController.config.AttackMaxSpeed, melodyController.config.AttackMaxAcceleration);
+        }
+
+        public override void OnFixedUpdate()
+        {
+            melodyController.melodyPhysics.ApplyVelocity(melodyController.config.MaxSpeed, melodyController.config.TurningSpeed);
+            melodyController.melodyPhysics.ApplyGravity(melodyController.config.Gravity);
+            melodyController.melodyPhysics.SnapToGround();
+            base.OnFixedUpdate();
         }
 
         public override void OnExit()
         {
-
+            
         }
     }
 }

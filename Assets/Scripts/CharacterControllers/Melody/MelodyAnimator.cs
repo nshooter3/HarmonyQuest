@@ -34,6 +34,21 @@
             controller.Animator.SetFloat(animationHashes[(int) Animations.Move], percentageOfMax);
         }
 
+        public void SetBoolParam(string param, bool val)
+        {
+            controller.Animator.SetBool(param, val);
+        }
+
+        public bool GetBoolParam(string param)
+        {
+            return controller.Animator.GetBool(param);
+        }
+
+        public void SwitchJabArm()
+        {
+            controller.Animator.SetBool("RightJab", !controller.Animator.GetBool("RightJab"));
+        }
+
         public void PlayAnimation(Animations animation)
         {
             controller.Animator.SetTrigger(animationHashes[(int) animation]);

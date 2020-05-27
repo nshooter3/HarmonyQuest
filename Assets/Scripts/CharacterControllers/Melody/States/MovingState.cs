@@ -6,7 +6,10 @@
     {
         public MovingState(MelodyController controller) : base(controller) { }
 
-        protected override void Enter() { }
+        protected override void Enter()
+        {
+            
+        }
 
         public override void OnUpdate(float time)
         {
@@ -47,7 +50,7 @@
 
         public override void OnExit()
         {
-            melodyController.melodyAnimator.SetWalkRun(0.0f);
+            
         }
     }
 }
