@@ -5,6 +5,7 @@
     using UI;
     using System.Collections.Generic;
     using UnityEngine;
+    using System.Collections;
 
     public class MelodyHealth
     {
@@ -51,6 +52,17 @@
             {
                 postSuccessfulCounterTimer -= Time.deltaTime;
             }
+        }
+
+        private void TakeDamageDelayed(int damage, float delay = 0f)
+        {
+            controller.StartCoroutine(TakeDamageDelayedCoroutine(damage, delay));
+        }
+
+        private IEnumerator TakeDamageDelayedCoroutine(int damage, float delay = 0f)
+        {
+            yield return new WaitForSeconds(delay);
+            TakeDamage(damage);
         }
 
         private void TakeDamage(int damage)
@@ -185,7 +197,7 @@
                     if (receivedDamageHitboxes[i].applyDamageWhenHitboxEnds == true)
                     {
                         receivedDamageHitboxes[i].applyDamageWhenHitboxEnds = false;
-                        TakeDamage(receivedDamageHitboxes[i].GetDamage());
+                        TakeDamageDelayed(receivedDamageHitboxes[i].GetDamage(), controller.config.PostHitDamageDelay - controller.config.PostCounterGracePeriod);
                     }
                     receivedDamageHitboxes.RemoveAt(i);
                     i--;

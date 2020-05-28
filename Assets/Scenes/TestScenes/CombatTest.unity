@@ -591,6 +591,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FrogKnight (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3047223838859579938, guid: 43c0d925baab30144b61aed83056c044,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3047223838859579940, guid: 43c0d925baab30144b61aed83056c044,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4644,6 +4649,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FrogKnight (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3047223838859579938, guid: 43c0d925baab30144b61aed83056c044,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3047223838859579940, guid: 43c0d925baab30144b61aed83056c044,
         type: 3}
@@ -9563,6 +9573,7 @@ MonoBehaviour:
   counterable: 1
   checkForLateCounter: 0
   applyDamageWhenHitboxEnds: 0
+  checkForLateDodge: 0
 --- !u!114 &2018767835
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11490,6 +11501,7 @@ MonoBehaviour:
     CounterGravity: {x: 0, y: -20, z: 0}
     preCounterGracePeriod: 0.25
     postCounterGracePeriod: 0.25
+    postHitDamageDelay: 0.5
     CounterDegreeRange: 60
     SuccessfulCounterCooldownTime: 0.025
     SuccessfulCounterInvincibilityTime: 0.05
@@ -11789,6 +11801,7 @@ MonoBehaviour:
   counterable: 1
   checkForLateCounter: 0
   applyDamageWhenHitboxEnds: 0
+  checkForLateDodge: 0
 --- !u!114 &8776026942179006258
 MonoBehaviour:
   m_ObjectHideFlags: 0
