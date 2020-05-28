@@ -38,6 +38,15 @@
         public float PostCounterGracePeriod { get { return postCounterGracePeriod * FmodFacade.instance.GetBeatDuration(); } private set { postCounterGracePeriod = value; } }
 
         /// <summary>
+        /// How long after an enemy attack before Melody takes damage (ratio of a beat)
+        /// Bceause player needs a window for late parries, we need them to receive damage after this window has passed.
+        /// </summary>
+        [SerializeField]
+        [Range(0f, 1f)]
+        private float postHitDamageDelay;
+        public float PostHitDamageDelay { get { return postHitDamageDelay * FmodFacade.instance.GetBeatDuration(); } private set { postHitDamageDelay = value; } }
+
+        /// <summary>
         /// If the damage comes a direction within CounterDegreeRange degrees of where the player is facing, we consider it a successful parry. (CounterDegreeRange * 2 degrees total range).
         /// </summary>
         [Tooltip("If the damage comes a direction within CounterDegreeRange degrees of where the player is facing, we consider it a successful parry. (CounterDegreeRange * 2 degrees total range).")]

@@ -72,34 +72,32 @@
                 //Only pay attention to this hitbox if we haven't been hit by it yet.
                 if (IsDamageHitboxCurrentlyReceived(damageHitbox) == false)
                 {
-                    if (damageHitbox.counterable == true)
+                    if (damageHitbox.counterable == true && WasDamageCountered(damageHitbox.GetAgent()))
                     {
-                        if (WasDamageCountered(damageHitbox.GetAgent()))
-                        {
-                            //Debug.Log("EARLY COUNTER SUCCESS");
-                            DealCounterDamage(damageHitbox);
-                            dealtCounterDamage = true;
-                        }
-                        else
-                        {
-                            //Only apply incoming hitbox damage if we're not just coming off a successful counter.
-                            if (postSuccessfulCounterTimer <= 0)
-                            {
-                                damageHitbox.applyDamageWhenHitboxEnds = true;
-                            }
-                            //If the player gets hit by a counterable attack, give them until the end of the hitbox to react.
-                            damageHitbox.checkForLateCounter = true;
-                        }
+                        //Debug.Log("EARLY COUNTER SUCCESS");
+                        DealCounterDamage(damageHitbox);
+                        dealtCounterDamage = true;
                     }
                     else
                     {
-                        //Ignore incoming hitbox damage for a little bit if we're just coming off a successful counter
+                        //Only apply incoming hitbox damage if we're not just coming off a successful counter.
                         if (postSuccessfulCounterTimer <= 0)
                         {
-                            TakeDamage(damageHitbox.GetDamage());
+                            damageHitbox.applyDamageWhenHitboxEnds = true;
                         }
+
+                        //If the player gets hit by a counterable attack, give them until the end of the hitbox to react.
+                        if (damageHitbox.counterable == true)
+                        {
+                            damageHitbox.checkForLateCounter = true;
+                        }
+                        else
+                        {
+                            damageHitbox.checkForLateDodge = true;
+                        }
+
+                        receivedDamageHitboxes.Add(damageHitbox);
                     }
-                    receivedDamageHitboxes.Add(damageHitbox);
                 }
             }
         }
@@ -130,6 +128,22 @@
                     receivedDamageHitboxes[i].applyDamageWhenHitboxEnds = false;
                     DealCounterDamage(receivedDamageHitboxes[i]);
                     dealtCounterDamage = true;
+                    receivedDamageHitboxes.RemoveAt(i);
+                    i--;
+                }
+            }
+        }
+
+        public void CheckForLateDodges()
+        {
+            for (int i = 0; i < receivedDamageHitboxes.Count; i++)
+            {
+                if (receivedDamageHitboxes[i].checkForLateDodge == true || receivedDamageHitboxes[i].checkForLateCounter == true)
+                {
+                    //Debug.Log("LATE DODGE SUCCESS");
+                    receivedDamageHitboxes[i].checkForLateDodge = false;
+                    receivedDamageHitboxes[i].checkForLateCounter = false;
+                    receivedDamageHitboxes[i].applyDamageWhenHitboxEnds = false;
                     receivedDamageHitboxes.RemoveAt(i);
                     i--;
                 }

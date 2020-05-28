@@ -53,6 +53,8 @@
         public bool checkForLateCounter = false;
         public bool applyDamageWhenHitboxEnds = false;
 
+        public bool checkForLateDodge = false;
+
         private Guid id;
 
         public void Start()
@@ -75,6 +77,7 @@
             hitboxLifetime = lifetime;
             hitboxLifetimeTimer = 0.0f;
             checkForLateCounter = false;
+            checkForLateDodge = false;
             applyDamageWhenHitboxEnds = false;
             callbacksInvoked = false;
             this.damage = damage;

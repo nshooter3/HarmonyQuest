@@ -30,6 +30,7 @@
             timer = 0;
             melodyController.melodyHealth.isDashing = true;
             melodyController.melodySound.Dash();
+            melodyController.melodyHealth.CheckForLateDodges();
         }
 
         public override void OnUpdate(float time)
