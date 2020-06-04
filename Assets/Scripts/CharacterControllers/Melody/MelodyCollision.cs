@@ -10,7 +10,7 @@
         private bool isSliding;
 
         //Radian Y value of the steepest slope that can cause the player to slide.
-        private float steepestSlopeYValue;
+        private float steepestSlopeYAngle;
         //Collision normal direction of the steepest slope, used to calculate which direction the player should slide.
         public Vector3 steepestSlopeDirection { get; private set; }
 
@@ -30,22 +30,25 @@
 
         public void SetGrounded(Collision collision)
         {
-            //Only pay attention to slopes steeper than the grounded normal threshold, hence it is our default value.
-            steepestSlopeYValue = controller.config.groundedYNormalThreshold;
+            steepestSlopeYAngle = 0;
             steepestSlopeDirection = Vector3.zero;
             for (int i = 0; i < collision.contactCount; i++)
             {
                 Vector3 normal = collision.GetContact(i).normal;
-                //If Melody is colliding with something that has a contact normal y value greater than groundedYNormalThreshold, we consider her grounded.
-                isGrounded |= normal.y >= controller.config.groundedYNormalThreshold;
-                isSliding |= normal.y >= controller.config.slidingYNormalThreshold;
+                Vector3 normalPerpendicular = Vector3.Cross(collision.GetContact(i).normal, Vector3.up).normalized;
+                //For determing the slope Melody is standing on, compare her contact normals to the up angle.
+                float slopeDownAngle = Vector3.Angle(normal, Vector3.up);
+                //If Melody is colliding with something that has a contact normal y angle less than groundedYAngleCutoff, we consider her grounded.
+                isGrounded |= slopeDownAngle <= controller.config.groundedYAngleCutoff;
+                isSliding |= slopeDownAngle > controller.config.groundedYAngleCutoff && slopeDownAngle <= controller.config.slidingYAngleCutoff;
                 //If this slope is steeper than our last one without angling further downwards than sideways, then it is our new steepest slope.
-                if (normal.y < steepestSlopeYValue && normal.y > controller.config.slidingYNormalThreshold)
+                if (slopeDownAngle > steepestSlopeYAngle && slopeDownAngle < controller.config.slidingYAngleCutoff)
                 {
-                    steepestSlopeYValue = normal.y;
-                    steepestSlopeDirection = collision.GetContact(i).normal;
+                    steepestSlopeYAngle = slopeDownAngle;
+                    steepestSlopeDirection = normal;
                 }
             }
+            Debug.Log("SLOPE ANGLE: " + steepestSlopeYAngle);
         }
 
         public bool IsGrounded()

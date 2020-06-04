@@ -105,16 +105,16 @@
 
         [Header("Contact Normal Logic")]
         /// <summary>
-        /// If Melody is colliding with something that has a contact normal y value greater than groundedYNormalThreshold, we consider her grounded.
+        /// If Melody is colliding with something that has a contact normal y angle less than groundedYAngleCutoff, we consider her grounded.
         /// </summary>
-        [Tooltip("If Melody is colliding with something that has a contact normal y value greater than groundedYNormalThreshold, we consider her grounded.")]
-        public float groundedYNormalThreshold;
+        [Tooltip("If Melody is colliding with something that has a contact normal y angle less than groundedYAngleCutoff, we consider her grounded.")]
+        public float groundedYAngleCutoff;
 
         /// <summary>
-        /// If Melody is colliding with something that has a contact normal y value greater than slidingYNormalThreshold, we consider her sliding.
+        /// If Melody is colliding with something that has a contact normal y angle less than slidingYAngleCutoff but greater than groundedYAngleCutoff, we consider her sliding.
         /// </summary>
-        [Tooltip("If Melody is colliding with something that has a contact normal y value greater than slidingYNormalThreshold, we consider her sliding.")]
-        public float slidingYNormalThreshold;
+        [Tooltip("If Melody is colliding with something that has a contact normal y angle less than slidingYAngleCutoff but greater than groundedYAngleCutoff, we consider her sliding.")]
+        public float slidingYAngleCutoff;
 
         /// <summary>
         /// Scaling values for the x, y and z axis of Melody's sliding force.

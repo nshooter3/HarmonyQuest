@@ -164,6 +164,16 @@
             }
         }
 
+        public void SlopeCheck()
+        {
+
+        }
+
+        public void SlopeCheckHorizontal()
+        {
+
+        }
+
         public void RotatePlayer(float turningSpeed, bool stationaryTurn = false)
         {
             //Rotate player to face movement direction
