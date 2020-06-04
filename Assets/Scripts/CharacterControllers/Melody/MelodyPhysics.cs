@@ -116,9 +116,9 @@
 
         private void SetVelocityToSlide()
         {
-            slideVelocity = new Vector3(controller.melodyCollision.steepestSlopeDirection.x * controller.config.slidingSpeedAdjusmentRatio.x,
+            slideVelocity = new Vector3(controller.melodyCollision.steepestSlopeNormal.x * controller.config.slidingSpeedAdjusmentRatio.x,
                                               velocity.y * controller.config.slidingSpeedAdjusmentRatio.y,
-                                              controller.melodyCollision.steepestSlopeDirection.z * controller.config.slidingSpeedAdjusmentRatio.z);
+                                              controller.melodyCollision.steepestSlopeNormal.z * controller.config.slidingSpeedAdjusmentRatio.z);
 
             if (controller.input.GetHorizontalMovement() != 0 || controller.input.GetVerticalMovement() != 0)
             {

@@ -122,6 +122,11 @@
             return transform;
         }
 
+        public Vector3 GetTransformForward()
+        {
+            return transform.forward;
+        }
+
         public MelodyConfig GetConfig()
         {
             return config;
