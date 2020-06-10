@@ -49,17 +49,17 @@
         {
             if (controller.melodyCollision.IsSliding())
             {
-                SetVelocityToSlide();
+                //TODO: Figure out if we want Melody to have influence over her movement while sliding down hills. For now, this is commented out.
+                //SetVelocityToSlide();
             }
             else
             {
                 ProhibitMovementIntoWalls();
+                RotatePlayer(turningSpeed);
+                controller.rigidBody.velocity = velocity;
             }
-            RotatePlayer(turningSpeed);
-            controller.rigidBody.velocity = velocity;
             controller.melodyAnimator.SetWalkRun(desiredVelocity.magnitude / maxSpeed);
             controller.melodyAnimator.SetStrafeInfo(controller.transform.forward, velocity);
-
         }
 
         public void ApplyStationaryVelocity()
