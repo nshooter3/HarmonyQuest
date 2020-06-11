@@ -15,13 +15,13 @@
             melodyController.melodyAnimator.EnterDash();
 
             //If there's no controller input, dodge in the direction of the player's forward
-            if (melodyController.input.GetHorizontalMovement() == 0 && melodyController.input.GetVerticalMovement() == 0)
+            if (melodyController.move == Vector3.zero)
             {
                 dodge = melodyController.transform.forward * (melodyController.config.DashLength / melodyController.config.DashTime);
             }
             else
             {
-                dodge = melodyController.rigidBody.velocity.normalized * (melodyController.config.DashLength / melodyController.config.DashTime);
+                dodge = melodyController.move.normalized * (melodyController.config.DashLength / melodyController.config.DashTime);
             }
 
             nextState = new DashState(melodyController, dodge);
