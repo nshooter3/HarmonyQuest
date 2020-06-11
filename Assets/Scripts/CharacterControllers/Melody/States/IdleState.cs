@@ -38,6 +38,11 @@
 
         public override void OnFixedUpdate()
         {
+            if (melodyController.melodyCollision.IsGrounded() && !melodyController.melodyCollision.IsSliding())
+            {
+                melodyController.melodyPhysics.IgnoreHorizontalMovementInput();
+                melodyController.melodyPhysics.ApplyVelocity(melodyController.config.MaxSpeed, melodyController.config.TurningSpeed);
+            }
             melodyController.melodyPhysics.ApplyGravity(melodyController.config.Gravity);
             if (melodyController.melodyLockOn.HasLockonTarget() == true)
             {

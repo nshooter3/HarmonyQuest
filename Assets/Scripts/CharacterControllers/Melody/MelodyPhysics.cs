@@ -134,7 +134,7 @@
             Debug.DrawRay(controller.transform.position + colliderOffset, velocity * 2.0f, Color.cyan);
         }
 
-        private void IgnoreHorizontalMovementInput()
+        public void IgnoreHorizontalMovementInput()
         {
             velocity = new Vector3(0.0f, velocity.y, 0.0f);
         }
@@ -162,16 +162,6 @@
                     controller.transform.position = hit.point + controller.config.snapOffset;
                 }
             }
-        }
-
-        public void SlopeCheck()
-        {
-
-        }
-
-        public void SlopeCheckHorizontal()
-        {
-
         }
 
         public void RotatePlayer(float turningSpeed, bool stationaryTurn = false)
