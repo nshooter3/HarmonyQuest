@@ -35,6 +35,11 @@
             colliderRadius = controller.capsuleCollider.radius;
         }
 
+        public void OverrideVelocity(Vector3 newVelocity)
+        {
+            velocity = newVelocity;
+        }
+
         public void CalculateVelocity(float maxSpeed, float maxAcceleration)
         {
             desiredVelocity = new Vector3(controller.move.x, 0, controller.move.z) * maxSpeed;
@@ -70,14 +75,24 @@
 
         public void ApplyDashVelocity(Vector3 dashVelocity)
         {
-            velocity = dashVelocity;
-            ProhibitMovementIntoWalls(true);
+            if (controller.melodyCollision.IsSliding())
+            {
+                velocity = Vector3.zero;
+            }
+            else
+            {
+                velocity = dashVelocity;
+                ProhibitMovementIntoWalls(true);
+            }
             controller.rigidBody.velocity = velocity;
         }
 
         public void CapSpeed(float maxSpeed)
         {
-            velocity = velocity.normalized * maxSpeed;
+            if (velocity.magnitude > maxSpeed)
+            {
+                velocity = velocity.normalized * maxSpeed;
+            }
         }
 
         /// <summary>

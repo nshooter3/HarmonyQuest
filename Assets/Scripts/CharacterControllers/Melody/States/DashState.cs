@@ -35,10 +35,6 @@
             {
                 dodge.y = Mathf.Clamp(dodge.y / dodgeMultiplier, melodyController.config.dashYRadianAirLowerRange, melodyController.config.dashYRadianAirUpperRange) * dodgeMultiplier;
             }
-            else
-            {
-                dodge.y = Mathf.Clamp(dodge.y / dodgeMultiplier, melodyController.config.dashYRadianGroundedLowerRange, melodyController.config.dashYRadianGroundedUpperRange) * dodgeMultiplier;
-            }
             //Debug.Log("DODGE RADIANS: " + dodge / dodgeMultiplier);
         }
 
@@ -51,7 +47,9 @@
 
         public override void OnExit()
         {
+            melodyController.melodyPhysics.OverrideVelocity(dodge);
             melodyController.melodyPhysics.CapSpeed(melodyController.config.MaxSpeed);
+            melodyController.melodyPhysics.ApplyVelocity(melodyController.config.DashOutroMaxSpeed, melodyController.config.DashOutroTurningSpeed);
         }
     }
 }

@@ -75,11 +75,6 @@
         //Radian values used to cap the y angle on the player's dash once they leave the ground.
         //Ensures that they always travel a little bit upwards, but prevents them from dashing straight up.
         [Range(-1.0f, 1.0f)]
-        public float dashYRadianGroundedLowerRange;
-        [Range(-1.0f, 1.0f)]
-        public float dashYRadianGroundedUpperRange;
-
-        [Range(-1.0f, 1.0f)]
         public float dashYRadianAirLowerRange;
         [Range(-1.0f, 1.0f)]
         public float dashYRadianAirUpperRange;

@@ -14,10 +14,10 @@
         {
             melodyController.melodyAnimator.EnterDash();
 
-            //If there's no controller input, dodge backwards.
+            //If there's no controller input, dodge in the direction of the player's forward
             if (melodyController.input.GetHorizontalMovement() == 0 && melodyController.input.GetVerticalMovement() == 0)
             {
-                dodge = -melodyController.transform.forward * (melodyController.config.DashLength / melodyController.config.DashTime);
+                dodge = melodyController.transform.forward * (melodyController.config.DashLength / melodyController.config.DashTime);
             }
             else
             {
