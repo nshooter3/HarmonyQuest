@@ -23,10 +23,7 @@
             {
                 //Use the controller input rather than the player velocity to determine dash direction.
                 //This feels a lot more responsive and prevents edge cases like dashing backwards after sliding down a hill.
-                dodge = melodyController.move;
-                //Apply the normalized y value from our velocity so that we maintain our upwards/downwards momentum when dashing. This allows Melody to get extra height off of ramps.
-                dodge.y = melodyController.rigidBody.velocity.normalized.y;
-                dodge = dodge.normalized * (melodyController.config.DashLength / melodyController.config.DashTime);
+                dodge = melodyController.move.normalized * (melodyController.config.DashLength / melodyController.config.DashTime);
             }
 
             nextState = new DashState(melodyController, dodge);

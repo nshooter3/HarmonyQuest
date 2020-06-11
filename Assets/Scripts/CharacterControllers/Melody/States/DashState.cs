@@ -30,6 +30,11 @@
             {
                 ableToExit = true;
             }
+
+            //Apply the normalized y value from our velocity so that we maintain our upwards/downwards momentum when dashing.
+            //This allows Melody to get extra height off of ramps.
+            dodge.y = melodyController.rigidBody.velocity.normalized.y * (melodyController.config.DashLength / melodyController.config.DashTime);
+
             //Restrict the Y axis range of Melody's dash once she leaves the ground.
             if (melodyController.melodyCollision.IsInAir())
             {
