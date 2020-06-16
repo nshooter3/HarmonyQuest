@@ -4,7 +4,7 @@ namespace Melody.States
 {
     public class SuccessfulCounterState : MelodyState
     {
-        public SuccessfulCounterState(MelodyController controller) : base(controller) { }
+        public SuccessfulCounterState(MelodyController controller) : base(controller) { stateName = "SuccessfulCounterState"; }
 
         float cooldownTimer = float.MaxValue;
 

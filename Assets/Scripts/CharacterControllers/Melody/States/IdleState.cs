@@ -5,7 +5,7 @@
     public class IdleState : MelodyState
     {
 
-        public IdleState(MelodyController controller) : base(controller) { }
+        public IdleState(MelodyController controller) : base(controller) { stateName = "IdleState"; }
 
         protected override void Enter() { }
 

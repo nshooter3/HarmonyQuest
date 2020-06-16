@@ -10,6 +10,7 @@
     public class MelodyController : MonoBehaviour, IMelodyInfo
     {
         MelodyStateMachine StateMachine;
+        public string currentStateName;
 
         public IPlayerInputManager input { get; private set; }
 
@@ -87,6 +88,7 @@
             melodyLockOn.OnUpdate(Time.deltaTime);
             StateMachine.OnUpdate(Time.deltaTime);
             melodySound.OnUpdate();
+            currentStateName = StateMachine.GetCurrentStateName();
         }
 
         void FixedUpdate()

@@ -13,6 +13,7 @@
         {
             this.dodge = dodge;
             dodgeMultiplier = (melodyController.config.DashLength / melodyController.config.DashTime);
+            stateName = "DashState";
         }
 
         protected override void Enter()

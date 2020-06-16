@@ -4,6 +4,8 @@
 
     public abstract class MelodyState
     {
+        public string stateName;
+
         private bool isEntering;
 
         protected bool ableToExit;

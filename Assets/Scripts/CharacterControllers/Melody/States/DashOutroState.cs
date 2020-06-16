@@ -6,7 +6,7 @@
     {
         protected float timer = 0;
 
-        public DashOutroState(MelodyController controller) : base(controller) { }
+        public DashOutroState(MelodyController controller) : base(controller) { stateName = "DashOutroState"; }
 
         protected override void Enter()
         {

@@ -5,7 +5,7 @@
 
     public class AttackRequestState : MelodyState
     {
-        public AttackRequestState(MelodyController controller) : base(controller) { }
+        public AttackRequestState(MelodyController controller) : base(controller) { stateName = "AttackRequestState"; }
 
         FmodFacade.OnBeatAccuracy accuracy;
 

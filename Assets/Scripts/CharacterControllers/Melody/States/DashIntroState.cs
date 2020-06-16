@@ -8,7 +8,7 @@
         protected Vector3 dodge;
         protected float timer;
 
-        public DashIntroState(MelodyController controller) : base(controller) { }
+        public DashIntroState(MelodyController controller) : base(controller) { stateName = "DashIntroState"; }
 
         protected override void Enter()
         {

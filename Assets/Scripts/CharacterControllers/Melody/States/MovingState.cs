@@ -4,7 +4,7 @@
 
     public class MovingState : MelodyState
     {
-        public MovingState(MelodyController controller) : base(controller) { }
+        public MovingState(MelodyController controller) : base(controller) { stateName = "MovingState"; }
 
         protected override void Enter()
         {
@@ -31,7 +31,7 @@
                 ableToExit = true;
                 nextState = new DashIntroState(melodyController);
             }
-            else if (melodyController.move.magnitude == 0.0f && melodyController.melodyPhysics.velocity.magnitude == 0.0f)
+            else if (melodyController.move.magnitude == 0.0f && melodyController.melodyPhysics.velocity.magnitude < 0.001f)
             {
                 ableToExit = true;
                 nextState = new IdleState(melodyController);
@@ -43,7 +43,14 @@
         public override void OnFixedUpdate()
         {
             melodyController.melodyPhysics.ApplyVelocity(melodyController.config.MaxSpeed, melodyController.config.TurningSpeed);
-            melodyController.melodyPhysics.ApplyGravity(melodyController.config.Gravity);
+            if (melodyController.move.magnitude == 0.0f && melodyController.melodyCollision.IsGrounded() == true)
+            {
+                //If there is no controller input and melody is grounded, do not apply gravity. This prevents her from infinitely sliding down hills.
+            }
+            else
+            {
+                melodyController.melodyPhysics.ApplyGravity(melodyController.config.Gravity);
+            }
             melodyController.melodyPhysics.SnapToGround();
             base.OnFixedUpdate();
         }
