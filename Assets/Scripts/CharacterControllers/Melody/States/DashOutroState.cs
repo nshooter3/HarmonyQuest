@@ -43,6 +43,7 @@
         {
             melodyController.melodyPhysics.ApplyVelocity(melodyController.config.DashOutroMaxSpeed, melodyController.config.DashOutroTurningSpeed);
             melodyController.melodyPhysics.ApplyGravity(melodyController.config.DashOutroGravity);
+            melodyController.melodyPhysics.SnapToGround();
             base.OnFixedUpdate();
         }
 

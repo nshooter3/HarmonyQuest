@@ -46,6 +46,7 @@
         public override void OnFixedUpdate()
         {
             melodyController.melodyPhysics.ApplyDashVelocity(dodge);
+            melodyController.melodyPhysics.ApplyDashGravity(melodyController.config.GroundedDashGravity);
             melodyController.melodyPhysics.SnapToGround();
             base.OnFixedUpdate();
         }

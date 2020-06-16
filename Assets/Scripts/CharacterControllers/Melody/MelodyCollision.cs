@@ -17,6 +17,9 @@
         public Vector3 steepestSlopeNormalPerpendicular { get; private set; }
         //The vector that travels horizontally along the collision plane. Has a y value of 0.
         public Vector3 steepestSlopeNormalPerpendicularSide { get; private set; }
+        //Dot product of the player's forward and the slope normal. When this is greater than 0, it means the player is moving towards the direction the slope is pushing them.
+        //When this is the case, we want to apply gravity to prevent the player from jittering as they go downhill.
+        public float slopeNormalDotProduct;
 
         private readonly bool debug = true;
 
@@ -32,6 +35,7 @@
             //Since FixedUpdate fires before collision functions, we can reset isGrounded here and let our collision enter/stay functions recheck every frame.
             isGrounded = false;
             isSliding = false;
+            slopeNormalDotProduct = 0;
         }
 
         public void SetGrounded(Collision collision)
@@ -61,6 +65,7 @@
                 {
                     steepestSlopeYAngle = slopeDownAngle;
                     steepestSlopeNormal = normal;
+                    slopeNormalDotProduct = Vector3.Dot(controller.GetTransformForward(), steepestSlopeNormal);
                     steepestSlopeNormalPerpendicularSide = normalPerpendicularSide;
                     steepestSlopeNormalPerpendicular = normalPerpendicular;
                 }

@@ -16,17 +16,17 @@
             base.OnUpdate(time);
 
             //Check For Attack
-            if (melodyController.input.AttackButtonDown() && FmodFacade.instance.HasPerformedActionThisBeat() == false)
+            if (melodyController.input.AttackButtonDown() && FmodFacade.instance.HasPerformedActionThisBeat() == false && melodyController.melodyCollision.IsSliding() == false)
             {
                 ableToExit = true;
                 nextState = new AttackRequestState(melodyController);
             }
-            else if (melodyController.input.ParryButtonDown())
+            else if (melodyController.input.ParryButtonDown() && melodyController.melodyCollision.IsSliding() == false)
             {
                 ableToExit = true;
                 nextState = new CounterState(melodyController);
             }
-            else if (melodyController.input.DodgeButtonDown())
+            else if (melodyController.input.DodgeButtonDown() && melodyController.melodyCollision.IsSliding() == false)
             {
                 ableToExit = true;
                 nextState = new DashIntroState(melodyController);
@@ -44,7 +44,7 @@
         {
             melodyController.melodyPhysics.ApplyVelocity(melodyController.config.MaxSpeed, melodyController.config.TurningSpeed);
             melodyController.melodyPhysics.ApplyGravity(melodyController.config.Gravity);
-            //melodyController.melodyPhysics.SnapToGround();
+            melodyController.melodyPhysics.SnapToGround();
             base.OnFixedUpdate();
         }
 

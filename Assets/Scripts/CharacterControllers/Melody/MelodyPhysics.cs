@@ -111,7 +111,7 @@
             //Check if the body's current velocity will result in a collision
             if (Physics.Raycast(colliderCenterPosition, velocity.normalized, out hit, distance, controller.config.prohibitMovementIntoWallsLayerMask) ||
                 Physics.Raycast(colliderUpperPosition,  velocity.normalized, out hit, distance, controller.config.prohibitMovementIntoWallsLayerMask) ||
-                Physics.Raycast(colliderLowerPosition,  velocity.normalized, out hit, distance, controller.config.prohibitMovementIntoWallsLayerMask) )
+                (Physics.Raycast(colliderLowerPosition,  velocity.normalized, out hit, distance, controller.config.prohibitMovementIntoWallsLayerMask) && !isDash) )
             {
                 if (isDash)
                 {
@@ -154,11 +154,11 @@
             velocity = new Vector3(0.0f, velocity.y, 0.0f);
         }
 
-        public void ApplyGravity(Vector3 gravity)
+        public void ApplyGravity(Vector3 gravity, bool isIdle = false)
         {
-            if (controller.melodyCollision.IsGrounded() == false)
+            if (controller.melodyCollision.IsGrounded() == false || (isIdle == false && controller.melodyCollision.slopeNormalDotProduct > 0.1f))
             {
-                //Apply gravity if Melody is in the air or sliding.
+                //Apply gravity if Melody is in the air or sliding, or if she is moving downhill.
                 controller.rigidBody.AddForce(gravity, ForceMode.Acceleration);
             }
             else
@@ -168,13 +168,22 @@
             }
         }
 
+        public void ApplyDashGravity(Vector3 gravity)
+        {
+            //Apply gravity if Melody is moving downhill.
+            if (controller.melodyCollision.slopeNormalDotProduct > 0.1f)
+            {
+                controller.rigidBody.AddForce(gravity, ForceMode.VelocityChange);
+            }
+        }
+
         public void SnapToGround()
         {
             if (controller.melodyCollision.IsInAir())
             {
                 if (Physics.Raycast(controller.transform.position, Vector3.down, out hit, controller.config.snapToGroundRaycastDistance, controller.config.snapToGroundLayerMask))
                 {
-                    controller.transform.position = hit.point + controller.config.snapOffset;
+                    controller.rigidBody.MovePosition(hit.point);
                 }
             }
         }

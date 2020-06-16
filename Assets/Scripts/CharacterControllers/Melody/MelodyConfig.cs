@@ -12,6 +12,8 @@
         public float TurningSpeed;
         public Vector3 Gravity;
 
+        public Vector3 GroundedDashGravity;
+
         [Header("Attack Settings")]
         public float AttackMaxSpeed;         //Unity Units Per Second
         public float AttackMaxAcceleration;  //Unity Units Per Second
@@ -87,10 +89,10 @@
         public float snapToGroundRaycastDistance;
 
         /// <summary>
-        /// Value that gets added to Melody's position when she snaps to the ground to prevent her from clipping into it.
+        /// The distance threshold within which Melody will snap to the ground when dashing if she is close enough.
         /// </summary>
-        [Tooltip("Value that gets added to Melody's position when she snaps to the ground to prevent her from clipping into it.")]
-        public Vector3 snapOffset;
+        [Tooltip("The distance threshold within which Melody will snap to the ground when dashing if she is close enough.")]
+        public float snapToGroundRaycastDistanceDash;
 
         /// <summary>
         /// Which surfaces Melody will snap to.
