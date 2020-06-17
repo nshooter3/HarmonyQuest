@@ -2407,6 +2407,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b269c5af4e70bfd419e61d48f3cd0ce9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentStateName: 
   animator: {fileID: 9072926042586309316}
   hurtboxes:
   - {fileID: 750596295520657578}
@@ -2418,6 +2419,7 @@ MonoBehaviour:
     MaxAcceleration: 80
     TurningSpeed: 5
     Gravity: {x: 0, y: -40, z: 0}
+    GroundedDashGravity: {x: 0, y: -40, z: 0}
     AttackMaxSpeed: 5
     AttackMaxAcceleration: 80
     AttackTurningSpeed: 0.5
@@ -2442,10 +2444,14 @@ MonoBehaviour:
     dashYRadianAirLowerRange: 0.025
     dashYRadianAirUpperRange: 0.3
     snapToGroundRaycastDistance: 0.4
-    snapOffset: {x: 0, y: 0.05, z: 0}
-    snapToGroundLayerMask:
+    snapToGroundRaycastDistanceDash: 1
+    groundLayerMask:
       serializedVersion: 2
       m_Bits: 257
+    groundCheckRaycastDistance: 0.3
+    groundCheckRaycastYOffset: 0.1
+    groundCheckRaycastSpread: 0.25
+    groundCheckCenterWeight: 1
     groundedYAngleCutoff: 45
     slidingYAngleCutoff: 89
     slidingSpeedAdjusmentRatio: {x: 5, y: 1.5, z: 5}

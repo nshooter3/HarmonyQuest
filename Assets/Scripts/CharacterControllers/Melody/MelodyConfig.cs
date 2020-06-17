@@ -95,12 +95,37 @@
         public float snapToGroundRaycastDistanceDash;
 
         /// <summary>
-        /// Which surfaces Melody will snap to.
+        /// Which surfaces we consider walkable ground.
         /// </summary>
-        [Tooltip("Which surfaces Melody will snap to.")]
-        public LayerMask snapToGroundLayerMask;
+        [Tooltip("Which surfaces we consider walkable ground.")]
+        public LayerMask groundLayerMask;
 
-        [Header("Contact Normal Logic")]
+        [Header("Grounded Check Logic")]
+
+        /// <summary>
+        /// How far to check below Melody for the ground.
+        /// </summary>
+        [Tooltip("How far to check below Melody for the ground.")]
+        public float groundCheckRaycastDistance;
+
+        /// <summary>
+        /// How far above Melody's position to start our grounded raycast.
+        /// </summary>
+        [Tooltip("How far above Melody's position to start our grounded raycast.")]
+        public float groundCheckRaycastYOffset;
+
+        /// <summary>
+        /// How far out from the central ground check raycast our other ground check raycasts should be. These are all averaged out to get a slope.
+        /// </summary>
+        [Tooltip("How far out from the central ground check raycast our other ground check raycasts should be. These are all averaged out to get a slope.")]
+        public float groundCheckRaycastSpread;
+
+        /// <summary>
+        /// The weight of the center raycast. Can be used to skew the average normal in favor of the middle of Melody.
+        /// </summary>
+        [Tooltip("The weight of the center raycast. Can be used to skew the average normal in favor of the middle of Melody.")]
+        public float groundCheckCenterWeight;
+
         /// <summary>
         /// If Melody is colliding with something that has a contact normal y angle less than groundedYAngleCutoff, we consider her grounded.
         /// </summary>

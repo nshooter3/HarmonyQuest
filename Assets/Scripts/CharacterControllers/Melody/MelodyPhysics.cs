@@ -193,7 +193,7 @@
         {
             if (controller.melodyCollision.IsInAir())
             {
-                if (Physics.Raycast(controller.transform.position, Vector3.down, out hit, controller.config.snapToGroundRaycastDistance, controller.config.snapToGroundLayerMask))
+                if (Physics.Raycast(controller.transform.position, Vector3.down, out hit, controller.config.snapToGroundRaycastDistance, controller.config.groundLayerMask))
                 {
                     controller.rigidBody.MovePosition(hit.point);
                 }
