@@ -34,7 +34,7 @@
 
             //Apply the normalized y value from our velocity so that we maintain our upwards/downwards momentum when dashing.
             //This allows Melody to get extra height off of ramps.
-            dodge.y = melodyController.rigidBody.velocity.normalized.y * (melodyController.config.DashLength / melodyController.config.DashTime);
+            dodge.y = melodyController.rigidBody.velocity.normalized.y * dodgeMultiplier;
 
             //Restrict the Y axis range of Melody's dash once she leaves the ground.
             if (melodyController.melodyCollision.IsInAir())
@@ -48,7 +48,15 @@
         {
             melodyController.melodyPhysics.ApplyDashVelocity(dodge);
             melodyController.melodyPhysics.ApplyDashGravity(melodyController.config.GroundedDashGravity);
+            //Cap speed after applying gravity when grounded to prevent Melody from moving too quickly downhill.
+            if (melodyController.melodyCollision.IsGrounded() == true)
+            {
+                melodyController.melodyPhysics.CapSpeed(dodgeMultiplier);
+            }
             melodyController.melodyPhysics.SnapToGround();
+
+            //Debug.Log("Dash State Velocity Magnitude: " + melodyController.melodyPhysics.velocity.magnitude);
+
             base.OnFixedUpdate();
         }
 

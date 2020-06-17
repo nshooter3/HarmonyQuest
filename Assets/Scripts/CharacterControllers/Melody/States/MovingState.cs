@@ -1,6 +1,7 @@
 ﻿namespace Melody.States
 {
     using HarmonyQuest.Audio;
+    using UnityEngine;
 
     public class MovingState : MelodyState
     {
@@ -50,8 +51,17 @@
             else
             {
                 melodyController.melodyPhysics.ApplyGravity(melodyController.config.Gravity);
+
+                //Cap speed after applying gravity when grounded to prevent Melody from moving too quickly downhill.
+                if (melodyController.melodyCollision.IsGrounded() == true)
+                {
+                    melodyController.melodyPhysics.CapSpeed(melodyController.config.MaxSpeed);
+                }
             }
             melodyController.melodyPhysics.SnapToGround();
+
+            //Debug.Log("Moving State Velocity Magnitude: " + melodyController.melodyPhysics.velocity.magnitude);
+
             base.OnFixedUpdate();
         }
 
