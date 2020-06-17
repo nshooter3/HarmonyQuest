@@ -15,7 +15,7 @@
         private bool isGrounded;
         private bool isSliding;
 
-        //Radian Y value of the steepest slope that can cause the player to slide.
+        //Angle Y value of the steepest slope that can cause the player to slide.
         private float steepestSlopeYAngle;
         //Collision normal direction of the steepest slope, used to calculate which direction the player should slide.
         public Vector3 steepestSlopeNormal { get; private set; }
