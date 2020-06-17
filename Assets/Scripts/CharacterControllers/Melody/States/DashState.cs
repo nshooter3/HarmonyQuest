@@ -48,11 +48,6 @@
         {
             melodyController.melodyPhysics.ApplyDashVelocity(dodge);
             melodyController.melodyPhysics.ApplyDashGravity(melodyController.config.GroundedDashGravity);
-            //Cap speed after applying gravity when grounded to prevent Melody from moving too quickly downhill.
-            if (melodyController.melodyCollision.IsGrounded() == true)
-            {
-                melodyController.melodyPhysics.CapSpeed(dodgeMultiplier);
-            }
             melodyController.melodyPhysics.SnapToGround();
 
             //Debug.Log("Dash State Velocity Magnitude: " + melodyController.melodyPhysics.velocity.magnitude);

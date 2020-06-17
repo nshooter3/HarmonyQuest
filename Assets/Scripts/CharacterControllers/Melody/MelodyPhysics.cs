@@ -166,6 +166,12 @@
                 //Don't apply gravity if we are grounded, as this can sometimes lead to sliding when Melody stands on slight slopes.
                 controller.rigidBody.velocity = new Vector3(controller.rigidBody.velocity.x, 0.0f, controller.rigidBody.velocity.z);
             }
+
+            //Cap speed after applying gravity when grounded to prevent Melody from moving too quickly downhill.
+            if (controller.melodyCollision.IsGrounded() == true)
+            {
+                controller.melodyPhysics.CapSpeed(controller.config.MaxSpeed);
+            }
         }
 
         public void ApplyDashGravity(Vector3 gravity)
@@ -174,6 +180,12 @@
             if (controller.melodyCollision.slopeNormalDotProduct > 0.1f)
             {
                 controller.rigidBody.AddForce(gravity, ForceMode.VelocityChange);
+            }
+
+            //Cap speed after applying gravity when grounded to prevent Melody from moving too quickly downhill.
+            if (controller.melodyCollision.IsGrounded() == true)
+            {
+                controller.melodyPhysics.CapSpeed(controller.config.DashLength / controller.config.DashTime);
             }
         }
 
