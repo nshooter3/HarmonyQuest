@@ -8,20 +8,22 @@
         protected Vector3 dodge;
         protected float timer;
 
-        public DashIntroState(MelodyController controller) : base(controller) { }
+        public DashIntroState(MelodyController controller) : base(controller) { stateName = "DashIntroState"; }
 
         protected override void Enter()
         {
             melodyController.melodyAnimator.EnterDash();
 
-            //If there's no controller input, dodge backwards.
-            if (melodyController.input.GetHorizontalMovement() == 0 && melodyController.input.GetVerticalMovement() == 0)
+            //If there's no controller input, dodge in the direction of the player's forward
+            if (melodyController.move == Vector3.zero)
             {
-                dodge = -melodyController.transform.forward * (melodyController.config.DashLength / melodyController.config.DashTime);
+                dodge = melodyController.transform.forward * (melodyController.config.DashLength / melodyController.config.DashTime);
             }
             else
             {
-                dodge = melodyController.rigidBody.velocity.normalized * (melodyController.config.DashLength / melodyController.config.DashTime);
+                //Use the controller input rather than the player velocity to determine dash direction.
+                //This feels a lot more responsive and prevents edge cases like dashing backwards after sliding down a hill.
+                dodge = melodyController.move.normalized * (melodyController.config.DashLength / melodyController.config.DashTime);
             }
 
             nextState = new DashState(melodyController, dodge);
@@ -30,6 +32,7 @@
             timer = 0;
             melodyController.melodyHealth.isDashing = true;
             melodyController.melodySound.Dash();
+            melodyController.melodyHealth.CheckForLateDodges();
         }
 
         public override void OnUpdate(float time)

@@ -5,7 +5,7 @@
     public class IdleState : MelodyState
     {
 
-        public IdleState(MelodyController controller) : base(controller) { }
+        public IdleState(MelodyController controller) : base(controller) { stateName = "IdleState"; }
 
         protected override void Enter() { }
 
@@ -13,18 +13,18 @@
         {
             base.OnUpdate(time);
 
-            if (melodyController.input.AttackButtonDown() && FmodFacade.instance.HasPerformedActionThisBeat() == false)
+            if (melodyController.input.AttackButtonDown() && FmodFacade.instance.HasPerformedActionThisBeat() == false && melodyController.melodyCollision.IsSliding() == false)
             {
 
                 ableToExit = true;
                 nextState = new AttackRequestState(melodyController);
             }
-            else if (melodyController.input.ParryButtonDown())
+            else if (melodyController.input.ParryButtonDown() && melodyController.melodyCollision.IsSliding() == false)
             {
                 ableToExit = true;
                 nextState = new CounterState(melodyController);
             }
-            else if (melodyController.input.DodgeButtonDown())
+            else if (melodyController.input.DodgeButtonDown() && melodyController.melodyCollision.IsSliding() == false)
             {
                 ableToExit = true;
                 nextState = new DashIntroState(melodyController);
@@ -38,7 +38,12 @@
 
         public override void OnFixedUpdate()
         {
-            melodyController.melodyPhysics.ApplyGravity(melodyController.config.Gravity);
+            if (melodyController.melodyCollision.IsGrounded() && !melodyController.melodyCollision.IsSliding())
+            {
+                melodyController.melodyPhysics.IgnoreHorizontalMovementInput();
+                melodyController.melodyPhysics.ApplyVelocity(melodyController.config.MaxSpeed, melodyController.config.TurningSpeed);
+            }
+            melodyController.melodyPhysics.ApplyGravity(melodyController.config.Gravity, true);
             if (melodyController.melodyLockOn.HasLockonTarget() == true)
             {
                 melodyController.melodyPhysics.RotatePlayer(melodyController.config.TurningSpeed, true);

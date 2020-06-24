@@ -226,7 +226,7 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   m_BlendParameter: RightLeft
-  m_BlendParameterY: UpDown
+  m_BlendParameterY: ForwardBackward
   m_MinThreshold: 0
   m_MaxThreshold: 3
   m_UseAutomaticThresholds: 0
@@ -293,7 +293,7 @@ AnimatorStateMachine:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Lower Body
+  m_Name: Full Body Actions
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 6718444780429508753}
@@ -601,7 +601,7 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-  - m_Name: UpDown
+  - m_Name: ForwardBackward
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -651,9 +651,9 @@ AnimatorController:
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
   - serializedVersion: 5
-    m_Name: Lower Body
+    m_Name: Full Body Actions
     m_StateMachine: {fileID: -4551006275352607681}
-    m_Mask: {fileID: 31900000, guid: 73a2fbdfae82ccc45946d00d5a2e5d4d, type: 2}
+    m_Mask: {fileID: 0}
     m_Motions: []
     m_Behaviours: []
     m_BlendingMode: 0
@@ -675,7 +675,7 @@ AnimatorController:
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
   - serializedVersion: 5
-    m_Name: Upper Body
+    m_Name: Upper Body Actions
     m_StateMachine: {fileID: 5629730492695918181}
     m_Mask: {fileID: 31900000, guid: 4a9416218df960f46ab73bcad3fb1858, type: 2}
     m_Motions: []
@@ -946,20 +946,20 @@ AnimatorStateMachine:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Upper Body
+  m_Name: Upper Body Actions
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -5891085649564441711}
     m_Position: {x: 190, y: -260, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3009362107249736276}
-    m_Position: {x: 510, y: -250, z: 0}
+    m_Position: {x: 510, y: -260, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1221666008894902577}
     m_Position: {x: -100, y: -260, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -9221645625799165178}
-    m_Position: {x: -390, y: -270, z: 0}
+    m_Position: {x: -390, y: -260, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: 2194021323728826428}

@@ -1,6 +1,7 @@
 ﻿namespace Melody
 {
     using UnityEngine;
+    using HarmonyQuest.Audio;
 
     [System.Serializable]
     public class MelodyConfig
@@ -10,6 +11,8 @@
         public float MaxAcceleration;  //Unity Units Per Second
         public float TurningSpeed;
         public Vector3 Gravity;
+
+        public Vector3 GroundedDashGravity;
 
         [Header("Attack Settings")]
         public float AttackMaxSpeed;         //Unity Units Per Second
@@ -22,11 +25,28 @@
         public float CounterMaxAcceleration;  //Unity Units Per Second
         public float CounterTurningSpeed;
         public Vector3 CounterGravity;
+
         /// <summary>
-        /// The amount of time before and after an enemy attack activates that our counter is considered successful.
-        /// Therefore, the total time window for a counter is CounterGracePeriod times two.
+        /// The percentage of a beat before and after an enemy attack activates that our counter is considered successful.
+        /// Therefore, the total time window for a counter is (PreCounterGracePeriod * Beat) time + (PostCounterGracePeriod * Beat).
         /// </summary>
-        public float CounterGracePeriod;
+        [SerializeField]
+        [Range(0f, 1f)]
+        private float preCounterGracePeriod;
+        public float PreCounterGracePeriod { get { return preCounterGracePeriod * FmodFacade.instance.GetBeatDuration(); } private set { preCounterGracePeriod = value; } }
+        [SerializeField]
+        [Range(0f, 1f)]
+        private float postCounterGracePeriod;
+        public float PostCounterGracePeriod { get { return postCounterGracePeriod * FmodFacade.instance.GetBeatDuration(); } private set { postCounterGracePeriod = value; } }
+
+        /// <summary>
+        /// How long after an enemy attack before Melody takes damage (ratio of a beat)
+        /// Bceause player needs a window for late parries, we need them to receive damage after this window has passed.
+        /// </summary>
+        [SerializeField]
+        [Range(0f, 1f)]
+        private float postHitDamageDelay;
+        public float PostHitDamageDelay { get { return postHitDamageDelay * FmodFacade.instance.GetBeatDuration(); } private set { postHitDamageDelay = value; } }
 
         /// <summary>
         /// If the damage comes a direction within CounterDegreeRange degrees of where the player is facing, we consider it a successful parry. (CounterDegreeRange * 2 degrees total range).
@@ -57,11 +77,6 @@
         //Radian values used to cap the y angle on the player's dash once they leave the ground.
         //Ensures that they always travel a little bit upwards, but prevents them from dashing straight up.
         [Range(-1.0f, 1.0f)]
-        public float dashYRadianGroundedLowerRange;
-        [Range(-1.0f, 1.0f)]
-        public float dashYRadianGroundedUpperRange;
-
-        [Range(-1.0f, 1.0f)]
         public float dashYRadianAirLowerRange;
         [Range(-1.0f, 1.0f)]
         public float dashYRadianAirUpperRange;
@@ -74,29 +89,54 @@
         public float snapToGroundRaycastDistance;
 
         /// <summary>
-        /// Value that gets added to Melody's position when she snaps to the ground to prevent her from clipping into it.
+        /// The distance threshold within which Melody will snap to the ground when dashing if she is close enough.
         /// </summary>
-        [Tooltip("Value that gets added to Melody's position when she snaps to the ground to prevent her from clipping into it.")]
-        public Vector3 snapOffset;
+        [Tooltip("The distance threshold within which Melody will snap to the ground when dashing if she is close enough.")]
+        public float snapToGroundRaycastDistanceDash;
 
         /// <summary>
-        /// Which surfaces Melody will snap to.
+        /// Which surfaces we consider walkable ground.
         /// </summary>
-        [Tooltip("Which surfaces Melody will snap to.")]
-        public LayerMask snapToGroundLayerMask;
+        [Tooltip("Which surfaces we consider walkable ground.")]
+        public LayerMask groundLayerMask;
 
-        [Header("Contact Normal Logic")]
-        /// <summary>
-        /// If Melody is colliding with something that has a contact normal y value greater than groundedYNormalThreshold, we consider her grounded.
-        /// </summary>
-        [Tooltip("If Melody is colliding with something that has a contact normal y value greater than groundedYNormalThreshold, we consider her grounded.")]
-        public float groundedYNormalThreshold;
+        [Header("Grounded Check Logic")]
 
         /// <summary>
-        /// If Melody is colliding with something that has a contact normal y value greater than slidingYNormalThreshold, we consider her sliding.
+        /// How far to check below Melody for the ground.
         /// </summary>
-        [Tooltip("If Melody is colliding with something that has a contact normal y value greater than slidingYNormalThreshold, we consider her sliding.")]
-        public float slidingYNormalThreshold;
+        [Tooltip("How far to check below Melody for the ground.")]
+        public float groundCheckRaycastDistance;
+
+        /// <summary>
+        /// How far above Melody's position to start our grounded raycast.
+        /// </summary>
+        [Tooltip("How far above Melody's position to start our grounded raycast.")]
+        public float groundCheckRaycastYOffset;
+
+        /// <summary>
+        /// How far out from the central ground check raycast our other ground check raycasts should be. These are all averaged out to get a slope.
+        /// </summary>
+        [Tooltip("How far out from the central ground check raycast our other ground check raycasts should be. These are all averaged out to get a slope.")]
+        public float groundCheckRaycastSpread;
+
+        /// <summary>
+        /// The weight of the center raycast. Can be used to skew the average normal in favor of the middle of Melody.
+        /// </summary>
+        [Tooltip("The weight of the center raycast. Can be used to skew the average normal in favor of the middle of Melody.")]
+        public float groundCheckCenterWeight;
+
+        /// <summary>
+        /// If Melody is colliding with something that has a contact normal y angle less than groundedYAngleCutoff, we consider her grounded.
+        /// </summary>
+        [Tooltip("If Melody is colliding with something that has a contact normal y angle less than groundedYAngleCutoff, we consider her grounded.")]
+        public float groundedYAngleCutoff;
+
+        /// <summary>
+        /// If Melody is colliding with something that has a contact normal y angle less than slidingYAngleCutoff but greater than groundedYAngleCutoff, we consider her sliding.
+        /// </summary>
+        [Tooltip("If Melody is colliding with something that has a contact normal y angle less than slidingYAngleCutoff but greater than groundedYAngleCutoff, we consider her sliding.")]
+        public float slidingYAngleCutoff;
 
         /// <summary>
         /// Scaling values for the x, y and z axis of Melody's sliding force.

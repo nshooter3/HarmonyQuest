@@ -35,6 +35,11 @@
             colliderRadius = controller.capsuleCollider.radius;
         }
 
+        public void OverrideVelocity(Vector3 newVelocity)
+        {
+            velocity = newVelocity;
+        }
+
         public void CalculateVelocity(float maxSpeed, float maxAcceleration)
         {
             desiredVelocity = new Vector3(controller.move.x, 0, controller.move.z) * maxSpeed;
@@ -49,16 +54,17 @@
         {
             if (controller.melodyCollision.IsSliding())
             {
-                SetVelocityToSlide();
+                //TODO: Figure out if we want Melody to have influence over her movement while sliding down hills. For now, this is commented out.
+                //SetVelocityToSlide();
             }
             else
             {
                 ProhibitMovementIntoWalls();
+                RotatePlayer(turningSpeed);
+                controller.rigidBody.velocity = velocity;
             }
-            RotatePlayer(turningSpeed);
-            controller.rigidBody.velocity = velocity;
             controller.melodyAnimator.SetWalkRun(desiredVelocity.magnitude / maxSpeed);
-
+            controller.melodyAnimator.SetStrafeInfo(controller.transform.forward, velocity);
         }
 
         public void ApplyStationaryVelocity()
@@ -69,14 +75,24 @@
 
         public void ApplyDashVelocity(Vector3 dashVelocity)
         {
-            velocity = dashVelocity;
-            ProhibitMovementIntoWalls(true);
+            if (controller.melodyCollision.IsSliding())
+            {
+                velocity = Vector3.zero;
+            }
+            else
+            {
+                velocity = dashVelocity;
+                ProhibitMovementIntoWalls(true);
+            }
             controller.rigidBody.velocity = velocity;
         }
 
         public void CapSpeed(float maxSpeed)
         {
-            velocity = velocity.normalized * maxSpeed;
+            if (velocity.magnitude > maxSpeed)
+            {
+                velocity = velocity.normalized * maxSpeed;
+            }
         }
 
         /// <summary>
@@ -95,7 +111,7 @@
             //Check if the body's current velocity will result in a collision
             if (Physics.Raycast(colliderCenterPosition, velocity.normalized, out hit, distance, controller.config.prohibitMovementIntoWallsLayerMask) ||
                 Physics.Raycast(colliderUpperPosition,  velocity.normalized, out hit, distance, controller.config.prohibitMovementIntoWallsLayerMask) ||
-                Physics.Raycast(colliderLowerPosition,  velocity.normalized, out hit, distance, controller.config.prohibitMovementIntoWallsLayerMask) )
+                (Physics.Raycast(colliderLowerPosition,  velocity.normalized, out hit, distance, controller.config.prohibitMovementIntoWallsLayerMask) && !isDash) )
             {
                 if (isDash)
                 {
@@ -115,9 +131,9 @@
 
         private void SetVelocityToSlide()
         {
-            slideVelocity = new Vector3(controller.melodyCollision.steepestSlopeDirection.x * controller.config.slidingSpeedAdjusmentRatio.x,
+            slideVelocity = new Vector3(controller.melodyCollision.steepestSlopeNormal.x * controller.config.slidingSpeedAdjusmentRatio.x,
                                               velocity.y * controller.config.slidingSpeedAdjusmentRatio.y,
-                                              controller.melodyCollision.steepestSlopeDirection.z * controller.config.slidingSpeedAdjusmentRatio.z);
+                                              controller.melodyCollision.steepestSlopeNormal.z * controller.config.slidingSpeedAdjusmentRatio.z);
 
             if (controller.input.GetHorizontalMovement() != 0 || controller.input.GetVerticalMovement() != 0)
             {
@@ -133,16 +149,16 @@
             Debug.DrawRay(controller.transform.position + colliderOffset, velocity * 2.0f, Color.cyan);
         }
 
-        private void IgnoreHorizontalMovementInput()
+        public void IgnoreHorizontalMovementInput()
         {
             velocity = new Vector3(0.0f, velocity.y, 0.0f);
         }
 
-        public void ApplyGravity(Vector3 gravity)
+        public void ApplyGravity(Vector3 gravity, bool isIdle = false)
         {
-            if (controller.melodyCollision.IsGrounded() == false)
+            if (controller.melodyCollision.IsGrounded() == false || (isIdle == false && controller.melodyCollision.slopeNormalDotProduct > 0.1f))
             {
-                //Apply gravity if Melody is in the air or sliding.
+                //Apply gravity if Melody is in the air or sliding, or if she is moving downhill.
                 controller.rigidBody.AddForce(gravity, ForceMode.Acceleration);
             }
             else
@@ -150,15 +166,36 @@
                 //Don't apply gravity if we are grounded, as this can sometimes lead to sliding when Melody stands on slight slopes.
                 controller.rigidBody.velocity = new Vector3(controller.rigidBody.velocity.x, 0.0f, controller.rigidBody.velocity.z);
             }
+
+            //Cap speed after applying gravity when grounded to prevent Melody from moving too quickly downhill.
+            if (controller.melodyCollision.IsGrounded() == true)
+            {
+                controller.melodyPhysics.CapSpeed(controller.config.MaxSpeed);
+            }
+        }
+
+        public void ApplyDashGravity(Vector3 gravity)
+        {
+            //Apply gravity if Melody is moving downhill.
+            if (controller.melodyCollision.slopeNormalDotProduct > 0.1f)
+            {
+                controller.rigidBody.AddForce(gravity, ForceMode.VelocityChange);
+            }
+
+            //Cap speed after applying gravity when grounded to prevent Melody from moving too quickly downhill.
+            if (controller.melodyCollision.IsGrounded() == true)
+            {
+                controller.melodyPhysics.CapSpeed(controller.config.DashLength / controller.config.DashTime);
+            }
         }
 
         public void SnapToGround()
         {
             if (controller.melodyCollision.IsInAir())
             {
-                if (Physics.Raycast(controller.transform.position, Vector3.down, out hit, controller.config.snapToGroundRaycastDistance, controller.config.snapToGroundLayerMask))
+                if (Physics.Raycast(controller.transform.position, Vector3.down, out hit, controller.config.snapToGroundRaycastDistance, controller.config.groundLayerMask))
                 {
-                    controller.transform.position = hit.point + controller.config.snapOffset;
+                    controller.rigidBody.MovePosition(hit.point);
                 }
             }
         }

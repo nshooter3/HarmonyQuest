@@ -4,7 +4,7 @@
 
     public class CounterState : MelodyState
     {
-        public CounterState(MelodyController controller) : base(controller) { }
+        public CounterState(MelodyController controller) : base(controller) { stateName = "CounterState"; }
 
         //Since the placeholder animation is so long, use a timer to exit this state sooner.
         float tempTimer = 0.6f;
@@ -16,10 +16,10 @@
 
         protected override void Enter()
         {
-            counterActiveTimer = melodyController.config.CounterGracePeriod;
+            counterActiveTimer = melodyController.config.PreCounterGracePeriod;
             melodyController.melodyAnimator.PlayAnimation(MelodyAnimator.Animations.Counter);
             melodyController.counterHurtbox.enabled = true;
-            melodyController.counterHurtboxMesh.enabled = true;
+            //melodyController.counterHurtboxMesh.enabled = true;
             melodyController.melodyHealth.isCountering = true;
             melodyController.melodyHealth.dealtCounterDamage = false;
             melodyController.melodyHealth.CheckForLateCounters();
@@ -74,7 +74,7 @@
         private void EndCounter()
         {
             melodyController.counterHurtbox.enabled = false;
-            melodyController.counterHurtboxMesh.enabled = false;
+            //melodyController.counterHurtboxMesh.enabled = false;
             melodyController.melodyHealth.isCountering = false;
             melodyController.melodyHealth.dealtCounterDamage = false;
         }

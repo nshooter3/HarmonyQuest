@@ -6,7 +6,7 @@
     {
         protected float timer = 0;
 
-        public DashOutroState(MelodyController controller) : base(controller) { }
+        public DashOutroState(MelodyController controller) : base(controller) { stateName = "DashOutroState"; }
 
         protected override void Enter()
         {
@@ -43,6 +43,7 @@
         {
             melodyController.melodyPhysics.ApplyVelocity(melodyController.config.DashOutroMaxSpeed, melodyController.config.DashOutroTurningSpeed);
             melodyController.melodyPhysics.ApplyGravity(melodyController.config.DashOutroGravity);
+            melodyController.melodyPhysics.SnapToGround();
             base.OnFixedUpdate();
         }
 
