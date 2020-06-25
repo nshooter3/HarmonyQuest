@@ -163,10 +163,15 @@
                     pushableBox = hit.transform.gameObject.GetComponent<PushableBox>();
                     if (pushableBox != null)
                     {
-                        pushableBox.Move(new Vector3(velocity.x, 0, velocity.z));
+                        pushableBox.Move();
                     }
                 }
             }
+        }
+
+        public bool IsPushingBox()
+        {
+            return pushableBox != null;
         }
 
         private void SetVelocityToSlide()

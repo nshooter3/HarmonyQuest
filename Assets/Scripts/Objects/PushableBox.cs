@@ -32,20 +32,26 @@
 
         private MelodyController melodyController;
 
+        //Determine which direction the box should be pushed based on which trigger the player is in.
+        [SerializeField]
+        private PushableBoxTrigger[] pushableBoxTriggers;
+
         private void FixedUpdate()
         {
             beingPushed = false;
             moving = false;
         }
 
-        public void Move(Vector3 direction)
+        public void Move()
         {
-            pushDisplacement = direction.normalized * pushSpeed;
+            beingPushed = true;
+
+            pushDisplacement = GetPushDirectionFromTriggers() * pushSpeed;
 
             //Debug.Log("Push Displacement: " + pushDisplacement);
 
             boxcastOrigin = transform.position;
-            boxcastScale = transform.localScale;
+            boxcastScale = transform.localScale * 0.99f;
             boxcastDirection = pushDisplacement.normalized;
             boxcastRotation = Quaternion.FromToRotation(transform.up, pushDisplacement.normalized) * transform.rotation;
             boxcastDistance = pushDisplacement.magnitude;
@@ -79,6 +85,18 @@
             {
                 Gizmos.DrawWireCube(boxcastDirection * boxcastDistance, Vector3.one);
             }
+        }
+
+        private Vector3 GetPushDirectionFromTriggers()
+        {
+            foreach (PushableBoxTrigger box in pushableBoxTriggers)
+            {
+                if (box.containsPlayer == true)
+                {
+                    return box.transform.forward;
+                }
+            }
+            return Vector3.zero;
         }
     }
 }
