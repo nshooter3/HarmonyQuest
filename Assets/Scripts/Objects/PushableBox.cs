@@ -22,7 +22,7 @@
         private Vector3 pushDisplacement;
 
         private Vector3 boxcastOrigin;
-        private Vector3 boxcastScale;
+        private Vector3 boxcastExtents;
         private Vector3 boxcastDirection;
         private Quaternion boxcastRotation;
         private float boxcastDistance;
@@ -46,26 +46,23 @@
         {
             beingPushed = true;
 
-            pushDisplacement = GetPushDirectionFromTriggers() * pushSpeed;
-
-            //Debug.Log("Push Displacement: " + pushDisplacement);
-
+            pushDisplacement = GetPushDirectionFromTriggers().normalized * pushSpeed;
             boxcastOrigin = transform.position;
-            boxcastScale = transform.localScale * 0.99f;
+            boxcastExtents = (transform.localScale / 2f) * 0.99f;
             boxcastDirection = pushDisplacement.normalized;
-            boxcastRotation = Quaternion.FromToRotation(transform.up, pushDisplacement.normalized) * transform.rotation;
+            boxcastRotation = transform.rotation;
             boxcastDistance = pushDisplacement.magnitude;
 
             //Temporarily disable our collider to prevent our boxcast from hitting the box it's coming from.
             col.enabled = false;
 
-            hitObstacleWhileBeingPushed = Physics.BoxCast(boxcastOrigin, boxcastScale / 2f, boxcastDirection, out boxcastHit, boxcastRotation, boxcastDistance, wallCheckMask);
+            hitObstacleWhileBeingPushed = Physics.BoxCast(boxcastOrigin, boxcastExtents, boxcastDirection, out boxcastHit, boxcastRotation, boxcastDistance, wallCheckMask);
 
             col.enabled = true;
 
             if (!hitObstacleWhileBeingPushed)
             {
-                rb.MovePosition(transform.position + pushDisplacement);
+                rb.MovePosition(boxcastOrigin + pushDisplacement);
                 moving = true;
             }
             else
