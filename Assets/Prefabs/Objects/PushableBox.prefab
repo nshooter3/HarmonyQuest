@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 2880871825998540088}
   - component: {fileID: 2880871825998540089}
   - component: {fileID: 2880871825998540092}
-  - component: {fileID: 2880871825998540095}
   m_Layer: 15
   m_Name: PushableBox
   m_TagString: Untagged
@@ -88,7 +87,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2880871825998540038}
-  m_Material: {fileID: 13400000, guid: 420df2dc990394940a18c8e1e0747f28, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -125,27 +124,6 @@ MonoBehaviour:
   rb: {fileID: 2880871825998540089}
   col: {fileID: 2880871825998540088}
   pushSpeed: 0.1
-  collisionWrapper: {fileID: 2880871825998540095}
   wallCheckMask:
     serializedVersion: 2
     m_Bits: 34817
---- !u!114 &2880871825998540095
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2880871825998540038}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36b75dc6df930d540a2979fe3844be64, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  col: {fileID: 2880871825998540088}
-  ignoreCollisionsWithOtherTriggers: 1
-  useLayerMask: 1
-  mask:
-    serializedVersion: 2
-    m_Bits: 512
-  objectsToIgnore: []
-  namesToIgnore: []

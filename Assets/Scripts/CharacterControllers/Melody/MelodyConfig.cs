@@ -164,6 +164,13 @@
         public float maxLockonDistance;
         public float maxLockonAngle;
 
+        [Header("Box Pushing")]
+        /// <summary>
+        /// Which objects are boxes that Melody can push.
+        /// </summary>
+        [Tooltip("Which objects are boxes that Melody can push.")]
+        public LayerMask boxPushingLayerMask;
+
         void Start()
         {
             //TODO load values in depending on save data.

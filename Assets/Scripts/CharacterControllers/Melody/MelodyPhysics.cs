@@ -1,6 +1,7 @@
 ﻿namespace Melody
 {
     using UnityEngine;
+    using Objects;
 
     public class MelodyPhysics
     {
@@ -17,10 +18,22 @@
         private Vector3 colliderOffset;
         private Vector3 upperColliderOffset;
         private Vector3 lowerColliderOffset;
+
+        //Raycast origin points
+        Vector3 colliderCenterPosition;
+        Vector3 colliderUpperPosition;
+        Vector3 colliderLowerPosition;
+
         //The radius of Melody's collider, added to her velocity when determing the distance to check for wall collisions.
         private float colliderRadius;
         //Used to determine how far from the center of our collider that the upper and lower raycasts should be. 0 for no separation, 1 for the very top and bottom of Melody's collider.
         private float upperLowerYHeightScale = 0.5f;
+
+        //How far the player is about to travel based on velocity
+        float predictedMovementDistance;
+
+        //The box that Melody is currently pushing.
+        PushableBox pushableBox;
 
         private RaycastHit hit;
 
@@ -59,7 +72,9 @@
             }
             else
             {
+                SetRaycastOriginPoints();
                 ProhibitMovementIntoWalls();
+                PushBoxes();
                 RotatePlayer(turningSpeed);
                 controller.rigidBody.velocity = velocity;
             }
@@ -82,6 +97,7 @@
             else
             {
                 velocity = dashVelocity;
+                SetRaycastOriginPoints();
                 ProhibitMovementIntoWalls(true);
             }
             controller.rigidBody.velocity = velocity;
@@ -95,6 +111,17 @@
             }
         }
 
+        private void SetRaycastOriginPoints()
+        {
+            //Calculate the approximate distance that will be traversed, accounting for the radius of our collider.
+            predictedMovementDistance = velocity.magnitude * Time.deltaTime + colliderRadius;
+
+            //Raycast from the top, center, and bottom of the player's collider to check for potential collisions.
+            colliderCenterPosition = controller.transform.position + colliderOffset;
+            colliderUpperPosition = controller.transform.position + upperColliderOffset;
+            colliderLowerPosition = controller.transform.position + lowerColliderOffset;
+        }
+
         /// <summary>
         /// Used to prevent the player from walking into walls and halting their descent during a fall.
         /// We shoot three raycasts out from various heights on Melody, using her velocity and collider radius to predict where she will be on the next frame.
@@ -102,16 +129,10 @@
         /// </summary>
         private void ProhibitMovementIntoWalls(bool isDash = false)
         {
-            //Calculate the approximate distance that will be traversed, accounting for the radius of our collider.
-            float distance = velocity.magnitude * Time.deltaTime + colliderRadius;
-            //Raycast from the top, center, and bottom of the player's collider to check for potential collisions.
-            Vector3 colliderCenterPosition = controller.transform.position + colliderOffset;
-            Vector3 colliderUpperPosition = controller.transform.position + upperColliderOffset;
-            Vector3 colliderLowerPosition = controller.transform.position + lowerColliderOffset;
             //Check if the body's current velocity will result in a collision
-            if (Physics.Raycast(colliderCenterPosition, velocity.normalized, out hit, distance, controller.config.prohibitMovementIntoWallsLayerMask) ||
-                Physics.Raycast(colliderUpperPosition,  velocity.normalized, out hit, distance, controller.config.prohibitMovementIntoWallsLayerMask) ||
-                (Physics.Raycast(colliderLowerPosition,  velocity.normalized, out hit, distance, controller.config.prohibitMovementIntoWallsLayerMask) && !isDash) )
+            if (Physics.Raycast(colliderCenterPosition, velocity.normalized, out hit, predictedMovementDistance, controller.config.prohibitMovementIntoWallsLayerMask) ||
+                Physics.Raycast(colliderUpperPosition,  velocity.normalized, out hit, predictedMovementDistance, controller.config.prohibitMovementIntoWallsLayerMask) ||
+                (Physics.Raycast(colliderLowerPosition,  velocity.normalized, out hit, predictedMovementDistance, controller.config.prohibitMovementIntoWallsLayerMask) && !isDash) )
             {
                 if (isDash)
                 {
@@ -124,9 +145,28 @@
                     IgnoreHorizontalMovementInput();
                 }
             }
-            Debug.DrawRay(colliderCenterPosition, velocity.normalized * distance, Color.yellow);
-            Debug.DrawRay(colliderUpperPosition, velocity.normalized * distance, Color.blue);
-            Debug.DrawRay(colliderLowerPosition, velocity.normalized * distance, Color.green);
+            Debug.DrawRay(colliderCenterPosition, velocity.normalized * predictedMovementDistance, Color.yellow);
+            Debug.DrawRay(colliderUpperPosition, velocity.normalized * predictedMovementDistance, Color.blue);
+            Debug.DrawRay(colliderLowerPosition, velocity.normalized * predictedMovementDistance, Color.green);
+        }
+
+        private void PushBoxes()
+        {
+            pushableBox = null;
+            if (controller.melodyCollision.IsGrounded() == true)
+            {
+                //Check if the body's current velocity will result in a collision
+                if (Physics.Raycast(colliderCenterPosition, velocity.normalized, out hit, predictedMovementDistance, controller.config.boxPushingLayerMask) ||
+                    Physics.Raycast(colliderUpperPosition, velocity.normalized, out hit, predictedMovementDistance, controller.config.boxPushingLayerMask) ||
+                    Physics.Raycast(colliderLowerPosition, velocity.normalized, out hit, predictedMovementDistance, controller.config.boxPushingLayerMask))
+                {
+                    pushableBox = hit.transform.gameObject.GetComponent<PushableBox>();
+                    if (pushableBox != null)
+                    {
+                        pushableBox.Move(new Vector3(velocity.x, 0, velocity.z));
+                    }
+                }
+            }
         }
 
         private void SetVelocityToSlide()
