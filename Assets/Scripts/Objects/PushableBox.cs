@@ -41,7 +41,7 @@
         private float minGravitySpeed = 0.15f;
         private float gravityMaxSpeed = 0.5f;
         private float gravityAcceleration = 0.01f;
-        private float gravityPosOffset = 0.001f;
+        private float gravityPosOffset = 0.005f;
 
         private Vector3 newPosition;
 
