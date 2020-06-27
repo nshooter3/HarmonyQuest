@@ -163,7 +163,7 @@
                     pushableBox = hit.transform.gameObject.GetComponent<PushableBox>();
                     if (pushableBox != null)
                     {
-                        pushableBox.Move();
+                        pushableBox.moveThisFrame = true;
                     }
                 }
             }
