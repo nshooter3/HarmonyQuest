@@ -1,4 +1,4 @@
-﻿Shader "Custom/ShellsNFinsGeometry"
+﻿Shader "Custom/StylizedGrass"
 {
     Properties
     {
