@@ -35,7 +35,7 @@
 
         private bool hitDetected;
         private RaycastHit boxcastHit;
-
+        private RaycastHit[] boxcastHits;
 
         private bool gravityBoxcastHitGround;
         private float gravitySpeed = 0f;
@@ -181,13 +181,13 @@
         {
             //Temporarily disable our collider to prevent our boxcast from hitting the box it's coming from.
             col.enabled = false;
-            hitDetected = Physics.BoxCast(boxcastOrigin, boxcastExtents, Vector3.up, out boxcastHit, boxcastRotation,
-                                     boxCastAboveRaycastDistance, melodyController.config.boxPushingLayerMask);
+            //Use BoxCastAll to detect multiple boxes on top of this one.
+            boxcastHits = Physics.BoxCastAll(boxcastOrigin, boxcastExtents, Vector3.up, boxcastRotation, boxCastAboveRaycastDistance, melodyController.config.boxPushingLayerMask);
             col.enabled = true;
 
-            if (hitDetected == true)
+            foreach(RaycastHit aboveHit in boxcastHits)
             {
-                aboveBox = boxcastHit.transform.GetComponent<PushableBox>();
+                aboveBox = aboveHit.transform.GetComponent<PushableBox>();
                 if (aboveBox != null)
                 {
                     aboveBox.hasBeenMovedFromBelow = true;
