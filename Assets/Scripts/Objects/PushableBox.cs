@@ -2,8 +2,9 @@
 {
     using UnityEngine;
     using Melody;
+    using HarmonyQuest;
 
-    public class PushableBox : MonoBehaviour
+    public class PushableBox : PhysicsObject
     {
         [SerializeField]
         private Rigidbody rb;
@@ -32,7 +33,7 @@
         private Quaternion boxcastRotation;
         private float boxcastDistance;
 
-        private bool hitObstacleWhileBeingPushed;
+        private bool hitDetected;
         private RaycastHit boxcastHit;
 
 
@@ -42,6 +43,8 @@
         private float gravityMaxSpeed = 0.5f;
         private float gravityAcceleration = 0.01f;
         private float gravityPosOffset = 0.005f;
+
+        private float boxCastAboveRaycastDistance = 0.1f;
 
         private Vector3 newPosition;
 
@@ -54,17 +57,26 @@
         [SerializeField]
         private PushableBoxTrigger[] pushableBoxTriggers;
 
+        private PushableBox aboveBox;
+        bool hasBeenMovedFromBelow = false;
+
         private void Start()
         {
             gravitySpeed = minGravitySpeed;
+            melodyController = ServiceLocator.instance.GetMelodyController();
         }
 
-        private void FixedUpdate()
+        public override void ObjectFixedUpdate()
         {
             PhysicsTick();
         }
 
-        public void PhysicsTick()
+        public override void ObjectLateFixedUpdate()
+        {
+            ApplyMove();
+        }
+
+        public void SetParams()
         {
             beingPushed = false;
             moving = false;
@@ -74,38 +86,56 @@
             boxcastRotation = transform.rotation;
 
             newPosition = transform.position;
+        }
 
-            if (moveThisFrame == true)
+        public void PhysicsTick()
+        {
+            if (hasBeenMovedFromBelow == false)
             {
-                CalculateMove();
-            }
-            CalculateGravity();
+                SetParams();
 
+                if (moveThisFrame == true)
+                {
+                    CalculateMoveFromTriggers();
+                }
+                CalculateGravity();
+            }
+        }
+
+        public void ApplyMove()
+        {
             if (transform.position != newPosition)
             {
                 rb.MovePosition(newPosition);
             }
+            hasBeenMovedFromBelow = false;
         }
 
-        public void CalculateMove()
+        public void CalculateMoveFromTriggers()
         {
             beingPushed = true;
 
             pushDisplacement = GetPushDirectionFromTriggers().normalized * pushSpeed;
-            boxcastDirection = pushDisplacement.normalized;
-            boxcastDistance = pushDisplacement.magnitude;
+            CaculateMove(pushDisplacement);
+        }
+
+        private void CaculateMove(Vector3 movement)
+        {
+            boxcastDirection = movement.normalized;
+            boxcastDistance = movement.magnitude;
 
             //Temporarily disable our collider to prevent our boxcast from hitting the box it's coming from.
             col.enabled = false;
 
-            hitObstacleWhileBeingPushed = Physics.BoxCast(boxcastOrigin, boxcastExtents, boxcastDirection, out boxcastHit, boxcastRotation, boxcastDistance, wallCheckMask);
+            hitDetected = Physics.BoxCast(boxcastOrigin, boxcastExtents, boxcastDirection, out boxcastHit, boxcastRotation, boxcastDistance, wallCheckMask);
 
             col.enabled = true;
 
-            if (!hitObstacleWhileBeingPushed)
+            if (!hitDetected)
             {
-                newPosition = boxcastOrigin + pushDisplacement;
+                newPosition = boxcastOrigin + movement;
                 moving = true;
+                ApplyMovementToBoxesSittingOnTopOfThisOne(movement);
             }
             else
             {
@@ -115,9 +145,8 @@
             moveThisFrame = false;
         }
 
-        void CalculateGravity()
+        private void CalculateGravity()
         {
-
             falling = false;
 
             if (debug)
@@ -127,10 +156,10 @@
 
             //Temporarily disable our collider to prevent our boxcast from hitting the box it's coming from.
             col.enabled = false;
-            hitObstacleWhileBeingPushed = Physics.BoxCast(boxcastOrigin, boxcastExtents, Vector3.down, out boxcastHit, boxcastRotation, gravitySpeed);
+            hitDetected = Physics.BoxCast(boxcastOrigin, boxcastExtents, Vector3.down, out boxcastHit, boxcastRotation, gravitySpeed);
             col.enabled = true;
 
-            if (hitObstacleWhileBeingPushed == true)
+            if (hitDetected == true)
             {
                 if (grounded == false)
                 {
@@ -139,12 +168,32 @@
                 }
                 grounded = true;
             }
-            else if (hitObstacleWhileBeingPushed == false)
+            else if (hitDetected == false)
             {
                 newPosition.y += gravitySpeed * -1f;
                 gravitySpeed = Mathf.MoveTowards(gravitySpeed, gravityMaxSpeed, gravityAcceleration);
                 falling = true;
                 grounded = false;
+            }
+        }
+
+        private void ApplyMovementToBoxesSittingOnTopOfThisOne(Vector3 movement)
+        {
+            //Temporarily disable our collider to prevent our boxcast from hitting the box it's coming from.
+            col.enabled = false;
+            hitDetected = Physics.BoxCast(boxcastOrigin, boxcastExtents, Vector3.up, out boxcastHit, boxcastRotation,
+                                     boxCastAboveRaycastDistance, melodyController.config.boxPushingLayerMask);
+            col.enabled = true;
+
+            if (hitDetected == true)
+            {
+                aboveBox = boxcastHit.transform.GetComponent<PushableBox>();
+                if (aboveBox != null)
+                {
+                    aboveBox.hasBeenMovedFromBelow = true;
+                    aboveBox.SetParams();
+                    aboveBox.CaculateMove(movement);
+                }
             }
         }
 
