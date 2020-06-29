@@ -4,7 +4,7 @@
 
     public class AttackMissState : MelodyState
     {
-        public AttackMissState(MelodyController controller) : base(controller) { }
+        public AttackMissState(MelodyController controller) : base(controller) { stateName = "AttackMissState"; }
 
         //Since the placeholder animation is so long, use a timer to exit this state sooner.
         float tempTimer = 0.2f;

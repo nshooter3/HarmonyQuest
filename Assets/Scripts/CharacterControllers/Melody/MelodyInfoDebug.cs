@@ -19,6 +19,11 @@ namespace Melody
             return transform;
         }
 
+        public Vector3 GetTransformForward()
+        {
+            return transform.forward;
+        }
+
         public AIAgent GetLockonTarget()
         {
             return lockonTarget;

@@ -29,5 +29,10 @@
         {
             CurrentState.OnFixedUpdate();
         }
+
+        public string GetCurrentStateName()
+        {
+            return CurrentState.stateName;
+        }
     }
 }

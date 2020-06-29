@@ -102,6 +102,7 @@
                 if (lockonTarget != prevLockonTarget)
                 {
                     controller.melodySound.LockOn();
+                    controller.melodyAnimator.SetBoolParam("IsLockedOn", true);
                 }
             }
             prevLockonTarget = lockonTarget;
@@ -197,6 +198,7 @@
                 if (lockonTarget != prevLockonTarget)
                 {
                     controller.melodySound.LockOn();
+                    controller.melodyAnimator.SetBoolParam("IsLockedOn", true);
                 }
             }
 
@@ -246,9 +248,11 @@
         public void CancelLockon()
         {
             lockonTarget = null;
+            prevLockonTarget = null;
             curTargetIndex = -1;
             lockOnImage.enabled = false;
             controller.melodySound.LockOff();
+            controller.melodyAnimator.SetBoolParam("IsLockedOn", false);
         }
 
         public void LockonButtonPressed()

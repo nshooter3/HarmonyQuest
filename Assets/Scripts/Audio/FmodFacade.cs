@@ -100,6 +100,42 @@
         }
 
         /// <summary>
+        /// Returns which beat of the measure we're on. i.e. Beat 1, 2, 3 or 4 for a 4/4 song.
+        /// </summary>
+        /// <returns> Which beat of the measure we're on. </returns>
+        public int GetCurrentBeat()
+        {
+            return FmodMusicHandler.instance.GetCurrentBeat();
+        }
+
+        /// <summary>
+        /// Get the length of a beat at our current bpm.
+        /// </summary>
+        /// <returns> The length of a beat at our current bpm. </returns>
+        public float GetBeatDuration()
+        {
+            return FmodMusicHandler.instance.GetBeatDuration();
+        }
+
+        /// <summary>
+        /// Get our current tempo.
+        /// </summary>
+        /// <returns> Our current tempo. </returns>
+        public float GetCurrentMusicTempo()
+        {
+            return FmodMusicHandler.instance.GetCurrentMusicTempo();
+        }
+
+        /// <summary>
+        /// Get the current fmod music event.
+        /// </summary>
+        /// <returns> The current fmod music event. </returns>
+        public FMOD.Studio.EventInstance GetMusicEvent()
+        {
+            return FmodMusicHandler.instance.GetMusicEvent();
+        }
+
+        /// <summary>
         /// Sets a param for the passed in fmod event
         /// </summary>
         /// <param name="fmodEvent"> The name of the fmod event we want to access </param>
@@ -236,6 +272,15 @@
         public bool HasPerformedActionThisBeat()
         {
             return FmodOnBeatAccuracyChecker.instance.HasPerformedActionThisBeat();
+        }
+
+        /// <summary>
+        /// Return a value from 0 to 1 gauging how far into a beat we are. i.e. 0 is the start of a beat, 0.5 is halfway through a beat, 1 is the end of a beat.
+        /// </summary>
+        /// <returns></returns>
+        public float GetNormalizedBeatProgress()
+        {
+            return FmodOnBeatAccuracyChecker.instance.GetNormalizedBeatProgress();
         }
 
         /// <summary>
