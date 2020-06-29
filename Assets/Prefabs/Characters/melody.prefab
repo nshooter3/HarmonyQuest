@@ -2459,6 +2459,9 @@ MonoBehaviour:
     prohibitMovementIntoWallsLayerMask:
       serializedVersion: 2
       m_Bits: 2305
+    prohibitDashIntoWallsLayerMask:
+      serializedVersion: 2
+      m_Bits: 35073
     maxLockonDistance: 30
     maxLockonAngle: 180
     boxPushingLayerMask:
@@ -2582,6 +2585,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ApplyRootMotion
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2369446805353295765, guid: 8936c17893992dd41a5e284062d58611,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2369446805353295765, guid: 8936c17893992dd41a5e284062d58611,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1200
+      objectReference: {fileID: 0}
+    - target: {fileID: -2369446805353295765, guid: 8936c17893992dd41a5e284062d58611,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 700
       objectReference: {fileID: 0}
     - target: {fileID: -3920956185680836646, guid: 8936c17893992dd41a5e284062d58611,
         type: 3}

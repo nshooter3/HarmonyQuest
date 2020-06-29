@@ -37,6 +37,8 @@
 
         private RaycastHit hit;
 
+        private LayerMask layerMask;
+
         public MelodyPhysics(MelodyController controller)
         {
             this.controller = controller;
@@ -129,12 +131,21 @@
         /// </summary>
         private void ProhibitMovementIntoWalls(bool isDash = false)
         {
-            //Check if the body's current velocity will result in a collision
-            if (Physics.Raycast(colliderCenterPosition, velocity.normalized, out hit, predictedMovementDistance, controller.config.prohibitMovementIntoWallsLayerMask) ||
-                Physics.Raycast(colliderUpperPosition,  velocity.normalized, out hit, predictedMovementDistance, controller.config.prohibitMovementIntoWallsLayerMask) ||
-                (Physics.Raycast(colliderLowerPosition,  velocity.normalized, out hit, predictedMovementDistance, controller.config.prohibitMovementIntoWallsLayerMask) && !isDash) )
+            if (isDash == true)
             {
-                if (isDash)
+                layerMask = controller.config.prohibitDashIntoWallsLayerMask;
+            }
+            else
+            {
+                layerMask = controller.config.prohibitMovementIntoWallsLayerMask;
+            }
+
+            //Check if the body's current velocity will result in a collision
+            if (Physics.Raycast(colliderCenterPosition, velocity.normalized, out hit, predictedMovementDistance, layerMask) ||
+                Physics.Raycast(colliderUpperPosition,  velocity.normalized, out hit, predictedMovementDistance, layerMask) ||
+                (Physics.Raycast(colliderLowerPosition,  velocity.normalized, out hit, predictedMovementDistance, layerMask) && !isDash) )
+            {
+                if (isDash == true)
                 {
                     //If the player dashes into a wall, cancel their movement for the remainder of the dash.
                     velocity = Vector3.zero;
