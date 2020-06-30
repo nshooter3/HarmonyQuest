@@ -160,9 +160,22 @@
         [Tooltip("Which surfaces will cancel Melody's horizontal velocity if she walks into them. Used to prevent sticking to objects by walking into them when falling.")]
         public LayerMask prohibitMovementIntoWallsLayerMask;
 
+        /// <summary>
+        /// Which surfaces will cancel Melody's horizontal velocity if she dashes into them.
+        /// </summary>
+        [Tooltip("Which surfaces will cancel Melody's horizontal velocity if she dashes into them.")]
+        public LayerMask prohibitDashIntoWallsLayerMask;
+
         [Header("Lock On")]
         public float maxLockonDistance;
         public float maxLockonAngle;
+
+        [Header("Box Pushing")]
+        /// <summary>
+        /// Which objects are boxes that Melody can push.
+        /// </summary>
+        [Tooltip("Which objects are boxes that Melody can push.")]
+        public LayerMask boxPushingLayerMask;
 
         void Start()
         {

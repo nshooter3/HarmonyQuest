@@ -2447,7 +2447,7 @@ MonoBehaviour:
     snapToGroundRaycastDistanceDash: 1
     groundLayerMask:
       serializedVersion: 2
-      m_Bits: 257
+      m_Bits: 33025
     groundCheckRaycastDistance: 0.3
     groundCheckRaycastYOffset: 0.1
     groundCheckRaycastSpread: 0.25
@@ -2459,8 +2459,14 @@ MonoBehaviour:
     prohibitMovementIntoWallsLayerMask:
       serializedVersion: 2
       m_Bits: 2305
+    prohibitDashIntoWallsLayerMask:
+      serializedVersion: 2
+      m_Bits: 35073
     maxLockonDistance: 30
     maxLockonAngle: 180
+    boxPushingLayerMask:
+      serializedVersion: 2
+      m_Bits: 32768
   move: {x: 0, y: 0, z: 0}
   rightStickMove: {x: 0, y: 0}
   melodySound: {fileID: 6204048396786551211}
@@ -2579,6 +2585,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ApplyRootMotion
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2369446805353295765, guid: 8936c17893992dd41a5e284062d58611,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2369446805353295765, guid: 8936c17893992dd41a5e284062d58611,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1200
+      objectReference: {fileID: 0}
+    - target: {fileID: -2369446805353295765, guid: 8936c17893992dd41a5e284062d58611,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 700
       objectReference: {fileID: 0}
     - target: {fileID: -3920956185680836646, guid: 8936c17893992dd41a5e284062d58611,
         type: 3}
