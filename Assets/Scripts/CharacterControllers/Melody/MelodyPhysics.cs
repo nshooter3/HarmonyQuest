@@ -65,7 +65,7 @@
             velocity.y = controller.rigidBody.velocity.y;
         }
 
-        public void ApplyVelocity(float maxSpeed, float turningSpeed)
+        public void ApplyVelocity(float maxSpeed, float turningSpeed, bool canPushBoxes = false)
         {
             if (controller.melodyCollision.IsSliding())
             {
@@ -76,7 +76,10 @@
             {
                 SetRaycastOriginPoints();
                 ProhibitMovementIntoWalls();
-                PushBoxes();
+                if (canPushBoxes == true)
+                {
+                    PushBoxes();
+                }
                 RotatePlayer(turningSpeed);
                 controller.rigidBody.velocity = velocity;
             }
