@@ -210,6 +210,11 @@
             Gizmos.DrawWireCube(Vector3.down * gravitySpeed, Vector3.one);
         }
 
+        public Vector3 GetBoxcastDirection()
+        {
+            return boxcastDirection;
+        }
+
         private Vector3 GetPushDirectionFromTriggers()
         {
             foreach (PushableBoxTrigger box in pushableBoxTriggers)

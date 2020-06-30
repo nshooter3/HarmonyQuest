@@ -270,6 +270,10 @@
                 {
                     targetDir = controller.melodyLockOn.GetLockonTargetPosition() - controller.transform.position;
                 }
+                else if (IsPushingBox() == true)
+                {
+                    targetDir = pushableBox.GetBoxcastDirection();
+                }
                 else
                 {
                     targetDir = controller.move;
