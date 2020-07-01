@@ -310,7 +310,12 @@
         // SOUND FUNCTIONS
         // ****************************
 
-        public void PlayFmodEvent(string eventName, FmodParamData[] extraParams = null)
+        public void PlayFmodEvent(string eventName)
+        {
+            aiSound.PlayFmodEvent(eventName);
+        }
+
+        public void PlayFmodEvent(string eventName, FmodParamData[] extraParams)
         {
             aiSound.PlayFmodEvent(eventName, extraParams);
         }
