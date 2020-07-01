@@ -15,10 +15,11 @@ namespace Melody
 
         bool HasLockonTarget();
 
-        float GetCurrentHealth();
+		float GetCurrentHealth();
 
         float GetMaxHealth();
 
         MelodySound GetMelodySound();
-    }
+
+		Vector3 GetVelocity();    }
 }

@@ -2,6 +2,7 @@
 {
     using UnityEngine;
     using System.Collections.Generic;
+    using Melody;
 
     public class CameraController : MonoBehaviour
     {
@@ -54,7 +55,7 @@
 
         private void InitCamera()
         {
-            TestPlayer player = GameObject.FindObjectOfType<TestPlayer>();
+            IMelodyInfo player = ServiceLocator.instance.GetMelodyController();
             behaviors.ForEach(b => b.Init(transform, player));
         }
 

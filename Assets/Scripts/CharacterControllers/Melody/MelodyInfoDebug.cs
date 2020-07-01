@@ -34,7 +34,7 @@ namespace Melody
             return false;
         }
 
-        public float GetCurrentHealth()
+		public float GetCurrentHealth()
         {
             return 0f;
         }
@@ -48,6 +48,10 @@ namespace Melody
         {
             return null;
         }
-    }
+
+		public Vector3 GetVelocity()
+        {
+            return Vector3.zero;
+        }    }
 
 }

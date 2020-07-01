@@ -17,11 +17,10 @@
         public TargetParameter target = new TargetParameter();
         [Range(1f, 9f)]
         public FloatParameter radius = new FloatParameter() { value = 5.0f };
-        [Range(0f, 15f)]
+        [Range(0f, 150f)]
         public FloatParameter distance = new FloatParameter() { value = 1.0f };
         [Range(0f, 1f)]
         public FloatParameter thickness = new FloatParameter() { value = 0.5f };
-        // public TransformParameter point = new TransformParameter() { };
     }
 
     public class OilPaintPostProcessingRenderer<T> : PostProcessEffectRenderer<T> where T : OilPaintPostProcessing
@@ -42,11 +41,14 @@
             _InverseViewID = Shader.PropertyToID("_InverseView");
             _PointID = Shader.PropertyToID("_Point");
 
-            // if (settings.point == null)
-            // {
-            //     settings.point = new OilPaintPostProcessing.TransformParameter() { value =  };
-            // }
-            point = GameObject.FindObjectOfType<OilPaintPoint>().transform;
+            if (GameObject.FindObjectOfType<OilPaintPoint>() == null)
+            {
+                point = Camera.main.transform;
+            }
+            else
+            {
+                point = GameObject.FindObjectOfType<OilPaintPoint>().transform;
+            }
         }
 
         public override void Render(PostProcessRenderContext context)

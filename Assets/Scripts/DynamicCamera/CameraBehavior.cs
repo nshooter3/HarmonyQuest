@@ -1,11 +1,11 @@
 ﻿namespace HarmonyQuest.DynamicCamera
 {
+    using Melody;
     using UnityEngine;
 
     public abstract class CameraBehavior
     {
-        private TestPlayer player;
-        private CharacterController characterController;
+        private IMelodyInfo player;
         
         protected Transform cameraTransform;
         protected Vector3 targetAngles;
@@ -14,11 +14,10 @@
         protected bool active = false;
         protected Vector3 direction;
 
-        public virtual void Init(Transform cameraTransform, TestPlayer player)
+        public virtual void Init(Transform cameraTransform, IMelodyInfo player)
         {
             this.cameraTransform = cameraTransform;
             this.player = player;
-            characterController = player.GetComponent<CharacterController>();
         }
 
         public virtual void Update()
@@ -44,17 +43,17 @@
         
         protected Vector3 PlayerLocation()
         {
-            return player.transform.position;
+            return player.GetTransform().position;
         }
 
         protected Vector3 PlayerVelocity()
         {
-            return characterController.velocity;
+            return player.GetVelocity();
         }
 
         protected Vector3 TargetLocation()
         {
-            return player.lockOnTarget.transform.position;
+            return player.GetLockonTarget().aiGameObject.transform.position;
         }
 
         protected Vector3 ScaleVectorComponents(Vector3 v, float xScale, float yScale, float zScale)
