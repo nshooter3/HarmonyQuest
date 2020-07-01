@@ -14,6 +14,7 @@
             updateData.aiGameObjectFacade.ActivateHitbox("BasicAttack", 0f, updateData.player.GetConfig().PostCounterGracePeriod, 10);
             updateData.aiGameObjectFacade.attacking = false;
             updateData.animator.SetBool("AttackBool", true);
+            Debug.Log("FrogKnightAttackState");
         }
 
         public override void OnUpdate(AIStateUpdateData updateData)
