@@ -18,6 +18,8 @@
         {
             updateData.aiGameObjectFacade.DebugChangeColor(Color.yellow);
             updateData.aiGameObjectFacade.SetRigidBodyConstraintsToDefault();
+            updateData.animator.SetBool("AttackStartBool", true);
+            Debug.Log("FrogKnightWindup1State");
         }
 
         public override void OnUpdate(AIStateUpdateData updateData)
@@ -78,6 +80,7 @@
             readyForStateTransition = true;
             updateData.aiGameObjectFacade.SetVelocity(Vector3.zero);
             updateData.aiGameObjectFacade.SetRigidBodyConstraintsToLockAllButGravity();
+            updateData.animator.SetBool("AttackStartBool", false);
         }
     }
 }
