@@ -89,6 +89,7 @@
                         //Debug.Log("EARLY COUNTER SUCCESS");
                         DealCounterDamage(damageHitbox);
                         dealtCounterDamage = true;
+                        damageHitbox.CancelHitbox();
                     }
                     else
                     {
