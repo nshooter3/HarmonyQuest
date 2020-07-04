@@ -89,7 +89,6 @@
                         //Debug.Log("EARLY COUNTER SUCCESS");
                         DealCounterDamage(damageHitbox);
                         dealtCounterDamage = true;
-                        damageHitbox.CancelHitbox();
                     }
                     else
                     {
@@ -108,9 +107,8 @@
                         {
                             damageHitbox.checkForLateDodge = true;
                         }
-
-                        receivedDamageHitboxes.Add(damageHitbox);
                     }
+                    receivedDamageHitboxes.Add(damageHitbox);
                 }
             }
         }
