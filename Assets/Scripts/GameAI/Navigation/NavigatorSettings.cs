@@ -71,5 +71,10 @@
         /// How far above the player to position the navPos when tracking them.
         /// </summary>
         public static float navPosHeightOffset = 2.25f;
+
+        /// <summary>
+        /// Distance threshold for determining whether or not the agent is above the navmesh. Don't set this too high, or NavMesh.SamplePosition() may slow down
+        /// </summary>
+        public static float onMeshThreshold = 3;
     }
 }

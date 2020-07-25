@@ -6,6 +6,7 @@
     using GamePhysics;
     using HarmonyQuest;
     using HarmonyQuest.Audio;
+    using UnityEngine.AI;
 
     public abstract class AIGameObjectFacade : MonoBehaviour
     {
@@ -66,13 +67,13 @@
             }
 
             data.origin.parent = null;
-            if (NavMeshUtil.IsNavMeshBelowTransform(transform, out Vector3 navmeshPosBelowOrigin))
+            if (NavMeshUtil.IsAgentOnNavMesh(transform.position, out NavMeshHit hit))
             {
-                data.origin.transform.position = navmeshPosBelowOrigin;
+                data.origin.transform.position = hit.position;
             }
             else
             {
-                Debug.LogError("AIGameObject Init WARNING: Agent origin not located on or above navmesh.");
+                Debug.LogWarning("AIGameObject Init WARNING: Agent origin not located on or above navmesh.");
             }
 
             data.navPos.transform.parent = null;
