@@ -2,6 +2,7 @@
 {
     using GameAI.AIStateActions;
     using GameAI.StateHandlers;
+    using HarmonyQuest;
     using UnityEngine;
 
     public class FrogKnightWindup1State : AIState
@@ -19,7 +20,8 @@
             updateData.aiGameObjectFacade.DebugChangeColor(Color.yellow);
             updateData.aiGameObjectFacade.SetRigidBodyConstraintsToDefault();
             updateData.animator.SetBool("AttackStartBool", true);
-            Debug.Log("FrogKnightWindup1State");
+            ServiceLocator.instance.GetAIAgentManager().SetNextAttackMinimumCooldownBeats(2);
+            //Debug.Log("FrogKnightWindup1State");
         }
 
         public override void OnUpdate(AIStateUpdateData updateData)

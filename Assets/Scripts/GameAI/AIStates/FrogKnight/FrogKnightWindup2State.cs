@@ -22,7 +22,7 @@
             updateData.aiGameObjectFacade.DebugChangeColor(new Color(1f, 0.5f, 0f));
             updateData.aiGameObjectFacade.SetRigidBodyConstraintsToDefault();
             updateData.animator.SetBool("AttackHoldBool", true);
-            Debug.Log("FrogKnightWindup2State");
+            //Debug.Log("FrogKnightWindup2State");
         }
 
         public override void OnUpdate(AIStateUpdateData updateData)

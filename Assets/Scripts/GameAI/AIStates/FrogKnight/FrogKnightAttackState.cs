@@ -15,7 +15,7 @@
             updateData.aiGameObjectFacade.attacking = false;
             updateData.aiGameObjectFacade.shouldAttackAsSoonAsPossible = false;
             updateData.animator.SetBool("AttackBool", true);
-            Debug.Log("FrogKnightAttackState");
+            //Debug.Log("FrogKnightAttackState");
         }
 
         public override void OnUpdate(AIStateUpdateData updateData)

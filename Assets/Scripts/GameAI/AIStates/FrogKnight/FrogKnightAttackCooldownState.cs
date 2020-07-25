@@ -11,7 +11,7 @@
         public override void Init(AIStateUpdateData updateData)
         {
             updateData.animator.SetBool("AttackEndBool", true);
-            Debug.Log("FrogKnightAttackCooldownState");
+            //Debug.Log("FrogKnightAttackCooldownState");
         }
 
         public override void OnUpdate(AIStateUpdateData updateData)
