@@ -11,10 +11,14 @@
 
         private DebugAction debugAction = new DebugAction();
 
+        //How many beats we've been in this state.
+        private int beatCount = 0;
+
         public override void Init(AIStateUpdateData updateData)
         {
             updateData.navigator.SetTarget(updateData.aiGameObjectFacade.data.aiAgentBottom, updateData.player.GetTransform());
             updateData.aiGameObjectFacade.data.isAggroed = true;
+            //updateData.aiGameObjectFacade.hasAttackedSinceEngaging = false;
             updateData.aiGameObjectFacade.SetRigidBodyConstraintsToDefault();
         }
 
@@ -32,7 +36,13 @@
 
         public override void OnBeatUpdate(AIStateUpdateData updateData)
         {
-            
+            beatCount++;
+
+            //If we've been in the navigate state for a while, attack ASAP upon reentering the engage state.
+            if (beatCount >= 4 && updateData.aiGameObjectFacade.shouldAttackAsSoonAsPossible == false)
+            {
+                updateData.aiGameObjectFacade.shouldAttackAsSoonAsPossible = true;
+            }
         }
 
         public override void CheckForStateChange(AIStateUpdateData updateData)

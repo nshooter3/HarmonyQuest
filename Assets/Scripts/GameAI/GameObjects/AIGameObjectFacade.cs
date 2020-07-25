@@ -26,6 +26,7 @@
         public bool attackPermissionGranted = false;
         public bool attacking = false;
         public bool isAvailableToAttack = false;
+        public bool shouldAttackAsSoonAsPossible = false;
 
         // ****************************
         // CHILD OVERRIDE FUNCTIONS

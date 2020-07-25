@@ -14,6 +14,7 @@
         public override void Init(AIStateUpdateData updateData)
         {
             updateData.aiGameObjectFacade.data.isAggroed = false;
+            updateData.aiGameObjectFacade.shouldAttackAsSoonAsPossible = true;
             updateData.aiGameObjectFacade.SetRigidBodyConstraintsToLockAllButGravity();
             if (updateData.aiGameObjectFacade.data.aggroZone != null)
             {

@@ -33,6 +33,9 @@
         //This includes being the lock on target, being in front of the player, being close to the player, etc.
         private float attackOddsCoefficient = 0;
 
+        //How many beats we've been in this state.
+        private int beatCount = 0;
+
         public override void Init(AIStateUpdateData updateData)
         {
             updateData.aiGameObjectFacade.data.isAggroed = true;
@@ -76,6 +79,11 @@
                 InitAttackRandomizerWithRNGCoefficient(updateData);
                 RandomAttack(updateData);
             }
+
+            beatCount++;
+
+            //If we've been in the engage state for more than one beat, use RNG to attack instead of doing so ASAP.
+            updateData.aiGameObjectFacade.shouldAttackAsSoonAsPossible = false;
         }
 
         private void InitAttackRandomizerWithRNGCoefficient(AIStateUpdateData updateData)
@@ -92,7 +100,7 @@
         private void RandomAttack(AIStateUpdateData updateData)
         {
             attackOption = attackRandomizer.GetRandomWeightedEntry();
-            if (attackOption == AttackOption.NormalAttack)
+            if (attackOption == AttackOption.NormalAttack || updateData.aiGameObjectFacade.shouldAttackAsSoonAsPossible == true)
             {
                 updateData.aiGameObjectFacade.requestingAttackPermission = true;
             }

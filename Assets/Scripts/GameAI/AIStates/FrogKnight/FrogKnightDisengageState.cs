@@ -15,6 +15,7 @@
         {
             updateData.navigator.SetTarget(updateData.aiGameObjectFacade.data.aiAgentBottom, updateData.aiGameObjectFacade.data.origin);
             updateData.aiGameObjectFacade.data.isAggroed = false;
+            updateData.aiGameObjectFacade.shouldAttackAsSoonAsPossible = true;
             updateData.aiGameObjectFacade.SetRigidBodyConstraintsToDefault();
             if (updateData.aiGameObjectFacade.data.aggroZone != null)
             {

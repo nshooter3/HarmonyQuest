@@ -21,6 +21,7 @@
 
             updateData.aiGameObjectFacade.data.navPos.SetActive(false);
             updateData.aiGameObjectFacade.data.isAggroed = false;
+            updateData.aiGameObjectFacade.shouldAttackAsSoonAsPossible = true;
 
             updateData.aiGameObjectFacade.SetRigidBodyConstraintsToNone();
 
