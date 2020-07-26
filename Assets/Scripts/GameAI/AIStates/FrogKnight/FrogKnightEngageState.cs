@@ -21,7 +21,7 @@
 
         private MoveAction moveAction = new MoveAction();
         private TargetDistanceAction targetDistanceAction = new TargetDistanceAction();
-        private StrafeAction strafeAction = new StrafeAction();
+        private StrafeAction strafeAction;
         private DebugAction debugAction = new DebugAction();
         private GenerateAttackRNGCoefficientAction attackRNGCoefficientGenerator = new GenerateAttackRNGCoefficientAction();
 
@@ -38,13 +38,13 @@
 
         public override void Init(AIStateUpdateData updateData)
         {
+            strafeAction = new StrafeAction(updateData, GetFrogKnightStrafeRandomizer(), 4.0f, 1.0f);
             updateData.aiGameObjectFacade.data.isAggroed = true;
             updateData.aiGameObjectFacade.SetRigidBodyConstraintsToDefault();
             updateData.aiGameObjectFacade.data.individualCollisionAvoidanceModifier = 3.5f;
             updateData.aiGameObjectFacade.data.individualCollisionAvoidanceMaxDistance = 4.0f;
             targetDistanceAction.Init();
             attackRNGCoefficientGenerator.Init(updateData.player);
-            strafeAction.Init(updateData, GetFrogKnightStrafeRandomizer(), 4.0f, 1.0f);
         }
 
         //Set up our Frog Knight strafe type odds before passing in the weighted list to the StrafeAction class.
@@ -119,7 +119,7 @@
             targetDistance = updateData.aiGameObjectFacade.GetDistanceFromAggroTarget();
 
             targetDistanceAction.Update(targetDistance);
-            strafeAction.Update(updateData, targetDistance, targetDistanceAction.minDistanceFromPlayer, targetDistanceAction.maxDistanceFromPlayer);
+            strafeAction.OnUpdate(updateData, targetDistance, targetDistanceAction.minDistanceFromPlayer, targetDistanceAction.maxDistanceFromPlayer);
 
             shouldStrafe = (targetDistanceAction.hitTargetDistance);
 

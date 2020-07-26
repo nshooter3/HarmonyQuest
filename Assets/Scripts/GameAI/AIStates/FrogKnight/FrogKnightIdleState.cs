@@ -9,10 +9,12 @@
     {
         private bool aggroZoneEntered = false;
 
+        private IdleWanderAction idleWanderAction;
         private DebugAction debugAction = new DebugAction();
 
         public override void Init(AIStateUpdateData updateData)
         {
+            idleWanderAction = new IdleWanderAction(updateData, 4.0f, 1.0f, 10f);
             updateData.aiGameObjectFacade.data.isAggroed = false;
             updateData.aiGameObjectFacade.shouldAttackAsSoonAsPossible = true;
             updateData.aiGameObjectFacade.SetRigidBodyConstraintsToLockAllButGravity();
@@ -24,12 +26,24 @@
 
         public override void OnUpdate(AIStateUpdateData updateData)
         {
-            
+            idleWanderAction.OnUpdate(updateData);
+            if (idleWanderAction.IsWandering())
+            {
+                debugAction.NavPosSetPosition(updateData, idleWanderAction.GetDestination());
+                updateData.aiGameObjectFacade.SetRigidBodyConstraintsToDefault();
+                updateData.aiGameObjectFacade.SetVelocityTowardsDestination(idleWanderAction.GetDestination(), true, 0.5f);
+            }
+            else
+            {
+                debugAction.NavPosSetPosition(updateData, updateData.aiGameObjectFacade.transform.position);
+                updateData.aiGameObjectFacade.SetRigidBodyConstraintsToLockAllButGravity();
+                updateData.aiGameObjectFacade.SetVelocity(Vector3.zero);
+            }
         }
 
         public override void OnFixedUpdate(AIStateUpdateData updateData)
         {
-            updateData.aiGameObjectFacade.ApplyAnimationVelocity();
+            updateData.aiGameObjectFacade.ApplyVelocity();
             updateData.aiGameObjectFacade.ApplyGravity();
         }
 
