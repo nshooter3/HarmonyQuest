@@ -1,15 +1,14 @@
-﻿namespace GameAI.AIStates.FrogKnight
+﻿namespace GameAI.AIStates
 {
-    using GameAI.AIStateActions;
+    using GameAI.AIStates.FrogKnight;
     using GameAI.Navigation;
     using GameAI.StateHandlers;
     using UnityEngine;
 
-    public class FrogKnightIdleState : AIState
+    public class FrogKnightLoseTargetState : AIState
     {
+        float idleTimer = 2f;
         private bool aggroZoneEntered = false;
-
-        private DebugAction debugAction = new DebugAction();
 
         public override void Init(AIStateUpdateData updateData)
         {
@@ -24,7 +23,11 @@
 
         public override void OnUpdate(AIStateUpdateData updateData)
         {
-            
+            idleTimer -= Time.deltaTime;
+            if (idleTimer <= 0)
+            {
+                updateData.stateHandler.RequestStateTransition(new FrogKnightDisengageState { }, updateData);
+            }
         }
 
         public override void OnFixedUpdate(AIStateUpdateData updateData)

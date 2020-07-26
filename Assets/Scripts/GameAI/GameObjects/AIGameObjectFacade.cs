@@ -151,6 +151,11 @@
             aiPhysics.ApplyVelocity(ignoreYValue, applyRotation, turnSpeedModifier);
         }
 
+        public virtual void ApplyAnimationVelocity()
+        {
+            aiAnimator.SetVelocity(transform.forward, aiPhysics.newVelocity, data.aiStats.speed);
+        }
+
         public virtual void ApplyGravity()
         {
             aiPhysics.ApplyGravity();

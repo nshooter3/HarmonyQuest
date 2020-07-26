@@ -174,7 +174,7 @@
             else if (ShouldDeAggro(updateData))
             {
                 checkForTargetObstructionTimer = 0;
-                updateData.stateHandler.RequestStateTransition(new FrogKnightDisengageState { }, updateData);
+                updateData.stateHandler.RequestStateTransition(new FrogKnightLoseTargetState { }, updateData);
             }
             else
             {
