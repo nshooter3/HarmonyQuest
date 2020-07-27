@@ -3,7 +3,6 @@
     using UnityEngine;
     using HarmonyQuest.Util;
     using GameAI.StateHandlers;
-    using GameAI.AIGameObjects;
 
     /// <summary>
     /// Handles the timing and random selection of ai agent strafing.
@@ -25,17 +24,14 @@
         private float maxStrafeCooldown;
         private float minStrafeCooldown;
 
-        StrafeHitboxes strafeHitboxes;
-
-        public StrafeAction(AIStateUpdateData updateData, WeightedList<StrafeType> strafeRandomizer, float maxStrafeCooldown = 4.0f, float minStrafeCooldown = 1.0f)
+        public void Init(AIStateUpdateData updateData, WeightedList<StrafeType> strafeRandomizer, float maxStrafeCooldown = 4.0f, float minStrafeCooldown = 1.0f)
         {
             this.strafeRandomizer = strafeRandomizer;
             this.maxStrafeCooldown = maxStrafeCooldown;
             this.minStrafeCooldown = minStrafeCooldown;
-            strafeHitboxes = updateData.aiGameObjectFacade.data.strafeHitBoxes;
         }
 
-        public void OnUpdate(AIStateUpdateData updateData, float targetDistance, float minDistanceFromPlayer, float maxDistanceFromPlayer)
+        public void Update(AIStateUpdateData updateData, float targetDistance, float minDistanceFromPlayer, float maxDistanceFromPlayer)
         {
             if (strafeTimer > 0.0f)
             {
@@ -54,7 +50,7 @@
                 }
             }
 
-            if (strafeHitboxes != null)
+            if (updateData.aiGameObjectFacade.data.strafeHitBoxes != null)
             {
                 CheckForStrafeInterupt(updateData);
             }
@@ -70,19 +66,19 @@
             StrafeType RNGResult = strafeRandomizer.GetRandomWeightedEntry();
 
             //Cancel strafe if it will result in a collision or move the enemy outside of the desired range from the player.
-            if (RNGResult == StrafeType.Clockwise && strafeHitboxes.leftCollision)
+            if (RNGResult == StrafeType.Clockwise && updateData.aiGameObjectFacade.data.strafeHitBoxes.leftCollision)
             {
                 return StrafeType.None;
             }
-            else if (RNGResult == StrafeType.Counterclockwise && strafeHitboxes.rightCollision)
+            else if (RNGResult == StrafeType.Counterclockwise && updateData.aiGameObjectFacade.data.strafeHitBoxes.rightCollision)
             {
                 return StrafeType.None;
             }
-            else if (RNGResult == StrafeType.Towards && (targetDistance <= minDistanceFromPlayer + strafeDistanceThreshold || strafeHitboxes.frontCollision))
+            else if (RNGResult == StrafeType.Towards && (targetDistance <= minDistanceFromPlayer + strafeDistanceThreshold || updateData.aiGameObjectFacade.data.strafeHitBoxes.frontCollision))
             {
                 return StrafeType.None;
             }
-            else if (RNGResult == StrafeType.Away && (targetDistance > maxDistanceFromPlayer - strafeDistanceThreshold || strafeHitboxes.backCollision))
+            else if (RNGResult == StrafeType.Away && (targetDistance > maxDistanceFromPlayer - strafeDistanceThreshold || updateData.aiGameObjectFacade.data.strafeHitBoxes.backCollision))
             {
                 return StrafeType.None;
             }
@@ -119,25 +115,25 @@
             switch (strafeType)
             {
                 case StrafeType.Clockwise:
-                    if (strafeHitboxes.leftCollision)
+                    if (updateData.aiGameObjectFacade.data.strafeHitBoxes.leftCollision)
                     {
                         cancelStrafe = true;
                     }
                     break;
                 case StrafeType.Counterclockwise:
-                    if (strafeHitboxes.rightCollision)
+                    if (updateData.aiGameObjectFacade.data.strafeHitBoxes.rightCollision)
                     {
                         cancelStrafe = true;
                     }
                     break;
                 case StrafeType.Towards:
-                    if (strafeHitboxes.frontCollision)
+                    if (updateData.aiGameObjectFacade.data.strafeHitBoxes.frontCollision)
                     {
                         cancelStrafe = true;
                     }
                     break;
                 case StrafeType.Away:
-                    if (strafeHitboxes.backCollision)
+                    if (updateData.aiGameObjectFacade.data.strafeHitBoxes.backCollision)
                     {
                         cancelStrafe = true;
                     }
@@ -147,7 +143,7 @@
             {
                 CancelStrafe();
             }
-            strafeHitboxes.ResetCollisions();
+            updateData.aiGameObjectFacade.data.strafeHitBoxes.ResetCollisions();
         }
 
         public bool StrafedTooClose(float targetDistance, float minDistanceFromPlayer)

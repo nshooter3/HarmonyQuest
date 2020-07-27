@@ -31,6 +31,12 @@
         public Transform origin;
 
         /// <summary>
+        /// This agent's wanderNavigationTarget. Used by IdleWanderAction.
+        /// </summary>
+        [Tooltip("This agent's wanderNavigationTarget. Used by IdleWanderAction.")]
+        public Transform wanderNavigationTarget;
+
+        /// <summary>
         /// Collider that causes the agent to aggro when a target enters it. Goes unused if null.
         /// </summary>
         [Tooltip("Collider that causes the agent to aggro when a target enters it. Goes unused if null.")]

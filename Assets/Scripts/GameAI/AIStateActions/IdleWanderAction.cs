@@ -22,6 +22,8 @@
         Transform agentTransform;
         Transform origin;
 
+        Transform wanderNavigationTarget;
+
         float wanderRadius;
 
         Vector3 randomWanderDestination;
@@ -35,21 +37,23 @@
             this.wanderRadius = wanderRadius;
             origin = updateData.aiGameObjectFacade.data.origin;
             agentTransform = updateData.aiGameObjectFacade.transform;
+            wanderNavigationTarget = updateData.aiGameObjectFacade.data.wanderNavigationTarget;
+            wanderNavigationTarget.parent = null;
         }
 
         public void OnUpdate(AIStateUpdateData updateData)
         {
             switch (wanderAction) {
                 case WanderAction.Wait:
-                    WaitUpdate();
+                    WaitUpdate(updateData);
                     break;
                 case WanderAction.Wander:
-                    WanderUpdate();
+                    WanderUpdate(updateData);
                     break;
             }
         }
 
-        private void WaitUpdate()
+        private void WaitUpdate(AIStateUpdateData updateData)
         {
             curActionTimer -= Time.deltaTime;
             if (curActionTimer <= 0f)
@@ -57,6 +61,7 @@
                 if (RequestNewWanderDestination())
                 {
                     wanderAction = WanderAction.Wander;
+                    updateData.navigator.SetTarget(updateData.aiGameObjectFacade.data.aiAgentBottom, wanderNavigationTarget);
                 }
                 else
                 {
@@ -65,11 +70,12 @@
             }
         }
 
-        private void WanderUpdate()
+        private void WanderUpdate(AIStateUpdateData updateData)
         {
-            if (/*strafeHitboxes.frontCollision ||*/ HasReachedDestination())
+            if (/*strafeHitboxes.frontCollision ||*/ HasReachedDestination(updateData))
             {
                 curActionTimer = Random.Range(this.maxWaitTime, this.minWaitTime);
+                updateData.navigator.CancelCurrentNavigation();
                 wanderAction = WanderAction.Wait;
             }
         }
@@ -83,8 +89,8 @@
             if (NavMesh.SamplePosition(randomWanderDestination, out hit, NavigatorSettings.onMeshThreshold, NavMesh.AllAreas))
             {
                 randomWanderDestination = hit.position;
-                //If our path is blocked, don't wander. Return false.
-                return !NavMesh.Raycast(agentTransform.position, randomWanderDestination, out hit, NavMesh.AllAreas);
+                wanderNavigationTarget.position = randomWanderDestination;
+                return true;
             }
             return false;
         }
@@ -94,14 +100,14 @@
             return wanderAction == WanderAction.Wander;
         }
 
-        public Vector3 GetDestination()
+        public Transform GetDestinationTransform()
         {
-            return randomWanderDestination;
+            return wanderNavigationTarget;
         }
 
-        private bool HasReachedDestination()
+        private bool HasReachedDestination(AIStateUpdateData updateData)
         {
-            return Vector3.Distance(agentTransform.position, randomWanderDestination) <= NavigatorSettings.waypointReachedDistanceThreshold;
+            return updateData.navigator.isActivelyGeneratingPath == false;
         }
     }
 }

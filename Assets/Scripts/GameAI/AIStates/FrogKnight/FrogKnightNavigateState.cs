@@ -58,7 +58,6 @@
             }
             else
             {
-
                 checkForTargetObstructionTimer += Time.deltaTime;
                 if (checkForTargetObstructionTimer > NavigatorSettings.checkForTargetObstructionRate)
                 {

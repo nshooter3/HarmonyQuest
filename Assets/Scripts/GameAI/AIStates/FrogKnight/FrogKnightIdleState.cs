@@ -14,7 +14,7 @@
 
         public override void Init(AIStateUpdateData updateData)
         {
-            idleWanderAction = new IdleWanderAction(updateData, 4.0f, 1.0f, 10f);
+            idleWanderAction = new IdleWanderAction(updateData, 5.0f, 2.0f, 7f);
             updateData.aiGameObjectFacade.data.isAggroed = false;
             updateData.aiGameObjectFacade.shouldAttackAsSoonAsPossible = true;
             updateData.aiGameObjectFacade.SetRigidBodyConstraintsToLockAllButGravity();
@@ -29,15 +29,15 @@
             idleWanderAction.OnUpdate(updateData);
             if (idleWanderAction.IsWandering())
             {
-                debugAction.NavPosSetPosition(updateData, idleWanderAction.GetDestination());
                 updateData.aiGameObjectFacade.SetRigidBodyConstraintsToDefault();
-                updateData.aiGameObjectFacade.SetVelocityTowardsDestination(idleWanderAction.GetDestination(), true, 0.5f);
+                updateData.aiGameObjectFacade.SetVelocityTowardsDestination(updateData.navigator.GetNextWaypoint(), true, 0.5f);
+                debugAction.NavPosSetPosition(updateData, updateData.navigator.GetNextWaypoint());
             }
             else
             {
-                debugAction.NavPosSetPosition(updateData, updateData.aiGameObjectFacade.transform.position);
                 updateData.aiGameObjectFacade.SetRigidBodyConstraintsToLockAllButGravity();
                 updateData.aiGameObjectFacade.SetVelocity(Vector3.zero);
+                debugAction.NavPosSetPosition(updateData, updateData.aiGameObjectFacade.transform.position);
             }
         }
 
@@ -67,6 +67,7 @@
 
         public override void Abort(AIStateUpdateData updateData)
         {
+            updateData.navigator.CancelCurrentNavigation();
             updateData.aiGameObjectFacade.ResetVelocity();
             aborted = true;
             readyForStateTransition = true;

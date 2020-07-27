@@ -79,6 +79,10 @@
                 {
                     nextWaypoint = waypoints.Dequeue();
                 }
+                else
+                {
+                    CancelCurrentNavigation();
+                }
             }
         }
 
