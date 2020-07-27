@@ -52,7 +52,7 @@
         /// Set of colliders that the enemy can use to determine which direction they can go when moving freely.
         /// </summary>
         [Tooltip("Set of colliders that the enemy can use to determine which direction they can go when moving freely.")]
-        public StrafeHitboxes strafeHitBoxes;
+        public StrafeHitboxes strafeHitboxes;
 
         /// <summary>
         /// The rigidbody for our agent

@@ -62,9 +62,9 @@
                 data.rb = GetComponent<Rigidbody>();
             }
 
-            if (data.strafeHitBoxes != null)
+            if (data.strafeHitboxes != null)
             {
-                data.strafeHitBoxes.Init();
+                data.strafeHitboxes.Init();
             }
 
             data.origin.parent = null;
@@ -153,10 +153,10 @@
             aiPhysics.SetVelocity(velocity, ignoreYValue, speedModifier, alwaysFaceTarget);
         }
 
-        public virtual void ApplyVelocity(bool ignoreYValue = true, bool applyRotation = true, float turnSpeedModifier = 1.0f)
+        public virtual void ApplyVelocity(bool ignoreYValue = true, bool applyRotation = true, float turnSpeedModifier = 1.0f, bool instantlyFaceDirection = false)
         {
             aiAnimator.SetVelocity(transform.forward, aiPhysics.newVelocity, data.aiStats.speed);
-            aiPhysics.ApplyVelocity(ignoreYValue, applyRotation, turnSpeedModifier);
+            aiPhysics.ApplyVelocity(ignoreYValue, applyRotation, turnSpeedModifier, instantlyFaceDirection);
         }
 
         public virtual void ApplyAnimationVelocity()

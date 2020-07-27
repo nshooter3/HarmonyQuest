@@ -14,7 +14,7 @@
 
         public override void Init(AIStateUpdateData updateData)
         {
-            idleWanderAction = new IdleWanderAction(updateData, 5.0f, 2.0f, 7f);
+            idleWanderAction = new IdleWanderAction(updateData, 5.0f, 2.0f, 5f);
             updateData.aiGameObjectFacade.data.isAggroed = false;
             updateData.aiGameObjectFacade.shouldAttackAsSoonAsPossible = true;
             updateData.aiGameObjectFacade.SetRigidBodyConstraintsToLockAllButGravity();
@@ -37,13 +37,13 @@
             {
                 updateData.aiGameObjectFacade.SetRigidBodyConstraintsToLockAllButGravity();
                 updateData.aiGameObjectFacade.SetVelocity(Vector3.zero);
-                debugAction.NavPosSetPosition(updateData, updateData.aiGameObjectFacade.transform.position);
+                debugAction.NavPosSetPosition(updateData, updateData.aiGameObjectFacade.data.aiAgentBottom.position);
             }
         }
 
         public override void OnFixedUpdate(AIStateUpdateData updateData)
         {
-            updateData.aiGameObjectFacade.ApplyVelocity();
+            updateData.aiGameObjectFacade.ApplyVelocity(true, true, 1, true);
             updateData.aiGameObjectFacade.ApplyGravity();
         }
 

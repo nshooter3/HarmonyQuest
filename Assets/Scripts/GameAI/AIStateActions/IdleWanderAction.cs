@@ -28,11 +28,13 @@
 
         Vector3 randomWanderDestination;
 
+        float minWanderDistance = 3f;
+
         public IdleWanderAction(AIStateUpdateData updateData, float maxWaitTime = 4.0f, float minWaitTime = 1.0f, float wanderRadius = 10f)
         {
             this.maxWaitTime = maxWaitTime;
             this.minWaitTime = minWaitTime;
-            strafeHitboxes = updateData.aiGameObjectFacade.data.strafeHitBoxes;
+            strafeHitboxes = updateData.aiGameObjectFacade.data.strafeHitboxes;
             curActionTimer = Random.Range(this.maxWaitTime, this.minWaitTime);
             this.wanderRadius = wanderRadius;
             origin = updateData.aiGameObjectFacade.data.origin;
@@ -58,7 +60,7 @@
             curActionTimer -= Time.deltaTime;
             if (curActionTimer <= 0f)
             {
-                if (RequestNewWanderDestination())
+                if (RequestNewWanderDestination(updateData))
                 {
                     wanderAction = WanderAction.Wander;
                     updateData.navigator.SetTarget(updateData.aiGameObjectFacade.data.aiAgentBottom, wanderNavigationTarget);
@@ -72,19 +74,26 @@
 
         private void WanderUpdate(AIStateUpdateData updateData)
         {
-            if (/*strafeHitboxes.frontCollision ||*/ HasReachedDestination(updateData))
+            if (strafeHitboxes.frontCollision || HasReachedDestination(updateData))
             {
                 curActionTimer = Random.Range(this.maxWaitTime, this.minWaitTime);
                 updateData.navigator.CancelCurrentNavigation();
+                strafeHitboxes.ResetCollisions();
                 wanderAction = WanderAction.Wait;
             }
         }
 
-        private bool RequestNewWanderDestination()
+        private bool RequestNewWanderDestination(AIStateUpdateData updateData)
         {
-            randomWanderDestination = origin.position;
-            randomWanderDestination.x += Random.Range(1f, -1f) * wanderRadius;
-            randomWanderDestination.z += Random.Range(1f, -1f) * wanderRadius;
+            //Ensure that our new destination is far enough away. This avoids wandering trivial distances.
+            bool isNewDestinationFarEnough = false;
+            while (isNewDestinationFarEnough == false)
+            {
+                randomWanderDestination = origin.position;
+                randomWanderDestination.x += Random.Range(1f, -1f) * wanderRadius;
+                randomWanderDestination.z += Random.Range(1f, -1f) * wanderRadius;
+                isNewDestinationFarEnough = Vector3.Distance(updateData.aiGameObjectFacade.data.aiAgentBottom.position, randomWanderDestination) >= minWanderDistance;
+            }
 
             if (NavMesh.SamplePosition(randomWanderDestination, out hit, NavigatorSettings.onMeshThreshold, NavMesh.AllAreas))
             {

@@ -107,11 +107,11 @@
             return avoidanceForce - difference * NavigatorSettings.avoidanceForceMovementVelocityAdjustmentScale;
         }
 
-        public virtual void ApplyVelocity(bool ignoreYValue = true, bool applyRotation = true, float turnSpeedModifier = 1.0f)
+        public virtual void ApplyVelocity(bool ignoreYValue = true, bool applyRotation = true, float turnSpeedModifier = 1.0f, bool instantlyFaceDirection = false)
         {
             if (applyRotation)
             {
-                Rotate(rotationDirection, turnSpeedModifier);
+                Rotate(rotationDirection, turnSpeedModifier, instantlyFaceDirection);
             }
             modifiedVelocity = newVelocity;
             if (ignoreYValue)
@@ -147,7 +147,7 @@
             this.obstacleAvoidanceForce = obstacleAvoidanceForce;
         }
 
-        public virtual void Rotate(Vector3 direction, float turnSpeedModifier)
+        public virtual void Rotate(Vector3 direction, float turnSpeedModifier, bool instantlyFaceDirection = false)
         {
             //Rotate enemy to face movement direction
             if (direction.magnitude > 0)
@@ -158,7 +158,15 @@
                 // The step size is equal to speed times frame time.
                 float step = data.aiStats.rotateSpeed * turnSpeedModifier * Time.deltaTime;
 
-                Vector3 newDir = Vector3.RotateTowards(data.gameObject.transform.forward, targetDir, step, 0.0f);
+                Vector3 newDir;
+                if (instantlyFaceDirection)
+                {
+                    newDir = targetDir;
+                }
+                else
+                {
+                    newDir = Vector3.RotateTowards(data.gameObject.transform.forward, targetDir, step, 0.0f);
+                }
                 Debug.DrawRay(data.gameObject.transform.position, newDir, Color.red);
 
                 // Move our position a step closer to the target.
