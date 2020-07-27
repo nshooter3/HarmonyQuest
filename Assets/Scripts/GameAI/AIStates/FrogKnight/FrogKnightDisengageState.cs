@@ -26,7 +26,7 @@
         public override void OnUpdate(AIStateUpdateData updateData)
         {
             debugAction.NavPosSetPosition(updateData, updateData.navigator.GetNextWaypoint());
-            updateData.aiGameObjectFacade.SetVelocityTowardsDestination(updateData.navigator.GetNextWaypoint());
+            updateData.aiGameObjectFacade.SetVelocityTowardsDestination(updateData.navigator.GetNextWaypoint(), true, 0.5f);
         }
 
         public override void OnFixedUpdate(AIStateUpdateData updateData)
@@ -46,7 +46,8 @@
             {
                 updateData.stateHandler.RequestStateTransition(new FrogKnightDeadState { }, updateData);
             }
-            else if (aggroZoneEntered && !NavMeshUtil.IsTargetObstructed(updateData.aiGameObjectFacade.data.aiAgentBottom, updateData.player.GetTransform()))
+            else if (updateData.aiGameObjectFacade.TookDamageFromPlayerThisFrame() ||
+                (aggroZoneEntered && !NavMeshUtil.IsTargetObstructed(updateData.aiGameObjectFacade.data.aiAgentBottom, updateData.player.GetTransform())))
             {
                 updateData.stateHandler.RequestStateTransition(new FrogKnightAggroState { }, updateData);
             }

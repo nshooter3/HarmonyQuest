@@ -31,6 +31,7 @@
         public void OnFixedUpdate(AIStateUpdateData updateData)
         {
             currentState.OnFixedUpdate(updateData);
+            updateData.aiGameObjectFacade.FixedUpdateSubclasses();
         }
 
         public void OnBeatUpdate(AIStateUpdateData updateData)

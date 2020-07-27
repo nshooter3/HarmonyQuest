@@ -5,6 +5,7 @@
     using UnityEngine;
     using UI;
     using HarmonyQuest;
+    using Melody;
 
     public class AIHealth
     {
@@ -18,6 +19,7 @@
         private AgentHealthBars agentHealthBarsUI;
 
         public bool isCountering = false;
+        public bool tookDamageFromPlayerThisFrame = false;
 
         UIManager uiManager;
 
@@ -36,8 +38,18 @@
             agentHealthBarsUI = uiManager.agentHealthBarsPool.GetAgentHealthBar(aiStats.healthBars.Length, ServiceLocator.instance.GetCamera(), data.gameObject.transform);
         }
 
-        private void TakeDamage(int damage)
+        public void OnFixedUpdate()
         {
+            tookDamageFromPlayerThisFrame = false;
+        }
+
+        private void TakeDamage(int damage, GameObject dealer)
+        {
+            if (dealer.GetComponent<MelodyController>() != null)
+            {
+                tookDamageFromPlayerThisFrame = true;
+            }
+
             aiStats.healthBars[curHealthBar] = Mathf.Max(0, aiStats.healthBars[curHealthBar] - damage);
             if (aiStats.healthBars[curHealthBar] <= 0)
             {
@@ -77,7 +89,7 @@
                         }
                         else
                         {
-                            TakeDamage(damageHitbox.GetDamage());
+                            TakeDamage(damageHitbox.GetDamage(), damageHitbox.GetAgent());
                         }
                         receivedDamageHitboxes.Add(damageHitbox);
                     }
@@ -87,15 +99,15 @@
 
         private void DealCounterDamage(DamageHitbox damageHitbox)
         {
-            damageHitbox.ReturnCounterDamageToSource(data.aiStats.counterDamage);
+            damageHitbox.ReturnCounterDamageToSource(data.aiStats.counterDamage, data.gameObject);
         }
 
         //Used to receive counter damage and other things not tied to damage hitboxes.
-        public void ReceiveDirectDamage(int damage)
+        public void ReceiveDirectDamage(int damage, GameObject dealer)
         {
             if (dead == false)
             {
-                TakeDamage(damage);
+                TakeDamage(damage, dealer);
             }
         }
 
@@ -139,6 +151,11 @@
         public bool IsDead()
         {
             return dead;
+        }
+
+        public bool TookDamageFromPlayerThisFrame()
+        {
+            return tookDamageFromPlayerThisFrame;
         }
     }
 }

@@ -126,6 +126,14 @@
             }
         }
 
+        public void FixedUpdateSubclasses()
+        {
+            if (IsDead() == false)
+            {
+                FixedUpdateHealth();
+            }
+        }
+
         // ****************************
         // PHYSICS FUNCTIONS
         // ****************************
@@ -294,6 +302,11 @@
         // HEALTH FUNCTIONS
         // ****************************
 
+        public bool TookDamageFromPlayerThisFrame()
+        {
+            return aiHealth.TookDamageFromPlayerThisFrame();
+        }
+
         public bool IsDead()
         {
             return aiHealth.IsDead();
@@ -302,6 +315,11 @@
         private void RemoveInactiveReceivedDamageHitboxes()
         {
             aiHealth.RemoveInactiveReceivedDamageHitboxes();
+        }
+
+        private void FixedUpdateHealth()
+        {
+            aiHealth.OnFixedUpdate();
         }
 
         // ****************************

@@ -133,9 +133,9 @@
             }
         }
 
-        public void ReturnCounterDamageToSource(int counterDamage)
+        public void ReturnCounterDamageToSource(int counterDamage, GameObject dealer)
         {
-            counterDamageReceiver.ReceiveCounterDamage(counterDamage);
+            counterDamageReceiver.ReceiveCounterDamage(counterDamage, dealer);
         }
 
         public Guid GetId()
