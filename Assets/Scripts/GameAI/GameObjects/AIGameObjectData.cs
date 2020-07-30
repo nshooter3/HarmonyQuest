@@ -43,6 +43,18 @@
         public CollisionWrapper aggroZone;
 
         /// <summary>
+        /// Collider used to determine size and origin of the boxcast the enemy uses to prevent collisions when wandering.
+        /// </summary>
+        [Tooltip("Collider used to determine size and origin of the boxcast the enemy uses to prevent collisions when wandering.")]
+        public BoxCollider wanderBoxcastReference;
+
+        /// <summary>
+        /// Layer Mask used by the wander boxcast.
+        /// </summary>
+        [Tooltip("Layer Mask used by the wander boxcast.")]
+        public LayerMask wanderBoxcastLayerMask;
+
+        /// <summary>
         /// A Transform stuck to the bottom of our AI agent. This is used to determine agent proximity to target positions.
         /// </summary>
         [Tooltip("A Transform stuck to the bottom of our AI agent. This is used to determine agent proximity to target positions.")]

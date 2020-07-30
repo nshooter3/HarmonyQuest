@@ -6,6 +6,9 @@
     using UnityEngine;
     using UnityEngine.AI;
 
+    /// <summary>
+    /// Class that handles the behavior of an enemy wandering around within a range and waiting when in an idle state.
+    /// </summary>
     public class IdleWanderAction
     {
         //Determines what kind of wander action this enemy will perform.
@@ -14,8 +17,6 @@
 
         float curActionTimer = 0f;
         float maxWaitTime, minWaitTime;
-
-        StrafeHitboxes strafeHitboxes;
 
         NavMeshHit hit;
 
@@ -30,17 +31,24 @@
 
         float minWanderDistance = 3f;
 
+        bool hitDetected;
+        RaycastHit boxcastHit;
+        float boxcastRange = 0.7f;
+        LayerMask boxcastLayerMask;
+        BoxCollider wanderBoxcastReference;
+
         public IdleWanderAction(AIStateUpdateData updateData, float maxWaitTime = 4.0f, float minWaitTime = 1.0f, float wanderRadius = 10f)
         {
             this.maxWaitTime = maxWaitTime;
             this.minWaitTime = minWaitTime;
-            strafeHitboxes = updateData.aiGameObjectFacade.data.strafeHitboxes;
             curActionTimer = Random.Range(this.maxWaitTime, this.minWaitTime);
             this.wanderRadius = wanderRadius;
             origin = updateData.aiGameObjectFacade.data.origin;
             agentTransform = updateData.aiGameObjectFacade.transform;
             wanderNavigationTarget = updateData.aiGameObjectFacade.data.wanderNavigationTarget;
             wanderNavigationTarget.parent = null;
+            wanderBoxcastReference = updateData.aiGameObjectFacade.data.wanderBoxcastReference;
+            boxcastLayerMask = updateData.aiGameObjectFacade.data.wanderBoxcastLayerMask;
         }
 
         public void OnUpdate(AIStateUpdateData updateData)
@@ -74,12 +82,12 @@
 
         private void WanderUpdate(AIStateUpdateData updateData)
         {
-            if (strafeHitboxes.frontCollision || HasReachedDestination(updateData))
+            if (CheckForCollision(randomWanderDestination - updateData.aiGameObjectFacade.transform.position) || HasReachedDestination(updateData))
             {
                 curActionTimer = Random.Range(this.maxWaitTime, this.minWaitTime);
                 updateData.navigator.CancelCurrentNavigation();
-                strafeHitboxes.ResetCollisions();
                 wanderAction = WanderAction.Wait;
+                hitDetected = false;
             }
         }
 
@@ -117,6 +125,12 @@
         private bool HasReachedDestination(AIStateUpdateData updateData)
         {
             return updateData.navigator.isActivelyGeneratingPath == false;
+        }
+
+        private bool CheckForCollision(Vector3 direction)
+        {
+            hitDetected = Physics.BoxCast(wanderBoxcastReference.transform.position, wanderBoxcastReference.size / 2f, direction, out boxcastHit, Quaternion.LookRotation(direction), boxcastRange, boxcastLayerMask);
+            return hitDetected;
         }
     }
 }
