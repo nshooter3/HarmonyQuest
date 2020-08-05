@@ -89,6 +89,7 @@
             StateMachine.OnUpdate(Time.deltaTime);
             melodySound.OnUpdate();
             currentStateName = StateMachine.GetCurrentStateName();
+            //Debug.Log(currentStateName);
         }
 
         void FixedUpdate()
@@ -161,6 +162,7 @@
 
 		public Vector3 GetVelocity()
         {
-            return melodyPhysics.velocity;
-        }    }
+            return melodyPhysics.GetVelocity();
+        }
+    }
 }

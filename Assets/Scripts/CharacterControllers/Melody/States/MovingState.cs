@@ -32,7 +32,7 @@
                 ableToExit = true;
                 nextState = new DashIntroState(melodyController);
             }
-            else if (melodyController.move.magnitude == 0.0f && melodyController.melodyPhysics.velocity.magnitude < 0.001f)
+            else if (melodyController.move.magnitude == 0.0f)
             {
                 ableToExit = true;
                 nextState = new IdleState(melodyController);
