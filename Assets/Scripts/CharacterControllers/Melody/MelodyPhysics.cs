@@ -80,6 +80,11 @@
             return pushableBox != null;
         }
 
+        public void ApplyGravity(Vector3 gravity, bool isIdle = false)
+        {
+            physicsEntity.ApplyGravity(gravity, controller.config.MaxSpeed, controller.melodyCollision.IsGrounded(), controller.melodyCollision.slopeNormalDotProduct, isIdle);
+        }
+
         public void ApplyDashGravity(Vector3 gravity)
         {
             //Apply gravity if Melody is moving downhill.
@@ -103,11 +108,6 @@
         public void CalculateVelocity(float maxSpeed, float maxAcceleration)
         {
             physicsEntity.CalculateVelocity(controller.move, maxSpeed, maxAcceleration);
-        }
-
-        public void ApplyGravity(Vector3 gravity, bool isIdle = false)
-        {
-            physicsEntity.ApplyGravity(gravity, controller.config.MaxSpeed, controller.melodyCollision.IsGrounded(), controller.melodyCollision.slopeNormalDotProduct, isIdle);
         }
 
         public void RotatePlayer(float turningSpeed, bool stationaryTurn = false)

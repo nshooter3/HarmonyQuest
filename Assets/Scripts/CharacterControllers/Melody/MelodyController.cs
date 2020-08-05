@@ -89,7 +89,7 @@
             StateMachine.OnUpdate(Time.deltaTime);
             melodySound.OnUpdate();
             currentStateName = StateMachine.GetCurrentStateName();
-            //Debug.Log(currentStateName);
+            //Debug.Log("State: " + currentStateName);
         }
 
         void FixedUpdate()
