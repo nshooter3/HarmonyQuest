@@ -52,8 +52,8 @@
             {
                 physicsEntity.velocity = dashVelocity;
                 physicsEntity.ProhibitMovementIntoWalls(controller.config.prohibitDashIntoWallsLayerMask, true);
+                physicsEntity.ApplyVelocity();
             }
-            controller.rigidBody.velocity = physicsEntity.velocity;
         }
 
         private void PushBoxes()
