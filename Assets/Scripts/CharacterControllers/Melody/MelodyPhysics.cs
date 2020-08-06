@@ -9,8 +9,6 @@
         private MelodyController controller;
         private PhysicsEntity physicsEntity;
 
-        private Vector3 slideVelocity;
-
         //The box that Melody is currently pushing.
         PushableBox pushableBox;
 
@@ -20,6 +18,11 @@
         {
             this.controller = controller;
             physicsEntity = new PhysicsEntity(controller.gameObject, controller.rigidBody, controller.capsuleCollider.center, controller.capsuleCollider.height, controller.capsuleCollider.radius);
+        }
+
+        public void CalculateVelocity(float maxSpeed, float maxAcceleration)
+        {
+            physicsEntity.CalculateVelocity(controller.move, maxSpeed, maxAcceleration);
         }
 
         public void ApplyVelocity(float maxSpeed, float turningSpeed, bool canPushBoxes = false)
@@ -103,11 +106,6 @@
         public Vector3 GetVelocity()
         {
             return physicsEntity.velocity;
-        }
-
-        public void CalculateVelocity(float maxSpeed, float maxAcceleration)
-        {
-            physicsEntity.CalculateVelocity(controller.move, maxSpeed, maxAcceleration);
         }
 
         public void RotatePlayer(float turningSpeed, bool stationaryTurn = false)

@@ -112,6 +112,14 @@
             gameObject.transform.eulerAngles = new Vector3(0.0f, gameObject.transform.eulerAngles.y, 0.0f);
         }
 
+        public void CapSpeed(float maxSpeed)
+        {
+            if (velocity.magnitude > maxSpeed)
+            {
+                velocity = velocity.normalized * maxSpeed;
+            }
+        }
+
         private void SetRaycastOriginPoints()
         {
             //Calculate the approximate distance that will be traversed, accounting for the radius of our collider.
@@ -123,18 +131,10 @@
             colliderLowerPosition = gameObject.transform.position + lowerColliderOffset;
         }
 
-        public void CapSpeed(float maxSpeed)
-        {
-            if (velocity.magnitude > maxSpeed)
-            {
-                velocity = velocity.normalized * maxSpeed;
-            }
-        }
-
         /// <summary>
         /// Used to prevent the entity from walking into walls and halting their descent during a fall.
         /// We shoot three raycasts out from various heights on the entity, using her velocity and collider radius to predict where she will be on the next frame.
-        /// If any of these raycast hit an object in prohibitMovementIntoWallsLayerMask, cancel all horizontal movement.
+        /// If any of these raycast hit an object in layerMask, cancel all horizontal movement.
         /// </summary>
         public void ProhibitMovementIntoWalls(LayerMask layerMask, bool isDash = false)
         {

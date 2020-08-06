@@ -118,12 +118,20 @@
             //If Melody is colliding with something that has a contact normal y angle less than slopeDownAngle but greater than groundedYAngleCutoff, we consider her sliding.
             isSliding |= slopeDownAngle > controller.config.groundedYAngleCutoff && slopeDownAngle <= controller.config.slidingYAngleCutoff;
 
+            //Use Melody's input direction for calculating the slope normal dot product if she is moving. Otherwise, use her transform.forward.
+            Vector3 melodyDirection = controller.transform.forward;
+            if (controller.move != Vector3.zero)
+            {
+                melodyDirection = controller.move;
+            }
+
             //If this slope is steeper than our last one without angling further downwards than sideways, then it is our new steepest slope.
             if (slopeDownAngle > steepestSlopeYAngle && slopeDownAngle < controller.config.slidingYAngleCutoff)
             {
                 steepestSlopeYAngle = slopeDownAngle;
                 steepestSlopeNormal = normal;
-                slopeNormalDotProduct = Vector3.Dot(controller.GetTransformForward(), steepestSlopeNormal);
+                
+                slopeNormalDotProduct = Vector3.Dot(melodyDirection, steepestSlopeNormal);
                 steepestSlopeNormalPerpendicularSide = normalPerpendicularSide;
                 steepestSlopeNormalPerpendicular = normalPerpendicular;
             }

@@ -34,7 +34,7 @@
 
             //Apply the normalized y value from our velocity so that we maintain our upwards/downwards momentum when dashing.
             //This allows Melody to get extra height off of ramps.
-            dodge.y = melodyController.rigidBody.velocity.normalized.y * dodgeMultiplier;
+            dodge.y = melodyController.GetVelocity().normalized.y * dodgeMultiplier;
 
             //Restrict the Y axis range of Melody's dash once she leaves the ground.
             if (melodyController.melodyCollision.IsInAir())
@@ -57,7 +57,16 @@
 
         public override void OnExit()
         {
-            melodyController.melodyPhysics.OverrideVelocity(dodge);
+            //Only carry momentum into the DashOutroState if we don't run into a wall or a steep hill.
+            if (melodyController.GetVelocity().magnitude > 0f && !melodyController.melodyCollision.IsSliding())
+            {
+                melodyController.melodyPhysics.OverrideVelocity(dodge);
+            }
+            else
+            {
+                melodyController.melodyPhysics.OverrideVelocity(Vector3.zero);
+            }
+
             melodyController.melodyPhysics.CapSpeed(melodyController.config.MaxSpeed);
             melodyController.melodyPhysics.ApplyVelocity(melodyController.config.DashOutroMaxSpeed, melodyController.config.DashOutroTurningSpeed);
         }

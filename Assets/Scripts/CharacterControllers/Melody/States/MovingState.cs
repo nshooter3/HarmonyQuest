@@ -44,7 +44,7 @@
         public override void OnFixedUpdate()
         {
             melodyController.melodyPhysics.ApplyVelocity(melodyController.config.MaxSpeed, melodyController.config.TurningSpeed, true);
-            if (melodyController.move.magnitude == 0.0f && melodyController.melodyCollision.IsGrounded() == true)
+            if (melodyController.move.magnitude == 0.0f && melodyController.melodyPhysics.GetVelocity().magnitude < 0.001f && melodyController.melodyCollision.IsGrounded() == true)
             {
                 //If there is no controller input and melody is grounded, do not apply gravity. This prevents her from infinitely sliding down hills.
             }
