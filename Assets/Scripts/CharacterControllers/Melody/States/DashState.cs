@@ -69,6 +69,15 @@
 
             melodyController.melodyPhysics.CapSpeed(melodyController.config.MaxSpeed);
             melodyController.melodyPhysics.ApplyVelocity(melodyController.config.DashOutroMaxSpeed, melodyController.config.DashOutroTurningSpeed);
+
+            if (melodyController.HasLockonTarget())
+            {
+                melodyController.melodyPhysics.InstantFaceDirection(melodyController.GetLockonTarget().aiGameObject.transform.position - melodyController.transform.position);
+            }
+            else
+            {
+                melodyController.melodyPhysics.InstantFaceDirection(dodge);
+            }
         }
     }
 }

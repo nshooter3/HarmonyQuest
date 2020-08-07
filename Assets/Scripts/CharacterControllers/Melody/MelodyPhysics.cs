@@ -124,6 +124,11 @@
             }
         }
 
+        public void InstantFaceDirection(Vector3 direction)
+        {
+            physicsEntity.InstantFaceDirection(direction);
+        }
+
         public void SnapToGround()
         {
             physicsEntity.SnapToGround(controller.melodyCollision.IsGrounded(), controller.config.snapToGroundRaycastDistance, controller.config.groundLayerMask);

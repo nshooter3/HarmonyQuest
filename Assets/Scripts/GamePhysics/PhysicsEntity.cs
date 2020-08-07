@@ -112,6 +112,11 @@
             gameObject.transform.eulerAngles = new Vector3(0.0f, gameObject.transform.eulerAngles.y, 0.0f);
         }
 
+        public void InstantFaceDirection(Vector3 direction)
+        {
+            RotateEntity(float.MaxValue, true, direction);
+        }
+
         public void CapSpeed(float maxSpeed)
         {
             if (velocity.magnitude > maxSpeed)
