@@ -138,6 +138,11 @@
         // PHYSICS FUNCTIONS
         // ****************************
 
+        public void ResetDesiredVelocity()
+        {
+            aiPhysics.ResetDesiredVelocity();
+        }
+
         public virtual void SetVelocityTowardsDestination(Vector3 destination, bool ignoreYValue = true, float speedModifier = 1.0f, bool alwaysFaceTarget = false)
         {
             SetVelocity((destination - data.aiAgentBottom.position).normalized, ignoreYValue, speedModifier, alwaysFaceTarget);
@@ -150,18 +155,18 @@
 
         public virtual void SetVelocity(Vector3 velocity, bool ignoreYValue = true, float speedModifier = 1.0f, bool alwaysFaceTarget = false)
         {
-            aiPhysics.SetVelocity(velocity, ignoreYValue, speedModifier, alwaysFaceTarget);
+            aiPhysics.CalculateVelocity(velocity, ignoreYValue, speedModifier, alwaysFaceTarget);
         }
 
         public virtual void ApplyVelocity(bool ignoreYValue = true, bool applyRotation = true, float turnSpeedModifier = 1.0f, bool instantlyFaceDirection = false)
         {
-            aiAnimator.SetVelocity(transform.forward, aiPhysics.newVelocity, data.aiStats.speed);
+            aiAnimator.SetVelocity(transform.forward, aiPhysics.GetVelocity(), data.aiStats.speed);
             aiPhysics.ApplyVelocity(ignoreYValue, applyRotation, turnSpeedModifier, instantlyFaceDirection);
         }
 
         public virtual void ApplyAnimationVelocity()
         {
-            aiAnimator.SetVelocity(transform.forward, aiPhysics.newVelocity, data.aiStats.speed);
+            aiAnimator.SetVelocity(transform.forward, aiPhysics.GetVelocity(), data.aiStats.speed);
         }
 
         public virtual void ApplyGravity()
@@ -189,14 +194,9 @@
             aiPhysics.SetObstacleAvoidanceForce(obstacleAvoidanceForce);
         }
 
-        public virtual void SetRotationDirection(bool alwaysFaceTarget = false)
+        public virtual void Rotate(float turningSpeed, bool stationaryTurn = false, Vector3? directionOverride = null)
         {
-            aiPhysics.SetRotationDirection(alwaysFaceTarget);
-        }
-
-        public virtual void Rotate(Vector3 direction, float turnSpeedModifier)
-        {
-            aiPhysics.Rotate(direction, turnSpeedModifier);
+            aiPhysics.Rotate(turningSpeed, stationaryTurn, directionOverride);
         }
 
         public virtual void SetRigidbodyConstraints(RigidbodyConstraints constraints)
@@ -236,12 +236,7 @@
 
         public virtual Vector3 GetMoveDirection()
         {
-            return aiPhysics.GetMoveDirection();
-        }
-
-        public virtual Vector3 GetRotationDirection()
-        {
-            return aiPhysics.GetRotationDirection();
+            return aiPhysics.GetVelocity().normalized;
         }
 
         public virtual Vector3 GetTransformForward()

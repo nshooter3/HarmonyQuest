@@ -33,7 +33,6 @@
             if (attackSnapWaitTime > 0.0f)
             {
                 attackSnapWaitTime -= Time.deltaTime;
-                updateData.aiGameObjectFacade.SetRotationDirection(true);
             }
             else
             {
@@ -49,7 +48,6 @@
                 else
                 {
                     updateData.aiGameObjectFacade.SetVelocity(Vector3.zero);
-                    updateData.aiGameObjectFacade.SetRotationDirection(true);
                     if (inAttackRange == false)
                     {
                         inAttackRange = true;
@@ -63,7 +61,7 @@
         {
             if (attackSnapWaitTime > 0.0f)
             {
-                updateData.aiGameObjectFacade.Rotate(updateData.aiGameObjectFacade.GetRotationDirection(), 0.15f);
+                updateData.aiGameObjectFacade.Rotate(updateData.aiGameObjectFacade.data.aiStats.rotateSpeed * 0.15f);
             }
             else
             {

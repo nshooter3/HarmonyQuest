@@ -2,16 +2,13 @@
 {
     using UnityEngine;
     using GameAI.Navigation;
+    using GamePhysics;
 
     public class AIPhysics
     {
         private AIGameObjectData data;
 
-        public Vector3 moveDirection = Vector3.zero;
-        public Vector3 rotationDirection = Vector3.zero;
-        public Vector3 newVelocity = Vector3.zero;
-        private Vector3 modifiedVelocity = Vector3.zero;
-        private float prevYVel = 0;
+        private PhysicsEntity physicsEntity;
 
         //Additional movement forces that make an agent attempt to keep away from other agents and obstacles.
         public Vector3 collisionAvoidanceForce = Vector3.zero;
@@ -25,54 +22,38 @@
         private Vector3 adjustedForce;
         private Vector3 difference;
 
+        private bool alwaysFaceTarget = false;
+
         public void Init(AIGameObjectData data)
         {
             this.data = data;
+            physicsEntity = new PhysicsEntity(data.gameObject, data.rb, data.capsuleCollider.center, data.capsuleCollider.height, data.capsuleCollider.radius);
         }
 
-        public virtual void SetVelocity(Vector3 velocity, bool ignoreYValue = true, float speedModifier = 1.0f, bool alwaysFaceTarget = false)
+        public void ResetDesiredVelocity()
         {
-            moveDirection = velocity.normalized;
+            physicsEntity.ResetDesiredVelocity();
+        }
 
-            SetRotationDirection(alwaysFaceTarget);
+        public virtual void CalculateVelocity(Vector3 velocity, bool ignoreYValue = true, float speedModifier = 1.0f, bool alwaysFaceTarget = false)
+        {
+            this.alwaysFaceTarget = alwaysFaceTarget;
+            physicsEntity.CalculateVelocity(velocity.normalized, data.aiStats.speed, float.MaxValue, ignoreYValue);
 
-            if (ignoreYValue)
-            {
-                //Whatever the y value was before, keep it. This allows the AI to still fall off of things while ignoring y velocity on their movement vector.
-                prevYVel = data.rb.velocity.y;
-                newVelocity = (moveDirection * Time.deltaTime) * data.aiStats.speed;
-                newVelocity.y = prevYVel;
-            }
-            else
-            {
-                newVelocity = (moveDirection * Time.deltaTime) * data.aiStats.speed;
-            }
+            adjustedCollisionAvoidanceForce = AdjustAvoidanceForceBasedOnMovementVelocity(collisionAvoidanceForce, physicsEntity.velocity);
+            adjustedObstacleAvoidanceForce = AdjustAvoidanceForceBasedOnMovementVelocity(obstacleAvoidanceForce, physicsEntity.velocity);
 
-            adjustedCollisionAvoidanceForce = AdjustAvoidanceForceBasedOnMovementVelocity(collisionAvoidanceForce, newVelocity);
-            adjustedObstacleAvoidanceForce = AdjustAvoidanceForceBasedOnMovementVelocity(obstacleAvoidanceForce, newVelocity);
+            physicsEntity.AddForceToVelocity(adjustedCollisionAvoidanceForce);
+            physicsEntity.AddForceToVelocity(adjustedObstacleAvoidanceForce);
 
             if (data.debugFlocking)
             {
-                Debug.Log("VELOCITY FORCE: " + newVelocity.magnitude);
+                Debug.Log("VELOCITY FORCE: " + physicsEntity.velocity);
                 Debug.Log("ADJUSTED COLLISION AVOIDANCE FORCE: " + adjustedCollisionAvoidanceForce.magnitude);
                 Debug.Log("ADJUSTED OBSTACLE AVOIDANCE FORCE: " + adjustedObstacleAvoidanceForce.magnitude);
             }
 
-            newVelocity = (newVelocity + adjustedCollisionAvoidanceForce + adjustedObstacleAvoidanceForce) * speedModifier;
-        }
-
-        public void SetRotationDirection(bool alwaysFaceTarget = false)
-        {
-            if (alwaysFaceTarget)
-            {
-                rotationDirection = (data.aggroTarget.transform.position - data.gameObject.transform.position).normalized;
-            }
-            else
-            {
-                rotationDirection = moveDirection;
-            }
-            rotationDirection.y = 0;
-            rotationDirection.Normalize();
+            physicsEntity.ApplyVelocityModifier(speedModifier);
         }
 
         /// <summary>
@@ -85,12 +66,7 @@
         /// <param name="rotationSpeed"> How quickly the enemy spins around in the air. </param>
         public virtual void LaunchAgent(Vector3 direction, float yForce, float launchSpeed, float rotationSpeed)
         {
-            moveDirection = direction.normalized;
-            moveDirection = new Vector3(moveDirection.x, yForce, moveDirection.z);
-
-            data.rb.angularVelocity = new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)).normalized * rotationSpeed;
-
-            newVelocity = moveDirection * launchSpeed;
+            physicsEntity.LaunchEntity(direction, yForce, launchSpeed, rotationSpeed);
         }
 
         /// <summary>
@@ -111,25 +87,21 @@
         {
             if (applyRotation)
             {
-                Rotate(rotationDirection, turnSpeedModifier, instantlyFaceDirection);
+                physicsEntity.RotateEntity(data.aiStats.rotateSpeed);
             }
-            modifiedVelocity = newVelocity;
-            if (ignoreYValue)
-            {
-                modifiedVelocity.y = 0;
-            }
-            data.rb.velocity = modifiedVelocity;
+            physicsEntity.ApplyVelocity();
         }
 
         public virtual void ApplyGravity()
         {
             // Apply a force directly so we can handle gravity on our own instead of relying on rigidbody gravity.
-            data.rb.AddForce(data.aiStats.gravity, ForceMode.Acceleration);
+            //TODO: Make stuff to tell whether or not enemies are grounded.
+            physicsEntity.ApplyGravity(data.aiStats.gravity, data.aiStats.speed, false, 0);
         }
 
         public virtual void ResetVelocity()
         {
-            newVelocity = Vector3.zero;
+            physicsEntity.ApplyStationaryVelocity();
         }
 
         public Vector3 GetCollisionAvoidanceForce()
@@ -147,33 +119,17 @@
             this.obstacleAvoidanceForce = obstacleAvoidanceForce;
         }
 
-        public virtual void Rotate(Vector3 direction, float turnSpeedModifier, bool instantlyFaceDirection = false)
+        public virtual void Rotate(float turningSpeed, bool stationaryTurn = false, Vector3? directionOverride = null)
         {
-            //Rotate enemy to face movement direction
-            if (direction.magnitude > 0)
+            if (alwaysFaceTarget)
             {
-                Vector3 targetPos = data.gameObject.transform.position + direction;
-                Vector3 targetDir = targetPos - data.gameObject.transform.position;
-
-                // The step size is equal to speed times frame time.
-                float step = data.aiStats.rotateSpeed * turnSpeedModifier * Time.deltaTime;
-
-                Vector3 newDir;
-                if (instantlyFaceDirection)
-                {
-                    newDir = targetDir;
-                }
-                else
-                {
-                    newDir = Vector3.RotateTowards(data.gameObject.transform.forward, targetDir, step, 0.0f);
-                }
-                Debug.DrawRay(data.gameObject.transform.position, newDir, Color.red);
-
-                // Move our position a step closer to the target.
-                data.gameObject.transform.rotation = Quaternion.LookRotation(newDir);
+                physicsEntity.RotateEntity(turningSpeed, stationaryTurn, data.aggroTarget.transform.position - data.gameObject.transform.position);
+                alwaysFaceTarget = false;
             }
-            //Failsafe to ensure that x and z are always zero.
-            data.gameObject.transform.eulerAngles = new Vector3(0, data.gameObject.transform.eulerAngles.y, 0);
+            else
+            {
+                physicsEntity.RotateEntity(turningSpeed, stationaryTurn, directionOverride);
+            }
         }
 
         public void SetRigidbodyConstraints(RigidbodyConstraints constraints)
@@ -207,19 +163,19 @@
             return Vector3.Distance(data.gameObject.transform.position, data.aggroTarget.transform.position);
         }
 
-        public Vector3 GetMoveDirection()
-        {
-            return moveDirection;
-        }
-
-        public Vector3 GetRotationDirection()
-        {
-            return rotationDirection;
-        }
-
         public Vector3 GetTransformForward()
         {
             return data.gameObject.transform.forward;
+        }
+
+        public Vector3 GetVelocity()
+        {
+            return physicsEntity.velocity;
+        }
+
+        public PhysicsEntity GetPhysicsEntity()
+        {
+            return physicsEntity;
         }
     }
 }

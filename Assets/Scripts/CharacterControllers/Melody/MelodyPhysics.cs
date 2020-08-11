@@ -20,6 +20,11 @@
             physicsEntity = new PhysicsEntity(controller.gameObject, controller.rigidBody, controller.capsuleCollider.center, controller.capsuleCollider.height, controller.capsuleCollider.radius);
         }
 
+        public void ResetDesiredVelocity()
+        {
+            physicsEntity.ResetDesiredVelocity();
+        }
+
         public void CalculateVelocity(float maxSpeed, float maxAcceleration)
         {
             physicsEntity.CalculateVelocity(controller.move, maxSpeed, maxAcceleration);
@@ -85,13 +90,13 @@
 
         public void ApplyGravity(Vector3 gravity, bool isIdle = false)
         {
-            physicsEntity.ApplyGravity(gravity, controller.config.MaxSpeed, controller.melodyCollision.IsGrounded(), controller.melodyCollision.slopeNormalDotProduct, isIdle);
+            physicsEntity.ApplyGravity(gravity, controller.config.MaxSpeed, controller.melodyCollision.IsGrounded(), controller.melodyCollision.GetSlopeNormalDotProduct(), isIdle);
         }
 
         public void ApplyDashGravity(Vector3 gravity)
         {
             //Apply gravity if Melody is moving downhill.
-            if (controller.melodyCollision.slopeNormalDotProduct > 0.1f)
+            if (controller.melodyCollision.GetSlopeNormalDotProduct() > 0.1f)
             {
                 controller.rigidBody.AddForce(gravity, ForceMode.VelocityChange);
             }
@@ -152,6 +157,11 @@
         public void IgnoreHorizontalMovementInput()
         {
             physicsEntity.IgnoreHorizontalMovementInput();
+        }
+
+        public PhysicsEntity GetPhysicsEntity()
+        {
+            return physicsEntity;
         }
     }
 }

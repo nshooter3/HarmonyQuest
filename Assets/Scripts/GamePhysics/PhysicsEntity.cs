@@ -25,7 +25,7 @@
         //The radius of the entity's collider, added to her velocity when determing the distance to check for wall collisions.
         private float colliderRadius;
         //Used to determine how far from the center of our collider that the upper and lower raycasts should be. 0 for no separation, 1 for the very top and bottom of the entity's collider.
-        private float upperLowerYHeightScale = 0.5f;
+        private float upperLowerYHeightScale;
 
         //How far the entity is about to travel based on velocity
         public float predictedMovementDistance;
@@ -34,16 +34,22 @@
 
         private bool debug = false;
 
-        public PhysicsEntity(GameObject gameObject, Rigidbody rb, Vector3 colliderOffset, float colliderHeight, float colliderRadius)
+        public PhysicsEntity(GameObject gameObject, Rigidbody rb, Vector3 colliderOffset, float colliderHeight, float colliderRadius, float upperLowerYHeightScale = 0.5f)
         {
             this.gameObject = gameObject;
             this.rb = rb;
             this.colliderOffset = colliderOffset;
             this.colliderRadius = colliderRadius;
+            this.upperLowerYHeightScale = upperLowerYHeightScale;
             upperColliderOffset = colliderOffset;
             upperColliderOffset.y += (colliderHeight / 2.0f) * upperLowerYHeightScale;
             lowerColliderOffset = colliderOffset;
             lowerColliderOffset.y += (-colliderHeight / 2.0f) * upperLowerYHeightScale;
+        }
+
+        public void ResetDesiredVelocity()
+        {
+            desiredVelocity = Vector3.zero;
         }
 
         public void OverrideVelocity(Vector3 newVelocity)
@@ -51,14 +57,32 @@
             velocity = newVelocity;
         }
 
-        public void CalculateVelocity(Vector3 direction, float maxSpeed, float maxAcceleration)
+        public void CalculateVelocity(Vector3 direction, float maxSpeed, float maxAcceleration, bool ignoreYValue = true)
         {
             desiredVelocity = new Vector3(direction.x, 0, direction.z) * maxSpeed;
             maxSpeedChange = maxAcceleration * Time.deltaTime;
             velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
             velocity.z = Mathf.MoveTowards(velocity.z, desiredVelocity.z, maxSpeedChange);
-            //Keep whatever our rigidbody y velocity was on the last frame to ensure that gravity works properly.
-            velocity.y = rb.velocity.y;
+            if (ignoreYValue)
+            {
+                //Keep whatever our rigidbody y velocity was on the last frame to ensure that gravity works properly.
+                velocity.y = rb.velocity.y;
+            }
+            else
+            {
+                velocity.y = Mathf.MoveTowards(velocity.y, desiredVelocity.y, maxSpeedChange);
+            }
+        }
+
+        public void AddForceToVelocity(Vector3 force)
+        {
+            velocity = velocity + force;
+        }
+
+        public void ApplyVelocityModifier(float modifier)
+        {
+            desiredVelocity = desiredVelocity * modifier;
+            velocity = velocity * modifier;
         }
 
         public void ApplyVelocity()
@@ -66,8 +90,27 @@
             rb.velocity = velocity;
         }
 
+        /// <summary>
+        /// One frame function that suddenly launches the entity in a particular direction.
+        /// Intended to juice up enemy deaths and such.
+        /// </summary>
+        /// <param name="direction"> Which direction the entity goes flying in. </param>
+        /// <param name="yForce"> How high up the entity gets launched. </param>
+        /// <param name="launchSpeed"> How quickly the entity is launched. </param>
+        /// <param name="rotationSpeed"> How quickly the entity spins around in the air. </param>
+        public void LaunchEntity(Vector3 direction, float yForce, float launchSpeed, float rotationSpeed)
+        {
+            desiredVelocity = direction.normalized;
+            desiredVelocity = new Vector3(velocity.x, yForce, velocity.z);
+
+            rb.angularVelocity = new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)).normalized * rotationSpeed;
+
+            velocity = desiredVelocity * launchSpeed;
+        }
+
         public void ApplyGravity(Vector3 gravity, float maxSpeed, bool isGrounded, float slopeNormalDotProduct, bool isIdle = false)
         {
+            Debug.Log("lopeNormalDotProduct: " + slopeNormalDotProduct);
             if (isGrounded == false || (isIdle == false && slopeNormalDotProduct > 0.1f))
             {
                 //Apply gravity if agent is in the air or sliding, or if they are moving downhill.

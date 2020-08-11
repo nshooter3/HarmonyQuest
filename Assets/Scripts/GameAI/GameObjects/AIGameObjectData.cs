@@ -97,6 +97,12 @@
         public Collider collisionAvoidanceHitbox;
 
         /// <summary>
+        /// This enemy's capsule collider, if they have one.
+        /// </summary>
+        [Tooltip("This enemy's capsule collider, if they have one.")]
+        public CapsuleCollider capsuleCollider;
+
+        /// <summary>
         /// If the damage comes a direction within CounterDegreeRange degrees of where the enemy is facing, we consider it a successful parry. (CounterDegreeRange * 2 degrees total range).
         /// </summary>
         [Tooltip("If the damage comes a direction within CounterDegreeRange degrees of where the enemy is facing, we consider it a successful parry. (CounterDegreeRange * 2 degrees total range).")]

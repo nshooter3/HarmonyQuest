@@ -24,6 +24,7 @@
                 nextState = null;
                 currentState.Init(updateData);
             }
+            updateData.aiGameObjectFacade.ResetDesiredVelocity();
             currentState.OnUpdate(updateData);
             updateData.aiGameObjectFacade.UpdateSubclasses();
         }

@@ -46,7 +46,6 @@
                     updateData.aiGameObjectFacade.SetRigidBodyConstraintsToLockAllButGravity();
                     inAttackRange = true;
                 }
-                updateData.aiGameObjectFacade.SetRotationDirection(true);
             }
         }
 
@@ -58,7 +57,7 @@
             }
             else
             {
-                updateData.aiGameObjectFacade.Rotate(updateData.aiGameObjectFacade.GetRotationDirection(), 0.5f);
+                updateData.aiGameObjectFacade.Rotate(updateData.aiGameObjectFacade.data.aiStats.rotateSpeed * 0.5f);
             }
             updateData.aiGameObjectFacade.ApplyGravity();
         }

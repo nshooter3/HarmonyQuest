@@ -82,6 +82,7 @@
         // Update is called once per frame
         void Update()
         {
+            melodyPhysics.ResetDesiredVelocity();
             CheckInputs();
             melodyHitboxes.UpdateHitboxes();
             melodyHealth.OnUpdate(Time.deltaTime);
