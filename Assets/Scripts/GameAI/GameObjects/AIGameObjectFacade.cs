@@ -18,6 +18,7 @@
         private AIHealth aiHealth = new AIHealth();
         private AIDebug aiDebug = new AIDebug();
         private AIUtil aiUtil = new AIUtil();
+        private AISurfaceCollision aiSurfaceCollision = new AISurfaceCollision();
         public AIAnimator aiAnimator;
         public AISound aiSound;
         
@@ -83,11 +84,12 @@
 
             data.aggroTarget = ServiceLocator.instance.GetMelodyInfo().GetTransform();
 
-            aiPhysics.Init(data);
+            aiPhysics.Init(this, data);
             aiHitboxes.Init(data);
             aiHealth.Init(data);
             aiDebug.Init(data);
             aiUtil.Init(data);
+            aiSurfaceCollision.Init();
 
             if (aiSound == null)
             {
@@ -131,6 +133,7 @@
             if (IsDead() == false)
             {
                 FixedUpdateHealth();
+                FixedUpdateSurfaceCollision();
             }
         }
 
@@ -169,9 +172,9 @@
             aiAnimator.SetVelocity(transform.forward, aiPhysics.GetVelocity(), data.aiStats.speed);
         }
 
-        public virtual void ApplyGravity()
+        public virtual void ApplyGravity(Vector3 gravity, bool isIdle = false)
         {
-            aiPhysics.ApplyGravity();
+            aiPhysics.ApplyGravity(gravity, isIdle);
         }
 
         public virtual void ResetVelocity()
@@ -346,6 +349,34 @@
         public void UpdateAnimations()
         {
             aiAnimator.OnUpdate();
+        }
+
+        // ****************************
+        // SURFACE COLLISION FUNCTIONS
+        // ****************************
+        public void FixedUpdateSurfaceCollision()
+        {
+            aiSurfaceCollision.OnFixedUpdate();
+        }
+
+        public bool IsGrounded()
+        {
+            return aiSurfaceCollision.IsGrounded();
+        }
+
+        public bool IsSliding()
+        {
+            return aiSurfaceCollision.IsSliding();
+        }
+
+        public bool IsInAir()
+        {
+            return aiSurfaceCollision.IsInAir();
+        }
+
+        public float GetSlopeNormalDotProduct()
+        {
+            return aiSurfaceCollision.GetSlopeNormalDotProduct();
         }
 
         // ****************************

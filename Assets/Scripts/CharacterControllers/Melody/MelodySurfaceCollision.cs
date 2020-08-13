@@ -2,11 +2,11 @@
 {
     using GamePhysics;
 
-    public class MelodyCollision
+    public class MelodySurfaceCollision
     {
         private SurfaceCollisionEntity surfaceCollisionEntity;
 
-        public MelodyCollision(MelodyController controller)
+        public MelodySurfaceCollision(MelodyController controller)
         {
             surfaceCollisionEntity = new SurfaceCollisionEntity(controller.gameObject, controller.melodyPhysics.GetPhysicsEntity(), controller.melodyColliderWrapper, controller.config.groundCheckRaycastDistance,
                 controller.config.groundCheckRaycastSpread, controller.config.groundCheckCenterWeight, controller.config.groundCheckRaycastYOffset, controller.config.groundLayerMask,

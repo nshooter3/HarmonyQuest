@@ -45,7 +45,7 @@
 
         //Utility classes
         public MelodyPhysics melodyPhysics;
-        public MelodyCollision melodyCollision;
+        public MelodySurfaceCollision melodyCollision;
         public MelodyHealth melodyHealth;
         public MelodyHitboxes melodyHitboxes;
         public MelodyAnimator melodyAnimator;
@@ -71,7 +71,7 @@
             move = new Vector3();
 
             melodyPhysics = new MelodyPhysics(this);
-            melodyCollision = new MelodyCollision(this);
+            melodyCollision = new MelodySurfaceCollision(this);
             melodyHealth = new MelodyHealth(this);
             melodyHitboxes = new MelodyHitboxes(this);
             melodyAnimator = new MelodyAnimator(this);

@@ -44,7 +44,7 @@
         public override void OnFixedUpdate(AIStateUpdateData updateData)
         {
             updateData.aiGameObjectFacade.ApplyVelocity();
-            updateData.aiGameObjectFacade.ApplyGravity();
+            updateData.aiGameObjectFacade.ApplyGravity(updateData.aiGameObjectFacade.data.aiStats.gravity);
         }
 
         public override void OnBeatUpdate(AIStateUpdateData updateData)

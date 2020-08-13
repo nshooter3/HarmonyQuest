@@ -67,7 +67,7 @@
             {
                 updateData.aiGameObjectFacade.ApplyVelocity(true, true, 0.35f);
             }
-            updateData.aiGameObjectFacade.ApplyGravity();
+            updateData.aiGameObjectFacade.ApplyGravity(updateData.aiGameObjectFacade.data.aiStats.gravity);
         }
 
         public override void OnBeatUpdate(AIStateUpdateData updateData)

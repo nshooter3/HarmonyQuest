@@ -3,10 +3,16 @@
     using UnityEngine;
     using GameAI.Navigation;
     using GamePhysics;
+    using Melody;
+    using HarmonyQuest;
 
     public class AIPhysics
     {
+        private AIGameObjectFacade aIGameObjectFacade;
         private AIGameObjectData data;
+
+        //Use some of Melody's physics params for now
+        private MelodyController melodyController;
 
         private PhysicsEntity physicsEntity;
 
@@ -24,9 +30,11 @@
 
         private bool alwaysFaceTarget = false;
 
-        public void Init(AIGameObjectData data)
+        public void Init(AIGameObjectFacade aIGameObjectFacade, AIGameObjectData data)
         {
+            this.aIGameObjectFacade = aIGameObjectFacade;
             this.data = data;
+            melodyController = ServiceLocator.instance.GetMelodyController();
             physicsEntity = new PhysicsEntity(data.gameObject, data.rb, data.capsuleCollider.center, data.capsuleCollider.height, data.capsuleCollider.radius);
         }
 
@@ -92,11 +100,11 @@
             physicsEntity.ApplyVelocity();
         }
 
-        public virtual void ApplyGravity()
+        public virtual void ApplyGravity(Vector3 gravity, bool isIdle = false)
         {
             // Apply a force directly so we can handle gravity on our own instead of relying on rigidbody gravity.
             //TODO: Make stuff to tell whether or not enemies are grounded.
-            physicsEntity.ApplyGravity(data.aiStats.gravity, data.aiStats.speed, false, 0);
+            physicsEntity.ApplyGravity(gravity, data.aiStats.speed, aIGameObjectFacade.IsGrounded(), aIGameObjectFacade.GetSlopeNormalDotProduct(), isIdle);
         }
 
         public virtual void ResetVelocity()
@@ -130,6 +138,16 @@
             {
                 physicsEntity.RotateEntity(turningSpeed, stationaryTurn, directionOverride);
             }
+        }
+
+        public void InstantFaceDirection(Vector3 direction)
+        {
+            physicsEntity.InstantFaceDirection(direction);
+        }
+
+        public void SnapToGround()
+        {
+            physicsEntity.SnapToGround(aIGameObjectFacade.IsGrounded(), melodyController.config.snapToGroundRaycastDistance, melodyController.config.groundLayerMask);
         }
 
         public void SetRigidbodyConstraints(RigidbodyConstraints constraints)
