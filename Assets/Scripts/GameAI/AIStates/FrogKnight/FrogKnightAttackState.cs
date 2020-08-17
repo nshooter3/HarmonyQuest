@@ -22,12 +22,17 @@
         {
             //Update navpos graphic for debug. Shows where the agent is focusing.
             debugAction.NavPosTrackTarget(updateData);
+            updateData.aiGameObjectFacade.SetVelocity(Vector3.zero);
         }
 
         public override void OnFixedUpdate(AIStateUpdateData updateData)
         {
-            //updateData.aiGameObjectFacade.ApplyVelocity();
-            //updateData.aiGameObjectFacade.ApplyGravity();
+            if (updateData.aiGameObjectFacade.IsGrounded() && !updateData.aiGameObjectFacade.IsSliding())
+            {
+                updateData.aiGameObjectFacade.IgnoreHorizontalMovementInput();
+                updateData.aiGameObjectFacade.ApplyVelocity();
+            }
+            updateData.aiGameObjectFacade.ApplyGravity(updateData.aiGameObjectFacade.data.aiStats.gravity, true);
         }
 
         public override void OnBeatUpdate(AIStateUpdateData updateData)

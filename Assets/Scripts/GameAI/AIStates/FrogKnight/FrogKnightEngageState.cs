@@ -68,7 +68,20 @@
         public override void OnFixedUpdate(AIStateUpdateData updateData)
         {
             updateData.aiGameObjectFacade.ApplyVelocity();
-            updateData.aiGameObjectFacade.ApplyGravity(updateData.aiGameObjectFacade.data.aiStats.gravity);
+
+            if (updateData.aiGameObjectFacade.GetDesiredVelocity().magnitude == 0.0f && updateData.aiGameObjectFacade.GetVelocity().magnitude < 0.001f && updateData.aiGameObjectFacade.IsGrounded() == true)
+            {
+                //If there is no controller input and the enemy is grounded, do not apply gravity. This prevents it from infinitely sliding down hills.
+            }
+            else
+            {
+                updateData.aiGameObjectFacade.ApplyGravity(updateData.aiGameObjectFacade.data.aiStats.gravity);
+            }
+
+            updateData.aiGameObjectFacade.SetAlwaysFaceTarget(true);
+            updateData.aiGameObjectFacade.Rotate(updateData.aiGameObjectFacade.data.aiStats.rotateSpeed * 5f, true);
+
+            updateData.aiGameObjectFacade.SnapToGround();
         }
 
         public override void OnBeatUpdate(AIStateUpdateData updateData)

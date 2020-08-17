@@ -12,6 +12,7 @@
         {
             currentState = initState;
             initState.Init(updateData);
+            updateData.aiGameObjectFacade.data.currentState = currentState.GetType().ToString();
         }
 
         public void OnUpdate(AIStateUpdateData updateData)
@@ -23,6 +24,7 @@
                 currentState = nextState;
                 nextState = null;
                 currentState.Init(updateData);
+                updateData.aiGameObjectFacade.data.currentState = currentState.GetType().ToString();
             }
             updateData.aiGameObjectFacade.ResetDesiredVelocity();
             currentState.OnUpdate(updateData);

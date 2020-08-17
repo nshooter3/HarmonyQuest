@@ -8,7 +8,7 @@
 
     public class AIPhysics
     {
-        private AIGameObjectFacade aIGameObjectFacade;
+        private AIGameObjectFacade aiGameObjectFacade;
         private AIGameObjectData data;
 
         //Use some of Melody's physics params for now
@@ -32,7 +32,7 @@
 
         public void Init(AIGameObjectFacade aIGameObjectFacade, AIGameObjectData data)
         {
-            this.aIGameObjectFacade = aIGameObjectFacade;
+            this.aiGameObjectFacade = aIGameObjectFacade;
             this.data = data;
             melodyController = ServiceLocator.instance.GetMelodyController();
             physicsEntity = new PhysicsEntity(data.gameObject, data.rb, data.capsuleCollider.center, data.capsuleCollider.height, data.capsuleCollider.radius);
@@ -95,6 +95,7 @@
         {
             if (applyRotation)
             {
+                //Rotate(aiGameObjectFacade.data.aiStats.rotateSpeed, true, Vector3 ? directionOverride = null)
                 physicsEntity.RotateEntity(data.aiStats.rotateSpeed);
             }
             physicsEntity.ApplyVelocity();
@@ -104,7 +105,7 @@
         {
             // Apply a force directly so we can handle gravity on our own instead of relying on rigidbody gravity.
             //TODO: Make stuff to tell whether or not enemies are grounded.
-            physicsEntity.ApplyGravity(gravity, data.aiStats.speed, aIGameObjectFacade.IsGrounded(), aIGameObjectFacade.GetSlopeNormalDotProduct(), isIdle);
+            physicsEntity.ApplyGravity(gravity, data.aiStats.speed, aiGameObjectFacade.IsGrounded(), aiGameObjectFacade.GetSlopeNormalDotProduct(), isIdle);
         }
 
         public virtual void ResetVelocity()
@@ -127,6 +128,11 @@
             this.obstacleAvoidanceForce = obstacleAvoidanceForce;
         }
 
+        public void SetAlwaysFaceTarget(bool alwaysFaceTarget)
+        {
+            this.alwaysFaceTarget = alwaysFaceTarget;
+        }
+
         public virtual void Rotate(float turningSpeed, bool stationaryTurn = false, Vector3? directionOverride = null)
         {
             if (alwaysFaceTarget)
@@ -147,7 +153,7 @@
 
         public void SnapToGround()
         {
-            physicsEntity.SnapToGround(aIGameObjectFacade.IsGrounded(), melodyController.config.snapToGroundRaycastDistance, melodyController.config.groundLayerMask);
+            physicsEntity.SnapToGround(aiGameObjectFacade.IsGrounded(), melodyController.config.snapToGroundRaycastDistance, melodyController.config.groundLayerMask);
         }
 
         public void SetRigidbodyConstraints(RigidbodyConstraints constraints)
@@ -189,6 +195,16 @@
         public Vector3 GetVelocity()
         {
             return physicsEntity.velocity;
+        }
+
+        public Vector3 GetDesiredVelocity()
+        {
+            return physicsEntity.desiredVelocity;
+        }
+
+        public void IgnoreHorizontalMovementInput()
+        {
+            physicsEntity.IgnoreHorizontalMovementInput();
         }
 
         public PhysicsEntity GetPhysicsEntity()

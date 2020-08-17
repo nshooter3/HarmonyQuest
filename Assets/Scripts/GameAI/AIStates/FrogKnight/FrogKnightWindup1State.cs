@@ -53,7 +53,11 @@
         {
             if (inAttackRange == false)
             {
-                updateData.aiGameObjectFacade.ApplyVelocity(true, true, 0.5f);
+                if (updateData.aiGameObjectFacade.IsGrounded() && !updateData.aiGameObjectFacade.IsSliding())
+                {
+                    updateData.aiGameObjectFacade.IgnoreHorizontalMovementInput();
+                    updateData.aiGameObjectFacade.ApplyVelocity(true, true, 0.5f);
+                }
             }
             else
             {

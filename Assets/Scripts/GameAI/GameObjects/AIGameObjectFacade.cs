@@ -202,6 +202,11 @@
             aiPhysics.Rotate(turningSpeed, stationaryTurn, directionOverride);
         }
 
+        public void SetAlwaysFaceTarget(bool alwaysFaceTarget)
+        {
+            aiPhysics.SetAlwaysFaceTarget(alwaysFaceTarget);
+        }
+
         public virtual void SetRigidbodyConstraints(RigidbodyConstraints constraints)
         {
             aiPhysics.SetRigidbodyConstraints(constraints);
@@ -247,7 +252,27 @@
             return aiPhysics.GetTransformForward();
         }
 
-        public PhysicsEntity GetPhysicsEntity()
+        public virtual void IgnoreHorizontalMovementInput()
+        {
+            aiPhysics.IgnoreHorizontalMovementInput();
+        }
+
+        public virtual void SnapToGround()
+        {
+            aiPhysics.SnapToGround();
+        }
+
+        public virtual Vector3 GetVelocity()
+        {
+            return aiPhysics.GetVelocity();
+        }
+
+        public virtual Vector3 GetDesiredVelocity()
+        {
+            return aiPhysics.GetDesiredVelocity();
+        }
+
+        public virtual PhysicsEntity GetPhysicsEntity()
         {
             return aiPhysics.GetPhysicsEntity();
         }

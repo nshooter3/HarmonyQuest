@@ -2,6 +2,7 @@
 {
     using GameAI.Navigation;
     using GamePhysics;
+    using Unity.Collections;
     using UnityEngine;
 
     [System.Serializable]
@@ -168,5 +169,9 @@
         //Multiplier for the collision avoidance force for this specific enemy
         [HideInInspector]
         public float individualCollisionAvoidanceMaxDistance = NavigatorSettings.collisionAvoidanceDefaultMaxDistance;
+
+        //Shows the current state this AIAgent is in.
+        [ReadOnly]
+        public string currentState;
     }
 }

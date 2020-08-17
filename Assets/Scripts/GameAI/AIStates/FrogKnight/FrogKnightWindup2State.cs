@@ -65,7 +65,11 @@
             }
             else
             {
-                updateData.aiGameObjectFacade.ApplyVelocity(true, true, 0.35f);
+                if (updateData.aiGameObjectFacade.IsGrounded() && !updateData.aiGameObjectFacade.IsSliding())
+                {
+                    updateData.aiGameObjectFacade.IgnoreHorizontalMovementInput();
+                    updateData.aiGameObjectFacade.ApplyVelocity(true, true, 0.35f);
+                }
             }
             updateData.aiGameObjectFacade.ApplyGravity(updateData.aiGameObjectFacade.data.aiStats.gravity);
         }
