@@ -56,25 +56,37 @@
 
         public override void CheckForStateChange(AIStateUpdateData updateData)
         {
+            checkForTargetObstructionTimer += Time.deltaTime;
             if (updateData.aiGameObjectFacade.IsDead() == true)
             {
                 updateData.stateHandler.RequestStateTransition(new FrogKnightDeadState { }, updateData);
             }
-            else if (ShouldDeAggro(updateData) || updateData.navigator.isActivelyGeneratingPath == false)
+            else if (ShouldDeAggro(updateData))
             {
                 checkForTargetObstructionTimer = 0;
                 updateData.stateHandler.RequestStateTransition(new FrogKnightLoseTargetState { }, updateData);
             }
-            else
+            else if (updateData.navigator.isActivelyGeneratingPath == false)
             {
-                checkForTargetObstructionTimer += Time.deltaTime;
-                if (checkForTargetObstructionTimer > NavigatorSettings.checkForTargetObstructionRate)
+                if (!NavMeshUtil.IsTargetObstructed(updateData.aiGameObjectFacade.data.aiAgentBottom, updateData.player.GetTransform()))
                 {
-                    checkForTargetObstructionTimer = 0;
-                    if (!NavMeshUtil.IsTargetObstructed(updateData.aiGameObjectFacade.data.aiAgentBottom, updateData.player.GetTransform()))
+                    updateData.stateHandler.RequestStateTransition(new FrogKnightEngageState { }, updateData);
+                }
+                else
+                {
+                    if (updateData.navigator.SetTarget(updateData.aiGameObjectFacade.data.aiAgentBottom, updateData.player.GetTransform()) == false)
                     {
-                        updateData.stateHandler.RequestStateTransition(new FrogKnightEngageState { }, updateData);
+                        //If we fail to generate a path to our target, go into the lose target state.
+                        updateData.stateHandler.RequestStateTransition(new FrogKnightLoseTargetState { }, updateData);
                     }
+                }
+            }
+            else if (checkForTargetObstructionTimer > NavigatorSettings.checkForTargetObstructionRate)
+            {
+                checkForTargetObstructionTimer = 0;
+                if (!NavMeshUtil.IsTargetObstructed(updateData.aiGameObjectFacade.data.aiAgentBottom, updateData.player.GetTransform()))
+                {
+                    updateData.stateHandler.RequestStateTransition(new FrogKnightEngageState { }, updateData);
                 }
             }
         }

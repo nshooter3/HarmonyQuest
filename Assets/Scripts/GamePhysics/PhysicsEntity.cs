@@ -110,7 +110,6 @@
 
         public void ApplyGravity(Vector3 gravity, float maxSpeed, bool isGrounded, float slopeNormalDotProduct, bool isIdle = false)
         {
-            Debug.Log("lopeNormalDotProduct: " + slopeNormalDotProduct);
             if (isGrounded == false || (isIdle == false && slopeNormalDotProduct > 0.1f))
             {
                 //Apply gravity if agent is in the air or sliding, or if they are moving downhill.

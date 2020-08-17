@@ -13,7 +13,7 @@
         private Queue<Vector3> waypoints;
         private Vector3 nextWaypoint;
 
-        public override void SetTarget(Transform navigationAgent, Transform navigationTarget)
+        public override bool SetTarget(Transform navigationAgent, Transform navigationTarget)
         {
             this.navigationAgent = navigationAgent;
             this.navigationTarget = navigationTarget;
@@ -21,7 +21,7 @@
             waypoints = null;
             lastKnownTargetPos = new Vector3(float.MinValue, float.MinValue, float.MinValue);
             isActivelyGeneratingPath = true;
-            GeneratePathToTarget();
+            return GeneratePathToTarget();
         }
 
         public override void CancelCurrentNavigation()
@@ -86,12 +86,12 @@
             }
         }
 
-        private void GeneratePathToTarget()
+        private bool GeneratePathToTarget()
         {
             if (navigationAgent == null || navigationTarget == null)
             {
                 CancelCurrentNavigation();
-                return;
+                return false;
             }
 
             bool pathFound = false;
@@ -117,6 +117,7 @@
                 //If we cannot reach the specified target using the navmesh, cancel navigation.
                 CancelCurrentNavigation();
             }
+            return pathFound;
         }
 
         private bool IsPathToTargetValid()

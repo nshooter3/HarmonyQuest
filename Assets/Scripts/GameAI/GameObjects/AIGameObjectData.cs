@@ -13,6 +13,13 @@
         // ****************************
 
         /// <summary>
+        /// READ ONLY: Shows the current state this AIAgent is in.
+        /// </summary>
+        [ReadOnly]
+        [Tooltip("READ ONLY: Shows the current state this AIAgent is in.")]
+        public string currentState;
+
+        /// <summary>
         /// The AIStats scriptable object associated with this enemy. Holds onto data like health bars, drops, etc.
         /// </summary>
         [Tooltip("The AIStats scriptable object associated with this enemy. Holds onto data like health bars, drops, etc.")]
@@ -169,9 +176,5 @@
         //Multiplier for the collision avoidance force for this specific enemy
         [HideInInspector]
         public float individualCollisionAvoidanceMaxDistance = NavigatorSettings.collisionAvoidanceDefaultMaxDistance;
-
-        //Shows the current state this AIAgent is in.
-        [ReadOnly]
-        public string currentState;
     }
 }

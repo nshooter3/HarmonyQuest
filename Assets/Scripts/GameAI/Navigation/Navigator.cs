@@ -9,7 +9,7 @@
 
         public Transform navigationTarget;
 
-        public abstract void SetTarget(Transform navigationAgent, Transform navigationTarget);
+        public abstract bool SetTarget(Transform navigationAgent, Transform navigationTarget);
         public abstract void CancelCurrentNavigation();
         public abstract void RegeneratePathIfTargetHasMoved();
         public abstract void RegeneratePathIfWaypointIsObstructed();
