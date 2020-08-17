@@ -1073,6 +1073,7 @@ GameObject:
   - component: {fileID: 3047223838859579937}
   - component: {fileID: 5600415224650793353}
   - component: {fileID: 2094703486723500754}
+  - component: {fileID: 494702484324720752}
   m_Layer: 11
   m_Name: FrogKnight
   m_TagString: Untagged
@@ -1214,6 +1215,7 @@ MonoBehaviour:
     CounterDamageReceiver: {fileID: 5600415224650793353}
     collisionAvoidanceHitbox: {fileID: 3047223838859579943}
     capsuleCollider: {fileID: 3047223838859579943}
+    collisionWrapper: {fileID: 494702484324720752}
     CounterDegreeRange: 60
     showDestination: 1
     body: {fileID: 3047223838859579942}
@@ -1265,6 +1267,26 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &494702484324720752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3047223838859579938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36b75dc6df930d540a2979fe3844be64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  col: {fileID: 3047223838859579943}
+  ignoreCollisionsWithOtherTriggers: 1
+  useLayerMask: 1
+  mask:
+    serializedVersion: 2
+    m_Bits: 2561
+  objectsToIgnore: []
+  namesToIgnore: []
 --- !u!1 &3047223838871435738
 GameObject:
   m_ObjectHideFlags: 0
@@ -1876,7 +1898,7 @@ PrefabInstance:
     - target: {fileID: 6721349019297956794, guid: 4e1630c2b91014d4dac5a925f60e6b9b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.75
+      value: -0.974
       objectReference: {fileID: 0}
     - target: {fileID: 6721349019297956794, guid: 4e1630c2b91014d4dac5a925f60e6b9b,
         type: 3}

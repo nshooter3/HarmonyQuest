@@ -103,6 +103,12 @@
         public CapsuleCollider capsuleCollider;
 
         /// <summary>
+        /// This enemy's collision wrapper.
+        /// </summary>
+        [Tooltip("This enemy's collision wrapper.")]
+        public CollisionWrapper collisionWrapper;
+
+        /// <summary>
         /// If the damage comes a direction within CounterDegreeRange degrees of where the enemy is facing, we consider it a successful parry. (CounterDegreeRange * 2 degrees total range).
         /// </summary>
         [Tooltip("If the damage comes a direction within CounterDegreeRange degrees of where the enemy is facing, we consider it a successful parry. (CounterDegreeRange * 2 degrees total range).")]

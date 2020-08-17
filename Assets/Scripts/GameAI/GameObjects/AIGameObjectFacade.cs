@@ -89,7 +89,7 @@
             aiHealth.Init(data);
             aiDebug.Init(data);
             aiUtil.Init(data);
-            aiSurfaceCollision.Init();
+            aiSurfaceCollision.Init(this, data);
 
             if (aiSound == null)
             {
@@ -245,6 +245,11 @@
         public virtual Vector3 GetTransformForward()
         {
             return aiPhysics.GetTransformForward();
+        }
+
+        public PhysicsEntity GetPhysicsEntity()
+        {
+            return aiPhysics.GetPhysicsEntity();
         }
 
         // ****************************

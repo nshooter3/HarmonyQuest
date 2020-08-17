@@ -6,18 +6,20 @@
 
     public class AISurfaceCollision
     {
+        private AIGameObjectFacade aIGameObjectFacade;
+        private AIGameObjectData data;
         private SurfaceCollisionEntity surfaceCollisionEntity;
 
         //Use Melody's collision params for now
         private MelodyController controller;
 
-        public void Init()
+        public void Init(AIGameObjectFacade aIGameObjectFacade, AIGameObjectData data)
         {
             //TODO: Make this actually use enemy params, ya dingus.
             controller = ServiceLocator.instance.GetMelodyController();
-            surfaceCollisionEntity = new SurfaceCollisionEntity(controller.gameObject, controller.melodyPhysics.GetPhysicsEntity(), controller.melodyColliderWrapper, controller.config.groundCheckRaycastDistance,
-                controller.config.groundCheckRaycastSpread, controller.config.groundCheckCenterWeight, controller.config.groundCheckRaycastYOffset, controller.config.groundLayerMask,
-                controller.config.slidingYAngleCutoff, controller.config.groundedYAngleCutoff, true, true, false);
+            surfaceCollisionEntity = new SurfaceCollisionEntity(aIGameObjectFacade.data.aiAgentBottom.gameObject, aIGameObjectFacade.GetPhysicsEntity(), aIGameObjectFacade.data.collisionWrapper,
+                controller.config.groundCheckRaycastDistance, controller.config.groundCheckRaycastSpread, controller.config.groundCheckCenterWeight, controller.config.groundCheckRaycastYOffset,
+                controller.config.groundLayerMask, controller.config.slidingYAngleCutoff, controller.config.groundedYAngleCutoff, true, true, false);
         }
 
         public void OnFixedUpdate()
