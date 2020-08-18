@@ -28,6 +28,8 @@
         public Collider counterHurtbox;
         public MeshRenderer counterHurtboxMesh;
 
+        public Transform center;
+
         /// <summary>
         /// The CounterDamageReceiver for the player. Handles taking counter damage without needing a damage hitbox.
         /// </summary>
@@ -164,6 +166,11 @@
 		public Vector3 GetVelocity()
         {
             return melodyPhysics.GetVelocity();
+        }
+
+        public Vector3 GetCenter()
+        {
+            return center.position;
         }
     }
 }

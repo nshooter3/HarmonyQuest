@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1160935756
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1160935757}
+  m_Layer: 9
+  m_Name: Center
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1160935757
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1160935756}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5739673520324811892}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &352068947651248248
 GameObject:
   m_ObjectHideFlags: 0
@@ -2375,6 +2405,7 @@ Transform:
   - {fileID: 6204048396151824962}
   - {fileID: 1257546467340726863}
   - {fileID: 6204048396786551208}
+  - {fileID: 1160935757}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2426,6 +2457,7 @@ MonoBehaviour:
   - {fileID: 750596295520657578}
   counterHurtbox: {fileID: 6204048395656251594}
   counterHurtboxMesh: {fileID: 6204048395656251597}
+  center: {fileID: 1160935757}
   counterDamageReceiver: {fileID: 8789957132980842086}
   config:
     MaxSpeed: 8
@@ -2672,9 +2704,9 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 6204048396826862756}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &1397103160021733310 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 8936c17893992dd41a5e284062d58611,
+--- !u!1 &1633180746748488789 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -4561288695918819087, guid: 8936c17893992dd41a5e284062d58611,
     type: 3}
   m_PrefabInstance: {fileID: 6204048396826862756}
   m_PrefabAsset: {fileID: 0}
@@ -2684,9 +2716,9 @@ Animator:
     type: 3}
   m_PrefabInstance: {fileID: 6204048396826862756}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1633180746748488789 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -4561288695918819087, guid: 8936c17893992dd41a5e284062d58611,
+--- !u!4 &1397103160021733310 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 8936c17893992dd41a5e284062d58611,
     type: 3}
   m_PrefabInstance: {fileID: 6204048396826862756}
   m_PrefabAsset: {fileID: 0}

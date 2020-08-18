@@ -25,7 +25,7 @@
         /// <summary>
         /// How frequently to check if this enemy has a clear path to the player. Determines whether to engage player or to navigate to a state where they can engage later.
         /// </summary>
-        public static float checkForTargetObstructionRate = 0.5f;
+        public static float checkForTargetObstructionRate = 0.001f;
 
         /// <summary>
         /// Multiplier that gets applied to the scale of the collision avoidance force.

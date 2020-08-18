@@ -7,6 +7,8 @@ namespace Melody
     {
         Transform GetTransform();
 
+        Vector3 GetCenter();
+
         Vector3 GetTransformForward();
 
         MelodyConfig GetConfig();

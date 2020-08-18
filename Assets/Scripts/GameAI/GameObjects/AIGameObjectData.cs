@@ -69,6 +69,12 @@
         public Transform aiAgentBottom;
 
         /// <summary>
+        /// A Transform stuck to the center of our AI agent.
+        /// </summary>
+        [Tooltip("A Transform stuck to the center of our AI agent.")]
+        public Transform aiAgentCenter;
+
+        /// <summary>
         /// Set of colliders that the enemy can use to determine which direction they can go when moving freely.
         /// </summary>
         [Tooltip("Set of colliders that the enemy can use to determine which direction they can go when moving freely.")]
