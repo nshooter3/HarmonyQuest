@@ -75,6 +75,12 @@
         /// <summary>
         /// Distance threshold for determining whether or not the agent is above the navmesh. Don't set this too high, or NavMesh.SamplePosition() may slow down
         /// </summary>
-        public static float onMeshThreshold = 3;
+        public static float onMeshThreshold = 3f;
+
+        /// <summary>
+        /// Distance at which the enemy will automatically switch from navigating to engaging their target.
+        /// This is used to prevent rapid state changes when the agent is near the player when they are standing close to a wall/corner.
+        /// </summary>
+        public static float autoEngageDistance = 4f;
     }
 }
