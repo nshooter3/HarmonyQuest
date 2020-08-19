@@ -15,7 +15,7 @@
         /// <summary>
         /// Range within a which standard enemies can attempt to attack Melody.
         /// </summary>
-        public static float standardAttackMaxDistance = 15f;
+        public static float standardAttackMaxDistance = 8f;
 
         /// <summary>
         /// The chance that your lock on target will override the current enemy attack if they're available to attack. Odds are out of 1.0f

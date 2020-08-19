@@ -30,7 +30,7 @@
         /// <summary>
         /// Multiplier that gets applied to the scale of the collision avoidance force.
         /// </summary>
-        public static float collisionAvoidanceScale = 0.2f;
+        public static float collisionAvoidanceScale = 1.0f;
 
         /// <summary>
         /// The maximum distance at which collision avoidance will be applied.
@@ -45,7 +45,7 @@
         /// <summary>
         /// Multiplier that gets applied to the scale of the obstacle avoidance force.
         /// </summary>
-        public static float obstacleAvoidanceScale = 0.3f;
+        public static float obstacleAvoidanceScale = 0.5f;
 
         /// <summary>
         /// The maximum distance at which obstacle avoidance will be applied.
@@ -66,6 +66,12 @@
         /// with the decrease becoming less dramatic as the angle between the avoidance force and the movement force increases.
         /// </summary>
         public static float avoidanceForceMovementVelocityAdjustmentScale = 0.5f;
+
+        /// <summary>
+        /// When the agent is moving, clamp the max value of their avoidance forces by a percentage of their movement speed.
+        /// This is a failsafe to prevent the avoidance force from overriding the agent's movment.
+        /// </summary>
+        public static float maxAvoidanceInfluence = 0.3f;
 
         /// <summary>
         /// How far above the player to position the navPos when tracking them.

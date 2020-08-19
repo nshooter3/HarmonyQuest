@@ -51,7 +51,8 @@
                     {
                         distance = GetAgentDistanceFromBoundingBox(sourceAgentPosition, targetAgentBoundingBox);
                         //Wij = max(dmax - dij, 0)
-                        agentWeights[i, j] = Mathf.Max(livingAgents[i].aiGameObject.data.individualCollisionAvoidanceMaxDistance - distance, 0);
+                        agentWeights[i, j] = Mathf.Max(livingAgents[i].aiGameObject.data.individualCollisionAvoidanceMaxDistance - distance, 0)
+                            / livingAgents[i].aiGameObject.data.individualCollisionAvoidanceMaxDistance;
                     }
                 }
             }
@@ -92,7 +93,7 @@
                     obstacleBoundingBox = obstacles[j].GetCollider();
                     distance = GetAgentDistanceFromBoundingBox(sourceAgentPosition, obstacleBoundingBox);
                     //Wij = max(dmax - dij, 0)
-                    obstacleWeights[i, j] = Mathf.Max(NavigatorSettings.obstacleAvoidanceMaxDistance - distance, 0);
+                    obstacleWeights[i, j] = Mathf.Max(NavigatorSettings.obstacleAvoidanceMaxDistance - distance, 0) / NavigatorSettings.obstacleAvoidanceMaxDistance;
                 }
             }
 

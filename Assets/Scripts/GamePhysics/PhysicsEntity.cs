@@ -74,8 +74,12 @@
             }
         }
 
-        public void AddForceToVelocity(Vector3 force)
+        public void AddForceToVelocity(Vector3 force, bool ignoreYValue = true)
         {
+            if (ignoreYValue)
+            {
+                force.y = 0f;
+            }
             velocity = velocity + force;
         }
 

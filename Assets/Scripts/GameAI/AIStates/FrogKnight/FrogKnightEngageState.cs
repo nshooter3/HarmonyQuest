@@ -14,9 +14,6 @@
         //Used to track the player's distance from this enemy
         private float targetDistance;
 
-        //The distance at which the enemy is available to attack the player
-        private float attackRange = 5.0f;
-
         private bool shouldStrafe = false;
 
         private MoveAction moveAction = new MoveAction();
@@ -79,7 +76,7 @@
             }
 
             updateData.aiGameObjectFacade.SetAlwaysFaceTarget(true);
-            updateData.aiGameObjectFacade.Rotate(updateData.aiGameObjectFacade.data.aiStats.rotateSpeed * 2, true);
+            updateData.aiGameObjectFacade.Rotate(updateData.aiGameObjectFacade.data.aiStats.rotateSpeed * 3, true);
 
             updateData.aiGameObjectFacade.SnapToGround();
         }

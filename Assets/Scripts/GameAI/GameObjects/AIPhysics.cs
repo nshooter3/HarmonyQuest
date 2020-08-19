@@ -25,6 +25,7 @@
         public Vector3 adjustedObstacleAvoidanceForce = Vector3.zero;
 
         //Private variables used in the AdjustAvoidanceForceBasedOnMovementVelocity to store intermediate results.
+        private Vector3 adjustedForceAngle;
         private Vector3 adjustedForce;
         private Vector3 difference;
 
@@ -51,15 +52,15 @@
             adjustedCollisionAvoidanceForce = AdjustAvoidanceForceBasedOnMovementVelocity(collisionAvoidanceForce, physicsEntity.velocity);
             adjustedObstacleAvoidanceForce = AdjustAvoidanceForceBasedOnMovementVelocity(obstacleAvoidanceForce, physicsEntity.velocity);
 
-            physicsEntity.AddForceToVelocity(adjustedCollisionAvoidanceForce);
-            physicsEntity.AddForceToVelocity(adjustedObstacleAvoidanceForce);
-
             if (data.debugFlocking)
             {
-                Debug.Log("VELOCITY FORCE: " + physicsEntity.velocity);
+                Debug.Log("VELOCITY FORCE: " + physicsEntity.velocity.magnitude);
                 Debug.Log("ADJUSTED COLLISION AVOIDANCE FORCE: " + adjustedCollisionAvoidanceForce.magnitude);
                 Debug.Log("ADJUSTED OBSTACLE AVOIDANCE FORCE: " + adjustedObstacleAvoidanceForce.magnitude);
             }
+
+            physicsEntity.AddForceToVelocity(adjustedCollisionAvoidanceForce);
+            physicsEntity.AddForceToVelocity(adjustedObstacleAvoidanceForce);
 
             physicsEntity.ApplyVelocityModifier(speedModifier);
         }
@@ -86,9 +87,13 @@
         /// <returns></returns>
         private Vector3 AdjustAvoidanceForceBasedOnMovementVelocity(Vector3 avoidanceForce, Vector3 movementVelocity)
         {
-            adjustedForce = avoidanceForce * (Vector3.Angle(movementVelocity, avoidanceForce) / 180.0f);
-            difference = avoidanceForce - adjustedForce;
-            return avoidanceForce - difference * NavigatorSettings.avoidanceForceMovementVelocityAdjustmentScale;
+            adjustedForceAngle = avoidanceForce * (Vector3.Angle(movementVelocity, avoidanceForce) / 180.0f);
+            difference = avoidanceForce - adjustedForceAngle;
+            adjustedForce = avoidanceForce - difference * NavigatorSettings.avoidanceForceMovementVelocityAdjustmentScale;
+
+            //Clamp the magnitude of our avoidance force based on a percentage of the agent's movement velocity.
+            adjustedForce = Vector3.ClampMagnitude(adjustedForce, movementVelocity.magnitude * NavigatorSettings.maxAvoidanceInfluence);
+            return adjustedForce;
         }
 
         public virtual void ApplyVelocity(bool ignoreYValue = true, bool applyRotation = true, float turnSpeedModifier = 1.0f, bool instantlyFaceDirection = false)
