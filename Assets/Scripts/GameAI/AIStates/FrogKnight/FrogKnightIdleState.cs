@@ -45,7 +45,10 @@
         {
             if (updateData.aiGameObjectFacade.IsGrounded() && !updateData.aiGameObjectFacade.IsSliding())
             {
-                updateData.aiGameObjectFacade.IgnoreHorizontalMovementInput();
+                if (!idleWanderAction.IsWandering())
+                {
+                    updateData.aiGameObjectFacade.IgnoreHorizontalMovementInput();
+                }
                 updateData.aiGameObjectFacade.ApplyVelocity();
             }
             updateData.aiGameObjectFacade.ApplyGravity(updateData.aiGameObjectFacade.data.aiStats.gravity, true);

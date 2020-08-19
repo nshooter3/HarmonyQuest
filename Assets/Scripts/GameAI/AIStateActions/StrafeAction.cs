@@ -93,16 +93,16 @@
             switch (strafeType)
             {
                 case StrafeType.Clockwise:
-                    result = Vector3.Cross(Vector3.up, target - updateData.aiGameObjectFacade.transform.position) * -1.0f;
+                    result = Vector3.Cross(Vector3.up, target - updateData.aiGameObjectFacade.data.aiAgentBottom.position) * -1.0f;
                     break;
                 case StrafeType.Counterclockwise:
-                    result = Vector3.Cross(Vector3.up, target - updateData.aiGameObjectFacade.transform.position);
+                    result = Vector3.Cross(Vector3.up, target - updateData.aiGameObjectFacade.data.aiAgentBottom.position);
                     break;
                 case StrafeType.Towards:
-                    result = target - updateData.aiGameObjectFacade.transform.position;
+                    result = target - updateData.aiGameObjectFacade.data.aiAgentBottom.position;
                     break;
                 case StrafeType.Away:
-                    result = updateData.aiGameObjectFacade.transform.position - target;
+                    result = updateData.aiGameObjectFacade.data.aiAgentBottom.position - target;
                     break;
             }
             return result.normalized;

@@ -81,6 +81,6 @@
         /// Distance at which the enemy will automatically switch from navigating to engaging their target.
         /// This is used to prevent rapid state changes when the agent is near the player when they are standing close to a wall/corner.
         /// </summary>
-        public static float autoEngageDistance = 4f;
+        public static float autoEngageDistance = 3f;
     }
 }

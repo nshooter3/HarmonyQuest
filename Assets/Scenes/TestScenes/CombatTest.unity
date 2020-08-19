@@ -985,7 +985,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &239409989
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -5006,7 +5006,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8244c18970335d4ea056938ec5786d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useFlocking: 1
+  useFlocking: 0
   useObstacleRepulsion: 1
   useWaypointBlockCheck: 0
 --- !u!4 &1390680720
@@ -10271,6 +10271,11 @@ PrefabInstance:
     - target: {fileID: 3047223838859579940, guid: 43c0d925baab30144b61aed83056c044,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6672482787236370507, guid: 43c0d925baab30144b61aed83056c044,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

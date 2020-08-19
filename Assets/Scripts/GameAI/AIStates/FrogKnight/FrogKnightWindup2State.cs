@@ -38,7 +38,7 @@
             {
                 if (updateData.aiGameObjectFacade.GetDistanceFromAggroTarget() > attackSnapCutoffRange)
                 {
-                    moveAction.SeekDestination(updateData.aiGameObjectFacade, updateData.aiGameObjectFacade.data.aggroTarget.position, true, 2.0f, true);
+                    moveAction.SeekDestination(updateData.aiGameObjectFacade, updateData.aiGameObjectFacade.data.aggroTarget.position, true, 3.0f, true);
                     if (inAttackRange == true)
                     {
                         inAttackRange = false;
@@ -67,7 +67,6 @@
             {
                 if (updateData.aiGameObjectFacade.IsGrounded() && !updateData.aiGameObjectFacade.IsSliding())
                 {
-                    updateData.aiGameObjectFacade.IgnoreHorizontalMovementInput();
                     updateData.aiGameObjectFacade.ApplyVelocity(true, true, 0.35f);
                 }
             }

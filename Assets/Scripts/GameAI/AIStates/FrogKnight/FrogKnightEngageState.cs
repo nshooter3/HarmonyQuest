@@ -79,7 +79,7 @@
             }
 
             updateData.aiGameObjectFacade.SetAlwaysFaceTarget(true);
-            updateData.aiGameObjectFacade.Rotate(updateData.aiGameObjectFacade.data.aiStats.rotateSpeed, true);
+            updateData.aiGameObjectFacade.Rotate(updateData.aiGameObjectFacade.data.aiStats.rotateSpeed * 2, true);
 
             updateData.aiGameObjectFacade.SnapToGround();
         }

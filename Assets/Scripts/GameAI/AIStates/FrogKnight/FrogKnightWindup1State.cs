@@ -11,7 +11,7 @@
         private DebugAction debugAction = new DebugAction();
 
         //The distance at which we are close enough, and stop trying to approach the target.
-        float attackApproachCutoffRange = 4.0f;
+        float attackApproachCutoffRange = 3.0f;
 
         private bool inAttackRange = false;
 
@@ -31,7 +31,7 @@
 
             if (updateData.aiGameObjectFacade.GetDistanceFromAggroTarget() > attackApproachCutoffRange)
             {
-                moveAction.SeekDestination(updateData.aiGameObjectFacade, updateData.aiGameObjectFacade.data.aggroTarget.position, true, 0.5f, true);
+                moveAction.SeekDestination(updateData.aiGameObjectFacade, updateData.aiGameObjectFacade.data.aggroTarget.position, true, 1.0f, true);
                 if (inAttackRange == true)
                 {
                     updateData.aiGameObjectFacade.SetRigidBodyConstraintsToDefault();
@@ -55,7 +55,6 @@
             {
                 if (updateData.aiGameObjectFacade.IsGrounded() && !updateData.aiGameObjectFacade.IsSliding())
                 {
-                    updateData.aiGameObjectFacade.IgnoreHorizontalMovementInput();
                     updateData.aiGameObjectFacade.ApplyVelocity(true, true, 0.5f);
                 }
             }
