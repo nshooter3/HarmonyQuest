@@ -44,7 +44,7 @@
                 melodyController.melodyPhysics.ApplyVelocity(melodyController.config.MaxSpeed, melodyController.config.TurningSpeed);
             }
             melodyController.melodyPhysics.ApplyGravity(melodyController.config.Gravity, true);
-            if (melodyController.melodyLockOn.HasLockonTarget() == true)
+            if (melodyController.HasLockonTarget() == true)
             {
                 melodyController.melodyPhysics.RotatePlayer(melodyController.config.TurningSpeed, true);
             }

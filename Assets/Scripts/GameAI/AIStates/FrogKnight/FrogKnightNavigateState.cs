@@ -11,10 +11,14 @@
 
         private DebugAction debugAction = new DebugAction();
 
+        //How many beats we've been in this state.
+        private int beatCount = 0;
+
         public override void Init(AIStateUpdateData updateData)
         {
             updateData.navigator.SetTarget(updateData.aiGameObjectFacade.data.aiAgentBottom, updateData.player.GetTransform());
             updateData.aiGameObjectFacade.data.isAggroed = true;
+            //updateData.aiGameObjectFacade.hasAttackedSinceEngaging = false;
             updateData.aiGameObjectFacade.SetRigidBodyConstraintsToDefault();
         }
 
@@ -27,36 +31,66 @@
         public override void OnFixedUpdate(AIStateUpdateData updateData)
         {
             updateData.aiGameObjectFacade.ApplyVelocity();
-            updateData.aiGameObjectFacade.ApplyGravity();
+
+            if (updateData.aiGameObjectFacade.GetDesiredVelocity().magnitude == 0.0f && updateData.aiGameObjectFacade.GetVelocity().magnitude < 0.001f && updateData.aiGameObjectFacade.IsGrounded() == true)
+            {
+                //If there is no controller input and the enemy is grounded, do not apply gravity. This prevents it from infinitely sliding down hills.
+            }
+            else
+            {
+                updateData.aiGameObjectFacade.ApplyGravity(updateData.aiGameObjectFacade.data.aiStats.gravity);
+            }
+            updateData.aiGameObjectFacade.SnapToGround();
         }
 
         public override void OnBeatUpdate(AIStateUpdateData updateData)
         {
-            
+            beatCount++;
+
+            //If we've been in the navigate state for a while, attack ASAP upon reentering the engage state.
+            if (beatCount >= 4 && updateData.aiGameObjectFacade.shouldAttackAsSoonAsPossible == false)
+            {
+                updateData.aiGameObjectFacade.shouldAttackAsSoonAsPossible = true;
+            }
         }
 
         public override void CheckForStateChange(AIStateUpdateData updateData)
         {
+            checkForTargetObstructionTimer += Time.deltaTime;
             if (updateData.aiGameObjectFacade.IsDead() == true)
             {
                 updateData.stateHandler.RequestStateTransition(new FrogKnightDeadState { }, updateData);
             }
-            else if (ShouldDeAggro(updateData) || updateData.navigator.isActivelyGeneratingPath == false)
+            else if (ShouldDeAggro(updateData))
             {
                 checkForTargetObstructionTimer = 0;
-                updateData.stateHandler.RequestStateTransition(new FrogKnightDisengageState { }, updateData);
+                updateData.stateHandler.RequestStateTransition(new FrogKnightLoseTargetState { }, updateData);
             }
-            else
+            else if (IsWithinAutoEngageDistance(updateData))
             {
-
-                checkForTargetObstructionTimer += Time.deltaTime;
-                if (checkForTargetObstructionTimer > NavigatorSettings.checkForTargetObstructionRate)
+                updateData.stateHandler.RequestStateTransition(new FrogKnightEngageState { }, updateData);
+            }
+            else if (updateData.navigator.isActivelyGeneratingPath == false)
+            {
+                if (!NavMeshUtil.IsTargetObstructed(updateData.aiGameObjectFacade.data.aiAgentBottom, updateData.player.GetTransform()))
                 {
-                    checkForTargetObstructionTimer = 0;
-                    if (!NavMeshUtil.IsTargetObstructed(updateData.aiGameObjectFacade.data.aiAgentBottom, updateData.player.GetTransform()))
+                    updateData.stateHandler.RequestStateTransition(new FrogKnightEngageState { }, updateData);
+                }
+                else
+                {
+                    if (updateData.navigator.SetTarget(updateData.aiGameObjectFacade.data.aiAgentBottom, updateData.player.GetTransform()) == false)
                     {
-                        updateData.stateHandler.RequestStateTransition(new FrogKnightEngageState { }, updateData);
+                        //If we fail to generate a path to our target, go into the lose target state.
+                        updateData.stateHandler.RequestStateTransition(new FrogKnightLoseTargetState { }, updateData);
                     }
+                }
+            }
+            else if (checkForTargetObstructionTimer > NavigatorSettings.checkForTargetObstructionRate)
+            {
+                checkForTargetObstructionTimer = 0;
+                if (!NavMeshUtil.IsTargetObstructed(updateData.aiGameObjectFacade.data.aiAgentBottom, updateData.player.GetTransform()))
+                {
+                    updateData.stateHandler.RequestStateTransition(new FrogKnightEngageState { }, updateData);
                 }
             }
         }
@@ -72,6 +106,11 @@
         private bool ShouldDeAggro(AIStateUpdateData updateData)
         {
             return updateData.aiGameObjectFacade.data.aiStats.disengageWithDistance && Vector3.Distance(updateData.aiGameObjectFacade.transform.position, updateData.player.GetTransform().position) > updateData.aiGameObjectFacade.data.aiStats.disengageDistance;
+        }
+
+        private bool IsWithinAutoEngageDistance(AIStateUpdateData updateData)
+        {
+            return updateData.aiGameObjectFacade.data.aiStats.disengageWithDistance && Vector3.Distance(updateData.aiGameObjectFacade.transform.position, updateData.player.GetTransform().position) <= NavigatorSettings.autoEngageDistance;
         }
     }
 }

@@ -5,8 +5,6 @@
 
     public static class NavMeshUtil
     {
-        private static LayerMask traversableGroundLayerMask = LayerMask.GetMask("TraversableGround");
-
         public static NavMeshPath GeneratePath(Transform source, Transform target, int areaMask = NavMesh.AllAreas)
         {
             return GeneratePath(source.position, target.position, NavMesh.AllAreas);
@@ -45,40 +43,15 @@
             return length;
         }
 
-        public static bool IsNavMeshBelowTransform(Transform navigationTransform, out Vector3 raycastHitPosition)
+        public static bool IsAgentOnNavMesh(Vector3 agentPosition, out NavMeshHit hit)
         {
-            //Start our raycast a little bit above the navigationTransform, so it doesn't fail if it's already touching the navmesh.
-            float yOffset = 0.1f;
-            Vector3 offsetPosition = new Vector3(navigationTransform.position.x, navigationTransform.position.y + yOffset, navigationTransform.position.z);
-
-            if (Physics.Raycast(offsetPosition, Vector3.down, out RaycastHit raycastHit, Mathf.Infinity, traversableGroundLayerMask))
+            // Check for nearest point on navmesh to agent, within onMeshThreshold
+            if (NavMesh.SamplePosition(agentPosition, out hit, NavigatorSettings.onMeshThreshold, NavMesh.AllAreas))
             {
-                raycastHitPosition = raycastHit.point;
                 return true;
             }
-            else
-            {
-                raycastHitPosition = Vector3.zero;
-                return false;
-            }
-        }
 
-        public static bool IsNavMeshBelowPosition(Vector3 navigationPosition, out Vector3 raycastHitPosition)
-        {
-            //Start our raycast a little bit above the navigationPosition, so it doesn't fail if it's already touching the navmesh.
-            float yOffset = 0.1f;
-            Vector3 offsetPosition = new Vector3(navigationPosition.x, navigationPosition.y + yOffset, navigationPosition.z);
-
-            if (Physics.Raycast(offsetPosition, Vector3.down, out RaycastHit raycastHit, Mathf.Infinity, traversableGroundLayerMask))
-            {
-                raycastHitPosition = raycastHit.point;
-                return true;
-            }
-            else
-            {
-                raycastHitPosition = Vector3.zero;
-                return false;
-            }
+            return false;
         }
 
         public static bool IsTargetObstructed(Transform source, Transform target, int areaMask = NavMesh.AllAreas)
@@ -100,14 +73,14 @@
         {
             Vector3 startPos = source;
             Vector3 targetPos = target;
-            Vector3 raycastHit;
-            if (IsNavMeshBelowPosition(source, out raycastHit))
+            NavMeshHit navMeshHit;
+            if (IsAgentOnNavMesh(source, out navMeshHit))
             {
-                startPos = raycastHit;
+                startPos = navMeshHit.position;
             }
-            if (IsNavMeshBelowPosition(target, out raycastHit))
+            if (IsAgentOnNavMesh(target, out navMeshHit))
             {
-                targetPos = raycastHit;
+                targetPos = navMeshHit.position;
             }
             NavMeshHit navmeshRaycastHit;
             return NavMesh.Raycast(startPos, targetPos, out navmeshRaycastHit, areaMask);

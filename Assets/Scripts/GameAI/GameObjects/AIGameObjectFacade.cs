@@ -6,6 +6,7 @@
     using GamePhysics;
     using HarmonyQuest;
     using HarmonyQuest.Audio;
+    using UnityEngine.AI;
 
     public abstract class AIGameObjectFacade : MonoBehaviour
     {
@@ -17,6 +18,7 @@
         private AIHealth aiHealth = new AIHealth();
         private AIDebug aiDebug = new AIDebug();
         private AIUtil aiUtil = new AIUtil();
+        private AISurfaceCollision aiSurfaceCollision = new AISurfaceCollision();
         public AIAnimator aiAnimator;
         public AISound aiSound;
         
@@ -25,6 +27,7 @@
         public bool attackPermissionGranted = false;
         public bool attacking = false;
         public bool isAvailableToAttack = false;
+        public bool shouldAttackAsSoonAsPossible = false;
 
         // ****************************
         // CHILD OVERRIDE FUNCTIONS
@@ -60,19 +63,19 @@
                 data.rb = GetComponent<Rigidbody>();
             }
 
-            if (data.strafeHitBoxes != null)
+            if (data.strafeHitboxes != null)
             {
-                data.strafeHitBoxes.Init();
+                data.strafeHitboxes.Init();
             }
 
             data.origin.parent = null;
-            if (NavMeshUtil.IsNavMeshBelowTransform(transform, out Vector3 navmeshPosBelowOrigin))
+            if (NavMeshUtil.IsAgentOnNavMesh(transform.position, out NavMeshHit hit))
             {
-                data.origin.transform.position = navmeshPosBelowOrigin;
+                data.origin.transform.position = hit.position;
             }
             else
             {
-                Debug.LogError("AIGameObject Init WARNING: Agent origin not located on or above navmesh.");
+                Debug.LogWarning("AIGameObject Init WARNING: Agent origin not located on or above navmesh.");
             }
 
             data.navPos.transform.parent = null;
@@ -81,11 +84,12 @@
 
             data.aggroTarget = ServiceLocator.instance.GetMelodyInfo().GetTransform();
 
-            aiPhysics.Init(data);
+            aiPhysics.Init(this, data);
             aiHitboxes.Init(data);
             aiHealth.Init(data);
             aiDebug.Init(data);
             aiUtil.Init(data);
+            aiSurfaceCollision.Init(this, data);
 
             if (aiSound == null)
             {
@@ -124,9 +128,23 @@
             }
         }
 
+        public void FixedUpdateSubclasses()
+        {
+            if (IsDead() == false)
+            {
+                FixedUpdateHealth();
+                FixedUpdateSurfaceCollision();
+            }
+        }
+
         // ****************************
         // PHYSICS FUNCTIONS
         // ****************************
+
+        public void ResetDesiredVelocity()
+        {
+            aiPhysics.ResetDesiredVelocity();
+        }
 
         public virtual void SetVelocityTowardsDestination(Vector3 destination, bool ignoreYValue = true, float speedModifier = 1.0f, bool alwaysFaceTarget = false)
         {
@@ -140,18 +158,23 @@
 
         public virtual void SetVelocity(Vector3 velocity, bool ignoreYValue = true, float speedModifier = 1.0f, bool alwaysFaceTarget = false)
         {
-            aiPhysics.SetVelocity(velocity, ignoreYValue, speedModifier, alwaysFaceTarget);
+            aiPhysics.CalculateVelocity(velocity, ignoreYValue, speedModifier, alwaysFaceTarget);
         }
 
-        public virtual void ApplyVelocity(bool ignoreYValue = true, bool applyRotation = true, float turnSpeedModifier = 1.0f)
+        public virtual void ApplyVelocity(bool ignoreYValue = true, bool applyRotation = true, float turnSpeedModifier = 1.0f, bool instantlyFaceDirection = false)
         {
-            aiAnimator.SetVelocity(transform.forward, aiPhysics.newVelocity, data.aiStats.speed);
-            aiPhysics.ApplyVelocity(ignoreYValue, applyRotation, turnSpeedModifier);
+            aiAnimator.SetVelocity(transform.forward, aiPhysics.GetVelocity(), data.aiStats.speed);
+            aiPhysics.ApplyVelocity(ignoreYValue, applyRotation, turnSpeedModifier, instantlyFaceDirection);
         }
 
-        public virtual void ApplyGravity()
+        public virtual void ApplyAnimationVelocity()
         {
-            aiPhysics.ApplyGravity();
+            aiAnimator.SetVelocity(transform.forward, aiPhysics.GetVelocity(), data.aiStats.speed);
+        }
+
+        public virtual void ApplyGravity(Vector3 gravity, bool isIdle = false)
+        {
+            aiPhysics.ApplyGravity(gravity, isIdle);
         }
 
         public virtual void ResetVelocity()
@@ -174,14 +197,14 @@
             aiPhysics.SetObstacleAvoidanceForce(obstacleAvoidanceForce);
         }
 
-        public virtual void SetRotationDirection(bool alwaysFaceTarget = false)
+        public virtual void Rotate(float turningSpeed, bool stationaryTurn = false, Vector3? directionOverride = null)
         {
-            aiPhysics.SetRotationDirection(alwaysFaceTarget);
+            aiPhysics.Rotate(turningSpeed, stationaryTurn, directionOverride);
         }
 
-        public virtual void Rotate(Vector3 direction, float turnSpeedModifier)
+        public void SetAlwaysFaceTarget(bool alwaysFaceTarget)
         {
-            aiPhysics.Rotate(direction, turnSpeedModifier);
+            aiPhysics.SetAlwaysFaceTarget(alwaysFaceTarget);
         }
 
         public virtual void SetRigidbodyConstraints(RigidbodyConstraints constraints)
@@ -221,17 +244,37 @@
 
         public virtual Vector3 GetMoveDirection()
         {
-            return aiPhysics.GetMoveDirection();
-        }
-
-        public virtual Vector3 GetRotationDirection()
-        {
-            return aiPhysics.GetRotationDirection();
+            return aiPhysics.GetVelocity().normalized;
         }
 
         public virtual Vector3 GetTransformForward()
         {
             return aiPhysics.GetTransformForward();
+        }
+
+        public virtual void IgnoreHorizontalMovementInput()
+        {
+            aiPhysics.IgnoreHorizontalMovementInput();
+        }
+
+        public virtual void SnapToGround()
+        {
+            aiPhysics.SnapToGround();
+        }
+
+        public virtual Vector3 GetVelocity()
+        {
+            return aiPhysics.GetVelocity();
+        }
+
+        public virtual Vector3 GetDesiredVelocity()
+        {
+            return aiPhysics.GetDesiredVelocity();
+        }
+
+        public virtual PhysicsEntity GetPhysicsEntity()
+        {
+            return aiPhysics.GetPhysicsEntity();
         }
 
         // ****************************
@@ -287,6 +330,11 @@
         // HEALTH FUNCTIONS
         // ****************************
 
+        public bool TookDamageFromPlayerThisFrame()
+        {
+            return aiHealth.TookDamageFromPlayerThisFrame();
+        }
+
         public bool IsDead()
         {
             return aiHealth.IsDead();
@@ -295,6 +343,11 @@
         private void RemoveInactiveReceivedDamageHitboxes()
         {
             aiHealth.RemoveInactiveReceivedDamageHitboxes();
+        }
+
+        private void FixedUpdateHealth()
+        {
+            aiHealth.OnFixedUpdate();
         }
 
         // ****************************
@@ -326,6 +379,34 @@
         public void UpdateAnimations()
         {
             aiAnimator.OnUpdate();
+        }
+
+        // ****************************
+        // SURFACE COLLISION FUNCTIONS
+        // ****************************
+        public void FixedUpdateSurfaceCollision()
+        {
+            aiSurfaceCollision.OnFixedUpdate();
+        }
+
+        public bool IsGrounded()
+        {
+            return aiSurfaceCollision.IsGrounded();
+        }
+
+        public bool IsSliding()
+        {
+            return aiSurfaceCollision.IsSliding();
+        }
+
+        public bool IsInAir()
+        {
+            return aiSurfaceCollision.IsInAir();
+        }
+
+        public float GetSlopeNormalDotProduct()
+        {
+            return aiSurfaceCollision.GetSlopeNormalDotProduct();
         }
 
         // ****************************

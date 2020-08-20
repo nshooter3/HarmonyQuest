@@ -7,12 +7,12 @@
     /// </summary>
     public class CounterDamageReceiver : MonoBehaviour
     {
-        public delegate void ReceiveCounterDamageDelegate(int damage);
+        public delegate void ReceiveCounterDamageDelegate(int damage, GameObject dealer);
         ReceiveCounterDamageDelegate receiveCounterDamageDelegate;
 
-        public void ReceiveCounterDamage(int damage)
+        public void ReceiveCounterDamage(int damage, GameObject dealer)
         {
-            receiveCounterDamageDelegate(damage);
+            receiveCounterDamageDelegate(damage, dealer);
         }
 
         public void AssignFunctionToReceiveCounterDamageDelegate(ReceiveCounterDamageDelegate func)

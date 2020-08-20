@@ -6,8 +6,8 @@
     {
         //The distance at which the enemy will stop attempting to get closer to the player.
         //Is randomly generated between minDistanceFromPlayer and maxDistanceFromPlayer every time a range is requested.
-        public float targetedDistanceFromPlayer = 3.0f;
-        public float minDistanceFromPlayer = 1.5f;
+        public float targetedDistanceFromPlayer = 4.0f;
+        public float minDistanceFromPlayer = 2.0f;
         public float maxDistanceFromPlayer = 8.0f;
         //Used to prevent targetedDistanceFromPlayer from being too close to minDistanceFromPlayer or maxDistanceFromPlayer.
         public float targetedDistanceThreshold = 0.5f;

@@ -2,6 +2,7 @@
 {
     using GameAI.Navigation;
     using GamePhysics;
+    using Unity.Collections;
     using UnityEngine;
 
     [System.Serializable]
@@ -10,6 +11,13 @@
         // ****************************
         // Inspector Exposed Parameters
         // ****************************
+
+        /// <summary>
+        /// READ ONLY: Shows the current state this AIAgent is in.
+        /// </summary>
+        [ReadOnly]
+        [Tooltip("READ ONLY: Shows the current state this AIAgent is in.")]
+        public string currentState;
 
         /// <summary>
         /// The AIStats scriptable object associated with this enemy. Holds onto data like health bars, drops, etc.
@@ -31,10 +39,28 @@
         public Transform origin;
 
         /// <summary>
+        /// This agent's wanderNavigationTarget. Used by IdleWanderAction.
+        /// </summary>
+        [Tooltip("This agent's wanderNavigationTarget. Used by IdleWanderAction.")]
+        public Transform wanderNavigationTarget;
+
+        /// <summary>
         /// Collider that causes the agent to aggro when a target enters it. Goes unused if null.
         /// </summary>
         [Tooltip("Collider that causes the agent to aggro when a target enters it. Goes unused if null.")]
         public CollisionWrapper aggroZone;
+
+        /// <summary>
+        /// Collider used to determine size and origin of the boxcast the enemy uses to prevent collisions when wandering.
+        /// </summary>
+        [Tooltip("Collider used to determine size and origin of the boxcast the enemy uses to prevent collisions when wandering.")]
+        public BoxCollider wanderBoxcastReference;
+
+        /// <summary>
+        /// Layer Mask used by the wander boxcast.
+        /// </summary>
+        [Tooltip("Layer Mask used by the wander boxcast.")]
+        public LayerMask wanderBoxcastLayerMask;
 
         /// <summary>
         /// A Transform stuck to the bottom of our AI agent. This is used to determine agent proximity to target positions.
@@ -43,10 +69,16 @@
         public Transform aiAgentBottom;
 
         /// <summary>
+        /// A Transform stuck to the center of our AI agent.
+        /// </summary>
+        [Tooltip("A Transform stuck to the center of our AI agent.")]
+        public Transform aiAgentCenter;
+
+        /// <summary>
         /// Set of colliders that the enemy can use to determine which direction they can go when moving freely.
         /// </summary>
         [Tooltip("Set of colliders that the enemy can use to determine which direction they can go when moving freely.")]
-        public StrafeHitboxes strafeHitBoxes;
+        public StrafeHitboxes strafeHitboxes;
 
         /// <summary>
         /// The rigidbody for our agent
@@ -77,6 +109,18 @@
         /// </summary>
         [Tooltip("The hitbox used for collision avoidance distance calculations.")]
         public Collider collisionAvoidanceHitbox;
+
+        /// <summary>
+        /// This enemy's capsule collider, if they have one.
+        /// </summary>
+        [Tooltip("This enemy's capsule collider, if they have one.")]
+        public CapsuleCollider capsuleCollider;
+
+        /// <summary>
+        /// This enemy's collision wrapper.
+        /// </summary>
+        [Tooltip("This enemy's collision wrapper.")]
+        public CollisionWrapper collisionWrapper;
 
         /// <summary>
         /// If the damage comes a direction within CounterDegreeRange degrees of where the enemy is facing, we consider it a successful parry. (CounterDegreeRange * 2 degrees total range).

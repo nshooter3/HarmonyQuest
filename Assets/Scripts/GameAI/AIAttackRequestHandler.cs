@@ -33,6 +33,9 @@
         float angleScoreWeight = 0.12f;
         float distanceScoreWeight = 0.08f;
 
+        //How many beats must pass before another enemy can be granted attack permission. Used to prevent enemy attacks from overlapping too much.
+        int nextAttackMinimumCooldownBeats = 0;
+
         public void Init(IMelodyInfo melodyInfo)
         {
             this.melodyInfo = melodyInfo;
@@ -68,10 +71,18 @@
         public void GrantAttackPermission(List<AIAgent> agentsRequestingAttackPermission)
         {
             enemyList.Clear();
+
+            //If we're still in cooldown from a previous attack, don't permit new attacks.
+            if (nextAttackMinimumCooldownBeats > 0)
+            {
+                return;
+            }
+
             foreach (AIAgent agent in agentsRequestingAttackPermission)
             {
                 enemyList.AddFloatWeightThenConvertToInt(agent, AssignEnemyAttackRequestScore(agent));
             }
+
             if (enemyList.GetLength() > 0)
             {
                 if (CheckForRandomLockOnTargetAttackOverride() == true)
@@ -91,6 +102,24 @@
             {
                 agent.aiGameObject.requestingAttackPermission = false;
             }
+        }
+
+        public void SetNextAttackMinimumCooldownBeats(int nextAttackMinimumCooldownBeats)
+        {
+            this.nextAttackMinimumCooldownBeats = nextAttackMinimumCooldownBeats;
+        }
+
+        public void DecrementNextAttackMinimumCooldownBeats()
+        {
+            if (IsInAttackCooldown())
+            {
+                nextAttackMinimumCooldownBeats--;
+            }
+        }
+
+        public bool IsInAttackCooldown()
+        {
+            return nextAttackMinimumCooldownBeats > 0;
         }
 
         /// <summary>

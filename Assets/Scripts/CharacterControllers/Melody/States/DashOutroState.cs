@@ -24,7 +24,7 @@
             timer += time;
             if (timer >= melodyController.config.DashOutroTime)
             {
-                if (melodyController.melodyPhysics.velocity.magnitude >= 0.0f)
+                if (melodyController.melodyPhysics.GetVelocity().magnitude >= 0.0f)
                 {
                     nextState = new MovingState(melodyController);
                 }
