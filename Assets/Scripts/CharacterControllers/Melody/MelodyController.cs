@@ -28,7 +28,9 @@
         public Collider counterHurtbox;
         public MeshRenderer counterHurtboxMesh;
 
+        public Transform bottom;
         public Transform center;
+        public Transform top;
 
         /// <summary>
         /// The CounterDamageReceiver for the player. Handles taking counter damage without needing a damage hitbox.
@@ -52,6 +54,7 @@
         public MelodyHitboxes melodyHitboxes;
         public MelodyAnimator melodyAnimator;
         public MelodyLockOn melodyLockOn;
+        public MelodyGrappleHook melodyGrappleHook;
         //MelodySound is actually a monobehavior, so it will be assigned via drag reference.
         public MelodySound melodySound;
 
@@ -78,6 +81,7 @@
             melodyHitboxes = new MelodyHitboxes(this);
             melodyAnimator = new MelodyAnimator(this);
             melodyLockOn = new MelodyLockOn(this);
+            melodyGrappleHook = new MelodyGrappleHook(this);
             melodySound.Init(this, ServiceLocator.instance.GetAIAgentManager());
         }
 
@@ -89,6 +93,7 @@
             melodyHitboxes.UpdateHitboxes();
             melodyHealth.OnUpdate(Time.deltaTime);
             melodyLockOn.OnUpdate(Time.deltaTime);
+            melodyGrappleHook.OnUpdate(Time.deltaTime);
             StateMachine.OnUpdate(Time.deltaTime);
             melodySound.OnUpdate();
             currentStateName = StateMachine.GetCurrentStateName();
