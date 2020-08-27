@@ -22,6 +22,11 @@
                 ableToExit = true;
                 nextState = new AttackRequestState(melodyController);
             }
+            else if (melodyController.input.GrappleButtonDown() && FmodFacade.instance.HasPerformedActionThisBeat() == false && melodyController.melodyGrappleHook.HasGrappleDestination())
+            {
+                ableToExit = true;
+                nextState = new GrappleHookIntroState(melodyController);
+            }
             else if (melodyController.input.ParryButtonDown() && melodyController.melodyCollision.IsSliding() == false)
             {
                 ableToExit = true;

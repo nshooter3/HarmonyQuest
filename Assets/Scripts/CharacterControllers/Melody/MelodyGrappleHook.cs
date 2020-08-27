@@ -39,12 +39,22 @@
             ToggleGrappleUI();
         }
 
-        public void FindGrapplePoints()
+        public bool HasGrappleDestination()
+        {
+            return grappleDestination != null;
+        }
+
+        public Transform GetGrappleDestination()
+        {
+            return grappleDestination.actualDestination;
+        }
+
+        private void FindGrapplePoints()
         {
             grapplePoints = Object.FindObjectsOfType<GrapplePoint>();
         }
 
-        public void SelectOptimalGrapplePoint()
+        private void SelectOptimalGrapplePoint()
         {
             curGrappleScore = 0f;
             minGrappleScore = float.MaxValue;
@@ -61,7 +71,7 @@
             }
         }
 
-        public void ToggleGrappleUI()
+        private void ToggleGrappleUI()
         {
             if (grappleDestination != null)
             {
@@ -74,7 +84,7 @@
             }
         }
 
-        public float GetGrapplePointScore (GrapplePoint grapplePoint)
+        private float GetGrapplePointScore (GrapplePoint grapplePoint)
         {
             if (!IsGrapplePointObstructed(grapplePoint.actualDestination.position))
             {
@@ -87,7 +97,7 @@
             return -1f;
         }
 
-        public bool IsGrapplePointObstructed(Vector3 destination)
+        private bool IsGrapplePointObstructed(Vector3 destination)
         {
             return Physics.Linecast(controller.top.position,    destination, controller.config.grappleAttemptLayerMask) || 
                    Physics.Linecast(controller.center.position, destination, controller.config.grappleAttemptLayerMask);

@@ -236,5 +236,10 @@
                 }
             }
         }
+
+        public void SetPosition(Vector3 position)
+        {
+            rb.MovePosition(position);
+        }
     }
 }

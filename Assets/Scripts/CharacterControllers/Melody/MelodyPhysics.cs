@@ -64,6 +64,11 @@
             }
         }
 
+        public void SetPosition(Vector3 position)
+        {
+            physicsEntity.SetPosition(position);
+        }
+
         private void PushBoxes()
         {
             pushableBox = null;
