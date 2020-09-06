@@ -18,6 +18,8 @@ namespace Melody.States
 
         public override void OnUpdate(float time)
         {
+            base.OnUpdate(time);
+
             cooldownTimer -= time;
             if (cooldownTimer <= 0)
             {
@@ -25,7 +27,6 @@ namespace Melody.States
                 nextState = new IdleState(melodyController);
                 ableToExit = true;
             }
-            base.OnUpdate(time);
         }
 
         public override void OnFixedUpdate()

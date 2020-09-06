@@ -1,7 +1,5 @@
 ﻿namespace Melody.States
 {
-    using System.Collections;
-    using System.Collections.Generic;
     using UnityEngine;
 
     public class GrappleHookState : MelodyState
@@ -26,16 +24,15 @@
 
         public override void OnUpdate(float time)
         {
+            base.OnUpdate(time);
             curGrappleTime = Mathf.Min(curGrappleTime + time, totalGrappleTime);
             melodyController.melodyPhysics.SetPosition(Vector3.Lerp(startPos, destination.position, curGrappleTime/totalGrappleTime));
 
             if (curGrappleTime >= totalGrappleTime)
             {
-                nextState = new IdleState(melodyController);
+                nextState = new GrappleHookOutroState(melodyController);
                 ableToExit = true;
             }
-
-            base.OnUpdate(time);
         }
 
         public override void OnExit()

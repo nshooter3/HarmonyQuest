@@ -190,6 +190,12 @@
         [Tooltip("The max distance from which you can use a grapple point.")]
         public float maxGrappleDistance;
 
+        public float grappleOutroTime;
+
+        public float grappleOutroMaxSpeed;
+        public float grappleOutroTurningSpeed;
+        public Vector3 grappleOutroGravity;
+
         void Start()
         {
             //TODO load values in depending on save data.
