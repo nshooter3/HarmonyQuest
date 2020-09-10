@@ -196,6 +196,8 @@
         public float grappleOutroTurningSpeed;
         public Vector3 grappleOutroGravity;
 
+        public float maxGrappleAngle;
+
         void Start()
         {
             //TODO load values in depending on save data.

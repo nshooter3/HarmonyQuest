@@ -12,14 +12,24 @@
         private GrapplePoint[] grapplePoints;
         private GrapplePoint grappleDestination;
 
-        private float grappleDistance;
         private float maxGrappleDistance;
 
         private UITracker grappleReticule;
         private Image grappleOnImage;
 
-        private float curGrappleScore;
-        private float minGrappleScore;
+        private float highestScore;
+        private float score;
+
+        private float distance;
+        private float distanceScore;
+        private float minDistanceScore;
+        private float distanceScoreWeight = 0.6f;
+
+        private float angle;
+        private float angleScore;
+        private float angleScoreWeight = 0.4f;
+
+        private float maxGrappleAngle;
 
         public MelodyGrappleHook(MelodyController controller)
         {
@@ -28,6 +38,7 @@
             grappleReticule = ServiceLocator.instance.GetUIManager().grappleReticule;
             grappleOnImage = ServiceLocator.instance.GetUIManager().grappleImage;
             maxGrappleDistance = controller.config.maxGrappleDistance;
+            maxGrappleAngle = controller.config.maxGrappleAngle;
             grappleOnImage.enabled = false;
 
             FindGrapplePoints();
@@ -56,17 +67,52 @@
 
         private void SelectOptimalGrapplePoint()
         {
-            curGrappleScore = 0f;
-            minGrappleScore = float.MaxValue;
+            highestScore = 0f;
+            score = 0f;
+
+            angle = 0f;
+            angleScore = 0f;
+
+            distance = 0;
+            distanceScore = 0f;
+            minDistanceScore = float.MaxValue;
+
             grappleDestination = null;
 
             foreach (GrapplePoint grapplePoint in grapplePoints)
             {
-                curGrappleScore = GetGrapplePointScore(grapplePoint);
-                if (curGrappleScore > 0f && curGrappleScore < minGrappleScore)
+                if (!IsGrapplePointObstructed(grapplePoint.actualDestination.position))
                 {
-                    minGrappleScore = curGrappleScore;
-                    grappleDestination = grapplePoint;
+                    distance = Vector3.Distance(controller.transform.position, grapplePoint.actualDestination.position);
+                    if (distance > maxGrappleDistance)
+                    {
+                        //Do nothing
+                    }
+                    else
+                    {
+                        distanceScore = (Mathf.Max(maxGrappleDistance - distance, 0f) / maxGrappleDistance) * distanceScoreWeight;
+
+                        //Calculate the angle of the target by getting the angle between the target position relative to the player, and the direction the player is facing.
+                        Vector3 sourceDirection = grapplePoint.actualDestination.position - controller.transform.position;
+                        angle = Vector3.Angle(controller.transform.forward, sourceDirection);
+
+                        if (angle > maxGrappleAngle)
+                        {
+                            //Do nothing
+                        }
+                        else
+                        {
+                            angleScore = ((maxGrappleAngle - angle) / maxGrappleAngle) * angleScoreWeight;
+
+                            score = angleScore + distanceScore;
+
+                            if (score > highestScore)
+                            {
+                                highestScore = score;
+                                grappleDestination = grapplePoint;
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -82,19 +128,6 @@
             {
                 grappleOnImage.enabled = false;
             }
-        }
-
-        private float GetGrapplePointScore (GrapplePoint grapplePoint)
-        {
-            if (!IsGrapplePointObstructed(grapplePoint.actualDestination.position))
-            {
-                grappleDistance = Vector3.Distance(controller.transform.position, grapplePoint.actualDestination.position);
-                if (grappleDistance <= maxGrappleDistance)
-                {
-                    return grappleDistance;
-                }
-            }
-            return -1f;
         }
 
         private bool IsGrapplePointObstructed(Vector3 destination)
