@@ -24,7 +24,6 @@
             //Allow Melody to cancel the dash outro into an attack, grapple, or counter
             if (melodyController.input.AttackButtonDown() && FmodFacade.instance.HasPerformedActionThisBeat() == false && melodyController.melodyCollision.IsSliding() == false)
             {
-
                 ableToExit = true;
                 nextState = new AttackRequestState(melodyController);
             }
@@ -40,7 +39,6 @@
             }
             else
             {
-
                 timer += time;
                 if (timer >= melodyController.config.DashOutroTime)
                 {
@@ -55,7 +53,6 @@
                     ableToExit = true;
                 }
             }
-
 
             melodyController.melodyPhysics.CalculateVelocity(melodyController.config.DashOutroMaxSpeed, melodyController.config.MaxAcceleration);
         }

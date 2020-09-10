@@ -1,5 +1,7 @@
 ﻿namespace Melody.States
 {
+    using UnityEngine;
+
     public class GrappleHookIntroState : MelodyState
     {
         public GrappleHookIntroState(MelodyController controller) : base(controller) { stateName = "GrappleHookIntroState"; }
@@ -7,6 +9,7 @@
         protected override void Enter()
         {
             nextState = new GrappleHookState(melodyController, melodyController.melodyGrappleHook.GetGrappleDestination());
+            melodyController.rigidBody.velocity = Vector3.zero;
             ableToExit = true;
         }
 
