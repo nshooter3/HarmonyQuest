@@ -1,10 +1,11 @@
 ﻿namespace Melody.States
 {
+    using Objects;
     using UnityEngine;
 
     public class GrappleHookState : MelodyState
     {
-        public GrappleHookState(MelodyController controller, Transform destination) : base(controller)
+        public GrappleHookState(MelodyController controller, GrapplePoint destination) : base(controller)
         {
             this.destination = destination;
             startPos = melodyController.transform.position;
@@ -15,7 +16,7 @@
         float curGrappleTime = 0f;
 
         Vector3 startPos;
-        Transform destination;
+        GrapplePoint destination;
 
         protected override void Enter()
         {
@@ -26,7 +27,7 @@
         {
             base.OnUpdate(time);
             curGrappleTime = Mathf.Min(curGrappleTime + time, totalGrappleTime);
-            melodyController.melodyPhysics.SetPosition(Vector3.Lerp(startPos, destination.position, curGrappleTime/totalGrappleTime));
+            melodyController.melodyPhysics.SetPosition(Vector3.Lerp(startPos, destination.actualDestination.position, curGrappleTime/totalGrappleTime));
 
             if (curGrappleTime >= totalGrappleTime)
             {
@@ -37,7 +38,7 @@
 
         public override void OnExit()
         {
-
+            destination.StartCooldownTimer();
         }
     }
 }

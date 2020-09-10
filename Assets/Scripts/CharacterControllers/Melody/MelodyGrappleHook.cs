@@ -55,9 +55,9 @@
             return grappleDestination != null;
         }
 
-        public Transform GetGrappleDestination()
+        public GrapplePoint GetGrappleDestination()
         {
-            return grappleDestination.actualDestination;
+            return grappleDestination;
         }
 
         private void FindGrapplePoints()
@@ -81,7 +81,7 @@
 
             foreach (GrapplePoint grapplePoint in grapplePoints)
             {
-                if (!IsGrapplePointObstructed(grapplePoint.actualDestination.position))
+                if (grapplePoint.IsCooldownActive() == false && !IsGrapplePointObstructed(grapplePoint.actualDestination.position))
                 {
                     distance = Vector3.Distance(controller.transform.position, grapplePoint.actualDestination.position);
                     if (distance > maxGrappleDistance)
