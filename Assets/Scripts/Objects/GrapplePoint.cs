@@ -8,7 +8,7 @@
         public Transform actualDestination;
         public int priority = 1;
 
-        public enum GrapplePointType { LandAbove, LandBelow };
+        public enum GrapplePointType { LandAbove, LandBelow, LandBeside };
         public GrapplePointType grapplePointType;
 
         public bool active = true;
@@ -32,6 +32,11 @@
         public bool IsCooldownActive()
         {
             return curCooldown > 0f;
+        }
+
+        public bool IsGrappleAngleConstricted()
+        {
+            return grapplePointType == GrapplePointType.LandAbove || grapplePointType == GrapplePointType.LandBeside;
         }
     }
 }

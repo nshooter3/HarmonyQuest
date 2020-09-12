@@ -81,7 +81,7 @@
 
             foreach (GrapplePoint grapplePoint in grapplePoints)
             {
-                if (grapplePoint.IsCooldownActive() == false && !IsGrapplePointObstructed(grapplePoint.actualDestination.position))
+                if (grapplePoint.IsCooldownActive() == false && !IsGrapplePointObstructed(grapplePoint.actualDestination.position) && !IsPlayerOutOfGrappleAngleRange(grapplePoint))
                 {
                     distance = Vector3.Distance(controller.transform.position, grapplePoint.actualDestination.position);
                     if (distance > maxGrappleDistance)
@@ -134,6 +134,17 @@
         {
             return Physics.Linecast(controller.top.position,    destination, controller.config.grappleAttemptLayerMask) || 
                    Physics.Linecast(controller.center.position, destination, controller.config.grappleAttemptLayerMask);
+        }
+
+        //Check to see if the player's position relative to the grapple point is within 90 degrees of the grapple point's normal
+        //This prevents the player from doing things like grappling up to a cliff, then turning around and grappling up to the edge they're already standing on.
+        private bool IsPlayerOutOfGrappleAngleRange(GrapplePoint grapplePoint)
+        {
+            if (grapplePoint.IsGrappleAngleConstricted())
+            {
+                return Vector3.Angle(grapplePoint.visibleDestination.forward, controller.center.position - grapplePoint.visibleDestination.position) > 90f;
+            }
+            return false;
         }
     }
 }
