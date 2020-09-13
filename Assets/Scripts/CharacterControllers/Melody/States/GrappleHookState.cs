@@ -12,7 +12,7 @@
             stateName = "GrappleHookState";
         }
 
-        float totalGrappleTime = 0.25f;
+        float totalGrappleTime = 0.15f;
         float curGrappleTime = 0f;
 
         Vector3 startPos;

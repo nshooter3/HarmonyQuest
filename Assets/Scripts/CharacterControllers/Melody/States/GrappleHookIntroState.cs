@@ -1,5 +1,6 @@
 ﻿namespace Melody.States
 {
+    using HarmonyQuest.Audio;
     using UnityEngine;
 
     public class GrappleHookIntroState : MelodyState
@@ -10,6 +11,7 @@
         {
             nextState = new GrappleHookState(melodyController, melodyController.melodyGrappleHook.GetGrappleDestination());
             melodyController.rigidBody.velocity = Vector3.zero;
+            FmodFacade.instance.PerformOnBeatAction();
             ableToExit = true;
         }
 

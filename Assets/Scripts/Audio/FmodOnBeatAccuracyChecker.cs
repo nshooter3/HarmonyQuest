@@ -70,7 +70,6 @@
         //FmodMusicHandler calls this during the beat callback. 
         public void Beat()
         {
-
             if (playMetronome)
             {
                 metronomeSound.Play();

@@ -2,9 +2,9 @@
 {
     using HarmonyQuest.Audio;
 
-    public class AttackRequestState : MelodyState
+    public class GrappleRequestState : MelodyState
     {
-        public AttackRequestState(MelodyController controller) : base(controller) { stateName = "AttackRequestState"; }
+        public GrappleRequestState(MelodyController controller) : base(controller) { stateName = "GrappleRequestState"; }
 
         FmodFacade.OnBeatAccuracy accuracy;
 
@@ -13,15 +13,15 @@
             accuracy = FmodFacade.instance.WasActionOnBeat();
             if (accuracy == FmodFacade.OnBeatAccuracy.Great)
             {
-                nextState = new AttackSuccessState(melodyController);
+                nextState = new GrappleHookIntroState(melodyController);
             }
             else if (accuracy == FmodFacade.OnBeatAccuracy.Good)
             {
-                nextState = new AttackSuccessState(melodyController);
+                nextState = new GrappleHookIntroState(melodyController);
             }
             else
             {
-                nextState = new AttackMissState(melodyController);
+                nextState = new GrappleMissState(melodyController);
             }
             ableToExit = true;
             FmodFacade.instance.PerformOnBeatAction();
@@ -41,7 +41,7 @@
 
         public override void OnExit()
         {
-            
+
         }
     }
 }
