@@ -252,9 +252,9 @@
         /// Function that returns how close to on beat we currently are. Accuracy is determined based on FmodOnBeatAccuracyChecker's onBeatPadding param.
         /// </summary>
         /// <returns> An OnBeatAccuracy value based on close to the beat we are right now </returns>
-        public OnBeatAccuracy WasActionOnBeat()
+        public OnBeatAccuracy WasActionOnBeat(bool useDegreesOfOnBeatAccuracyOverride = false)
         {
-            return FmodOnBeatAccuracyChecker.instance.WasActionOnBeat();
+            return FmodOnBeatAccuracyChecker.instance.WasActionOnBeat(useDegreesOfOnBeatAccuracyOverride);
         }
 
         /// <summary>

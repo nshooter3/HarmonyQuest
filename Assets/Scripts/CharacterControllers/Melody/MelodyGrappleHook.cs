@@ -81,7 +81,7 @@
 
             foreach (GrapplePoint grapplePoint in grapplePoints)
             {
-                if (grapplePoint.IsCooldownActive() == false && !IsGrapplePointObstructed(grapplePoint.actualDestination.position) && !IsPlayerOutOfGrappleAngleRange(grapplePoint))
+                if (grapplePoint.active && grapplePoint.IsCooldownActive() == false && !IsGrapplePointObstructed(grapplePoint.actualDestination.position) && !IsPlayerOutOfGrappleAngleRange(grapplePoint))
                 {
                     distance = Vector3.Distance(controller.transform.position, grapplePoint.actualDestination.position);
                     if (distance > maxGrappleDistance)
