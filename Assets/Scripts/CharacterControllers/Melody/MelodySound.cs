@@ -208,7 +208,7 @@
         //Param setting functions
         public void SetHealthParam()
         {
-            FmodFacade.instance.SetMusicParam(global_health_param, (melodyInfo.GetCurrentHealth()/ melodyInfo.GetMaxHealth()) * maxHealthValueFmod);
+            //FmodFacade.instance.SetMusicParam(global_health_param, (melodyInfo.GetCurrentHealth()/ melodyInfo.GetMaxHealth()) * maxHealthValueFmod);
         }
 
         //Scale our fmod combat proximity param from 0 to combatProximityFmodParamMaxValue based on the distance of the closest living ai agent.

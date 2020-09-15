@@ -72,5 +72,11 @@
         {
             return player.GetButtonDown("Lockon");
         }
+
+        public bool InteractButtonDown()
+        {
+            //Todo update this
+            return false;
+        }
     }
 }

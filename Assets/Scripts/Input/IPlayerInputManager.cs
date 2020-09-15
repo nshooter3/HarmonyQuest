@@ -21,5 +21,7 @@
         bool HealButtonDown();
 
         bool LockonButtonDown();
+
+        bool InteractButtonDown();
     }
 }

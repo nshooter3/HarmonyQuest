@@ -71,5 +71,10 @@
         {
             return Input.GetKey(KeyCode.C);
         }
+
+        public bool InteractButtonDown()
+        {
+            return Input.GetKeyDown(KeyCode.Space);
+        }
     }
 }
