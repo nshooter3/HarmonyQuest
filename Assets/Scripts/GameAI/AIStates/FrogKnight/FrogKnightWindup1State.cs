@@ -2,6 +2,7 @@
 {
     using GameAI.AIStateActions;
     using GameAI.StateHandlers;
+    using HarmonyQuest;
     using UnityEngine;
 
     public class FrogKnightWindup1State : AIState
@@ -10,7 +11,7 @@
         private DebugAction debugAction = new DebugAction();
 
         //The distance at which we are close enough, and stop trying to approach the target.
-        float attackApproachCutoffRange = 4.0f;
+        float attackApproachCutoffRange = 3.0f;
 
         private bool inAttackRange = false;
 
@@ -19,7 +20,8 @@
             updateData.aiGameObjectFacade.DebugChangeColor(Color.yellow);
             updateData.aiGameObjectFacade.SetRigidBodyConstraintsToDefault();
             updateData.animator.SetBool("AttackStartBool", true);
-            Debug.Log("FrogKnightWindup1State");
+            ServiceLocator.instance.GetAIAgentManager().SetNextAttackMinimumCooldownBeats(2);
+            //Debug.Log("FrogKnightWindup1State");
         }
 
         public override void OnUpdate(AIStateUpdateData updateData)
@@ -29,7 +31,7 @@
 
             if (updateData.aiGameObjectFacade.GetDistanceFromAggroTarget() > attackApproachCutoffRange)
             {
-                moveAction.SeekDestination(updateData.aiGameObjectFacade, updateData.aiGameObjectFacade.data.aggroTarget.position, true, 0.5f, true);
+                moveAction.SeekDestination(updateData.aiGameObjectFacade, updateData.aiGameObjectFacade.data.aggroTarget.position, true, 1.0f, true);
                 if (inAttackRange == true)
                 {
                     updateData.aiGameObjectFacade.SetRigidBodyConstraintsToDefault();
@@ -44,7 +46,6 @@
                     updateData.aiGameObjectFacade.SetRigidBodyConstraintsToLockAllButGravity();
                     inAttackRange = true;
                 }
-                updateData.aiGameObjectFacade.SetRotationDirection(true);
             }
         }
 
@@ -52,13 +53,16 @@
         {
             if (inAttackRange == false)
             {
-                updateData.aiGameObjectFacade.ApplyVelocity(true, true, 0.5f);
+                if (updateData.aiGameObjectFacade.IsGrounded() && !updateData.aiGameObjectFacade.IsSliding())
+                {
+                    updateData.aiGameObjectFacade.ApplyVelocity(true, true, 0.5f);
+                }
             }
             else
             {
-                updateData.aiGameObjectFacade.Rotate(updateData.aiGameObjectFacade.GetRotationDirection(), 0.5f);
+                updateData.aiGameObjectFacade.Rotate(updateData.aiGameObjectFacade.data.aiStats.rotateSpeed * 0.5f);
             }
-            updateData.aiGameObjectFacade.ApplyGravity();
+            updateData.aiGameObjectFacade.ApplyGravity(updateData.aiGameObjectFacade.data.aiStats.gravity);
         }
 
         public override void OnBeatUpdate(AIStateUpdateData updateData)

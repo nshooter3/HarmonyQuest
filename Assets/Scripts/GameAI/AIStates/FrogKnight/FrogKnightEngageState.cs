@@ -14,9 +14,6 @@
         //Used to track the player's distance from this enemy
         private float targetDistance;
 
-        //The distance at which the enemy is available to attack the player
-        private float attackRange = 5.0f;
-
         private bool shouldStrafe = false;
 
         private MoveAction moveAction = new MoveAction();
@@ -32,6 +29,9 @@
         //Coefficient used to improve odds of attacking when the enemy is in favorable conditions.
         //This includes being the lock on target, being in front of the player, being close to the player, etc.
         private float attackOddsCoefficient = 0;
+
+        //How many beats we've been in this state.
+        private int beatCount = 0;
 
         public override void Init(AIStateUpdateData updateData)
         {
@@ -65,7 +65,20 @@
         public override void OnFixedUpdate(AIStateUpdateData updateData)
         {
             updateData.aiGameObjectFacade.ApplyVelocity();
-            updateData.aiGameObjectFacade.ApplyGravity();
+
+            if (updateData.aiGameObjectFacade.GetDesiredVelocity().magnitude == 0.0f && updateData.aiGameObjectFacade.GetVelocity().magnitude < 0.001f && updateData.aiGameObjectFacade.IsGrounded() == true)
+            {
+                //If there is no controller input and the enemy is grounded, do not apply gravity. This prevents it from infinitely sliding down hills.
+            }
+            else
+            {
+                updateData.aiGameObjectFacade.ApplyGravity(updateData.aiGameObjectFacade.data.aiStats.gravity);
+            }
+
+            updateData.aiGameObjectFacade.SetAlwaysFaceTarget(true);
+            updateData.aiGameObjectFacade.Rotate(updateData.aiGameObjectFacade.data.aiStats.rotateSpeed * 3, true);
+
+            updateData.aiGameObjectFacade.SnapToGround();
         }
 
         public override void OnBeatUpdate(AIStateUpdateData updateData)
@@ -76,6 +89,11 @@
                 InitAttackRandomizerWithRNGCoefficient(updateData);
                 RandomAttack(updateData);
             }
+
+            beatCount++;
+
+            //If we've been in the engage state for more than one beat, use RNG to attack instead of doing so ASAP.
+            updateData.aiGameObjectFacade.shouldAttackAsSoonAsPossible = false;
         }
 
         private void InitAttackRandomizerWithRNGCoefficient(AIStateUpdateData updateData)
@@ -92,7 +110,7 @@
         private void RandomAttack(AIStateUpdateData updateData)
         {
             attackOption = attackRandomizer.GetRandomWeightedEntry();
-            if (attackOption == AttackOption.NormalAttack)
+            if (attackOption == AttackOption.NormalAttack || updateData.aiGameObjectFacade.shouldAttackAsSoonAsPossible == true)
             {
                 updateData.aiGameObjectFacade.requestingAttackPermission = true;
             }
@@ -159,6 +177,7 @@
 
         public override void CheckForStateChange(AIStateUpdateData updateData)
         {
+            checkForTargetObstructionTimer += Time.deltaTime;
             if (updateData.aiGameObjectFacade.IsDead() == true)
             {
                 updateData.stateHandler.RequestStateTransition(new FrogKnightDeadState { }, updateData);
@@ -166,11 +185,10 @@
             else if (ShouldDeAggro(updateData))
             {
                 checkForTargetObstructionTimer = 0;
-                updateData.stateHandler.RequestStateTransition(new FrogKnightDisengageState { }, updateData);
+                updateData.stateHandler.RequestStateTransition(new FrogKnightLoseTargetState { }, updateData);
             }
-            else
+            else if(!IsWithinAutoEngageDistance(updateData))
             {
-                checkForTargetObstructionTimer += Time.deltaTime;
                 if (checkForTargetObstructionTimer > NavigatorSettings.checkForTargetObstructionRate)
                 {
                     checkForTargetObstructionTimer = 0;
@@ -198,6 +216,11 @@
         private bool ShouldDeAggro(AIStateUpdateData updateData)
         {
             return updateData.aiGameObjectFacade.data.aiStats.disengageWithDistance && Vector3.Distance(updateData.aiGameObjectFacade.transform.position, updateData.player.GetTransform().position) > updateData.aiGameObjectFacade.data.aiStats.disengageDistance;
+        }
+
+        private bool IsWithinAutoEngageDistance(AIStateUpdateData updateData)
+        {
+            return updateData.aiGameObjectFacade.data.aiStats.disengageWithDistance && Vector3.Distance(updateData.aiGameObjectFacade.transform.position, updateData.player.GetTransform().position) <= NavigatorSettings.autoEngageDistance;
         }
     }
 }

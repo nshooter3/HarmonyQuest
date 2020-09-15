@@ -13,7 +13,7 @@
         private Queue<Vector3> waypoints;
         private Vector3 nextWaypoint;
 
-        public override void SetTarget(Transform navigationAgent, Transform navigationTarget)
+        public override bool SetTarget(Transform navigationAgent, Transform navigationTarget)
         {
             this.navigationAgent = navigationAgent;
             this.navigationTarget = navigationTarget;
@@ -21,7 +21,7 @@
             waypoints = null;
             lastKnownTargetPos = new Vector3(float.MinValue, float.MinValue, float.MinValue);
             isActivelyGeneratingPath = true;
-            GeneratePathToTarget();
+            return GeneratePathToTarget();
         }
 
         public override void CancelCurrentNavigation()
@@ -79,24 +79,28 @@
                 {
                     nextWaypoint = waypoints.Dequeue();
                 }
+                else
+                {
+                    CancelCurrentNavigation();
+                }
             }
         }
 
-        private void GeneratePathToTarget()
+        private bool GeneratePathToTarget()
         {
             if (navigationAgent == null || navigationTarget == null)
             {
                 CancelCurrentNavigation();
-                return;
+                return false;
             }
 
             bool pathFound = false;
             //For both our agent and our target, raycast down to the navmesh before generating a path. This allows navigations to work even when they aren't both grounded.
-            if (NavMeshUtil.IsNavMeshBelowTransform(navigationAgent, out Vector3 agentRaycastDownPosition))
+            if (NavMeshUtil.IsAgentOnNavMesh(navigationAgent.position, out NavMeshHit agentNavMeshHit))
             {
-                if (NavMeshUtil.IsNavMeshBelowTransform(navigationTarget, out Vector3 targetRaycastDownPosition))
+                if (NavMeshUtil.IsAgentOnNavMesh(navigationTarget.position, out NavMeshHit targetNavMeshHit))
                 {
-                    path = NavMeshUtil.GeneratePath(agentRaycastDownPosition, targetRaycastDownPosition);
+                    path = NavMeshUtil.GeneratePath(agentNavMeshHit.position, targetNavMeshHit.position);
 
                     if (IsPathToTargetValid())
                     {
@@ -113,6 +117,7 @@
                 //If we cannot reach the specified target using the navmesh, cancel navigation.
                 CancelCurrentNavigation();
             }
+            return pathFound;
         }
 
         private bool IsPathToTargetValid()

@@ -25,12 +25,12 @@
         /// <summary>
         /// How frequently to check if this enemy has a clear path to the player. Determines whether to engage player or to navigate to a state where they can engage later.
         /// </summary>
-        public static float checkForTargetObstructionRate = 0.5f;
+        public static float checkForTargetObstructionRate = 0.001f;
 
         /// <summary>
         /// Multiplier that gets applied to the scale of the collision avoidance force.
         /// </summary>
-        public static float collisionAvoidanceScale = 0.2f;
+        public static float collisionAvoidanceScale = 1.0f;
 
         /// <summary>
         /// The maximum distance at which collision avoidance will be applied.
@@ -45,7 +45,7 @@
         /// <summary>
         /// Multiplier that gets applied to the scale of the obstacle avoidance force.
         /// </summary>
-        public static float obstacleAvoidanceScale = 0.3f;
+        public static float obstacleAvoidanceScale = 0.5f;
 
         /// <summary>
         /// The maximum distance at which obstacle avoidance will be applied.
@@ -68,8 +68,25 @@
         public static float avoidanceForceMovementVelocityAdjustmentScale = 0.5f;
 
         /// <summary>
+        /// When the agent is moving, clamp the max value of their avoidance forces by a percentage of their movement speed.
+        /// This is a failsafe to prevent the avoidance force from overriding the agent's movment.
+        /// </summary>
+        public static float maxAvoidanceInfluence = 0.3f;
+
+        /// <summary>
         /// How far above the player to position the navPos when tracking them.
         /// </summary>
         public static float navPosHeightOffset = 2.25f;
+
+        /// <summary>
+        /// Distance threshold for determining whether or not the agent is above the navmesh. Don't set this too high, or NavMesh.SamplePosition() may slow down
+        /// </summary>
+        public static float onMeshThreshold = 3f;
+
+        /// <summary>
+        /// Distance at which the enemy will automatically switch from navigating to engaging their target.
+        /// This is used to prevent rapid state changes when the agent is near the player when they are standing close to a wall/corner.
+        /// </summary>
+        public static float autoEngageDistance = 3f;
     }
 }

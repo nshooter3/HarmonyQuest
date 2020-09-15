@@ -154,6 +154,7 @@
 
         private void AgentsBeatUpdate()
         {
+            aiAttackRequestHandler.DecrementNextAttackMinimumCooldownBeats();
             foreach (AIAgent agent in agents)
             {
                 agent.OnBeatUpdate();
@@ -171,6 +172,16 @@
                 }
             }
             return livingAgents;
+        }
+
+        public void SetNextAttackMinimumCooldownBeats(int nextAttackMinimumCooldownBeats)
+        {
+            aiAttackRequestHandler.SetNextAttackMinimumCooldownBeats(nextAttackMinimumCooldownBeats);
+        }
+
+        public bool IsInAttackCooldown()
+        {
+            return aiAttackRequestHandler.IsInAttackCooldown();
         }
     }
 }

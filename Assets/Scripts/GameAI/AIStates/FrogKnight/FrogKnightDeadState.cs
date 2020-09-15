@@ -21,6 +21,7 @@
 
             updateData.aiGameObjectFacade.data.navPos.SetActive(false);
             updateData.aiGameObjectFacade.data.isAggroed = false;
+            updateData.aiGameObjectFacade.shouldAttackAsSoonAsPossible = true;
 
             updateData.aiGameObjectFacade.SetRigidBodyConstraintsToNone();
 
@@ -49,7 +50,7 @@
 
         public override void OnFixedUpdate(AIStateUpdateData updateData)
         {
-            updateData.aiGameObjectFacade.ApplyGravity();
+            updateData.aiGameObjectFacade.ApplyGravity(updateData.aiGameObjectFacade.data.aiStats.gravity);
         }
 
         public override void OnBeatUpdate(AIStateUpdateData updateData)

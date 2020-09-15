@@ -50,7 +50,7 @@
                 }
             }
 
-            if (updateData.aiGameObjectFacade.data.strafeHitBoxes != null)
+            if (updateData.aiGameObjectFacade.data.strafeHitboxes != null)
             {
                 CheckForStrafeInterupt(updateData);
             }
@@ -66,19 +66,19 @@
             StrafeType RNGResult = strafeRandomizer.GetRandomWeightedEntry();
 
             //Cancel strafe if it will result in a collision or move the enemy outside of the desired range from the player.
-            if (RNGResult == StrafeType.Clockwise && updateData.aiGameObjectFacade.data.strafeHitBoxes.leftCollision)
+            if (RNGResult == StrafeType.Clockwise && updateData.aiGameObjectFacade.data.strafeHitboxes.leftCollision)
             {
                 return StrafeType.None;
             }
-            else if (RNGResult == StrafeType.Counterclockwise && updateData.aiGameObjectFacade.data.strafeHitBoxes.rightCollision)
+            else if (RNGResult == StrafeType.Counterclockwise && updateData.aiGameObjectFacade.data.strafeHitboxes.rightCollision)
             {
                 return StrafeType.None;
             }
-            else if (RNGResult == StrafeType.Towards && (targetDistance <= minDistanceFromPlayer + strafeDistanceThreshold || updateData.aiGameObjectFacade.data.strafeHitBoxes.frontCollision))
+            else if (RNGResult == StrafeType.Towards && (targetDistance <= minDistanceFromPlayer + strafeDistanceThreshold || updateData.aiGameObjectFacade.data.strafeHitboxes.frontCollision))
             {
                 return StrafeType.None;
             }
-            else if (RNGResult == StrafeType.Away && (targetDistance > maxDistanceFromPlayer - strafeDistanceThreshold || updateData.aiGameObjectFacade.data.strafeHitBoxes.backCollision))
+            else if (RNGResult == StrafeType.Away && (targetDistance > maxDistanceFromPlayer - strafeDistanceThreshold || updateData.aiGameObjectFacade.data.strafeHitboxes.backCollision))
             {
                 return StrafeType.None;
             }
@@ -93,16 +93,16 @@
             switch (strafeType)
             {
                 case StrafeType.Clockwise:
-                    result = Vector3.Cross(Vector3.up, target - updateData.aiGameObjectFacade.transform.position) * -1.0f;
+                    result = Vector3.Cross(Vector3.up, target - updateData.aiGameObjectFacade.data.aiAgentBottom.position) * -1.0f;
                     break;
                 case StrafeType.Counterclockwise:
-                    result = Vector3.Cross(Vector3.up, target - updateData.aiGameObjectFacade.transform.position);
+                    result = Vector3.Cross(Vector3.up, target - updateData.aiGameObjectFacade.data.aiAgentBottom.position);
                     break;
                 case StrafeType.Towards:
-                    result = target - updateData.aiGameObjectFacade.transform.position;
+                    result = target - updateData.aiGameObjectFacade.data.aiAgentBottom.position;
                     break;
                 case StrafeType.Away:
-                    result = updateData.aiGameObjectFacade.transform.position - target;
+                    result = updateData.aiGameObjectFacade.data.aiAgentBottom.position - target;
                     break;
             }
             return result.normalized;
@@ -115,25 +115,25 @@
             switch (strafeType)
             {
                 case StrafeType.Clockwise:
-                    if (updateData.aiGameObjectFacade.data.strafeHitBoxes.leftCollision)
+                    if (updateData.aiGameObjectFacade.data.strafeHitboxes.leftCollision)
                     {
                         cancelStrafe = true;
                     }
                     break;
                 case StrafeType.Counterclockwise:
-                    if (updateData.aiGameObjectFacade.data.strafeHitBoxes.rightCollision)
+                    if (updateData.aiGameObjectFacade.data.strafeHitboxes.rightCollision)
                     {
                         cancelStrafe = true;
                     }
                     break;
                 case StrafeType.Towards:
-                    if (updateData.aiGameObjectFacade.data.strafeHitBoxes.frontCollision)
+                    if (updateData.aiGameObjectFacade.data.strafeHitboxes.frontCollision)
                     {
                         cancelStrafe = true;
                     }
                     break;
                 case StrafeType.Away:
-                    if (updateData.aiGameObjectFacade.data.strafeHitBoxes.backCollision)
+                    if (updateData.aiGameObjectFacade.data.strafeHitboxes.backCollision)
                     {
                         cancelStrafe = true;
                     }
@@ -143,7 +143,7 @@
             {
                 CancelStrafe();
             }
-            updateData.aiGameObjectFacade.data.strafeHitBoxes.ResetCollisions();
+            updateData.aiGameObjectFacade.data.strafeHitboxes.ResetCollisions();
         }
 
         public bool StrafedTooClose(float targetDistance, float minDistanceFromPlayer)

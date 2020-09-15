@@ -52,6 +52,11 @@ namespace Melody
 		public Vector3 GetVelocity()
         {
             return Vector3.zero;
-        }    }
+        }
 
+        public Vector3 GetCenter()
+        {
+            return Vector3.zero;
+        }
+    }
 }

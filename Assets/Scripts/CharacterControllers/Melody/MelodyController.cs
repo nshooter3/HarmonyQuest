@@ -28,6 +28,8 @@
         public Collider counterHurtbox;
         public MeshRenderer counterHurtboxMesh;
 
+        public Transform center;
+
         /// <summary>
         /// The CounterDamageReceiver for the player. Handles taking counter damage without needing a damage hitbox.
         /// </summary>
@@ -45,7 +47,7 @@
 
         //Utility classes
         public MelodyPhysics melodyPhysics;
-        public MelodyCollision melodyCollision;
+        public MelodySurfaceCollision melodyCollision;
         public MelodyHealth melodyHealth;
         public MelodyHitboxes melodyHitboxes;
         public MelodyAnimator melodyAnimator;
@@ -71,7 +73,7 @@
             move = new Vector3();
 
             melodyPhysics = new MelodyPhysics(this);
-            melodyCollision = new MelodyCollision(this);
+            melodyCollision = new MelodySurfaceCollision(this);
             melodyHealth = new MelodyHealth(this);
             melodyHitboxes = new MelodyHitboxes(this);
             melodyAnimator = new MelodyAnimator(this);
@@ -82,6 +84,7 @@
         // Update is called once per frame
         void Update()
         {
+            melodyPhysics.ResetDesiredVelocity();
             CheckInputs();
             melodyHitboxes.UpdateHitboxes();
             melodyHealth.OnUpdate(Time.deltaTime);
@@ -89,6 +92,7 @@
             StateMachine.OnUpdate(Time.deltaTime);
             melodySound.OnUpdate();
             currentStateName = StateMachine.GetCurrentStateName();
+            //Debug.Log("State: " + currentStateName);
         }
 
         void FixedUpdate()
@@ -161,6 +165,12 @@
 
 		public Vector3 GetVelocity()
         {
-            return melodyPhysics.velocity;
-        }    }
+            return melodyPhysics.GetVelocity();
+        }
+
+        public Vector3 GetCenter()
+        {
+            return center.position;
+        }
+    }
 }

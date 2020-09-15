@@ -163,11 +163,11 @@
 
         private void DealCounterDamage(DamageHitbox damageHitbox)
         {
-            damageHitbox.ReturnCounterDamageToSource(MelodyStats.counterDamage);
+            damageHitbox.ReturnCounterDamageToSource(MelodyStats.counterDamage, controller.gameObject);
         }
 
         //Used to receive counter damage and other things not tied to damage hitboxes.
-        public void ReceiveDirectDamage(int damage)
+        public void ReceiveDirectDamage(int damage, GameObject dealer)
         {
             if (dead == false)
             {
