@@ -8,7 +8,7 @@
         {
             if (melodyController.melodyGrappleHook.HasGrappleDestination())
             {
-                nextState = new GrappleHookIntroState(melodyController);
+                nextState = new GrappleHookIntroState(melodyController, melodyController.melodyGrappleHook.GetGrappleDestination());
             }
             else
             {

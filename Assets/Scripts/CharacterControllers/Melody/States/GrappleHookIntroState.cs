@@ -1,15 +1,22 @@
 ﻿namespace Melody.States
 {
     using HarmonyQuest.Audio;
+    using Objects;
     using UnityEngine;
 
     public class GrappleHookIntroState : MelodyState
     {
-        public GrappleHookIntroState(MelodyController controller) : base(controller) { stateName = "GrappleHookIntroState"; }
+        GrapplePoint destination;
+
+        public GrappleHookIntroState(MelodyController controller, GrapplePoint destination) : base(controller)
+        {
+            stateName = "GrappleHookIntroState";
+            this.destination = destination;
+        }
 
         protected override void Enter()
         {
-            nextState = new GrappleHookState(melodyController, melodyController.melodyGrappleHook.GetGrappleDestination());
+            nextState = new GrappleHookState(melodyController, destination);
             melodyController.rigidBody.velocity = Vector3.zero;
             FmodFacade.instance.PerformOnBeatAction();
             ableToExit = true;
