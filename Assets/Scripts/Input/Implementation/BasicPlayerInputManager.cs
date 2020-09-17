@@ -54,12 +54,12 @@
 
         public bool HarmonyModeButtonDown()
         {
-            return Input.GetKey(KeyCode.J);
+            return Input.GetKey(KeyCode.F);
         }
 
         public bool HealButtonDown()
         {
-            return Input.GetKey(KeyCode.H);
+            return Input.GetKey(KeyCode.V);
         }
 
         public bool LockonButtonDown()
@@ -70,6 +70,11 @@
         public bool ParryButtonDown()
         {
             return Input.GetKey(KeyCode.C);
+        }
+
+        public bool GrappleButtonDown()
+        {
+            return Input.GetKey(KeyCode.LeftShift);
         }
     }
 }

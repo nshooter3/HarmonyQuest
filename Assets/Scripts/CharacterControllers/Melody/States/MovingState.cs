@@ -1,7 +1,6 @@
 ﻿namespace Melody.States
 {
     using HarmonyQuest.Audio;
-    using UnityEngine;
 
     public class MovingState : MelodyState
     {
@@ -21,6 +20,11 @@
             {
                 ableToExit = true;
                 nextState = new AttackRequestState(melodyController);
+            }
+            else if (melodyController.input.GrappleButtonDown() && FmodFacade.instance.HasPerformedActionThisBeat() == false)
+            {
+                ableToExit = true;
+                nextState = new GrappleRequestState(melodyController);
             }
             else if (melodyController.input.ParryButtonDown() && melodyController.melodyCollision.IsSliding() == false)
             {

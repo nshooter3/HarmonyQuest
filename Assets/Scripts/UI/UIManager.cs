@@ -9,6 +9,10 @@
 
         public Image lockOnImage;
 
+        public UITracker grappleReticule;
+
+        public Image grappleImage;
+
         public AgentHealthBarsPool agentHealthBarsPool;
 
         public UIMeter playerHealth;

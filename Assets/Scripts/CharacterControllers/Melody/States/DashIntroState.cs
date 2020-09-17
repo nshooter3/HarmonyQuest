@@ -4,7 +4,6 @@
 
     public class DashIntroState : MelodyState
     {
-
         protected Vector3 dodge;
         protected float timer;
 

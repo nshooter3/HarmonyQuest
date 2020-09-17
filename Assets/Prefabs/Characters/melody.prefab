@@ -1016,6 +1016,36 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1 &4889487508080473388
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 337343446706727026}
+  m_Layer: 9
+  m_Name: Top
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &337343446706727026
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4889487508080473388}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5739673520324811892}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5454996922980906092
 GameObject:
   m_ObjectHideFlags: 0
@@ -2406,6 +2436,7 @@ Transform:
   - {fileID: 1257546467340726863}
   - {fileID: 6204048396786551208}
   - {fileID: 1160935757}
+  - {fileID: 337343446706727026}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2457,7 +2488,9 @@ MonoBehaviour:
   - {fileID: 750596295520657578}
   counterHurtbox: {fileID: 6204048395656251594}
   counterHurtboxMesh: {fileID: 6204048395656251597}
+  bottom: {fileID: 5739673520324811892}
   center: {fileID: 1160935757}
+  top: {fileID: 337343446706727026}
   counterDamageReceiver: {fileID: 8789957132980842086}
   config:
     MaxSpeed: 8
@@ -2512,6 +2545,15 @@ MonoBehaviour:
     boxPushingLayerMask:
       serializedVersion: 2
       m_Bits: 32768
+    grappleAttemptLayerMask:
+      serializedVersion: 2
+      m_Bits: 1
+    maxGrappleDistance: 20
+    grappleOutroTime: 0.15
+    grappleOutroMaxSpeed: 6
+    grappleOutroTurningSpeed: 3
+    grappleOutroGravity: {x: 0, y: -20, z: 0}
+    maxGrappleAngle: 120
   move: {x: 0, y: 0, z: 0}
   rightStickMove: {x: 0, y: 0}
   melodySound: {fileID: 6204048396786551211}
@@ -2698,18 +2740,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8936c17893992dd41a5e284062d58611, type: 3}
---- !u!1 &2682131291926511021 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 8936c17893992dd41a5e284062d58611,
-    type: 3}
-  m_PrefabInstance: {fileID: 6204048396826862756}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1633180746748488789 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -4561288695918819087, guid: 8936c17893992dd41a5e284062d58611,
-    type: 3}
-  m_PrefabInstance: {fileID: 6204048396826862756}
-  m_PrefabAsset: {fileID: 0}
 --- !u!95 &9072926042586309316 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: -6057140222963153312, guid: 8936c17893992dd41a5e284062d58611,
@@ -2719,6 +2749,18 @@ Animator:
 --- !u!4 &1397103160021733310 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 8936c17893992dd41a5e284062d58611,
+    type: 3}
+  m_PrefabInstance: {fileID: 6204048396826862756}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2682131291926511021 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 8936c17893992dd41a5e284062d58611,
+    type: 3}
+  m_PrefabInstance: {fileID: 6204048396826862756}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1633180746748488789 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -4561288695918819087, guid: 8936c17893992dd41a5e284062d58611,
     type: 3}
   m_PrefabInstance: {fileID: 6204048396826862756}
   m_PrefabAsset: {fileID: 0}

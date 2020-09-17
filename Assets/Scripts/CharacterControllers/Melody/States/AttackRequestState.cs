@@ -1,7 +1,6 @@
 ﻿namespace Melody.States
 {
     using HarmonyQuest.Audio;
-    using UnityEngine;
 
     public class AttackRequestState : MelodyState
     {

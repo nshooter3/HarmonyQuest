@@ -70,7 +70,6 @@
         //FmodMusicHandler calls this during the beat callback. 
         public void Beat()
         {
-
             if (playMetronome)
             {
                 metronomeSound.Play();
@@ -81,7 +80,7 @@
         }
 
         //Allow a little bit of wiggle room both before and after the beat for determining whether or not an action was on beat.
-        public FmodFacade.OnBeatAccuracy WasActionOnBeat()
+        public FmodFacade.OnBeatAccuracy WasActionOnBeat(bool useDegreesOfOnBeatAccuracyOverride = false)
         {
             //Full onBeatPadding range for good on beat
             bool attackedWithinRangeBeforeBeatGood = beatTimer > beatDuration - (beatDuration * onBeatPadding);
@@ -97,7 +96,7 @@
             }
             else if (attackedWithinRangeBeforeBeatGood || attackedWithinRangeAfterBeatGood)
             {
-                if (useDegreesOfOnBeatAccuracy)
+                if (useDegreesOfOnBeatAccuracy || useDegreesOfOnBeatAccuracyOverride)
                 {
                     return FmodFacade.OnBeatAccuracy.Good;
                 }
