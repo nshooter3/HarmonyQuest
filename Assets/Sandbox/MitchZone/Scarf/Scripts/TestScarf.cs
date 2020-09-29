@@ -1,11 +1,12 @@
-﻿using UnityEngine;
+﻿using Melody;
+using UnityEngine;
 
 // [ExecuteInEditMode ]
 public class TestScarf : MonoBehaviour
 {
     public float dashProgress = 0f;
     [SerializeField]
-    private TestPlayerScarf player;
+    private MelodyController player;
     [SerializeField]
     private Transform ball;
 
