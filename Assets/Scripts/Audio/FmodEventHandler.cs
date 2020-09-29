@@ -4,13 +4,14 @@
     using System.Collections.Generic;
     using System.Linq;
     using UnityEngine;
+    using GameManager;
 
     /// <summary>
     /// Class that holds the information for playing and updating parameters on a specific fmod event, for both tonal and atonal events.
     /// The actual playing of the fmod event will occur through the fmod event pool based on the information stored in this class.
     /// Any time we need to play an fmod event, it should be accessed through a gameobject with an instance of this class.
     /// </summary>
-    public class FmodEventHandler : MonoBehaviour
+    public class FmodEventHandler : ManageableObject
     {
         public string sfxEventName = "";
         public float sfxEventVolume = 1.0f;
@@ -63,7 +64,7 @@
 
         private string octaveParamName = "global_octave_param";
 
-        private void Awake()
+        public override void OnAwake()
         {
             if (indexBehaviorOnNewChord == IndexBehaviorOnNewChord.ResetNoteToInitIndex)
             {
@@ -86,7 +87,7 @@
             rb.useGravity = false;
         }
 
-        private void Start()
+        public override void OnStart()
         {
             switch (sfxMode)
             {
@@ -99,7 +100,7 @@
             }
         }
 
-        private void Update()
+        public override void OnUpdate()
         {
             if (debugPrintVelocity)
             {

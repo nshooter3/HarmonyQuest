@@ -1,59 +1,35 @@
 ﻿namespace GameManager
 {
-    using DitzelGames.FastIK;
     using Effects.Particles;
     using GameAI;
     using GamePhysics;
+    using HarmonyQuest.Audio;
     using HarmonyQuest.DynamicCamera;
     using HarmonyQuest.Input.Implementation;
     using Melody;
     using Objects;
     using System.Collections.Generic;
-    using System.Linq;
     using UI;
     using UnityEngine;
 
     public class GameManager : MonoBehaviour
     {
         ObjectManager gameplayObjectManager = new ObjectManager();
-
-        //UI
-        UITracker uiTracker;
-        UIMeter uiMeter;
-        AgentHealthBarsPool agentHealthBarsPool;
-
-        //Art
-        FastIKLook fastIKLook;
-        FastIKFabric fastIKFabric;
-        VerletConstraint verletConstraint;
-        SetPlayerVelocity setPlayerVelocity;
-        ClothPoints clothPoints;
-        BillboardSprite billboardSprite;
-        TestScarf testScarf;
-        DynamicParticleSystem dynamicParticleSystem;
+        ObjectManager artObjectManager = new ObjectManager();
+        ObjectManager uiObjectManager = new ObjectManager();
+        ObjectManager audioObjectManager = new ObjectManager();
 
         //The master list of all the objects that need to be updated, in order.
         List<ManageableObject> updateQueue = new List<ManageableObject>();
 
         void PopulateUpdateQueue()
         {
-            PopulateObjectManagers();
-
-            //Gameplay
-            updateQueue.Add(FindObjectOfType<RewiredPlayerInputManager>());
-            updateQueue.Add(FindObjectOfType<MelodyController>());
-            updateQueue.Add(FindObjectOfType<AIAgentManager>());
-            updateQueue.Add(FindObjectOfType<PhysicsObjectManager>());
-            updateQueue.Add(FindObjectOfType<CameraController>());
-            updateQueue.Add(FindObjectOfType<MelodyGroundedChecker>());
-            updateQueue.Add(gameplayObjectManager);
-
-            //Remove null entries as a failsafe.
-            updateQueue = updateQueue.Where(item => item != null).ToList();
-        }
-
-        void PopulateObjectManagers()
-        {
+            gameplayObjectManager.FindManageableObjectsInScene<RewiredPlayerInputManager>();
+            gameplayObjectManager.FindManageableObjectsInScene<MelodyController>();
+            gameplayObjectManager.FindManageableObjectsInScene<AIAgentManager>();
+            gameplayObjectManager.FindManageableObjectsInScene<PhysicsObjectManager>();
+            gameplayObjectManager.FindManageableObjectsInScene<CameraController>();
+            gameplayObjectManager.FindManageableObjectsInScene<MelodyGroundedChecker>();
             gameplayObjectManager.FindManageableObjectsInScene<CollisionWrapper>();
             gameplayObjectManager.FindManageableObjectsInScene<DamageHitbox>();
             gameplayObjectManager.FindManageableObjectsInScene<PuzzleZoneTrigger>();
@@ -61,7 +37,29 @@
             gameplayObjectManager.FindManageableObjectsInScene<PushableBoxTrigger>();
             gameplayObjectManager.FindManageableObjectsInScene<CameraPointOfInterest>();
 
-            Debug.Log(gameplayObjectManager);
+            artObjectManager.FindManageableObjectsInScene<VerletConstraint>();
+            artObjectManager.FindManageableObjectsInScene<SetPlayerVelocity>();
+            artObjectManager.FindManageableObjectsInScene<ClothPoints>();
+            artObjectManager.FindManageableObjectsInScene<BillboardSprite>();
+            artObjectManager.FindManageableObjectsInScene<TestScarf>();
+            artObjectManager.FindManageableObjectsInScene<DynamicParticleSystem>();
+
+            uiObjectManager.FindManageableObjectsInScene<UITracker>();
+            uiObjectManager.FindManageableObjectsInScene<UIMeter>();
+            uiObjectManager.FindManageableObjectsInScene<AgentHealthBarsPool>();
+
+            audioObjectManager.FindManageableObjectsInScene<FmodFacade>();
+            audioObjectManager.FindManageableObjectsInScene<FmodMusicHandler>();
+            audioObjectManager.FindManageableObjectsInScene<FmodOnBeatAccuracyChecker>();
+            audioObjectManager.FindManageableObjectsInScene<FmodEventHandler>();
+            audioObjectManager.FindManageableObjectsInScene<FmodChordInterpreter>();
+
+            //Add Object Managers to the updateQueue after the null check since they can be incorrectly filtered out for some reason.
+            //They perform their own null check anyway.
+            updateQueue.Add(gameplayObjectManager);
+            updateQueue.Add(artObjectManager);
+            updateQueue.Add(uiObjectManager);
+            updateQueue.Add(audioObjectManager);
         }
 
         void Awake()

@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
+using GameManager;
 
-public class BillboardSprite : MonoBehaviour
+public class BillboardSprite : ManageableObject
 {
     public Camera mainCamera;
 
-    // Update is called once per frame
-    void Update()
+    public override void OnUpdate()
     {
         transform.LookAt(mainCamera.transform.position, -Vector3.up);
     }

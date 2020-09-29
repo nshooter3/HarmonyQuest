@@ -2,8 +2,9 @@
 {
     using System.Collections.Generic;
     using UnityEngine;
+    using GameManager;
 
-    public class AgentHealthBarsPool : MonoBehaviour
+    public class AgentHealthBarsPool : ManageableObject
     {
         [SerializeField]
         private AgentHealthBars healthBarPrefab;
@@ -15,7 +16,7 @@
 
         private AgentHealthBars tempHealthbar;
 
-        private void Awake()
+        public override void OnAwake()
         {
             InitPool();
         }

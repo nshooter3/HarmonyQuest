@@ -76,10 +76,6 @@
 
         public bool GrappleButtonDown()
         {
-            if (player.GetButtonDown("Grapple"))
-            {
-                Debug.Log("GRAPPLE PRESSED");
-            }
             return player.GetButtonDown("Grapple");
         }
     }

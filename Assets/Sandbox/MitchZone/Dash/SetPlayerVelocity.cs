@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using Melody;
+using GameManager;
 
-public class SetPlayerVelocity : MonoBehaviour
+public class SetPlayerVelocity : ManageableObject
 {
     public MelodyController player;
 
-    // Update is called once per frame
-    void Update()
+    public override void OnUpdate()
     {
         if (player != null)
             Shader.SetGlobalVector("_PlayerVelocity", player.rigidBody.velocity);

@@ -4,11 +4,12 @@
     using System.Collections.Generic;
     using System.Linq;
     using UnityEngine;
+    using GameManager;
 
     /// <summary>
     /// This class will be the primary way in which other scripts interface with our fmod logic.
     /// </summary>
-    public class FmodFacade : MonoBehaviour
+    public class FmodFacade : ManageableObject
     {
         //Enum used to quantify how close an action is to the beat.
         public enum OnBeatAccuracy
@@ -29,7 +30,7 @@
         [SerializeField]
         private bool debugOneShotEvents = false;
 
-        private void Awake()
+        public override void OnAwake()
         {
             if (instance == null)
             {

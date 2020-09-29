@@ -1,8 +1,9 @@
 ﻿using Melody;
 using UnityEngine;
+using GameManager;
 
 // [ExecuteInEditMode ]
-public class TestScarf : MonoBehaviour
+public class TestScarf : ManageableObject
 {
     public float dashProgress = 0f;
     [SerializeField]
@@ -14,12 +15,12 @@ public class TestScarf : MonoBehaviour
 
 
 
-    void Start()
+    public override void OnStart()
     {
         scarfAnimator = GetComponent<Animator>();
     }
 
-    void Update()
+    public override void OnUpdate()
     {
         Shader.SetGlobalVector("_BallLocation", ball.transform.position);
         Shader.SetGlobalVector("_PlayerLocation", player.transform.forward);

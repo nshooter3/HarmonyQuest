@@ -4,8 +4,9 @@
     using System.Collections.Generic;
     using System.Runtime.InteropServices;
     using UnityEngine;
+    using GameManager;
 
-    public class FmodMusicHandler : MonoBehaviour
+    public class FmodMusicHandler : ManageableObject
     {
         private static FmodMusicHandler inst;
         public static FmodMusicHandler instance
@@ -71,7 +72,7 @@
         FMOD.Studio.EventInstance ambienceEvent;
         FMOD.Studio.EVENT_CALLBACK beatCallback;
 
-        private void Awake()
+        public override void OnAwake()
         {
             if (inst == null)
             {
@@ -84,7 +85,7 @@
         }
 
         // Start is called before the first frame update
-        void Start()
+        public override void OnStart()
         {
             timelineInfo = new TimelineInfo();
             beatCallback = new FMOD.Studio.EVENT_CALLBACK(BeatEventCallback);
