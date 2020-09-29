@@ -3,8 +3,9 @@
     using UnityEngine;
     using System.Collections.Generic;
     using Melody;
+    using GameManager;
 
-    public class CameraController : MonoBehaviour
+    public class CameraController : ManageableObject
     {
         private List<CameraBehavior> behaviors = new List<CameraBehavior>();
 
@@ -26,7 +27,7 @@
             }
         }
 
-        void Awake()
+        public override void OnAwake()
         {
             if (!inst)
             {
@@ -47,7 +48,7 @@
             }
         }
 
-        void LateUpdate()
+        public override void OnLateUpdate()
         {
             MoveCamera();
             UpdateCamera();

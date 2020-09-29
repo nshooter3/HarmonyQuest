@@ -1,13 +1,14 @@
 ﻿namespace Melody
 {
     using GameAI;
+    using GameManager;
     using GamePhysics;
     using HarmonyQuest;
     using HarmonyQuest.Input;
     using Melody.States;
     using UnityEngine;
 
-    public class MelodyController : MonoBehaviour, IMelodyInfo
+    public class MelodyController : ManageableObject, IMelodyInfo
     {
         MelodyStateMachine StateMachine;
         public string currentStateName;
@@ -63,7 +64,7 @@
         public Renderer scarfRenderer;
 
         // Start is called before the first frame update
-        void Start()
+        public override void OnStart()
         {
             rigidBody = gameObject.GetComponent<Rigidbody>();
             melodyColliderWrapper = gameObject.GetComponent<CollisionWrapper>();
@@ -86,7 +87,7 @@
         }
 
         // Update is called once per frame
-        void Update()
+        public override void OnUpdate()
         {
             melodyPhysics.ResetDesiredVelocity();
             CheckInputs();
@@ -100,7 +101,7 @@
             //Debug.Log("State: " + currentStateName);
         }
 
-        void FixedUpdate()
+        public override void OnFixedUpdate()
         {
             StateMachine.OnFixedUpdate();
             melodyCollision.OnFixedUpdate();

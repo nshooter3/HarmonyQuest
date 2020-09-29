@@ -1,7 +1,8 @@
-﻿using Melody;
+﻿using GameManager;
+using Melody;
 using UnityEngine;
 
-public class MelodyGroundedChecker : MonoBehaviour
+public class MelodyGroundedChecker : ManageableObject
 {
     public Renderer groundedIndicator;
     public Material groundedReference, slidingReference, inAirReference;
@@ -10,7 +11,7 @@ public class MelodyGroundedChecker : MonoBehaviour
     public MelodyController melodyController;
 
     // Start is called before the first frame update
-    void Start()
+    public override void OnStart()
     {
         grounded = new Material(groundedReference);
         inAir = new Material(inAirReference);
@@ -18,7 +19,7 @@ public class MelodyGroundedChecker : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public override void OnUpdate()
     {
         if (melodyController.melodyCollision.IsGrounded())
         {

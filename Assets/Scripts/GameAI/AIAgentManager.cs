@@ -7,8 +7,9 @@
     using System.Collections.Generic;
     using Melody;
     using HarmonyQuest;
+    using GameManager;
 
-    public class AIAgentManager : MonoBehaviour
+    public class AIAgentManager : ManageableObject
     {
         public bool useFlocking = true;
         public bool useObstacleRepulsion = true;
@@ -33,7 +34,7 @@
         private float obstacleAvoidanceTimer = 0.0f;
 
         // Start is called before the first frame update
-        void Start()
+        public override void OnStart()
         {
             PopulateAgentsList();
             PopulateObstaclesList();
@@ -63,7 +64,7 @@
         }
 
         // Update is called once per frame
-        void Update()
+        public override void OnUpdate()
         {
             livingAgents = GetLivingAgents();
             aiFlockingHandler.SetLivingAgents(agents);
@@ -101,7 +102,7 @@
             AgentsUpdate();
         }
 
-        void FixedUpdate()
+        public override void OnFixedUpdate()
         {
             AgentsFixedUpdate();
         }

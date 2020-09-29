@@ -1,12 +1,13 @@
 ﻿namespace HarmonyQuest.DynamicCamera
 {
+    using GameManager;
     using UnityEngine;
 
-    public class CameraPointOfInterest : MonoBehaviour
+    public class CameraPointOfInterest : ManageableObject
     {
         private int playerLayer;
 
-        void Awake()
+        public override void OnAwake()
         {
             playerLayer = LayerMask.NameToLayer("Player");
         }

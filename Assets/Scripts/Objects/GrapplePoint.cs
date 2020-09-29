@@ -2,8 +2,9 @@
 {
     using UnityEngine;
     using HarmonyQuest.Audio;
+    using GameManager;
 
-    public class GrapplePoint : MonoBehaviour
+    public class GrapplePoint : ManageableObject
     {
         public Transform visibleDestination;
         public Transform actualDestination;
@@ -22,7 +23,7 @@
 
         FmodFacade.OnBeatAccuracy onBeatState, prevOnBeatState;
 
-        public void Update()
+        public override void OnUpdate()
         {
             if (curCooldown > 0f)
             {

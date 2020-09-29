@@ -2,8 +2,9 @@
 {
     using UnityEngine;
     using Rewired;
+    using GameManager;
 
-    public class RewiredPlayerInputManager : MonoBehaviour, IPlayerInputManager
+    public class RewiredPlayerInputManager : ManageableObject, IPlayerInputManager
     {
         // The Rewired player id. Currently, this will always be 0.
         public int playerId = 0;
@@ -15,7 +16,7 @@
         // The Rewired Player
         private Player player;
 
-        void Awake()
+        public override void OnAwake()
         {
             Instantiate(RewiredManager);
 
