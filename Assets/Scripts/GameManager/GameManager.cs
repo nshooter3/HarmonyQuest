@@ -57,13 +57,13 @@
             //TODO: Use actual camera controller later.
             objectManager.AddManageableObject(TempCamera.GetComponent<TestCamera>());
 
-            objectManager.FindManageableObjectsInScene<MelodyGroundedChecker>();
             objectManager.FindManageableObjectsInScene<CollisionWrapper>();
             objectManager.FindManageableObjectsInScene<DamageHitbox>();
             objectManager.FindManageableObjectsInScene<PuzzleZoneTrigger>();
             objectManager.FindManageableObjectsInScene<GrapplePoint>();
             objectManager.FindManageableObjectsInScene<PushableBoxTrigger>();
             objectManager.FindManageableObjectsInScene<CameraPointOfInterest>();
+            objectManager.FindManageableObjectsInScene<MelodySpawnPoint>();
 
             //Art
             objectManager.FindManageableObjectsInScene<VerletConstraint>();

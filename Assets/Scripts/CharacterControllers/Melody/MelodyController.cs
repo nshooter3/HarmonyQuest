@@ -58,6 +58,8 @@
         public MelodyGrappleHook melodyGrappleHook;
         //MelodySound is actually a monobehavior, so it will be assigned via drag reference.
         public MelodySound melodySound;
+        //Debug object to help tell whether or not melody is on the ground.
+        public MelodyGroundedChecker melodyGroundedChecker;
 
         //Drag References
         public GameObject melodyRenderer;
@@ -84,6 +86,7 @@
             melodyLockOn = new MelodyLockOn(this);
             melodyGrappleHook = new MelodyGrappleHook(this);
             melodySound.Init(this, ServiceLocator.instance.GetAIAgentManager());
+            melodyGroundedChecker.OnStart();
         }
 
         // Update is called once per frame
@@ -97,6 +100,7 @@
             melodyGrappleHook.OnUpdate(Time.deltaTime);
             StateMachine.OnUpdate(Time.deltaTime);
             melodySound.OnUpdate();
+            melodyGroundedChecker.OnUpdate();
             currentStateName = StateMachine.GetCurrentStateName();
             //Debug.Log("State: " + currentStateName);
         }
