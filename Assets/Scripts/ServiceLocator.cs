@@ -6,6 +6,7 @@
     using Melody;
     using UnityEngine;
     using UI;
+    using GameManager;
 
     ///<summary>
     ///The ServiceLocator is a Singleton that points scripts to whatever is managing each of the game's major subsystems.
@@ -13,7 +14,7 @@
     ///GameObject, that manager will be used. Otherwise, the ServiceManager will do nothing, unless a manager for that subsystem is requested,
     ///in which case, the ServiceLocator will try to start one up. Useful for testing!
     ///</summary>
-    public class ServiceLocator : MonoBehaviour
+    public class ServiceLocator : ManageableObject
     {
         private static ServiceLocator inst;
         public static ServiceLocator instance
@@ -43,7 +44,7 @@
         //TODO: Make this use Mitch's camera.
         Camera cam;
 
-        void Awake()
+        public override void OnAwake()
         {
             if (inst == null)
             {
@@ -57,12 +58,9 @@
             aiAgentManager = FindObjectOfType<AIAgentManager>();
             uiManager = FindObjectOfType<UIManager>();
             cam = FindObjectOfType<Camera>();
-        }
-
-        void Start()
-        {
             //Check to see to see what Managers have been attached to this GameObject.
             InputManager = GetComponent(typeof(IPlayerInputManager)) as IPlayerInputManager;
+            InputManager.OnAwake();
         }
 
         public IPlayerInputManager GetInputManager()

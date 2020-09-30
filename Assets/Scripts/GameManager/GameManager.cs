@@ -3,9 +3,11 @@
     using Effects.Particles;
     using GameAI;
     using GamePhysics;
+    using HarmonyQuest;
     using HarmonyQuest.Audio;
     using HarmonyQuest.DynamicCamera;
     using HarmonyQuest.Input.Implementation;
+    using Manager;
     using Melody;
     using Objects;
     using System.Collections.Generic;
@@ -14,83 +16,108 @@
 
     public class GameManager : MonoBehaviour
     {
-        ObjectManager gameplayObjectManager = new ObjectManager();
-        ObjectManager artObjectManager = new ObjectManager();
-        ObjectManager uiObjectManager = new ObjectManager();
-        ObjectManager audioObjectManager = new ObjectManager();
+        //References to the prefabs we're gonna load into these objects later.
+        public GameObject MelodyController;
+        public GameObject AIAgentManager;
+        public GameObject PhysicsObjectManager;
+        public GameObject TempCamera;
+        public GameObject DefaultCanvas;
+        public GameObject FmodHandler;
+        public GameObject ServiceLocator;
 
         //The master list of all the objects that need to be updated, in order.
-        List<ManageableObject> updateQueue = new List<ManageableObject>();
+        private ObjectManager objectManager = new ObjectManager();
 
-        void PopulateUpdateQueue()
+        Transform melodySpawnPoint;
+
+        private void FindMelodySpawnPoint()
         {
-            gameplayObjectManager.FindManageableObjectsInScene<RewiredPlayerInputManager>();
-            gameplayObjectManager.FindManageableObjectsInScene<MelodyController>();
-            gameplayObjectManager.FindManageableObjectsInScene<AIAgentManager>();
-            gameplayObjectManager.FindManageableObjectsInScene<PhysicsObjectManager>();
-            gameplayObjectManager.FindManageableObjectsInScene<CameraController>();
-            gameplayObjectManager.FindManageableObjectsInScene<MelodyGroundedChecker>();
-            gameplayObjectManager.FindManageableObjectsInScene<CollisionWrapper>();
-            gameplayObjectManager.FindManageableObjectsInScene<DamageHitbox>();
-            gameplayObjectManager.FindManageableObjectsInScene<PuzzleZoneTrigger>();
-            gameplayObjectManager.FindManageableObjectsInScene<GrapplePoint>();
-            gameplayObjectManager.FindManageableObjectsInScene<PushableBoxTrigger>();
-            gameplayObjectManager.FindManageableObjectsInScene<CameraPointOfInterest>();
+            melodySpawnPoint = FindObjectOfType<MelodySpawnPoint>().transform;
+        }
 
-            artObjectManager.FindManageableObjectsInScene<VerletConstraint>();
-            artObjectManager.FindManageableObjectsInScene<SetPlayerVelocity>();
-            artObjectManager.FindManageableObjectsInScene<ClothPoints>();
-            artObjectManager.FindManageableObjectsInScene<BillboardSprite>();
-            artObjectManager.FindManageableObjectsInScene<TestScarf>();
-            artObjectManager.FindManageableObjectsInScene<DynamicParticleSystem>();
+        private void PopulateUpdateQueue()
+        {
+            //Initialize all our one-of manageable objects that need to be in every scene.
+            ServiceLocator = Instantiate(ServiceLocator);
 
-            uiObjectManager.FindManageableObjectsInScene<UITracker>();
-            uiObjectManager.FindManageableObjectsInScene<UIMeter>();
-            uiObjectManager.FindManageableObjectsInScene<AgentHealthBarsPool>();
+            FindMelodySpawnPoint();
+            MelodyController = Instantiate(MelodyController, melodySpawnPoint.position, melodySpawnPoint.rotation);
 
-            audioObjectManager.FindManageableObjectsInScene<FmodFacade>();
-            audioObjectManager.FindManageableObjectsInScene<FmodMusicHandler>();
-            audioObjectManager.FindManageableObjectsInScene<FmodOnBeatAccuracyChecker>();
-            audioObjectManager.FindManageableObjectsInScene<FmodEventHandler>();
-            audioObjectManager.FindManageableObjectsInScene<FmodChordInterpreter>();
+            AIAgentManager = Instantiate(AIAgentManager);
+            PhysicsObjectManager = Instantiate(PhysicsObjectManager);
+            TempCamera = Instantiate(TempCamera);
+            DefaultCanvas = Instantiate(DefaultCanvas);
+            FmodHandler = Instantiate(FmodHandler);
+            ServiceLocator = Instantiate(ServiceLocator);
 
-            //Add Object Managers to the updateQueue after the null check since they can be incorrectly filtered out for some reason.
-            //They perform their own null check anyway.
-            updateQueue.Add(gameplayObjectManager);
-            updateQueue.Add(artObjectManager);
-            updateQueue.Add(uiObjectManager);
-            updateQueue.Add(audioObjectManager);
+            //Gameplay
+            objectManager.AddManageableObject(MelodyController.GetComponent<MelodyController>());
+            objectManager.AddManageableObject(AIAgentManager.GetComponent<AIAgentManager>());
+            objectManager.AddManageableObject(PhysicsObjectManager.GetComponent<PhysicsObjectManager>());
+            //TODO: Use actual camera controller later.
+            objectManager.AddManageableObject(TempCamera.GetComponent<TestCamera>());
+
+            objectManager.FindManageableObjectsInScene<MelodyGroundedChecker>();
+            objectManager.FindManageableObjectsInScene<CollisionWrapper>();
+            objectManager.FindManageableObjectsInScene<DamageHitbox>();
+            objectManager.FindManageableObjectsInScene<PuzzleZoneTrigger>();
+            objectManager.FindManageableObjectsInScene<GrapplePoint>();
+            objectManager.FindManageableObjectsInScene<PushableBoxTrigger>();
+            objectManager.FindManageableObjectsInScene<CameraPointOfInterest>();
+
+            //Art
+            objectManager.FindManageableObjectsInScene<VerletConstraint>();
+            objectManager.FindManageableObjectsInScene<SetPlayerVelocity>();
+            objectManager.FindManageableObjectsInScene<ClothPoints>();
+            objectManager.FindManageableObjectsInScene<BillboardSprite>();
+            objectManager.FindManageableObjectsInScene<TestScarf>();
+            objectManager.FindManageableObjectsInScene<DynamicParticleSystem>();
+
+            //UI
+            objectManager.FindManageableObjectsInScene<UITracker>();
+            objectManager.FindManageableObjectsInScene<UIMeter>();
+            objectManager.FindManageableObjectsInScene<AgentHealthBarsPool>();
+
+            //Audio
+            objectManager.AddManageableObject(FmodHandler.GetComponent<FmodFacade>());
+            objectManager.AddManageableObject(FmodHandler.GetComponent<FmodMusicHandler>());
+            objectManager.AddManageableObject(FmodHandler.GetComponent<FmodOnBeatAccuracyChecker>());
+            objectManager.AddManageableObject(FmodHandler.GetComponent<FmodChordInterpreter>());
+            objectManager.FindManageableObjectsInScene<FmodEventHandler>();
+
+            //Misc
+            objectManager.AddManageableObject(ServiceLocator.GetComponent<ServiceLocator>());
         }
 
         void Awake()
         {
             PopulateUpdateQueue();
-            updateQueue.ForEach(p => p.OnAwake());
+            objectManager.OnAwake();
         }
 
         void Start()
         {
-            updateQueue.ForEach(p => p.OnStart());
+            objectManager.OnStart();
         }
         
         void Update()
         {
-            updateQueue.ForEach(p => p.OnUpdate());
+            objectManager.OnUpdate();
         }
 
         void LateUpdate()
         {
-            updateQueue.ForEach(p => p.OnLateUpdate());
+            objectManager.OnLateUpdate();
         }
 
         void FixedUpdate()
         {
-            updateQueue.ForEach(p => p.OnFixedUpdate());
+            objectManager.OnFixedUpdate();
         }
 
         void Abort()
         {
-            updateQueue.ForEach(p => p.OnAbort());
+            objectManager.OnAbort();
         }
     }
 }

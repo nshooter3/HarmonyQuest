@@ -19,6 +19,14 @@
             objects = objects.Where(item => item != null).ToList();
         }
 
+        public void AddManageableObject(ManageableObject obj)
+        {
+            if (obj != null)
+            {
+                objects.Add(new List<ManageableObject> { obj });
+            }
+        }
+
         public override void OnAwake()
         {
             objects.ForEach(p => p.ForEach(q => q.OnAwake()));

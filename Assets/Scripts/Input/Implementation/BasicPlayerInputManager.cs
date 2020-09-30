@@ -4,6 +4,8 @@
 
     public class BasicPlayerInputManager : MonoBehaviour, IPlayerInputManager
     {
+        public void OnAwake() { }
+
         public bool AttackButtonDown()
         {
             return Input.GetKey(KeyCode.X);

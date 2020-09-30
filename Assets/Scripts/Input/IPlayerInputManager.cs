@@ -23,5 +23,7 @@
         bool LockonButtonDown();
 
         bool GrappleButtonDown();
+
+        void OnAwake();
     }
 }
