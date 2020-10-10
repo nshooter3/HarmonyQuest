@@ -51,6 +51,9 @@
             //ServiceLocator. Used to get references to other objects in the scene.
             objectManager.AddManageableObject(ServiceLocator.GetComponent<ServiceLocator>());
 
+            //UI
+            objectManager.AddManageableObject(DefaultCanvas.GetComponent<UIManager>());
+
             //Gameplay
             objectManager.AddManageableObject(MelodyController.GetComponent<MelodyController>());
             objectManager.AddManageableObject(AIAgentManager.GetComponent<AIAgentManager>());
@@ -73,11 +76,6 @@
             objectManager.FindManageableObjectsInScene<BillboardSprite>();
             objectManager.FindManageableObjectsInScene<TestScarf>();
             objectManager.FindManageableObjectsInScene<DynamicParticleSystem>();
-
-            //UI
-            objectManager.FindManageableObjectsInScene<UITracker>();
-            objectManager.FindManageableObjectsInScene<UIMeter>();
-            objectManager.FindManageableObjectsInScene<AgentHealthBarsPool>();
 
             //Audio
             objectManager.AddManageableObject(FmodHandler.GetComponent<FmodFacade>());

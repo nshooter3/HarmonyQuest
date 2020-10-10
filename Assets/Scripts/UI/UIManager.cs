@@ -1,9 +1,9 @@
 ﻿namespace UI
 {
-    using UnityEngine;
+    using GameManager;
     using UnityEngine.UI;
 
-    public class UIManager : MonoBehaviour
+    public class UIManager : ManageableObject
     {
         public UITracker lockOnReticule;
 
@@ -17,6 +17,16 @@
 
         public UIMeter playerHealth;
 
-        //TODO: Other UI functions, yeah!
+        public override void OnAwake()
+        {
+            playerHealth.OnAwake();
+            agentHealthBarsPool.OnAwake();
+        }
+
+        public override void OnUpdate()
+        {
+            playerHealth.OnUpdate();
+            agentHealthBarsPool.OnUpdate();
+        }
     }
 }

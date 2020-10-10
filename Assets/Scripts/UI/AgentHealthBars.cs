@@ -17,6 +17,25 @@
         private int numHealthBars;
         private int lastHealthBarIndex;
 
+        public void OnAwake()
+        {
+            for (int i = 0; i < meters.Length; i++)
+            {
+                meters[i].OnAwake();
+            }
+            tracker.OnAwake();
+        }
+
+        // Update is called once per frame
+        public void OnUpdate()
+        {
+            for (int i = 0; i < meters.Length; i++)
+            {
+                meters[i].OnUpdate();
+            }
+            tracker.OnUpdate();
+        }
+
         public void SetNumHealthBars(int numHealthBars)
         {
             this.numHealthBars = numHealthBars;

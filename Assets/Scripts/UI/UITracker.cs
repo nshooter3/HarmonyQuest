@@ -2,16 +2,15 @@
 {
     using HarmonyQuest;
     using UnityEngine;
-    using GameManager;
 
-    public class UITracker : ManageableObject
+    public class UITracker : MonoBehaviour
     {
-        Transform target;
+        public Transform target;
         float yOffset;
 
         Camera cam;
 
-        public override void OnStart()
+        public void OnAwake()
         {
             cam = ServiceLocator.instance.GetCamera();
         }
@@ -29,7 +28,7 @@
         }
 
         // Update is called once per frame
-        public override void OnUpdate()
+        public void OnUpdate()
         {
             TrackTarget();
         }

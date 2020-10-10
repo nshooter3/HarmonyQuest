@@ -10,7 +10,7 @@ namespace Melody.States
 
         protected override void Enter()
         {
-            Debug.Log("Successful counter!");
+            //Debug.Log("Successful counter!");
             melodyController.melodyHealth.SetPostSuccessfulCounterTimer();
             cooldownTimer = melodyController.config.SuccessfulCounterCooldownTime;
             melodyController.melodySound.CounterSuccess();
@@ -23,7 +23,7 @@ namespace Melody.States
             cooldownTimer -= time;
             if (cooldownTimer <= 0)
             {
-                Debug.Log("Exit successful counter state");
+                //Debug.Log("Exit successful counter state");
                 nextState = new IdleState(melodyController);
                 ableToExit = true;
             }

@@ -2,9 +2,8 @@
 {
     using UnityEngine;
     using UnityEngine.UI;
-    using GameManager;
 
-    public class UIMeter : ManageableObject
+    public class UIMeter : MonoBehaviour
     {
         /// <summary>
         /// Background that sits behind delayedDropdown and meterValue.
@@ -35,13 +34,13 @@
         private float delayedDropdownMaxTimer = 1.0f;
 
         // Start is called before the first frame update
-        public override void OnStart()
+        public void OnAwake()
         {
             delayedDropdown.enabled = usesDelayedDropdown;
         }
 
         // Update is called once per frame
-        public override void OnUpdate()
+        public void OnUpdate()
         {
             if (usesDelayedDropdown)
             {
