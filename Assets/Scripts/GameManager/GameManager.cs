@@ -6,11 +6,9 @@
     using HarmonyQuest;
     using HarmonyQuest.Audio;
     using HarmonyQuest.DynamicCamera;
-    using HarmonyQuest.Input.Implementation;
     using Manager;
     using Melody;
     using Objects;
-    using System.Collections.Generic;
     using UI;
     using UnityEngine;
 
@@ -50,6 +48,9 @@
             FmodHandler = Instantiate(FmodHandler);
             ServiceLocator = Instantiate(ServiceLocator);
 
+            //ServiceLocator. Used to get references to other objects in the scene.
+            objectManager.AddManageableObject(ServiceLocator.GetComponent<ServiceLocator>());
+
             //Gameplay
             objectManager.AddManageableObject(MelodyController.GetComponent<MelodyController>());
             objectManager.AddManageableObject(AIAgentManager.GetComponent<AIAgentManager>());
@@ -84,9 +85,6 @@
             objectManager.AddManageableObject(FmodHandler.GetComponent<FmodOnBeatAccuracyChecker>());
             objectManager.AddManageableObject(FmodHandler.GetComponent<FmodChordInterpreter>());
             objectManager.FindManageableObjectsInScene<FmodEventHandler>();
-
-            //Misc
-            objectManager.AddManageableObject(ServiceLocator.GetComponent<ServiceLocator>());
         }
 
         void Awake()
