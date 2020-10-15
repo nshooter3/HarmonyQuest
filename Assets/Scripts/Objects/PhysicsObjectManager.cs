@@ -15,14 +15,17 @@
         // Update is called once per frame
         public override void OnFixedUpdate()
         {
-            foreach (PhysicsObject physicsObject in physicsObjects)
+            if (!PauseManager.GetPaused())
             {
-                physicsObject.ObjectFixedUpdate();
-            }
+                foreach (PhysicsObject physicsObject in physicsObjects)
+                {
+                    physicsObject.ObjectFixedUpdate();
+                }
 
-            foreach (PhysicsObject physicsObject in physicsObjects)
-            {
-                physicsObject.ObjectLateFixedUpdate();
+                foreach (PhysicsObject physicsObject in physicsObjects)
+                {
+                    physicsObject.ObjectLateFixedUpdate();
+                }
             }
         }
     }

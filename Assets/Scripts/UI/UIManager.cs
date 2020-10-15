@@ -27,10 +27,13 @@
 
         public override void OnUpdate()
         {
-            playerHealth.OnUpdate();
-            lockOnReticule.OnUpdate();
-            grappleReticule.OnUpdate();
-            agentHealthBarsPool.OnUpdate();
+            if (!PauseManager.GetPaused())
+            {
+                playerHealth.OnUpdate();
+                lockOnReticule.OnUpdate();
+                grappleReticule.OnUpdate();
+                agentHealthBarsPool.OnUpdate();
+            }
         }
     }
 }

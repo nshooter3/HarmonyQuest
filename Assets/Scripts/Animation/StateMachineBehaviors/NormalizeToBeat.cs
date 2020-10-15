@@ -53,21 +53,28 @@ namespace HarmonyQuest.Animation.StateMachineBehaviours
         // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
         override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            if (FmodFacade.instance.GetNormalizedBeatProgress() > LastBeatProgressUpdate)
+            if (!PauseManager.GetPaused())
             {
-                BeatsCounter += FmodFacade.instance.GetNormalizedBeatProgress() - LastBeatProgressUpdate;
+                if (FmodFacade.instance.GetNormalizedBeatProgress() > LastBeatProgressUpdate)
+                {
+                    BeatsCounter += FmodFacade.instance.GetNormalizedBeatProgress() - LastBeatProgressUpdate;
+                }
+                else
+                {
+                    BeatsCounter += 1f - LastBeatProgressUpdate + FmodFacade.instance.GetNormalizedBeatProgress();
+                }
+                LastBeatProgressUpdate = FmodFacade.instance.GetNormalizedBeatProgress();
+                BeatsCounter = Mathf.Clamp(BeatsCounter, 0, TargetBeats);
+                animator.Play(0, -1, BeatsCounter / TargetBeats);
+
+                if (BeatsCounter == TargetBeats)
+                {
+                    BeatsCounter = 0;
+                }
             }
             else
             {
-                BeatsCounter += 1f - LastBeatProgressUpdate + FmodFacade.instance.GetNormalizedBeatProgress();
-            }
-            LastBeatProgressUpdate = FmodFacade.instance.GetNormalizedBeatProgress();
-            BeatsCounter = Mathf.Clamp(BeatsCounter, 0, TargetBeats);
-            animator.Play(0, -1, BeatsCounter / TargetBeats);
-
-            if (BeatsCounter == TargetBeats)
-            {
-                BeatsCounter = 0;
+                animator.enabled = false;
             }
         }
 
