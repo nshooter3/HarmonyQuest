@@ -105,7 +105,7 @@
         public void LaunchEntity(Vector3 direction, float yForce, float launchSpeed, float rotationSpeed)
         {
             desiredVelocity = direction.normalized;
-            desiredVelocity = new Vector3(velocity.x, yForce, velocity.z);
+            desiredVelocity = new Vector3(desiredVelocity.x, yForce, desiredVelocity.z);
 
             rb.angularVelocity = new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)).normalized * rotationSpeed;
 

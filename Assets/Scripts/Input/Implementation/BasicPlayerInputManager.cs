@@ -78,5 +78,10 @@
         {
             return Input.GetKey(KeyCode.LeftShift);
         }
+
+        public bool PauseButtonDown()
+        {
+            return Input.GetKey(KeyCode.P);
+        }
     }
 }

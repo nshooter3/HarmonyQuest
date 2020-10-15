@@ -7,13 +7,13 @@
     {
         private float launchYForceLower = 0.7f;
         private float launchYForceUpper = 1.2f;
-        private float launchSpeedLower = 10.0f;
-        private float launchSpeedUpper = 18.0f;
+        private float launchSpeedLower = 14.0f;
+        private float launchSpeedUpper = 22.0f;
         private float launchRotationSpeedLower = 50.0f;
         private float launchRotationSpeedUpper = 100.0f;
 
         private float deactivateTimer = 0.0f;
-        private float deactivateMaxTimer = 3.0f;
+        private float deactivateMaxTimer = 1.0f;
 
         public override void Init(AIStateUpdateData updateData)
         {

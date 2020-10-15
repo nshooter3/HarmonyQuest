@@ -20,12 +20,16 @@
         public override void OnAwake()
         {
             playerHealth.OnAwake();
+            lockOnReticule.OnAwake();
+            grappleReticule.OnAwake();
             agentHealthBarsPool.OnAwake();
         }
 
         public override void OnUpdate()
         {
             playerHealth.OnUpdate();
+            lockOnReticule.OnUpdate();
+            grappleReticule.OnUpdate();
             agentHealthBarsPool.OnUpdate();
         }
     }

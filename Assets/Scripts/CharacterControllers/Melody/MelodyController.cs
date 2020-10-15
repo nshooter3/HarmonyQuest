@@ -87,6 +87,9 @@
             melodyGrappleHook = new MelodyGrappleHook(this);
             melodySound.Init(this, ServiceLocator.instance.GetAIAgentManager());
             melodyGroundedChecker.OnStart();
+
+            PauseManager.AssignFunctionToOnPauseDelegate(OnPause);
+            PauseManager.AssignFunctionToOnUnpauseDelegate(OnUnpause);
         }
 
         // Update is called once per frame
@@ -119,17 +122,25 @@
 
             rightStickMove.Set(input.GetHorizontalMovement2(), input.GetVerticalMovement2());
 
-            if (input.LockonButtonDown())
+            if (input.PauseButtonDown())
             {
-                melodyLockOn.LockonButtonPressed();
+                PauseManager.TogglePaused(true);
+                PlayerControllerStateManager.instance.SetState(PlayerControllerStateManager.ControllerState.Pause);
             }
-            else if (melodyLockOn.HasLockonTarget() == true && rightStickMove.magnitude > 0.5f)
+            else
             {
-                melodyLockOn.ChangeLockonTargetRightStick(rightStickMove);
-            }
-            if (rightStickMove.magnitude <= 0.25f)
-            {
-                melodyLockOn.RightStickResetToNeutral();
+                if (input.LockonButtonDown())
+                {
+                    melodyLockOn.LockonButtonPressed();
+                }
+                else if (melodyLockOn.HasLockonTarget() == true && rightStickMove.magnitude > 0.5f)
+                {
+                    melodyLockOn.ChangeLockonTargetRightStick(rightStickMove);
+                }
+                if (rightStickMove.magnitude <= 0.25f)
+                {
+                    melodyLockOn.RightStickResetToNeutral();
+                }
             }
         }
 
@@ -181,6 +192,16 @@
         public Vector3 GetCenter()
         {
             return center.position;
+        }
+
+        public void OnPause()
+        {
+            animator.enabled = false;
+        }
+
+        public void OnUnpause()
+        {
+            animator.enabled = true;
         }
     }
 }

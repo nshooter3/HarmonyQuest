@@ -42,6 +42,9 @@
             }
             fmodDictionary = new FmodDictionary();
             fmodEventPool = new FmodEventPool();
+
+            PauseManager.AssignFunctionToOnPauseDelegate(OnPause);
+            PauseManager.AssignFunctionToOnUnpauseDelegate(OnUnpause);
         }
 
         /// <summary>
@@ -168,6 +171,24 @@
             fmodEvent.setUserData(IntPtr.Zero);
             fmodEvent.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
             fmodEvent.release();
+        }
+
+        /// <summary>
+        /// Pauses the passed in fmod event
+        /// </summary>
+        /// <param name="fmodEvent"> The name of the event we want to pause </param>
+        public void PauseFmodEvent(FMOD.Studio.EventInstance fmodEvent)
+        {
+            fmodEvent.setPaused(true);
+        }
+
+        /// <summary>
+        /// Resumes the passed in fmod event
+        /// </summary>
+        /// <param name="fmodEvent"> The name of the event we want to resume </param>
+        public void ResumeFmodEvent(FMOD.Studio.EventInstance fmodEvent)
+        {
+            fmodEvent.setPaused(false);
         }
 
         /// <summary>
@@ -327,6 +348,18 @@
         public List<string> GetFmodSFXEventNames()
         {
             return fmodDictionary.fmodSFXEventDictionary.Keys.ToList();
+        }
+
+        public void OnPause()
+        {
+            fmodEventPool.PauseAll();
+            FmodMusicHandler.instance.PauseAll();
+        }
+
+        public void OnUnpause()
+        {
+            fmodEventPool.ResumeAll();
+            FmodMusicHandler.instance.ResumeAll();
         }
 
         /*public void GetDSPData()

@@ -1,9 +1,10 @@
 ﻿namespace Melody
 {
+    using Animation;
     using System;
     using UnityEngine;
 
-    public class MelodyAnimator
+    public class MelodyAnimator : ObjectAnimator
     {
         private MelodyController controller;
 
@@ -32,6 +33,7 @@
             {
                 animationHashes[i] = Animator.StringToHash(names[i]);
             }
+            animator = controller.Animator;
         }
 
         public void SetWalkRun(float percentageOfMax)

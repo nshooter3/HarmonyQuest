@@ -24,6 +24,8 @@
 
         bool GrappleButtonDown();
 
+        bool PauseButtonDown();
+
         void OnAwake();
     }
 }

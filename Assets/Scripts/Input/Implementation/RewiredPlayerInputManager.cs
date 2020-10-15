@@ -77,5 +77,10 @@
         {
             return player.GetButtonDown("Grapple");
         }
+
+        public bool PauseButtonDown()
+        {
+            return player.GetButtonDown("Pause");
+        }
     }
 }

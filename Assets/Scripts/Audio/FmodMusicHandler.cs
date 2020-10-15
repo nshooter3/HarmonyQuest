@@ -166,6 +166,18 @@
             }
         }
 
+        public void PauseAll()
+        {
+            FmodFacade.instance.PauseFmodEvent(musicEvent);
+            FmodFacade.instance.PauseFmodEvent(ambienceEvent);
+        }
+
+        public void ResumeAll()
+        {
+            FmodFacade.instance.ResumeFmodEvent(musicEvent);
+            FmodFacade.instance.ResumeFmodEvent(ambienceEvent);
+        }
+
         private void OnDestroy()
         {
             StopMusic();

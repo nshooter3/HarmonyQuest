@@ -21,7 +21,11 @@
         public GameObject TempCamera;
         public GameObject DefaultCanvas;
         public GameObject FmodHandler;
+        public GameObject PlayerControllerStateManager;
         public GameObject ServiceLocator;
+
+        //Manager classes that don't have monobehaviors
+        public PhysicsManager physicsManager;
 
         //The master list of all the objects that need to be updated, in order.
         private ObjectManager objectManager = new ObjectManager();
@@ -46,6 +50,7 @@
             TempCamera = Instantiate(TempCamera);
             DefaultCanvas = Instantiate(DefaultCanvas);
             FmodHandler = Instantiate(FmodHandler);
+            PlayerControllerStateManager = Instantiate(PlayerControllerStateManager);
             ServiceLocator = Instantiate(ServiceLocator);
 
             //ServiceLocator. Used to get references to other objects in the scene.
@@ -55,7 +60,7 @@
             objectManager.AddManageableObject(DefaultCanvas.GetComponent<UIManager>());
 
             //Gameplay
-            objectManager.AddManageableObject(MelodyController.GetComponent<MelodyController>());
+            objectManager.AddManageableObject(PlayerControllerStateManager.GetComponent<PlayerControllerStateManager>());
             objectManager.AddManageableObject(AIAgentManager.GetComponent<AIAgentManager>());
             objectManager.AddManageableObject(PhysicsObjectManager.GetComponent<PhysicsObjectManager>());
             //TODO: Use actual camera controller later.
@@ -85,8 +90,14 @@
             objectManager.FindManageableObjectsInScene<FmodEventHandler>();
         }
 
+        public void InitManagerClasses()
+        {
+            physicsManager = new PhysicsManager();
+        }
+
         void Awake()
         {
+            InitManagerClasses();
             PopulateUpdateQueue();
             objectManager.OnAwake();
         }

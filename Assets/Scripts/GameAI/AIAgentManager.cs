@@ -42,6 +42,9 @@
             melodyInfo = ServiceLocator.instance.GetMelodyInfo();
             aiAttackRequestHandler.Init(melodyInfo);
             aiAgentsUtil.Init(this);
+
+            PauseManager.AssignFunctionToOnPauseDelegate(OnPause);
+            PauseManager.AssignFunctionToOnUnpauseDelegate(OnUnpause);
         }
 
         public void PopulateAgentsList()
@@ -66,45 +69,51 @@
         // Update is called once per frame
         public override void OnUpdate()
         {
-            livingAgents = GetLivingAgents();
-            aiFlockingHandler.SetLivingAgents(agents);
-            if (useFlocking)
+            if (!PauseManager.GetPaused())
             {
-                if (collisionAvoidanceTimer > 0)
+                livingAgents = GetLivingAgents();
+                aiFlockingHandler.SetLivingAgents(agents);
+                if (useFlocking)
                 {
-                    collisionAvoidanceTimer -= Time.deltaTime;
+                    if (collisionAvoidanceTimer > 0)
+                    {
+                        collisionAvoidanceTimer -= Time.deltaTime;
+                    }
+                    else
+                    {
+                        collisionAvoidanceTimer = NavigatorSettings.collisionAvoidanceUpdateRate;
+                        aiFlockingHandler.SetAgentCollisionAvoidanceForces();
+                    }
                 }
-                else
+                if (useObstacleRepulsion)
                 {
-                    collisionAvoidanceTimer = NavigatorSettings.collisionAvoidanceUpdateRate;
-                    aiFlockingHandler.SetAgentCollisionAvoidanceForces();
+                    if (obstacleAvoidanceTimer > 0)
+                    {
+                        obstacleAvoidanceTimer -= Time.deltaTime;
+                    }
+                    else
+                    {
+                        obstacleAvoidanceTimer = NavigatorSettings.obstacleAvoidanceUpdateRate;
+                        aiFlockingHandler.SetAgentObstacleAvoidanceForces(aiObstacles);
+                    }
                 }
-            }
-            if (useObstacleRepulsion)
-            {
-                if (obstacleAvoidanceTimer > 0)
-                {
-                    obstacleAvoidanceTimer -= Time.deltaTime;
-                }
-                else
-                {
-                    obstacleAvoidanceTimer = NavigatorSettings.obstacleAvoidanceUpdateRate;
-                    aiFlockingHandler.SetAgentObstacleAvoidanceForces(aiObstacles);
-                }
-            }
 
-            if (aiAttackRequestHandler.AgentIsCurrentlyAttacking(livingAgents) == false)
-            {
-                aiAttackRequestHandler.GrantAttackPermission(aiAttackRequestHandler.GetAgentsRequestingAttackPermission(livingAgents));
-                aiAttackRequestHandler.ResetAttackPermissionRequests(livingAgents);
-            }
+                if (aiAttackRequestHandler.AgentIsCurrentlyAttacking(livingAgents) == false)
+                {
+                    aiAttackRequestHandler.GrantAttackPermission(aiAttackRequestHandler.GetAgentsRequestingAttackPermission(livingAgents));
+                    aiAttackRequestHandler.ResetAttackPermissionRequests(livingAgents);
+                }
 
-            AgentsUpdate();
+                AgentsUpdate();
+            }
         }
 
         public override void OnFixedUpdate()
         {
-            AgentsFixedUpdate();
+            if (!PauseManager.GetPaused())
+            {
+                AgentsFixedUpdate();
+            }
         }
 
         private void AgentsUpdate()
@@ -131,35 +140,23 @@
 
         private void AgentsFixedUpdate()
         {
-            foreach (AIAgent agent in agents)
-            {
-                agent.OnFixedUpdate();
-            }
+            agents.ForEach(p => p.OnFixedUpdate());
         }
 
         private void AllNavigatorsPathRefreshCheck()
         {
-            foreach (AIAgent agent in agents)
-            {
-                agent.NavigatorPathRefreshCheck();
-            }
+            agents.ForEach(p => p.NavigatorPathRefreshCheck());
         }
 
         private void AllNavigatorsWaypointIsObstructedCheck()
         {
-            foreach (AIAgent agent in agents)
-            {
-                agent.NavigatorsWaypointIsObstructedCheck();
-            }
+            agents.ForEach(p => p.NavigatorsWaypointIsObstructedCheck());
         }
 
         private void AgentsBeatUpdate()
         {
             aiAttackRequestHandler.DecrementNextAttackMinimumCooldownBeats();
-            foreach (AIAgent agent in agents)
-            {
-                agent.OnBeatUpdate();
-            }
+            agents.ForEach(p => p.OnBeatUpdate());
         }
 
         public List<AIAgent> GetLivingAgents()
@@ -183,6 +180,16 @@
         public bool IsInAttackCooldown()
         {
             return aiAttackRequestHandler.IsInAttackCooldown();
+        }
+
+        public void OnPause()
+        {
+            agents.ForEach(p => p.aiGameObject.ToggleAnimationActive(false));
+        }
+
+        public void OnUnpause()
+        {
+            agents.ForEach(p => p.aiGameObject.ToggleAnimationActive(true));
         }
     }
 }
