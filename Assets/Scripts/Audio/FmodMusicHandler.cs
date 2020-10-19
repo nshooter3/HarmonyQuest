@@ -8,18 +8,7 @@
 
     public class FmodMusicHandler : ManageableObject
     {
-        private static FmodMusicHandler inst;
-        public static FmodMusicHandler instance
-        {
-            get
-            {
-                if (inst == null)
-                {
-                    inst = GameObject.FindObjectOfType<FmodMusicHandler>();
-                }
-                return inst;
-            }
-        }
+        public static FmodMusicHandler instance;
 
         public string musicEventName;
         public float musicVolume;
@@ -74,11 +63,11 @@
 
         public override void OnAwake()
         {
-            if (inst == null)
+            if (instance == null)
             {
-                inst = this;
+                instance = this;
             }
-            else if(inst != this)
+            else if(instance != this)
             {
                 Destroy(gameObject);
             }

@@ -11,6 +11,8 @@
     using Objects;
     using UI;
     using UnityEngine;
+    using Saving;
+    using System.Collections.Generic;
 
     public class GameManager : MonoBehaviour
     {
@@ -30,11 +32,33 @@
         //The master list of all the objects that need to be updated, in order.
         private ObjectManager objectManager = new ObjectManager();
 
-        Transform melodySpawnPoint;
+        List<MelodySpawnPoint> melodySpawnPoints;
+        MelodySpawnPoint selectedSpawnPoint;
+
+        [SerializeField]
+        private int debugSaveFile = 1;
+
+        private string loadError;
 
         private void FindMelodySpawnPoint()
         {
-            melodySpawnPoint = FindObjectOfType<MelodySpawnPoint>().transform;
+            melodySpawnPoints = new List<MelodySpawnPoint>(FindObjectsOfType<MelodySpawnPoint>());
+            selectedSpawnPoint = melodySpawnPoints.Find(x => x.id == SaveDataManager.saveData.currentDoor);
+            if (selectedSpawnPoint == null)
+            {
+                selectedSpawnPoint = melodySpawnPoints[0];
+                Debug.LogWarning("No doors matched the id " + SaveDataManager.saveData.currentDoor + ", so spawning the player at first available door.");
+            }
+        }
+
+        //If we haven't entered a scene through the main menu, load a save file just in case.
+        private void LoadDebugFileIfNoFileSelected()
+        {
+            if (SaveDataManager.saveLoaded == false)
+            {
+                Debug.Log("LoadDebugFileIfNoFileSelected");
+                SaveDataManager.Load(debugSaveFile, out loadError);
+            }
         }
 
         private void PopulateUpdateQueue()
@@ -43,7 +67,7 @@
             ServiceLocator = Instantiate(ServiceLocator);
 
             FindMelodySpawnPoint();
-            MelodyController = Instantiate(MelodyController, melodySpawnPoint.position, melodySpawnPoint.rotation);
+            MelodyController = Instantiate(MelodyController, selectedSpawnPoint.transform.position, selectedSpawnPoint.transform.rotation);
 
             AIAgentManager = Instantiate(AIAgentManager);
             PhysicsObjectManager = Instantiate(PhysicsObjectManager);
@@ -66,6 +90,7 @@
             //TODO: Use actual camera controller later.
             objectManager.AddManageableObject(TempCamera.GetComponent<TestCamera>());
 
+            objectManager.FindManageableObjectsInScene<SceneTransitionTrigger>();
             objectManager.FindManageableObjectsInScene<CollisionWrapper>();
             objectManager.FindManageableObjectsInScene<DamageHitbox>();
             objectManager.FindManageableObjectsInScene<PuzzleZoneTrigger>();
@@ -97,6 +122,7 @@
 
         void Awake()
         {
+            LoadDebugFileIfNoFileSelected();
             InitManagerClasses();
             PopulateUpdateQueue();
             objectManager.OnAwake();

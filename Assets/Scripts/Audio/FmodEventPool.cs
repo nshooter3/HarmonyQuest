@@ -77,6 +77,20 @@
             return null;
         }
 
+        public void StopAll()
+        {
+            foreach (KeyValuePair<string, List<FmodEventPoolableObject>> eventPool in eventPools)
+            {
+                foreach (FmodEventPoolableObject fmodEvent in eventPool.Value)
+                {
+                    if (fmodEvent.isPlaying == true)
+                    {
+                        fmodEvent.Abort();
+                    }
+                }
+            }
+        }
+
         public void PauseAll()
         {
             foreach (KeyValuePair < string, List<FmodEventPoolableObject>> eventPool in eventPools)
