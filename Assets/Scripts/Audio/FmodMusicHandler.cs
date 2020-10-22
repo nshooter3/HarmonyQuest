@@ -10,14 +10,8 @@
     {
         public static FmodMusicHandler instance;
 
-        public string musicEventName;
-        public float musicVolume;
-
-        public string ambienceEventName;
-        public float ambienceVolume;
-
-        [SerializeField]
-        private bool startMusicOnAwake = false;
+        private string musicEventName;
+        private string ambienceEventName;
 
         [SerializeField]
         private bool memoryDebug = false;
@@ -71,28 +65,17 @@
             {
                 Destroy(gameObject);
             }
-        }
 
-        // Start is called before the first frame update
-        public override void OnStart()
-        {
             timelineInfo = new TimelineInfo();
             beatCallback = new FMOD.Studio.EVENT_CALLBACK(BeatEventCallback);
 
             // Pin the class that will store the data modified during the callback
             timelineHandle = GCHandle.Alloc(timelineInfo, GCHandleType.Pinned);
-
-            if (startMusicOnAwake)
-            {
-                StartMusic(musicEventName, musicVolume);
-                StartAmbience(ambienceEventName, ambienceVolume);
-            }
         }
 
         public void StartMusic(string name, float volume)
         {
             musicEventName = name;
-            musicVolume = volume;
 
             musicEvent = FmodFacade.instance.CreateFmodEventInstance(FmodFacade.instance.GetFmodMusicEventFromDictionary(name));
 
@@ -113,6 +96,7 @@
         {
             if (isMusicPlaying == true)
             {
+                musicEventName = "";
                 timelineHandle.Free();
                 FmodFacade.instance.StopFmodEvent(musicEvent);
                 isMusicPlaying = false;
@@ -130,7 +114,6 @@
         public void StartAmbience(string name, float volume)
         {
             ambienceEventName = name;
-            ambienceVolume = volume;
 
             ambienceEvent = FmodFacade.instance.CreateFmodEventInstance(FmodFacade.instance.GetFmodMusicEventFromDictionary(name));
 
@@ -142,6 +125,7 @@
         {
             if (isAmbiencePlaying == true)
             {
+                ambienceEventName = "";
                 FmodFacade.instance.StopFmodEvent(ambienceEvent);
                 isAmbiencePlaying = false;
             }
@@ -170,6 +154,16 @@
         private void OnDestroy()
         {
             StopMusic();
+        }
+
+        public string GetMusicEventName()
+        {
+            return musicEventName;
+        }
+
+        public string GetAmbienceEventName()
+        {
+            return ambienceEventName;
         }
 
         public int GetCurrentBeat()

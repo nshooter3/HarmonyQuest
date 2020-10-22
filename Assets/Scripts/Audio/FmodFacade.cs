@@ -94,6 +94,16 @@
             FmodMusicHandler.instance.StopAmbience();
         }
 
+        public string GetMusicEventName()
+        {
+            return FmodMusicHandler.instance.GetMusicEventName();
+        }
+
+        public string GetAmbienceEventName()
+        {
+            return FmodMusicHandler.instance.GetAmbienceEventName();
+        }
+
         /// <summary>
         /// Sets a param for the current fmod ambience event.
         /// </summary>

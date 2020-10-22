@@ -110,6 +110,7 @@
             //Audio
             objectManager.AddManageableObject(FmodHandler.GetComponent<FmodFacade>());
             objectManager.AddManageableObject(FmodHandler.GetComponent<FmodMusicHandler>());
+            objectManager.FindManageableObjectsInScene<FmodMusicInstructions>();
             objectManager.AddManageableObject(FmodHandler.GetComponent<FmodOnBeatAccuracyChecker>());
             objectManager.AddManageableObject(FmodHandler.GetComponent<FmodChordInterpreter>());
             objectManager.FindManageableObjectsInScene<FmodEventHandler>();
