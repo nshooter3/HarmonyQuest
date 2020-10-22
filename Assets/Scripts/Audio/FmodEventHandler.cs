@@ -155,38 +155,44 @@
                 firstPlayRequest = false;
             }
 
-            switch (sfxMode)
+            if (sfxMode == TonalSfxMode.None)
             {
-                case TonalSfxMode.None:
-                    PlayNonTonalNote(extraParams);
-                    break;
-                case TonalSfxMode.Root:
-                    PlayRootNote(extraParams);
-                    break;
-                case TonalSfxMode.Upwards:
-                    PlayNoteUpdwards(extraParams);
-                    break;
-                case TonalSfxMode.Downwards:
-                    PlayNoteDownwards(extraParams);
-                    break;
-                case TonalSfxMode.UpThenDown:
-                    PlayNoteUpThenDown(extraParams);
-                    break;
-                case TonalSfxMode.DownThenUp:
-                    PlayNoteDownThenUp(extraParams);
-                    break;
-                case TonalSfxMode.Random:
-                    PlayRandomNote(extraParams);
-                    break;
-                case TonalSfxMode.Chord:
-                    PlayChord(extraParams);
-                    break;
-                case TonalSfxMode.GlissUp:
-                    PlayGlissUp(extraParams);
-                    break;
-                case TonalSfxMode.GlissDown:
-                    PlayGlissDown(extraParams);
-                    break;
+                PlayNonTonalNote(extraParams);
+                return;
+            }
+            //Don't play tonal sfx if we have no chord information.
+            else if (notesInChord.Count > 0)
+            {
+                switch (sfxMode)
+                {
+                    case TonalSfxMode.Root:
+                        PlayRootNote(extraParams);
+                        break;
+                    case TonalSfxMode.Upwards:
+                        PlayNoteUpdwards(extraParams);
+                        break;
+                    case TonalSfxMode.Downwards:
+                        PlayNoteDownwards(extraParams);
+                        break;
+                    case TonalSfxMode.UpThenDown:
+                        PlayNoteUpThenDown(extraParams);
+                        break;
+                    case TonalSfxMode.DownThenUp:
+                        PlayNoteDownThenUp(extraParams);
+                        break;
+                    case TonalSfxMode.Random:
+                        PlayRandomNote(extraParams);
+                        break;
+                    case TonalSfxMode.Chord:
+                        PlayChord(extraParams);
+                        break;
+                    case TonalSfxMode.GlissUp:
+                        PlayGlissUp(extraParams);
+                        break;
+                    case TonalSfxMode.GlissDown:
+                        PlayGlissDown(extraParams);
+                        break;
+                }
             }
         }
 

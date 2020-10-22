@@ -68,9 +68,6 @@
 
             timelineInfo = new TimelineInfo();
             beatCallback = new FMOD.Studio.EVENT_CALLBACK(BeatEventCallback);
-
-            // Pin the class that will store the data modified during the callback
-            timelineHandle = GCHandle.Alloc(timelineInfo, GCHandleType.Pinned);
         }
 
         public void StartMusic(string name, float volume)
@@ -84,6 +81,9 @@
                 | FMOD.Studio.EVENT_CALLBACK_TYPE.TIMELINE_MARKER
                 | FMOD.Studio.EVENT_CALLBACK_TYPE.STARTED
                 );
+
+            // Pin the class that will store the data modified during the callback
+            timelineHandle = GCHandle.Alloc(timelineInfo, GCHandleType.Pinned);
 
             // Pass the object through the userdata of the instance
             musicEvent.setUserData(GCHandle.ToIntPtr(timelineHandle));
@@ -151,9 +151,15 @@
             FmodFacade.instance.ResumeFmodEvent(ambienceEvent);
         }
 
-        private void OnDestroy()
+        public void StopAll()
         {
             StopMusic();
+            StopAmbience();
+        }
+
+        private void OnDestroy()
+        {
+            StopAll();
         }
 
         public string GetMusicEventName()
