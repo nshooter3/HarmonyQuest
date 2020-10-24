@@ -1,13 +1,18 @@
-﻿using HarmonyQuest;
+﻿using Articy.Unity;
+using HarmonyQuest;
 using System.Collections;
 using System.Collections.Generic;
 using UI;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HQDialogueSpeaker : MonoBehaviour
 {
-
+    public ArticyRef character;
     public UITracker dialogeBoxPositioner;
+    public Text dialogueText;
+    public GameObject dialogueBox;
+    public GameObject barkStuff;
 
     Camera mainCamera;
 
@@ -15,6 +20,7 @@ public class HQDialogueSpeaker : MonoBehaviour
     void Start()
     {
         DialogManager.speakers.Add(this);
+        Debug.Log("Speaker name? " + character.GetObject().TechnicalName);
         mainCamera = ServiceLocator.instance.GetCamera();
     }
 
@@ -22,6 +28,13 @@ public class HQDialogueSpeaker : MonoBehaviour
     void Update()
     {
         //IsOnScreen();
+    }
+
+    public void Speak(string text)
+    {
+        dialogueText.text = text;
+        dialogueBox.SetActive(true);
+        barkStuff.SetActive(false);
     }
 
     public bool IsOnScreen()

@@ -29,8 +29,8 @@
         public void SetOffsets(float xOffset, float yOffset)
         {
             float[] scaledPixels = ServiceLocator.instance.GetUIManager().GetScaledPixels((int)xOffset, (int)yOffset);
-            this.yOffset = scaledPixels[1];
-            this.xOffset = scaledPixels[0];
+            this.yOffset = scaledPixels[0];
+            this.xOffset = scaledPixels[1];
             TrackTarget();
         }
 

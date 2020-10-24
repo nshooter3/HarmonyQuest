@@ -219,7 +219,7 @@
             float proximityRange = AIStateConfig.combatProximityMaxRange - AIStateConfig.combatProximityMinRange;
             float proximityParam = (1.0f - ((clampedProximity - AIStateConfig.combatProximityMinRange) / proximityRange)) * AIStateConfig.combatProximityFmodParamMaxValue;
 
-            FmodFacade.instance.SetMusicParam(global_combat_proximity_param, proximityParam);
+            //FmodFacade.instance.SetMusicParam(global_combat_proximity_param, proximityParam);
         }
 
         public void PuzzleZoneTriggerEntered()

@@ -17,11 +17,11 @@
         public float GetClosestAgentDistance()
         {
             float closestDistance = float.MaxValue;
-
+            /*
             foreach (AIAgent agent in aiAgentManager.GetLivingAgents())
             {
                 closestDistance = Mathf.Min(closestDistance, Vector3.Distance(agent.aiGameObject.transform.position, melodyTransform.position));
-            }
+            }*/
 
             return closestDistance;
         }

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class HQDialogueTease : MonoBehaviour
 {
-    public ArticyRef character;
+    //public ArticyRef character;
     public ArticyRef startFlowFragment;
 
     public Text barkText;
