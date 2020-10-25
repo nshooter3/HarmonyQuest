@@ -1,10 +1,13 @@
 ﻿namespace UI
 {
     using GameManager;
+    using UnityEngine;
     using UnityEngine.UI;
 
     public class UIManager : ManageableObject
     {
+        public Canvas canvas;
+
         public UITracker lockOnReticule;
 
         public Image lockOnImage;
