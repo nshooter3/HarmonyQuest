@@ -11,6 +11,8 @@
         public string nextScene;
         public string nextDoor;
 
+        private bool hasBeenEntered = false;
+
         public UITransitionManager.UITransitionType uiTransitionType = UITransitionManager.UITransitionType.FadeOut;
 
         public CollisionWrapper collisionWrapper;
@@ -22,8 +24,12 @@
 
         public void OnEnter(Collider other)
         {
-            SceneTransitionManager.PrepareNewScene(nextScene, nextDoor);
-            UITransitionManager.instance.StartTransition(uiTransitionType);
+            if (!hasBeenEntered)
+            {
+                hasBeenEntered = true;
+                SceneTransitionManager.PrepareNewScene(nextScene, nextDoor);
+                UITransitionManager.instance.StartTransition(uiTransitionType);
+            }
         }
     }
 }

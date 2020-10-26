@@ -35,6 +35,15 @@
             }
         }
 
+        public override void OnUpdate()
+        {
+            //Wait until our transition has covered the screen and the music has faded out (if it needs to) to switch scenes.
+            if (currentTransition != null && currentTransition.isIntroTransitionDone && SceneTransitionManager.isMusicTransitionDone)
+            {
+                TransitionToNewScene();
+            }
+        }
+
         /// <summary>
         /// Function that is called from things like SceneTransitionTriggers to quick off the transition presentation for switching scenes.
         /// </summary>

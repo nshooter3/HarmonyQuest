@@ -5,6 +5,7 @@
     using System.Runtime.InteropServices;
     using UnityEngine;
     using GameManager;
+    using Manager;
 
     public class FmodMusicHandler : ManageableObject
     {
@@ -55,7 +56,7 @@
         FMOD.Studio.EventInstance ambienceEvent;
         FMOD.Studio.EVENT_CALLBACK beatCallback;
 
-        private float fadeOutTimer, maxFadeOutTimer = 1.0f;
+        private float fadeOutTimer, maxFadeOutTimer = 1.5f;
 
         public override void OnAwake()
         {
@@ -74,13 +75,14 @@
 
         public override void OnUpdate()
         {
-            if (fadeOutTimer > 0)
+            if (fadeOutTimer > 0f)
             {
-                fadeOutTimer = Mathf.Max(fadeOutTimer - Time.deltaTime, 0);
+                fadeOutTimer = Mathf.Max(fadeOutTimer - Time.deltaTime, 0f);
                 FmodFacade.instance.SetMusicParam("global_master_fade_.5_param", 1f - fadeOutTimer/maxFadeOutTimer);
                 //Ambience doesn't have a master fade param yet, so we'll have to set that up later.
-                if (fadeOutTimer <= 0)
+                if (fadeOutTimer <= 0f)
                 {
+                    SceneTransitionManager.isMusicTransitionDone = true;
                     StopAll();
                 }
             }
@@ -175,7 +177,13 @@
 
         public void FadeOutAll()
         {
+            Debug.Log("FadeOutAll");
             fadeOutTimer = maxFadeOutTimer;
+        }
+
+        public bool IsMusicFading()
+        {
+            return fadeOutTimer > 0;
         }
 
         private void OnDestroy()

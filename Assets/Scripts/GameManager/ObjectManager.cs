@@ -29,12 +29,12 @@
 
         public override void OnAwake()
         {
-            objects.ForEach(p => p.ForEach(q => q.OnAwake()));
+            objects.ForEach(p => p.ForEach(q => { if (!q.hasInitialized) q.OnAwake(); }));
         }
 
         public override void OnStart()
         {
-            objects.ForEach(p => p.ForEach(q => q.OnStart()));
+            objects.ForEach(p => p.ForEach(q => { if (!q.hasInitialized) { q.OnStart(); q.hasInitialized = true; } }));
         }
 
         public override void OnUpdate()

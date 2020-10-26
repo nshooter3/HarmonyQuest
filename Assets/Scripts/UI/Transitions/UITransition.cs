@@ -11,10 +11,15 @@
     /// </summary>
     public abstract class UITransition : ManageableObject
     {
+        public bool isIntroTransitionDone = false;
+
         public abstract void TransitionIntro();
 
         public abstract void TransitionOutro();
 
-        public abstract void ResetTransition();
+        public virtual void ResetTransition()
+        {
+            isIntroTransitionDone = false;
+        }
     }
 }

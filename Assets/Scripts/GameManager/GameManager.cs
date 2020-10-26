@@ -27,6 +27,11 @@
         public GameObject PlayerControllerStateManager;
         public GameObject ServiceLocator;
 
+        //Variables to hold scripts found in the scene upon load.
+        //This is so that objects that aren't destroyed on load can be reloaded into the update queue when switching scenes.
+        private FmodFacade foundFmodHandler;
+        private UITransitionManager foundTransitionManager;
+
         //Manager classes that don't have monobehaviors
         public PhysicsManager physicsManager;
 
@@ -70,12 +75,30 @@
             FindMelodySpawnPoint();
             MelodyController = Instantiate(MelodyController, selectedSpawnPoint.transform.position, selectedSpawnPoint.transform.rotation);
 
+            foundTransitionManager = FindObjectOfType<UITransitionManager>();
+            if (foundTransitionManager != null)
+            {
+                TransitionManager = foundTransitionManager.gameObject;
+            }
+            else
+            {
+                TransitionManager = Instantiate(TransitionManager);
+            }
+
+            foundFmodHandler = FindObjectOfType<FmodFacade>();
+            if (foundFmodHandler != null)
+            {
+                FmodHandler = foundFmodHandler.gameObject;
+            }
+            else
+            {
+                FmodHandler = Instantiate(FmodHandler);
+            }
+
             AIAgentManager = Instantiate(AIAgentManager);
             PhysicsObjectManager = Instantiate(PhysicsObjectManager);
             TempCamera = Instantiate(TempCamera);
             DefaultCanvas = Instantiate(DefaultCanvas);
-            TransitionManager = Instantiate(TransitionManager);
-            FmodHandler = Instantiate(FmodHandler);
             PlayerControllerStateManager = Instantiate(PlayerControllerStateManager);
             ServiceLocator = Instantiate(ServiceLocator);
 

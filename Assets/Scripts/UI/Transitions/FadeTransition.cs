@@ -38,7 +38,7 @@
                 fadeImage.color = Color.Lerp(fadedColor, color, 1 - fadeInTimer/maxFadeInTimer);
                 if (fadeInTimer <= 0f)
                 {
-                    UITransitionManager.instance.TransitionToNewScene();
+                    isIntroTransitionDone = true;
                 }
             }
             else if (fadeOutTimer > 0f)
@@ -54,6 +54,7 @@
 
         public override void ResetTransition()
         {
+            base.ResetTransition();
             fadeInTimer = 0f;
             fadeOutTimer = 0f;
         }
