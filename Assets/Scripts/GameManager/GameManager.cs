@@ -22,6 +22,7 @@
         public GameObject PhysicsObjectManager;
         public GameObject TempCamera;
         public GameObject DefaultCanvas;
+        public GameObject TransitionManager;
         public GameObject FmodHandler;
         public GameObject PlayerControllerStateManager;
         public GameObject ServiceLocator;
@@ -73,6 +74,7 @@
             PhysicsObjectManager = Instantiate(PhysicsObjectManager);
             TempCamera = Instantiate(TempCamera);
             DefaultCanvas = Instantiate(DefaultCanvas);
+            TransitionManager = Instantiate(TransitionManager);
             FmodHandler = Instantiate(FmodHandler);
             PlayerControllerStateManager = Instantiate(PlayerControllerStateManager);
             ServiceLocator = Instantiate(ServiceLocator);
@@ -82,6 +84,8 @@
 
             //UI
             objectManager.AddManageableObject(DefaultCanvas.GetComponent<UIManager>());
+            objectManager.AddManageableObject(TransitionManager.GetComponent<UITransitionManager>());
+            objectManager.FindManageableObjectsInScene<UITransition>();
 
             //Gameplay
             objectManager.AddManageableObject(PlayerControllerStateManager.GetComponent<PlayerControllerStateManager>());
