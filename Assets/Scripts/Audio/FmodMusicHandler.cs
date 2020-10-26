@@ -55,6 +55,8 @@
         FMOD.Studio.EventInstance ambienceEvent;
         FMOD.Studio.EVENT_CALLBACK beatCallback;
 
+        private float fadeOutTimer, maxFadeOutTimer = 1.0f;
+
         public override void OnAwake()
         {
             if (instance == null)
@@ -68,6 +70,20 @@
 
             timelineInfo = new TimelineInfo();
             beatCallback = new FMOD.Studio.EVENT_CALLBACK(BeatEventCallback);
+        }
+
+        public override void OnUpdate()
+        {
+            if (fadeOutTimer > 0)
+            {
+                fadeOutTimer = Mathf.Max(fadeOutTimer - Time.deltaTime, 0);
+                FmodFacade.instance.SetMusicParam("global_master_fade_.5_param", 1f - fadeOutTimer/maxFadeOutTimer);
+                //Ambience doesn't have a master fade param yet, so we'll have to set that up later.
+                if (fadeOutTimer <= 0)
+                {
+                    StopAll();
+                }
+            }
         }
 
         public void StartMusic(string name, float volume)
@@ -155,6 +171,11 @@
         {
             StopMusic();
             StopAmbience();
+        }
+
+        public void FadeOutAll()
+        {
+            fadeOutTimer = maxFadeOutTimer;
         }
 
         private void OnDestroy()

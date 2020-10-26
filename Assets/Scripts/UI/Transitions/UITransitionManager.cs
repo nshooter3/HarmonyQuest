@@ -2,6 +2,7 @@
 {
     using GameManager;
     using HarmonyQuest;
+    using HarmonyQuest.Audio;
     using Manager;
 
     /// <summary>
@@ -53,6 +54,7 @@
             {
                 currentTransition.TransitionIntro();
             }
+            FmodMusicHandler.instance.FadeOutAll();
             ServiceLocator.instance.GetMelodyController().OnSceneTransitionStart();
         }
 
