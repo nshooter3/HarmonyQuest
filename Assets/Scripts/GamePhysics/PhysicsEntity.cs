@@ -241,5 +241,10 @@
         {
             rb.MovePosition(position);
         }
+
+        public void ToggleIsKinematic(bool isKinematic)
+        {
+            rb.isKinematic = isKinematic;
+        }
     }
 }

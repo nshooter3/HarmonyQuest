@@ -7,6 +7,7 @@
     using HarmonyQuest.Input;
     using Melody.States;
     using UnityEngine;
+    using UI;
 
     public class MelodyController : ManageableObject, IMelodyInfo
     {
@@ -95,24 +96,30 @@
         // Update is called once per frame
         public override void OnUpdate()
         {
-            melodyPhysics.ResetDesiredVelocity();
-            CheckInputs();
-            melodyHitboxes.UpdateHitboxes();
-            melodyHealth.OnUpdate(Time.deltaTime);
-            melodyLockOn.OnUpdate(Time.deltaTime);
-            melodyGrappleHook.OnUpdate(Time.deltaTime);
-            StateMachine.OnUpdate(Time.deltaTime);
-            melodySound.OnUpdate();
-            melodyGroundedChecker.OnUpdate();
-            currentStateName = StateMachine.GetCurrentStateName();
-            //Debug.Log("State: " + currentStateName);
+            if (UITransitionManager.instance.IsTransitionActive() == false)
+            {
+                melodyPhysics.ResetDesiredVelocity();
+                CheckInputs();
+                melodyHitboxes.UpdateHitboxes();
+                melodyHealth.OnUpdate(Time.deltaTime);
+                melodyLockOn.OnUpdate(Time.deltaTime);
+                melodyGrappleHook.OnUpdate(Time.deltaTime);
+                StateMachine.OnUpdate(Time.deltaTime);
+                melodySound.OnUpdate();
+                melodyGroundedChecker.OnUpdate();
+                currentStateName = StateMachine.GetCurrentStateName();
+                //Debug.Log("State: " + currentStateName);
+            }
         }
 
         public override void OnFixedUpdate()
         {
-            StateMachine.OnFixedUpdate();
-            melodyCollision.OnFixedUpdate();
-            melodySound.OnFixedUpdate();
+            if (UITransitionManager.instance.IsTransitionActive() == false)
+            {
+                StateMachine.OnFixedUpdate();
+                melodyCollision.OnFixedUpdate();
+                melodySound.OnFixedUpdate();
+            }
         }
 
         void CheckInputs()
@@ -202,6 +209,12 @@
         public void OnUnpause()
         {
             animator.enabled = true;
+        }
+
+        public void OnSceneTransitionStart()
+        {
+            melodyPhysics.ToggleIsKinematic(true);
+            melodyAnimator.SetWalkRun(0f);
         }
     }
 }

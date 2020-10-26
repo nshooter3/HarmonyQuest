@@ -1,6 +1,7 @@
 ﻿namespace UI
 {
     using GameManager;
+    using HarmonyQuest;
     using Manager;
 
     /// <summary>
@@ -50,9 +51,9 @@
             }
             if (currentTransition != null)
             {
-                currentTransition.active = true;
                 currentTransition.TransitionIntro();
             }
+            ServiceLocator.instance.GetMelodyController().OnSceneTransitionStart();
         }
 
         /// <summary>
@@ -71,6 +72,11 @@
         {
             currentTransition.ResetTransition();
             currentTransition = null;
+        }
+
+        public bool IsTransitionActive()
+        {
+            return currentTransition != null;
         }
     }
 }

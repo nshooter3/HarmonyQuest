@@ -16,10 +16,7 @@
 
         public override void OnUpdate()
         {
-            if (PauseManager.GetPaused())
-            {
-                CheckInputs();
-            }
+            CheckInputs();
         }
 
         void CheckInputs()

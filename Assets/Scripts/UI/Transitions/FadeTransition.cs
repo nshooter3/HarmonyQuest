@@ -54,7 +54,6 @@
 
         public override void ResetTransition()
         {
-            base.ResetTransition();
             fadeInTimer = 0f;
             fadeOutTimer = 0f;
         }

@@ -1,7 +1,6 @@
 ﻿namespace UI
 {
     using GameManager;
-    using UnityEngine;
 
     /// <summary>
     /// Abstract class that all visual scene transition should be derived from.
@@ -12,16 +11,10 @@
     /// </summary>
     public abstract class UITransition : ManageableObject
     {
-        [HideInInspector]
-        public bool active = false;
-
         public abstract void TransitionIntro();
 
         public abstract void TransitionOutro();
 
-        public virtual void ResetTransition()
-        {
-            active = false;
-        }
+        public abstract void ResetTransition();
     }
 }
