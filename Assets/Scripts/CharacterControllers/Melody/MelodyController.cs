@@ -1,13 +1,15 @@
 ﻿namespace Melody
 {
     using GameAI;
+    using GameManager;
     using GamePhysics;
     using HarmonyQuest;
     using HarmonyQuest.Input;
     using Melody.States;
     using UnityEngine;
+    using UI;
 
-    public class MelodyController : MonoBehaviour, IMelodyInfo
+    public class MelodyController : ManageableObject, IMelodyInfo
     {
         MelodyStateMachine StateMachine;
         public string currentStateName;
@@ -57,13 +59,15 @@
         public MelodyGrappleHook melodyGrappleHook;
         //MelodySound is actually a monobehavior, so it will be assigned via drag reference.
         public MelodySound melodySound;
+        //Debug object to help tell whether or not melody is on the ground.
+        public MelodyGroundedChecker melodyGroundedChecker;
 
         //Drag References
         public GameObject melodyRenderer;
         public Renderer scarfRenderer;
 
         // Start is called before the first frame update
-        void Start()
+        public override void OnStart()
         {
             rigidBody = gameObject.GetComponent<Rigidbody>();
             melodyColliderWrapper = gameObject.GetComponent<CollisionWrapper>();
@@ -83,28 +87,39 @@
             melodyLockOn = new MelodyLockOn(this);
             melodyGrappleHook = new MelodyGrappleHook(this);
             melodySound.Init(this, ServiceLocator.instance.GetAIAgentManager());
+            melodyGroundedChecker.OnStart();
+
+            PauseManager.AssignFunctionToOnPauseDelegate(OnPause);
+            PauseManager.AssignFunctionToOnUnpauseDelegate(OnUnpause);
         }
 
         // Update is called once per frame
-        void Update()
+        public override void OnUpdate()
         {
-            melodyPhysics.ResetDesiredVelocity();
-            CheckInputs();
-            melodyHitboxes.UpdateHitboxes();
-            melodyHealth.OnUpdate(Time.deltaTime);
-            melodyLockOn.OnUpdate(Time.deltaTime);
-            melodyGrappleHook.OnUpdate(Time.deltaTime);
-            StateMachine.OnUpdate(Time.deltaTime);
-            melodySound.OnUpdate();
-            currentStateName = StateMachine.GetCurrentStateName();
-            //Debug.Log("State: " + currentStateName);
+            if (UITransitionManager.instance.IsTransitionActive() == false)
+            {
+                melodyPhysics.ResetDesiredVelocity();
+                CheckInputs();
+                melodyHitboxes.UpdateHitboxes();
+                melodyHealth.OnUpdate(Time.deltaTime);
+                melodyLockOn.OnUpdate(Time.deltaTime);
+                melodyGrappleHook.OnUpdate(Time.deltaTime);
+                StateMachine.OnUpdate(Time.deltaTime);
+                melodySound.OnUpdate();
+                melodyGroundedChecker.OnUpdate();
+                currentStateName = StateMachine.GetCurrentStateName();
+                //Debug.Log("State: " + currentStateName);
+            }
         }
 
-        void FixedUpdate()
+        public override void OnFixedUpdate()
         {
-            StateMachine.OnFixedUpdate();
-            melodyCollision.OnFixedUpdate();
-            melodySound.OnFixedUpdate();
+            if (UITransitionManager.instance.IsTransitionActive() == false)
+            {
+                StateMachine.OnFixedUpdate();
+                melodyCollision.OnFixedUpdate();
+                melodySound.OnFixedUpdate();
+            }
         }
 
         void CheckInputs()
@@ -114,17 +129,25 @@
 
             rightStickMove.Set(input.GetHorizontalMovement2(), input.GetVerticalMovement2());
 
-            if (input.LockonButtonDown())
+            if (input.PauseButtonDown())
             {
-                melodyLockOn.LockonButtonPressed();
+                PauseManager.TogglePaused(true);
+                PlayerControllerStateManager.instance.SetState(PlayerControllerStateManager.ControllerState.Pause);
             }
-            else if (melodyLockOn.HasLockonTarget() == true && rightStickMove.magnitude > 0.5f)
+            else
             {
-                melodyLockOn.ChangeLockonTargetRightStick(rightStickMove);
-            }
-            if (rightStickMove.magnitude <= 0.25f)
-            {
-                melodyLockOn.RightStickResetToNeutral();
+                if (input.LockonButtonDown())
+                {
+                    melodyLockOn.LockonButtonPressed();
+                }
+                else if (melodyLockOn.HasLockonTarget() == true && rightStickMove.magnitude > 0.5f)
+                {
+                    melodyLockOn.ChangeLockonTargetRightStick(rightStickMove);
+                }
+                if (rightStickMove.magnitude <= 0.25f)
+                {
+                    melodyLockOn.RightStickResetToNeutral();
+                }
             }
         }
 
@@ -176,6 +199,22 @@
         public Vector3 GetCenter()
         {
             return center.position;
+        }
+
+        public void OnPause()
+        {
+            animator.enabled = false;
+        }
+
+        public void OnUnpause()
+        {
+            animator.enabled = true;
+        }
+
+        public void OnSceneTransitionStart()
+        {
+            melodyPhysics.ToggleIsKinematic(true);
+            melodyAnimator.SetWalkRun(0f);
         }
     }
 }

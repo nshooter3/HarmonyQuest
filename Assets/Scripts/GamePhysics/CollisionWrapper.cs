@@ -1,5 +1,6 @@
 ﻿namespace GamePhysics
 {
+    using GameManager;
     using UnityEngine;
 
     /// <summary>
@@ -9,7 +10,7 @@
     /// When a collision is detected on this gameobject, the pertinent delegates will be called.
     /// It is up to other classes to set up and manage these callbacks to perform collision logic.
     /// </summary>
-    public class CollisionWrapper : MonoBehaviour
+    public class CollisionWrapper : ManageableObject
     {
         public Collider col;
         public bool ignoreCollisionsWithOtherTriggers = true;
@@ -37,7 +38,7 @@
         OnCollisionExitDelegate onCollisionExitDelegate;
 
         // Start is called before the first frame update
-        void Start()
+        public override void OnStart()
         {
             if (col == null)
             {

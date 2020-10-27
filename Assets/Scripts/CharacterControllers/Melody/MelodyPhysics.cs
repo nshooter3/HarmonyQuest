@@ -168,5 +168,10 @@
         {
             return physicsEntity;
         }
+
+        public void ToggleIsKinematic(bool isKinematic)
+        {
+            physicsEntity.ToggleIsKinematic(isKinematic);
+        }
     }
 }

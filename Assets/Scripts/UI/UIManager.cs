@@ -1,10 +1,13 @@
 ﻿namespace UI
 {
+    using GameManager;
     using UnityEngine;
     using UnityEngine.UI;
 
-    public class UIManager : MonoBehaviour
+    public class UIManager : ManageableObject
     {
+        public Canvas canvas;
+
         public UITracker lockOnReticule;
 
         public Image lockOnImage;
@@ -17,6 +20,23 @@
 
         public UIMeter playerHealth;
 
-        //TODO: Other UI functions, yeah!
+        public override void OnAwake()
+        {
+            playerHealth.OnAwake();
+            lockOnReticule.OnAwake();
+            grappleReticule.OnAwake();
+            agentHealthBarsPool.OnAwake();
+        }
+
+        public override void OnUpdate()
+        {
+            if (!PauseManager.GetPaused())
+            {
+                playerHealth.OnUpdate();
+                lockOnReticule.OnUpdate();
+                grappleReticule.OnUpdate();
+                agentHealthBarsPool.OnUpdate();
+            }
+        }
     }
 }

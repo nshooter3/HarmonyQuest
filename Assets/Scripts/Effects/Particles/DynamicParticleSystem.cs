@@ -2,27 +2,28 @@
 {
     using UnityEngine;
     using HarmonyQuest;
+    using GameManager;
 
-    public class DynamicParticleSystem : MonoBehaviour
+    public class DynamicParticleSystem : ManageableObject
     {
         [SerializeField]
-        private ParticleSystem particleSystem;
+        private ParticleSystem particles;
 
         [SerializeField]
         private bool followPlayer = false;
         private Transform melodyTransform;
 
-        private void Start()
+        public override void OnStart()
         {
             melodyTransform = ServiceLocator.instance.GetMelodyController().GetTransform();
-            if (particleSystem == null)
+            if (particles == null)
             {
-                particleSystem = GetComponent<ParticleSystem>();
+                particles = GetComponent<ParticleSystem>();
             }
         }
 
         // Update is called once per frame
-        void Update()
+        public override void OnUpdate()
         {
             if (followPlayer == true)
             {

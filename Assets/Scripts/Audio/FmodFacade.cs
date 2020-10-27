@@ -4,11 +4,13 @@
     using System.Collections.Generic;
     using System.Linq;
     using UnityEngine;
+    using GameManager;
+    using UnityEngine.SceneManagement;
 
     /// <summary>
     /// This class will be the primary way in which other scripts interface with our fmod logic.
     /// </summary>
-    public class FmodFacade : MonoBehaviour
+    public class FmodFacade : ManageableObject
     {
         //Enum used to quantify how close an action is to the beat.
         public enum OnBeatAccuracy
@@ -24,23 +26,39 @@
         private FmodEventPool fmodEventPool;
 
         //Dictionary used to convert our fmod event and parameter names into the values fmod will actually use.
-        private FmodDictionary fmodDictionary;
+        private FmodEventDictionary fmodDictionary;
 
         [SerializeField]
         private bool debugOneShotEvents = false;
 
-        private void Awake()
+        public override void OnAwake()
         {
             if (instance == null)
             {
                 instance = this;
+                DontDestroyOnLoad(gameObject);
             }
             else if (instance != this)
             {
                 Destroy(gameObject);
             }
-            fmodDictionary = new FmodDictionary();
+            fmodDictionary = new FmodEventDictionary();
             fmodEventPool = new FmodEventPool();
+
+            PauseManager.AssignFunctionToOnPauseDelegate(OnPause);
+            PauseManager.AssignFunctionToOnUnpauseDelegate(OnUnpause);
+        }
+
+        public void LoadSceneMusic()
+        {
+            if (!FmodMusicHandler.instance.isMusicPlaying)
+            {
+                StartMusic(FmodSceneMusicDictionary.GetSceneMusic(SceneManager.GetActiveScene().name), 1f);
+            }
+            if (!FmodMusicHandler.instance.isAmbiencePlaying)
+            {
+                StartAmbience(FmodSceneMusicDictionary.GetSceneAmbience(SceneManager.GetActiveScene().name), 1f);
+            }
         }
 
         /// <summary>
@@ -87,6 +105,16 @@
         public void StopAmbience()
         {
             FmodMusicHandler.instance.StopAmbience();
+        }
+
+        public string GetMusicEventName()
+        {
+            return FmodMusicHandler.instance.GetMusicEventName();
+        }
+
+        public string GetAmbienceEventName()
+        {
+            return FmodMusicHandler.instance.GetAmbienceEventName();
         }
 
         /// <summary>
@@ -167,6 +195,24 @@
             fmodEvent.setUserData(IntPtr.Zero);
             fmodEvent.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
             fmodEvent.release();
+        }
+
+        /// <summary>
+        /// Pauses the passed in fmod event
+        /// </summary>
+        /// <param name="fmodEvent"> The name of the event we want to pause </param>
+        public void PauseFmodEvent(FMOD.Studio.EventInstance fmodEvent)
+        {
+            fmodEvent.setPaused(true);
+        }
+
+        /// <summary>
+        /// Resumes the passed in fmod event
+        /// </summary>
+        /// <param name="fmodEvent"> The name of the event we want to resume </param>
+        public void ResumeFmodEvent(FMOD.Studio.EventInstance fmodEvent)
+        {
+            fmodEvent.setPaused(false);
         }
 
         /// <summary>
@@ -326,6 +372,18 @@
         public List<string> GetFmodSFXEventNames()
         {
             return fmodDictionary.fmodSFXEventDictionary.Keys.ToList();
+        }
+
+        public void OnPause()
+        {
+            fmodEventPool.PauseAll();
+            FmodMusicHandler.instance.PauseAll();
+        }
+
+        public void OnUnpause()
+        {
+            fmodEventPool.ResumeAll();
+            FmodMusicHandler.instance.ResumeAll();
         }
 
         /*public void GetDSPData()

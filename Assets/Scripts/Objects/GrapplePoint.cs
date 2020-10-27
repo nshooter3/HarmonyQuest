@@ -2,8 +2,9 @@
 {
     using UnityEngine;
     using HarmonyQuest.Audio;
+    using GameManager;
 
-    public class GrapplePoint : MonoBehaviour
+    public class GrapplePoint : ManageableObject
     {
         public Transform visibleDestination;
         public Transform actualDestination;
@@ -22,36 +23,39 @@
 
         FmodFacade.OnBeatAccuracy onBeatState, prevOnBeatState;
 
-        public void Update()
+        public override void OnUpdate()
         {
-            if (curCooldown > 0f)
+            if (!PauseManager.GetPaused())
             {
-                curCooldown -= Time.deltaTime;
-            }
+                if (curCooldown > 0f)
+                {
+                    curCooldown -= Time.deltaTime;
+                }
 
-            onBeatState = FmodFacade.instance.WasActionOnBeat(true);
-            if (prevOnBeatState != onBeatState)
-            {
-                if (onBeatState == FmodFacade.OnBeatAccuracy.Great)
+                onBeatState = FmodFacade.instance.WasActionOnBeat(true);
+                if (prevOnBeatState != onBeatState)
                 {
-                    //visibleDestinationRenderer.enabled = true;
-                    actualDestinationRenderer.enabled = true;
-                    active = true;
+                    if (onBeatState == FmodFacade.OnBeatAccuracy.Great)
+                    {
+                        //visibleDestinationRenderer.enabled = true;
+                        actualDestinationRenderer.enabled = true;
+                        active = true;
+                    }
+                    else if (onBeatState == FmodFacade.OnBeatAccuracy.Good)
+                    {
+                        //visibleDestinationRenderer.enabled = true;
+                        actualDestinationRenderer.enabled = false;
+                        active = true;
+                    }
+                    else
+                    {
+                        //visibleDestinationRenderer.enabled = false;
+                        actualDestinationRenderer.enabled = false;
+                        active = false;
+                    }
                 }
-                else if (onBeatState == FmodFacade.OnBeatAccuracy.Good)
-                {
-                    //visibleDestinationRenderer.enabled = true;
-                    actualDestinationRenderer.enabled = false;
-                    active = true;
-                }
-                else
-                {
-                    //visibleDestinationRenderer.enabled = false;
-                    actualDestinationRenderer.enabled = false;
-                    active = false;
-                }
+                prevOnBeatState = onBeatState;
             }
-            prevOnBeatState = onBeatState;
         }
 
         public void StartCooldownTimer()

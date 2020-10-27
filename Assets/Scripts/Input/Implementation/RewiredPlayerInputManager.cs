@@ -15,7 +15,7 @@
         // The Rewired Player
         private Player player;
 
-        void Awake()
+        public void OnAwake()
         {
             Instantiate(RewiredManager);
 
@@ -75,11 +75,12 @@
 
         public bool GrappleButtonDown()
         {
-            if (player.GetButtonDown("Grapple"))
-            {
-                Debug.Log("GRAPPLE PRESSED");
-            }
             return player.GetButtonDown("Grapple");
+        }
+
+        public bool PauseButtonDown()
+        {
+            return player.GetButtonDown("Pause");
         }
     }
 }

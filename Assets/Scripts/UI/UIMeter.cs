@@ -34,13 +34,13 @@
         private float delayedDropdownMaxTimer = 1.0f;
 
         // Start is called before the first frame update
-        private void Start()
+        public void OnAwake()
         {
             delayedDropdown.enabled = usesDelayedDropdown;
         }
 
         // Update is called once per frame
-        protected void Update()
+        public void OnUpdate()
         {
             if (usesDelayedDropdown)
             {

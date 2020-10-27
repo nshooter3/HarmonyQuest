@@ -381,6 +381,11 @@
             aiAnimator.OnUpdate();
         }
 
+        public void ToggleAnimationActive(bool isActive)
+        {
+            aiAnimator.ToggleAnimationActive(isActive);
+        }
+
         // ****************************
         // SURFACE COLLISION FUNCTIONS
         // ****************************

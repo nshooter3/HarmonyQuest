@@ -1,10 +1,11 @@
 ﻿namespace GamePhysics
 {
+    using GameManager;
     using System;
     using UnityEngine;
     using UnityEngine.Events;
 
-    public class DamageHitbox : MonoBehaviour
+    public class DamageHitbox : ManageableObject
     {
         [SerializeField]
         private string hitboxName;
@@ -57,7 +58,7 @@
 
         private Guid id;
 
-        public void Start()
+        public override void OnStart()
         {
             if (debugRenderer != null)
             {

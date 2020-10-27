@@ -4,6 +4,8 @@
 
     public class BasicPlayerInputManager : MonoBehaviour, IPlayerInputManager
     {
+        public void OnAwake() { }
+
         public bool AttackButtonDown()
         {
             return Input.GetKey(KeyCode.X);
@@ -75,6 +77,11 @@
         public bool GrappleButtonDown()
         {
             return Input.GetKey(KeyCode.LeftShift);
+        }
+
+        public bool PauseButtonDown()
+        {
+            return Input.GetKey(KeyCode.P);
         }
     }
 }

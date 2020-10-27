@@ -3,14 +3,15 @@
     using Melody;
     using UnityEngine;
     using HarmonyQuest;
+    using GameManager;
 
-    public class PuzzleZoneTrigger : MonoBehaviour
+    public class PuzzleZoneTrigger : ManageableObject
     {
         public CollisionWrapper collisionWrapper;
         private MelodySound melodySound;
 
         // Start is called before the first frame update
-        void Start()
+        public override void OnStart()
         {
             melodySound = ServiceLocator.instance.GetMelodyController().GetMelodySound();
             collisionWrapper.AssignFunctionToTriggerStayDelegate(PuzzleZoneTriggerEntered);

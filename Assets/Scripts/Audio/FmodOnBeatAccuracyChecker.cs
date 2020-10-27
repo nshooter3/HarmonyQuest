@@ -1,8 +1,9 @@
 ﻿namespace HarmonyQuest.Audio
 {
     using UnityEngine;
+    using GameManager;
 
-    public class FmodOnBeatAccuracyChecker : MonoBehaviour
+    public class FmodOnBeatAccuracyChecker : ManageableObject
     {
         public static FmodOnBeatAccuracyChecker instance;
 
@@ -36,7 +37,7 @@
         //True once we're halfway or more through a beat.
         private bool hasReachedBeatHalfwayPoint = false;
 
-        private void Awake()
+        public override void OnAwake()
         {
             if (instance == null)
             {
@@ -49,7 +50,7 @@
             FmodMusicHandler.instance.AssignFunctionToOnBeatDelegate(Beat);
         }
 
-        void Update()
+        public override void OnUpdate()
         {
             if (FmodMusicHandler.instance.isMusicPlaying)
             {
