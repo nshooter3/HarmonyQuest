@@ -5,17 +5,23 @@
     /// <summary>
     /// Class that allows us to access fmod event and param names by our own defined keys. This way if fmod event names or paths change, we need only update the FmodNameDictionary script.
     /// </summary>
-    public class FmodDictionary
+    public class FmodEventDictionary
     {
         //Event name-to-fmod-path dictionary for Music.
         public Dictionary<string, string> fmodMusicEventDictionary = new Dictionary<string, string>()
         {
             //{ "", "" },
 
+            #region Placeholder
+            { "placeholder", "event:/music/twilit_hollow/twilit_hollow" },
+            { "placeholder_ambience", "event:/music/twilit_hollow/twilit_hollow_dissonance" },
+            #endregion
+
             #region Reliqua
             { "twilit_hollow", "event:/music/twilit_hollow/twilit_hollow" },
             { "twilit_hollow_dissonance", "event:/music/twilit_hollow/twilit_hollow_dissonance" },
             { "twilit_hollow_ambience", "event:/music/twilit_hollow/twilit_hollow_ambience" },
+            { "twilit_hollow_dissonance_ambience", "event:/music/twilit_hollow/twilit_hollow_dissonance_ambience" },
             { "crystal_man_fight_pink", "event:/music/crystal_men/crystal_man_fight_pink" },
             #endregion
         };

@@ -5,6 +5,7 @@
     using System.Linq;
     using UnityEngine;
     using GameManager;
+    using UnityEngine.SceneManagement;
 
     /// <summary>
     /// This class will be the primary way in which other scripts interface with our fmod logic.
@@ -25,7 +26,7 @@
         private FmodEventPool fmodEventPool;
 
         //Dictionary used to convert our fmod event and parameter names into the values fmod will actually use.
-        private FmodDictionary fmodDictionary;
+        private FmodEventDictionary fmodDictionary;
 
         [SerializeField]
         private bool debugOneShotEvents = false;
@@ -41,11 +42,23 @@
             {
                 Destroy(gameObject);
             }
-            fmodDictionary = new FmodDictionary();
+            fmodDictionary = new FmodEventDictionary();
             fmodEventPool = new FmodEventPool();
 
             PauseManager.AssignFunctionToOnPauseDelegate(OnPause);
             PauseManager.AssignFunctionToOnUnpauseDelegate(OnUnpause);
+        }
+
+        public void LoadSceneMusic()
+        {
+            if (!FmodMusicHandler.instance.isMusicPlaying)
+            {
+                StartMusic(FmodSceneMusicDictionary.GetSceneMusic(SceneManager.GetActiveScene().name), 1f);
+            }
+            if (!FmodMusicHandler.instance.isAmbiencePlaying)
+            {
+                StartAmbience(FmodSceneMusicDictionary.GetSceneAmbience(SceneManager.GetActiveScene().name), 1f);
+            }
         }
 
         /// <summary>

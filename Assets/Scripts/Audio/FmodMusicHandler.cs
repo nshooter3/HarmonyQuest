@@ -6,6 +6,7 @@
     using UnityEngine;
     using GameManager;
     using Manager;
+    using Saving;
 
     public class FmodMusicHandler : ManageableObject
     {
@@ -177,8 +178,15 @@
 
         public void FadeOutAll()
         {
-            Debug.Log("FadeOutAll");
-            fadeOutTimer = maxFadeOutTimer;
+            //Only fade out music if the next scene has different music.
+            if (FmodSceneMusicDictionary.GetSceneMusic(SaveDataManager.saveData.currentScene) != musicEventName)
+            {
+                fadeOutTimer = maxFadeOutTimer;
+            }
+            else
+            {
+                SceneTransitionManager.isMusicTransitionDone = true;
+            }
         }
 
         public bool IsMusicFading()
