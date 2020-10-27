@@ -62,7 +62,7 @@
         {
             if (SaveDataManager.saveLoaded == false)
             {
-                Debug.Log("LoadDebugFileIfNoFileSelected");
+                //Debug.Log("LoadDebugFileIfNoFileSelected");
                 SaveDataManager.Load(debugSaveFile, out loadError);
             }
         }
