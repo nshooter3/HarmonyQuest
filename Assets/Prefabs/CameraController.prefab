@@ -112,6 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36424bd11d72c1d4e8334c16ecdb0b63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasInitialized: 0
 --- !u!114 &8483921970487328601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,7 +145,7 @@ MonoBehaviour:
   volumeTrigger: {fileID: 0}
   volumeLayer:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 35351
   stopNaNPropagation: 1
   finalBlitToCameraTarget: 1
   antialiasingMode: 1
@@ -189,5 +190,5 @@ MonoBehaviour:
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
   m_AfterStackBundles:
-  - assemblyQualifiedName: HarmonyQuest.Effects.OilPaint.OilPaintPostProcessing, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  - assemblyQualifiedName: HarmonyQuest.Effects.OilPaint.OilPaintPostProcessing,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null

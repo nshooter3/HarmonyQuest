@@ -20,7 +20,7 @@
         public GameObject MelodyController;
         public GameObject AIAgentManager;
         public GameObject PhysicsObjectManager;
-        public GameObject TempCamera;
+        public GameObject CameraController;
         public GameObject DefaultCanvas;
         public GameObject TransitionManager;
         public GameObject FmodHandler;
@@ -97,7 +97,7 @@
 
             AIAgentManager = Instantiate(AIAgentManager);
             PhysicsObjectManager = Instantiate(PhysicsObjectManager);
-            TempCamera = Instantiate(TempCamera);
+            CameraController = Instantiate(CameraController);
             DefaultCanvas = Instantiate(DefaultCanvas);
             PlayerControllerStateManager = Instantiate(PlayerControllerStateManager);
             ServiceLocator = Instantiate(ServiceLocator);
@@ -114,8 +114,7 @@
             objectManager.AddManageableObject(PlayerControllerStateManager.GetComponent<PlayerControllerStateManager>());
             objectManager.AddManageableObject(AIAgentManager.GetComponent<AIAgentManager>());
             objectManager.AddManageableObject(PhysicsObjectManager.GetComponent<PhysicsObjectManager>());
-            //TODO: Use actual camera controller later.
-            objectManager.AddManageableObject(TempCamera.GetComponent<TestCamera>());
+            objectManager.AddManageableObject(CameraController.GetComponent<CameraController>());
 
             objectManager.FindManageableObjectsInScene<SceneTransitionTrigger>();
             objectManager.FindManageableObjectsInScene<CollisionWrapper>();
@@ -160,7 +159,7 @@
         {
             objectManager.OnStart();
         }
-        
+
         void Update()
         {
             objectManager.OnUpdate();

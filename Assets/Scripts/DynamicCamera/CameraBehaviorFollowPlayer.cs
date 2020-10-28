@@ -21,6 +21,16 @@
         private float wideFOV = 73f;
         private float narrowFOV = 65f;
 
+        public void ResetToPlayer()
+        {
+            exponentialHeight = Mathf.Pow(exponentBase, distance * exponentFactor) + minHeight;
+            Vector3 position = PlayerLocation();
+            position.x = 0;
+            position.y = exponentialHeight;
+            position.z -= cameraOffset + distance;
+            cameraTransform.position = position;
+        }
+
         public override void Update()
         {
             bias = followBias;
