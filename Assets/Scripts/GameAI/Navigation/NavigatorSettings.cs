@@ -1,0 +1,92 @@
+﻿namespace GameAI.Navigation
+{
+    public static class NavigatorSettings
+    {
+        /// <summary>
+        /// How frequently our agent navigators check to see if their path to their target should change.
+        /// </summary>
+        public static float pathRefreshRate = 0.5f;
+
+        /// <summary>
+        /// How frequently our agent navigators check to see if their path to their current waypoint is blocked. In this case, they will generate a new path.
+        /// </summary>
+        public static float waypointBlockedCheckRate = 2.0f;
+
+        /// <summary>
+        /// How far our target must move from its last known position to warrant generating a new path.
+        /// </summary>
+        public static float pathRefreshDistanceThreshold = 2.0f;
+
+        /// <summary>
+        /// How close we need to be to a waypoint for it to be considered reached.
+        /// </summary>
+        public static float waypointReachedDistanceThreshold = 1.0f;
+
+        /// <summary>
+        /// How frequently to check if this enemy has a clear path to the player. Determines whether to engage player or to navigate to a state where they can engage later.
+        /// </summary>
+        public static float checkForTargetObstructionRate = 0.001f;
+
+        /// <summary>
+        /// Multiplier that gets applied to the scale of the collision avoidance force.
+        /// </summary>
+        public static float collisionAvoidanceScale = 1.0f;
+
+        /// <summary>
+        /// The maximum distance at which collision avoidance will be applied.
+        /// </summary>
+        public static float collisionAvoidanceDefaultMaxDistance = 3.0f;
+
+        /// <summary>
+        /// How much time passes between collision avoidance calculation updates. A larger value leads to better performance.
+        /// </summary>
+        public static float collisionAvoidanceUpdateRate = 0.05f;
+
+        /// <summary>
+        /// Multiplier that gets applied to the scale of the obstacle avoidance force.
+        /// </summary>
+        public static float obstacleAvoidanceScale = 0.5f;
+
+        /// <summary>
+        /// The maximum distance at which obstacle avoidance will be applied.
+        /// </summary>
+        public static float obstacleAvoidanceMaxDistance = 3.0f;
+
+        /// <summary>
+        /// How much time passes between obstacle avoidance calculation updates. A larger value leads to better performance.
+        /// </summary>
+        public static float obstacleAvoidanceUpdateRate = 0.05f;
+
+        /// <summary>
+        /// Value that determines how much avoidance forces get scaled down as they approach the same direction as the movement direction.
+        /// A value of 1.0f means that avoidance forces in the same direction as the movement direction will be nullified.
+        /// A value of 0.0f means that avoidance forces will not be decreased regardless of their angle from the the movement direction.
+        /// Anything in between will scale how much of a decrease the avoidance force will receive as it approaches the movement direction.
+        /// i.e a value of 0.5f means that any avoidance forces that push in the same direction as the movement force will be halved,
+        /// with the decrease becoming less dramatic as the angle between the avoidance force and the movement force increases.
+        /// </summary>
+        public static float avoidanceForceMovementVelocityAdjustmentScale = 0.5f;
+
+        /// <summary>
+        /// When the agent is moving, clamp the max value of their avoidance forces by a percentage of their movement speed.
+        /// This is a failsafe to prevent the avoidance force from overriding the agent's movment.
+        /// </summary>
+        public static float maxAvoidanceInfluence = 0.3f;
+
+        /// <summary>
+        /// How far above the player to position the navPos when tracking them.
+        /// </summary>
+        public static float navPosHeightOffset = 2.25f;
+
+        /// <summary>
+        /// Distance threshold for determining whether or not the agent is above the navmesh. Don't set this too high, or NavMesh.SamplePosition() may slow down
+        /// </summary>
+        public static float onMeshThreshold = 3f;
+
+        /// <summary>
+        /// Distance at which the enemy will automatically switch from navigating to engaging their target.
+        /// This is used to prevent rapid state changes when the agent is near the player when they are standing close to a wall/corner.
+        /// </summary>
+        public static float autoEngageDistance = 3f;
+    }
+}

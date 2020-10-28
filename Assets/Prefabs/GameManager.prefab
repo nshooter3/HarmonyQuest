@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &362422134577299912
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 362422134577303094}
+  - component: {fileID: 362422134577303095}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &362422134577303094
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 362422134577299912}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &362422134577303095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 362422134577299912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5b2681afe922764abf27b546c1491fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MelodyController: {fileID: 8789957132980842087, guid: d31e0868403c9c0488598bfbe54f311d,
+    type: 3}
+  AIAgentManager: {fileID: 1514939764168810503, guid: a6f2b39ef74489547b01ef4e17465dfe,
+    type: 3}
+  PhysicsObjectManager: {fileID: 6501896034024066452, guid: c61aca6d192b54641941ee3ee38f1503,
+    type: 3}
+  TempCamera: {fileID: 2593792645828629413, guid: a759178298de77845ababa1b382ef04d,
+    type: 3}
+  DefaultCanvas: {fileID: 119734217971162421, guid: 262f5e5626e1a3d45b3482f5ffdb874d,
+    type: 3}
+  TransitionManager: {fileID: 6812512636306075052, guid: 67889e26f784f7e408e4320bfda85b5e,
+    type: 3}
+  FmodHandler: {fileID: 6384125495003974059, guid: a92c764d6d7856e489b32ab5ecc141ff,
+    type: 3}
+  PlayerControllerStateManager: {fileID: 3337983438086311380, guid: 284afd5984aab4c4f81a0c6a624c9d06,
+    type: 3}
+  ServiceLocator: {fileID: 6620198133663565335, guid: d99b4e2172603e940a5aa96bddd1dac4,
+    type: 3}
+  debugSaveFile: 1
