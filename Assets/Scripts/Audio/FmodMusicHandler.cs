@@ -20,6 +20,8 @@
         [HideInInspector]
         public bool isMusicPlaying = false;
 
+        private bool isFadingScreenTransition = false;
+
         /// <summary>
         /// Delegate that gets called when we get a beat callback from fmod. Load any functions that need to get called on beat here.
         /// </summary>
@@ -52,7 +54,7 @@
         FMOD.Studio.EventInstance musicEvent;
         FMOD.Studio.EVENT_CALLBACK beatCallback;
 
-        private float fadeOutTimer, maxFadeOutTimer = 1.5f;
+        FMOD.Studio.PLAYBACK_STATE playbackState;
 
         public override void OnAwake()
         {
@@ -71,12 +73,12 @@
 
         public override void OnUpdate()
         {
-            if (fadeOutTimer > 0f)
+            if (isFadingScreenTransition)
             {
-                fadeOutTimer = Mathf.Max(fadeOutTimer - Time.deltaTime, 0f);
-                FmodFacade.instance.SetMusicParam("global_master_fade_.5_param", 1f - fadeOutTimer/maxFadeOutTimer);
-                if (fadeOutTimer <= 0f)
+                musicEvent.getPlaybackState(out playbackState);
+                if (playbackState == FMOD.Studio.PLAYBACK_STATE.STOPPED)
                 {
+                    isFadingScreenTransition = false;
                     SceneTransitionManager.isMusicTransitionDone = true;
                     StopMusic();
                 }
@@ -129,7 +131,8 @@
             //Only fade out music if the next scene has different music.
             if (FmodSceneMusicDictionary.GetSceneMusic(SaveDataManager.saveData.currentScene) != musicEventName)
             {
-                fadeOutTimer = maxFadeOutTimer;
+                FmodFacade.instance.SetMusicParam("global_event_end_param", 1f);
+                isFadingScreenTransition = true;
             }
             else
             {
@@ -137,9 +140,9 @@
             }
         }
 
-        public bool IsMusicFading()
+        public bool IsMusicFadingSceneTransition()
         {
-            return fadeOutTimer > 0;
+            return isFadingScreenTransition;
         }
 
         public void PauseMusic()

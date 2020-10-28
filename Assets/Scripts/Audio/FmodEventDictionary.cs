@@ -13,7 +13,7 @@
             //{ "", "" },
 
             #region Placeholder
-            { "placeholder", "event:/music/twilit_hollow/twilit_hollow" },
+            { "placeholder", "event:/music/placeholder_music/placeholder_music" },
             #endregion
 
             #region Reliqua
@@ -84,7 +84,7 @@
             {"global_combat_proximity_param", "global_combat_proximity" },
             {"global_puzzle_proximity_param", "global_puzzle_proximity" },
             {"global_health_param", "global_health" },
-            {"global_master_fade_.5_param", "global_master_fade_.5" },
+            {"global_event_end_param", "global_event_end" },
 
             {"global_pitch_param", "global_pitch" },
             {"global_octave_param", "global_octave" },
