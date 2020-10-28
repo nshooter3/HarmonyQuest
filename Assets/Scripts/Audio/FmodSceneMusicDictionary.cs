@@ -38,10 +38,5 @@
                 return FmodFacade.instance.GetFmodMusicEventFromDictionary("placeholder");
             }
         }
-
-        public static string GetSceneAmbience(string scene)
-        {
-            return GetSceneMusic(scene) + "_ambience";
-        }
     }
 }

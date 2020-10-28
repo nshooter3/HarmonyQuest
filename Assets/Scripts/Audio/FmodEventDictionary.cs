@@ -14,14 +14,11 @@
 
             #region Placeholder
             { "placeholder", "event:/music/twilit_hollow/twilit_hollow" },
-            { "placeholder_ambience", "event:/music/twilit_hollow/twilit_hollow_dissonance" },
             #endregion
 
             #region Reliqua
             { "twilit_hollow", "event:/music/twilit_hollow/twilit_hollow" },
             { "twilit_hollow_dissonance", "event:/music/twilit_hollow/twilit_hollow_dissonance" },
-            { "twilit_hollow_ambience", "event:/music/twilit_hollow/twilit_hollow_ambience" },
-            { "twilit_hollow_dissonance_ambience", "event:/music/twilit_hollow/twilit_hollow_dissonance_ambience" },
             { "crystal_man_fight_pink", "event:/music/crystal_men/crystal_man_fight_pink" },
             #endregion
         };

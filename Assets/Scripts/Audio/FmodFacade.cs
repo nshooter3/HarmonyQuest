@@ -55,10 +55,6 @@
             {
                 StartMusic(FmodSceneMusicDictionary.GetSceneMusic(SceneManager.GetActiveScene().name), 1f);
             }
-            if (!FmodMusicHandler.instance.isAmbiencePlaying)
-            {
-                StartAmbience(FmodSceneMusicDictionary.GetSceneAmbience(SceneManager.GetActiveScene().name), 1f);
-            }
         }
 
         /// <summary>
@@ -89,42 +85,9 @@
             FmodMusicHandler.instance.SetMusicParam(param, value);
         }
 
-        /// <summary>
-        /// Starts an fmod ambience event
-        /// </summary>
-        /// <param name="name"> The name of the fmod ambience event </param>
-        /// <param name="volume"> The volume of the fmod ambience event </param>
-        public void StartAmbience(string name, float volume)
-        {
-            FmodMusicHandler.instance.StartAmbience(name, volume);
-        }
-
-        /// <summary>
-        /// Stops the active fmod ambience event if there is one.
-        /// </summary>
-        public void StopAmbience()
-        {
-            FmodMusicHandler.instance.StopAmbience();
-        }
-
         public string GetMusicEventName()
         {
             return FmodMusicHandler.instance.GetMusicEventName();
-        }
-
-        public string GetAmbienceEventName()
-        {
-            return FmodMusicHandler.instance.GetAmbienceEventName();
-        }
-
-        /// <summary>
-        /// Sets a param for the current fmod ambience event.
-        /// </summary>
-        /// <param name="param"> The name of the param </param>
-        /// <param name="value">The new param value </param>
-        public void SetAmbienceParam(string param, float value)
-        {
-            FmodMusicHandler.instance.SetAmbienceParam(param, value);
         }
 
         /// <summary>
@@ -172,7 +135,7 @@
         public void SetFmodParameterValue(FMOD.Studio.EventInstance fmodEvent, string parameter, float value)
         {
             //print("Set param " + parameter + ", dict value " + GetFmodParamFromDictionary(parameter) + " TO " + value);
-            fmodEvent.setParameterValue(GetFmodParamFromDictionary(parameter), value);
+            fmodEvent.setParameterByName(GetFmodParamFromDictionary(parameter), value);
         }
 
         /// <summary>
@@ -377,13 +340,13 @@
         public void OnPause()
         {
             fmodEventPool.PauseAll();
-            FmodMusicHandler.instance.PauseAll();
+            FmodMusicHandler.instance.PauseMusic();
         }
 
         public void OnUnpause()
         {
             fmodEventPool.ResumeAll();
-            FmodMusicHandler.instance.ResumeAll();
+            FmodMusicHandler.instance.ResumeMusic();
         }
 
         /*public void GetDSPData()
