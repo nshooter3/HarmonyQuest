@@ -13,7 +13,6 @@
         public static FmodMusicHandler instance;
 
         private string musicEventName;
-        private string ambienceEventName;
 
         [SerializeField]
         private bool memoryDebug = false;
@@ -21,8 +20,7 @@
         [HideInInspector]
         public bool isMusicPlaying = false;
 
-        [HideInInspector]
-        public bool isAmbiencePlaying = false;
+        private bool isFadingScreenTransition = false;
 
         /// <summary>
         /// Delegate that gets called when we get a beat callback from fmod. Load any functions that need to get called on beat here.
@@ -54,10 +52,9 @@
         GCHandle timelineHandle;
 
         FMOD.Studio.EventInstance musicEvent;
-        FMOD.Studio.EventInstance ambienceEvent;
         FMOD.Studio.EVENT_CALLBACK beatCallback;
 
-        private float fadeOutTimer, maxFadeOutTimer = 1.5f;
+        FMOD.Studio.PLAYBACK_STATE playbackState;
 
         public override void OnAwake()
         {
@@ -76,15 +73,14 @@
 
         public override void OnUpdate()
         {
-            if (fadeOutTimer > 0f)
+            if (isFadingScreenTransition)
             {
-                fadeOutTimer = Mathf.Max(fadeOutTimer - Time.deltaTime, 0f);
-                FmodFacade.instance.SetMusicParam("global_master_fade_.5_param", 1f - fadeOutTimer/maxFadeOutTimer);
-                //Ambience doesn't have a master fade param yet, so we'll have to set that up later.
-                if (fadeOutTimer <= 0f)
+                musicEvent.getPlaybackState(out playbackState);
+                if (playbackState == FMOD.Studio.PLAYBACK_STATE.STOPPED)
                 {
+                    isFadingScreenTransition = false;
                     SceneTransitionManager.isMusicTransitionDone = true;
-                    StopAll();
+                    StopMusic();
                 }
             }
         }
@@ -130,58 +126,13 @@
             }
         }
 
-        public void StartAmbience(string name, float volume)
-        {
-            ambienceEventName = name;
-
-            ambienceEvent = FmodFacade.instance.CreateFmodEventInstance(FmodFacade.instance.GetFmodMusicEventFromDictionary(name));
-
-            FmodFacade.instance.PlayFmodEvent(ambienceEvent, volume);
-            isAmbiencePlaying = true;
-        }
-
-        public void StopAmbience()
-        {
-            if (isAmbiencePlaying == true)
-            {
-                ambienceEventName = "";
-                FmodFacade.instance.StopFmodEvent(ambienceEvent);
-                isAmbiencePlaying = false;
-            }
-        }
-
-        public void SetAmbienceParam(string param, float value)
-        {
-            if (isAmbiencePlaying == true)
-            {
-                FmodFacade.instance.SetFmodParameterValue(ambienceEvent, param, value);
-            }
-        }
-
-        public void PauseAll()
-        {
-            FmodFacade.instance.PauseFmodEvent(musicEvent);
-            FmodFacade.instance.PauseFmodEvent(ambienceEvent);
-        }
-
-        public void ResumeAll()
-        {
-            FmodFacade.instance.ResumeFmodEvent(musicEvent);
-            FmodFacade.instance.ResumeFmodEvent(ambienceEvent);
-        }
-
-        public void StopAll()
-        {
-            StopMusic();
-            StopAmbience();
-        }
-
         public void FadeOutAll()
         {
             //Only fade out music if the next scene has different music.
             if (FmodSceneMusicDictionary.GetSceneMusic(SaveDataManager.saveData.currentScene) != musicEventName)
             {
-                fadeOutTimer = maxFadeOutTimer;
+                FmodFacade.instance.SetMusicParam("global_event_end_param", 1f);
+                isFadingScreenTransition = true;
             }
             else
             {
@@ -189,24 +140,29 @@
             }
         }
 
-        public bool IsMusicFading()
+        public bool IsMusicFadingSceneTransition()
         {
-            return fadeOutTimer > 0;
+            return isFadingScreenTransition;
+        }
+
+        public void PauseMusic()
+        {
+            FmodFacade.instance.PauseFmodEvent(musicEvent);
+        }
+
+        public void ResumeMusic()
+        {
+            FmodFacade.instance.ResumeFmodEvent(musicEvent);
         }
 
         private void OnDestroy()
         {
-            StopAll();
+            StopMusic();
         }
 
         public string GetMusicEventName()
         {
             return musicEventName;
-        }
-
-        public string GetAmbienceEventName()
-        {
-            return ambienceEventName;
         }
 
         public int GetCurrentBeat()

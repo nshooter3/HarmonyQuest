@@ -35,13 +35,8 @@
             else
             {
                 Debug.LogWarning("Warning: No music assigned to scene " + scene + " in the FmodSceneMusicDictionary. Loading the placeholder music.");
-                return FmodFacade.instance.GetFmodMusicEventFromDictionary("placeholder");
+                return "placeholder";
             }
-        }
-
-        public static string GetSceneAmbience(string scene)
-        {
-            return GetSceneMusic(scene) + "_ambience";
         }
     }
 }
