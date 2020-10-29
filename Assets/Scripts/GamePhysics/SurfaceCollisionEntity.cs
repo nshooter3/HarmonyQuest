@@ -4,21 +4,21 @@
 
     public class SurfaceCollisionEntity
     {
-        private GameObject gameObject;
-        private PhysicsEntity physicsEntity;
-        private CollisionWrapper collisionWrapper;
+        protected GameObject gameObject;
+        protected PhysicsEntity physicsEntity;
+        protected CollisionWrapper collisionWrapper;
 
         //Bools used to toggle which type of check we use to determine the slope of the surface the entity is standing on.
         //Option 1: Use the highest normal value from the ground colliding with the entity.
-        private bool useCollisionNormals;
+        protected bool useCollisionNormals;
         //Option 2: Use the averaged normals from a series of raycasts from the entity's feet to the ground.
-        private bool useGroupRaycastNormals;
+        protected bool useGroupRaycastNormals;
 
-        private bool isGrounded;
-        private bool isSliding;
+        protected bool isGrounded;
+        protected bool isSliding;
 
         //Angle Y value of the steepest slope that can cause the player to slide.
-        private float steepestSlopeYAngle;
+        protected float steepestSlopeYAngle;
         //Collision normal direction of the steepest slope, used to calculate which direction the player should slide.
         public Vector3 steepestSlopeNormal { get; private set; }
         //The vector that travels up or down along the collision plane. Follows the slope of the collision plane.
@@ -28,25 +28,25 @@
         //Dot product of the player's forward and the slope normal. When this is greater than 0, it means the player is moving towards the direction the slope is pushing them.
         //When this is the case, we want to apply gravity to prevent the player from jittering as they go downhill.
         public float slopeNormalDotProduct;
-        private float slidingYAngleCutoff;
-        private float groundedYAngleCutoff;
-        private bool canSlide;
+        protected float slidingYAngleCutoff;
+        protected float groundedYAngleCutoff;
+        protected bool canSlide;
 
         //Variables used to calculate floor normals.
-        Vector3 raycastOrigin;
-        RaycastHit hit;
-        Vector3 hitNormal;
-        Vector3 averagedHitNormal;
+        protected Vector3 raycastOrigin;
+        protected RaycastHit hit;
+        protected Vector3 hitNormal;
+        protected Vector3 averagedHitNormal;
 
         //Group Raycast vars
-        private float groundCheckRaycastDistance;
-        private float groundCheckRaycastSpread;
-        private float groundCheckCenterWeight;
-        private float groundCheckRaycastYOffset;
-        private LayerMask groundLayerMask;
-        private int numRaycastHits = 0;
+        protected float groundCheckRaycastDistance;
+        protected float groundCheckRaycastSpread;
+        protected float groundCheckCenterWeight;
+        protected float groundCheckRaycastYOffset;
+        protected LayerMask groundLayerMask;
+        protected int numRaycastHits = 0;
 
-        private readonly bool debug = true;
+        protected readonly bool debug = true;
 
         public SurfaceCollisionEntity(GameObject gameObject, PhysicsEntity physicsEntity, CollisionWrapper collisionWrapper, float groundCheckRaycastDistance, float groundCheckRaycastSpread,
              float groundCheckCenterWeight, float groundCheckRaycastYOffset, LayerMask groundLayerMask, float slidingYAngleCutoff, float groundedYAngleCutoff,
@@ -104,7 +104,7 @@
             return averagedHitNormal;
         }
 
-        private Vector3 GetNormalFromRaycast(Vector3 origin, float xOffset, float zOffset, float distance)
+        protected Vector3 GetNormalFromRaycast(Vector3 origin, float xOffset, float zOffset, float distance)
         {
             raycastOrigin = new Vector3(origin.x + xOffset, origin.y + groundCheckRaycastYOffset, origin.z + zOffset);
             Debug.DrawRay(raycastOrigin, Vector3.down * (distance + groundCheckRaycastYOffset), Color.magenta);
@@ -121,7 +121,7 @@
             return Vector3.zero;
         }
 
-        private void SetGroundedFromCollision(Collision collision)
+        protected void SetGroundedFromCollision(Collision collision)
         {
             for (int i = 0; i < collision.contactCount; i++)
             {
@@ -129,17 +129,7 @@
             }
         }
 
-        //Simulate whether or not the player will standing on a steep slope before they've actually moved, so that we can prevent this movement.
-        //Will be overwritten with actual slope information once OnFixedUpdate runs.
-        public bool IsMovementDestinationASteepSlope(Vector3 position, float raycastDistance)
-        {
-            isSliding = false;
-            GetAveragedNormalFromDownwardRaycast(position, raycastDistance);
-            SetGroundedFromNormal(averagedHitNormal);
-            return isSliding;
-        }
-
-        private void SetGroundedFromNormal(Vector3 normal)
+        protected void SetGroundedFromNormal(Vector3 normal)
         {
             steepestSlopeYAngle = 0;
             steepestSlopeNormal = Vector3.zero;

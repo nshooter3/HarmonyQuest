@@ -9,7 +9,7 @@
         private SurfaceCollisionEntity surfaceCollisionEntity;
         //Surface collision for where Melody is attempting to stand before her velocity is applied.
         //Used to check for and prevent Melody from walking onto steep slopes without changing her actual grounded data.
-        private SurfaceCollisionEntity preemptiveSurfaceCollisionEntity;
+        private PreemptiveSurfaceCollisionEntity preemptiveSurfaceCollisionEntity;
 
         public MelodySurfaceCollision(MelodyController controller)
         {
@@ -17,7 +17,7 @@
                 controller.config.groundCheckRaycastSpread, controller.config.groundCheckCenterWeight, controller.config.groundCheckRaycastYOffset, controller.config.groundLayerMask,
                 controller.config.slidingYAngleCutoff, controller.config.groundedYAngleCutoff, true, true, false);
 
-            preemptiveSurfaceCollisionEntity = new SurfaceCollisionEntity(controller.gameObject, controller.melodyPhysics.GetPhysicsEntity(), controller.melodyColliderWrapper, controller.config.groundCheckRaycastDistance,
+            preemptiveSurfaceCollisionEntity = new PreemptiveSurfaceCollisionEntity(controller.gameObject, controller.melodyPhysics.GetPhysicsEntity(), controller.melodyColliderWrapper, controller.config.groundCheckRaycastDistance,
                 controller.config.groundCheckRaycastSpread, controller.config.groundCheckCenterWeight, controller.config.groundCheckRaycastYOffset, controller.config.groundLayerMask,
                 controller.config.slidingYAngleCutoff, controller.config.groundedYAngleCutoff, true, true, false);
         }
@@ -52,7 +52,7 @@
             return preemptiveSurfaceCollisionEntity.IsMovementDestinationASteepSlope(position, raycastDistance);
         }
 
-        public SurfaceCollisionEntity GetPreemptiveSurfaceCollisionEntity()
+        public PreemptiveSurfaceCollisionEntity GetPreemptiveSurfaceCollisionEntity()
         {
             return preemptiveSurfaceCollisionEntity;
         }
