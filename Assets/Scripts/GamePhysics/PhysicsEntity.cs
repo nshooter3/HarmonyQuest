@@ -12,6 +12,8 @@
         public GameObject gameObject;
         public Rigidbody rb;
 
+        private float colliderHeight;
+
         //Create three offsets from the entity's pivot point for generating an upper, central, and lower point to raycast from when checking for wall collisions.
         public Vector3 colliderOffset;
         public Vector3 upperColliderOffset;
@@ -34,6 +36,9 @@
 
         private bool debug = false;
 
+        //The distance between the lowest wall collision raycast height and the ground. Used to raycast down from lowest raycast to the ground to prevent the player from walking onto steep slopes.
+        private float lowerRaycastToGroundDistance;
+
         public PhysicsEntity(GameObject gameObject, Rigidbody rb, Vector3 colliderOffset, float colliderHeight, float colliderRadius, float upperLowerYHeightScale = 0.5f)
         {
             this.gameObject = gameObject;
@@ -41,10 +46,12 @@
             this.colliderOffset = colliderOffset;
             this.colliderRadius = colliderRadius;
             this.upperLowerYHeightScale = upperLowerYHeightScale;
+            this.colliderHeight = colliderHeight;
             upperColliderOffset = colliderOffset;
             upperColliderOffset.y += (colliderHeight / 2.0f) * upperLowerYHeightScale;
             lowerColliderOffset = colliderOffset;
             lowerColliderOffset.y += (-colliderHeight / 2.0f) * upperLowerYHeightScale;
+            lowerRaycastToGroundDistance = (colliderHeight / 2.0f) - Mathf.Abs(lowerColliderOffset.y);
         }
 
         public void ResetDesiredVelocity()
@@ -212,6 +219,38 @@
                 Debug.DrawRay(colliderCenterPosition, velocity.normalized * predictedMovementDistance, Color.yellow);
                 Debug.DrawRay(colliderUpperPosition, velocity.normalized * predictedMovementDistance, Color.blue);
                 Debug.DrawRay(colliderLowerPosition, velocity.normalized * predictedMovementDistance, Color.green);
+            }
+        }
+
+        /// <summary>
+        /// Used to prevent the entity from walking onto an overly steep slope. This prevents jitteryness from walking up and immediately sliding back down a hill.
+        /// </summary>
+        public void ProhibitMovementOntoSteepSlope(SurfaceCollisionEntity preemptiveSurfaceCollisionEntity, bool isDash = false)
+        {
+            SetRaycastOriginPoints();
+
+            Vector3 playerPos = rb.position;
+            playerPos.y += (colliderHeight / 2.0f) + (-colliderHeight / 2.0f) * upperLowerYHeightScale;
+            Vector3 movementDisplacement = velocity.normalized * predictedMovementDistance;
+            Vector3 futurePos = playerPos + movementDisplacement;
+
+            if (preemptiveSurfaceCollisionEntity.IsMovementDestinationASteepSlope(futurePos, lowerRaycastToGroundDistance))
+            {
+                Debug.Log("ProhibitMovementOntoSteepSlope");
+                if (isDash == true)
+                {
+                    //If the entity dashes into a steep slope, cancel their movement for the remainder of the dash.
+                    velocity = Vector3.zero;
+                }
+                else
+                {
+                    //If the entity walks into a steep slope, stop the horizontal movement
+                    IgnoreHorizontalMovementInput();
+                }
+            }
+            if (debug)
+            {
+                Debug.DrawRay(colliderCenterPosition, velocity.normalized * predictedMovementDistance, Color.magenta);
             }
         }
 

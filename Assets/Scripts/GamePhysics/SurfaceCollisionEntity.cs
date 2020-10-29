@@ -80,23 +80,28 @@
             slopeNormalDotProduct = 0;
             if (useGroupRaycastNormals == true)
             {
-                GetAveragedNormal();
+                GetAveragedNormalFromDownwardRaycast(gameObject.transform.position, groundCheckRaycastDistance);
+                if (numRaycastHits != 0)
+                {
+                    SetGroundedFromNormal(averagedHitNormal);
+                }
             }
         }
 
-        private void GetAveragedNormal()
+        public Vector3 GetAveragedNormalFromDownwardRaycast(Vector3 position, float raycastDistance)
         {
+            averagedHitNormal = Vector3.zero;
             numRaycastHits = 0;
-            averagedHitNormal = GetNormalFromRaycast(gameObject.transform.position, 0f, 0f, groundCheckRaycastDistance) * groundCheckCenterWeight +
-            GetNormalFromRaycast(gameObject.transform.position, groundCheckRaycastSpread, 0f, groundCheckRaycastDistance) +
-            GetNormalFromRaycast(gameObject.transform.position, -groundCheckRaycastSpread, 0f, groundCheckRaycastDistance) +
-            GetNormalFromRaycast(gameObject.transform.position, 0f, groundCheckRaycastSpread, groundCheckRaycastDistance) +
-            GetNormalFromRaycast(gameObject.transform.position, 0f, -groundCheckRaycastSpread, groundCheckRaycastDistance);
+            averagedHitNormal = GetNormalFromRaycast(position, 0f, 0f, raycastDistance) * groundCheckCenterWeight +
+            GetNormalFromRaycast(position, groundCheckRaycastSpread, 0f, raycastDistance) +
+            GetNormalFromRaycast(position, -groundCheckRaycastSpread, 0f, raycastDistance) +
+            GetNormalFromRaycast(position, 0f, groundCheckRaycastSpread, raycastDistance) +
+            GetNormalFromRaycast(position, 0f, -groundCheckRaycastSpread, raycastDistance);
             if (numRaycastHits != 0)
             {
                 averagedHitNormal = averagedHitNormal / numRaycastHits;
-                SetGroundedFromNormal(averagedHitNormal);
             }
+            return averagedHitNormal;
         }
 
         private Vector3 GetNormalFromRaycast(Vector3 origin, float xOffset, float zOffset, float distance)
@@ -122,6 +127,16 @@
             {
                 SetGroundedFromNormal(collision.GetContact(i).normal);
             }
+        }
+
+        //Simulate whether or not the player will standing on a steep slope before they've actually moved, so that we can prevent this movement.
+        //Will be overwritten with actual slope information once OnFixedUpdate runs.
+        public bool IsMovementDestinationASteepSlope(Vector3 position, float raycastDistance)
+        {
+            isSliding = false;
+            GetAveragedNormalFromDownwardRaycast(position, raycastDistance);
+            SetGroundedFromNormal(averagedHitNormal);
+            return isSliding;
         }
 
         private void SetGroundedFromNormal(Vector3 normal)
