@@ -39,7 +39,7 @@
             else
             {
                 physicsEntity.ProhibitMovementIntoWalls(controller.config.prohibitMovementIntoWallsLayerMask);
-                physicsEntity.ProhibitMovementOntoSteepSlope(controller.melodyCollision.GetPreemptiveSurfaceCollisionEntity());
+                physicsEntity.ProhibitMovementOntoSteepSlope(controller.melodyCollision.GetPreemptiveSurfaceCollisionEntity(), controller.melodyCollision.IsGrounded());
                 if (canPushBoxes == true)
                 {
                     PushBoxes();
@@ -61,7 +61,7 @@
             {
                 physicsEntity.velocity = dashVelocity;
                 physicsEntity.ProhibitMovementIntoWalls(controller.config.prohibitDashIntoWallsLayerMask, true);
-                physicsEntity.ProhibitMovementOntoSteepSlope(controller.melodyCollision.GetPreemptiveSurfaceCollisionEntity(), true);
+                physicsEntity.ProhibitMovementOntoSteepSlope(controller.melodyCollision.GetPreemptiveSurfaceCollisionEntity(), controller.melodyCollision.IsGrounded(), true);
                 physicsEntity.ApplyVelocity();
             }
         }

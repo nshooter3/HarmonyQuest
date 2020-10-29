@@ -225,32 +225,35 @@
         /// <summary>
         /// Used to prevent the entity from walking onto an overly steep slope. This prevents jitteryness from walking up and immediately sliding back down a hill.
         /// </summary>
-        public void ProhibitMovementOntoSteepSlope(SurfaceCollisionEntity preemptiveSurfaceCollisionEntity, bool isDash = false)
+        public void ProhibitMovementOntoSteepSlope(SurfaceCollisionEntity preemptiveSurfaceCollisionEntity, bool isGrounded, bool isDash = false)
         {
-            SetRaycastOriginPoints();
-
-            Vector3 playerPos = rb.position;
-            playerPos.y += (colliderHeight / 2.0f) + (-colliderHeight / 2.0f) * upperLowerYHeightScale;
-            Vector3 movementDisplacement = velocity.normalized * predictedMovementDistance;
-            Vector3 futurePos = playerPos + movementDisplacement;
-
-            if (preemptiveSurfaceCollisionEntity.IsMovementDestinationASteepSlope(futurePos, lowerRaycastToGroundDistance))
+            if (isGrounded)
             {
-                Debug.Log("ProhibitMovementOntoSteepSlope");
-                if (isDash == true)
+                SetRaycastOriginPoints();
+
+                Vector3 playerPos = rb.position;
+                playerPos.y += (colliderHeight / 2.0f) + (-colliderHeight / 2.0f) * upperLowerYHeightScale;
+                Vector3 movementDisplacement = velocity.normalized * predictedMovementDistance;
+                Vector3 futurePos = playerPos + movementDisplacement;
+
+                if (preemptiveSurfaceCollisionEntity.IsMovementDestinationASteepSlope(futurePos, lowerRaycastToGroundDistance))
                 {
-                    //If the entity dashes into a steep slope, cancel their movement for the remainder of the dash.
-                    velocity = Vector3.zero;
+                    Debug.Log("ProhibitMovementOntoSteepSlope");
+                    if (isDash == true)
+                    {
+                        //If the entity dashes into a steep slope, cancel their movement for the remainder of the dash.
+                        velocity = Vector3.zero;
+                    }
+                    else
+                    {
+                        //If the entity walks into a steep slope, stop the horizontal movement
+                        IgnoreHorizontalMovementInput();
+                    }
                 }
-                else
+                if (debug)
                 {
-                    //If the entity walks into a steep slope, stop the horizontal movement
-                    IgnoreHorizontalMovementInput();
+                    Debug.DrawRay(colliderCenterPosition, velocity.normalized * predictedMovementDistance, Color.magenta);
                 }
-            }
-            if (debug)
-            {
-                Debug.DrawRay(colliderCenterPosition, velocity.normalized * predictedMovementDistance, Color.magenta);
             }
         }
 
