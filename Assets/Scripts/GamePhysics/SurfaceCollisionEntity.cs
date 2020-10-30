@@ -25,6 +25,8 @@
         public Vector3 steepestSlopeNormalPerpendicular { get; private set; }
         //The vector that travels horizontally along the collision plane. Has a y value of 0.
         public Vector3 steepestSlopeNormalPerpendicularSide { get; private set; }
+        //A 2D representation of which direction the slope should be pushing back on the player.
+        public Vector3 slopeNormal2D;
         //Dot product of the player's forward and the slope normal. When this is greater than 0, it means the player is moving towards the direction the slope is pushing them.
         //When this is the case, we want to apply gravity to prevent the player from jittering as they go downhill.
         public float slopeNormalDotProduct;
@@ -165,6 +167,10 @@
                 slopeNormalDotProduct = Vector3.Dot(entityDirection, steepestSlopeNormal);
                 steepestSlopeNormalPerpendicularSide = normalPerpendicularSide;
                 steepestSlopeNormalPerpendicular = normalPerpendicular;
+
+                slopeNormal2D = steepestSlopeNormal;
+                slopeNormal2D.y = 0f;
+                slopeNormal2D.Normalize();
             }
 
             if (debug && (isGrounded || isSliding))

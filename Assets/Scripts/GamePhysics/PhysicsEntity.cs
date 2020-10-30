@@ -253,7 +253,7 @@
                     else
                     {
                         //If the entity walks into a steep slope, stop the horizontal movement
-                        IgnoreHorizontalMovementInput();
+                        AddForceToVelocity(preemptiveSurfaceCollisionEntity.slopeNormal2D * velocity.magnitude);
                     }
                 }
             }
@@ -268,6 +268,11 @@
         public void IgnoreHorizontalMovementInput()
         {
             velocity = new Vector3(0.0f, velocity.y, 0.0f);
+        }
+
+        public void AddForceToVelocity(Vector3 newForce)
+        {
+            velocity = velocity + newForce;
         }
 
         public void SnapToGround(bool isGrounded, float snapToGroundRaycastDistance, LayerMask layerMask)
