@@ -12,12 +12,14 @@
         public GameObject gameObject;
         public Rigidbody rb;
 
+        private float colliderHeight;
+
         //Create three offsets from the entity's pivot point for generating an upper, central, and lower point to raycast from when checking for wall collisions.
         public Vector3 colliderOffset;
         public Vector3 upperColliderOffset;
         public Vector3 lowerColliderOffset;
 
-        //Raycast origin points
+        //Raycast origin points for preventing movement into walls.
         public Vector3 colliderCenterPosition;
         public Vector3 colliderUpperPosition;
         public Vector3 colliderLowerPosition;
@@ -34,6 +36,9 @@
 
         private bool debug = false;
 
+        //The how far above the ground to check for steep slopes when using the ProhibitMovementOntoSteepSlope function.
+        private float steepSlopeCheckRaycastDistance;
+
         public PhysicsEntity(GameObject gameObject, Rigidbody rb, Vector3 colliderOffset, float colliderHeight, float colliderRadius, float upperLowerYHeightScale = 0.5f)
         {
             this.gameObject = gameObject;
@@ -41,10 +46,12 @@
             this.colliderOffset = colliderOffset;
             this.colliderRadius = colliderRadius;
             this.upperLowerYHeightScale = upperLowerYHeightScale;
+            this.colliderHeight = colliderHeight;
             upperColliderOffset = colliderOffset;
             upperColliderOffset.y += (colliderHeight / 2.0f) * upperLowerYHeightScale;
             lowerColliderOffset = colliderOffset;
             lowerColliderOffset.y += (-colliderHeight / 2.0f) * upperLowerYHeightScale;
+            steepSlopeCheckRaycastDistance = colliderHeight * 0.25f;
         }
 
         public void ResetDesiredVelocity()
@@ -215,6 +222,43 @@
             }
         }
 
+        /// <summary>
+        /// Used to prevent the entity from walking onto an overly steep slope. This prevents jitteryness from walking up and immediately sliding back down a hill.
+        /// </summary>
+        /// <param name="preemptiveSurfaceCollisionEntity"> The class used to simulate the steepness of the slope Melody will be standing on if she moves. </param>
+        /// <param name="isGrounded"> Whether or not the player is grounded. If they are sliding or in the air, we do not want to apply this function. </param>
+        /// <param name="isDash"> Whether or not the player is dashing. This will effect HOW we stop their movement up the slope. </param>
+        public void ProhibitMovementOntoSteepSlope(PreemptiveSurfaceCollisionEntity preemptiveSurfaceCollisionEntity, bool isGrounded, bool isDash = false)
+        {
+            if (isGrounded)
+            {
+                SetRaycastOriginPoints();
+
+                //The position of the bottom of the player.
+                Vector3 playerPos = rb.position;
+                //The vector of movement that will be applied to the player, assuming their movement is valid.
+                Vector3 movementDisplacement = velocity.normalized * predictedMovementDistance;
+                //Start our raycast from where the player will be if their movement continues.
+                Vector3 raycastPos = playerPos + movementDisplacement;
+                //Add an offset to the y value so that we hit the ground when we raycast down.
+                raycastPos.y += steepSlopeCheckRaycastDistance;
+
+                if (preemptiveSurfaceCollisionEntity.IsMovementDestinationASteepSlope(raycastPos, steepSlopeCheckRaycastDistance))
+                {
+                    if (isDash == true)
+                    {
+                        //If the entity dashes into a steep slope, cancel their movement for the remainder of the dash.
+                        velocity = Vector3.zero;
+                    }
+                    else
+                    {
+                        //If the entity walks into a steep slope, stop the horizontal movement
+                        AddForceToVelocity(preemptiveSurfaceCollisionEntity.slopeNormal2D * velocity.magnitude);
+                    }
+                }
+            }
+        }
+
         public void ApplyStationaryVelocity()
         {
             velocity = Vector3.zero;
@@ -224,6 +268,11 @@
         public void IgnoreHorizontalMovementInput()
         {
             velocity = new Vector3(0.0f, velocity.y, 0.0f);
+        }
+
+        public void AddForceToVelocity(Vector3 newForce)
+        {
+            velocity = velocity + newForce;
         }
 
         public void SnapToGround(bool isGrounded, float snapToGroundRaycastDistance, LayerMask layerMask)
