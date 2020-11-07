@@ -129,7 +129,7 @@
         public void FadeOutAll()
         {
             //Only fade out music if the next scene has different music.
-            if (FmodSceneMusicDictionary.GetSceneMusic(SaveDataManager.saveData.currentScene) != musicEventName)
+            if (SceneLoadObjectDictionary.instance.GetSceneLoadObject(SaveDataManager.saveData.currentScene).fmodMusicEvent != musicEventName)
             {
                 FmodFacade.instance.SetMusicParam("global_event_end_param", 1f);
                 isFadingScreenTransition = true;

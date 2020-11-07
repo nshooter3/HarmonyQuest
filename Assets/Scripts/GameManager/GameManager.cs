@@ -33,7 +33,8 @@
         private UITransitionManager foundTransitionManager;
 
         //Manager classes that don't have monobehaviors
-        public PhysicsManager physicsManager;
+        private PhysicsManager physicsManager;
+        private SceneLoadObjectDictionary sceneLoadObjectDictionary;
 
         //The master list of all the objects that need to be updated, in order.
         private ObjectManager objectManager = new ObjectManager();
@@ -143,6 +144,10 @@
 
         public void InitManagerClasses()
         {
+            if (SceneLoadObjectDictionary.instance == null)
+            {
+                sceneLoadObjectDictionary = new SceneLoadObjectDictionary();
+            }
             physicsManager = new PhysicsManager();
         }
 
