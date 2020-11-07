@@ -21,18 +21,41 @@
         private float wideFOV = 73f;
         private float narrowFOV = 65f;
 
+        public void ResetToPlayer()
+        {
+            cameraTransform.eulerAngles = CalculateRotation();
+            cameraTransform.position = CalculateDirection();
+            Camera.main.fieldOfView = CalculateFOV();
+        }
+
         public override void Update()
         {
             bias = followBias;
+            targetAngles = CalculateRotation();
+            direction = CalculateDirection();
+            Camera.main.fieldOfView = CalculateFOV();
+        }
+
+        private Vector3 CalculateDirection()
+        {
+            Vector3 position = (cameraTransform.position - PlayerLocation()).normalized * distance;
+            position.x = 0;
+            position.y = exponentialHeight;
+            position.z -= cameraOffset;
+            position += PlayerLocation() + PlayerVelocity() / Mathf.Lerp(fastVelocityScale, slowVelocityScale, cameraTransform.position.y / maxHeight);
+            return position;
+        }
+
+        private Vector3 CalculateRotation()
+        {
             // Camera Height calculated on an exponential curve
             exponentialHeight = Mathf.Pow(exponentBase, distance * exponentFactor) + minHeight;
-            direction = (cameraTransform.position - PlayerLocation()).normalized * distance;
-            direction.x = 0;
-            direction.y = exponentialHeight;
-            direction.z -= cameraOffset;
-            targetAngles = Vector3.Lerp(lowAngle, highAngle, exponentialHeight / maxHeight);
-            direction += PlayerLocation() + PlayerVelocity() / Mathf.Lerp(fastVelocityScale, slowVelocityScale, cameraTransform.position.y / maxHeight);
-            Camera.main.fieldOfView = Mathf.Lerp(wideFOV, narrowFOV, exponentialHeight / maxHeight);
+            return Vector3.Lerp(lowAngle, highAngle, exponentialHeight / maxHeight);
+        }
+
+        private float CalculateFOV()
+        {
+            return Mathf.Lerp(wideFOV, narrowFOV, exponentialHeight / maxHeight);
         }
     }
 }

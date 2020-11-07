@@ -6,7 +6,7 @@
     public abstract class CameraBehavior
     {
         private IMelodyInfo player;
-        
+
         protected Transform cameraTransform;
         protected Vector3 targetAngles;
 
@@ -40,7 +40,7 @@
         {
             active = value;
         }
-        
+
         protected Vector3 PlayerLocation()
         {
             return player.GetTransform().position;

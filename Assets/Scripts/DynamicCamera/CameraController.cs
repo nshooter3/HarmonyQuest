@@ -27,7 +27,7 @@
             }
         }
 
-        public override void OnAwake()
+        public override void OnStart()
         {
             if (!inst)
             {
@@ -46,6 +46,7 @@
             {
                 behaviors[0].ToggleActive(true);
             }
+            GetCameraBehavior<CameraBehaviorFollowPlayer>().ResetToPlayer();
         }
 
         public override void OnLateUpdate()
