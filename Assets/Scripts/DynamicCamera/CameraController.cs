@@ -27,7 +27,7 @@
             }
         }
 
-        public override void OnAwake()
+        public override void OnStart()
         {
             if (!inst)
             {
