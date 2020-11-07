@@ -4,10 +4,14 @@
     using System.Collections.Generic;
     using Melody;
     using GameManager;
+    using UnityEngine.Rendering.PostProcessing;
+    using UnityEngine.SceneManagement;
 
     public class CameraController : ManageableObject
     {
         private List<CameraBehavior> behaviors = new List<CameraBehavior>();
+
+        public PostProcessVolume postProcessVolume;
 
         private static CameraController inst;
         public static CameraController instance
@@ -37,6 +41,10 @@
             {
                 Destroy(this);
             }
+
+            //Load in scene specific post processing profiles based on the SceneLoadObjectDictionary.
+            postProcessVolume.profile = SceneLoadObjectDictionary.instance.GetSceneLoadObject(SceneManager.GetActiveScene().name).postProcessProfile;
+
             // Fill behaviors list with camera behaviors
             behaviors.Add(new CameraBehaviorFollowPlayer());
             behaviors.Add(new CameraBehaviorLookAt());
