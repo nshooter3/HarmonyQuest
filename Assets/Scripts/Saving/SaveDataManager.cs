@@ -18,6 +18,8 @@
         private static BinaryFormatter bf;
         private static FileStream file;
 
+        public static bool saveLoaded = false;
+
         /// <summary>
         /// Initializes save file with default SaveData values. This function can be called to clear an existing save.
         /// </summary>
@@ -119,6 +121,7 @@
                     bf = new BinaryFormatter();
                     saveData = (SaveData)bf.Deserialize(file);
                     file.Close();
+                    saveLoaded = true;
                 }
             }
             catch (Exception e)

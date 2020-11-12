@@ -43,7 +43,6 @@ public class HQDialogueTease : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log("Hit");
         SetBarkComponents(false);
         SetIndicator(true);
     }

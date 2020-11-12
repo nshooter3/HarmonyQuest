@@ -48,11 +48,11 @@
             {
                 for (int i = 0; i < eventPool.Count; i++)
                 {
-                    if (eventPool[i].isReadyToPlay == true)
+                    if (eventPool[i].isPlaying == false)
                     {
                         eventPool[i].Play(volume, parent, rb, paramData);
                         //Prepare our next event object before it is told to play
-                        eventPool[(i + 1) % eventPool.Count].Restart();
+                        eventPool[(i + 1) % eventPool.Count].RestartAndPause();
                         return eventPool[i];
                     }
                 }
@@ -69,12 +69,54 @@
 
             if (eventPool != null && eventPool.Count > index && eventPool[index] != null)
             {
-                eventPool[index].Restart();
+                eventPool[index].RestartAndPause();
                 return eventPool[index];
             }
 
             Debug.LogWarning("No fmod event exists for attempt to restart " + eventName + " at index " + index + ". Doing nothing.");
             return null;
+        }
+
+        public void StopAll()
+        {
+            foreach (KeyValuePair<string, List<FmodEventPoolableObject>> eventPool in eventPools)
+            {
+                foreach (FmodEventPoolableObject fmodEvent in eventPool.Value)
+                {
+                    if (fmodEvent.isPlaying == true)
+                    {
+                        fmodEvent.Abort();
+                    }
+                }
+            }
+        }
+
+        public void PauseAll()
+        {
+            foreach (KeyValuePair < string, List<FmodEventPoolableObject>> eventPool in eventPools)
+            {
+                foreach (FmodEventPoolableObject fmodEvent in eventPool.Value)
+                {
+                    if (fmodEvent.isPlaying == true)
+                    {
+                        fmodEvent.Pause();
+                    }
+                }
+            }
+        }
+
+        public void ResumeAll()
+        {
+            foreach (KeyValuePair<string, List<FmodEventPoolableObject>> eventPool in eventPools)
+            {
+                foreach (FmodEventPoolableObject fmodEvent in eventPool.Value)
+                {
+                    if (fmodEvent.isPlaying == true)
+                    {
+                        fmodEvent.Resume();
+                    }
+                }
+            }
         }
 
         public void ClearPools()

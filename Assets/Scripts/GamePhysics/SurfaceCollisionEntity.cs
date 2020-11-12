@@ -4,49 +4,51 @@
 
     public class SurfaceCollisionEntity
     {
-        private GameObject gameObject;
-        private PhysicsEntity physicsEntity;
-        private CollisionWrapper collisionWrapper;
+        protected GameObject gameObject;
+        protected PhysicsEntity physicsEntity;
+        protected CollisionWrapper collisionWrapper;
 
         //Bools used to toggle which type of check we use to determine the slope of the surface the entity is standing on.
         //Option 1: Use the highest normal value from the ground colliding with the entity.
-        private bool useCollisionNormals;
+        protected bool useCollisionNormals;
         //Option 2: Use the averaged normals from a series of raycasts from the entity's feet to the ground.
-        private bool useGroupRaycastNormals;
+        protected bool useGroupRaycastNormals;
 
-        private bool isGrounded;
-        private bool isSliding;
+        protected bool isGrounded;
+        protected bool isSliding;
 
         //Angle Y value of the steepest slope that can cause the player to slide.
-        private float steepestSlopeYAngle;
+        protected float steepestSlopeYAngle;
         //Collision normal direction of the steepest slope, used to calculate which direction the player should slide.
         public Vector3 steepestSlopeNormal { get; private set; }
         //The vector that travels up or down along the collision plane. Follows the slope of the collision plane.
         public Vector3 steepestSlopeNormalPerpendicular { get; private set; }
         //The vector that travels horizontally along the collision plane. Has a y value of 0.
         public Vector3 steepestSlopeNormalPerpendicularSide { get; private set; }
+        //A 2D representation of which direction the slope should be pushing back on the player.
+        public Vector3 slopeNormal2D;
         //Dot product of the player's forward and the slope normal. When this is greater than 0, it means the player is moving towards the direction the slope is pushing them.
         //When this is the case, we want to apply gravity to prevent the player from jittering as they go downhill.
         public float slopeNormalDotProduct;
-        private float slidingYAngleCutoff;
-        private float groundedYAngleCutoff;
-        private bool canSlide;
+        protected float slidingYAngleCutoff;
+        protected float groundedYAngleCutoff;
+        protected bool canSlide;
 
         //Variables used to calculate floor normals.
-        Vector3 raycastOrigin;
-        RaycastHit hit;
-        Vector3 hitNormal;
-        Vector3 averagedHitNormal;
+        protected Vector3 raycastOrigin;
+        protected RaycastHit hit;
+        protected Vector3 hitNormal;
+        protected Vector3 averagedHitNormal;
 
         //Group Raycast vars
-        private float groundCheckRaycastDistance;
-        private float groundCheckRaycastSpread;
-        private float groundCheckCenterWeight;
-        private float groundCheckRaycastYOffset;
-        private LayerMask groundLayerMask;
-        private int numRaycastHits = 0;
+        protected float groundCheckRaycastDistance;
+        protected float groundCheckRaycastSpread;
+        protected float groundCheckCenterWeight;
+        protected float groundCheckRaycastYOffset;
+        protected LayerMask groundLayerMask;
+        protected int numRaycastHits = 0;
 
-        private readonly bool debug = true;
+        protected readonly bool debug = true;
 
         public SurfaceCollisionEntity(GameObject gameObject, PhysicsEntity physicsEntity, CollisionWrapper collisionWrapper, float groundCheckRaycastDistance, float groundCheckRaycastSpread,
              float groundCheckCenterWeight, float groundCheckRaycastYOffset, LayerMask groundLayerMask, float slidingYAngleCutoff, float groundedYAngleCutoff,
@@ -80,26 +82,31 @@
             slopeNormalDotProduct = 0;
             if (useGroupRaycastNormals == true)
             {
-                GetAveragedNormal();
+                GetAveragedNormalFromDownwardRaycast(gameObject.transform.position, groundCheckRaycastDistance);
+                if (numRaycastHits != 0)
+                {
+                    SetGroundedFromNormal(averagedHitNormal);
+                }
             }
         }
 
-        private void GetAveragedNormal()
+        public Vector3 GetAveragedNormalFromDownwardRaycast(Vector3 position, float raycastDistance)
         {
+            averagedHitNormal = Vector3.zero;
             numRaycastHits = 0;
-            averagedHitNormal = GetNormalFromRaycast(gameObject.transform.position, 0f, 0f, groundCheckRaycastDistance) * groundCheckCenterWeight +
-            GetNormalFromRaycast(gameObject.transform.position, groundCheckRaycastSpread, 0f, groundCheckRaycastDistance) +
-            GetNormalFromRaycast(gameObject.transform.position, -groundCheckRaycastSpread, 0f, groundCheckRaycastDistance) +
-            GetNormalFromRaycast(gameObject.transform.position, 0f, groundCheckRaycastSpread, groundCheckRaycastDistance) +
-            GetNormalFromRaycast(gameObject.transform.position, 0f, -groundCheckRaycastSpread, groundCheckRaycastDistance);
+            averagedHitNormal = GetNormalFromRaycast(position, 0f, 0f, raycastDistance) * groundCheckCenterWeight +
+            GetNormalFromRaycast(position, groundCheckRaycastSpread, 0f, raycastDistance) +
+            GetNormalFromRaycast(position, -groundCheckRaycastSpread, 0f, raycastDistance) +
+            GetNormalFromRaycast(position, 0f, groundCheckRaycastSpread, raycastDistance) +
+            GetNormalFromRaycast(position, 0f, -groundCheckRaycastSpread, raycastDistance);
             if (numRaycastHits != 0)
             {
                 averagedHitNormal = averagedHitNormal / numRaycastHits;
-                SetGroundedFromNormal(averagedHitNormal);
             }
+            return averagedHitNormal;
         }
 
-        private Vector3 GetNormalFromRaycast(Vector3 origin, float xOffset, float zOffset, float distance)
+        protected Vector3 GetNormalFromRaycast(Vector3 origin, float xOffset, float zOffset, float distance)
         {
             raycastOrigin = new Vector3(origin.x + xOffset, origin.y + groundCheckRaycastYOffset, origin.z + zOffset);
             Debug.DrawRay(raycastOrigin, Vector3.down * (distance + groundCheckRaycastYOffset), Color.magenta);
@@ -116,7 +123,7 @@
             return Vector3.zero;
         }
 
-        private void SetGroundedFromCollision(Collision collision)
+        protected void SetGroundedFromCollision(Collision collision)
         {
             for (int i = 0; i < collision.contactCount; i++)
             {
@@ -124,7 +131,7 @@
             }
         }
 
-        private void SetGroundedFromNormal(Vector3 normal)
+        protected void SetGroundedFromNormal(Vector3 normal)
         {
             steepestSlopeYAngle = 0;
             steepestSlopeNormal = Vector3.zero;
@@ -160,6 +167,10 @@
                 slopeNormalDotProduct = Vector3.Dot(entityDirection, steepestSlopeNormal);
                 steepestSlopeNormalPerpendicularSide = normalPerpendicularSide;
                 steepestSlopeNormalPerpendicular = normalPerpendicular;
+
+                slopeNormal2D = steepestSlopeNormal;
+                slopeNormal2D.y = 0f;
+                slopeNormal2D.Normalize();
             }
 
             if (debug && (isGrounded || isSliding))

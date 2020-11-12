@@ -1,37 +1,76 @@
 ﻿namespace UI
 {
+    using GameManager;
     using HarmonyQuest;
+    using System.Collections.Generic;
     using UnityEngine;
     using UnityEngine.UI;
 
-    public class UIManager : MonoBehaviour
+    public class UIManager : ManageableObject
     {
+        public Canvas canvas;
+
         public UITracker lockOnReticule;
 
         public Image lockOnImage;
 
+        public UITracker grappleReticule;
+        public Image grappleImage;
+
         public AgentHealthBarsPool agentHealthBarsPool;
 
         public UIMeter playerHealth;
+
+        protected List<UITracker> uiTrackers;
 
         //[HideInInspector]
         public float[] screenScale;
 
         public static readonly int[] targetResolution = { 1920, 1080 };
 
-        //TODO: Other UI functions, yeah!
-
-        void Start()
+        public UIManager()
         {
-            Debug.Log(Screen.currentResolution.ToString());
-            screenScale = new float[2];
-            screenScale[0] = (float) ServiceLocator.instance.GetCamera().pixelWidth / targetResolution[0];
-            screenScale[1] = (float) ServiceLocator.instance.GetCamera().pixelHeight/ targetResolution[1];
+            uiTrackers = new List<UITracker>();
         }
 
-        public float[] GetScaledPixels(int x, int y)
+        public override void OnAwake()
         {
-            return new float[2] { x * screenScale[0], y * screenScale[1] };
+            playerHealth.OnAwake();
+            lockOnReticule.OnAwake();
+            grappleReticule.OnAwake();
+            agentHealthBarsPool.OnAwake();
+            foreach(UITracker tracker in uiTrackers)
+            {
+                tracker.OnAwake();
+            }
+        }
+
+        public override void OnUpdate()
+        {
+            if (!PauseManager.GetPaused())
+            {
+                playerHealth.OnUpdate();
+                lockOnReticule.OnUpdate();
+                grappleReticule.OnUpdate();
+                agentHealthBarsPool.OnUpdate();
+                foreach (UITracker tracker in uiTrackers)
+                {
+                    tracker.OnUpdate();
+                }
+            }
+        }
+
+        public void AddUITracker(UITracker tracker)
+        {
+            if(tracker != lockOnReticule && tracker != grappleReticule)
+            {
+                uiTrackers.Add(tracker);
+            }
+        }
+
+        public void RemoveUITracker(UITracker tracker)
+        {
+          uiTrackers.Remove(tracker);
         }
     }
 }

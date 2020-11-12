@@ -177,6 +177,27 @@
         [Tooltip("Which objects are boxes that Melody can push.")]
         public LayerMask boxPushingLayerMask;
 
+        [Header("Grapple Hook")]
+        /// <summary>
+        /// Which objects block a grapple attempt from Melody.
+        /// </summary>
+        [Tooltip("Which objects block a grapple attempt from Melody.")]
+        public LayerMask grappleAttemptLayerMask;
+
+        /// <summary>
+        /// The max distance from which you can use a grapple point.
+        /// </summary>
+        [Tooltip("The max distance from which you can use a grapple point.")]
+        public float maxGrappleDistance;
+
+        public float grappleOutroTime;
+
+        public float grappleOutroMaxSpeed;
+        public float grappleOutroTurningSpeed;
+        public Vector3 grappleOutroGravity;
+
+        public float maxGrappleAngle;
+
         void Start()
         {
             //TODO load values in depending on save data.

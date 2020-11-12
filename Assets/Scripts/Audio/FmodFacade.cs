@@ -4,11 +4,13 @@
     using System.Collections.Generic;
     using System.Linq;
     using UnityEngine;
+    using GameManager;
+    using UnityEngine.SceneManagement;
 
     /// <summary>
     /// This class will be the primary way in which other scripts interface with our fmod logic.
     /// </summary>
-    public class FmodFacade : MonoBehaviour
+    public class FmodFacade : ManageableObject
     {
         //Enum used to quantify how close an action is to the beat.
         public enum OnBeatAccuracy
@@ -24,23 +26,35 @@
         private FmodEventPool fmodEventPool;
 
         //Dictionary used to convert our fmod event and parameter names into the values fmod will actually use.
-        private FmodDictionary fmodDictionary;
+        private FmodEventDictionary fmodDictionary;
 
         [SerializeField]
         private bool debugOneShotEvents = false;
 
-        private void Awake()
+        public override void OnAwake()
         {
             if (instance == null)
             {
                 instance = this;
+                DontDestroyOnLoad(gameObject);
             }
             else if (instance != this)
             {
                 Destroy(gameObject);
             }
-            fmodDictionary = new FmodDictionary();
+            fmodDictionary = new FmodEventDictionary();
             fmodEventPool = new FmodEventPool();
+
+            PauseManager.AssignFunctionToOnPauseDelegate(OnPause);
+            PauseManager.AssignFunctionToOnUnpauseDelegate(OnUnpause);
+        }
+
+        public void LoadSceneMusic()
+        {
+            if (!FmodMusicHandler.instance.isMusicPlaying)
+            {
+                StartMusic(FmodSceneMusicDictionary.GetSceneMusic(SceneManager.GetActiveScene().name), 1f);
+            }
         }
 
         /// <summary>
@@ -71,32 +85,9 @@
             FmodMusicHandler.instance.SetMusicParam(param, value);
         }
 
-        /// <summary>
-        /// Starts an fmod ambience event
-        /// </summary>
-        /// <param name="name"> The name of the fmod ambience event </param>
-        /// <param name="volume"> The volume of the fmod ambience event </param>
-        public void StartAmbience(string name, float volume)
+        public string GetMusicEventName()
         {
-            FmodMusicHandler.instance.StartAmbience(name, volume);
-        }
-
-        /// <summary>
-        /// Stops the active fmod ambience event if there is one.
-        /// </summary>
-        public void StopAmbience()
-        {
-            FmodMusicHandler.instance.StopAmbience();
-        }
-
-        /// <summary>
-        /// Sets a param for the current fmod ambience event.
-        /// </summary>
-        /// <param name="param"> The name of the param </param>
-        /// <param name="value">The new param value </param>
-        public void SetAmbienceParam(string param, float value)
-        {
-            FmodMusicHandler.instance.SetAmbienceParam(param, value);
+            return FmodMusicHandler.instance.GetMusicEventName();
         }
 
         /// <summary>
@@ -144,7 +135,7 @@
         public void SetFmodParameterValue(FMOD.Studio.EventInstance fmodEvent, string parameter, float value)
         {
             //print("Set param " + parameter + ", dict value " + GetFmodParamFromDictionary(parameter) + " TO " + value);
-            fmodEvent.setParameterValue(GetFmodParamFromDictionary(parameter), value);
+            fmodEvent.setParameterByName(GetFmodParamFromDictionary(parameter), value);
         }
 
         /// <summary>
@@ -167,6 +158,24 @@
             fmodEvent.setUserData(IntPtr.Zero);
             fmodEvent.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
             fmodEvent.release();
+        }
+
+        /// <summary>
+        /// Pauses the passed in fmod event
+        /// </summary>
+        /// <param name="fmodEvent"> The name of the event we want to pause </param>
+        public void PauseFmodEvent(FMOD.Studio.EventInstance fmodEvent)
+        {
+            fmodEvent.setPaused(true);
+        }
+
+        /// <summary>
+        /// Resumes the passed in fmod event
+        /// </summary>
+        /// <param name="fmodEvent"> The name of the event we want to resume </param>
+        public void ResumeFmodEvent(FMOD.Studio.EventInstance fmodEvent)
+        {
+            fmodEvent.setPaused(false);
         }
 
         /// <summary>
@@ -252,9 +261,9 @@
         /// Function that returns how close to on beat we currently are. Accuracy is determined based on FmodOnBeatAccuracyChecker's onBeatPadding param.
         /// </summary>
         /// <returns> An OnBeatAccuracy value based on close to the beat we are right now </returns>
-        public OnBeatAccuracy WasActionOnBeat()
+        public OnBeatAccuracy WasActionOnBeat(bool useDegreesOfOnBeatAccuracyOverride = false)
         {
-            return FmodOnBeatAccuracyChecker.instance.WasActionOnBeat();
+            return FmodOnBeatAccuracyChecker.instance.WasActionOnBeat(useDegreesOfOnBeatAccuracyOverride);
         }
 
         /// <summary>
@@ -326,6 +335,18 @@
         public List<string> GetFmodSFXEventNames()
         {
             return fmodDictionary.fmodSFXEventDictionary.Keys.ToList();
+        }
+
+        public void OnPause()
+        {
+            fmodEventPool.PauseAll();
+            FmodMusicHandler.instance.PauseMusic();
+        }
+
+        public void OnUnpause()
+        {
+            fmodEventPool.ResumeAll();
+            FmodMusicHandler.instance.ResumeMusic();
         }
 
         /*public void GetDSPData()

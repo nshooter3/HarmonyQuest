@@ -1,28 +1,31 @@
 ﻿namespace Objects
 {
-    using UnityEngine;
+    using GameManager;
 
-    public class PhysicsObjectManager : MonoBehaviour
+    public class PhysicsObjectManager : ManageableObject
     {
         PhysicsObject[] physicsObjects;
 
         // Start is called before the first frame update
-        void Start()
+        public override void OnStart()
         {
             physicsObjects = FindObjectsOfType<PhysicsObject>();
         }
 
         // Update is called once per frame
-        void FixedUpdate()
+        public override void OnFixedUpdate()
         {
-            foreach (PhysicsObject physicsObject in physicsObjects)
+            if (!PauseManager.GetPaused())
             {
-                physicsObject.ObjectFixedUpdate();
-            }
+                foreach (PhysicsObject physicsObject in physicsObjects)
+                {
+                    physicsObject.ObjectFixedUpdate();
+                }
 
-            foreach (PhysicsObject physicsObject in physicsObjects)
-            {
-                physicsObject.ObjectLateFixedUpdate();
+                foreach (PhysicsObject physicsObject in physicsObjects)
+                {
+                    physicsObject.ObjectLateFixedUpdate();
+                }
             }
         }
     }

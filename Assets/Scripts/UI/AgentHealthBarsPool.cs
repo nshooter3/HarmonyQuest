@@ -15,7 +15,7 @@
 
         private AgentHealthBars tempHealthbar;
 
-        private void Awake()
+        public void OnAwake()
         {
             InitPool();
         }
@@ -28,9 +28,19 @@
             }
         }
 
+        // Update is called once per frame
+        public void OnUpdate()
+        {
+            for (int i = 0; i < healthBarPool.Count; i++)
+            {
+                healthBarPool[i].OnUpdate();
+            }
+        }
+
         private AgentHealthBars AddAgentHealthBarToPool()
         {
             tempHealthbar = Instantiate(healthBarPrefab);
+            tempHealthbar.OnAwake();
             tempHealthbar.transform.parent = transform;
             tempHealthbar.gameObject.SetActive(false);
             healthBarPool.Add(tempHealthbar);
@@ -39,7 +49,8 @@
 
         public AgentHealthBars GetAgentHealthBar(int numHealthBars, Camera cam, Transform target, float yOffset = 65.0f)
         {
-            for (int i = 0; i < healthBarPoolSize; i++)
+            tempHealthbar = null;
+            for (int i = 0; i < healthBarPool.Count; i++)
             {
                 if (healthBarPool[i].gameObject.activeSelf == false)
                 {
@@ -68,7 +79,7 @@
 
         public void ReturnAllAgentHealthBarsToPool()
         {
-            for (int i = 0; i < healthBarPoolSize; i++)
+            for (int i = 0; i < healthBarPool.Count; i++)
             {
                 ReturnAgentHealthBarToPool(healthBarPool[i]);
             }

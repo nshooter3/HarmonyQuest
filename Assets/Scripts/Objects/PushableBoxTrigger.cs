@@ -1,9 +1,10 @@
 ﻿namespace Objects
 {
+    using GameManager;
     using GamePhysics;
     using UnityEngine;
 
-    public class PushableBoxTrigger : MonoBehaviour
+    public class PushableBoxTrigger : ManageableObject
     {
         public bool containsPlayer { get; private set; }
 
@@ -11,7 +12,7 @@
         private CollisionWrapper collisionWrapper;
 
         // Start is called before the first frame update
-        void Start()
+        public override void OnStart()
         {
             collisionWrapper.AssignFunctionToTriggerEnterDelegate(PlayerEnter);
             collisionWrapper.AssignFunctionToTriggerStayDelegate(PlayerEnter);

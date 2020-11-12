@@ -6,7 +6,7 @@
     {
         public string eventName;
         public int index = -1;
-        public bool isReadyToPlay = false;
+        public bool isPlaying = false;
 
         private FMOD.Studio.EventInstance fmodEvent;
 
@@ -15,7 +15,7 @@
             this.eventName = eventName;
             this.index = index;
             fmodEvent = FmodFacade.instance.CreateFmodEventInstance(FmodFacade.instance.GetFmodSFXEventFromDictionary(eventName));
-            isReadyToPlay = true;
+            isPlaying = false;
         }
 
         public void Play(float volume = 1.0f, GameObject parent = null, Rigidbody rb = null, FmodParamData[] paramData = null)
@@ -35,20 +35,30 @@
             }
 
             fmodEvent.start();
-            isReadyToPlay = false;
+            isPlaying = true;
+        }
+
+        public void Pause()
+        {
+            FmodFacade.instance.PauseFmodEvent(fmodEvent);
+        }
+
+        public void Resume()
+        {
+            FmodFacade.instance.ResumeFmodEvent(fmodEvent);
         }
 
         public void Abort()
         {
-            Restart();
+            RestartAndPause();
         }
 
-        public void Restart()
+        public void RestartAndPause()
         {
             //print("RESTART FMOD EVENT " + eventName + " INDEX " + index);
 
             fmodEvent.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-            isReadyToPlay = true;
+            isPlaying = false;
         }
     }
 }

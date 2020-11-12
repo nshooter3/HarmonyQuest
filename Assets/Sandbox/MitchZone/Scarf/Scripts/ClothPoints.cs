@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using GameManager;
 
-public class ClothPoints : MonoBehaviour
+public class ClothPoints : ManageableObject
 {
     public Transform LeftScarfIK, RightScarfIK;
     public int ball1, ball2;
@@ -10,8 +11,8 @@ public class ClothPoints : MonoBehaviour
     int[] LeftClothIndices = {15, 20, 25, 30};
     int[] RightClothIndices = {131, 125, 120, 115, 110, 105, 100, 95, 90, 83, 76};
     List<Transform> LeftScarfBones, RightScarfBones;
-    // Start is called before the first frame update
-    void Start()
+
+    public override void OnStart()
     {
         cloth = GetComponent<Cloth>();
         LeftScarfBones = new List<Transform>();
@@ -31,8 +32,7 @@ public class ClothPoints : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    public override void OnFixedUpdate()
     {
         // LeftScarfIK.position = transform.TransformPoint(cloth.vertices[61]); //4
         // RightScarfIK.position = transform.TransformPoint(cloth.vertices[95]); //140

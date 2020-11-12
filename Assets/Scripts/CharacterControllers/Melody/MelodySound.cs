@@ -109,11 +109,11 @@
             SetCombatProximityParam();
             if (isInPuzzleZone == true)
             {
-                FmodFacade.instance.SetMusicParam(global_puzzle_proximity_param, maxPuzzleProximityValueFmod);
+                //FmodFacade.instance.SetMusicParam(global_puzzle_proximity_param, maxPuzzleProximityValueFmod);
             }
             else
             {
-                FmodFacade.instance.SetMusicParam(global_puzzle_proximity_param, 0f);
+                //FmodFacade.instance.SetMusicParam(global_puzzle_proximity_param, 0f);
             }
         }
 

@@ -20,7 +20,7 @@ namespace Articy.Harmonybarktest.GlobalVariables
 {
     
     
-    [Articy.Unity.ArticyCodeGenerationHashAttribute(637389695396080396)]
+    [Articy.Unity.ArticyCodeGenerationHashAttribute(637401324674767523)]
     public class ArticyScriptFragments : BaseScriptFragments, ISerializationCallbackReceiver
     {
         

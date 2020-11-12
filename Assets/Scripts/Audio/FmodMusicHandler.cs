@@ -4,30 +4,15 @@
     using System.Collections.Generic;
     using System.Runtime.InteropServices;
     using UnityEngine;
+    using GameManager;
+    using Manager;
+    using Saving;
 
-    public class FmodMusicHandler : MonoBehaviour
+    public class FmodMusicHandler : ManageableObject
     {
-        private static FmodMusicHandler inst;
-        public static FmodMusicHandler instance
-        {
-            get
-            {
-                if (inst == null)
-                {
-                    inst = GameObject.FindObjectOfType<FmodMusicHandler>();
-                }
-                return inst;
-            }
-        }
+        public static FmodMusicHandler instance;
 
-        public string musicEventName;
-        public float musicVolume;
-
-        public string ambienceEventName;
-        public float ambienceVolume;
-
-        [SerializeField]
-        private bool startMusicOnAwake = false;
+        private string musicEventName;
 
         [SerializeField]
         private bool memoryDebug = false;
@@ -35,8 +20,7 @@
         [HideInInspector]
         public bool isMusicPlaying = false;
 
-        [HideInInspector]
-        public bool isAmbiencePlaying = false;
+        private bool isFadingScreenTransition = false;
 
         /// <summary>
         /// Delegate that gets called when we get a beat callback from fmod. Load any functions that need to get called on beat here.
@@ -68,41 +52,42 @@
         GCHandle timelineHandle;
 
         FMOD.Studio.EventInstance musicEvent;
-        FMOD.Studio.EventInstance ambienceEvent;
         FMOD.Studio.EVENT_CALLBACK beatCallback;
 
-        private void Awake()
+        FMOD.Studio.PLAYBACK_STATE playbackState;
+
+        public override void OnAwake()
         {
-            if (inst == null)
+            if (instance == null)
             {
-                inst = this;
+                instance = this;
             }
-            else if(inst != this)
+            else if(instance != this)
             {
                 Destroy(gameObject);
             }
-        }
 
-        // Start is called before the first frame update
-        void Start()
-        {
             timelineInfo = new TimelineInfo();
             beatCallback = new FMOD.Studio.EVENT_CALLBACK(BeatEventCallback);
+        }
 
-            // Pin the class that will store the data modified during the callback
-            timelineHandle = GCHandle.Alloc(timelineInfo, GCHandleType.Pinned);
-
-            if (startMusicOnAwake)
+        public override void OnUpdate()
+        {
+            if (isFadingScreenTransition)
             {
-                StartMusic(musicEventName, musicVolume);
-                StartAmbience(ambienceEventName, ambienceVolume);
+                musicEvent.getPlaybackState(out playbackState);
+                if (playbackState == FMOD.Studio.PLAYBACK_STATE.STOPPED)
+                {
+                    isFadingScreenTransition = false;
+                    SceneTransitionManager.isMusicTransitionDone = true;
+                    StopMusic();
+                }
             }
         }
 
         public void StartMusic(string name, float volume)
         {
             musicEventName = name;
-            musicVolume = volume;
 
             musicEvent = FmodFacade.instance.CreateFmodEventInstance(FmodFacade.instance.GetFmodMusicEventFromDictionary(name));
 
@@ -111,6 +96,9 @@
                 | FMOD.Studio.EVENT_CALLBACK_TYPE.TIMELINE_MARKER
                 | FMOD.Studio.EVENT_CALLBACK_TYPE.STARTED
                 );
+
+            // Pin the class that will store the data modified during the callback
+            timelineHandle = GCHandle.Alloc(timelineInfo, GCHandleType.Pinned);
 
             // Pass the object through the userdata of the instance
             musicEvent.setUserData(GCHandle.ToIntPtr(timelineHandle));
@@ -123,6 +111,7 @@
         {
             if (isMusicPlaying == true)
             {
+                musicEventName = "";
                 timelineHandle.Free();
                 FmodFacade.instance.StopFmodEvent(musicEvent);
                 isMusicPlaying = false;
@@ -137,37 +126,43 @@
             }
         }
 
-        public void StartAmbience(string name, float volume)
+        public void FadeOutAll()
         {
-            ambienceEventName = name;
-            ambienceVolume = volume;
-
-            ambienceEvent = FmodFacade.instance.CreateFmodEventInstance(FmodFacade.instance.GetFmodMusicEventFromDictionary(name));
-
-            FmodFacade.instance.PlayFmodEvent(ambienceEvent, volume);
-            isAmbiencePlaying = true;
-        }
-
-        public void StopAmbience()
-        {
-            if (isAmbiencePlaying == true)
+            //Only fade out music if the next scene has different music.
+            if (FmodSceneMusicDictionary.GetSceneMusic(SaveDataManager.saveData.currentScene) != musicEventName)
             {
-                FmodFacade.instance.StopFmodEvent(ambienceEvent);
-                isAmbiencePlaying = false;
+                FmodFacade.instance.SetMusicParam("global_event_end_param", 1f);
+                isFadingScreenTransition = true;
+            }
+            else
+            {
+                SceneTransitionManager.isMusicTransitionDone = true;
             }
         }
 
-        public void SetAmbienceParam(string param, float value)
+        public bool IsMusicFadingSceneTransition()
         {
-            if (isAmbiencePlaying == true)
-            {
-                FmodFacade.instance.SetFmodParameterValue(ambienceEvent, param, value);
-            }
+            return isFadingScreenTransition;
+        }
+
+        public void PauseMusic()
+        {
+            FmodFacade.instance.PauseFmodEvent(musicEvent);
+        }
+
+        public void ResumeMusic()
+        {
+            FmodFacade.instance.ResumeFmodEvent(musicEvent);
         }
 
         private void OnDestroy()
         {
             StopMusic();
+        }
+
+        public string GetMusicEventName()
+        {
+            return musicEventName;
         }
 
         public int GetCurrentBeat()

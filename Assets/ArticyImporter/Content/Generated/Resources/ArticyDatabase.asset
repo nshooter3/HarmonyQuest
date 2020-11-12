@@ -15,13 +15,30 @@ MonoBehaviour:
   OnLanguageChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: Articy.Unity.OnLanguageChangedEvent, ArticyRuntime, Version=2.1.1.0,
-      Culture=neutral, PublicKeyToken=null
   mUseLocalization: 0
   mLanguage: en
   mThrowOnMissingText: 0
   mClearOnLanguageSwitch: 1
   mExportLanguage: en
+--- !u!114 &-790721584016304068
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1655710724, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: HierarchyManager
+  m_EditorClassIdentifier: 
+  serializedNodes:
+  - id: 72057594037927937
+    parent: 0
+    technicalName: Harmonybarktest
+    articyType: Project
+    childCount: 0
+    indexOfFirstChild: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34,7 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: -1676762633, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
   m_Name: ArticyDatabase
   m_EditorClassIdentifier: 
-  mHierarchy: {fileID: 6020167188554591260}
+  mHierarchy: {fileID: -790721584016304068}
   mLocalization: {fileID: -2685529646794070996}
   mInternalProject:
     mName: HarmonyBarkTest
@@ -42,26 +59,13 @@ MonoBehaviour:
     mId: bda27ac8-48b5-4181-a11d-12f365293693
     mTechnicalName: Harmonybarktest
   mImportedAssets: []
-  mDefaultGlobalVariables: {fileID: 8881823777127402958}
-  mScriptFragments: {fileID: 7081668165151395929}
+  mDefaultGlobalVariables: {fileID: 9216389118427801406}
+  mScriptFragments: {fileID: 4719395390557953772}
   mPackages:
   - PackageName: All objects
     PackagePath: All objects
     mIsDefaultPackage: 1
---- !u!114 &6020167188554591260
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1655710724, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: HierarchyManager
-  m_EditorClassIdentifier: 
-  serializedNodes: []
---- !u!114 &7081668165151395929
+--- !u!114 &4719395390557953772
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -73,9 +77,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30534dcf4c27a2646b3d506504997575, type: 3}
   m_Name: ArticyScriptFragments
   m_EditorClassIdentifier: 
---- !u!114 &8881823777127402958
+--- !u!114 &9216389118427801406
 MonoBehaviour:
-  m_ObjectHideFlags: 3
+  m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}

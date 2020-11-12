@@ -43,7 +43,6 @@ public class DialogPromptFlowPlayer : MonoBehaviour, IArticyFlowPlayerCallbacks
             
             buttons[0].onClick.AddListener(() => DialogOptionSelected(0));
             buttons[1].onClick.AddListener(() => DialogOptionSelected(1));
-            buttons[2].onClick.AddListener(() => DialogOptionSelected(2));
             index++;
         }
         else
@@ -109,6 +108,10 @@ public class DialogPromptFlowPlayer : MonoBehaviour, IArticyFlowPlayerCallbacks
         if (ServiceLocator.instance.GetInputManager().InteractButtonDown())
         {
             flowPlayer.Play(dialog);
+        }
+        else
+        {
+            Debug.Log("Not Interacting");
         }
     }
 }

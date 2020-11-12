@@ -1,6 +1,72 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-9019514523812105303
+--- !u!114 &-9166629808460422358
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 747260720, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: Instruction
+  m_EditorClassIdentifier: 
+  mTechnicalName: Instruction
+  mDisplayName: Instruction
+  mBaseType: {fileID: 5699413222025548459}
+  mCSharpType: Articy.Harmonybarktest.Instruction, Assembly-CSharp, Version=0.0.0.0,
+    Culture=neutral, PublicKeyToken=null
+  mIsEnum: 0
+  mHasTemplate: 0
+  mFeatures: []
+  mProperties:
+  - {fileID: -940598948718139968}
+  - {fileID: -2764685596056368341}
+  - {fileID: -7680589823546369298}
+  - {fileID: -4836543487199772720}
+  - {fileID: 2837812840525676063}
+  - {fileID: 342260549245298295}
+  - {fileID: -2937397294101575948}
+  - {fileID: -8674727501714004325}
+  - {fileID: 7669905787378626991}
+  - {fileID: -2108611160766382413}
+  - {fileID: 6970369336510911703}
+  - {fileID: -257446547157761497}
+  - {fileID: 7830683586919154623}
+  - {fileID: 7245542710162673935}
+  - {fileID: -7609524593560653603}
+  - {fileID: -2061879253002664744}
+  - {fileID: 9023615521182862185}
+  mEnumValues: []
+--- !u!114 &-9126424000005793788
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 747260720, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: OutlineStyle
+  m_EditorClassIdentifier: 
+  mTechnicalName: OutlineStyle
+  mDisplayName: OutlineStyle
+  mBaseType: {fileID: 0}
+  mCSharpType: Articy.Harmonybarktest.OutlineStyle, Assembly-CSharp, Version=0.0.0.0,
+    Culture=neutral, PublicKeyToken=null
+  mIsEnum: 1
+  mHasTemplate: 0
+  mFeatures: []
+  mProperties: []
+  mEnumValues:
+  - {fileID: -2638147516236103623}
+  - {fileID: -5640826602983468353}
+  - {fileID: -6497433966650867609}
+  - {fileID: -2444708339123626895}
+  - {fileID: 8299984378074541621}
+--- !u!114 &-9026964043403114116
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10,15 +76,54 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: DropShadow
+  m_Name: StageDirections
   m_EditorClassIdentifier: 
-  mTechnicalName: DropShadow
+  mTechnicalName: StageDirections
   mDisplayName: 
   mIsTemplateProperty: 0
-  mPropertyType: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  mPropertyType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
   mConstraintNames: 
   mConstraintValues: []
---- !u!114 &-8988093259920156427
+--- !u!114 &-8945808873857568204
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 747260720, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: Condition
+  m_EditorClassIdentifier: 
+  mTechnicalName: Condition
+  mDisplayName: Condition
+  mBaseType: {fileID: 5699413222025548459}
+  mCSharpType: Articy.Harmonybarktest.Condition, Assembly-CSharp, Version=0.0.0.0,
+    Culture=neutral, PublicKeyToken=null
+  mIsEnum: 0
+  mHasTemplate: 0
+  mFeatures: []
+  mProperties:
+  - {fileID: -940598948718139968}
+  - {fileID: -2764685596056368341}
+  - {fileID: -7680589823546369298}
+  - {fileID: -4836543487199772720}
+  - {fileID: 2837812840525676063}
+  - {fileID: 342260549245298295}
+  - {fileID: -2937397294101575948}
+  - {fileID: -8674727501714004325}
+  - {fileID: 7669905787378626991}
+  - {fileID: -2108611160766382413}
+  - {fileID: 6970369336510911703}
+  - {fileID: -257446547157761497}
+  - {fileID: 7830683586919154623}
+  - {fileID: 7245542710162673935}
+  - {fileID: -7609524593560653603}
+  - {fileID: -2061879253002664744}
+  - {fileID: 9023615521182862185}
+  mEnumValues: []
+--- !u!114 &-8723089357407592755
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -28,12 +133,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -246416443, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: SelectabilityModes.Selectable
+  m_Name: PathCaps.None
   m_EditorClassIdentifier: 
-  mTechnicalName: Selectable
-  mDisplayName: Selectable
+  mTechnicalName: None
+  mDisplayName: None
   mValue: 1
---- !u!114 &-8983977501008531296
+--- !u!114 &-8710004397173183269
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -48,7 +153,7 @@ MonoBehaviour:
   mTechnicalName: FilledArrowHead
   mDisplayName: FilledArrowHead
   mValue: 3
---- !u!114 &-8979273576449879907
+--- !u!114 &-8674727501714004325
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -58,806 +163,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: InputPins
+  m_Name: Expression
   m_EditorClassIdentifier: 
-  mTechnicalName: InputPins
+  mTechnicalName: Expression
   mDisplayName: 
   mIsTemplateProperty: 0
-  mPropertyType: Articy.Harmonybarktest.List`1, Assembly-CSharp
-  mConstraintNames: 
-  mConstraintValues: []
---- !u!114 &-7923419965668715077
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -246416443, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: LocationAnchorSize.Medium
-  m_EditorClassIdentifier: 
-  mTechnicalName: Medium
-  mDisplayName: Medium
-  mValue: 1
---- !u!114 &-7854559385367283330
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -246416443, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: PathCaps.LineArrowHead
-  m_EditorClassIdentifier: 
-  mTechnicalName: LineArrowHead
-  mDisplayName: LineArrowHead
-  mValue: 2
---- !u!114 &-7693851194023599922
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 747260720, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: Instruction
-  m_EditorClassIdentifier: 
-  mTechnicalName: Instruction
-  mDisplayName: Instruction
-  mBaseType: {fileID: 3170600253084776791}
-  mCSharpType: Articy.Harmonybarktest.Instruction, Assembly-CSharp, Version=0.0.0.0,
+  mPropertyType: Articy.Unity.ArticyScriptCondition, ArticyRuntime, Version=2.2.0.0,
     Culture=neutral, PublicKeyToken=null
-  mIsEnum: 0
-  mHasTemplate: 0
-  mFeatures: []
-  mProperties:
-  - {fileID: 1503750508407529944}
-  - {fileID: 8625672323224915365}
-  - {fileID: -7189990704772222893}
-  - {fileID: -7619522009408435573}
-  - {fileID: -7565282412987353106}
-  - {fileID: 6899512596035049822}
-  - {fileID: -3659262268098629400}
-  - {fileID: -2923621406421487365}
-  - {fileID: -7687836143550115872}
-  - {fileID: -7181068715460330353}
-  - {fileID: 1082891652882901478}
-  - {fileID: -6613771598178699049}
-  - {fileID: -8979273576449879907}
-  - {fileID: 4934528922601085315}
-  - {fileID: -319628973132797853}
-  - {fileID: 3849256236396507290}
-  - {fileID: 5114125731322242819}
-  mEnumValues: []
---- !u!114 &-7687836143550115872
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: Color
-  m_EditorClassIdentifier: 
-  mTechnicalName: Color
-  mDisplayName: 
-  mIsTemplateProperty: 0
-  mPropertyType: UnityEngine.Color, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral,
-    PublicKeyToken=null
   mConstraintNames: 
   mConstraintValues: []
---- !u!114 &-7666241923214486350
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -246416443, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: PathCaps.ColoredDot
-  m_EditorClassIdentifier: 
-  mTechnicalName: ColoredDot
-  mDisplayName: ColoredDot
-  mValue: 0
---- !u!114 &-7651342653178838174
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -246416443, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: OutlineStyle.DashDotDot
-  m_EditorClassIdentifier: 
-  mTechnicalName: DashDotDot
-  mDisplayName: DashDotDot
-  mValue: 4
---- !u!114 &-7619522009408435573
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: Position
-  m_EditorClassIdentifier: 
-  mTechnicalName: Position
-  mDisplayName: 
-  mIsTemplateProperty: 0
-  mPropertyType: UnityEngine.Vector2, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral,
-    PublicKeyToken=null
-  mConstraintNames: 
-  mConstraintValues: []
---- !u!114 &-7565282412987353106
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: ZIndex
-  m_EditorClassIdentifier: 
-  mTechnicalName: ZIndex
-  mDisplayName: 
-  mIsTemplateProperty: 0
-  mPropertyType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
-  mConstraintNames: 
-  mConstraintValues: []
---- !u!114 &-7470132701271384908
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -246416443, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: PathCaps.Disc
-  m_EditorClassIdentifier: 
-  mTechnicalName: Disc
-  mDisplayName: Disc
-  mValue: 6
---- !u!114 &-7397915706890021292
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 747260720, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: Comment
-  m_EditorClassIdentifier: 
-  mTechnicalName: Comment
-  mDisplayName: Comment
-  mBaseType: {fileID: 3170600253084776791}
-  mCSharpType: Articy.Harmonybarktest.Comment, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-    PublicKeyToken=null
-  mIsEnum: 0
-  mHasTemplate: 0
-  mFeatures: []
-  mProperties:
-  - {fileID: 805870784305456394}
-  - {fileID: 4411776639057349220}
-  - {fileID: -7687836143550115872}
-  - {fileID: 8625672323224915365}
-  - {fileID: -7189990704772222893}
-  - {fileID: -7619522009408435573}
-  - {fileID: -7565282412987353106}
-  - {fileID: 6899512596035049822}
-  - {fileID: -3659262268098629400}
-  - {fileID: -7181068715460330353}
-  - {fileID: 1082891652882901478}
-  - {fileID: -6613771598178699049}
-  - {fileID: -319628973132797853}
-  - {fileID: 3849256236396507290}
-  - {fileID: 5114125731322242819}
-  mEnumValues: []
---- !u!114 &-7189990704772222893
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: ExternalId
-  m_EditorClassIdentifier: 
-  mTechnicalName: ExternalId
-  mDisplayName: 
-  mIsTemplateProperty: 0
-  mPropertyType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
-  mConstraintNames: 
-  mConstraintValues: []
---- !u!114 &-7181068715460330353
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: Id
-  m_EditorClassIdentifier: 
-  mTechnicalName: Id
-  mDisplayName: 
-  mIsTemplateProperty: 0
-  mPropertyType: System.UInt64, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
-  mConstraintNames: 
-  mConstraintValues: []
---- !u!114 &-6985418873031356133
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: Target
-  m_EditorClassIdentifier: 
-  mTechnicalName: Target
-  mDisplayName: 
-  mIsTemplateProperty: 0
-  mPropertyType: Articy.Unity.ArticyObject, ArticyRuntime, Version=2.1.1.0, Culture=neutral,
-    PublicKeyToken=null
-  mConstraintNames: 
-  mConstraintValues: []
---- !u!114 &-6811823855926575580
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: Speaker
-  m_EditorClassIdentifier: 
-  mTechnicalName: Speaker
-  mDisplayName: 
-  mIsTemplateProperty: 0
-  mPropertyType: Articy.Unity.ArticyObject, ArticyRuntime, Version=2.1.1.0, Culture=neutral,
-    PublicKeyToken=null
-  mConstraintNames: 
-  mConstraintValues: []
---- !u!114 &-6716934256113706912
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: DefaultBasicCharacterFeature.Personality
-  m_EditorClassIdentifier: 
-  mTechnicalName: DefaultBasicCharacterFeature.Personality
-  mDisplayName: Personality
-  mIsTemplateProperty: 1
-  mPropertyType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
-  mConstraintNames: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f0000001000000011000000
-  mConstraintValues:
-  - 
-  - 
-  - 
-  - True
-  - 
-  - False
-  - True
-  - 2048
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 
-  - 0
-  - 
-  - 
-  - 
---- !u!114 &-6673589811401714661
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 747260720, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: DialogueType
-  m_EditorClassIdentifier: 
-  mTechnicalName: DialogueType
-  mDisplayName: Dialogue Type
-  mBaseType: {fileID: 0}
-  mCSharpType: Articy.Harmonybarktest.DialogueType, Assembly-CSharp, Version=0.0.0.0,
-    Culture=neutral, PublicKeyToken=null
-  mIsEnum: 1
-  mHasTemplate: 0
-  mFeatures: []
-  mProperties: []
-  mEnumValues:
-  - {fileID: 6575516169882305124}
-  - {fileID: -137315442792068218}
---- !u!114 &-6613771598178699049
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: Parent
-  m_EditorClassIdentifier: 
-  mTechnicalName: Parent
-  mDisplayName: 
-  mIsTemplateProperty: 0
-  mPropertyType: Articy.Unity.ArticyObject, ArticyRuntime, Version=2.1.1.0, Culture=neutral,
-    PublicKeyToken=null
-  mConstraintNames: 
-  mConstraintValues: []
---- !u!114 &-6335214606054275850
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: ImageAsset
-  m_EditorClassIdentifier: 
-  mTechnicalName: ImageAsset
-  mDisplayName: 
-  mIsTemplateProperty: 0
-  mPropertyType: Articy.Unity.ArticyObject, ArticyRuntime, Version=2.1.1.0, Culture=neutral,
-    PublicKeyToken=null
-  mConstraintNames: 
-  mConstraintValues: []
---- !u!114 &-5949351258825500497
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: Attachments
-  m_EditorClassIdentifier: 
-  mTechnicalName: Attachments
-  mDisplayName: 
-  mIsTemplateProperty: 0
-  mPropertyType: Articy.Harmonybarktest.List`1, Assembly-CSharp
-  mConstraintNames: 
-  mConstraintValues: []
---- !u!114 &-5937637931102765199
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: LineWidth
-  m_EditorClassIdentifier: 
-  mTechnicalName: LineWidth
-  mDisplayName: 
-  mIsTemplateProperty: 0
-  mPropertyType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
-  mConstraintNames: 
-  mConstraintValues: []
---- !u!114 &-5590039003394420278
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -246416443, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: ShapeType.Path
-  m_EditorClassIdentifier: 
-  mTechnicalName: Path
-  mDisplayName: Path
-  mValue: 4
---- !u!114 &-5581193111930001015
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: CachedImageWidth
-  m_EditorClassIdentifier: 
-  mTechnicalName: CachedImageWidth
-  mDisplayName: 
-  mIsTemplateProperty: 0
-  mPropertyType: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
-  mConstraintNames: 
-  mConstraintValues: []
---- !u!114 &-5265863229081422160
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -246416443, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: OutlineStyle.DashDot
-  m_EditorClassIdentifier: 
-  mTechnicalName: DashDot
-  mDisplayName: DashDot
-  mValue: 3
---- !u!114 &-5262977649660469651
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 747260720, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: VisibilityModes
-  m_EditorClassIdentifier: 
-  mTechnicalName: VisibilityModes
-  mDisplayName: VisibilityModes
-  mBaseType: {fileID: 0}
-  mCSharpType: Articy.Harmonybarktest.VisibilityModes, Assembly-CSharp, Version=0.0.0.0,
-    Culture=neutral, PublicKeyToken=null
-  mIsEnum: 1
-  mHasTemplate: 0
-  mFeatures: []
-  mProperties: []
-  mEnumValues:
-  - {fileID: -2893138715204600859}
-  - {fileID: 4316206343243254242}
---- !u!114 &-5160649475636628600
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 747260720, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: LocationImage
-  m_EditorClassIdentifier: 
-  mTechnicalName: LocationImage
-  mDisplayName: LocationImage
-  mBaseType: {fileID: 3170600253084776791}
-  mCSharpType: Articy.Harmonybarktest.LocationImage, Assembly-CSharp, Version=0.0.0.0,
-    Culture=neutral, PublicKeyToken=null
-  mIsEnum: 0
-  mHasTemplate: 0
-  mFeatures: []
-  mProperties:
-  - {fileID: 1503750508407529944}
-  - {fileID: -516227654248727319}
-  - {fileID: 2474626215847165312}
-  - {fileID: -401668824210488200}
-  - {fileID: 886906808896423095}
-  - {fileID: 1525510335815679262}
-  - {fileID: -7687836143550115872}
-  - {fileID: 8625672323224915365}
-  - {fileID: -7189990704772222893}
-  - {fileID: -7565282412987353106}
-  - {fileID: 6899512596035049822}
-  - {fileID: -3659262268098629400}
-  - {fileID: 5836739278381233432}
-  - {fileID: 2954945432116449875}
-  - {fileID: 8333702074638475496}
-  - {fileID: 5584264529544217752}
-  - {fileID: -3250886787788156961}
-  - {fileID: -9019514523812105303}
-  - {fileID: 3149723157748159257}
-  - {fileID: -564164786933226095}
-  - {fileID: -6335214606054275850}
-  - {fileID: -5581193111930001015}
-  - {fileID: 2593120834588543991}
-  - {fileID: -15954740935781769}
-  - {fileID: -3521575384320653844}
-  - {fileID: 3949227827020479136}
-  - {fileID: -7181068715460330353}
-  - {fileID: 1082891652882901478}
-  - {fileID: -6613771598178699049}
-  - {fileID: -319628973132797853}
-  - {fileID: 3849256236396507290}
-  - {fileID: 5114125731322242819}
-  mEnumValues: []
---- !u!114 &-5047562902933925020
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: DefaultExtendedCharacterFeature.Fears
-  m_EditorClassIdentifier: 
-  mTechnicalName: DefaultExtendedCharacterFeature.Fears
-  mDisplayName: Weaknesses
-  mIsTemplateProperty: 1
-  mPropertyType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
-  mConstraintNames: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f0000001000000011000000
-  mConstraintValues:
-  - 
-  - 
-  - 
-  - True
-  - 
-  - False
-  - True
-  - 2048
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 
-  - 0
-  - 
-  - 
-  - 
---- !u!114 &-4915528372759090783
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: Filename
-  m_EditorClassIdentifier: 
-  mTechnicalName: Filename
-  mDisplayName: 
-  mIsTemplateProperty: 0
-  mPropertyType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
-  mConstraintNames: 
-  mConstraintValues: []
---- !u!114 &-4677576670627011946
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 747260720, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: Spot
-  m_EditorClassIdentifier: 
-  mTechnicalName: Spot
-  mDisplayName: Spot
-  mBaseType: {fileID: 3170600253084776791}
-  mCSharpType: Articy.Harmonybarktest.Spot, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-    PublicKeyToken=null
-  mIsEnum: 0
-  mHasTemplate: 0
-  mFeatures: []
-  mProperties:
-  - {fileID: 1503750508407529944}
-  - {fileID: -7687836143550115872}
-  - {fileID: 8625672323224915365}
-  - {fileID: -7189990704772222893}
-  - {fileID: -7619522009408435573}
-  - {fileID: -7565282412987353106}
-  - {fileID: 6899512596035049822}
-  - {fileID: -516227654248727319}
-  - {fileID: -3659262268098629400}
-  - {fileID: 5836739278381233432}
-  - {fileID: -15954740935781769}
-  - {fileID: -3521575384320653844}
-  - {fileID: 3949227827020479136}
-  - {fileID: 2954945432116449875}
-  - {fileID: 8333702074638475496}
-  - {fileID: 5584264529544217752}
-  - {fileID: -9019514523812105303}
-  - {fileID: -3250886787788156961}
-  - {fileID: -7181068715460330353}
-  - {fileID: 1082891652882901478}
-  - {fileID: -6613771598178699049}
-  - {fileID: -319628973132797853}
-  - {fileID: 3849256236396507290}
-  - {fileID: 5114125731322242819}
-  mEnumValues: []
---- !u!114 &-4556083683302979873
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: DefaultBasicCharacterFeature.BornIn
-  m_EditorClassIdentifier: 
-  mTechnicalName: DefaultBasicCharacterFeature.BornIn
-  mDisplayName: Born in
-  mIsTemplateProperty: 1
-  mPropertyType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
-  mConstraintNames: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f0000001000000011000000
-  mConstraintValues:
-  - 
-  - 
-  - 
-  - False
-  - 
-  - False
-  - True
-  - 2048
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 
-  - 0
-  - 
-  - 
-  - 
---- !u!114 &-4537882726665673892
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -246416443, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: OutlineStyle.Dash
-  m_EditorClassIdentifier: 
-  mTechnicalName: Dash
-  mDisplayName: Dash
-  mValue: 2
---- !u!114 &-4034055724633902035
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 747260720, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: UserFolder
-  m_EditorClassIdentifier: 
-  mTechnicalName: UserFolder
-  mDisplayName: UserFolder
-  mBaseType: {fileID: 3170600253084776791}
-  mCSharpType: Articy.Harmonybarktest.UserFolder, Assembly-CSharp, Version=0.0.0.0,
-    Culture=neutral, PublicKeyToken=null
-  mIsEnum: 0
-  mHasTemplate: 0
-  mFeatures: []
-  mProperties:
-  - {fileID: 1503750508407529944}
-  - {fileID: -7189990704772222893}
-  - {fileID: -3659262268098629400}
-  - {fileID: -7181068715460330353}
-  - {fileID: 1082891652882901478}
-  - {fileID: -6613771598178699049}
-  - {fileID: -7565282412987353106}
-  - {fileID: -319628973132797853}
-  - {fileID: 3849256236396507290}
-  - {fileID: 5114125731322242819}
-  mEnumValues: []
---- !u!114 &-3922642765297185447
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -246416443, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: Sex.Male
-  m_EditorClassIdentifier: 
-  mTechnicalName: Male
-  mDisplayName: Male
-  mValue: 0
---- !u!114 &-3863885678887301585
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -246416443, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: Sex.Unknown
-  m_EditorClassIdentifier: 
-  mTechnicalName: Unknown
-  mDisplayName: Unknown
-  mValue: 2
---- !u!114 &-3659262268098629400
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: ShortId
-  m_EditorClassIdentifier: 
-  mTechnicalName: ShortId
-  mDisplayName: 
-  mIsTemplateProperty: 0
-  mPropertyType: System.UInt32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
-  mConstraintNames: 
-  mConstraintValues: []
---- !u!114 &-3521575384320653844
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: DisplayNameColor
-  m_EditorClassIdentifier: 
-  mTechnicalName: DisplayNameColor
-  mDisplayName: 
-  mIsTemplateProperty: 0
-  mPropertyType: UnityEngine.Color, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral,
-    PublicKeyToken=null
-  mConstraintNames: 
-  mConstraintValues: []
---- !u!114 &-3513830628190751453
+--- !u!114 &-8278115999610012618
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -893,7 +208,7 @@ MonoBehaviour:
   - 
   - 
   - 
---- !u!114 &-3428718299000294848
+--- !u!114 &-7933463224013363607
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -903,48 +218,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 747260720, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: PreviewImageViewBoxModes
+  m_Name: ShapeType
   m_EditorClassIdentifier: 
-  mTechnicalName: PreviewImageViewBoxModes
-  mDisplayName: PreviewImageViewBoxModes
+  mTechnicalName: ShapeType
+  mDisplayName: ShapeType
   mBaseType: {fileID: 0}
-  mCSharpType: Articy.Unity.PreviewImageViewBoxModes, ArticyRuntime, Version=2.1.1.0,
+  mCSharpType: Articy.Harmonybarktest.ShapeType, Assembly-CSharp, Version=0.0.0.0,
     Culture=neutral, PublicKeyToken=null
   mIsEnum: 1
   mHasTemplate: 0
   mFeatures: []
   mProperties: []
   mEnumValues:
-  - {fileID: 1032719610074705409}
-  - {fileID: -724540151292728488}
---- !u!114 &-3409271411436950008
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 747260720, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: OutlineStyle
-  m_EditorClassIdentifier: 
-  mTechnicalName: OutlineStyle
-  mDisplayName: OutlineStyle
-  mBaseType: {fileID: 0}
-  mCSharpType: Articy.Harmonybarktest.OutlineStyle, Assembly-CSharp, Version=0.0.0.0,
-    Culture=neutral, PublicKeyToken=null
-  mIsEnum: 1
-  mHasTemplate: 0
-  mFeatures: []
-  mProperties: []
-  mEnumValues:
-  - {fileID: -2781124750626855678}
-  - {fileID: -1289216913759908030}
-  - {fileID: -4537882726665673892}
-  - {fileID: -5265863229081422160}
-  - {fileID: -7651342653178838174}
---- !u!114 &-3250886787788156961
+  - {fileID: -5020963582455921727}
+  - {fileID: -5957850902927938060}
+  - {fileID: 590161889784676530}
+  - {fileID: 1121952354057870826}
+  - {fileID: 3316589575621155465}
+  - {fileID: 5204121343882536494}
+  - {fileID: -4397654657177795228}
+--- !u!114 &-7866464428080117740
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -954,16 +247,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: Selectability
+  m_Name: DisplayNameColor
   m_EditorClassIdentifier: 
-  mTechnicalName: Selectability
+  mTechnicalName: DisplayNameColor
   mDisplayName: 
   mIsTemplateProperty: 0
-  mPropertyType: Articy.Harmonybarktest.SelectabilityModes, Assembly-CSharp, Version=0.0.0.0,
-    Culture=neutral, PublicKeyToken=null
+  mPropertyType: UnityEngine.Color, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral,
+    PublicKeyToken=null
   mConstraintNames: 
   mConstraintValues: []
---- !u!114 &-2923621406421487365
+--- !u!114 &-7771662251828037358
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -973,46 +266,51 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: Expression
+  m_Name: DefaultExtendedCharacterFeature.Fears
   m_EditorClassIdentifier: 
-  mTechnicalName: Expression
+  mTechnicalName: DefaultExtendedCharacterFeature.Fears
+  mDisplayName: Weaknesses
+  mIsTemplateProperty: 1
+  mPropertyType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  mConstraintNames: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f0000001000000011000000
+  mConstraintValues:
+  - 
+  - 
+  - 
+  - True
+  - 
+  - False
+  - True
+  - 2048
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 
+  - 0
+  - 
+  - 
+  - 
+--- !u!114 &-7680589823546369298
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: ExternalId
+  m_EditorClassIdentifier: 
+  mTechnicalName: ExternalId
   mDisplayName: 
   mIsTemplateProperty: 0
-  mPropertyType: Articy.Unity.ArticyScriptCondition, ArticyRuntime, Version=2.1.1.0,
-    Culture=neutral, PublicKeyToken=null
+  mPropertyType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
   mConstraintNames: 
   mConstraintValues: []
---- !u!114 &-2893138715204600859
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -246416443, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: VisibilityModes.Invisible
-  m_EditorClassIdentifier: 
-  mTechnicalName: Invisible
-  mDisplayName: Invisible
-  mValue: 0
---- !u!114 &-2781124750626855678
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -246416443, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: OutlineStyle.Solid
-  m_EditorClassIdentifier: 
-  mTechnicalName: Solid
-  mDisplayName: Solid
-  mValue: 0
---- !u!114 &-2475915289506745874
+--- !u!114 &-7675988340480315747
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1022,35 +320,53 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 747260720, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: Hub
+  m_Name: Entity
   m_EditorClassIdentifier: 
-  mTechnicalName: Hub
-  mDisplayName: Hub
-  mBaseType: {fileID: 3170600253084776791}
-  mCSharpType: Articy.Harmonybarktest.Hub, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+  mTechnicalName: Entity
+  mDisplayName: Entity
+  mBaseType: {fileID: 5699413222025548459}
+  mCSharpType: Articy.Harmonybarktest.Entity, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
     PublicKeyToken=null
   mIsEnum: 0
   mHasTemplate: 0
   mFeatures: []
   mProperties:
-  - {fileID: 1503750508407529944}
-  - {fileID: -7687836143550115872}
-  - {fileID: 8625672323224915365}
-  - {fileID: -7189990704772222893}
-  - {fileID: -7619522009408435573}
-  - {fileID: -7565282412987353106}
-  - {fileID: 6899512596035049822}
-  - {fileID: -3659262268098629400}
-  - {fileID: -7181068715460330353}
-  - {fileID: 1082891652882901478}
-  - {fileID: -6613771598178699049}
-  - {fileID: -8979273576449879907}
-  - {fileID: 4934528922601085315}
-  - {fileID: -319628973132797853}
-  - {fileID: 3849256236396507290}
-  - {fileID: 5114125731322242819}
+  - {fileID: 6433269249519108406}
+  - {fileID: -940598948718139968}
+  - {fileID: 7669905787378626991}
+  - {fileID: -2764685596056368341}
+  - {fileID: -7680589823546369298}
+  - {fileID: -4836543487199772720}
+  - {fileID: 2837812840525676063}
+  - {fileID: 342260549245298295}
+  - {fileID: 36688708500909184}
+  - {fileID: -2937397294101575948}
+  - {fileID: -2108611160766382413}
+  - {fileID: 6970369336510911703}
+  - {fileID: -257446547157761497}
+  - {fileID: -7609524593560653603}
+  - {fileID: -2061879253002664744}
+  - {fileID: 9023615521182862185}
   mEnumValues: []
---- !u!114 &-2383627691729894675
+--- !u!114 &-7609524593560653603
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: ParentId
+  m_EditorClassIdentifier: 
+  mTechnicalName: ParentId
+  mDisplayName: 
+  mIsTemplateProperty: 0
+  mPropertyType: System.UInt64, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  mConstraintNames: 
+  mConstraintValues: []
+--- !u!114 &-7568278916881217753
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1060,37 +376,244 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 747260720, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: DialogueFragment
+  m_Name: Comment
   m_EditorClassIdentifier: 
-  mTechnicalName: DialogueFragment
-  mDisplayName: DialogueFragment
-  mBaseType: {fileID: 3170600253084776791}
-  mCSharpType: Articy.Harmonybarktest.DialogueFragment, Assembly-CSharp, Version=0.0.0.0,
+  mTechnicalName: Comment
+  mDisplayName: Comment
+  mBaseType: {fileID: 5699413222025548459}
+  mCSharpType: Articy.Harmonybarktest.Comment, Assembly-CSharp, Version=0.0.0.0,
     Culture=neutral, PublicKeyToken=null
   mIsEnum: 0
   mHasTemplate: 0
   mFeatures: []
   mProperties:
-  - {fileID: 3038275105579734049}
-  - {fileID: 4293815754080921333}
-  - {fileID: -6811823855926575580}
-  - {fileID: -7687836143550115872}
-  - {fileID: 8625672323224915365}
-  - {fileID: -7189990704772222893}
-  - {fileID: -7619522009408435573}
-  - {fileID: -7565282412987353106}
-  - {fileID: 6899512596035049822}
-  - {fileID: -3659262268098629400}
-  - {fileID: -7181068715460330353}
-  - {fileID: 1082891652882901478}
-  - {fileID: -6613771598178699049}
-  - {fileID: -8979273576449879907}
-  - {fileID: 4934528922601085315}
-  - {fileID: -319628973132797853}
-  - {fileID: 3849256236396507290}
-  - {fileID: 5114125731322242819}
+  - {fileID: 4556571252258442349}
+  - {fileID: 8596909496306313453}
+  - {fileID: 7669905787378626991}
+  - {fileID: -2764685596056368341}
+  - {fileID: -7680589823546369298}
+  - {fileID: -4836543487199772720}
+  - {fileID: 2837812840525676063}
+  - {fileID: 342260549245298295}
+  - {fileID: -2937397294101575948}
+  - {fileID: -2108611160766382413}
+  - {fileID: 6970369336510911703}
+  - {fileID: -257446547157761497}
+  - {fileID: -7609524593560653603}
+  - {fileID: -2061879253002664744}
+  - {fileID: 9023615521182862185}
   mEnumValues: []
---- !u!114 &-2183155201135269958
+--- !u!114 &-7441929337629672230
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 747260720, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: FlowFragment
+  m_EditorClassIdentifier: 
+  mTechnicalName: FlowFragment
+  mDisplayName: FlowFragment
+  mBaseType: {fileID: 5699413222025548459}
+  mCSharpType: Articy.Harmonybarktest.FlowFragment, Assembly-CSharp, Version=0.0.0.0,
+    Culture=neutral, PublicKeyToken=null
+  mIsEnum: 0
+  mHasTemplate: 0
+  mFeatures: []
+  mProperties:
+  - {fileID: 6433269249519108406}
+  - {fileID: -940598948718139968}
+  - {fileID: 36688708500909184}
+  - {fileID: 7669905787378626991}
+  - {fileID: -2764685596056368341}
+  - {fileID: -7680589823546369298}
+  - {fileID: -4836543487199772720}
+  - {fileID: 2837812840525676063}
+  - {fileID: 342260549245298295}
+  - {fileID: -2937397294101575948}
+  - {fileID: -2108611160766382413}
+  - {fileID: 6970369336510911703}
+  - {fileID: -257446547157761497}
+  - {fileID: 7830683586919154623}
+  - {fileID: 7245542710162673935}
+  - {fileID: -7609524593560653603}
+  - {fileID: -2061879253002664744}
+  - {fileID: 9023615521182862185}
+  mEnumValues: []
+--- !u!114 &-7441677382056267794
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 747260720, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: DefaultMainCharacterTemplate
+  m_EditorClassIdentifier: 
+  mTechnicalName: DefaultMainCharacterTemplate
+  mDisplayName: Main characters
+  mBaseType: {fileID: -7675988340480315747}
+  mCSharpType: Articy.Harmonybarktest.DefaultMainCharacterTemplate, Assembly-CSharp,
+    Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  mIsEnum: 0
+  mHasTemplate: 1
+  mFeatures:
+  - DefaultExtendedCharacterFeature
+  - DefaultBasicCharacterFeature
+  mProperties:
+  - {fileID: 8781929362032290155}
+  - {fileID: 6115555276298119735}
+  - {fileID: 1969477788133471921}
+  - {fileID: -7771662251828037358}
+  - {fileID: -7064516804549606165}
+  - {fileID: -8278115999610012618}
+  - {fileID: 149768640180382063}
+  - {fileID: -4689358934993094595}
+  - {fileID: 3087830716489008283}
+  - {fileID: 7630091115002329949}
+  - {fileID: -2084996033022419659}
+  - {fileID: 2481154715873228897}
+  - {fileID: 1541999201384535004}
+  - {fileID: 2841452875062953002}
+  - {fileID: 6433269249519108406}
+  - {fileID: -940598948718139968}
+  - {fileID: 7669905787378626991}
+  - {fileID: -2764685596056368341}
+  - {fileID: -7680589823546369298}
+  - {fileID: -4836543487199772720}
+  - {fileID: 2837812840525676063}
+  - {fileID: 342260549245298295}
+  - {fileID: 36688708500909184}
+  - {fileID: -2937397294101575948}
+  - {fileID: -2108611160766382413}
+  - {fileID: 6970369336510911703}
+  - {fileID: -257446547157761497}
+  - {fileID: -7609524593560653603}
+  - {fileID: -2061879253002664744}
+  - {fileID: 9023615521182862185}
+  mEnumValues: []
+--- !u!114 &-7290220648624912451
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: HQ_NPC.TeaseText
+  m_EditorClassIdentifier: 
+  mTechnicalName: HQ_NPC.TeaseText
+  mDisplayName: Tease
+  mIsTemplateProperty: 1
+  mPropertyType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  mConstraintNames: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f0000001000000011000000
+  mConstraintValues:
+  - 
+  - 
+  - 
+  - False
+  - 
+  - False
+  - False
+  - 2048
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - This text will display when Melody gets close.
+  - 0
+  - 
+  - 
+  - 
+--- !u!114 &-7289305947587405185
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: ForcedWidth
+  m_EditorClassIdentifier: 
+  mTechnicalName: ForcedWidth
+  mDisplayName: 
+  mIsTemplateProperty: 0
+  mPropertyType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  mConstraintNames: 
+  mConstraintValues: []
+--- !u!114 &-7203030473381267329
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -246416443, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: PathCaps.Diamond
+  m_EditorClassIdentifier: 
+  mTechnicalName: Diamond
+  mDisplayName: Diamond
+  mValue: 4
+--- !u!114 &-7090109738006137084
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 747260720, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: DefaultSupportingCharacterTemplate
+  m_EditorClassIdentifier: 
+  mTechnicalName: DefaultSupportingCharacterTemplate
+  mDisplayName: Supporting characters
+  mBaseType: {fileID: -7675988340480315747}
+  mCSharpType: Articy.Harmonybarktest.DefaultSupportingCharacterTemplate, Assembly-CSharp,
+    Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  mIsEnum: 0
+  mHasTemplate: 1
+  mFeatures:
+  - DefaultBasicCharacterFeature
+  mProperties:
+  - {fileID: 149768640180382063}
+  - {fileID: -4689358934993094595}
+  - {fileID: 3087830716489008283}
+  - {fileID: 7630091115002329949}
+  - {fileID: -2084996033022419659}
+  - {fileID: 2481154715873228897}
+  - {fileID: 1541999201384535004}
+  - {fileID: 2841452875062953002}
+  - {fileID: 6433269249519108406}
+  - {fileID: -940598948718139968}
+  - {fileID: 7669905787378626991}
+  - {fileID: -2764685596056368341}
+  - {fileID: -7680589823546369298}
+  - {fileID: -4836543487199772720}
+  - {fileID: 2837812840525676063}
+  - {fileID: 342260549245298295}
+  - {fileID: 36688708500909184}
+  - {fileID: -2937397294101575948}
+  - {fileID: -2108611160766382413}
+  - {fileID: 6970369336510911703}
+  - {fileID: -257446547157761497}
+  - {fileID: -7609524593560653603}
+  - {fileID: -2061879253002664744}
+  - {fileID: 9023615521182862185}
+  mEnumValues: []
+--- !u!114 &-7064516804549606165
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1126,62 +649,7 @@ MonoBehaviour:
   - 
   - 
   - 
---- !u!114 &-2109757661497700216
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -246416443, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: SelectabilityModes.Unselectable
-  m_EditorClassIdentifier: 
-  mTechnicalName: Unselectable
-  mDisplayName: Unselectable
-  mValue: 0
---- !u!114 &-1854588775930879132
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 747260720, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: Dialogue
-  m_EditorClassIdentifier: 
-  mTechnicalName: Dialogue
-  mDisplayName: Dialogue
-  mBaseType: {fileID: 3170600253084776791}
-  mCSharpType: Articy.Harmonybarktest.Dialogue, Assembly-CSharp, Version=0.0.0.0,
-    Culture=neutral, PublicKeyToken=null
-  mIsEnum: 0
-  mHasTemplate: 0
-  mFeatures: []
-  mProperties:
-  - {fileID: -5949351258825500497}
-  - {fileID: 1503750508407529944}
-  - {fileID: -516227654248727319}
-  - {fileID: -7687836143550115872}
-  - {fileID: 8625672323224915365}
-  - {fileID: -7189990704772222893}
-  - {fileID: -7619522009408435573}
-  - {fileID: -7565282412987353106}
-  - {fileID: 6899512596035049822}
-  - {fileID: -3659262268098629400}
-  - {fileID: -7181068715460330353}
-  - {fileID: 1082891652882901478}
-  - {fileID: -6613771598178699049}
-  - {fileID: -8979273576449879907}
-  - {fileID: 4934528922601085315}
-  - {fileID: -319628973132797853}
-  - {fileID: 3849256236396507290}
-  - {fileID: 5114125731322242819}
-  mEnumValues: []
---- !u!114 &-1715994064981065900
+--- !u!114 &-6673720331429195015
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1191,33 +659,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: DefaultBasicCharacterFeature.Age
+  m_Name: Filename
   m_EditorClassIdentifier: 
-  mTechnicalName: DefaultBasicCharacterFeature.Age
-  mDisplayName: Age
-  mIsTemplateProperty: 1
-  mPropertyType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
-  mConstraintNames: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f0000001000000011000000
-  mConstraintValues:
-  - 
-  - 
-  - 
-  - False
-  - 
-  - False
-  - False
-  - 0
-  - 0
-  - 0
-  - 3.40282346638529E+38
-  - 0
-  - -3.40282346638529E+38
-  - 
-  - 0
-  - 
-  - 
-  - 
---- !u!114 &-1377553101012632492
+  mTechnicalName: Filename
+  mDisplayName: 
+  mIsTemplateProperty: 0
+  mPropertyType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  mConstraintNames: 
+  mConstraintValues: []
+--- !u!114 &-6497433966650867609
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -246416443, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: OutlineStyle.Dash
+  m_EditorClassIdentifier: 
+  mTechnicalName: Dash
+  mDisplayName: Dash
+  mValue: 2
+--- !u!114 &-6349787470965965536
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1227,39 +692,84 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 747260720, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: Link
+  m_Name: Asset
   m_EditorClassIdentifier: 
-  mTechnicalName: Link
-  mDisplayName: Link
-  mBaseType: {fileID: 3170600253084776791}
-  mCSharpType: Articy.Harmonybarktest.Link, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+  mTechnicalName: Asset
+  mDisplayName: Asset
+  mBaseType: {fileID: 5699413222025548459}
+  mCSharpType: Articy.Harmonybarktest.Asset, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
     PublicKeyToken=null
   mIsEnum: 0
   mHasTemplate: 0
   mFeatures: []
   mProperties:
-  - {fileID: -7687836143550115872}
-  - {fileID: 8625672323224915365}
-  - {fileID: -7189990704772222893}
-  - {fileID: -7619522009408435573}
-  - {fileID: -7565282412987353106}
-  - {fileID: 6899512596035049822}
-  - {fileID: -6985418873031356133}
-  - {fileID: -3659262268098629400}
-  - {fileID: 5836739278381233432}
-  - {fileID: -15954740935781769}
-  - {fileID: -3521575384320653844}
-  - {fileID: 3949227827020479136}
-  - {fileID: -3250886787788156961}
-  - {fileID: -9019514523812105303}
-  - {fileID: -7181068715460330353}
-  - {fileID: 1082891652882901478}
-  - {fileID: -6613771598178699049}
-  - {fileID: -319628973132797853}
-  - {fileID: 3849256236396507290}
-  - {fileID: 5114125731322242819}
+  - {fileID: -940598948718139968}
+  - {fileID: -6673720331429195015}
+  - {fileID: -4192022011955955755}
+  - {fileID: 36688708500909184}
+  - {fileID: 7669905787378626991}
+  - {fileID: -2764685596056368341}
+  - {fileID: -7680589823546369298}
+  - {fileID: -4836543487199772720}
+  - {fileID: 2837812840525676063}
+  - {fileID: 342260549245298295}
+  - {fileID: -2937397294101575948}
+  - {fileID: -2108611160766382413}
+  - {fileID: 6970369336510911703}
+  - {fileID: -257446547157761497}
+  - {fileID: -7609524593560653603}
+  - {fileID: -2061879253002664744}
+  - {fileID: 9023615521182862185}
   mEnumValues: []
---- !u!114 &-1357325933083779481
+--- !u!114 &-5957850902927938060
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -246416443, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: ShapeType.Spot
+  m_EditorClassIdentifier: 
+  mTechnicalName: Spot
+  mDisplayName: Spot
+  mValue: 1
+--- !u!114 &-5943348446830895068
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: LineWidth
+  m_EditorClassIdentifier: 
+  mTechnicalName: LineWidth
+  mDisplayName: 
+  mIsTemplateProperty: 0
+  mPropertyType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  mConstraintNames: 
+  mConstraintValues: []
+--- !u!114 &-5937009823103607116
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -246416443, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: PathCaps.LineArrowHead
+  m_EditorClassIdentifier: 
+  mTechnicalName: LineArrowHead
+  mDisplayName: LineArrowHead
+  mValue: 2
+--- !u!114 &-5701485810224969048
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1269,33 +779,40 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 747260720, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: Document
+  m_Name: HQ_NPC_DIALOGUE
   m_EditorClassIdentifier: 
-  mTechnicalName: Document
-  mDisplayName: Document
-  mBaseType: {fileID: 3170600253084776791}
-  mCSharpType: Articy.Harmonybarktest.Document, Assembly-CSharp, Version=0.0.0.0,
+  mTechnicalName: HQ_NPC_DIALOGUE
+  mDisplayName: HQ NPC Dialogue
+  mBaseType: {fileID: -7441929337629672230}
+  mCSharpType: Articy.Harmonybarktest.HQ_NPC_DIALOGUE, Assembly-CSharp, Version=0.0.0.0,
     Culture=neutral, PublicKeyToken=null
   mIsEnum: 0
-  mHasTemplate: 0
-  mFeatures: []
+  mHasTemplate: 1
+  mFeatures:
+  - HQ_NPC
   mProperties:
-  - {fileID: 1503750508407529944}
-  - {fileID: -7687836143550115872}
-  - {fileID: 8625672323224915365}
-  - {fileID: -7189990704772222893}
-  - {fileID: -7619522009408435573}
-  - {fileID: -7565282412987353106}
-  - {fileID: 6899512596035049822}
-  - {fileID: -3659262268098629400}
-  - {fileID: -7181068715460330353}
-  - {fileID: 1082891652882901478}
-  - {fileID: -6613771598178699049}
-  - {fileID: -319628973132797853}
-  - {fileID: 3849256236396507290}
-  - {fileID: 5114125731322242819}
+  - {fileID: -7290220648624912451}
+  - {fileID: -5313560126934189951}
+  - {fileID: 6433269249519108406}
+  - {fileID: -940598948718139968}
+  - {fileID: 36688708500909184}
+  - {fileID: 7669905787378626991}
+  - {fileID: -2764685596056368341}
+  - {fileID: -7680589823546369298}
+  - {fileID: -4836543487199772720}
+  - {fileID: 2837812840525676063}
+  - {fileID: 342260549245298295}
+  - {fileID: -2937397294101575948}
+  - {fileID: -2108611160766382413}
+  - {fileID: 6970369336510911703}
+  - {fileID: -257446547157761497}
+  - {fileID: 7830683586919154623}
+  - {fileID: 7245542710162673935}
+  - {fileID: -7609524593560653603}
+  - {fileID: -2061879253002664744}
+  - {fileID: 9023615521182862185}
   mEnumValues: []
---- !u!114 &-1289216913759908030
+--- !u!114 &-5640826602983468353
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1310,7 +827,166 @@ MonoBehaviour:
   mTechnicalName: Dot
   mDisplayName: Dot
   mValue: 1
---- !u!114 &-1187935297109512030
+--- !u!114 &-5413951999828071100
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 747260720, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: LocationImage
+  m_EditorClassIdentifier: 
+  mTechnicalName: LocationImage
+  mDisplayName: LocationImage
+  mBaseType: {fileID: 5699413222025548459}
+  mCSharpType: Articy.Harmonybarktest.LocationImage, Assembly-CSharp, Version=0.0.0.0,
+    Culture=neutral, PublicKeyToken=null
+  mIsEnum: 0
+  mHasTemplate: 0
+  mFeatures: []
+  mProperties:
+  - {fileID: -940598948718139968}
+  - {fileID: 36688708500909184}
+  - {fileID: 2860545009720706231}
+  - {fileID: 227142438934816363}
+  - {fileID: 3279683241092877810}
+  - {fileID: 7312395535471236630}
+  - {fileID: 7669905787378626991}
+  - {fileID: -2764685596056368341}
+  - {fileID: -7680589823546369298}
+  - {fileID: 2837812840525676063}
+  - {fileID: 342260549245298295}
+  - {fileID: -2937397294101575948}
+  - {fileID: -1490049682070477014}
+  - {fileID: -1880215554976284389}
+  - {fileID: -3693655407036122053}
+  - {fileID: 3563609466312608407}
+  - {fileID: 3542383837637698180}
+  - {fileID: 2733004636422383917}
+  - {fileID: 4858485974600524678}
+  - {fileID: 5661451801882644003}
+  - {fileID: -1635653408018505980}
+  - {fileID: 5980784327746938739}
+  - {fileID: -4131418132795155728}
+  - {fileID: 8407816978944491138}
+  - {fileID: -7866464428080117740}
+  - {fileID: 2682851233411513378}
+  - {fileID: -2108611160766382413}
+  - {fileID: 6970369336510911703}
+  - {fileID: -257446547157761497}
+  - {fileID: -7609524593560653603}
+  - {fileID: -2061879253002664744}
+  - {fileID: 9023615521182862185}
+  mEnumValues: []
+--- !u!114 &-5340619504659805810
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -246416443, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: VisibilityModes.Invisible
+  m_EditorClassIdentifier: 
+  mTechnicalName: Invisible
+  mDisplayName: Invisible
+  mValue: 0
+--- !u!114 &-5313560126934189951
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: HQ_NPC.DialogueType
+  m_EditorClassIdentifier: 
+  mTechnicalName: HQ_NPC.DialogueType
+  mDisplayName: Dialogue Type
+  mIsTemplateProperty: 1
+  mPropertyType: Articy.Harmonybarktest.DialogueType, Assembly-CSharp, Version=0.0.0.0,
+    Culture=neutral, PublicKeyToken=null
+  mConstraintNames: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f0000001000000011000000
+  mConstraintValues:
+  - 
+  - 
+  - 
+  - False
+  - 
+  - False
+  - False
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 
+  - 0
+  - 
+  - BySortIndex
+  - 
+--- !u!114 &-5020963582455921727
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -246416443, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: ShapeType.Invalid
+  m_EditorClassIdentifier: 
+  mTechnicalName: Invalid
+  mDisplayName: Invalid
+  mValue: 0
+--- !u!114 &-4836543487199772720
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: Position
+  m_EditorClassIdentifier: 
+  mTechnicalName: Position
+  mDisplayName: 
+  mIsTemplateProperty: 0
+  mPropertyType: UnityEngine.Vector2, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral,
+    PublicKeyToken=null
+  mConstraintNames: 
+  mConstraintValues: []
+--- !u!114 &-4792054204721782581
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: StartCap
+  m_EditorClassIdentifier: 
+  mTechnicalName: StartCap
+  mDisplayName: 
+  mIsTemplateProperty: 0
+  mPropertyType: Articy.Harmonybarktest.PathCaps, Assembly-CSharp, Version=0.0.0.0,
+    Culture=neutral, PublicKeyToken=null
+  mConstraintNames: 
+  mConstraintValues: []
+--- !u!114 &-4689358934993094595
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1346,7 +1022,7 @@ MonoBehaviour:
   - 
   - 
   - 
---- !u!114 &-1123158588920779536
+--- !u!114 &-4397654657177795228
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1356,27 +1032,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -246416443, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: ShapeType.Polygon
+  m_Name: ShapeType.Link
   m_EditorClassIdentifier: 
-  mTechnicalName: Polygon
-  mDisplayName: Polygon
-  mValue: 5
---- !u!114 &-1120277615481756908
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -246416443, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: PathCaps.Square
-  m_EditorClassIdentifier: 
-  mTechnicalName: Square
-  mDisplayName: Square
-  mValue: 5
---- !u!114 &-889157013613196402
+  mTechnicalName: Link
+  mDisplayName: Link
+  mValue: 6
+--- !u!114 &-4286923654248068643
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1386,105 +1047,50 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 747260720, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: DefaultMainCharacterTemplate
+  m_Name: TextObject
   m_EditorClassIdentifier: 
-  mTechnicalName: DefaultMainCharacterTemplate
-  mDisplayName: Main characters
-  mBaseType: {fileID: 7594711655872295337}
-  mCSharpType: Articy.Harmonybarktest.DefaultMainCharacterTemplate, Assembly-CSharp,
-    Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-  mIsEnum: 0
-  mHasTemplate: 1
-  mFeatures:
-  - DefaultExtendedCharacterFeature
-  - DefaultBasicCharacterFeature
-  mProperties:
-  - {fileID: -485245196841034024}
-  - {fileID: 5133915599351533509}
-  - {fileID: 4966648906371316816}
-  - {fileID: -5047562902933925020}
-  - {fileID: -2183155201135269958}
-  - {fileID: -3513830628190751453}
-  - {fileID: -1715994064981065900}
-  - {fileID: -1187935297109512030}
-  - {fileID: -4556083683302979873}
-  - {fileID: 973049375364133352}
-  - {fileID: 4436430425885135688}
-  - {fileID: 1890637021404314058}
-  - {fileID: -6716934256113706912}
-  - {fileID: 7451407022867265024}
-  - {fileID: -5949351258825500497}
-  - {fileID: 1503750508407529944}
-  - {fileID: -7687836143550115872}
-  - {fileID: 8625672323224915365}
-  - {fileID: -7189990704772222893}
-  - {fileID: -7619522009408435573}
-  - {fileID: -7565282412987353106}
-  - {fileID: 6899512596035049822}
-  - {fileID: -516227654248727319}
-  - {fileID: -3659262268098629400}
-  - {fileID: -7181068715460330353}
-  - {fileID: 1082891652882901478}
-  - {fileID: -6613771598178699049}
-  - {fileID: -319628973132797853}
-  - {fileID: 3849256236396507290}
-  - {fileID: 5114125731322242819}
-  mEnumValues: []
---- !u!114 &-724540151292728488
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -246416443, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: PreviewImageViewBoxModes.Custom
-  m_EditorClassIdentifier: 
-  mTechnicalName: Custom
-  mDisplayName: Custom
-  mValue: 1
---- !u!114 &-651315961278930274
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 747260720, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: Condition
-  m_EditorClassIdentifier: 
-  mTechnicalName: Condition
-  mDisplayName: Condition
-  mBaseType: {fileID: 3170600253084776791}
-  mCSharpType: Articy.Harmonybarktest.Condition, Assembly-CSharp, Version=0.0.0.0,
+  mTechnicalName: TextObject
+  mDisplayName: TextObject
+  mBaseType: {fileID: 5699413222025548459}
+  mCSharpType: Articy.Harmonybarktest.TextObject, Assembly-CSharp, Version=0.0.0.0,
     Culture=neutral, PublicKeyToken=null
   mIsEnum: 0
   mHasTemplate: 0
   mFeatures: []
   mProperties:
-  - {fileID: 1503750508407529944}
-  - {fileID: 8625672323224915365}
-  - {fileID: -7189990704772222893}
-  - {fileID: -7619522009408435573}
-  - {fileID: -7565282412987353106}
-  - {fileID: 6899512596035049822}
-  - {fileID: -3659262268098629400}
-  - {fileID: -2923621406421487365}
-  - {fileID: -7687836143550115872}
-  - {fileID: -7181068715460330353}
-  - {fileID: 1082891652882901478}
-  - {fileID: -6613771598178699049}
-  - {fileID: -8979273576449879907}
-  - {fileID: 4934528922601085315}
-  - {fileID: -319628973132797853}
-  - {fileID: 3849256236396507290}
-  - {fileID: 5114125731322242819}
+  - {fileID: -940598948718139968}
+  - {fileID: 6433269249519108406}
+  - {fileID: 36688708500909184}
+  - {fileID: 7669905787378626991}
+  - {fileID: -2764685596056368341}
+  - {fileID: -7680589823546369298}
+  - {fileID: -4836543487199772720}
+  - {fileID: 2837812840525676063}
+  - {fileID: 342260549245298295}
+  - {fileID: -2937397294101575948}
+  - {fileID: -2108611160766382413}
+  - {fileID: 6970369336510911703}
+  - {fileID: -257446547157761497}
+  - {fileID: -7609524593560653603}
+  - {fileID: -2061879253002664744}
+  - {fileID: 9023615521182862185}
   mEnumValues: []
---- !u!114 &-564164786933226095
+--- !u!114 &-4259286148137360287
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -246416443, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: PathCaps.ColoredDot
+  m_EditorClassIdentifier: 
+  mTechnicalName: ColoredDot
+  mDisplayName: ColoredDot
+  mValue: 0
+--- !u!114 &-4192022011955955755
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1494,15 +1100,162 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: ImageOpacity
+  m_Name: OriginalSource
   m_EditorClassIdentifier: 
-  mTechnicalName: ImageOpacity
+  mTechnicalName: OriginalSource
+  mDisplayName: 
+  mIsTemplateProperty: 0
+  mPropertyType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  mConstraintNames: 
+  mConstraintValues: []
+--- !u!114 &-4184885902362145297
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 747260720, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: Spot
+  m_EditorClassIdentifier: 
+  mTechnicalName: Spot
+  mDisplayName: Spot
+  mBaseType: {fileID: 5699413222025548459}
+  mCSharpType: Articy.Harmonybarktest.Spot, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+    PublicKeyToken=null
+  mIsEnum: 0
+  mHasTemplate: 0
+  mFeatures: []
+  mProperties:
+  - {fileID: -940598948718139968}
+  - {fileID: 7669905787378626991}
+  - {fileID: -2764685596056368341}
+  - {fileID: -7680589823546369298}
+  - {fileID: -4836543487199772720}
+  - {fileID: 2837812840525676063}
+  - {fileID: 342260549245298295}
+  - {fileID: 36688708500909184}
+  - {fileID: -2937397294101575948}
+  - {fileID: -1490049682070477014}
+  - {fileID: 8407816978944491138}
+  - {fileID: -7866464428080117740}
+  - {fileID: 2682851233411513378}
+  - {fileID: -1880215554976284389}
+  - {fileID: -3693655407036122053}
+  - {fileID: 3563609466312608407}
+  - {fileID: 2733004636422383917}
+  - {fileID: 3542383837637698180}
+  - {fileID: -2108611160766382413}
+  - {fileID: 6970369336510911703}
+  - {fileID: -257446547157761497}
+  - {fileID: -7609524593560653603}
+  - {fileID: -2061879253002664744}
+  - {fileID: 9023615521182862185}
+  mEnumValues: []
+--- !u!114 &-4131418132795155728
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: CachedImageHeight
+  m_EditorClassIdentifier: 
+  mTechnicalName: CachedImageHeight
+  mDisplayName: 
+  mIsTemplateProperty: 0
+  mPropertyType: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  mConstraintNames: 
+  mConstraintValues: []
+--- !u!114 &-3967662805923954744
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 747260720, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  mTechnicalName: Dialogue
+  mDisplayName: Dialogue
+  mBaseType: {fileID: 5699413222025548459}
+  mCSharpType: Articy.Harmonybarktest.Dialogue, Assembly-CSharp, Version=0.0.0.0,
+    Culture=neutral, PublicKeyToken=null
+  mIsEnum: 0
+  mHasTemplate: 0
+  mFeatures: []
+  mProperties:
+  - {fileID: 6433269249519108406}
+  - {fileID: -940598948718139968}
+  - {fileID: 36688708500909184}
+  - {fileID: 7669905787378626991}
+  - {fileID: -2764685596056368341}
+  - {fileID: -7680589823546369298}
+  - {fileID: -4836543487199772720}
+  - {fileID: 2837812840525676063}
+  - {fileID: 342260549245298295}
+  - {fileID: -2937397294101575948}
+  - {fileID: -2108611160766382413}
+  - {fileID: 6970369336510911703}
+  - {fileID: -257446547157761497}
+  - {fileID: 7830683586919154623}
+  - {fileID: 7245542710162673935}
+  - {fileID: -7609524593560653603}
+  - {fileID: -2061879253002664744}
+  - {fileID: 9023615521182862185}
+  mEnumValues: []
+--- !u!114 &-3693655407036122053
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: OutlineSize
+  m_EditorClassIdentifier: 
+  mTechnicalName: OutlineSize
   mDisplayName: 
   mIsTemplateProperty: 0
   mPropertyType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
   mConstraintNames: 
   mConstraintValues: []
---- !u!114 &-516227654248727319
+--- !u!114 &-3176175291489854703
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 747260720, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: LocationAnchorSize
+  m_EditorClassIdentifier: 
+  mTechnicalName: LocationAnchorSize
+  mDisplayName: LocationAnchorSize
+  mBaseType: {fileID: 0}
+  mCSharpType: Articy.Harmonybarktest.LocationAnchorSize, Assembly-CSharp, Version=0.0.0.0,
+    Culture=neutral, PublicKeyToken=null
+  mIsEnum: 1
+  mHasTemplate: 0
+  mFeatures: []
+  mProperties: []
+  mEnumValues:
+  - {fileID: 3423750965722342413}
+  - {fileID: 7882862877127550533}
+  - {fileID: 3202382987315487651}
+--- !u!114 &-2937397294101575948
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1512,16 +1265,102 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: PreviewImage
+  m_Name: ShortId
   m_EditorClassIdentifier: 
-  mTechnicalName: PreviewImage
+  mTechnicalName: ShortId
   mDisplayName: 
   mIsTemplateProperty: 0
-  mPropertyType: Articy.Unity.PreviewImage, ArticyRuntime, Version=2.1.1.0, Culture=neutral,
-    PublicKeyToken=null
+  mPropertyType: System.UInt32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
   mConstraintNames: 
   mConstraintValues: []
---- !u!114 &-485245196841034024
+--- !u!114 &-2908808111572208877
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -246416443, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: Sex.Female
+  m_EditorClassIdentifier: 
+  mTechnicalName: Female
+  mDisplayName: Female
+  mValue: 1
+--- !u!114 &-2879674163208463970
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 747260720, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: PreviewImageViewBoxModes
+  m_EditorClassIdentifier: 
+  mTechnicalName: PreviewImageViewBoxModes
+  mDisplayName: PreviewImageViewBoxModes
+  mBaseType: {fileID: 0}
+  mCSharpType: Articy.Unity.PreviewImageViewBoxModes, ArticyRuntime, Version=2.2.0.0,
+    Culture=neutral, PublicKeyToken=null
+  mIsEnum: 1
+  mHasTemplate: 0
+  mFeatures: []
+  mProperties: []
+  mEnumValues:
+  - {fileID: 1023695391965298947}
+  - {fileID: 1365882007280172159}
+--- !u!114 &-2850071780512970569
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 747260720, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: Zone
+  m_EditorClassIdentifier: 
+  mTechnicalName: Zone
+  mDisplayName: Zone
+  mBaseType: {fileID: 5699413222025548459}
+  mCSharpType: Articy.Harmonybarktest.Zone, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+    PublicKeyToken=null
+  mIsEnum: 0
+  mHasTemplate: 0
+  mFeatures: []
+  mProperties:
+  - {fileID: -940598948718139968}
+  - {fileID: 36688708500909184}
+  - {fileID: 227142438934816363}
+  - {fileID: 3279683241092877810}
+  - {fileID: 7312395535471236630}
+  - {fileID: 7669905787378626991}
+  - {fileID: -2764685596056368341}
+  - {fileID: -7680589823546369298}
+  - {fileID: 2837812840525676063}
+  - {fileID: 342260549245298295}
+  - {fileID: -2937397294101575948}
+  - {fileID: -1490049682070477014}
+  - {fileID: -1880215554976284389}
+  - {fileID: -3693655407036122053}
+  - {fileID: 3563609466312608407}
+  - {fileID: 8407816978944491138}
+  - {fileID: -7866464428080117740}
+  - {fileID: 2682851233411513378}
+  - {fileID: 2733004636422383917}
+  - {fileID: 3542383837637698180}
+  - {fileID: -2108611160766382413}
+  - {fileID: 6970369336510911703}
+  - {fileID: -257446547157761497}
+  - {fileID: -7609524593560653603}
+  - {fileID: -2061879253002664744}
+  - {fileID: 9023615521182862185}
+  mEnumValues: []
+--- !u!114 &-2764685596056368341
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1531,10 +1370,76 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: DefaultExtendedCharacterFeature.Motivation
+  m_Name: Text
   m_EditorClassIdentifier: 
-  mTechnicalName: DefaultExtendedCharacterFeature.Motivation
-  mDisplayName: Goals
+  mTechnicalName: Text
+  mDisplayName: 
+  mIsTemplateProperty: 0
+  mPropertyType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  mConstraintNames: 
+  mConstraintValues: []
+--- !u!114 &-2638147516236103623
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -246416443, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: OutlineStyle.Solid
+  m_EditorClassIdentifier: 
+  mTechnicalName: Solid
+  mDisplayName: Solid
+  mValue: 0
+--- !u!114 &-2444708339123626895
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -246416443, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: OutlineStyle.DashDot
+  m_EditorClassIdentifier: 
+  mTechnicalName: DashDot
+  mDisplayName: DashDot
+  mValue: 3
+--- !u!114 &-2108611160766382413
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: Id
+  m_EditorClassIdentifier: 
+  mTechnicalName: Id
+  mDisplayName: 
+  mIsTemplateProperty: 0
+  mPropertyType: System.UInt64, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  mConstraintNames: 
+  mConstraintValues: []
+--- !u!114 &-2084996033022419659
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: DefaultBasicCharacterFeature.Occupation
+  m_EditorClassIdentifier: 
+  mTechnicalName: DefaultBasicCharacterFeature.Occupation
+  mDisplayName: Profession
   mIsTemplateProperty: 1
   mPropertyType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
   mConstraintNames: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f0000001000000011000000
@@ -1542,7 +1447,7 @@ MonoBehaviour:
   - 
   - 
   - 
-  - True
+  - False
   - 
   - False
   - True
@@ -1557,43 +1462,7 @@ MonoBehaviour:
   - 
   - 
   - 
---- !u!114 &-401668824210488200
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: Vertices
-  m_EditorClassIdentifier: 
-  mTechnicalName: Vertices
-  mDisplayName: 
-  mIsTemplateProperty: 0
-  mPropertyType: Articy.Harmonybarktest.List`1, Assembly-CSharp
-  mConstraintNames: 
-  mConstraintValues: []
---- !u!114 &-319628973132797853
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: ParentId
-  m_EditorClassIdentifier: 
-  mTechnicalName: ParentId
-  mDisplayName: 
-  mIsTemplateProperty: 0
-  mPropertyType: System.UInt64, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
-  mConstraintNames: 
-  mConstraintValues: []
---- !u!114 &-137315442792068218
+--- !u!114 &-2069537017566490300
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1603,60 +1472,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -246416443, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: DialogueType.INFO
+  m_Name: SelectabilityModes.Unselectable
   m_EditorClassIdentifier: 
-  mTechnicalName: INFO
-  mDisplayName: Info
-  mValue: 1
---- !u!114 &-78862414707797587
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 747260720, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: Zone
-  m_EditorClassIdentifier: 
-  mTechnicalName: Zone
-  mDisplayName: Zone
-  mBaseType: {fileID: 3170600253084776791}
-  mCSharpType: Articy.Harmonybarktest.Zone, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-    PublicKeyToken=null
-  mIsEnum: 0
-  mHasTemplate: 0
-  mFeatures: []
-  mProperties:
-  - {fileID: 1503750508407529944}
-  - {fileID: -516227654248727319}
-  - {fileID: -401668824210488200}
-  - {fileID: 886906808896423095}
-  - {fileID: 1525510335815679262}
-  - {fileID: -7687836143550115872}
-  - {fileID: 8625672323224915365}
-  - {fileID: -7189990704772222893}
-  - {fileID: -7565282412987353106}
-  - {fileID: 6899512596035049822}
-  - {fileID: -3659262268098629400}
-  - {fileID: 5836739278381233432}
-  - {fileID: 2954945432116449875}
-  - {fileID: 8333702074638475496}
-  - {fileID: 5584264529544217752}
-  - {fileID: -15954740935781769}
-  - {fileID: -3521575384320653844}
-  - {fileID: 3949227827020479136}
-  - {fileID: -9019514523812105303}
-  - {fileID: -3250886787788156961}
-  - {fileID: -7181068715460330353}
-  - {fileID: 1082891652882901478}
-  - {fileID: -6613771598178699049}
-  - {fileID: -319628973132797853}
-  - {fileID: 3849256236396507290}
-  - {fileID: 5114125731322242819}
-  mEnumValues: []
---- !u!114 &-15954740935781769
+  mTechnicalName: Unselectable
+  mDisplayName: Unselectable
+  mValue: 0
+--- !u!114 &-2061879253002664744
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1666,12 +1487,357 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: ShowDisplayName
+  m_Name: InstanceId
   m_EditorClassIdentifier: 
-  mTechnicalName: ShowDisplayName
+  mTechnicalName: InstanceId
   mDisplayName: 
   mIsTemplateProperty: 0
-  mPropertyType: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  mPropertyType: System.UInt64, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  mConstraintNames: 
+  mConstraintValues: []
+--- !u!114 &-1922372272681980185
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: MenuText
+  m_EditorClassIdentifier: 
+  mTechnicalName: MenuText
+  mDisplayName: 
+  mIsTemplateProperty: 0
+  mPropertyType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  mConstraintNames: 
+  mConstraintValues: []
+--- !u!114 &-1880215554976284389
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: OutlineColor
+  m_EditorClassIdentifier: 
+  mTechnicalName: OutlineColor
+  mDisplayName: 
+  mIsTemplateProperty: 0
+  mPropertyType: UnityEngine.Color, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral,
+    PublicKeyToken=null
+  mConstraintNames: 
+  mConstraintValues: []
+--- !u!114 &-1855171253363154750
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 747260720, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: Location
+  m_EditorClassIdentifier: 
+  mTechnicalName: Location
+  mDisplayName: Location
+  mBaseType: {fileID: 5699413222025548459}
+  mCSharpType: Articy.Harmonybarktest.Location, Assembly-CSharp, Version=0.0.0.0,
+    Culture=neutral, PublicKeyToken=null
+  mIsEnum: 0
+  mHasTemplate: 0
+  mFeatures: []
+  mProperties:
+  - {fileID: 6433269249519108406}
+  - {fileID: -940598948718139968}
+  - {fileID: 36688708500909184}
+  - {fileID: 7669905787378626991}
+  - {fileID: -2764685596056368341}
+  - {fileID: -7680589823546369298}
+  - {fileID: -4836543487199772720}
+  - {fileID: 2837812840525676063}
+  - {fileID: 342260549245298295}
+  - {fileID: -2937397294101575948}
+  - {fileID: -2108611160766382413}
+  - {fileID: 6970369336510911703}
+  - {fileID: -257446547157761497}
+  - {fileID: -7609524593560653603}
+  - {fileID: -2061879253002664744}
+  - {fileID: 9023615521182862185}
+  mEnumValues: []
+--- !u!114 &-1841040879133228564
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 747260720, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: DialogueFragment
+  m_EditorClassIdentifier: 
+  mTechnicalName: DialogueFragment
+  mDisplayName: DialogueFragment
+  mBaseType: {fileID: 5699413222025548459}
+  mCSharpType: Articy.Harmonybarktest.DialogueFragment, Assembly-CSharp, Version=0.0.0.0,
+    Culture=neutral, PublicKeyToken=null
+  mIsEnum: 0
+  mHasTemplate: 0
+  mFeatures: []
+  mProperties:
+  - {fileID: -1922372272681980185}
+  - {fileID: -9026964043403114116}
+  - {fileID: 517966628872120017}
+  - {fileID: 7669905787378626991}
+  - {fileID: -2764685596056368341}
+  - {fileID: -7680589823546369298}
+  - {fileID: -4836543487199772720}
+  - {fileID: 2837812840525676063}
+  - {fileID: 342260549245298295}
+  - {fileID: -2937397294101575948}
+  - {fileID: -2108611160766382413}
+  - {fileID: 6970369336510911703}
+  - {fileID: -257446547157761497}
+  - {fileID: 7830683586919154623}
+  - {fileID: 7245542710162673935}
+  - {fileID: -7609524593560653603}
+  - {fileID: -2061879253002664744}
+  - {fileID: 9023615521182862185}
+  mEnumValues: []
+--- !u!114 &-1751641004552224229
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 747260720, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: LocationText
+  m_EditorClassIdentifier: 
+  mTechnicalName: LocationText
+  mDisplayName: LocationText
+  mBaseType: {fileID: 5699413222025548459}
+  mCSharpType: Articy.Harmonybarktest.LocationText, Assembly-CSharp, Version=0.0.0.0,
+    Culture=neutral, PublicKeyToken=null
+  mIsEnum: 0
+  mHasTemplate: 0
+  mFeatures: []
+  mProperties:
+  - {fileID: -940598948718139968}
+  - {fileID: 36688708500909184}
+  - {fileID: 2860545009720706231}
+  - {fileID: 227142438934816363}
+  - {fileID: 3279683241092877810}
+  - {fileID: 7312395535471236630}
+  - {fileID: 7669905787378626991}
+  - {fileID: -2764685596056368341}
+  - {fileID: -7680589823546369298}
+  - {fileID: 2837812840525676063}
+  - {fileID: 342260549245298295}
+  - {fileID: -2937397294101575948}
+  - {fileID: -1490049682070477014}
+  - {fileID: -1880215554976284389}
+  - {fileID: -3693655407036122053}
+  - {fileID: 3563609466312608407}
+  - {fileID: 3542383837637698180}
+  - {fileID: -7289305947587405185}
+  - {fileID: -1199455406566387375}
+  - {fileID: 2733004636422383917}
+  - {fileID: -2108611160766382413}
+  - {fileID: 6970369336510911703}
+  - {fileID: -257446547157761497}
+  - {fileID: -7609524593560653603}
+  - {fileID: -2061879253002664744}
+  - {fileID: 9023615521182862185}
+  mEnumValues: []
+--- !u!114 &-1635653408018505980
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: ImageAsset
+  m_EditorClassIdentifier: 
+  mTechnicalName: ImageAsset
+  mDisplayName: 
+  mIsTemplateProperty: 0
+  mPropertyType: Articy.Unity.ArticyObject, ArticyRuntime, Version=2.2.0.0, Culture=neutral,
+    PublicKeyToken=null
+  mConstraintNames: 
+  mConstraintValues: []
+--- !u!114 &-1490049682070477014
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: Visibility
+  m_EditorClassIdentifier: 
+  mTechnicalName: Visibility
+  mDisplayName: 
+  mIsTemplateProperty: 0
+  mPropertyType: Articy.Harmonybarktest.VisibilityModes, Assembly-CSharp, Version=0.0.0.0,
+    Culture=neutral, PublicKeyToken=null
+  mConstraintNames: 
+  mConstraintValues: []
+--- !u!114 &-1466473071657235076
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 747260720, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: UserFolder
+  m_EditorClassIdentifier: 
+  mTechnicalName: UserFolder
+  mDisplayName: UserFolder
+  mBaseType: {fileID: 5699413222025548459}
+  mCSharpType: Articy.Harmonybarktest.UserFolder, Assembly-CSharp, Version=0.0.0.0,
+    Culture=neutral, PublicKeyToken=null
+  mIsEnum: 0
+  mHasTemplate: 0
+  mFeatures: []
+  mProperties:
+  - {fileID: -940598948718139968}
+  - {fileID: -7680589823546369298}
+  - {fileID: -2937397294101575948}
+  - {fileID: -2108611160766382413}
+  - {fileID: 6970369336510911703}
+  - {fileID: -257446547157761497}
+  - {fileID: 2837812840525676063}
+  - {fileID: -7609524593560653603}
+  - {fileID: -2061879253002664744}
+  - {fileID: 9023615521182862185}
+  mEnumValues: []
+--- !u!114 &-1199455406566387375
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: ForcedHeight
+  m_EditorClassIdentifier: 
+  mTechnicalName: ForcedHeight
+  mDisplayName: 
+  mIsTemplateProperty: 0
+  mPropertyType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  mConstraintNames: 
+  mConstraintValues: []
+--- !u!114 &-940598948718139968
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: DisplayName
+  m_EditorClassIdentifier: 
+  mTechnicalName: DisplayName
+  mDisplayName: 
+  mIsTemplateProperty: 0
+  mPropertyType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  mConstraintNames: 
+  mConstraintValues: []
+--- !u!114 &-809830436972717658
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -246416443, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: PathCaps.Square
+  m_EditorClassIdentifier: 
+  mTechnicalName: Square
+  mDisplayName: Square
+  mValue: 5
+--- !u!114 &-679437177168268159
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 747260720, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: Link
+  m_EditorClassIdentifier: 
+  mTechnicalName: Link
+  mDisplayName: Link
+  mBaseType: {fileID: 5699413222025548459}
+  mCSharpType: Articy.Harmonybarktest.Link, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+    PublicKeyToken=null
+  mIsEnum: 0
+  mHasTemplate: 0
+  mFeatures: []
+  mProperties:
+  - {fileID: 7669905787378626991}
+  - {fileID: -2764685596056368341}
+  - {fileID: -7680589823546369298}
+  - {fileID: -4836543487199772720}
+  - {fileID: 2837812840525676063}
+  - {fileID: 342260549245298295}
+  - {fileID: 3730643245856148632}
+  - {fileID: -2937397294101575948}
+  - {fileID: -1490049682070477014}
+  - {fileID: 8407816978944491138}
+  - {fileID: -7866464428080117740}
+  - {fileID: 2682851233411513378}
+  - {fileID: 3542383837637698180}
+  - {fileID: 2733004636422383917}
+  - {fileID: -2108611160766382413}
+  - {fileID: 6970369336510911703}
+  - {fileID: -257446547157761497}
+  - {fileID: -7609524593560653603}
+  - {fileID: -2061879253002664744}
+  - {fileID: 9023615521182862185}
+  mEnumValues: []
+--- !u!114 &-257446547157761497
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: Parent
+  m_EditorClassIdentifier: 
+  mTechnicalName: Parent
+  mDisplayName: 
+  mIsTemplateProperty: 0
+  mPropertyType: Articy.Unity.ArticyObject, ArticyRuntime, Version=2.2.0.0, Culture=neutral,
+    PublicKeyToken=null
   mConstraintNames: 
   mConstraintValues: []
 --- !u!114 &11400000
@@ -1687,107 +1853,107 @@ MonoBehaviour:
   m_Name: ArticyTypeSystem
   m_EditorClassIdentifier: 
   mArticyTypes:
-  - {fileID: 3170600253084776791}
-  - {fileID: 8159837310673969062}
-  - {fileID: -6673589811401714661}
-  - {fileID: 9215393935983227187}
-  - {fileID: 4745637969399955065}
-  - {fileID: -5262977649660469651}
-  - {fileID: -3409271411436950008}
-  - {fileID: 2197424788735080206}
-  - {fileID: 1624628290595281162}
-  - {fileID: -3428718299000294848}
-  - {fileID: 5541065305892804723}
-  - {fileID: 1637771097947459935}
-  - {fileID: -1854588775930879132}
-  - {fileID: -2383627691729894675}
-  - {fileID: -2475915289506745874}
-  - {fileID: -7397915706890021292}
-  - {fileID: 832920182255705721}
-  - {fileID: 7594711655872295337}
-  - {fileID: 4030794635742632731}
-  - {fileID: -889157013613196402}
-  - {fileID: 4156341433990133092}
-  - {fileID: -4677576670627011946}
-  - {fileID: -78862414707797587}
-  - {fileID: 3080370067963683471}
-  - {fileID: -1377553101012632492}
-  - {fileID: 4820915379111380148}
-  - {fileID: -651315961278930274}
-  - {fileID: -7693851194023599922}
-  - {fileID: 2210575398585256422}
-  - {fileID: -5160649475636628600}
-  - {fileID: -1357325933083779481}
-  - {fileID: 2315476752597546295}
-  - {fileID: -4034055724633902035}
+  - {fileID: 5699413222025548459}
+  - {fileID: 3532392070820254465}
+  - {fileID: 1347527415068344790}
+  - {fileID: -7933463224013363607}
+  - {fileID: 9211708306861578505}
+  - {fileID: 5462544623411149401}
+  - {fileID: -9126424000005793788}
+  - {fileID: 5771196487087598131}
+  - {fileID: -3176175291489854703}
+  - {fileID: -2879674163208463970}
+  - {fileID: -7441929337629672230}
+  - {fileID: -5701485810224969048}
+  - {fileID: -3967662805923954744}
+  - {fileID: -1841040879133228564}
+  - {fileID: 2505162172210604567}
+  - {fileID: -7568278916881217753}
+  - {fileID: 3703280142201996975}
+  - {fileID: -7675988340480315747}
+  - {fileID: -7090109738006137084}
+  - {fileID: -7441677382056267794}
+  - {fileID: -1855171253363154750}
+  - {fileID: -4184885902362145297}
+  - {fileID: -2850071780512970569}
+  - {fileID: 477737673572112281}
+  - {fileID: -679437177168268159}
+  - {fileID: -6349787470965965536}
+  - {fileID: -8945808873857568204}
+  - {fileID: -9166629808460422358}
+  - {fileID: -1751641004552224229}
+  - {fileID: -5413951999828071100}
+  - {fileID: 4729082134510424781}
+  - {fileID: -4286923654248068643}
+  - {fileID: -1466473071657235076}
   mArticyPropertyInfos:
-  - {fileID: -319628973132797853}
-  - {fileID: -7181068715460330353}
-  - {fileID: 3849256236396507290}
-  - {fileID: 1082891652882901478}
-  - {fileID: -6613771598178699049}
-  - {fileID: 5114125731322242819}
-  - {fileID: -5949351258825500497}
-  - {fileID: 1503750508407529944}
-  - {fileID: -516227654248727319}
-  - {fileID: -7687836143550115872}
-  - {fileID: 8625672323224915365}
-  - {fileID: -7189990704772222893}
-  - {fileID: -7619522009408435573}
-  - {fileID: -7565282412987353106}
-  - {fileID: 6899512596035049822}
-  - {fileID: -3659262268098629400}
-  - {fileID: -8979273576449879907}
-  - {fileID: 4934528922601085315}
-  - {fileID: 4191215093302688510}
-  - {fileID: 5775986990267587984}
-  - {fileID: 3038275105579734049}
-  - {fileID: 4293815754080921333}
-  - {fileID: -6811823855926575580}
-  - {fileID: 805870784305456394}
-  - {fileID: 4411776639057349220}
-  - {fileID: -6985418873031356133}
-  - {fileID: 1002257369403691000}
-  - {fileID: -1715994064981065900}
-  - {fileID: -1187935297109512030}
-  - {fileID: -4556083683302979873}
-  - {fileID: 973049375364133352}
-  - {fileID: 4436430425885135688}
-  - {fileID: 1890637021404314058}
-  - {fileID: -6716934256113706912}
-  - {fileID: 7451407022867265024}
-  - {fileID: -485245196841034024}
-  - {fileID: 5133915599351533509}
-  - {fileID: 4966648906371316816}
-  - {fileID: -5047562902933925020}
-  - {fileID: -2183155201135269958}
-  - {fileID: -3513830628190751453}
-  - {fileID: 5836739278381233432}
-  - {fileID: -15954740935781769}
-  - {fileID: -3521575384320653844}
-  - {fileID: 3949227827020479136}
-  - {fileID: 2954945432116449875}
-  - {fileID: 8333702074638475496}
-  - {fileID: 5584264529544217752}
-  - {fileID: -9019514523812105303}
-  - {fileID: -3250886787788156961}
-  - {fileID: -401668824210488200}
-  - {fileID: 886906808896423095}
-  - {fileID: 1525510335815679262}
-  - {fileID: 6949930839849552581}
-  - {fileID: 2168377079225270916}
-  - {fileID: -5937637931102765199}
-  - {fileID: -4915528372759090783}
-  - {fileID: 2646262602671052721}
-  - {fileID: -2923621406421487365}
-  - {fileID: 2474626215847165312}
-  - {fileID: 3264167599204564544}
-  - {fileID: 7958554040033967704}
-  - {fileID: 3149723157748159257}
-  - {fileID: -564164786933226095}
-  - {fileID: -6335214606054275850}
-  - {fileID: -5581193111930001015}
-  - {fileID: 2593120834588543991}
+  - {fileID: -7609524593560653603}
+  - {fileID: -2108611160766382413}
+  - {fileID: -2061879253002664744}
+  - {fileID: 6970369336510911703}
+  - {fileID: -257446547157761497}
+  - {fileID: 9023615521182862185}
+  - {fileID: 6433269249519108406}
+  - {fileID: -940598948718139968}
+  - {fileID: 36688708500909184}
+  - {fileID: 7669905787378626991}
+  - {fileID: -2764685596056368341}
+  - {fileID: -7680589823546369298}
+  - {fileID: -4836543487199772720}
+  - {fileID: 2837812840525676063}
+  - {fileID: 342260549245298295}
+  - {fileID: -2937397294101575948}
+  - {fileID: 7830683586919154623}
+  - {fileID: 7245542710162673935}
+  - {fileID: -7290220648624912451}
+  - {fileID: -5313560126934189951}
+  - {fileID: -1922372272681980185}
+  - {fileID: -9026964043403114116}
+  - {fileID: 517966628872120017}
+  - {fileID: 4556571252258442349}
+  - {fileID: 8596909496306313453}
+  - {fileID: 3730643245856148632}
+  - {fileID: 9180974543199129275}
+  - {fileID: 149768640180382063}
+  - {fileID: -4689358934993094595}
+  - {fileID: 3087830716489008283}
+  - {fileID: 7630091115002329949}
+  - {fileID: -2084996033022419659}
+  - {fileID: 2481154715873228897}
+  - {fileID: 1541999201384535004}
+  - {fileID: 2841452875062953002}
+  - {fileID: 8781929362032290155}
+  - {fileID: 6115555276298119735}
+  - {fileID: 1969477788133471921}
+  - {fileID: -7771662251828037358}
+  - {fileID: -7064516804549606165}
+  - {fileID: -8278115999610012618}
+  - {fileID: -1490049682070477014}
+  - {fileID: 8407816978944491138}
+  - {fileID: -7866464428080117740}
+  - {fileID: 2682851233411513378}
+  - {fileID: -1880215554976284389}
+  - {fileID: -3693655407036122053}
+  - {fileID: 3563609466312608407}
+  - {fileID: 2733004636422383917}
+  - {fileID: 3542383837637698180}
+  - {fileID: 227142438934816363}
+  - {fileID: 3279683241092877810}
+  - {fileID: 7312395535471236630}
+  - {fileID: -4792054204721782581}
+  - {fileID: 7868265679286313423}
+  - {fileID: -5943348446830895068}
+  - {fileID: -6673720331429195015}
+  - {fileID: -4192022011955955755}
+  - {fileID: -8674727501714004325}
+  - {fileID: 2860545009720706231}
+  - {fileID: -7289305947587405185}
+  - {fileID: -1199455406566387375}
+  - {fileID: 4858485974600524678}
+  - {fileID: 5661451801882644003}
+  - {fileID: -1635653408018505980}
+  - {fileID: 5980784327746938739}
+  - {fileID: -4131418132795155728}
   mArticyTypeNames:
   - ArticyObject
   - Sex
@@ -1823,24 +1989,24 @@ MonoBehaviour:
   - TextObject
   - UserFolder
   mArticyTypeTypes:
-  - Articy.Unity.ArticyObject, ArticyRuntime, Version=2.1.1.0, Culture=neutral, PublicKeyToken=null
+  - Articy.Unity.ArticyObject, ArticyRuntime, Version=2.2.0.0, Culture=neutral, PublicKeyToken=null
   - Articy.Harmonybarktest.Sex, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
     PublicKeyToken=null
   - Articy.Harmonybarktest.DialogueType, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
     PublicKeyToken=null
   - Articy.Harmonybarktest.ShapeType, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
     PublicKeyToken=null
-  - Articy.Harmonybarktest.SelectabilityModes, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-    PublicKeyToken=null
+  - Articy.Harmonybarktest.SelectabilityModes, Assembly-CSharp, Version=0.0.0.0,
+    Culture=neutral, PublicKeyToken=null
   - Articy.Harmonybarktest.VisibilityModes, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
     PublicKeyToken=null
   - Articy.Harmonybarktest.OutlineStyle, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
     PublicKeyToken=null
   - Articy.Harmonybarktest.PathCaps, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
     PublicKeyToken=null
-  - Articy.Harmonybarktest.LocationAnchorSize, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-    PublicKeyToken=null
-  - Articy.Unity.PreviewImageViewBoxModes, ArticyRuntime, Version=2.1.1.0, Culture=neutral,
+  - Articy.Harmonybarktest.LocationAnchorSize, Assembly-CSharp, Version=0.0.0.0,
+    Culture=neutral, PublicKeyToken=null
+  - Articy.Unity.PreviewImageViewBoxModes, ArticyRuntime, Version=2.2.0.0, Culture=neutral,
     PublicKeyToken=null
   - Articy.Harmonybarktest.FlowFragment, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
     PublicKeyToken=null
@@ -1906,22 +2072,22 @@ MonoBehaviour:
   - DefaultExtendedCharacterFeature.Habits
   - DefaultExtendedCharacterFeature.FurtherDetails
   mFeaturePropInfos:
-  - {fileID: 4191215093302688510}
-  - {fileID: 5775986990267587984}
-  - {fileID: -1715994064981065900}
-  - {fileID: -1187935297109512030}
-  - {fileID: -4556083683302979873}
-  - {fileID: 973049375364133352}
-  - {fileID: 4436430425885135688}
-  - {fileID: 1890637021404314058}
-  - {fileID: -6716934256113706912}
-  - {fileID: 7451407022867265024}
-  - {fileID: -485245196841034024}
-  - {fileID: 5133915599351533509}
-  - {fileID: 4966648906371316816}
-  - {fileID: -5047562902933925020}
-  - {fileID: -2183155201135269958}
-  - {fileID: -3513830628190751453}
+  - {fileID: -7290220648624912451}
+  - {fileID: -5313560126934189951}
+  - {fileID: 149768640180382063}
+  - {fileID: -4689358934993094595}
+  - {fileID: 3087830716489008283}
+  - {fileID: 7630091115002329949}
+  - {fileID: -2084996033022419659}
+  - {fileID: 2481154715873228897}
+  - {fileID: 1541999201384535004}
+  - {fileID: 2841452875062953002}
+  - {fileID: 8781929362032290155}
+  - {fileID: 6115555276298119735}
+  - {fileID: 1969477788133471921}
+  - {fileID: -7771662251828037358}
+  - {fileID: -7064516804549606165}
+  - {fileID: -8278115999610012618}
   mFeatureTechnicalNames:
   - HQ_NPC
   - DefaultBasicCharacterFeature
@@ -1930,7 +2096,168 @@ MonoBehaviour:
   - HQ_NPC
   - Basic Character Properties
   - Extended Character Properties
---- !u!114 &304319974518967658
+--- !u!114 &36688708500909184
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: PreviewImage
+  m_EditorClassIdentifier: 
+  mTechnicalName: PreviewImage
+  mDisplayName: 
+  mIsTemplateProperty: 0
+  mPropertyType: Articy.Unity.PreviewImage, ArticyRuntime, Version=2.2.0.0, Culture=neutral,
+    PublicKeyToken=null
+  mConstraintNames: 
+  mConstraintValues: []
+--- !u!114 &149768640180382063
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: DefaultBasicCharacterFeature.Age
+  m_EditorClassIdentifier: 
+  mTechnicalName: DefaultBasicCharacterFeature.Age
+  mDisplayName: Age
+  mIsTemplateProperty: 1
+  mPropertyType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  mConstraintNames: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f0000001000000011000000
+  mConstraintValues:
+  - 
+  - 
+  - 
+  - False
+  - 
+  - False
+  - False
+  - 0
+  - 0
+  - 0
+  - 3.40282346638529E+38
+  - 0
+  - -3.40282346638529E+38
+  - 
+  - 0
+  - 
+  - 
+  - 
+--- !u!114 &227142438934816363
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: Vertices
+  m_EditorClassIdentifier: 
+  mTechnicalName: Vertices
+  mDisplayName: 
+  mIsTemplateProperty: 0
+  mPropertyType: Articy.Harmonybarktest.List`1, Assembly-CSharp
+  mConstraintNames: 
+  mConstraintValues: []
+--- !u!114 &342260549245298295
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: Size
+  m_EditorClassIdentifier: 
+  mTechnicalName: Size
+  mDisplayName: 
+  mIsTemplateProperty: 0
+  mPropertyType: UnityEngine.Vector2, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral,
+    PublicKeyToken=null
+  mConstraintNames: 
+  mConstraintValues: []
+--- !u!114 &477737673572112281
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 747260720, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: Path
+  m_EditorClassIdentifier: 
+  mTechnicalName: Path
+  mDisplayName: Path
+  mBaseType: {fileID: 5699413222025548459}
+  mCSharpType: Articy.Harmonybarktest.Path, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+    PublicKeyToken=null
+  mIsEnum: 0
+  mHasTemplate: 0
+  mFeatures: []
+  mProperties:
+  - {fileID: -940598948718139968}
+  - {fileID: 36688708500909184}
+  - {fileID: 227142438934816363}
+  - {fileID: 3279683241092877810}
+  - {fileID: 7669905787378626991}
+  - {fileID: -2764685596056368341}
+  - {fileID: -7680589823546369298}
+  - {fileID: 2837812840525676063}
+  - {fileID: 342260549245298295}
+  - {fileID: -2937397294101575948}
+  - {fileID: -1490049682070477014}
+  - {fileID: 3542383837637698180}
+  - {fileID: 8407816978944491138}
+  - {fileID: -7866464428080117740}
+  - {fileID: 2682851233411513378}
+  - {fileID: 2733004636422383917}
+  - {fileID: -1880215554976284389}
+  - {fileID: -3693655407036122053}
+  - {fileID: 3563609466312608407}
+  - {fileID: -4792054204721782581}
+  - {fileID: 7868265679286313423}
+  - {fileID: -5943348446830895068}
+  - {fileID: -2108611160766382413}
+  - {fileID: 6970369336510911703}
+  - {fileID: -257446547157761497}
+  - {fileID: -7609524593560653603}
+  - {fileID: -2061879253002664744}
+  - {fileID: 9023615521182862185}
+  mEnumValues: []
+--- !u!114 &517966628872120017
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: Speaker
+  m_EditorClassIdentifier: 
+  mTechnicalName: Speaker
+  mDisplayName: 
+  mIsTemplateProperty: 0
+  mPropertyType: Articy.Unity.ArticyObject, ArticyRuntime, Version=2.2.0.0, Culture=neutral,
+    PublicKeyToken=null
+  mConstraintNames: 
+  mConstraintValues: []
+--- !u!114 &590161889784676530
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1940,12 +2267,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -246416443, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: ShapeType.Link
+  m_Name: ShapeType.Circle
   m_EditorClassIdentifier: 
-  mTechnicalName: Link
-  mDisplayName: Link
-  mValue: 6
---- !u!114 &363821926010832692
+  mTechnicalName: Circle
+  mDisplayName: Circle
+  mValue: 2
+--- !u!114 &1023695391965298947
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1955,12 +2282,541 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -246416443, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: Sex.Female
+  m_Name: PreviewImageViewBoxModes.FromAsset
   m_EditorClassIdentifier: 
-  mTechnicalName: Female
-  mDisplayName: Female
+  mTechnicalName: FromAsset
+  mDisplayName: FromAsset
+  mValue: 0
+--- !u!114 &1121952354057870826
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -246416443, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: ShapeType.Rectangle
+  m_EditorClassIdentifier: 
+  mTechnicalName: Rectangle
+  mDisplayName: Rectangle
+  mValue: 3
+--- !u!114 &1347527415068344790
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 747260720, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: DialogueType
+  m_EditorClassIdentifier: 
+  mTechnicalName: DialogueType
+  mDisplayName: Dialogue Type
+  mBaseType: {fileID: 0}
+  mCSharpType: Articy.Harmonybarktest.DialogueType, Assembly-CSharp, Version=0.0.0.0,
+    Culture=neutral, PublicKeyToken=null
+  mIsEnum: 1
+  mHasTemplate: 0
+  mFeatures: []
+  mProperties: []
+  mEnumValues:
+  - {fileID: 6289488757109337181}
+  - {fileID: 4605833959060858535}
+--- !u!114 &1365882007280172159
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -246416443, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: PreviewImageViewBoxModes.Custom
+  m_EditorClassIdentifier: 
+  mTechnicalName: Custom
+  mDisplayName: Custom
   mValue: 1
---- !u!114 &805870784305456394
+--- !u!114 &1541999201384535004
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: DefaultBasicCharacterFeature.Personality
+  m_EditorClassIdentifier: 
+  mTechnicalName: DefaultBasicCharacterFeature.Personality
+  mDisplayName: Personality
+  mIsTemplateProperty: 1
+  mPropertyType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  mConstraintNames: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f0000001000000011000000
+  mConstraintValues:
+  - 
+  - 
+  - 
+  - True
+  - 
+  - False
+  - True
+  - 2048
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 
+  - 0
+  - 
+  - 
+  - 
+--- !u!114 &1969477788133471921
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: DefaultExtendedCharacterFeature.Skills
+  m_EditorClassIdentifier: 
+  mTechnicalName: DefaultExtendedCharacterFeature.Skills
+  mDisplayName: Skills
+  mIsTemplateProperty: 1
+  mPropertyType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  mConstraintNames: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f0000001000000011000000
+  mConstraintValues:
+  - 
+  - 
+  - 
+  - True
+  - 
+  - False
+  - True
+  - 2048
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 
+  - 0
+  - 
+  - 
+  - 
+--- !u!114 &2481154715873228897
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: DefaultBasicCharacterFeature.Accent
+  m_EditorClassIdentifier: 
+  mTechnicalName: DefaultBasicCharacterFeature.Accent
+  mDisplayName: Voice
+  mIsTemplateProperty: 1
+  mPropertyType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  mConstraintNames: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f0000001000000011000000
+  mConstraintValues:
+  - 
+  - 
+  - 
+  - False
+  - 
+  - False
+  - True
+  - 2048
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 
+  - 0
+  - 
+  - 
+  - 
+--- !u!114 &2505162172210604567
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 747260720, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: Hub
+  m_EditorClassIdentifier: 
+  mTechnicalName: Hub
+  mDisplayName: Hub
+  mBaseType: {fileID: 5699413222025548459}
+  mCSharpType: Articy.Harmonybarktest.Hub, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+    PublicKeyToken=null
+  mIsEnum: 0
+  mHasTemplate: 0
+  mFeatures: []
+  mProperties:
+  - {fileID: -940598948718139968}
+  - {fileID: 7669905787378626991}
+  - {fileID: -2764685596056368341}
+  - {fileID: -7680589823546369298}
+  - {fileID: -4836543487199772720}
+  - {fileID: 2837812840525676063}
+  - {fileID: 342260549245298295}
+  - {fileID: -2937397294101575948}
+  - {fileID: -2108611160766382413}
+  - {fileID: 6970369336510911703}
+  - {fileID: -257446547157761497}
+  - {fileID: 7830683586919154623}
+  - {fileID: 7245542710162673935}
+  - {fileID: -7609524593560653603}
+  - {fileID: -2061879253002664744}
+  - {fileID: 9023615521182862185}
+  mEnumValues: []
+--- !u!114 &2682851233411513378
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: DisplayNameSize
+  m_EditorClassIdentifier: 
+  mTechnicalName: DisplayNameSize
+  mDisplayName: 
+  mIsTemplateProperty: 0
+  mPropertyType: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  mConstraintNames: 
+  mConstraintValues: []
+--- !u!114 &2733004636422383917
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: DropShadow
+  m_EditorClassIdentifier: 
+  mTechnicalName: DropShadow
+  mDisplayName: 
+  mIsTemplateProperty: 0
+  mPropertyType: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  mConstraintNames: 
+  mConstraintValues: []
+--- !u!114 &2837812840525676063
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: ZIndex
+  m_EditorClassIdentifier: 
+  mTechnicalName: ZIndex
+  mDisplayName: 
+  mIsTemplateProperty: 0
+  mPropertyType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  mConstraintNames: 
+  mConstraintValues: []
+--- !u!114 &2841452875062953002
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: DefaultBasicCharacterFeature.Appearance
+  m_EditorClassIdentifier: 
+  mTechnicalName: DefaultBasicCharacterFeature.Appearance
+  mDisplayName: Appearance
+  mIsTemplateProperty: 1
+  mPropertyType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  mConstraintNames: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f0000001000000011000000
+  mConstraintValues:
+  - 
+  - 
+  - 
+  - True
+  - 
+  - False
+  - True
+  - 2048
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 
+  - 0
+  - 
+  - 
+  - 
+--- !u!114 &2860545009720706231
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: Anchors
+  m_EditorClassIdentifier: 
+  mTechnicalName: Anchors
+  mDisplayName: 
+  mIsTemplateProperty: 0
+  mPropertyType: Articy.Harmonybarktest.List`1, Assembly-CSharp
+  mConstraintNames: 
+  mConstraintValues: []
+--- !u!114 &3087830716489008283
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: DefaultBasicCharacterFeature.BornIn
+  m_EditorClassIdentifier: 
+  mTechnicalName: DefaultBasicCharacterFeature.BornIn
+  mDisplayName: Born in
+  mIsTemplateProperty: 1
+  mPropertyType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  mConstraintNames: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f0000001000000011000000
+  mConstraintValues:
+  - 
+  - 
+  - 
+  - False
+  - 
+  - False
+  - True
+  - 2048
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 
+  - 0
+  - 
+  - 
+  - 
+--- !u!114 &3202382987315487651
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -246416443, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: LocationAnchorSize.Large
+  m_EditorClassIdentifier: 
+  mTechnicalName: Large
+  mDisplayName: Large
+  mValue: 2
+--- !u!114 &3279683241092877810
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: Transform
+  m_EditorClassIdentifier: 
+  mTechnicalName: Transform
+  mDisplayName: 
+  mIsTemplateProperty: 0
+  mPropertyType: Articy.Unity.Transformation, ArticyRuntime, Version=2.2.0.0, Culture=neutral,
+    PublicKeyToken=null
+  mConstraintNames: 
+  mConstraintValues: []
+--- !u!114 &3316589575621155465
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -246416443, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: ShapeType.Path
+  m_EditorClassIdentifier: 
+  mTechnicalName: Path
+  mDisplayName: Path
+  mValue: 4
+--- !u!114 &3423750965722342413
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -246416443, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: LocationAnchorSize.Small
+  m_EditorClassIdentifier: 
+  mTechnicalName: Small
+  mDisplayName: Small
+  mValue: 0
+--- !u!114 &3532392070820254465
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 747260720, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: Sex
+  m_EditorClassIdentifier: 
+  mTechnicalName: Sex
+  mDisplayName: Sex
+  mBaseType: {fileID: 0}
+  mCSharpType: Articy.Harmonybarktest.Sex, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+    PublicKeyToken=null
+  mIsEnum: 1
+  mHasTemplate: 0
+  mFeatures: []
+  mProperties: []
+  mEnumValues:
+  - {fileID: 6299304528522515922}
+  - {fileID: -2908808111572208877}
+  - {fileID: 6857389612356184780}
+--- !u!114 &3542383837637698180
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: Selectability
+  m_EditorClassIdentifier: 
+  mTechnicalName: Selectability
+  mDisplayName: 
+  mIsTemplateProperty: 0
+  mPropertyType: Articy.Harmonybarktest.SelectabilityModes, Assembly-CSharp, Version=0.0.0.0,
+    Culture=neutral, PublicKeyToken=null
+  mConstraintNames: 
+  mConstraintValues: []
+--- !u!114 &3563609466312608407
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: OutlineStyle
+  m_EditorClassIdentifier: 
+  mTechnicalName: OutlineStyle
+  mDisplayName: 
+  mIsTemplateProperty: 0
+  mPropertyType: Articy.Harmonybarktest.OutlineStyle, Assembly-CSharp, Version=0.0.0.0,
+    Culture=neutral, PublicKeyToken=null
+  mConstraintNames: 
+  mConstraintValues: []
+--- !u!114 &3703280142201996975
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 747260720, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: Jump
+  m_EditorClassIdentifier: 
+  mTechnicalName: Jump
+  mDisplayName: Jump
+  mBaseType: {fileID: 5699413222025548459}
+  mCSharpType: Articy.Harmonybarktest.Jump, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+    PublicKeyToken=null
+  mIsEnum: 0
+  mHasTemplate: 0
+  mFeatures: []
+  mProperties:
+  - {fileID: 7669905787378626991}
+  - {fileID: -2764685596056368341}
+  - {fileID: -7680589823546369298}
+  - {fileID: -4836543487199772720}
+  - {fileID: 2837812840525676063}
+  - {fileID: 342260549245298295}
+  - {fileID: -2937397294101575948}
+  - {fileID: -2108611160766382413}
+  - {fileID: 6970369336510911703}
+  - {fileID: -257446547157761497}
+  - {fileID: 3730643245856148632}
+  - {fileID: 9180974543199129275}
+  - {fileID: 7830683586919154623}
+  - {fileID: 7245542710162673935}
+  - {fileID: -7609524593560653603}
+  - {fileID: -2061879253002664744}
+  - {fileID: 9023615521182862185}
+  mEnumValues: []
+--- !u!114 &3730643245856148632
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: Target
+  m_EditorClassIdentifier: 
+  mTechnicalName: Target
+  mDisplayName: 
+  mIsTemplateProperty: 0
+  mPropertyType: Articy.Unity.ArticyObject, ArticyRuntime, Version=2.2.0.0, Culture=neutral,
+    PublicKeyToken=null
+  mConstraintNames: 
+  mConstraintValues: []
+--- !u!114 &4556571252258442349
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1978,7 +2834,22 @@ MonoBehaviour:
   mPropertyType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
   mConstraintNames: 
   mConstraintValues: []
---- !u!114 &832920182255705721
+--- !u!114 &4605833959060858535
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -246416443, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: DialogueType.INFO
+  m_EditorClassIdentifier: 
+  mTechnicalName: INFO
+  mDisplayName: Info
+  mValue: 1
+--- !u!114 &4729082134510424781
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1988,36 +2859,33 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 747260720, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: Jump
+  m_Name: Document
   m_EditorClassIdentifier: 
-  mTechnicalName: Jump
-  mDisplayName: Jump
-  mBaseType: {fileID: 3170600253084776791}
-  mCSharpType: Articy.Harmonybarktest.Jump, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-    PublicKeyToken=null
+  mTechnicalName: Document
+  mDisplayName: Document
+  mBaseType: {fileID: 5699413222025548459}
+  mCSharpType: Articy.Harmonybarktest.Document, Assembly-CSharp, Version=0.0.0.0,
+    Culture=neutral, PublicKeyToken=null
   mIsEnum: 0
   mHasTemplate: 0
   mFeatures: []
   mProperties:
-  - {fileID: -7687836143550115872}
-  - {fileID: 8625672323224915365}
-  - {fileID: -7189990704772222893}
-  - {fileID: -7619522009408435573}
-  - {fileID: -7565282412987353106}
-  - {fileID: 6899512596035049822}
-  - {fileID: -3659262268098629400}
-  - {fileID: -7181068715460330353}
-  - {fileID: 1082891652882901478}
-  - {fileID: -6613771598178699049}
-  - {fileID: -6985418873031356133}
-  - {fileID: 1002257369403691000}
-  - {fileID: -8979273576449879907}
-  - {fileID: 4934528922601085315}
-  - {fileID: -319628973132797853}
-  - {fileID: 3849256236396507290}
-  - {fileID: 5114125731322242819}
+  - {fileID: -940598948718139968}
+  - {fileID: 7669905787378626991}
+  - {fileID: -2764685596056368341}
+  - {fileID: -7680589823546369298}
+  - {fileID: -4836543487199772720}
+  - {fileID: 2837812840525676063}
+  - {fileID: 342260549245298295}
+  - {fileID: -2937397294101575948}
+  - {fileID: -2108611160766382413}
+  - {fileID: 6970369336510911703}
+  - {fileID: -257446547157761497}
+  - {fileID: -7609524593560653603}
+  - {fileID: -2061879253002664744}
+  - {fileID: 9023615521182862185}
   mEnumValues: []
---- !u!114 &886906808896423095
+--- !u!114 &4858485974600524678
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2027,16 +2895,317 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: Transform
+  m_Name: ClipRect
   m_EditorClassIdentifier: 
-  mTechnicalName: Transform
+  mTechnicalName: ClipRect
   mDisplayName: 
   mIsTemplateProperty: 0
-  mPropertyType: Articy.Unity.Transformation, ArticyRuntime, Version=2.1.1.0, Culture=neutral,
+  mPropertyType: UnityEngine.Rect, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral,
     PublicKeyToken=null
   mConstraintNames: 
   mConstraintValues: []
---- !u!114 &973049375364133352
+--- !u!114 &4965369707465416418
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -246416443, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: PathCaps.Disc
+  m_EditorClassIdentifier: 
+  mTechnicalName: Disc
+  mDisplayName: Disc
+  mValue: 6
+--- !u!114 &5204121343882536494
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -246416443, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: ShapeType.Polygon
+  m_EditorClassIdentifier: 
+  mTechnicalName: Polygon
+  mDisplayName: Polygon
+  mValue: 5
+--- !u!114 &5462544623411149401
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 747260720, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: VisibilityModes
+  m_EditorClassIdentifier: 
+  mTechnicalName: VisibilityModes
+  mDisplayName: VisibilityModes
+  mBaseType: {fileID: 0}
+  mCSharpType: Articy.Harmonybarktest.VisibilityModes, Assembly-CSharp, Version=0.0.0.0,
+    Culture=neutral, PublicKeyToken=null
+  mIsEnum: 1
+  mHasTemplate: 0
+  mFeatures: []
+  mProperties: []
+  mEnumValues:
+  - {fileID: -5340619504659805810}
+  - {fileID: 8884194040446062569}
+--- !u!114 &5661451801882644003
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: ImageOpacity
+  m_EditorClassIdentifier: 
+  mTechnicalName: ImageOpacity
+  mDisplayName: 
+  mIsTemplateProperty: 0
+  mPropertyType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  mConstraintNames: 
+  mConstraintValues: []
+--- !u!114 &5699413222025548459
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 747260720, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: ArticyObject
+  m_EditorClassIdentifier: 
+  mTechnicalName: ArticyObject
+  mDisplayName: 
+  mBaseType: {fileID: 0}
+  mCSharpType: Articy.Unity.ArticyObject, ArticyRuntime, Version=2.2.0.0, Culture=neutral,
+    PublicKeyToken=null
+  mIsEnum: 0
+  mHasTemplate: 0
+  mFeatures: []
+  mProperties:
+  - {fileID: -7609524593560653603}
+  - {fileID: -2108611160766382413}
+  - {fileID: -2061879253002664744}
+  - {fileID: 6970369336510911703}
+  - {fileID: -257446547157761497}
+  - {fileID: 9023615521182862185}
+  mEnumValues: []
+--- !u!114 &5771196487087598131
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 747260720, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: PathCaps
+  m_EditorClassIdentifier: 
+  mTechnicalName: PathCaps
+  mDisplayName: PathCaps
+  mBaseType: {fileID: 0}
+  mCSharpType: Articy.Harmonybarktest.PathCaps, Assembly-CSharp, Version=0.0.0.0,
+    Culture=neutral, PublicKeyToken=null
+  mIsEnum: 1
+  mHasTemplate: 0
+  mFeatures: []
+  mProperties: []
+  mEnumValues:
+  - {fileID: -4259286148137360287}
+  - {fileID: -8723089357407592755}
+  - {fileID: -5937009823103607116}
+  - {fileID: -8710004397173183269}
+  - {fileID: -7203030473381267329}
+  - {fileID: -809830436972717658}
+  - {fileID: 4965369707465416418}
+--- !u!114 &5980784327746938739
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: CachedImageWidth
+  m_EditorClassIdentifier: 
+  mTechnicalName: CachedImageWidth
+  mDisplayName: 
+  mIsTemplateProperty: 0
+  mPropertyType: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  mConstraintNames: 
+  mConstraintValues: []
+--- !u!114 &6115555276298119735
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: DefaultExtendedCharacterFeature.InnerConflict
+  m_EditorClassIdentifier: 
+  mTechnicalName: DefaultExtendedCharacterFeature.InnerConflict
+  mDisplayName: Inner Conflict
+  mIsTemplateProperty: 1
+  mPropertyType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  mConstraintNames: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f0000001000000011000000
+  mConstraintValues:
+  - 
+  - 
+  - 
+  - True
+  - 
+  - False
+  - True
+  - 2048
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 
+  - 0
+  - 
+  - 
+  - 
+--- !u!114 &6289488757109337181
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -246416443, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: DialogueType.QUEST
+  m_EditorClassIdentifier: 
+  mTechnicalName: QUEST
+  mDisplayName: Quest
+  mValue: 0
+--- !u!114 &6299304528522515922
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -246416443, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: Sex.Male
+  m_EditorClassIdentifier: 
+  mTechnicalName: Male
+  mDisplayName: Male
+  mValue: 0
+--- !u!114 &6433269249519108406
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: Attachments
+  m_EditorClassIdentifier: 
+  mTechnicalName: Attachments
+  mDisplayName: 
+  mIsTemplateProperty: 0
+  mPropertyType: Articy.Harmonybarktest.List`1, Assembly-CSharp
+  mConstraintNames: 
+  mConstraintValues: []
+--- !u!114 &6857389612356184780
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -246416443, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: Sex.Unknown
+  m_EditorClassIdentifier: 
+  mTechnicalName: Unknown
+  mDisplayName: Unknown
+  mValue: 2
+--- !u!114 &6970369336510911703
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: TechnicalName
+  m_EditorClassIdentifier: 
+  mTechnicalName: TechnicalName
+  mDisplayName: 
+  mIsTemplateProperty: 0
+  mPropertyType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  mConstraintNames: 
+  mConstraintValues: []
+--- !u!114 &7245542710162673935
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: OutputPins
+  m_EditorClassIdentifier: 
+  mTechnicalName: OutputPins
+  mDisplayName: 
+  mIsTemplateProperty: 0
+  mPropertyType: Articy.Harmonybarktest.List`1, Assembly-CSharp
+  mConstraintNames: 
+  mConstraintValues: []
+--- !u!114 &7312395535471236630
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: ShapeType
+  m_EditorClassIdentifier: 
+  mTechnicalName: ShapeType
+  mDisplayName: 
+  mIsTemplateProperty: 0
+  mPropertyType: Articy.Harmonybarktest.ShapeType, Assembly-CSharp, Version=0.0.0.0,
+    Culture=neutral, PublicKeyToken=null
+  mConstraintNames: 
+  mConstraintValues: []
+--- !u!114 &7630091115002329949
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2073,7 +3242,7 @@ MonoBehaviour:
   - 
   - BySortIndex
   - 
---- !u!114 &1002257369403691000
+--- !u!114 &7669905787378626991
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2083,15 +3252,34 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: TargetPin
+  m_Name: Color
   m_EditorClassIdentifier: 
-  mTechnicalName: TargetPin
+  mTechnicalName: Color
   mDisplayName: 
   mIsTemplateProperty: 0
-  mPropertyType: Articy.Harmonybarktest.UInt64, Assembly-CSharp
+  mPropertyType: UnityEngine.Color, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral,
+    PublicKeyToken=null
   mConstraintNames: 
   mConstraintValues: []
---- !u!114 &1032719610074705409
+--- !u!114 &7830683586919154623
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: InputPins
+  m_EditorClassIdentifier: 
+  mTechnicalName: InputPins
+  mDisplayName: 
+  mIsTemplateProperty: 0
+  mPropertyType: Articy.Harmonybarktest.List`1, Assembly-CSharp
+  mConstraintNames: 
+  mConstraintValues: []
+--- !u!114 &7847196532784080794
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2101,171 +3289,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -246416443, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: PreviewImageViewBoxModes.FromAsset
+  m_Name: SelectabilityModes.Selectable
   m_EditorClassIdentifier: 
-  mTechnicalName: FromAsset
-  mDisplayName: FromAsset
-  mValue: 0
---- !u!114 &1082891652882901478
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: TechnicalName
-  m_EditorClassIdentifier: 
-  mTechnicalName: TechnicalName
-  mDisplayName: 
-  mIsTemplateProperty: 0
-  mPropertyType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
-  mConstraintNames: 
-  mConstraintValues: []
---- !u!114 &1503750508407529944
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: DisplayName
-  m_EditorClassIdentifier: 
-  mTechnicalName: DisplayName
-  mDisplayName: 
-  mIsTemplateProperty: 0
-  mPropertyType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
-  mConstraintNames: 
-  mConstraintValues: []
---- !u!114 &1525510335815679262
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: ShapeType
-  m_EditorClassIdentifier: 
-  mTechnicalName: ShapeType
-  mDisplayName: 
-  mIsTemplateProperty: 0
-  mPropertyType: Articy.Harmonybarktest.ShapeType, Assembly-CSharp, Version=0.0.0.0,
-    Culture=neutral, PublicKeyToken=null
-  mConstraintNames: 
-  mConstraintValues: []
---- !u!114 &1624628290595281162
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 747260720, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: LocationAnchorSize
-  m_EditorClassIdentifier: 
-  mTechnicalName: LocationAnchorSize
-  mDisplayName: LocationAnchorSize
-  mBaseType: {fileID: 0}
-  mCSharpType: Articy.Harmonybarktest.LocationAnchorSize, Assembly-CSharp, Version=0.0.0.0,
-    Culture=neutral, PublicKeyToken=null
-  mIsEnum: 1
-  mHasTemplate: 0
-  mFeatures: []
-  mProperties: []
-  mEnumValues:
-  - {fileID: 7588077146091507700}
-  - {fileID: -7923419965668715077}
-  - {fileID: 4850174931513882345}
---- !u!114 &1637771097947459935
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 747260720, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: HQ_NPC_DIALOGUE
-  m_EditorClassIdentifier: 
-  mTechnicalName: HQ_NPC_DIALOGUE
-  mDisplayName: HQ NPC Dialogue
-  mBaseType: {fileID: 5541065305892804723}
-  mCSharpType: Articy.Harmonybarktest.HQ_NPC_DIALOGUE, Assembly-CSharp, Version=0.0.0.0,
-    Culture=neutral, PublicKeyToken=null
-  mIsEnum: 0
-  mHasTemplate: 1
-  mFeatures:
-  - HQ_NPC
-  mProperties:
-  - {fileID: 4191215093302688510}
-  - {fileID: 5775986990267587984}
-  - {fileID: -5949351258825500497}
-  - {fileID: 1503750508407529944}
-  - {fileID: -516227654248727319}
-  - {fileID: -7687836143550115872}
-  - {fileID: 8625672323224915365}
-  - {fileID: -7189990704772222893}
-  - {fileID: -7619522009408435573}
-  - {fileID: -7565282412987353106}
-  - {fileID: 6899512596035049822}
-  - {fileID: -3659262268098629400}
-  - {fileID: -7181068715460330353}
-  - {fileID: 1082891652882901478}
-  - {fileID: -6613771598178699049}
-  - {fileID: -8979273576449879907}
-  - {fileID: 4934528922601085315}
-  - {fileID: -319628973132797853}
-  - {fileID: 3849256236396507290}
-  - {fileID: 5114125731322242819}
-  mEnumValues: []
---- !u!114 &1890637021404314058
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: DefaultBasicCharacterFeature.Accent
-  m_EditorClassIdentifier: 
-  mTechnicalName: DefaultBasicCharacterFeature.Accent
-  mDisplayName: Voice
-  mIsTemplateProperty: 1
-  mPropertyType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
-  mConstraintNames: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f0000001000000011000000
-  mConstraintValues:
-  - 
-  - 
-  - 
-  - False
-  - 
-  - False
-  - True
-  - 2048
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 
-  - 0
-  - 
-  - 
-  - 
---- !u!114 &2168377079225270916
+  mTechnicalName: Selectable
+  mDisplayName: Selectable
+  mValue: 1
+--- !u!114 &7868265679286313423
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2284,176 +3313,7 @@ MonoBehaviour:
     Culture=neutral, PublicKeyToken=null
   mConstraintNames: 
   mConstraintValues: []
---- !u!114 &2197424788735080206
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 747260720, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: PathCaps
-  m_EditorClassIdentifier: 
-  mTechnicalName: PathCaps
-  mDisplayName: PathCaps
-  mBaseType: {fileID: 0}
-  mCSharpType: Articy.Harmonybarktest.PathCaps, Assembly-CSharp, Version=0.0.0.0,
-    Culture=neutral, PublicKeyToken=null
-  mIsEnum: 1
-  mHasTemplate: 0
-  mFeatures: []
-  mProperties: []
-  mEnumValues:
-  - {fileID: -7666241923214486350}
-  - {fileID: 6300538227004176661}
-  - {fileID: -7854559385367283330}
-  - {fileID: -8983977501008531296}
-  - {fileID: 4452536410855191881}
-  - {fileID: -1120277615481756908}
-  - {fileID: -7470132701271384908}
---- !u!114 &2210575398585256422
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 747260720, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: LocationText
-  m_EditorClassIdentifier: 
-  mTechnicalName: LocationText
-  mDisplayName: LocationText
-  mBaseType: {fileID: 3170600253084776791}
-  mCSharpType: Articy.Harmonybarktest.LocationText, Assembly-CSharp, Version=0.0.0.0,
-    Culture=neutral, PublicKeyToken=null
-  mIsEnum: 0
-  mHasTemplate: 0
-  mFeatures: []
-  mProperties:
-  - {fileID: 1503750508407529944}
-  - {fileID: -516227654248727319}
-  - {fileID: 2474626215847165312}
-  - {fileID: -401668824210488200}
-  - {fileID: 886906808896423095}
-  - {fileID: 1525510335815679262}
-  - {fileID: -7687836143550115872}
-  - {fileID: 8625672323224915365}
-  - {fileID: -7189990704772222893}
-  - {fileID: -7565282412987353106}
-  - {fileID: 6899512596035049822}
-  - {fileID: -3659262268098629400}
-  - {fileID: 5836739278381233432}
-  - {fileID: 2954945432116449875}
-  - {fileID: 8333702074638475496}
-  - {fileID: 5584264529544217752}
-  - {fileID: -3250886787788156961}
-  - {fileID: 3264167599204564544}
-  - {fileID: 7958554040033967704}
-  - {fileID: -9019514523812105303}
-  - {fileID: -7181068715460330353}
-  - {fileID: 1082891652882901478}
-  - {fileID: -6613771598178699049}
-  - {fileID: -319628973132797853}
-  - {fileID: 3849256236396507290}
-  - {fileID: 5114125731322242819}
-  mEnumValues: []
---- !u!114 &2315476752597546295
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 747260720, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: TextObject
-  m_EditorClassIdentifier: 
-  mTechnicalName: TextObject
-  mDisplayName: TextObject
-  mBaseType: {fileID: 3170600253084776791}
-  mCSharpType: Articy.Harmonybarktest.TextObject, Assembly-CSharp, Version=0.0.0.0,
-    Culture=neutral, PublicKeyToken=null
-  mIsEnum: 0
-  mHasTemplate: 0
-  mFeatures: []
-  mProperties:
-  - {fileID: 1503750508407529944}
-  - {fileID: -5949351258825500497}
-  - {fileID: -516227654248727319}
-  - {fileID: -7687836143550115872}
-  - {fileID: 8625672323224915365}
-  - {fileID: -7189990704772222893}
-  - {fileID: -7619522009408435573}
-  - {fileID: -7565282412987353106}
-  - {fileID: 6899512596035049822}
-  - {fileID: -3659262268098629400}
-  - {fileID: -7181068715460330353}
-  - {fileID: 1082891652882901478}
-  - {fileID: -6613771598178699049}
-  - {fileID: -319628973132797853}
-  - {fileID: 3849256236396507290}
-  - {fileID: 5114125731322242819}
-  mEnumValues: []
---- !u!114 &2474626215847165312
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: Anchors
-  m_EditorClassIdentifier: 
-  mTechnicalName: Anchors
-  mDisplayName: 
-  mIsTemplateProperty: 0
-  mPropertyType: Articy.Harmonybarktest.List`1, Assembly-CSharp
-  mConstraintNames: 
-  mConstraintValues: []
---- !u!114 &2593120834588543991
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: CachedImageHeight
-  m_EditorClassIdentifier: 
-  mTechnicalName: CachedImageHeight
-  mDisplayName: 
-  mIsTemplateProperty: 0
-  mPropertyType: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
-  mConstraintNames: 
-  mConstraintValues: []
---- !u!114 &2646262602671052721
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: OriginalSource
-  m_EditorClassIdentifier: 
-  mTechnicalName: OriginalSource
-  mDisplayName: 
-  mIsTemplateProperty: 0
-  mPropertyType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
-  mConstraintNames: 
-  mConstraintValues: []
---- !u!114 &2914275479456676564
+--- !u!114 &7882862877127550533
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2463,354 +3323,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -246416443, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: ShapeType.Rectangle
+  m_Name: LocationAnchorSize.Medium
   m_EditorClassIdentifier: 
-  mTechnicalName: Rectangle
-  mDisplayName: Rectangle
-  mValue: 3
---- !u!114 &2954945432116449875
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: OutlineColor
-  m_EditorClassIdentifier: 
-  mTechnicalName: OutlineColor
-  mDisplayName: 
-  mIsTemplateProperty: 0
-  mPropertyType: UnityEngine.Color, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral,
-    PublicKeyToken=null
-  mConstraintNames: 
-  mConstraintValues: []
---- !u!114 &3038275105579734049
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: MenuText
-  m_EditorClassIdentifier: 
-  mTechnicalName: MenuText
-  mDisplayName: 
-  mIsTemplateProperty: 0
-  mPropertyType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
-  mConstraintNames: 
-  mConstraintValues: []
---- !u!114 &3080370067963683471
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 747260720, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: Path
-  m_EditorClassIdentifier: 
-  mTechnicalName: Path
-  mDisplayName: Path
-  mBaseType: {fileID: 3170600253084776791}
-  mCSharpType: Articy.Harmonybarktest.Path, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-    PublicKeyToken=null
-  mIsEnum: 0
-  mHasTemplate: 0
-  mFeatures: []
-  mProperties:
-  - {fileID: 1503750508407529944}
-  - {fileID: -516227654248727319}
-  - {fileID: -401668824210488200}
-  - {fileID: 886906808896423095}
-  - {fileID: -7687836143550115872}
-  - {fileID: 8625672323224915365}
-  - {fileID: -7189990704772222893}
-  - {fileID: -7565282412987353106}
-  - {fileID: 6899512596035049822}
-  - {fileID: -3659262268098629400}
-  - {fileID: 5836739278381233432}
-  - {fileID: -3250886787788156961}
-  - {fileID: -15954740935781769}
-  - {fileID: -3521575384320653844}
-  - {fileID: 3949227827020479136}
-  - {fileID: -9019514523812105303}
-  - {fileID: 2954945432116449875}
-  - {fileID: 8333702074638475496}
-  - {fileID: 5584264529544217752}
-  - {fileID: 6949930839849552581}
-  - {fileID: 2168377079225270916}
-  - {fileID: -5937637931102765199}
-  - {fileID: -7181068715460330353}
-  - {fileID: 1082891652882901478}
-  - {fileID: -6613771598178699049}
-  - {fileID: -319628973132797853}
-  - {fileID: 3849256236396507290}
-  - {fileID: 5114125731322242819}
-  mEnumValues: []
---- !u!114 &3149723157748159257
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: ClipRect
-  m_EditorClassIdentifier: 
-  mTechnicalName: ClipRect
-  mDisplayName: 
-  mIsTemplateProperty: 0
-  mPropertyType: UnityEngine.Rect, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral,
-    PublicKeyToken=null
-  mConstraintNames: 
-  mConstraintValues: []
---- !u!114 &3170600253084776791
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 747260720, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: ArticyObject
-  m_EditorClassIdentifier: 
-  mTechnicalName: ArticyObject
-  mDisplayName: 
-  mBaseType: {fileID: 0}
-  mCSharpType: Articy.Unity.ArticyObject, ArticyRuntime, Version=2.1.1.0, Culture=neutral,
-    PublicKeyToken=null
-  mIsEnum: 0
-  mHasTemplate: 0
-  mFeatures: []
-  mProperties:
-  - {fileID: -319628973132797853}
-  - {fileID: -7181068715460330353}
-  - {fileID: 3849256236396507290}
-  - {fileID: 1082891652882901478}
-  - {fileID: -6613771598178699049}
-  - {fileID: 5114125731322242819}
-  mEnumValues: []
---- !u!114 &3181138901946893867
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -246416443, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: ShapeType.Spot
-  m_EditorClassIdentifier: 
-  mTechnicalName: Spot
-  mDisplayName: Spot
+  mTechnicalName: Medium
+  mDisplayName: Medium
   mValue: 1
---- !u!114 &3264167599204564544
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: ForcedWidth
-  m_EditorClassIdentifier: 
-  mTechnicalName: ForcedWidth
-  mDisplayName: 
-  mIsTemplateProperty: 0
-  mPropertyType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
-  mConstraintNames: 
-  mConstraintValues: []
---- !u!114 &3849256236396507290
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: InstanceId
-  m_EditorClassIdentifier: 
-  mTechnicalName: InstanceId
-  mDisplayName: 
-  mIsTemplateProperty: 0
-  mPropertyType: System.UInt64, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
-  mConstraintNames: 
-  mConstraintValues: []
---- !u!114 &3949227827020479136
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: DisplayNameSize
-  m_EditorClassIdentifier: 
-  mTechnicalName: DisplayNameSize
-  mDisplayName: 
-  mIsTemplateProperty: 0
-  mPropertyType: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
-  mConstraintNames: 
-  mConstraintValues: []
---- !u!114 &4030794635742632731
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 747260720, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: DefaultSupportingCharacterTemplate
-  m_EditorClassIdentifier: 
-  mTechnicalName: DefaultSupportingCharacterTemplate
-  mDisplayName: Supporting characters
-  mBaseType: {fileID: 7594711655872295337}
-  mCSharpType: Articy.Harmonybarktest.DefaultSupportingCharacterTemplate, Assembly-CSharp,
-    Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-  mIsEnum: 0
-  mHasTemplate: 1
-  mFeatures:
-  - DefaultBasicCharacterFeature
-  mProperties:
-  - {fileID: -1715994064981065900}
-  - {fileID: -1187935297109512030}
-  - {fileID: -4556083683302979873}
-  - {fileID: 973049375364133352}
-  - {fileID: 4436430425885135688}
-  - {fileID: 1890637021404314058}
-  - {fileID: -6716934256113706912}
-  - {fileID: 7451407022867265024}
-  - {fileID: -5949351258825500497}
-  - {fileID: 1503750508407529944}
-  - {fileID: -7687836143550115872}
-  - {fileID: 8625672323224915365}
-  - {fileID: -7189990704772222893}
-  - {fileID: -7619522009408435573}
-  - {fileID: -7565282412987353106}
-  - {fileID: 6899512596035049822}
-  - {fileID: -516227654248727319}
-  - {fileID: -3659262268098629400}
-  - {fileID: -7181068715460330353}
-  - {fileID: 1082891652882901478}
-  - {fileID: -6613771598178699049}
-  - {fileID: -319628973132797853}
-  - {fileID: 3849256236396507290}
-  - {fileID: 5114125731322242819}
-  mEnumValues: []
---- !u!114 &4156341433990133092
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 747260720, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: Location
-  m_EditorClassIdentifier: 
-  mTechnicalName: Location
-  mDisplayName: Location
-  mBaseType: {fileID: 3170600253084776791}
-  mCSharpType: Articy.Harmonybarktest.Location, Assembly-CSharp, Version=0.0.0.0,
-    Culture=neutral, PublicKeyToken=null
-  mIsEnum: 0
-  mHasTemplate: 0
-  mFeatures: []
-  mProperties:
-  - {fileID: -5949351258825500497}
-  - {fileID: 1503750508407529944}
-  - {fileID: -516227654248727319}
-  - {fileID: -7687836143550115872}
-  - {fileID: 8625672323224915365}
-  - {fileID: -7189990704772222893}
-  - {fileID: -7619522009408435573}
-  - {fileID: -7565282412987353106}
-  - {fileID: 6899512596035049822}
-  - {fileID: -3659262268098629400}
-  - {fileID: -7181068715460330353}
-  - {fileID: 1082891652882901478}
-  - {fileID: -6613771598178699049}
-  - {fileID: -319628973132797853}
-  - {fileID: 3849256236396507290}
-  - {fileID: 5114125731322242819}
-  mEnumValues: []
---- !u!114 &4191215093302688510
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: HQ_NPC.TeaseText
-  m_EditorClassIdentifier: 
-  mTechnicalName: HQ_NPC.TeaseText
-  mDisplayName: Tease
-  mIsTemplateProperty: 1
-  mPropertyType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
-  mConstraintNames: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f0000001000000011000000
-  mConstraintValues:
-  - 
-  - 
-  - 
-  - False
-  - 
-  - False
-  - False
-  - 2048
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - This text will display when Melody gets close.
-  - 0
-  - 
-  - 
-  - 
---- !u!114 &4293815754080921333
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: StageDirections
-  m_EditorClassIdentifier: 
-  mTechnicalName: StageDirections
-  mDisplayName: 
-  mIsTemplateProperty: 0
-  mPropertyType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
-  mConstraintNames: 
-  mConstraintValues: []
---- !u!114 &4316206343243254242
+--- !u!114 &8299984378074541621
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2820,12 +3338,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -246416443, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: VisibilityModes.Visible
+  m_Name: OutlineStyle.DashDotDot
   m_EditorClassIdentifier: 
-  mTechnicalName: Visible
-  mDisplayName: Visible
-  mValue: 1
---- !u!114 &4411776639057349220
+  mTechnicalName: DashDotDot
+  mDisplayName: DashDotDot
+  mValue: 4
+--- !u!114 &8407816978944491138
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: ShowDisplayName
+  m_EditorClassIdentifier: 
+  mTechnicalName: ShowDisplayName
+  mDisplayName: 
+  mIsTemplateProperty: 0
+  mPropertyType: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  mConstraintNames: 
+  mConstraintValues: []
+--- !u!114 &8596909496306313453
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2843,7 +3379,7 @@ MonoBehaviour:
   mPropertyType: System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
   mConstraintNames: 
   mConstraintValues: []
---- !u!114 &4436430425885135688
+--- !u!114 &8781929362032290155
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2853,10 +3389,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: DefaultBasicCharacterFeature.Occupation
+  m_Name: DefaultExtendedCharacterFeature.Motivation
   m_EditorClassIdentifier: 
-  mTechnicalName: DefaultBasicCharacterFeature.Occupation
-  mDisplayName: Profession
+  mTechnicalName: DefaultExtendedCharacterFeature.Motivation
+  mDisplayName: Goals
   mIsTemplateProperty: 1
   mPropertyType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
   mConstraintNames: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f0000001000000011000000
@@ -2864,7 +3400,7 @@ MonoBehaviour:
   - 
   - 
   - 
-  - False
+  - True
   - 
   - False
   - True
@@ -2879,7 +3415,7 @@ MonoBehaviour:
   - 
   - 
   - 
---- !u!114 &4452536410855191881
+--- !u!114 &8884194040446062569
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2889,12 +3425,49 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -246416443, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: PathCaps.Diamond
+  m_Name: VisibilityModes.Visible
   m_EditorClassIdentifier: 
-  mTechnicalName: Diamond
-  mDisplayName: Diamond
-  mValue: 4
---- !u!114 &4745637969399955065
+  mTechnicalName: Visible
+  mDisplayName: Visible
+  mValue: 1
+--- !u!114 &9023615521182862185
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: Children
+  m_EditorClassIdentifier: 
+  mTechnicalName: Children
+  mDisplayName: 
+  mIsTemplateProperty: 0
+  mPropertyType: System.Collections.ArrayList, mscorlib, Version=4.0.0.0, Culture=neutral,
+    PublicKeyToken=b77a5c561934e089
+  mConstraintNames: 
+  mConstraintValues: []
+--- !u!114 &9180974543199129275
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: TargetPin
+  m_EditorClassIdentifier: 
+  mTechnicalName: TargetPin
+  mDisplayName: 
+  mIsTemplateProperty: 0
+  mPropertyType: Articy.Harmonybarktest.UInt64, Assembly-CSharp
+  mConstraintNames: 
+  mConstraintValues: []
+--- !u!114 &9211708306861578505
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2916,578 +3489,5 @@ MonoBehaviour:
   mFeatures: []
   mProperties: []
   mEnumValues:
-  - {fileID: -2109757661497700216}
-  - {fileID: -8988093259920156427}
---- !u!114 &4820915379111380148
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 747260720, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: Asset
-  m_EditorClassIdentifier: 
-  mTechnicalName: Asset
-  mDisplayName: Asset
-  mBaseType: {fileID: 3170600253084776791}
-  mCSharpType: Articy.Harmonybarktest.Asset, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-    PublicKeyToken=null
-  mIsEnum: 0
-  mHasTemplate: 0
-  mFeatures: []
-  mProperties:
-  - {fileID: 1503750508407529944}
-  - {fileID: -4915528372759090783}
-  - {fileID: 2646262602671052721}
-  - {fileID: -516227654248727319}
-  - {fileID: -7687836143550115872}
-  - {fileID: 8625672323224915365}
-  - {fileID: -7189990704772222893}
-  - {fileID: -7619522009408435573}
-  - {fileID: -7565282412987353106}
-  - {fileID: 6899512596035049822}
-  - {fileID: -3659262268098629400}
-  - {fileID: -7181068715460330353}
-  - {fileID: 1082891652882901478}
-  - {fileID: -6613771598178699049}
-  - {fileID: -319628973132797853}
-  - {fileID: 3849256236396507290}
-  - {fileID: 5114125731322242819}
-  mEnumValues: []
---- !u!114 &4850174931513882345
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -246416443, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: LocationAnchorSize.Large
-  m_EditorClassIdentifier: 
-  mTechnicalName: Large
-  mDisplayName: Large
-  mValue: 2
---- !u!114 &4934528922601085315
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: OutputPins
-  m_EditorClassIdentifier: 
-  mTechnicalName: OutputPins
-  mDisplayName: 
-  mIsTemplateProperty: 0
-  mPropertyType: Articy.Harmonybarktest.List`1, Assembly-CSharp
-  mConstraintNames: 
-  mConstraintValues: []
---- !u!114 &4966648906371316816
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: DefaultExtendedCharacterFeature.Skills
-  m_EditorClassIdentifier: 
-  mTechnicalName: DefaultExtendedCharacterFeature.Skills
-  mDisplayName: Skills
-  mIsTemplateProperty: 1
-  mPropertyType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
-  mConstraintNames: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f0000001000000011000000
-  mConstraintValues:
-  - 
-  - 
-  - 
-  - True
-  - 
-  - False
-  - True
-  - 2048
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 
-  - 0
-  - 
-  - 
-  - 
---- !u!114 &5114125731322242819
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: Children
-  m_EditorClassIdentifier: 
-  mTechnicalName: Children
-  mDisplayName: 
-  mIsTemplateProperty: 0
-  mPropertyType: System.Collections.ArrayList, mscorlib, Version=4.0.0.0, Culture=neutral,
-    PublicKeyToken=b77a5c561934e089
-  mConstraintNames: 
-  mConstraintValues: []
---- !u!114 &5133915599351533509
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: DefaultExtendedCharacterFeature.InnerConflict
-  m_EditorClassIdentifier: 
-  mTechnicalName: DefaultExtendedCharacterFeature.InnerConflict
-  mDisplayName: Inner Conflict
-  mIsTemplateProperty: 1
-  mPropertyType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
-  mConstraintNames: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f0000001000000011000000
-  mConstraintValues:
-  - 
-  - 
-  - 
-  - True
-  - 
-  - False
-  - True
-  - 2048
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 
-  - 0
-  - 
-  - 
-  - 
---- !u!114 &5452499983206773022
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -246416443, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: ShapeType.Circle
-  m_EditorClassIdentifier: 
-  mTechnicalName: Circle
-  mDisplayName: Circle
-  mValue: 2
---- !u!114 &5541065305892804723
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 747260720, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: FlowFragment
-  m_EditorClassIdentifier: 
-  mTechnicalName: FlowFragment
-  mDisplayName: FlowFragment
-  mBaseType: {fileID: 3170600253084776791}
-  mCSharpType: Articy.Harmonybarktest.FlowFragment, Assembly-CSharp, Version=0.0.0.0,
-    Culture=neutral, PublicKeyToken=null
-  mIsEnum: 0
-  mHasTemplate: 0
-  mFeatures: []
-  mProperties:
-  - {fileID: -5949351258825500497}
-  - {fileID: 1503750508407529944}
-  - {fileID: -516227654248727319}
-  - {fileID: -7687836143550115872}
-  - {fileID: 8625672323224915365}
-  - {fileID: -7189990704772222893}
-  - {fileID: -7619522009408435573}
-  - {fileID: -7565282412987353106}
-  - {fileID: 6899512596035049822}
-  - {fileID: -3659262268098629400}
-  - {fileID: -7181068715460330353}
-  - {fileID: 1082891652882901478}
-  - {fileID: -6613771598178699049}
-  - {fileID: -8979273576449879907}
-  - {fileID: 4934528922601085315}
-  - {fileID: -319628973132797853}
-  - {fileID: 3849256236396507290}
-  - {fileID: 5114125731322242819}
-  mEnumValues: []
---- !u!114 &5561680162637389340
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -246416443, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: ShapeType.Invalid
-  m_EditorClassIdentifier: 
-  mTechnicalName: Invalid
-  mDisplayName: Invalid
-  mValue: 0
---- !u!114 &5584264529544217752
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: OutlineStyle
-  m_EditorClassIdentifier: 
-  mTechnicalName: OutlineStyle
-  mDisplayName: 
-  mIsTemplateProperty: 0
-  mPropertyType: Articy.Harmonybarktest.OutlineStyle, Assembly-CSharp, Version=0.0.0.0,
-    Culture=neutral, PublicKeyToken=null
-  mConstraintNames: 
-  mConstraintValues: []
---- !u!114 &5775986990267587984
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: HQ_NPC.DialogueType
-  m_EditorClassIdentifier: 
-  mTechnicalName: HQ_NPC.DialogueType
-  mDisplayName: Dialogue Type
-  mIsTemplateProperty: 1
-  mPropertyType: Articy.Harmonybarktest.DialogueType, Assembly-CSharp, Version=0.0.0.0,
-    Culture=neutral, PublicKeyToken=null
-  mConstraintNames: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f0000001000000011000000
-  mConstraintValues:
-  - 
-  - 
-  - 
-  - False
-  - 
-  - False
-  - False
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 
-  - 0
-  - 
-  - BySortIndex
-  - 
---- !u!114 &5836739278381233432
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: Visibility
-  m_EditorClassIdentifier: 
-  mTechnicalName: Visibility
-  mDisplayName: 
-  mIsTemplateProperty: 0
-  mPropertyType: Articy.Harmonybarktest.VisibilityModes, Assembly-CSharp, Version=0.0.0.0,
-    Culture=neutral, PublicKeyToken=null
-  mConstraintNames: 
-  mConstraintValues: []
---- !u!114 &6300538227004176661
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -246416443, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: PathCaps.None
-  m_EditorClassIdentifier: 
-  mTechnicalName: None
-  mDisplayName: None
-  mValue: 1
---- !u!114 &6575516169882305124
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -246416443, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: DialogueType.QUEST
-  m_EditorClassIdentifier: 
-  mTechnicalName: QUEST
-  mDisplayName: Quest
-  mValue: 0
---- !u!114 &6899512596035049822
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: Size
-  m_EditorClassIdentifier: 
-  mTechnicalName: Size
-  mDisplayName: 
-  mIsTemplateProperty: 0
-  mPropertyType: UnityEngine.Vector2, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral,
-    PublicKeyToken=null
-  mConstraintNames: 
-  mConstraintValues: []
---- !u!114 &6949930839849552581
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: StartCap
-  m_EditorClassIdentifier: 
-  mTechnicalName: StartCap
-  mDisplayName: 
-  mIsTemplateProperty: 0
-  mPropertyType: Articy.Harmonybarktest.PathCaps, Assembly-CSharp, Version=0.0.0.0,
-    Culture=neutral, PublicKeyToken=null
-  mConstraintNames: 
-  mConstraintValues: []
---- !u!114 &7451407022867265024
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: DefaultBasicCharacterFeature.Appearance
-  m_EditorClassIdentifier: 
-  mTechnicalName: DefaultBasicCharacterFeature.Appearance
-  mDisplayName: Appearance
-  mIsTemplateProperty: 1
-  mPropertyType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
-  mConstraintNames: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f0000001000000011000000
-  mConstraintValues:
-  - 
-  - 
-  - 
-  - True
-  - 
-  - False
-  - True
-  - 2048
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 
-  - 0
-  - 
-  - 
-  - 
---- !u!114 &7588077146091507700
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -246416443, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: LocationAnchorSize.Small
-  m_EditorClassIdentifier: 
-  mTechnicalName: Small
-  mDisplayName: Small
-  mValue: 0
---- !u!114 &7594711655872295337
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 747260720, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: Entity
-  m_EditorClassIdentifier: 
-  mTechnicalName: Entity
-  mDisplayName: Entity
-  mBaseType: {fileID: 3170600253084776791}
-  mCSharpType: Articy.Harmonybarktest.Entity, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-    PublicKeyToken=null
-  mIsEnum: 0
-  mHasTemplate: 0
-  mFeatures: []
-  mProperties:
-  - {fileID: -5949351258825500497}
-  - {fileID: 1503750508407529944}
-  - {fileID: -7687836143550115872}
-  - {fileID: 8625672323224915365}
-  - {fileID: -7189990704772222893}
-  - {fileID: -7619522009408435573}
-  - {fileID: -7565282412987353106}
-  - {fileID: 6899512596035049822}
-  - {fileID: -516227654248727319}
-  - {fileID: -3659262268098629400}
-  - {fileID: -7181068715460330353}
-  - {fileID: 1082891652882901478}
-  - {fileID: -6613771598178699049}
-  - {fileID: -319628973132797853}
-  - {fileID: 3849256236396507290}
-  - {fileID: 5114125731322242819}
-  mEnumValues: []
---- !u!114 &7958554040033967704
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: ForcedHeight
-  m_EditorClassIdentifier: 
-  mTechnicalName: ForcedHeight
-  mDisplayName: 
-  mIsTemplateProperty: 0
-  mPropertyType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
-  mConstraintNames: 
-  mConstraintValues: []
---- !u!114 &8159837310673969062
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 747260720, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: Sex
-  m_EditorClassIdentifier: 
-  mTechnicalName: Sex
-  mDisplayName: Sex
-  mBaseType: {fileID: 0}
-  mCSharpType: Articy.Harmonybarktest.Sex, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-    PublicKeyToken=null
-  mIsEnum: 1
-  mHasTemplate: 0
-  mFeatures: []
-  mProperties: []
-  mEnumValues:
-  - {fileID: -3922642765297185447}
-  - {fileID: 363821926010832692}
-  - {fileID: -3863885678887301585}
---- !u!114 &8333702074638475496
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: OutlineSize
-  m_EditorClassIdentifier: 
-  mTechnicalName: OutlineSize
-  mDisplayName: 
-  mIsTemplateProperty: 0
-  mPropertyType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
-  mConstraintNames: 
-  mConstraintValues: []
---- !u!114 &8625672323224915365
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -152228120, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: Text
-  m_EditorClassIdentifier: 
-  mTechnicalName: Text
-  mDisplayName: 
-  mIsTemplateProperty: 0
-  mPropertyType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
-  mConstraintNames: 
-  mConstraintValues: []
---- !u!114 &9215393935983227187
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 747260720, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
-  m_Name: ShapeType
-  m_EditorClassIdentifier: 
-  mTechnicalName: ShapeType
-  mDisplayName: ShapeType
-  mBaseType: {fileID: 0}
-  mCSharpType: Articy.Harmonybarktest.ShapeType, Assembly-CSharp, Version=0.0.0.0,
-    Culture=neutral, PublicKeyToken=null
-  mIsEnum: 1
-  mHasTemplate: 0
-  mFeatures: []
-  mProperties: []
-  mEnumValues:
-  - {fileID: 5561680162637389340}
-  - {fileID: 3181138901946893867}
-  - {fileID: 5452499983206773022}
-  - {fileID: 2914275479456676564}
-  - {fileID: -5590039003394420278}
-  - {fileID: -1123158588920779536}
-  - {fileID: 304319974518967658}
+  - {fileID: -2069537017566490300}
+  - {fileID: 7847196532784080794}

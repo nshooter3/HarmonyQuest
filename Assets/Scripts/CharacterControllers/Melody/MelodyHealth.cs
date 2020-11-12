@@ -67,14 +67,17 @@
 
         private void TakeDamage(int damage)
         {
-            currentHealth = Mathf.Max(0, currentHealth - damage);
-            playerHealth.SetMeterValue(currentHealth, MelodyStats.maxHealth);
-            controller.melodySound.TakeDamage();
-            if (currentHealth <= 0)
+            if (UITransitionManager.instance.IsTransitionActive() == false)
             {
-                Die();
+                currentHealth = Mathf.Max(0, currentHealth - damage);
+                playerHealth.SetMeterValue(currentHealth, MelodyStats.maxHealth);
+                controller.melodySound.TakeDamage();
+                if (currentHealth <= 0)
+                {
+                    Die();
+                }
+                //Debug.Log("MELODY TAKE DAMAGE. CURRENT HEALTH: " + currentHealth);
             }
-            //Debug.Log("MELODY TAKE DAMAGE. CURRENT HEALTH: " + currentHealth);
         }
 
         public void ReceiveDamageHitbox(DamageHitbox damageHitbox)

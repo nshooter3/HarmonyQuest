@@ -4,8 +4,9 @@
     using System.Collections.Generic;
     using System.Text;
     using UnityEngine;
+    using GameManager;
 
-    public class FmodChordInterpreter : MonoBehaviour
+    public class FmodChordInterpreter : ManageableObject
     {
         private static FmodChordInterpreter inst;
         public static FmodChordInterpreter instance
@@ -48,7 +49,7 @@
         private FmodNote noteStruct;
         private StringBuilder myStringBuilder = new StringBuilder();
 
-        private void Awake()
+        public override void OnAwake()
         {
             if (inst == null)
             {

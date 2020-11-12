@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
+using GameManager;
 
-public class VerletConstraint : MonoBehaviour
+public class VerletConstraint : ManageableObject
 {
     public Transform t2;
     public float distance, compensate1, compensate2, gravityCompensation;
@@ -11,7 +12,7 @@ public class VerletConstraint : MonoBehaviour
     private bool isPassed = false;
     private Vector3 t1Old, t2Old;
 
-    void Start()
+    public override void OnStart()
     {
         // grav = new Vector3(0, -gravityCompensation, 0);
         t1 = this.transform;
@@ -19,7 +20,7 @@ public class VerletConstraint : MonoBehaviour
     }
 
     // Update is called once per frame
-    void LateUpdate()
+    public override void OnLateUpdate()
     {
         // VerletUpdatePoints();
         FixedDistanceConstraint();
