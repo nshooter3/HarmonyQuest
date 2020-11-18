@@ -87,6 +87,12 @@
 
         public void StartMusic(string name, float volume)
         {
+            if (name == "")
+            {
+                Debug.LogWarning("No music set for this scene, playing the placeholder song instead.");
+                name = "placeholder";
+            }
+
             musicEventName = name;
 
             musicEvent = FmodFacade.instance.CreateFmodEventInstance(FmodFacade.instance.GetFmodMusicEventFromDictionary(name));
