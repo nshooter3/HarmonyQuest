@@ -120,6 +120,11 @@
             return physicsEntity.velocity;
         }
 
+        public Vector3 GetRigidbodyVelocity()
+        {
+            return physicsEntity.rb.velocity;
+        }
+
         public void RotatePlayer(float turningSpeed, bool stationaryTurn = false)
         {
             if (controller.HasLockonTarget())

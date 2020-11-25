@@ -196,6 +196,11 @@
             return melodyPhysics.GetVelocity();
         }
 
+        public Vector3 GetRigidbodyVelocity()
+        {
+            return melodyPhysics.GetRigidbodyVelocity();
+        }
+
         public Vector3 GetCenter()
         {
             return center.position;

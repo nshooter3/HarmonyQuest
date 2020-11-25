@@ -62,6 +62,7 @@
         public void OverrideVelocity(Vector3 newVelocity)
         {
             velocity = newVelocity;
+            desiredVelocity = newVelocity;
         }
 
         public void CalculateVelocity(Vector3 direction, float maxSpeed, float maxAcceleration, bool ignoreYValue = true)
@@ -263,6 +264,7 @@
         public void ApplyStationaryVelocity()
         {
             velocity = Vector3.zero;
+            desiredVelocity = Vector3.zero;
             rb.velocity = velocity;
         }
 

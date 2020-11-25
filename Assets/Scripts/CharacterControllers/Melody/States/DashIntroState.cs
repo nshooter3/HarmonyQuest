@@ -30,14 +30,12 @@
             }
 
             nextState = new DashState(melodyController, dodge, dodgeMultiplier);
-            melodyController.rigidBody.velocity = Vector3.zero;
+            melodyController.melodyPhysics.ApplyStationaryVelocity();
 
             timer = 0;
             melodyController.melodyHealth.isDashing = true;
             melodyController.melodySound.Dash();
             melodyController.melodyHealth.CheckForLateDodges();
-
-            //Debug.Log("INIT DODGE: " + dodge);
         }
 
         public override void OnUpdate(float time)
