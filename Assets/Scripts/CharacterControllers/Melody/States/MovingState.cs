@@ -51,6 +51,8 @@
             if (melodyController.move.magnitude == 0.0f && melodyController.melodyCollision.IsGrounded() == true)
             {
                 //If there is no controller input and melody is grounded, do not apply gravity. This prevents her from infinitely sliding down hills.
+                //Clamp her upwards movement so she doesn't drift upwards while sliding to a stop, though.
+                melodyController.melodyPhysics.ClampUpwardsVelocity();
             }
             else
             {

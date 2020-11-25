@@ -166,6 +166,11 @@
             physicsEntity.IgnoreHorizontalMovementInput();
         }
 
+        public void ClampUpwardsVelocity()
+        {
+            physicsEntity.ClampUpwardsVelocity();
+        }
+
         public PhysicsEntity GetPhysicsEntity()
         {
             return physicsEntity;

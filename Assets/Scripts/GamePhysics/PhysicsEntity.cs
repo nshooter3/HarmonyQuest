@@ -270,6 +270,11 @@
             velocity = new Vector3(0.0f, velocity.y, 0.0f);
         }
 
+        public void ClampUpwardsVelocity()
+        {
+            velocity = new Vector3(velocity.x, Mathf.Min(velocity.x, 0f), velocity.z);
+        }
+
         public void AddForceToVelocity(Vector3 newForce)
         {
             velocity = velocity + newForce;
