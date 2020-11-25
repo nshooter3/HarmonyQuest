@@ -167,7 +167,8 @@
 
         public void InstantFaceDirection(Vector3 direction)
         {
-            RotateEntity(float.MaxValue, true, direction);
+            direction.y = 0f;
+            gameObject.transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
         }
 
         public void CapSpeed(float maxSpeed)

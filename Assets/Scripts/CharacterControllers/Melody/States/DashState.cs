@@ -8,10 +8,10 @@
         protected float timer = 0.0f;
         private float dodgeMultiplier;
 
-        public DashState(MelodyController controller, Vector3 dodge) : base(controller)
+        public DashState(MelodyController controller, Vector3 dodge, float dodgeMultiplier) : base(controller)
         {
             this.dodge = dodge;
-            dodgeMultiplier = (melodyController.config.DashLength / melodyController.config.DashTime);
+            this.dodgeMultiplier = dodgeMultiplier;
             stateName = "DashState";
         }
 
@@ -31,16 +31,10 @@
                 ableToExit = true;
             }
 
-            //Apply the normalized y value from our velocity so that we maintain our upwards/downwards momentum when dashing.
-            //This allows Melody to get extra height off of ramps.
-            dodge.y = melodyController.GetVelocity().normalized.y * dodgeMultiplier;
+            //Apply the y value from our velocity so that we maintain our upwards/downwards momentum when dashing.
+            dodge.y = melodyController.GetVelocity().y ;
 
-            //Restrict the Y axis range of Melody's dash once she leaves the ground.
-            if (melodyController.melodyCollision.IsInAir())
-            {
-                dodge.y = Mathf.Clamp(dodge.y / dodgeMultiplier, melodyController.config.dashYRadianAirLowerRange, melodyController.config.dashYRadianAirUpperRange) * dodgeMultiplier;
-            }
-            //Debug.Log("DODGE RADIANS: " + dodge / dodgeMultiplier);
+            //Debug.Log("DODGE: " + dodge);
         }
 
         public override void OnFixedUpdate()
@@ -48,8 +42,6 @@
             melodyController.melodyPhysics.ApplyDashVelocity(dodge);
             melodyController.melodyPhysics.ApplyDashGravity(melodyController.config.GroundedDashGravity);
             melodyController.melodyPhysics.SnapToGround();
-
-            //Debug.Log("Dash State Velocity Magnitude: " + melodyController.melodyPhysics.velocity.magnitude);
 
             base.OnFixedUpdate();
         }
