@@ -39,7 +39,7 @@
             else
             {
                 physicsEntity.ProhibitMovementIntoWalls(controller.config.prohibitMovementIntoWallsLayerMask);
-                physicsEntity.ProhibitMovementOntoSteepSlope(controller.melodyCollision.GetPreemptiveSurfaceCollisionEntity(), controller.melodyCollision.IsGrounded());
+                physicsEntity.ProhibitMovementOntoSteepSlope(controller.melodyCollision.GetPreemptiveSurfaceCollisionEntity(), controller.melodyCollision.IsGrounded(), controller.melodyCollision.IsInAir());
                 if (canPushBoxes == true)
                 {
                     PushBoxes();

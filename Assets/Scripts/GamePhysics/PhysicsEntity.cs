@@ -228,9 +228,9 @@
         /// <param name="preemptiveSurfaceCollisionEntity"> The class used to simulate the steepness of the slope Melody will be standing on if she moves. </param>
         /// <param name="isGrounded"> Whether or not the player is grounded. If they are sliding or in the air, we do not want to apply this function. </param>
         /// <param name="isDash"> Whether or not the player is dashing. This will effect HOW we stop their movement up the slope. </param>
-        public void ProhibitMovementOntoSteepSlope(PreemptiveSurfaceCollisionEntity preemptiveSurfaceCollisionEntity, bool isGrounded, bool isDash = false)
+        public void ProhibitMovementOntoSteepSlope(PreemptiveSurfaceCollisionEntity preemptiveSurfaceCollisionEntity, bool isGrounded, bool isInAir, bool isDash = false)
         {
-            if (isGrounded)
+            if (isGrounded || isInAir)
             {
                 SetRaycastOriginPoints();
 
