@@ -15,11 +15,13 @@ public class DialogPromptFlowPlayer : MonoBehaviour, IArticyFlowPlayerCallbacks
     // the flow player component found on this game object
     private ArticyFlowPlayer flowPlayer;
 
+    IFlowObject articyRef;
+
     public void OnBranchesUpdated(IList<Branch> aBranches)
     {
         dialogOptions = aBranches;
         dialog = aBranches[0];
-        Debug.Log("Branch count: " + aBranches.Count + " " +dialog.DefaultDescription);
+        //Debug.Log("Branch count: " + aBranches.Count + " " +dialog.DefaultDescription);
         if(aBranches.Count > 1)
         {
             dialogOptionHolder.SetActive(true);
@@ -30,7 +32,7 @@ public class DialogPromptFlowPlayer : MonoBehaviour, IArticyFlowPlayerCallbacks
                 var aObject = branch.Target;
                 var menuText = aObject as IObjectWithMenuText;
                 if (menuText != null)
-                    Debug.Log("Menu text: " + menuText.MenuText);
+                    //Debug.Log("Menu text: " + menuText.MenuText);
                 options[index].text = menuText.MenuText;
                 index++;
             }
@@ -43,6 +45,7 @@ public class DialogPromptFlowPlayer : MonoBehaviour, IArticyFlowPlayerCallbacks
             
             buttons[0].onClick.AddListener(() => DialogOptionSelected(0));
             buttons[1].onClick.AddListener(() => DialogOptionSelected(1));
+            buttons[2].onClick.AddListener(() => DialogOptionSelected(2));
             index++;
         }
         else
@@ -53,11 +56,11 @@ public class DialogPromptFlowPlayer : MonoBehaviour, IArticyFlowPlayerCallbacks
             {
                 var aObject = branch.Target;
                 var menuText = aObject as IObjectWithMenuText;
-                if (menuText != null)
-                    Debug.Log("Menu text: " + menuText.MenuText);
+               //if (menuText != null)
+                //    Debug.Log("Menu text: " + menuText.MenuText);
                 var text = aObject as IObjectWithText;
-                if (text != null)
-                    Debug.Log("Debug3: " + text.Text);
+                //if (text != null)
+                 //   Debug.Log("Debug3: " + text.Text);
                 var speaker = aObject as IObjectWithSpeaker;
                 if (speaker != null)
                     DialogManager.Speak(speaker.Speaker.TechnicalName, text.Text);
@@ -72,17 +75,15 @@ public class DialogPromptFlowPlayer : MonoBehaviour, IArticyFlowPlayerCallbacks
 
     void DialogOptionSelected(int index)
     {
-        Debug.Log("DialogOptionSelected: "+index);
+        //Debug.Log("DialogOptionSelected: "+index);
         flowPlayer.Play(dialogOptions[index]);
-    }
-
-    public void DialogOptionSelected()
-    {
-        Debug.Log("Hello");
     }
 
     public void OnFlowPlayerPaused(IFlowObject aObject)
     {
+        //Debug.Log("Flow Player Paused");
+        //var aObject = aObject as Flow
+
         if(aObject != null)
         {
             var modelWithDisplayName = aObject as IObjectWithDisplayName;
@@ -91,6 +92,14 @@ public class DialogPromptFlowPlayer : MonoBehaviour, IArticyFlowPlayerCallbacks
             //Debug.Log("Debug2: " + menuText.MenuText);
             var text = aObject as IObjectWithText;
             //Debug.Log("Debug3: " + text.Text);
+
+            articyRef = aObject;
+            //Debug.Log("Flow Player null");
+        }
+        else
+        {
+            DialogManager.dialoging = false;
+            //Debug.Log("Test");
         }
     }
 
@@ -108,10 +117,7 @@ public class DialogPromptFlowPlayer : MonoBehaviour, IArticyFlowPlayerCallbacks
         if (ServiceLocator.instance.GetInputManager().InteractButtonDown())
         {
             flowPlayer.Play(dialog);
-        }
-        else
-        {
-            Debug.Log("Not Interacting");
+            flowPlayer.FinishCurrentPausedObject();
         }
     }
 }

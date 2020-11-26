@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Test : MonoBehaviour
+public class DialogController : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
     {
-        //DialogManager.PositionDialogueBoxes();
+        //DialogManager.speakers.Add(this);
     }
 
     // Update is called once per frame
     void Update()
     {
-        DialogManager.PositionDialogueBoxes();
+        
     }
 }

@@ -4,7 +4,7 @@ using Articy.Unity.Interfaces;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HQDialogueTease : MonoBehaviour
+public class HQDialogTease : MonoBehaviour
 {
     //public ArticyRef character;
     public ArticyRef startFlowFragment;
@@ -21,30 +21,28 @@ public class HQDialogueTease : MonoBehaviour
 
     void Start()
     {
-        barkText.text = startFlowFragment.GetObject<HQ_NPC_DIALOGUE>().GetFeatureHQ_NPC().TeaseText;
-        SetAssets(startFlowFragment.GetObject<HQ_NPC_DIALOGUE>().GetFeatureHQ_NPC().DialogueType);
+        //barkText.text = startFlowFragment.GetObject<HQ_NPC_DIALOGUE>().GetFeatureHQ_NPC().TeaseText;
+        //SetAssets(startFlowFragment.GetObject<HQ_NPC_DIALOGUE>().GetFeatureHQ_NPC().DialogueType);
     }
 
     private void SetAssets(DialogueType type)
     {
         int typeInt = (int)type;
-        Debug.Log("Type: " + typeInt);
         indicatorEmblem.GetComponent<Image>().sprite = assetDefinitions[typeInt].Emblem;
         indicator.GetComponent<Image>().sprite = assetDefinitions[typeInt].Emblem;
         barkPanel.GetComponent<Image>().color = assetDefinitions[typeInt].TextBoxColor;
-        Debug.Log("Color: " + assetDefinitions[typeInt].TextBoxColor.ToString());
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        SetBarkComponents(true);
-        SetIndicator(false);
+        //SetBarkComponents(true);
+        //SetIndicator(false);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        SetBarkComponents(false);
-        SetIndicator(true);
+        //SetBarkComponents(false);
+        //SetIndicator(true);
     }
 
     private void SetIndicator(bool active)
