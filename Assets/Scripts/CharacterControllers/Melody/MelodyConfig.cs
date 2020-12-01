@@ -212,6 +212,8 @@
         [Tooltip("Used to determine whether or not Melody is dashing relatively in the same direction as the ramp.")]
         public float dashAlongRampDegreeRange;
 
+        public Vector3 RampDashGravity;
+
         void Start()
         {
             //TODO load values in depending on save data.

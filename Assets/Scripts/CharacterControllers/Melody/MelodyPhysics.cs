@@ -118,6 +118,15 @@
             }
         }
 
+        public void ApplyRampGravity(Vector3 gravity)
+        {
+            //Apply gravity if Melody is in the air after a ramp jump.
+            if (controller.melodyCollision.IsInAir() == true)
+            {
+                controller.rigidBody.AddForce(gravity, ForceMode.VelocityChange);
+            }
+        }
+
         public Vector3 GetVelocity()
         {
             return physicsEntity.velocity;

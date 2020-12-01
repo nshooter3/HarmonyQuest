@@ -77,9 +77,14 @@
         public override void OnFixedUpdate()
         {
             melodyController.melodyPhysics.ApplyDashVelocity(dodge);
-            melodyController.melodyPhysics.ApplyDashGravity(melodyController.config.GroundedDashGravity);
-            if (!melodyController.melodyRamp.isRampDash)
+
+            if (melodyController.melodyRamp.isRampDash)
             {
+                melodyController.melodyPhysics.ApplyRampGravity(melodyController.config.RampDashGravity);
+            }
+            else
+            {
+                melodyController.melodyPhysics.ApplyDashGravity(melodyController.config.GroundedDashGravity);
                 melodyController.melodyPhysics.SnapToGround();
             }
 
