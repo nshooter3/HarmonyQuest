@@ -120,6 +120,7 @@
             {
                 StateMachine.OnFixedUpdate();
                 melodyCollision.OnFixedUpdate();
+                melodyRamp.OnFixedUpdate();
                 melodySound.OnFixedUpdate();
             }
         }

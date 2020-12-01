@@ -18,8 +18,8 @@
             melodyController.melodyHealth.isDashing = false;
             melodyController.melodyPhysics.isDashing = false;
             melodyController.melodyRamp.isRampDash = false;
+            melodyController.melodyRamp.dashSpeedMultiplier = 0f;
             melodyController.melodyPhysics.dashDirection = Vector3.zero;
-            //melodyController.
         }
 
         public override void OnUpdate(float time)
