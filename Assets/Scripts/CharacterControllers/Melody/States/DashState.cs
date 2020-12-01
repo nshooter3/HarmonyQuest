@@ -45,6 +45,7 @@
                 normalizedVelocity.y = Mathf.Clamp(normalizedVelocity.y, melodyController.config.dashYRadianAirLowerRange, melodyController.config.dashYRadianAirUpperRange);
                 dodge.y = Mathf.Max(normalizedVelocity.y * velocityMagnitude, 0f);
             }
+            melodyController.melodyPhysics.dashDirection = dodge;
         }
 
         public override void OnFixedUpdate()

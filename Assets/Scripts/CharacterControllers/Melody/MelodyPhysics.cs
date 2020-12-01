@@ -14,6 +14,9 @@
 
         private RaycastHit hit;
 
+        public bool isDashing;
+        public Vector3 dashDirection;
+
         public MelodyPhysics(MelodyController controller)
         {
             this.controller = controller;

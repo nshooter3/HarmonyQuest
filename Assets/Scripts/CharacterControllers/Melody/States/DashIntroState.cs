@@ -36,6 +36,9 @@
             melodyController.melodyHealth.isDashing = true;
             melodyController.melodySound.Dash();
             melodyController.melodyHealth.CheckForLateDodges();
+
+            melodyController.melodyPhysics.isDashing = true;
+            melodyController.melodyPhysics.dashDirection = dodge;
         }
 
         public override void OnUpdate(float time)

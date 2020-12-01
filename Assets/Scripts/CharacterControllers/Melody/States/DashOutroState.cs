@@ -1,6 +1,7 @@
 ﻿namespace Melody.States
 {
     using HarmonyQuest.Audio;
+    using UnityEngine;
 
     public class DashOutroState : MelodyState
     {
@@ -15,6 +16,10 @@
             nextState = new IdleState(melodyController);
             timer = 0;
             melodyController.melodyHealth.isDashing = false;
+            melodyController.melodyPhysics.isDashing = false;
+            melodyController.melodyRamp.isRampDash = false;
+            melodyController.melodyPhysics.dashDirection = Vector3.zero;
+            //melodyController.
         }
 
         public override void OnUpdate(float time)

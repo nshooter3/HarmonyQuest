@@ -57,6 +57,7 @@
         public MelodyAnimator melodyAnimator;
         public MelodyLockOn melodyLockOn;
         public MelodyGrappleHook melodyGrappleHook;
+        public MelodyRamp melodyRamp;
         //MelodySound is actually a monobehavior, so it will be assigned via drag reference.
         public MelodySound melodySound;
         //Debug object to help tell whether or not melody is on the ground.
@@ -86,6 +87,7 @@
             melodyAnimator = new MelodyAnimator(this);
             melodyLockOn = new MelodyLockOn(this);
             melodyGrappleHook = new MelodyGrappleHook(this);
+            melodyRamp = new MelodyRamp(this);
             melodySound.Init(this, ServiceLocator.instance.GetAIAgentManager());
             melodyGroundedChecker.OnStart();
 
