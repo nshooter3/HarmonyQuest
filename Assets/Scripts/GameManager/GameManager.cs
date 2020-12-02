@@ -20,7 +20,7 @@
         public GameObject MelodyController;
         public GameObject AIAgentManager;
         public GameObject PhysicsObjectManager;
-        public GameObject TempCamera;
+        public GameObject CameraController;
         public GameObject DefaultCanvas;
         public GameObject TransitionManager;
         public GameObject FmodHandler;
@@ -33,7 +33,8 @@
         private UITransitionManager foundTransitionManager;
 
         //Manager classes that don't have monobehaviors
-        public PhysicsManager physicsManager;
+        private PhysicsManager physicsManager;
+        private SceneLoadObjectDictionary sceneLoadObjectDictionary;
 
         //The master list of all the objects that need to be updated, in order.
         private ObjectManager objectManager = new ObjectManager();
@@ -94,7 +95,7 @@
             }
             AIAgentManager = Instantiate(AIAgentManager);
             PhysicsObjectManager = Instantiate(PhysicsObjectManager);
-            TempCamera = Instantiate(TempCamera);
+            CameraController = Instantiate(CameraController);
             DefaultCanvas = Instantiate(DefaultCanvas);
             PlayerControllerStateManager = Instantiate(PlayerControllerStateManager);
             ServiceLocator = Instantiate(ServiceLocator);
@@ -111,8 +112,7 @@
             objectManager.AddManageableObject(PlayerControllerStateManager.GetComponent<PlayerControllerStateManager>());
             objectManager.AddManageableObject(AIAgentManager.GetComponent<AIAgentManager>());
             objectManager.AddManageableObject(PhysicsObjectManager.GetComponent<PhysicsObjectManager>());
-            //TODO: Use actual camera controller later.
-            objectManager.AddManageableObject(TempCamera.GetComponent<TestCamera>());
+            objectManager.AddManageableObject(CameraController.GetComponent<CameraController>());
 
             objectManager.FindManageableObjectsInScene<SceneTransitionTrigger>();
             objectManager.FindManageableObjectsInScene<CollisionWrapper>();
@@ -141,6 +141,10 @@
 
         public void InitManagerClasses()
         {
+            if (SceneLoadObjectDictionary.instance == null)
+            {
+                sceneLoadObjectDictionary = new SceneLoadObjectDictionary();
+            }
             physicsManager = new PhysicsManager();
         }
 
@@ -157,7 +161,7 @@
         {
             objectManager.OnStart();
         }
-        
+
         void Update()
         {
             objectManager.OnUpdate();

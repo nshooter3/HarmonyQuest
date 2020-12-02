@@ -87,6 +87,12 @@
 
         public void StartMusic(string name, float volume)
         {
+            if (name == "")
+            {
+                Debug.LogWarning("No music set for this scene, playing the placeholder song instead.");
+                name = "placeholder";
+            }
+
             musicEventName = name;
 
             musicEvent = FmodFacade.instance.CreateFmodEventInstance(FmodFacade.instance.GetFmodMusicEventFromDictionary(name));
@@ -129,7 +135,7 @@
         public void FadeOutAll()
         {
             //Only fade out music if the next scene has different music.
-            if (FmodSceneMusicDictionary.GetSceneMusic(SaveDataManager.saveData.currentScene) != musicEventName)
+            if (SceneLoadObjectDictionary.instance.GetSceneLoadObject(SaveDataManager.saveData.currentScene).fmodMusicEvent != musicEventName)
             {
                 FmodFacade.instance.SetMusicParam("global_event_end_param", 1f);
                 isFadingScreenTransition = true;

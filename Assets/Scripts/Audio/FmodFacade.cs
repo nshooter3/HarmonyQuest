@@ -53,7 +53,7 @@
         {
             if (!FmodMusicHandler.instance.isMusicPlaying)
             {
-                StartMusic(FmodSceneMusicDictionary.GetSceneMusic(SceneManager.GetActiveScene().name), 1f);
+                StartMusic(SceneLoadObjectDictionary.instance.GetSceneLoadObject(SceneManager.GetActiveScene().name).fmodMusicEvent, 1f);
             }
         }
 
