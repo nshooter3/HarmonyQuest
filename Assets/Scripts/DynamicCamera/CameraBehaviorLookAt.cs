@@ -19,7 +19,7 @@
         {
             if (targetPoint != null)
             {
-                direction = Vector3.Lerp(PlayerLocation(), targetPoint.mountPoint.position, 0.5f) + distanceFromPlayer;
+                direction = Vector3.Lerp(PlayerLocation(), targetPoint.mountPoint.position, 0.75f) + distanceFromPlayer;
             }
             else
             {
