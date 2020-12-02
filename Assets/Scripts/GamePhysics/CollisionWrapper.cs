@@ -79,13 +79,10 @@
                 {
                     return;
                 }
-                Debug.Log("TRIGGER ENTER 2 " + other.gameObject.name);
                 if (useLayerMask == false || (mask == (mask | 1 << other.gameObject.layer)))
                 {
-                    Debug.Log("TRIGGER ENTER 3");
                     if (onTriggerEnterDelegate != null)
                     {
-                        Debug.Log("TRIGGER ENTER 4");
                         onTriggerEnterDelegate(other);
                     }
                 }

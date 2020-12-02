@@ -19,14 +19,12 @@
 
         void PlayerEnter(Collider other)
         {
-            Debug.Log("PLAYER ENTER!");
             CameraController.instance.ToggleCamera<CameraBehaviorLookAt>(true);
             CameraController.instance.GetCameraBehavior<CameraBehaviorLookAt>().targetPoint = this;
         }
 
         void PlayerExit(Collider other)
         {
-            Debug.Log("PLAYER EXIT!");
             CameraController.instance.ToggleCamera<CameraBehaviorLookAt>(false);
             CameraController.instance.GetCameraBehavior<CameraBehaviorLookAt>().targetPoint = null;
         }
