@@ -38,7 +38,7 @@
         OnCollisionExitDelegate onCollisionExitDelegate;
 
         // Start is called before the first frame update
-        public override void OnStart()
+        public override void OnAwake()
         {
             if (col == null)
             {
@@ -79,10 +79,13 @@
                 {
                     return;
                 }
+                Debug.Log("TRIGGER ENTER 2 " + other.gameObject.name);
                 if (useLayerMask == false || (mask == (mask | 1 << other.gameObject.layer)))
                 {
+                    Debug.Log("TRIGGER ENTER 3");
                     if (onTriggerEnterDelegate != null)
                     {
+                        Debug.Log("TRIGGER ENTER 4");
                         onTriggerEnterDelegate(other);
                     }
                 }

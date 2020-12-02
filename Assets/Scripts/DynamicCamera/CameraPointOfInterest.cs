@@ -1,33 +1,34 @@
 ﻿namespace HarmonyQuest.DynamicCamera
 {
     using GameManager;
+    using GamePhysics;
     using UnityEngine;
 
     public class CameraPointOfInterest : ManageableObject
     {
-        private int playerLayer;
+        public Transform mountPoint;
 
-        public override void OnAwake()
+        [SerializeField]
+        private CollisionWrapper collisionWrapper;
+
+        public override void OnStart()
         {
-            playerLayer = LayerMask.NameToLayer("Player");
+            collisionWrapper.AssignFunctionToTriggerEnterDelegate(PlayerEnter);
+            collisionWrapper.AssignFunctionToTriggerExitDelegate(PlayerExit);
         }
 
-        void OnTriggerEnter(Collider col)
+        void PlayerEnter(Collider other)
         {
-            if (col.gameObject.layer == playerLayer)
-            {
-                CameraController.instance.ToggleCamera<CameraBehaviorLookAt>(true);
-                CameraController.instance.GetCameraBehavior<CameraBehaviorLookAt>().targetPoint = this.transform;
-            }
+            Debug.Log("PLAYER ENTER!");
+            CameraController.instance.ToggleCamera<CameraBehaviorLookAt>(true);
+            CameraController.instance.GetCameraBehavior<CameraBehaviorLookAt>().targetPoint = this;
         }
 
-        void OnTriggerExit(Collider col)
+        void PlayerExit(Collider other)
         {
-            if (col.gameObject.layer == playerLayer)
-            {
-                CameraController.instance.ToggleCamera<CameraBehaviorLookAt>(false);
-                CameraController.instance.GetCameraBehavior<CameraBehaviorLookAt>().targetPoint = null;
-            }
+            Debug.Log("PLAYER EXIT!");
+            CameraController.instance.ToggleCamera<CameraBehaviorLookAt>(false);
+            CameraController.instance.GetCameraBehavior<CameraBehaviorLookAt>().targetPoint = null;
         }
     }
 }

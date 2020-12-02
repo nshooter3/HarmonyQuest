@@ -5,7 +5,7 @@
     public class CameraBehaviorFollowPlayer : CameraBehavior
     {
         [Range(2.5f, 10)]
-        private float distance = 10f;
+        private float distance = 13f;
         private float minHeight = 0.5f;
         private float maxHeight = 10f;
         private Vector3 lowAngle  = new Vector3(10, 0, 0);
@@ -15,7 +15,7 @@
         private float exponentialHeight;
         private float exponentFactor = 0.5f;
         private float exponentBase = 1.5f;
-        private float cameraOffset = 3.2f;
+        private float cameraOffset = 6f;
         private float fastVelocityScale = 5f;
         private float slowVelocityScale = 1.2f;
         private float wideFOV = 73f;

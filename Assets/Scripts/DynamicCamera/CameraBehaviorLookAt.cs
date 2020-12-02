@@ -5,7 +5,7 @@
 
     public class CameraBehaviorLookAt : CameraBehavior
     {
-        public Transform targetPoint;
+        public CameraPointOfInterest targetPoint;
         private Vector3 distanceFromPlayer = new Vector3(0, 9.5f, -10);
 
         public override void Init(Transform cameraTransform, IMelodyInfo player)
@@ -19,7 +19,7 @@
         {
             if (targetPoint != null)
             {
-                direction = Vector3.Lerp(PlayerLocation(), targetPoint.position, 0.5f) + distanceFromPlayer;
+                direction = Vector3.Lerp(PlayerLocation(), targetPoint.mountPoint.position, 0.5f) + distanceFromPlayer;
             }
             else
             {

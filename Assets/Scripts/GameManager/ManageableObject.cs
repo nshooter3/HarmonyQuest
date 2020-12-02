@@ -5,6 +5,7 @@
     public abstract class ManageableObject : MonoBehaviour
     {
         //Track whether or not this object has run its start and awake functions. Prevents repeat calls if an object is marked as DontDestroyOnLoad.
+        [HideInInspector]
         public bool hasInitialized = false;
 
         public virtual void OnAwake() { }
