@@ -14,6 +14,9 @@
 
         private RaycastHit hit;
 
+        public bool isDashing;
+        public Vector3 dashDirection;
+
         public MelodyPhysics(MelodyController controller)
         {
             this.controller = controller;
@@ -39,7 +42,7 @@
             else
             {
                 physicsEntity.ProhibitMovementIntoWalls(controller.config.prohibitMovementIntoWallsLayerMask);
-                physicsEntity.ProhibitMovementOntoSteepSlope(controller.melodyCollision.GetPreemptiveSurfaceCollisionEntity(), controller.melodyCollision.IsGrounded());
+                physicsEntity.ProhibitMovementOntoSteepSlope(controller.melodyCollision.GetPreemptiveSurfaceCollisionEntity(), controller.melodyCollision.IsGrounded(), controller.melodyCollision.IsInAir());
                 if (canPushBoxes == true)
                 {
                     PushBoxes();
@@ -115,9 +118,23 @@
             }
         }
 
+        public void ApplyRampGravity(Vector3 gravity)
+        {
+            //Apply gravity if Melody is in the air after a ramp jump.
+            if (controller.melodyCollision.IsInAir() == true)
+            {
+                controller.rigidBody.AddForce(gravity, ForceMode.VelocityChange);
+            }
+        }
+
         public Vector3 GetVelocity()
         {
             return physicsEntity.velocity;
+        }
+
+        public Vector3 GetRigidbodyVelocity()
+        {
+            return physicsEntity.rb.velocity;
         }
 
         public void RotatePlayer(float turningSpeed, bool stationaryTurn = false)
@@ -164,6 +181,11 @@
         public void IgnoreHorizontalMovementInput()
         {
             physicsEntity.IgnoreHorizontalMovementInput();
+        }
+
+        public void ClampUpwardsVelocity()
+        {
+            physicsEntity.ClampUpwardsVelocity();
         }
 
         public PhysicsEntity GetPhysicsEntity()

@@ -140,6 +140,10 @@
         //This prevents the player from doing things like grappling up to a cliff, then turning around and grappling up to the edge they're already standing on.
         private bool IsPlayerOutOfGrappleAngleRange(GrapplePoint grapplePoint)
         {
+            if (!grapplePoint.canGrappleFromAbove && controller.transform.position.y >= grapplePoint.transform.position.y)
+            {
+                return true;
+            }
             if (grapplePoint.IsGrappleAngleConstricted())
             {
                 return Vector3.Angle(grapplePoint.visibleDestination.forward, controller.center.position - grapplePoint.visibleDestination.position) > 90f;

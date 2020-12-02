@@ -198,6 +198,22 @@
 
         public float maxGrappleAngle;
 
+        [Header("Ramps")]
+
+        /// <summary>
+        /// The ramp layermask.
+        /// </summary>
+        [Tooltip("The ramp layermask.")]
+        public LayerMask rampLayerMask;
+
+        /// <summary>
+        /// Used to determine whether or not Melody is dashing relatively in the same direction as the ramp.
+        /// </summary>
+        [Tooltip("Used to determine whether or not Melody is dashing relatively in the same direction as the ramp.")]
+        public float dashAlongRampDegreeRange;
+
+        public Vector3 RampDashGravity;
+
         void Start()
         {
             //TODO load values in depending on save data.

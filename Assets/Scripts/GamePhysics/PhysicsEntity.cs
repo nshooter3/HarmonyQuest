@@ -62,6 +62,7 @@
         public void OverrideVelocity(Vector3 newVelocity)
         {
             velocity = newVelocity;
+            desiredVelocity = newVelocity;
         }
 
         public void CalculateVelocity(Vector3 direction, float maxSpeed, float maxAcceleration, bool ignoreYValue = true)
@@ -167,7 +168,8 @@
 
         public void InstantFaceDirection(Vector3 direction)
         {
-            RotateEntity(float.MaxValue, true, direction);
+            direction.y = 0f;
+            gameObject.transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
         }
 
         public void CapSpeed(float maxSpeed)
@@ -228,9 +230,9 @@
         /// <param name="preemptiveSurfaceCollisionEntity"> The class used to simulate the steepness of the slope Melody will be standing on if she moves. </param>
         /// <param name="isGrounded"> Whether or not the player is grounded. If they are sliding or in the air, we do not want to apply this function. </param>
         /// <param name="isDash"> Whether or not the player is dashing. This will effect HOW we stop their movement up the slope. </param>
-        public void ProhibitMovementOntoSteepSlope(PreemptiveSurfaceCollisionEntity preemptiveSurfaceCollisionEntity, bool isGrounded, bool isDash = false)
+        public void ProhibitMovementOntoSteepSlope(PreemptiveSurfaceCollisionEntity preemptiveSurfaceCollisionEntity, bool isGrounded, bool isInAir, bool isDash = false)
         {
-            if (isGrounded)
+            if (isGrounded || isInAir)
             {
                 SetRaycastOriginPoints();
 
@@ -262,12 +264,18 @@
         public void ApplyStationaryVelocity()
         {
             velocity = Vector3.zero;
+            desiredVelocity = Vector3.zero;
             rb.velocity = velocity;
         }
 
         public void IgnoreHorizontalMovementInput()
         {
             velocity = new Vector3(0.0f, velocity.y, 0.0f);
+        }
+
+        public void ClampUpwardsVelocity()
+        {
+            velocity = new Vector3(velocity.x, Mathf.Min(velocity.x, 0f), velocity.z);
         }
 
         public void AddForceToVelocity(Vector3 newForce)

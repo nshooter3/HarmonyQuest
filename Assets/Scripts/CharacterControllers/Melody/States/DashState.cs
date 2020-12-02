@@ -5,13 +5,18 @@
     public class DashState : MelodyState
     {
         protected Vector3 dodge;
-        protected float timer = 0.0f;
+        protected float timer = 0.0f, maxTimer;
         private float dodgeMultiplier;
 
-        public DashState(MelodyController controller, Vector3 dodge) : base(controller)
+        private Vector3 normalizedVelocity;
+        private float velocityMagnitude;
+
+        bool startedRampJump = false;
+
+        public DashState(MelodyController controller, Vector3 dodge, float dodgeMultiplier) : base(controller)
         {
             this.dodge = dodge;
-            dodgeMultiplier = (melodyController.config.DashLength / melodyController.config.DashTime);
+            this.dodgeMultiplier = dodgeMultiplier;
             stateName = "DashState";
         }
 
@@ -19,6 +24,7 @@
         {
             nextState = new DashOutroState(melodyController);
             timer = 0.0f;
+            maxTimer = melodyController.config.DashTime;
         }
 
         public override void OnUpdate(float time)
@@ -26,30 +32,61 @@
             base.OnUpdate(time);
 
             timer += time;
-            if (timer >= melodyController.config.DashTime)
+            if (timer >= maxTimer)
             {
                 ableToExit = true;
             }
 
-            //Apply the normalized y value from our velocity so that we maintain our upwards/downwards momentum when dashing.
-            //This allows Melody to get extra height off of ramps.
-            dodge.y = melodyController.GetVelocity().normalized.y * dodgeMultiplier;
+            //Keep our y velocity if Melody has jumped off a ramp, allowing her to get some air.
+            if (melodyController.melodyRamp.isRampDash)
+            {
+                //Adjustments to the dash that fire on the first frame of using a ramp.
+                if (!startedRampJump)
+                {
+                    //Restart our dash timer to ensure that Melody gets the proper distance off of ramp jumps.
+                    timer = 0f;
+                    //Apply the dash duration multplier from the ramp, as some jumps will need to last longer.
+                    maxTimer = melodyController.config.DashTime * melodyController.melodyRamp.dashDurationMultiplier;
+
+                    //Face Melody in the direction of the ramp she jumped.
+                    dodge.x = melodyController.melodyRamp.rampDirection.x;
+                    dodge.y = 0f;
+                    dodge.z = melodyController.melodyRamp.rampDirection.z;
+
+                    //Recalculate dodge with our new direction, and apply the speed multiplier from the ramp.
+                    dodge = dodge.normalized * dodgeMultiplier * melodyController.melodyRamp.dashSpeedMultiplier;
+                    melodyController.melodyPhysics.InstantFaceDirection(dodge);
+
+                    startedRampJump = true;
+                }
+
+                dodge.y = melodyController.GetRigidbodyVelocity().y;
+            }
 
             //Restrict the Y axis range of Melody's dash once she leaves the ground.
             if (melodyController.melodyCollision.IsInAir())
             {
-                dodge.y = Mathf.Clamp(dodge.y / dodgeMultiplier, melodyController.config.dashYRadianAirLowerRange, melodyController.config.dashYRadianAirUpperRange) * dodgeMultiplier;
+                normalizedVelocity = melodyController.GetRigidbodyVelocity().normalized;
+                velocityMagnitude = melodyController.GetRigidbodyVelocity().magnitude;
+                normalizedVelocity.y = Mathf.Clamp(normalizedVelocity.y, melodyController.config.dashYRadianAirLowerRange, melodyController.config.dashYRadianAirUpperRange);
+                dodge.y = Mathf.Max(normalizedVelocity.y * velocityMagnitude, 0f);
             }
-            //Debug.Log("DODGE RADIANS: " + dodge / dodgeMultiplier);
+            melodyController.melodyPhysics.dashDirection = dodge;
         }
 
         public override void OnFixedUpdate()
         {
             melodyController.melodyPhysics.ApplyDashVelocity(dodge);
-            melodyController.melodyPhysics.ApplyDashGravity(melodyController.config.GroundedDashGravity);
-            melodyController.melodyPhysics.SnapToGround();
 
-            //Debug.Log("Dash State Velocity Magnitude: " + melodyController.melodyPhysics.velocity.magnitude);
+            if (melodyController.melodyRamp.isRampDash)
+            {
+                melodyController.melodyPhysics.ApplyRampGravity(melodyController.config.RampDashGravity);
+            }
+            else
+            {
+                melodyController.melodyPhysics.ApplyDashGravity(melodyController.config.GroundedDashGravity);
+                melodyController.melodyPhysics.SnapToGround();
+            }
 
             base.OnFixedUpdate();
         }

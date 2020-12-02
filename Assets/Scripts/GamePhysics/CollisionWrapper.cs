@@ -38,7 +38,7 @@
         OnCollisionExitDelegate onCollisionExitDelegate;
 
         // Start is called before the first frame update
-        public override void OnStart()
+        public override void OnAwake()
         {
             if (col == null)
             {
