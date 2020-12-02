@@ -11,6 +11,7 @@
         public int priority = 1;
 
         public enum GrapplePointType { LandAbove, LandBelow, LandBeside };
+        public bool canGrappleFromAbove = true;
         public GrapplePointType grapplePointType;
 
         public bool active = true;
