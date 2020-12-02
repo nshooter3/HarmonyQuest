@@ -109,11 +109,11 @@
             SetCombatProximityParam();
             if (isInPuzzleZone == true)
             {
-                //FmodFacade.instance.SetMusicParam(global_puzzle_proximity_param, maxPuzzleProximityValueFmod);
+                FmodFacade.instance.SetMusicParam(global_puzzle_proximity_param, maxPuzzleProximityValueFmod);
             }
             else
             {
-                //FmodFacade.instance.SetMusicParam(global_puzzle_proximity_param, 0f);
+                FmodFacade.instance.SetMusicParam(global_puzzle_proximity_param, 0f);
             }
         }
 
@@ -208,7 +208,7 @@
         //Param setting functions
         public void SetHealthParam()
         {
-            //FmodFacade.instance.SetMusicParam(global_health_param, (melodyInfo.GetCurrentHealth()/ melodyInfo.GetMaxHealth()) * maxHealthValueFmod);
+            FmodFacade.instance.SetMusicParam(global_health_param, (melodyInfo.GetCurrentHealth()/ melodyInfo.GetMaxHealth()) * maxHealthValueFmod);
         }
 
         //Scale our fmod combat proximity param from 0 to combatProximityFmodParamMaxValue based on the distance of the closest living ai agent.
@@ -219,7 +219,7 @@
             float proximityRange = AIStateConfig.combatProximityMaxRange - AIStateConfig.combatProximityMinRange;
             float proximityParam = (1.0f - ((clampedProximity - AIStateConfig.combatProximityMinRange) / proximityRange)) * AIStateConfig.combatProximityFmodParamMaxValue;
 
-            //FmodFacade.instance.SetMusicParam(global_combat_proximity_param, proximityParam);
+            FmodFacade.instance.SetMusicParam(global_combat_proximity_param, proximityParam);
         }
 
         public void PuzzleZoneTriggerEntered()

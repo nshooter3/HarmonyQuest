@@ -132,11 +132,11 @@
             objectManager.FindManageableObjectsInScene<DynamicParticleSystem>();
 
             //Audio
-            //objectManager.AddManageableObject(FmodHandler.GetComponent<FmodFacade>());
-            //objectManager.AddManageableObject(FmodHandler.GetComponent<FmodMusicHandler>());
-            //objectManager.AddManageableObject(FmodHandler.GetComponent<FmodOnBeatAccuracyChecker>());
-            //objectManager.AddManageableObject(FmodHandler.GetComponent<FmodChordInterpreter>());
-            //objectManager.FindManageableObjectsInScene<FmodEventHandler>();
+            objectManager.AddManageableObject(FmodHandler.GetComponent<FmodFacade>());
+            objectManager.AddManageableObject(FmodHandler.GetComponent<FmodMusicHandler>());
+            objectManager.AddManageableObject(FmodHandler.GetComponent<FmodOnBeatAccuracyChecker>());
+            objectManager.AddManageableObject(FmodHandler.GetComponent<FmodChordInterpreter>());
+            objectManager.FindManageableObjectsInScene<FmodEventHandler>();
         }
 
         public void InitManagerClasses()
@@ -154,7 +154,7 @@
             InitManagerClasses();
             PopulateUpdateQueue();
             objectManager.OnAwake();
-           // FmodFacade.instance.LoadSceneMusic();
+            FmodFacade.instance.LoadSceneMusic();
         }
 
         void Start()

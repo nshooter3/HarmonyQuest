@@ -38,7 +38,7 @@
         {
             PopulateAgentsList();
             PopulateObstaclesList();
-            //FmodMusicHandler.instance.AssignFunctionToOnBeatDelegate(AgentsBeatUpdate);
+            FmodMusicHandler.instance.AssignFunctionToOnBeatDelegate(AgentsBeatUpdate);
             melodyInfo = ServiceLocator.instance.GetMelodyInfo();
             aiAttackRequestHandler.Init(melodyInfo);
             aiAgentsUtil.Init(this);
