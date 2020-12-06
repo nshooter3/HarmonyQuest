@@ -69,6 +69,7 @@ public class ArticyDebugBranch : MonoBehaviour
 				{
 					// if for some reason the object cannot be cast to a basic articy type, we show its class name or null.
 					dialogText.text = target == null ? "null" : target.GetType().Name;
+					Debug.Log("Output? " + dialogText.text);
 				}
 			}
 		}

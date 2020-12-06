@@ -11,6 +11,7 @@ public class DialogPromptFlowPlayer : MonoBehaviour, IArticyFlowPlayerCallbacks
     public GameObject dialogOptionHolder;
     Branch dialog;
     IList<Branch> dialogOptions;
+    bool awaitingResponse = false;
 
     // the flow player component found on this game object
     private ArticyFlowPlayer flowPlayer;
@@ -19,12 +20,13 @@ public class DialogPromptFlowPlayer : MonoBehaviour, IArticyFlowPlayerCallbacks
 
     public void OnBranchesUpdated(IList<Branch> aBranches)
     {
+
         dialogOptions = aBranches;
-        dialog = aBranches[0];
-        //Debug.Log("Branch count: " + aBranches.Count + " " +dialog.DefaultDescription);
-        if(aBranches.Count > 1)
+
+        if (aBranches.Count > 1)
         {
             dialogOptionHolder.SetActive(true);
+            awaitingResponse = true;
             Text[] options = dialogOptionHolder.GetComponentsInChildren<Text>();
             int index = 0;
             foreach (Branch branch in aBranches)
@@ -46,12 +48,19 @@ public class DialogPromptFlowPlayer : MonoBehaviour, IArticyFlowPlayerCallbacks
             buttons[0].onClick.AddListener(() => DialogOptionSelected(0));
             buttons[1].onClick.AddListener(() => DialogOptionSelected(1));
             buttons[2].onClick.AddListener(() => DialogOptionSelected(2));
+            
             index++;
         }
-        else
+        else if(aBranches.Count == 1)
         {
             dialog = aBranches[0];
+            Debug.Log("Single Target " + dialog.Target.GetType());
             dialogOptionHolder.SetActive(false);
+            //var output = dialog.Target as IOutputPin;
+            //if (output != null)
+            //{
+            //    ServiceLocator.instance.GetDialogController().EndDialog();
+            //}
             foreach (Branch branch in aBranches)
             {
                 var aObject = branch.Target;
@@ -63,43 +72,25 @@ public class DialogPromptFlowPlayer : MonoBehaviour, IArticyFlowPlayerCallbacks
                  //   Debug.Log("Debug3: " + text.Text);
                 var speaker = aObject as IObjectWithSpeaker;
                 if (speaker != null)
-                    DialogManager.Speak(speaker.Speaker.TechnicalName, text.Text);
-            }
-
-            if (aBranches.Count > 1)
-            {
-                Debug.LogError("DialogPromptFlowPlayer expects only one dialog branch.");
+                    ServiceLocator.instance.GetDialogController().Speak(speaker.Speaker.TechnicalName, text.Text);
             }
         }
     }
 
     void DialogOptionSelected(int index)
     {
-        //Debug.Log("DialogOptionSelected: "+index);
-        flowPlayer.Play(dialogOptions[index]);
+        Debug.Log("DialogOptionSelected: "+index);
+        awaitingResponse = false;
+        flowPlayer.Play(dialogOptions[index]);       
     }
+
+
 
     public void OnFlowPlayerPaused(IFlowObject aObject)
     {
-        //Debug.Log("Flow Player Paused");
-        //var aObject = aObject as Flow
-
         if(aObject != null)
         {
-            var modelWithDisplayName = aObject as IObjectWithDisplayName;
-            
-            var menuText = aObject as IObjectWithMenuText;
-            //Debug.Log("Debug2: " + menuText.MenuText);
-            var text = aObject as IObjectWithText;
-            //Debug.Log("Debug3: " + text.Text);
-
             articyRef = aObject;
-            //Debug.Log("Flow Player null");
-        }
-        else
-        {
-            DialogManager.dialoging = false;
-            //Debug.Log("Test");
         }
     }
 
@@ -114,10 +105,22 @@ public class DialogPromptFlowPlayer : MonoBehaviour, IArticyFlowPlayerCallbacks
     // Update is called once per frame
     void Update()
     {
-        if (ServiceLocator.instance.GetInputManager().InteractButtonDown())
+        if (ServiceLocator.instance.GetInputManager().InteractButtonDown() && !awaitingResponse)
         {
-            flowPlayer.Play(dialog);
-            flowPlayer.FinishCurrentPausedObject();
+            var output = dialog != null ? dialog.Target as IOutputPin : null;
+            if (output != null)
+            {
+              ServiceLocator.instance.GetDialogController().EndDialog();
+              flowPlayer.Play(dialog);
+              flowPlayer.FinishCurrentPausedObject();                
+              dialog = null;
+              flowPlayer.startOn = null;
+            }
+            else
+            {
+              flowPlayer.Play(dialog);
+              flowPlayer.FinishCurrentPausedObject();
+            }            
         }
     }
 }

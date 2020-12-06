@@ -1,5 +1,22 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9136733769665107830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/enemy_death_tonal/global_pitch
+  m_EditorClassIdentifier: 
+  Name: global_pitch
+  Min: 0
+  Max: 12
+  Default: 0
+  Exists: 1
 --- !u!114 &-9100584623969598149
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101,8 +118,8 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: -2618733010122582358}
-  - {fileID: 7429680444910928730}
+  - {fileID: -9136733769665107830}
+  - {fileID: -7500056784727935768}
   MinDistance: 10000
   MaxDistance: 10000
   Length: 50000
@@ -303,6 +320,23 @@ MonoBehaviour:
   Max: 100
   Default: 0
   Exists: 1
+--- !u!114 &-8134128023050107182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/twilit_hollow_dissonance/global_event_end
+  m_EditorClassIdentifier: 
+  Name: global_event_end
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
 --- !u!114 &-8098858188988844664
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -358,7 +392,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: -1110738359625639362}
+  - {fileID: -4370777658568279688}
   MinDistance: 10000
   MaxDistance: 10000
   Length: 488
@@ -490,6 +524,23 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 400000
+--- !u!114 &-7908728828030154456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/placeholder_music/global_puzzle_proximity
+  m_EditorClassIdentifier: 
+  Name: global_puzzle_proximity
+  Min: 0
+  Max: 100
+  Default: 0
+  Exists: 1
 --- !u!114 &-7807396496627255302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -616,11 +667,28 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 511407443760323602}
-  - {fileID: 2888448735832682358}
+  - {fileID: -355170320249122502}
+  - {fileID: -2977691780177054114}
   MinDistance: 10000
   MaxDistance: 10000
   Length: 28000
+--- !u!114 &-7500056784727935768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/enemy_death_tonal/global_octave
+  m_EditorClassIdentifier: 
+  Name: global_octave
+  Min: 0
+  Max: 7
+  Default: 0
+  Exists: 1
 --- !u!114 &-7489067193433282447
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -685,6 +753,40 @@ MonoBehaviour:
   MinDistance: 10000
   MaxDistance: 10000
   Length: 95
+--- !u!114 &-7272505863156096720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/prototype_pill_attack_tonal/melody_attack_tonal
+  m_EditorClassIdentifier: 
+  Name: melody_attack_tonal
+  Min: 0
+  Max: 12
+  Default: 0
+  Exists: 1
+--- !u!114 &-7103209797998891374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/twilit_hollow_dissonance/global_combat_proximity
+  m_EditorClassIdentifier: 
+  Name: global_combat_proximity
+  Min: 0
+  Max: 100
+  Default: 0
+  Exists: 1
 --- !u!114 &-7068619161345618698
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -740,6 +842,23 @@ MonoBehaviour:
   Name: global_event_end
   Min: 0
   Max: 1
+  Default: 0
+  Exists: 1
+--- !u!114 &-6763645109946755372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/protoype_pill_attack_swing/global_enemy_attack_swing
+  m_EditorClassIdentifier: 
+  Name: global_enemy_attack_swing
+  Min: 0
+  Max: 10
   Default: 0
   Exists: 1
 --- !u!114 &-6726963681337796759
@@ -894,8 +1013,8 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 4487670721704551676}
-  - {fileID: -2050740928542620599}
+  - {fileID: 6881240420812586186}
+  - {fileID: 8361497613393039319}
   MinDistance: 10000
   MaxDistance: 10000
   Length: 50000
@@ -922,6 +1041,23 @@ MonoBehaviour:
   MinDistance: 10000
   MaxDistance: 10000
   Length: 338
+--- !u!114 &-5803482891211691855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/crystal_man_fight_pink/global_phase1_idle
+  m_EditorClassIdentifier: 
+  Name: global_phase1_idle
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
 --- !u!114 &-5797544961136897328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -982,10 +1118,27 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: -8500192053502470308}
+  - {fileID: 2297943874724610130}
   MinDistance: 10000
   MaxDistance: 10000
   Length: 95
+--- !u!114 &-5654613683099973255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/crystal_man_fight_pink/global_event_end
+  m_EditorClassIdentifier: 
+  Name: global_event_end
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
 --- !u!114 &-5453448167523622267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1077,10 +1230,10 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 6755332732391431409}
-  - {fileID: -8654144052774728852}
-  - {fileID: 7570991709173012733}
-  - {fileID: -8352888759969537322}
+  - {fileID: 6819658196990685791}
+  - {fileID: 7776067010674995874}
+  - {fileID: 7843763999193241477}
+  - {fileID: -7908728828030154456}
   MinDistance: 0
   MaxDistance: 0
   Length: 139636
@@ -1095,6 +1248,23 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
   m_Name: parameter:/prototype_pill_attack_tonal/global_octave
+  m_EditorClassIdentifier: 
+  Name: global_octave
+  Min: 0
+  Max: 7
+  Default: 0
+  Exists: 1
+--- !u!114 &-5254362222479667937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/melody_attack_fail_tonal/global_octave
   m_EditorClassIdentifier: 
   Name: global_octave
   Min: 0
@@ -1161,8 +1331,8 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: -2311056311549524534}
-  - {fileID: -8347032985586647933}
+  - {fileID: 7461327695003068201}
+  - {fileID: 4238292712075417893}
   MinDistance: 10000
   MaxDistance: 10000
   Length: 50000
@@ -1204,6 +1374,23 @@ MonoBehaviour:
   Name: global_octave
   Min: 0
   Max: 7
+  Default: 0
+  Exists: 1
+--- !u!114 &-4889049786501933719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/protoype_pill_attack_hit/gloabl_master_fade_.25
+  m_EditorClassIdentifier: 
+  Name: gloabl_master_fade_.25
+  Min: 0
+  Max: 1
   Default: 0
   Exists: 1
 --- !u!114 &-4850407319087284717
@@ -1285,8 +1472,8 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: 1825394649257606788}
-  - {fileID: 5854588054835964114}
+  - {fileID: -4889049786501933719}
+  - {fileID: 3995562785901124064}
   MinDistance: 10000
   MaxDistance: 10000
   Length: 1407
@@ -1350,6 +1537,23 @@ MonoBehaviour:
   MinDistance: 10000
   MaxDistance: 10000
   Length: 28000
+--- !u!114 &-4370777658568279688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/prototype_pill_attack_charge/global_enemy_attack_charge
+  m_EditorClassIdentifier: 
+  Name: global_enemy_attack_charge
+  Min: 0
+  Max: 10
+  Default: 0
+  Exists: 1
 --- !u!114 &-4370736264186088955
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1382,6 +1586,23 @@ MonoBehaviour:
   Name: melody_attack_tonal
   Min: 0
   Max: 12
+  Default: 0
+  Exists: 1
+--- !u!114 &-4294851613945048306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/twilit_hollow/global_event_end
+  m_EditorClassIdentifier: 
+  Name: global_event_end
+  Min: 0
+  Max: 1
   Default: 0
   Exists: 1
 --- !u!114 &-4279545719061970997
@@ -1515,10 +1736,27 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: -4370736264186088955}
+  - {fileID: 7681319111251269333}
   MinDistance: 10000
   MaxDistance: 10000
   Length: 95
+--- !u!114 &-3773456905239261503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/crystal_man_fight_pink/global_dissonance_idle
+  m_EditorClassIdentifier: 
+  Name: global_dissonance_idle
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
 --- !u!114 &-3687779407487817017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1773,6 +2011,23 @@ MonoBehaviour:
   Max: 12
   Default: 0
   Exists: 1
+--- !u!114 &-3135338719104589422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/melody_dash_tonal/global_pitch
+  m_EditorClassIdentifier: 
+  Name: global_pitch
+  Min: 0
+  Max: 12
+  Default: 0
+  Exists: 1
 --- !u!114 &-3056445966538658735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1818,7 +2073,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: -9100584623969598149}
+  - {fileID: -6763645109946755372}
   MinDistance: 10000
   MaxDistance: 10000
   Length: 202
@@ -1864,6 +2119,23 @@ MonoBehaviour:
   MinDistance: 10000
   MaxDistance: 10000
   Length: 50000
+--- !u!114 &-2977691780177054114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/frog_knight_attack_hit_tonal/global_octave
+  m_EditorClassIdentifier: 
+  Name: global_octave
+  Min: 0
+  Max: 7
+  Default: 0
+  Exists: 1
 --- !u!114 &-2958913144195659239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1948,6 +2220,23 @@ MonoBehaviour:
   MinDistance: 10000
   MaxDistance: 10000
   Length: 95
+--- !u!114 &-2667135142857380671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/PLACEHOLDER_tonal/global_octave
+  m_EditorClassIdentifier: 
+  Name: global_octave
+  Min: 0
+  Max: 7
+  Default: 0
+  Exists: 1
 --- !u!114 &-2618733010122582358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1959,6 +2248,23 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
   m_Name: parameter:/enemy_death_tonal/global_pitch
+  m_EditorClassIdentifier: 
+  Name: global_pitch
+  Min: 0
+  Max: 12
+  Default: 0
+  Exists: 1
+--- !u!114 &-2614003349174034216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/melody_attack_hit_tonal/global_pitch
   m_EditorClassIdentifier: 
   Name: global_pitch
   Min: 0
@@ -2039,6 +2345,23 @@ MonoBehaviour:
   MinDistance: 10000
   MaxDistance: 10000
   Length: 216
+--- !u!114 &-2506067640395665612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/melody_footstep_tonal/global_pitch
+  m_EditorClassIdentifier: 
+  Name: global_pitch
+  Min: 0
+  Max: 12
+  Default: 0
+  Exists: 1
 --- !u!114 &-2437712260494988945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2141,8 +2464,8 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: -3341420338023536282}
-  - {fileID: 2983816125026063312}
+  - {fileID: -2614003349174034216}
+  - {fileID: 3240411022696019473}
   MinDistance: 10000
   MaxDistance: 10000
   Length: 28000
@@ -2240,8 +2563,8 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 4417858708192831032}
-  - {fileID: 5532720635493424573}
+  - {fileID: -1325520428207149826}
+  - {fileID: -2667135142857380671}
   MinDistance: 10000
   MaxDistance: 10000
   Length: 50000
@@ -2367,6 +2690,23 @@ MonoBehaviour:
   Max: 12
   Default: 0
   Exists: 1
+--- !u!114 &-1325520428207149826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/PLACEHOLDER_tonal/global_pitch
+  m_EditorClassIdentifier: 
+  Name: global_pitch
+  Min: 0
+  Max: 12
+  Default: 0
+  Exists: 1
 --- !u!114 &-1273934531179489635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2387,11 +2727,11 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: -8213106939311083974}
-  - {fileID: -8455900571914175439}
-  - {fileID: -4570811235550075929}
-  - {fileID: -5081765178015582698}
-  - {fileID: -4798134831211381484}
+  - {fileID: -702385313682791866}
+  - {fileID: 6319857300334264565}
+  - {fileID: 6029801909874934285}
+  - {fileID: -7103209797998891374}
+  - {fileID: -8134128023050107182}
   MinDistance: 0
   MaxDistance: 0
   Length: 400000
@@ -2410,6 +2750,23 @@ MonoBehaviour:
   Name: global_enemy_attack_charge
   Min: 0
   Max: 10
+  Default: 0
+  Exists: 1
+--- !u!114 &-702385313682791866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/twilit_hollow_dissonance/global_puzzle_proximity
+  m_EditorClassIdentifier: 
+  Name: global_puzzle_proximity
+  Min: 0
+  Max: 100
   Default: 0
   Exists: 1
 --- !u!114 &-628106583022104602
@@ -2435,6 +2792,23 @@ MonoBehaviour:
   MinDistance: 10000
   MaxDistance: 10000
   Length: 95
+--- !u!114 &-355170320249122502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/frog_knight_attack_hit_tonal/global_pitch
+  m_EditorClassIdentifier: 
+  Name: global_pitch
+  Min: 0
+  Max: 12
+  Default: 0
+  Exists: 1
 --- !u!114 &-290471719723885120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2584,7 +2958,7 @@ MonoBehaviour:
   - {fileID: 2290488184788389828}
   StringsBanks:
   - {fileID: 1586485846700270002}
-  stringsBankWriteTime: 637394231402306318
+  stringsBankWriteTime: 637425180189309634
   cacheVersion: 4
 --- !u!114 &9542461738394647
 MonoBehaviour:
@@ -2708,6 +3082,40 @@ MonoBehaviour:
   MinDistance: 10000
   MaxDistance: 10000
   Length: 338
+--- !u!114 &307297933406303169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/melody_dash_tonal/global_octave
+  m_EditorClassIdentifier: 
+  Name: global_octave
+  Min: 0
+  Max: 7
+  Default: 0
+  Exists: 1
+--- !u!114 &312941291960183038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/crystal_man_fight_pink/global_fight_outro
+  m_EditorClassIdentifier: 
+  Name: global_fight_outro
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
 --- !u!114 &313980143194386471
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2776,8 +3184,8 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 7564929617966865545}
-  - {fileID: -8719157932804615115}
+  - {fileID: 791737424137275090}
+  - {fileID: 2836409187493647440}
   MinDistance: 10000
   MaxDistance: 10000
   Length: 50000
@@ -2857,6 +3265,23 @@ MonoBehaviour:
   Max: 7
   Default: 0
   Exists: 1
+--- !u!114 &791737424137275090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/melody_heal_tonal/global_octave
+  m_EditorClassIdentifier: 
+  Name: global_octave
+  Min: 0
+  Max: 7
+  Default: 0
+  Exists: 1
 --- !u!114 &854116679960073247
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2896,6 +3321,23 @@ MonoBehaviour:
   Min: 0
   Max: 5
   Default: 1
+  Exists: 1
+--- !u!114 &975541059536284238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/crystal_man_fight_pink/global_phase1
+  m_EditorClassIdentifier: 
+  Name: global_phase1
+  Min: 0
+  Max: 1
+  Default: 0
   Exists: 1
 --- !u!114 &1008080083561881639
 MonoBehaviour:
@@ -3108,7 +3550,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: FmodBuild/Desktop/Master Bank.strings.bank
   Name: Master Bank.strings
-  lastModified: 637394231402306318
+  lastModified: 637425180189309634
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -3137,6 +3579,23 @@ MonoBehaviour:
   MinDistance: 10000
   MaxDistance: 10000
   Length: 338
+--- !u!114 &1636321614416998956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/melody_attack_fail_tonal/global_pitch
+  m_EditorClassIdentifier: 
+  Name: global_pitch
+  Min: 0
+  Max: 12
+  Default: 0
+  Exists: 1
 --- !u!114 &1796865799985584289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3261,9 +3720,43 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: FmodBuild/Desktop/Master Bank.bank
   Name: Master Bank
-  lastModified: 637394231402286207
+  lastModified: 637425180189309634
   LoadResult: 0
   FileSizes: []
+  Exists: 1
+--- !u!114 &2297943874724610130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/frog_knight_footstep/global_footstep_surface
+  m_EditorClassIdentifier: 
+  Name: global_footstep_surface
+  Min: 0
+  Max: 10
+  Default: 1
+  Exists: 1
+--- !u!114 &2301665928369339933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/crystal_man_fight_pink/global_dissonance
+  m_EditorClassIdentifier: 
+  Name: global_dissonance
+  Min: 0
+  Max: 1
+  Default: 0
   Exists: 1
 --- !u!114 &2364483512650255231
 MonoBehaviour:
@@ -3378,6 +3871,23 @@ MonoBehaviour:
   MinDistance: 10000
   MaxDistance: 10000
   Length: 1700
+--- !u!114 &2836409187493647440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/melody_heal_tonal/global_pitch
+  m_EditorClassIdentifier: 
+  Name: global_pitch
+  Min: 0
+  Max: 12
+  Default: 0
+  Exists: 1
 --- !u!114 &2838863843108440841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3578,12 +4088,12 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: -3647976483060038375}
-  - {fileID: 3286713329697745167}
-  - {fileID: 5848289810953473517}
-  - {fileID: -158600215420097225}
-  - {fileID: 3520112652494234500}
-  - {fileID: -7489067193433282447}
+  - {fileID: -3773456905239261503}
+  - {fileID: -5654613683099973255}
+  - {fileID: 2301665928369339933}
+  - {fileID: -5803482891211691855}
+  - {fileID: 312941291960183038}
+  - {fileID: 975541059536284238}
   MinDistance: 0
   MaxDistance: 0
   Length: 140000
@@ -3654,11 +4164,28 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 7004748021806838911}
-  - {fileID: 6654043524021933312}
+  - {fileID: -3135338719104589422}
+  - {fileID: 307297933406303169}
   MinDistance: 10000
   MaxDistance: 10000
   Length: 28000
+--- !u!114 &3240411022696019473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/melody_attack_hit_tonal/global_octave
+  m_EditorClassIdentifier: 
+  Name: global_octave
+  Min: 0
+  Max: 7
+  Default: 0
+  Exists: 1
 --- !u!114 &3260696607321086778
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3781,10 +4308,10 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 9219773382283668069}
-  - {fileID: -4057325913573296932}
-  - {fileID: 6016453111075403089}
-  - {fileID: 4841146395565429303}
+  - {fileID: 8863868488491733321}
+  - {fileID: -4294851613945048306}
+  - {fileID: 4845462731670314892}
+  - {fileID: 6623826417783900411}
   MinDistance: 0
   MaxDistance: 0
   Length: 139636
@@ -3908,7 +4435,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: FmodBuild/Desktop/Music.bank
   Name: Music
-  lastModified: 637394231403554386
+  lastModified: 637425180191011176
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -3992,6 +4519,23 @@ MonoBehaviour:
   MinDistance: 10000
   MaxDistance: 10000
   Length: 554
+--- !u!114 &3926740925543099406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/prototype_pill_attack_tonal/global_octave
+  m_EditorClassIdentifier: 
+  Name: global_octave
+  Min: 0
+  Max: 7
+  Default: 0
+  Exists: 1
 --- !u!114 &3944594695637454294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4032,6 +4576,23 @@ MonoBehaviour:
   MinDistance: 10000
   MaxDistance: 10000
   Length: 338
+--- !u!114 &3995562785901124064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/protoype_pill_attack_hit/global_enemy_attack_hit
+  m_EditorClassIdentifier: 
+  Name: global_enemy_attack_hit
+  Min: 0
+  Max: 10
+  Default: 0
+  Exists: 1
 --- !u!114 &4052689052671335215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4167,6 +4728,23 @@ MonoBehaviour:
   MinDistance: 10000
   MaxDistance: 10000
   Length: 95
+--- !u!114 &4238292712075417893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/melody_parry_fail_tonal/global_octave
+  m_EditorClassIdentifier: 
+  Name: global_octave
+  Min: 0
+  Max: 7
+  Default: 0
+  Exists: 1
 --- !u!114 &4274212357538217559
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4330,7 +4908,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: FmodBuild/Desktop/SFX.bank
   Name: SFX
-  lastModified: 637394231404551180
+  lastModified: 637425180191321461
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -4483,6 +5061,23 @@ MonoBehaviour:
   Max: 5
   Default: 1
   Exists: 1
+--- !u!114 &4845462731670314892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/twilit_hollow/global_puzzle_proximity
+  m_EditorClassIdentifier: 
+  Name: global_puzzle_proximity
+  Min: 0
+  Max: 100
+  Default: 0
+  Exists: 1
 --- !u!114 &4877448753000859774
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4520,8 +5115,8 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 8772992584950006782}
-  - {fileID: -7535162830942056920}
+  - {fileID: 5777581976594266619}
+  - {fileID: -2506067640395665612}
   MinDistance: 10000
   MaxDistance: 10000
   Length: 50000
@@ -4784,6 +5379,23 @@ MonoBehaviour:
   MinDistance: 10000
   MaxDistance: 10000
   Length: 338
+--- !u!114 &5777581976594266619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/melody_footstep_tonal/global_octave
+  m_EditorClassIdentifier: 
+  Name: global_octave
+  Min: 0
+  Max: 7
+  Default: 0
+  Exists: 1
 --- !u!114 &5848289810953473517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4885,6 +5497,23 @@ MonoBehaviour:
   Min: 0
   Max: 100
   Default: 0
+  Exists: 1
+--- !u!114 &6029801909874934285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/twilit_hollow_dissonance/global_area_phase
+  m_EditorClassIdentifier: 
+  Name: global_area_phase
+  Min: 0
+  Max: 5
+  Default: 1
   Exists: 1
 --- !u!114 &6071576436610387170
 MonoBehaviour:
@@ -4996,6 +5625,40 @@ MonoBehaviour:
   MinDistance: 10000
   MaxDistance: 10000
   Length: 216
+--- !u!114 &6319857300334264565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/twilit_hollow_dissonance/global_health
+  m_EditorClassIdentifier: 
+  Name: global_health
+  Min: 0
+  Max: 100
+  Default: 100
+  Exists: 1
+--- !u!114 &6623826417783900411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/twilit_hollow/global_area_phase
+  m_EditorClassIdentifier: 
+  Name: global_area_phase
+  Min: 0
+  Max: 5
+  Default: 1
+  Exists: 1
 --- !u!114 &6654043524021933312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5149,6 +5812,23 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 1
+--- !u!114 &6819658196990685791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/placeholder_music/global_event_end
+  m_EditorClassIdentifier: 
+  Name: global_event_end
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
 --- !u!114 &6850265625053223075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5164,6 +5844,23 @@ MonoBehaviour:
   Name: global_enemy_attack_charge
   Min: 0
   Max: 10
+  Default: 0
+  Exists: 1
+--- !u!114 &6881240420812586186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/melody_parry_hit_tonal/global_pitch
+  m_EditorClassIdentifier: 
+  Name: global_pitch
+  Min: 0
+  Max: 12
   Default: 0
   Exists: 1
 --- !u!114 &7004748021806838911
@@ -5220,8 +5917,8 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: -4330261480335260743}
-  - {fileID: -4920130447056844573}
+  - {fileID: -7272505863156096720}
+  - {fileID: 3926740925543099406}
   MinDistance: 10000
   MaxDistance: 10000
   Length: 28000
@@ -5257,6 +5954,23 @@ MonoBehaviour:
   Name: global_octave
   Min: 0
   Max: 7
+  Default: 0
+  Exists: 1
+--- !u!114 &7461327695003068201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/melody_parry_fail_tonal/global_pitch
+  m_EditorClassIdentifier: 
+  Name: global_pitch
+  Min: 0
+  Max: 12
   Default: 0
   Exists: 1
 --- !u!114 &7564929617966865545
@@ -5316,6 +6030,23 @@ MonoBehaviour:
   MinDistance: 10000
   MaxDistance: 10000
   Length: 338
+--- !u!114 &7681319111251269333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/melody_footstep/global_footstep_surface
+  m_EditorClassIdentifier: 
+  Name: global_footstep_surface
+  Min: 0
+  Max: 10
+  Default: 1
+  Exists: 1
 --- !u!114 &7685332095099819154
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5383,6 +6114,40 @@ MonoBehaviour:
   Min: 0
   Max: 100
   Default: 0
+  Exists: 1
+--- !u!114 &7776067010674995874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/placeholder_music/global_combat_proximity
+  m_EditorClassIdentifier: 
+  Name: global_combat_proximity
+  Min: 0
+  Max: 100
+  Default: 0
+  Exists: 1
+--- !u!114 &7843763999193241477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/placeholder_music/global_area_phase
+  m_EditorClassIdentifier: 
+  Name: global_area_phase
+  Min: 0
+  Max: 5
+  Default: 1
   Exists: 1
 --- !u!114 &8123819429160514587
 MonoBehaviour:
@@ -5453,6 +6218,23 @@ MonoBehaviour:
   MinDistance: 10000
   MaxDistance: 10000
   Length: 95
+--- !u!114 &8361497613393039319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/melody_parry_hit_tonal/global_octave
+  m_EditorClassIdentifier: 
+  Name: global_octave
+  Min: 0
+  Max: 7
+  Default: 0
+  Exists: 1
 --- !u!114 &8449771530527671974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5539,6 +6321,23 @@ MonoBehaviour:
   Max: 7
   Default: 0
   Exists: 1
+--- !u!114 &8863868488491733321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/twilit_hollow/global_combat_proximity
+  m_EditorClassIdentifier: 
+  Name: global_combat_proximity
+  Min: 0
+  Max: 100
+  Default: 0
+  Exists: 1
 --- !u!114 &8931670456571948813
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5616,8 +6415,8 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 8967574620827213645}
-  - {fileID: 3368061341754458582}
+  - {fileID: 1636321614416998956}
+  - {fileID: -5254362222479667937}
   MinDistance: 10000
   MaxDistance: 10000
   Length: 28000

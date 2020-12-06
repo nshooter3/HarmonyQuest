@@ -26,7 +26,7 @@ public class HQDialogSpeaker : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        DialogManager.speakers.Add(this);
+        ServiceLocator.instance.GetDialogController().RegisterSpeaker(this);
         mainCamera = ServiceLocator.instance.GetCamera();
 
         GameObject go = Instantiate(DialogPrefab, gameObject.transform);
@@ -54,6 +54,12 @@ public class HQDialogSpeaker : MonoBehaviour
         dialogView.bark.SetActive(false);
     }
 
+    public void ShutUp()
+    {
+        dialogView.mainText.text = "";
+        dialogView.main.SetActive(false);
+    }
+
     public bool IsOnScreen()
     {
         Vector2 screenPoint = GetScreenPostion();
@@ -78,6 +84,8 @@ public class HQDialogSpeaker : MonoBehaviour
         {
             dialogView.bark.SetActive(true);
             dialogView.indicator.SetActive(false);
+
+            ServiceLocator.instance.GetDialogController().EnterSpeakerZone(this);
         }
     }
 
@@ -87,6 +95,8 @@ public class HQDialogSpeaker : MonoBehaviour
         {
             dialogView.bark.SetActive(false);
             dialogView.indicator.SetActive(true);
+
+            ServiceLocator.instance.GetDialogController().ExitSpeakerZone(this);
         }
     }
 

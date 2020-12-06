@@ -15,8 +15,11 @@
 
         public void OnEnable()
         {
-            ServiceLocator.instance.GetUIManager().AddUITracker(this);
-            cam = ServiceLocator.instance.GetCamera();
+            if(ServiceLocator.instance != null)
+            {
+                ServiceLocator.instance.GetUIManager().AddUITracker(this);
+                cam = ServiceLocator.instance.GetCamera();
+            }           
             rectTransform = GetComponent<RectTransform>();
         }
 

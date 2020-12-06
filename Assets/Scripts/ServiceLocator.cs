@@ -23,6 +23,7 @@
         IMelodyInfo melodyInfo;
         AIAgentManager aiAgentManager;
         UIManager uiManager;
+        DialogController dialogController;
         //TODO: Make this use Mitch's camera.
         Camera cam;
         //End List of managers
@@ -43,6 +44,7 @@
             aiAgentManager = FindObjectOfType<AIAgentManager>();
             uiManager = FindObjectOfType<UIManager>();
             cam = FindObjectOfType<Camera>();
+            dialogController = FindObjectOfType<DialogController>();
             //Check to see to see what Managers have been attached to this GameObject.
             InputManager = GetComponent(typeof(IPlayerInputManager)) as IPlayerInputManager;
             InputManager.OnAwake();
@@ -76,6 +78,11 @@
         public Camera GetCamera()
         {
             return cam;
+        }
+
+        public DialogController GetDialogController()
+        {
+            return dialogController;
         }
     }
 }

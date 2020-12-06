@@ -26,6 +26,7 @@
         public GameObject FmodHandler;
         public GameObject PlayerControllerStateManager;
         public GameObject ServiceLocator;
+        public GameObject DialogManager;
 
         //Variables to hold scripts found in the scene upon load.
         //This is so that objects that aren't destroyed on load can be reloaded into the update queue when switching scenes.
@@ -99,6 +100,7 @@
             DefaultCanvas = Instantiate(DefaultCanvas);
             PlayerControllerStateManager = Instantiate(PlayerControllerStateManager);
             ServiceLocator = Instantiate(ServiceLocator);
+            DialogManager = Instantiate(DialogManager);
 
             //ServiceLocator. Used to get references to other objects in the scene.
             objectManager.AddManageableObject(ServiceLocator.GetComponent<ServiceLocator>());
@@ -137,6 +139,9 @@
             objectManager.AddManageableObject(FmodHandler.GetComponent<FmodOnBeatAccuracyChecker>());
             objectManager.AddManageableObject(FmodHandler.GetComponent<FmodChordInterpreter>());
             objectManager.FindManageableObjectsInScene<FmodEventHandler>();
+
+            //Dialog
+            objectManager.AddManageableObject(DialogManager.GetComponent<DialogController>()) ;
         }
 
         public void InitManagerClasses()
