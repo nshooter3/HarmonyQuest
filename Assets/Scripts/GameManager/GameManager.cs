@@ -13,6 +13,7 @@
     using UnityEngine;
     using Saving;
     using System.Collections.Generic;
+    using HarmonyQuest.Dialog;
 
     public class GameManager : MonoBehaviour
     {

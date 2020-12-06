@@ -6,6 +6,7 @@
     using UnityEngine;
     using UI;
     using GameManager;
+    using HarmonyQuest.Dialog;
 
     ///<summary>
     ///The ServiceLocator is a Singleton that points scripts to whatever is managing each of the game's major subsystems.
