@@ -339,7 +339,7 @@
 
         private void PlayPooledFmodEvent(string sfxEventName, float sfxEventVolume, FmodParamData[] paramData)
         {
-            //FmodFacade.instance.PlayPooledFmodEvent(sfxEventName, sfxEventVolume, gameObject, rb, paramData);
+            FmodFacade.instance.PlayPooledFmodEvent(sfxEventName, sfxEventVolume, gameObject, rb, paramData);
         }
     }
 }
