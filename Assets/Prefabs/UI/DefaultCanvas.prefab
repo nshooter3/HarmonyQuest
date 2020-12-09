@@ -117,6 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d661095f2e0634e9b7fa8921b7c7b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasInitialized: 0
   canvas: {fileID: 119734217971162425}
   lockOnReticule: {fileID: 119734219525103942}
   lockOnImage: {fileID: 119734219525103940}
@@ -124,6 +125,7 @@ MonoBehaviour:
   grappleImage: {fileID: 119734218840348055}
   agentHealthBarsPool: {fileID: 119734219129781293}
   playerHealth: {fileID: 119734219362322839}
+  screenScale: []
 --- !u!1 &119734218048260927
 GameObject:
   m_ObjectHideFlags: 0
@@ -1003,6 +1005,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  yOffset: 0
+  xOffset: 0
 --- !u!1 &119734218997810258
 GameObject:
   m_ObjectHideFlags: 0
@@ -1675,6 +1679,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  yOffset: 0
+  xOffset: 0
 --- !u!1 &119734219533079112
 GameObject:
   m_ObjectHideFlags: 0

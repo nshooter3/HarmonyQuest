@@ -72,7 +72,6 @@
         {
             return player.GetButtonDown("Lockon");
         }
-
         public bool GrappleButtonDown()
         {
             return player.GetButtonDown("Grapple");
@@ -81,6 +80,11 @@
         public bool PauseButtonDown()
         {
             return player.GetButtonDown("Pause");
+        }
+
+        public bool InteractButtonDown()
+        {
+            return player.GetButtonDown("Interact");
         }
     }
 }

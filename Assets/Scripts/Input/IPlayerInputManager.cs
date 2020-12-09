@@ -27,5 +27,7 @@
         bool PauseButtonDown();
 
         void OnAwake();
+
+        bool InteractButtonDown();
     }
 }
