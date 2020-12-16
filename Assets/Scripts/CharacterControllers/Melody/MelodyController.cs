@@ -221,8 +221,18 @@
 
         public void OnSceneTransitionStart()
         {
+            FreezeMovement();
+        }
+
+        public void FreezeMovement()
+        {
             melodyPhysics.ToggleIsKinematic(true);
             melodyAnimator.SetWalkRun(0f);
+        }
+
+        public void UnfreezeMovement()
+        {
+            melodyPhysics.ToggleIsKinematic(false);
         }
     }
 }

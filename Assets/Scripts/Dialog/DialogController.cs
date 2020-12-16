@@ -20,7 +20,7 @@ namespace HarmonyQuest.Dialog
 
         public bool inDialog = false;
 
-
+        public MelodyController melodyController;
 
         public GameObject dialogOptionHolder;
 
@@ -44,6 +44,7 @@ namespace HarmonyQuest.Dialog
             if (dialogRef.GetObject() != null)
             {
                 flowPlayer.StartOn = dialogRef.GetObject();
+                melodyController.FreezeMovement();
                 PauseManager.ToggleDialog(true);
                 PlayerControllerStateManager.instance.SetState(PlayerControllerStateManager.ControllerState.Dialog);
             }
@@ -89,6 +90,7 @@ namespace HarmonyQuest.Dialog
             {
                 speaker.ShutUp();
             }
+            melodyController.UnfreezeMovement();
             PauseManager.ToggleDialog(false);
             PlayerControllerStateManager.instance.SetState(PlayerControllerStateManager.ControllerState.Melody);
         }
@@ -199,6 +201,8 @@ namespace HarmonyQuest.Dialog
 
         public override void OnStart()
         {
+            melodyController = ServiceLocator.instance.GetMelodyController();
+
             Button[] buttons = dialogOptionHolder.GetComponentsInChildren<Button>();
             buttons[0].onClick.AddListener(() => DialogOptionSelected(0));
             buttons[1].onClick.AddListener(() => DialogOptionSelected(1));
