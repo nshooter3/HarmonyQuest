@@ -3,7 +3,7 @@
 public static class PauseManager
 {
     private static bool isPaused = false;
-    private static bool isCutscene = false;
+    private static bool isDialog = false;
 
     public delegate void OnPause();
     private static OnPause onPause;
@@ -11,11 +11,11 @@ public static class PauseManager
     public delegate void OnUnpause();
     private static OnUnpause onUnpause;
 
-    public delegate void OnCutscene();
-    private static OnCutscene onCutscene;
+    public delegate void OnDialog();
+    private static OnDialog onDialog;
 
-    public delegate void OnCutsceneEnd();
-    private static OnCutsceneEnd onCutsceneEnd;
+    public delegate void OnDialogEnd();
+    private static OnDialogEnd onDialogEnd;
 
     public static void TogglePaused(bool isPaused)
     {
@@ -39,18 +39,18 @@ public static class PauseManager
         }
     }
 
-    public static void ToggleCutscene(bool isCutscene)
+    public static void ToggleDialog(bool isDialog)
     {
-        if (isCutscene != PauseManager.isCutscene)
+        if (isDialog != PauseManager.isDialog)
         {
-            PauseManager.isCutscene = isCutscene;
-            if (isCutscene && onCutscene != null)
+            PauseManager.isDialog = isDialog;
+            if (isDialog && onDialog != null)
             {
-                onCutscene();
+                onDialog();
             }
-            else if (onCutsceneEnd != null)
+            else if (onDialogEnd != null)
             {
-                onCutsceneEnd();
+                onDialogEnd();
             }
         }
     }
@@ -60,9 +60,9 @@ public static class PauseManager
         return isPaused;
     }
 
-    public static bool GetCutscene()
+    public static bool GetDialog()
     {
-        return isCutscene;
+        return isDialog;
     }
 
     public static void AssignFunctionToOnPauseDelegate(OnPause func)
@@ -95,33 +95,33 @@ public static class PauseManager
         onUnpause = null;
     }
 
-    public static void AssignFunctionToOnCutsceneDelegate(OnCutscene func)
+    public static void AssignFunctionToOnDialogDelegate(OnDialog func)
     {
-        onCutscene += func;
+        onDialog += func;
     }
 
-    public static void RemoveFunctionFromOnCutsceneDelegate(OnCutscene func)
+    public static void RemoveFunctionFromOnDialogDelegate(OnDialog func)
     {
-        onCutscene -= func;
+        onDialog -= func;
     }
 
-    public static void ClearOnCutsceneDelegate()
+    public static void ClearOnDialogDelegate()
     {
-        onCutscene = null;
+        onDialog = null;
     }
 
-    public static void AssignFunctionToOnCutsceneEndDelegate(OnCutsceneEnd func)
+    public static void AssignFunctionToOnDialogEndDelegate(OnDialogEnd func)
     {
-        onCutsceneEnd += func;
+        onDialogEnd += func;
     }
 
-    public static void RemoveFunctionFromOnCutsceneEndDelegate(OnCutsceneEnd func)
+    public static void RemoveFunctionFromOnDialogEndDelegate(OnDialogEnd func)
     {
-        onCutsceneEnd -= func;
+        onDialogEnd -= func;
     }
 
-    public static void ClearOnCutsceneEndDelegate()
+    public static void ClearOnDialogEndDelegate()
     {
-        onCutsceneEnd = null;
+        onDialogEnd = null;
     }
 }

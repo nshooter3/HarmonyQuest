@@ -1,6 +1,7 @@
 ﻿using Articy.Unity;
 using Articy.Unity.Interfaces;
 using GameManager;
+using Melody;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -38,11 +39,13 @@ namespace HarmonyQuest.Dialog
             return false;
         }
 
-        public void SetDialog(ArticyRef dialogRef)
+        public void StartDialog(ArticyRef dialogRef)
         {
             if (dialogRef.GetObject() != null)
             {
                 flowPlayer.StartOn = dialogRef.GetObject();
+                PauseManager.ToggleDialog(true);
+                PlayerControllerStateManager.instance.SetState(PlayerControllerStateManager.ControllerState.Dialog);
             }
         }
 
@@ -86,6 +89,8 @@ namespace HarmonyQuest.Dialog
             {
                 speaker.ShutUp();
             }
+            PauseManager.ToggleDialog(false);
+            PlayerControllerStateManager.instance.SetState(PlayerControllerStateManager.ControllerState.Melody);
         }
 
         public void PositionDialogBoxes()
@@ -214,7 +219,7 @@ namespace HarmonyQuest.Dialog
                     if (proximalDialog != null && proximalDialog.HasReference)
                     {
                         inDialog = true;
-                        SetDialog(proximalDialog);
+                        StartDialog(proximalDialog);
                         proximalDialog = null;
                     }
                 }
