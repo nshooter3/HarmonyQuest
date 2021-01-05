@@ -19,6 +19,7 @@
         public Animator animator;
         public Animator Animator { get { return animator; } private set { animator = value; } }
         public Rigidbody rigidBody { get; private set; }
+        public RigidbodyConstraints defaultConstraints { get; private set; }
         public CollisionWrapper melodyColliderWrapper { get; private set; }
         public CapsuleCollider capsuleCollider { get; private set; }
 
@@ -71,6 +72,7 @@
         public override void OnStart()
         {
             rigidBody = gameObject.GetComponent<Rigidbody>();
+            defaultConstraints = rigidBody.constraints;
             melodyColliderWrapper = gameObject.GetComponent<CollisionWrapper>();
             capsuleCollider = gameObject.GetComponent<CapsuleCollider>();
 
@@ -226,13 +228,13 @@
 
         public void FreezeMovement()
         {
-            melodyPhysics.ToggleIsKinematic(true);
+            melodyPhysics.SetRigidBodyConstraintsToLockAll();
             melodyAnimator.SetWalkRun(0f);
         }
 
         public void UnfreezeMovement()
         {
-            melodyPhysics.ToggleIsKinematic(false);
+            melodyPhysics.SetRigidBodyConstraintsToDefault();
         }
     }
 }

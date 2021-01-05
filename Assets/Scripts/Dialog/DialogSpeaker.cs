@@ -1,12 +1,13 @@
 ﻿using Articy.Harmonybarktest;
 using Articy.Unity;
+using GameManager;
+using GamePhysics;
 using UnityEngine;
 
 
 namespace HarmonyQuest.Dialog
 {
-    [RequireComponent(typeof(SphereCollider))]
-    public class DialogSpeaker : MonoBehaviour
+    public class DialogSpeaker : ManageableObject
     {
         public ArticyRef character;
         public ArticyRef DialogReference;
@@ -15,15 +16,19 @@ namespace HarmonyQuest.Dialog
         [HideInInspector]
         public DialogView dialogView;
 
-        private SphereCollider teaseCollider;
-
-        public static float DialogRadius = 1.5f;
+        public CollisionWrapper teaseCollider;
 
         Camera mainCamera;
 
-        // Start is called before the first frame update
-        void Start()
+        public override void OnStart()
         {
+            //If this speaker is does not have a bark, do not assign dialogue trigger zone callbacks.
+            if (teaseCollider != null)
+            {
+                teaseCollider.AssignFunctionToTriggerEnterDelegate(TriggerEnter);
+                teaseCollider.AssignFunctionToTriggerExitDelegate(TriggerExit);
+            }
+
             ServiceLocator.instance.GetDialogController().RegisterSpeaker(this);
             mainCamera = ServiceLocator.instance.GetCamera();
 
@@ -40,9 +45,6 @@ namespace HarmonyQuest.Dialog
                 dialogView.bark.SetActive(false);
                 dialogView.indicator.SetActive(true);
             }
-
-            teaseCollider = GetComponent<SphereCollider>();
-            teaseCollider.radius = DialogRadius;
         }
 
         public void Speak(string text)
@@ -76,23 +78,29 @@ namespace HarmonyQuest.Dialog
             return mainCamera.WorldToScreenPoint(transform.position);
         }
 
-        private void OnTriggerEnter(Collider other)
+        private void TriggerEnter(Collider other)
         {
             if (DialogReference.HasReference)
             {
-                dialogView.bark.SetActive(true);
-                dialogView.indicator.SetActive(false);
+                if (!dialogView.main.activeSelf)
+                {
+                    dialogView.bark.SetActive(true);
+                    dialogView.indicator.SetActive(false);
+                }
 
                 ServiceLocator.instance.GetDialogController().EnterSpeakerZone(this);
             }
         }
 
-        private void OnTriggerExit(Collider other)
+        private void TriggerExit(Collider other)
         {
-            if (DialogReference.HasReference)
+            if (DialogReference.HasReference && !dialogView.main.activeSelf)
             {
-                dialogView.bark.SetActive(false);
-                dialogView.indicator.SetActive(true);
+                if (!dialogView.main.activeSelf)
+                {
+                    dialogView.bark.SetActive(false);
+                    dialogView.indicator.SetActive(true);
+                }
 
                 ServiceLocator.instance.GetDialogController().ExitSpeakerZone(this);
             }

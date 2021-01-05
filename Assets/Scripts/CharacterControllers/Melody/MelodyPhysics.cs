@@ -197,5 +197,36 @@
         {
             physicsEntity.ToggleIsKinematic(isKinematic);
         }
+
+        public void SetRigidbodyConstraints(RigidbodyConstraints constraints)
+        {
+            physicsEntity.rb.constraints = constraints;
+        }
+
+        public void SetRigidBodyConstraintsToDefault()
+        {
+            SetRigidbodyConstraints(controller.defaultConstraints);
+        }
+
+        public void SetRigidBodyConstraintsToLockAll()
+        {
+            SetRigidbodyConstraints(RigidbodyConstraints.FreezeAll);
+        }
+
+        public void SetRigidBodyConstraintsToLockAllButGravity()
+        {
+            SetRigidbodyConstraints(RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ);
+        }
+
+        public void SetRigidBodyConstraintsToLockMovement()
+        {
+            SetRigidbodyConstraints(RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ |
+                                    RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ);
+        }
+
+        public void SetRigidBodyConstraintsToNone()
+        {
+            SetRigidbodyConstraints(RigidbodyConstraints.None);
+        }
     }
 }

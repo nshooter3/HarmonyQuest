@@ -125,6 +125,7 @@
             objectManager.FindManageableObjectsInScene<PushableBoxTrigger>();
             objectManager.FindManageableObjectsInScene<CameraPointOfInterest>();
             objectManager.FindManageableObjectsInScene<MelodySpawnPoint>();
+            objectManager.FindManageableObjectsInScene<DialogSpeaker>();
 
             //Art
             objectManager.FindManageableObjectsInScene<VerletConstraint>();
