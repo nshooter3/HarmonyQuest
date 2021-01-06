@@ -15,3 +15,48 @@ using System.Collections;
 using UnityEngine;
 
 
+namespace Articy.Harmonybarktest.GlobalVariables
+{
+    
+    
+    [Serializable()]
+    public class QuickTest : IArticyNamespace
+    {
+        
+        [SerializeField()]
+        private BaseGlobalVariables _VariableStorage;
+        
+        // What language Melody speaks
+        public bool SpeaksSpanish
+        {
+            get
+            {
+                return _VariableStorage.Internal_GetVariableValueBoolean(0);
+            }
+            set
+            {
+                _VariableStorage.Internal_SetVariableValueBoolean(0, value);
+            }
+        }
+        
+        // True if this is the first time talking to Master Fist
+        public bool FirstConversation
+        {
+            get
+            {
+                return _VariableStorage.Internal_GetVariableValueBoolean(1);
+            }
+            set
+            {
+                _VariableStorage.Internal_SetVariableValueBoolean(1, value);
+            }
+        }
+        
+        public void RegisterVariables(BaseGlobalVariables aStorage)
+        {
+            _VariableStorage = aStorage;
+            aStorage.RegisterVariable("QuickTest.SpeaksSpanish", false);
+            aStorage.RegisterVariable("QuickTest.FirstConversation", true);
+        }
+    }
+}

@@ -20,7 +20,7 @@ namespace Articy.Harmonybarktest.GlobalVariables
 {
     
     
-    [Articy.Unity.ArticyCodeGenerationHashAttribute(637427215353627787)]
+    [Articy.Unity.ArticyCodeGenerationHashAttribute(637454785936516958)]
     public class ArticyScriptFragments : BaseScriptFragments, ISerializationCallbackReceiver
     {
         
@@ -28,6 +28,62 @@ namespace Articy.Harmonybarktest.GlobalVariables
         private System.Collections.Generic.Dictionary<int, System.Func<ArticyGlobalVariables, Articy.Unity.IBaseScriptMethodProvider, bool>> Conditions = new System.Collections.Generic.Dictionary<int, System.Func<ArticyGlobalVariables, Articy.Unity.IBaseScriptMethodProvider, bool>>();
         
         private System.Collections.Generic.Dictionary<int, System.Action<ArticyGlobalVariables, Articy.Unity.IBaseScriptMethodProvider>> Instructions = new System.Collections.Generic.Dictionary<int, System.Action<ArticyGlobalVariables, Articy.Unity.IBaseScriptMethodProvider>>();
+        #endregion
+        
+        #region Script fragments
+        /// <summary>
+        /// ObjectID: 0x1000000000002E7
+        /// Articy Object ref: articy://localhost/view/bda27ac8-48b5-4181-a11d-12f365293693/72057594037928679?pane=selected&amp;tab=current
+        /// </summary>
+        public void Script_0x1000000000002E7Text(ArticyGlobalVariables aGlobalVariablesState, Articy.Unity.IBaseScriptMethodProvider aMethodProvider)
+        {
+            aGlobalVariablesState.QuickTest.FirstConversation = false;
+        }
+        
+        /// <summary>
+        /// ObjectID: 0x1000000000002EE
+        /// Articy Object ref: articy://localhost/view/bda27ac8-48b5-4181-a11d-12f365293693/72057594037928686?pane=selected&amp;tab=current
+        /// </summary>
+        public bool Script_0x1000000000002EEText(ArticyGlobalVariables aGlobalVariablesState, Articy.Unity.IBaseScriptMethodProvider aMethodProvider)
+        {
+            return aGlobalVariablesState.QuickTest.FirstConversation == true;
+        }
+        
+        /// <summary>
+        /// ObjectID: 0x1000000000002FD
+        /// Articy Object ref: articy://localhost/view/bda27ac8-48b5-4181-a11d-12f365293693/72057594037928701?pane=selected&amp;tab=current
+        /// </summary>
+        public void Script_0x1000000000002FDText(ArticyGlobalVariables aGlobalVariablesState, Articy.Unity.IBaseScriptMethodProvider aMethodProvider)
+        {
+            aGlobalVariablesState.QuickTest.SpeaksSpanish = true;
+        }
+        
+        /// <summary>
+        /// ObjectID: 0x10000000000031E
+        /// Articy Object ref: articy://localhost/view/bda27ac8-48b5-4181-a11d-12f365293693/72057594037928734?pane=selected&amp;tab=current
+        /// </summary>
+        public bool Script_0x10000000000031EText(ArticyGlobalVariables aGlobalVariablesState, Articy.Unity.IBaseScriptMethodProvider aMethodProvider)
+        {
+            return aGlobalVariablesState.QuickTest.FirstConversation == false;
+        }
+        
+        /// <summary>
+        /// ObjectID: 0x100000000000325
+        /// Articy Object ref: articy://localhost/view/bda27ac8-48b5-4181-a11d-12f365293693/72057594037928741?pane=selected&amp;tab=current
+        /// </summary>
+        public bool Script_0x100000000000325Text(ArticyGlobalVariables aGlobalVariablesState, Articy.Unity.IBaseScriptMethodProvider aMethodProvider)
+        {
+            return aGlobalVariablesState.QuickTest.SpeaksSpanish == false;
+        }
+        
+        /// <summary>
+        /// ObjectID: 0x10000000000032A
+        /// Articy Object ref: articy://localhost/view/bda27ac8-48b5-4181-a11d-12f365293693/72057594037928746?pane=selected&amp;tab=current
+        /// </summary>
+        public bool Script_0x10000000000032AText(ArticyGlobalVariables aGlobalVariablesState, Articy.Unity.IBaseScriptMethodProvider aMethodProvider)
+        {
+            return aGlobalVariablesState.QuickTest.SpeaksSpanish == true;
+        }
         #endregion
         
         #region Unity serialization
@@ -39,6 +95,12 @@ namespace Articy.Harmonybarktest.GlobalVariables
         {
             Conditions = new System.Collections.Generic.Dictionary<int, System.Func<ArticyGlobalVariables, Articy.Unity.IBaseScriptMethodProvider, bool>>();
             Instructions = new System.Collections.Generic.Dictionary<int, System.Action<ArticyGlobalVariables, Articy.Unity.IBaseScriptMethodProvider>>();
+            Instructions.Add(-309349008, this.Script_0x1000000000002E7Text);
+            Conditions.Add(-1972352458, this.Script_0x1000000000002EEText);
+            Instructions.Add(-496575718, this.Script_0x1000000000002FDText);
+            Conditions.Add(1755686415, this.Script_0x10000000000031EText);
+            Conditions.Add(854058366, this.Script_0x100000000000325Text);
+            Conditions.Add(1787634874, this.Script_0x10000000000032AText);
         }
         #endregion
         

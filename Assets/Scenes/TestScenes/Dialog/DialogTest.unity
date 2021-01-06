@@ -322,10 +322,10 @@ MonoBehaviour:
   hasInitialized: 0
   col: {fileID: 214841168}
   ignoreCollisionsWithOtherTriggers: 1
-  useLayerMask: 1
+  useLayerMask: 0
   mask:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 0
   objectsToIgnore: []
   namesToIgnore: []
 --- !u!135 &214841168
@@ -459,7 +459,7 @@ GameObject:
   - component: {fileID: 607862080}
   - component: {fileID: 607862079}
   - component: {fileID: 607862078}
-  - component: {fileID: 607862084}
+  - component: {fileID: 607862082}
   m_Layer: 0
   m_Name: MasterFist
   m_TagString: Untagged
@@ -542,7 +542,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &607862084
+--- !u!114 &607862082
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -551,7 +551,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 607862077}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7265bb5849243b4ebbf36d4b9cb6ad1, type: 3}
+  m_Script: {fileID: 11500000, guid: f1a475b5c7a2ad2428b229af5dfe4cc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   hasInitialized: 0
@@ -560,15 +560,14 @@ MonoBehaviour:
     referencingMode: 0
     lowId: 275
     highId: 16777216
+  DialogPrefab: {fileID: 5945235112212906155, guid: 129cefa3636bff24bb1e5e6239ab9c8e,
+    type: 3}
+  dialogView: {fileID: 0}
   DialogReference:
     instanceId: 0
     referencingMode: 0
     lowId: 519
     highId: 16777216
-  DialogPrefab: {fileID: 5945235112212906155, guid: 129cefa3636bff24bb1e5e6239ab9c8e,
-    type: 3}
-  dialogView: {fileID: 5945235112212906153, guid: 129cefa3636bff24bb1e5e6239ab9c8e,
-    type: 3}
   teaseCollider: {fileID: 214841167}
 --- !u!1001 &1052544671
 PrefabInstance:

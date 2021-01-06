@@ -24,11 +24,25 @@ namespace Articy.Harmonybarktest.GlobalVariables
     public class ArticyGlobalVariables : BaseGlobalVariables
     {
         
+        [SerializeField()]
+        [HideInInspector()]
+        private QuickTest mQuickTest = new QuickTest();
+        
         #region Initialize static VariableName set
         static ArticyGlobalVariables()
         {
+            variableNames.Add("QuickTest.SpeaksSpanish");
+            variableNames.Add("QuickTest.FirstConversation");
         }
         #endregion
+        
+        public QuickTest QuickTest
+        {
+            get
+            {
+                return mQuickTest;
+            }
+        }
         
         public static ArticyGlobalVariables Default
         {
@@ -40,6 +54,7 @@ namespace Articy.Harmonybarktest.GlobalVariables
         
         public override void Init()
         {
+            QuickTest.RegisterVariables(this);
         }
     }
 }

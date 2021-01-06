@@ -10,7 +10,7 @@ namespace HarmonyQuest.Dialog
 {
     public class DialogController : ManageableObject, IArticyFlowPlayerCallbacks
     {
-        private List<DialogSpeaker> speakers;
+        private List<DialogSpeakerNPC> speakers;
         private const float spacing = 150;
         private ArticyFlowPlayer flowPlayer;
         private ArticyRef proximalDialog;
@@ -26,10 +26,10 @@ namespace HarmonyQuest.Dialog
 
         public DialogController()
         {
-            speakers = new List<DialogSpeaker>(5);
+            speakers = new List<DialogSpeakerNPC>(5);
         }
 
-        public bool RegisterSpeaker(DialogSpeaker speaker)
+        public bool RegisterSpeaker(DialogSpeakerNPC speaker)
         {
             if (!speakers.Contains(speaker))
             {
@@ -50,7 +50,7 @@ namespace HarmonyQuest.Dialog
             }
         }
 
-        public void EnterSpeakerZone(DialogSpeaker speaker)
+        public void EnterSpeakerZone(DialogSpeakerNPC speaker)
         {
             if (proximalDialog != speaker.DialogReference)
             {
@@ -59,7 +59,7 @@ namespace HarmonyQuest.Dialog
         }
 
 
-        public void ExitSpeakerZone(DialogSpeaker speaker)
+        public void ExitSpeakerZone(DialogSpeakerNPC speaker)
         {
             if (proximalDialog == speaker.DialogReference)
             {
@@ -71,7 +71,7 @@ namespace HarmonyQuest.Dialog
 
         public void Speak(string speakerTechnicalName, string text)
         {
-            foreach (DialogSpeaker speaker in speakers)
+            foreach (DialogSpeakerNPC speaker in speakers)
             {
                 if (speaker.character.GetObject().TechnicalName == speakerTechnicalName)
                 {
@@ -86,7 +86,7 @@ namespace HarmonyQuest.Dialog
 
         public void EndDialog()
         {
-            foreach (DialogSpeaker speaker in speakers)
+            foreach (DialogSpeakerNPC speaker in speakers)
             {
                 speaker.ShutUp();
             }
@@ -99,7 +99,7 @@ namespace HarmonyQuest.Dialog
         {
             //Get Average X and Y of Speakers in screen coordinates
             Vector2 average = new Vector2();
-            foreach (DialogSpeaker speaker in speakers)
+            foreach (DialogSpeakerNPC speaker in speakers)
             {
                 if (speaker.IsOnScreen())
                 {
@@ -111,7 +111,7 @@ namespace HarmonyQuest.Dialog
 
             //Pick a quadrant to place the dialog box based on where the speaker is
             //in relation to the average point
-            foreach (DialogSpeaker speaker in speakers)
+            foreach (DialogSpeakerNPC speaker in speakers)
             {
                 if (speaker.GetScreenPostion().x >= average.x)
                 {
@@ -224,7 +224,6 @@ namespace HarmonyQuest.Dialog
                     {
                         inDialog = true;
                         StartDialog(proximalDialog);
-                        proximalDialog = null;
                     }
                 }
             }
