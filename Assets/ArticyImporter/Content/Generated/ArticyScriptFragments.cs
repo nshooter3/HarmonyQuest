@@ -20,7 +20,7 @@ namespace Articy.Harmonybarktest.GlobalVariables
 {
     
     
-    [Articy.Unity.ArticyCodeGenerationHashAttribute(637454785936516958)]
+    [Articy.Unity.ArticyCodeGenerationHashAttribute(637455525573746399)]
     public class ArticyScriptFragments : BaseScriptFragments, ISerializationCallbackReceiver
     {
         
@@ -84,6 +84,35 @@ namespace Articy.Harmonybarktest.GlobalVariables
         {
             return aGlobalVariablesState.QuickTest.SpeaksSpanish == true;
         }
+        
+        /// <summary>
+        /// ObjectID: 0x100000000000349
+        /// Articy Object ref: articy://localhost/view/bda27ac8-48b5-4181-a11d-12f365293693/72057594037928777?pane=selected&amp;tab=current
+        /// </summary>
+        public bool Script_0x100000000000349Text(ArticyGlobalVariables aGlobalVariablesState, Articy.Unity.IBaseScriptMethodProvider aMethodProvider)
+        {
+            return aGlobalVariablesState.QuickTest.FirstConversation == true;
+        }
+        
+        /// <summary>
+        /// ObjectID: 0x100000000000351
+        /// Articy Object ref: articy://localhost/view/bda27ac8-48b5-4181-a11d-12f365293693/72057594037928785?pane=selected&amp;tab=current
+        /// </summary>
+        public bool Script_0x100000000000351Text(ArticyGlobalVariables aGlobalVariablesState, Articy.Unity.IBaseScriptMethodProvider aMethodProvider)
+        {
+            return aGlobalVariablesState.QuickTest.FirstConversation == false &&
+aGlobalVariablesState.QuickTest.SpeaksSpanish == true;;
+        }
+        
+        /// <summary>
+        /// ObjectID: 0x100000000000361
+        /// Articy Object ref: articy://localhost/view/bda27ac8-48b5-4181-a11d-12f365293693/72057594037928801?pane=selected&amp;tab=current
+        /// </summary>
+        public bool Script_0x100000000000361Text(ArticyGlobalVariables aGlobalVariablesState, Articy.Unity.IBaseScriptMethodProvider aMethodProvider)
+        {
+            return aGlobalVariablesState.QuickTest.FirstConversation == false &&
+aGlobalVariablesState.QuickTest.SpeaksSpanish == false;;
+        }
         #endregion
         
         #region Unity serialization
@@ -101,6 +130,9 @@ namespace Articy.Harmonybarktest.GlobalVariables
             Conditions.Add(1755686415, this.Script_0x10000000000031EText);
             Conditions.Add(854058366, this.Script_0x100000000000325Text);
             Conditions.Add(1787634874, this.Script_0x10000000000032AText);
+            Conditions.Add(-2021143616, this.Script_0x100000000000349Text);
+            Conditions.Add(886012839, this.Script_0x100000000000351Text);
+            Conditions.Add(886011878, this.Script_0x100000000000361Text);
         }
         #endregion
         

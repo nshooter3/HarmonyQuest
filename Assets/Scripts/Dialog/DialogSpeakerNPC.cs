@@ -1,6 +1,7 @@
 ﻿using Articy.Harmonybarktest;
 using Articy.Unity;
 using GamePhysics;
+using System.Collections;
 using UnityEngine;
 
 namespace HarmonyQuest.Dialog
@@ -8,6 +9,7 @@ namespace HarmonyQuest.Dialog
     public class DialogSpeakerNPC : DialogSpeaker
     {
         public ArticyRef DialogReference;
+        public ArticyRef BarkReference;
 
         public CollisionWrapper teaseCollider;
 
@@ -19,18 +21,22 @@ namespace HarmonyQuest.Dialog
         {
             base.OnStart();
 
-            teaseCollider.AssignFunctionToTriggerEnterDelegate(TriggerEnter);
-            teaseCollider.AssignFunctionToTriggerExitDelegate(TriggerExit);
-
-            ServiceLocator.instance.GetDialogController().RegisterSpeaker(this);
-            mainCamera = ServiceLocator.instance.GetCamera();
-
-            if (DialogReference.HasReference)
+            if (DialogReference != null)
             {
-                dialogView.barkText.text = DialogReference.GetObject<HQ_NPC_DIALOGUE>().GetFeatureHQ_NPC().TeaseText;
-                dialogView.SetAssets(DialogReference.GetObject<HQ_NPC_DIALOGUE>().GetFeatureHQ_NPC().DialogueType);
-                dialogView.bark.SetActive(false);
-                dialogView.indicator.SetActive(true);
+
+                teaseCollider.AssignFunctionToTriggerEnterDelegate(TriggerEnter);
+                teaseCollider.AssignFunctionToTriggerExitDelegate(TriggerExit);
+
+                ServiceLocator.instance.GetDialogController().RegisterSpeaker(this);
+                mainCamera = ServiceLocator.instance.GetCamera();
+
+                if (DialogReference.HasReference)
+                {
+                    dialogView.barkText.text = DialogReference.GetObject<HQ_NPC_DIALOGUE>().GetFeatureHQ_NPC().TeaseText;
+                    dialogView.SetAssets(DialogReference.GetObject<HQ_NPC_DIALOGUE>().GetFeatureHQ_NPC().DialogueType);
+                    dialogView.bark.SetActive(false);
+                    dialogView.indicator.SetActive(true);
+                }
             }
         }
 
@@ -40,18 +46,34 @@ namespace HarmonyQuest.Dialog
             dialogView.bark.SetActive(false);
         }
 
+        public void SpeakBark(string text)
+        {
+            dialogView.barkText.text = text;
+            dialogView.bark.SetActive(true);
+        }
+
         public override void ShutUp()
         {
             base.ShutUp();
 
             if (playerInRange)
             {
-                dialogView.bark.SetActive(true);
+                if (BarkReference != null && BarkReference.HasReference)
+                {
+                    //Delay the bark until the end of the frame so that the current dialogue gets closed out properly before reopening the flow manager.
+                    StartCoroutine(DelayedBark());
+                }
             }
             else
             {
                 dialogView.indicator.SetActive(true);
             }
+        }
+
+        private IEnumerator DelayedBark()
+        {
+            yield return new WaitForEndOfFrame();
+            ServiceLocator.instance.GetDialogController().StartBark(BarkReference);
         }
 
         public bool IsOnScreen()
@@ -74,9 +96,9 @@ namespace HarmonyQuest.Dialog
 
         private void TriggerEnter(Collider other)
         {
-            if (DialogReference != null && DialogReference.HasReference)
+            if (BarkReference != null && BarkReference.HasReference)
             {
-                dialogView.bark.SetActive(true);
+                ServiceLocator.instance.GetDialogController().StartBark(BarkReference);
                 dialogView.indicator.SetActive(false);
                 ServiceLocator.instance.GetDialogController().EnterSpeakerZone(this);
                 playerInRange = true;
@@ -85,7 +107,7 @@ namespace HarmonyQuest.Dialog
 
         private void TriggerExit(Collider other)
         {
-            if (DialogReference != null && DialogReference.HasReference)
+            if (BarkReference != null && BarkReference.HasReference)
             {
                 dialogView.bark.SetActive(false);
                 dialogView.indicator.SetActive(true);

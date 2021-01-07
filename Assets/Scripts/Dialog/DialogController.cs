@@ -17,6 +17,7 @@ namespace HarmonyQuest.Dialog
         private IList<Branch> dialogOptions;
         private Branch dialog;
         private bool awaitingResponse = false;
+        private bool isBark = false;
 
         public bool inDialog = false;
 
@@ -50,6 +51,15 @@ namespace HarmonyQuest.Dialog
             }
         }
 
+        public void StartBark(ArticyRef barkRef)
+        {
+            if (barkRef.GetObject() != null)
+            {
+                isBark = true;
+                flowPlayer.StartOn = barkRef.GetObject();
+            }
+        }
+
         public void EnterSpeakerZone(DialogSpeakerNPC speaker)
         {
             if (proximalDialog != speaker.DialogReference)
@@ -67,8 +77,6 @@ namespace HarmonyQuest.Dialog
             }
         }
 
-
-
         public void Speak(string speakerTechnicalName, string text)
         {
             foreach (DialogSpeakerNPC speaker in speakers)
@@ -80,6 +88,17 @@ namespace HarmonyQuest.Dialog
                 else
                 {
                     speaker.ShutUp();
+                }
+            }
+        }
+
+        public void SpeakBark(string speakerTechnicalName, string text)
+        {
+            foreach (DialogSpeakerNPC speaker in speakers)
+            {
+                if (speaker.character.GetObject().TechnicalName == speakerTechnicalName)
+                {
+                    speaker.SpeakBark(text);
                 }
             }
         }
@@ -141,11 +160,14 @@ namespace HarmonyQuest.Dialog
 
         public void OnBranchesUpdated(IList<Branch> aBranches)
         {
-
             dialogOptions = aBranches;
 
             if (aBranches.Count > 1)
             {
+                if (isBark)
+                {
+                    throw new System.Exception("Error: Barks cannot have more than one branch. Check the articy project to fix this.");
+                }
                 dialogOptionHolder.SetActive(true);
                 awaitingResponse = true;
                 Text[] options = dialogOptionHolder.GetComponentsInChildren<Text>();
@@ -172,11 +194,11 @@ namespace HarmonyQuest.Dialog
                 var output = dialog.Target as IOutputPin;
                 if (output != null)
                 {
-                    ServiceLocator.instance.GetDialogController().EndDialog();
                     flowPlayer.Play(dialog);
                     flowPlayer.FinishCurrentPausedObject();
                     flowPlayer.StartOn = null;
                     inDialog = false;
+                    ServiceLocator.instance.GetDialogController().EndDialog();
                 }
                 else
                 {
@@ -184,11 +206,20 @@ namespace HarmonyQuest.Dialog
                     var speaker = dialog.Target as IObjectWithSpeaker;
                     if (speaker != null)
                     {
-                        ServiceLocator.instance.GetDialogController().Speak(speaker.Speaker.TechnicalName, text.Text);
+                        if (isBark)
+                        {
+                            ServiceLocator.instance.GetDialogController().SpeakBark(speaker.Speaker.TechnicalName, text.Text);
+                            flowPlayer.FinishCurrentPausedObject();
+                            flowPlayer.StartOn = null;
+                        }
+                        else
+                        {
+                            ServiceLocator.instance.GetDialogController().Speak(speaker.Speaker.TechnicalName, text.Text);
+                        }
                     }
                 }
-
             }
+            isBark = false;
         }
 
         public void OnFlowPlayerPaused(IFlowObject aObject) { }
