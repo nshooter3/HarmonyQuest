@@ -1,4 +1,5 @@
-﻿using Articy.Unity;
+﻿using Articy.Harmonybarktest;
+using Articy.Unity;
 using Articy.Unity.Interfaces;
 using GameManager;
 using Melody;
@@ -18,6 +19,7 @@ namespace HarmonyQuest.Dialog
         private Branch dialog;
         private bool awaitingResponse = false;
         private bool isBark = false;
+        private DialogueType barkTypeFeature;
 
         public bool inDialog = false;
 
@@ -99,6 +101,17 @@ namespace HarmonyQuest.Dialog
                 if (speaker.character.GetObject().TechnicalName == speakerTechnicalName)
                 {
                     speaker.SpeakBark(text);
+                }
+            }
+        }
+
+        public void SetAssets(string speakerTechnicalName, DialogueType dialogueType)
+        {
+            foreach (DialogSpeakerNPC speaker in speakers)
+            {
+                if (speaker.character.GetObject().TechnicalName == speakerTechnicalName)
+                {
+                    speaker.dialogView.SetAssets(dialogueType);
                 }
             }
         }
@@ -208,13 +221,19 @@ namespace HarmonyQuest.Dialog
                     {
                         if (isBark)
                         {
-                            ServiceLocator.instance.GetDialogController().SpeakBark(speaker.Speaker.TechnicalName, text.Text);
+                            var barkType = dialog.Target as BarkType;
+                            if (barkType != null)
+                            {
+                                barkTypeFeature = barkType.Template.BARK_TYPE.DialogueType;
+                                SetAssets(speaker.Speaker.TechnicalName, barkTypeFeature);
+                            }
+                            SpeakBark(speaker.Speaker.TechnicalName, text.Text);
                             flowPlayer.FinishCurrentPausedObject();
                             flowPlayer.StartOn = null;
                         }
                         else
                         {
-                            ServiceLocator.instance.GetDialogController().Speak(speaker.Speaker.TechnicalName, text.Text);
+                            Speak(speaker.Speaker.TechnicalName, text.Text);
                         }
                     }
                 }

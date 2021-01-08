@@ -32,8 +32,6 @@ namespace HarmonyQuest.Dialog
 
                 if (DialogReference.HasReference)
                 {
-                    dialogView.barkText.text = DialogReference.GetObject<HQ_NPC_DIALOGUE>().GetFeatureHQ_NPC().TeaseText;
-                    dialogView.SetAssets(DialogReference.GetObject<HQ_NPC_DIALOGUE>().GetFeatureHQ_NPC().DialogueType);
                     dialogView.bark.SetActive(false);
                     dialogView.indicator.SetActive(true);
                 }

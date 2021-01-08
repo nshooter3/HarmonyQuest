@@ -26,5 +26,7 @@ namespace Articy.Harmonybarktest
         QUEST = 0,
         
         INFO = 1,
+        
+        NON_INTERACTIVE = 2,
     }
 }

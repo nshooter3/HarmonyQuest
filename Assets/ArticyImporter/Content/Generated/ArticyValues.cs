@@ -147,33 +147,6 @@ namespace Articy.Harmonybarktest
     
     
     [Serializable()]
-    public class ArticyValueHQ_NPC_DIALOGUETemplate : ArticyValue<Articy.Harmonybarktest.Templates.HQ_NPC_DIALOGUETemplate>
-    {
-    }
-}
-namespace Articy.Harmonybarktest
-{
-    
-    
-    [Serializable()]
-    public class ArticyValueHQ_NPCFeature : ArticyValue<Articy.Harmonybarktest.Features.HQ_NPCFeature>
-    {
-    }
-}
-namespace Articy.Harmonybarktest
-{
-    
-    
-    [Serializable()]
-    public class ArticyValueHQ_NPC_DIALOGUE : ArticyValue<HQ_NPC_DIALOGUE>
-    {
-    }
-}
-namespace Articy.Harmonybarktest
-{
-    
-    
-    [Serializable()]
     public class ArticyValueDialogue : ArticyValue<Dialogue>
     {
     }
@@ -184,6 +157,33 @@ namespace Articy.Harmonybarktest
     
     [Serializable()]
     public class ArticyValueDialogueFragment : ArticyValue<DialogueFragment>
+    {
+    }
+}
+namespace Articy.Harmonybarktest
+{
+    
+    
+    [Serializable()]
+    public class ArticyValueBarkTypeTemplate : ArticyValue<Articy.Harmonybarktest.Templates.BarkTypeTemplate>
+    {
+    }
+}
+namespace Articy.Harmonybarktest
+{
+    
+    
+    [Serializable()]
+    public class ArticyValueBARK_TYPEFeature : ArticyValue<Articy.Harmonybarktest.Features.BARK_TYPEFeature>
+    {
+    }
+}
+namespace Articy.Harmonybarktest
+{
+    
+    
+    [Serializable()]
+    public class ArticyValueBarkType : ArticyValue<BarkType>
     {
     }
 }
