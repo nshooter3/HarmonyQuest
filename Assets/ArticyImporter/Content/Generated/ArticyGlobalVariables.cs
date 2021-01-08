@@ -26,21 +26,21 @@ namespace Articy.Harmonybarktest.GlobalVariables
         
         [SerializeField()]
         [HideInInspector()]
-        private QuickTest mQuickTest = new QuickTest();
+        private TreeQuest mTreeQuest = new TreeQuest();
         
         #region Initialize static VariableName set
         static ArticyGlobalVariables()
         {
-            variableNames.Add("QuickTest.SpeaksSpanish");
-            variableNames.Add("QuickTest.FirstConversation");
+            variableNames.Add("TreeQuest.TreeQuestFinished");
+            variableNames.Add("TreeQuest.FoundTrees");
         }
         #endregion
         
-        public QuickTest QuickTest
+        public TreeQuest TreeQuest
         {
             get
             {
-                return mQuickTest;
+                return mTreeQuest;
             }
         }
         
@@ -54,7 +54,7 @@ namespace Articy.Harmonybarktest.GlobalVariables
         
         public override void Init()
         {
-            QuickTest.RegisterVariables(this);
+            TreeQuest.RegisterVariables(this);
         }
     }
 }

@@ -20,14 +20,14 @@ namespace Articy.Harmonybarktest.GlobalVariables
     
     
     [Serializable()]
-    public class QuickTest : IArticyNamespace
+    public class TreeQuest : IArticyNamespace
     {
         
         [SerializeField()]
         private BaseGlobalVariables _VariableStorage;
         
-        // What language Melody speaks
-        public bool SpeaksSpanish
+        // True if Timbre knows where the trees are.
+        public bool TreeQuestFinished
         {
             get
             {
@@ -39,8 +39,8 @@ namespace Articy.Harmonybarktest.GlobalVariables
             }
         }
         
-        // True if this is the first time talking to Master Fist
-        public bool FirstConversation
+        // True if Melody knows where the trees are.
+        public bool FoundTrees
         {
             get
             {
@@ -55,8 +55,8 @@ namespace Articy.Harmonybarktest.GlobalVariables
         public void RegisterVariables(BaseGlobalVariables aStorage)
         {
             _VariableStorage = aStorage;
-            aStorage.RegisterVariable("QuickTest.SpeaksSpanish", false);
-            aStorage.RegisterVariable("QuickTest.FirstConversation", true);
+            aStorage.RegisterVariable("TreeQuest.TreeQuestFinished", false);
+            aStorage.RegisterVariable("TreeQuest.FoundTrees", false);
         }
     }
 }

@@ -5,8 +5,8 @@
     "set_IncludedNodes": "Settings, Project, GlobalVariables, ObjectDefinitions, Packages, ScriptMethods, Hierarchy, Assets",
     "set_UseScriptSupport": "True",
     "ExportVersion": "1.2",
-    "ObjectDefinitionsHash": "441E286A32EF2FFE8DF370EB6F69AE3FAF06AFB326D377ADF449CE6003F347FB",
-    "ScriptFragmentsHash": "1890511972"
+    "ObjectDefinitionsHash": "A92BF84E15B82227A83A425E50F9DA498E69BAE940DF594347EC4196395F0A9D",
+    "ScriptFragmentsHash": "4237843604"
   },
   "Project": {
     "Name": "HarmonyBarkTest",
@@ -16,20 +16,20 @@
   },
   "GlobalVariables": [
     {
-      "Namespace": "QuickTest",
+      "Namespace": "TreeQuest",
       "Description": "",
       "Variables": [
         {
-          "Variable": "SpeaksSpanish",
+          "Variable": "TreeQuestFinished",
           "Type": "Boolean",
           "Value": "False",
-          "Description": "What language Melody speaks"
+          "Description": "True if Timbre knows where the trees are."
         },
         {
-          "Variable": "FirstConversation",
+          "Variable": "FoundTrees",
           "Type": "Boolean",
-          "Value": "True",
-          "Description": "True if this is the first time talking to Master Fist"
+          "Value": "False",
+          "Description": "True if Melody knows where the trees are."
         }
       ]
     }
@@ -2228,7 +2228,7 @@
           "Properties": {
             "TechnicalName": "FFr_97182879",
             "Id": "0x0100000000000207",
-            "Parent": "0x0300000043CE43F7",
+            "Parent": "0x01000000000004DD",
             "Attachments": [],
             "DisplayName": "Master Fist Dialogue",
             "PreviewImage": {
@@ -2249,8 +2249,8 @@
             "Text": "",
             "ExternalId": "",
             "Position": {
-              "x": -1425.0,
-              "y": -750.0
+              "x": 50.0,
+              "y": -425.0
             },
             "ZIndex": 1.0,
             "Size": {
@@ -2278,9 +2278,9 @@
                   {
                     "Color": {
                       "a": 1.0,
-                      "r": 0.5764706,
-                      "g": 0.75686276,
-                      "b": 0.8
+                      "r": 0.577580452,
+                      "g": 0.7605245,
+                      "b": 0.7991027
                     },
                     "Label": "",
                     "TargetPin": "0x01000000000003AF",
@@ -2303,7 +2303,7 @@
           "Properties": {
             "TechnicalName": "FFr_AD00C214",
             "Id": "0x0100000000000338",
-            "Parent": "0x0300000043CE43F7",
+            "Parent": "0x01000000000004DD",
             "Attachments": [],
             "DisplayName": "Master Fist Barks",
             "PreviewImage": {
@@ -2324,8 +2324,8 @@
             "Text": "",
             "ExternalId": "",
             "Position": {
-              "x": -1425.0,
-              "y": -525.0
+              "x": 50.0,
+              "y": -200.0
             },
             "ZIndex": 1.0,
             "Size": {
@@ -2363,13 +2363,305 @@
           }
         },
         {
+          "Type": "FlowFragment",
+          "Properties": {
+            "TechnicalName": "FFr_71442640",
+            "Id": "0x01000000000004DD",
+            "Parent": "0x01000000000004D7",
+            "Attachments": [],
+            "DisplayName": "Master Fist",
+            "PreviewImage": {
+              "ViewBox": {
+                "x": 0.0,
+                "y": 0.0,
+                "w": 0.0,
+                "h": 0.0
+              },
+              "Mode": "FromAsset",
+              "Asset": "0x0000000000000000"
+            },
+            "Color": {
+              "r": 0.5764706,
+              "g": 0.75686276,
+              "b": 0.8
+            },
+            "Text": "",
+            "ExternalId": "",
+            "Position": {
+              "x": -25.0,
+              "y": -425.0
+            },
+            "ZIndex": 2.0,
+            "Size": {
+              "w": 275.0,
+              "h": 200.0
+            },
+            "ShortId": 1900291648,
+            "InputPins": [
+              {
+                "Text": "",
+                "Id": "0x01000000000004E0",
+                "Owner": "0x01000000000004DD"
+              }
+            ],
+            "OutputPins": [
+              {
+                "Text": "",
+                "Id": "0x01000000000004E1",
+                "Owner": "0x01000000000004DD"
+              }
+            ]
+          }
+        },
+        {
+          "Type": "FlowFragment",
+          "Properties": {
+            "TechnicalName": "FFr_82EEB98E",
+            "Id": "0x01000000000004D7",
+            "Parent": "0x0300000043CE43F7",
+            "Attachments": [],
+            "DisplayName": "Reliqua",
+            "PreviewImage": {
+              "ViewBox": {
+                "x": 0.0,
+                "y": 0.0,
+                "w": 0.0,
+                "h": 0.0
+              },
+              "Mode": "FromAsset",
+              "Asset": "0x0000000000000000"
+            },
+            "Color": {
+              "r": 0.5764706,
+              "g": 0.75686276,
+              "b": 0.8
+            },
+            "Text": "",
+            "ExternalId": "",
+            "Position": {
+              "x": -325.0,
+              "y": -325.0
+            },
+            "ZIndex": 2.0,
+            "Size": {
+              "w": 275.0,
+              "h": 200.0
+            },
+            "ShortId": 2196683150,
+            "InputPins": [
+              {
+                "Text": "",
+                "Id": "0x01000000000004DA",
+                "Owner": "0x01000000000004D7"
+              }
+            ],
+            "OutputPins": [
+              {
+                "Text": "",
+                "Id": "0x01000000000004DB",
+                "Owner": "0x01000000000004D7"
+              }
+            ]
+          }
+        },
+        {
+          "Type": "FlowFragment",
+          "Properties": {
+            "TechnicalName": "FFr_B7BEA3FE",
+            "Id": "0x01000000000004E3",
+            "Parent": "0x01000000000004D7",
+            "Attachments": [],
+            "DisplayName": "Timbre",
+            "PreviewImage": {
+              "ViewBox": {
+                "x": 0.0,
+                "y": 0.0,
+                "w": 0.0,
+                "h": 0.0
+              },
+              "Mode": "FromAsset",
+              "Asset": "0x0000000000000000"
+            },
+            "Color": {
+              "r": 0.5764706,
+              "g": 0.75686276,
+              "b": 0.8
+            },
+            "Text": "",
+            "ExternalId": "",
+            "Position": {
+              "x": -25.0,
+              "y": -200.0
+            },
+            "ZIndex": 1.0,
+            "Size": {
+              "w": 275.0,
+              "h": 200.0
+            },
+            "ShortId": 3082724350,
+            "InputPins": [
+              {
+                "Text": "",
+                "Id": "0x01000000000004E6",
+                "Owner": "0x01000000000004E3"
+              }
+            ],
+            "OutputPins": [
+              {
+                "Text": "",
+                "Id": "0x01000000000004E7",
+                "Owner": "0x01000000000004E3"
+              }
+            ]
+          }
+        },
+        {
+          "Type": "FlowFragment",
+          "Properties": {
+            "TechnicalName": "FFr_219813B4",
+            "Id": "0x01000000000004E9",
+            "Parent": "0x01000000000004E3",
+            "Attachments": [],
+            "DisplayName": "Timbre Dialogue",
+            "PreviewImage": {
+              "ViewBox": {
+                "x": 0.0,
+                "y": 0.0,
+                "w": 0.0,
+                "h": 0.0
+              },
+              "Mode": "FromAsset",
+              "Asset": "0x0000000000000000"
+            },
+            "Color": {
+              "r": 0.5764706,
+              "g": 0.75686276,
+              "b": 0.8
+            },
+            "Text": "",
+            "ExternalId": "",
+            "Position": {
+              "x": 650.0,
+              "y": 300.0
+            },
+            "ZIndex": 0.0,
+            "Size": {
+              "w": 275.0,
+              "h": 200.0
+            },
+            "ShortId": 563614644,
+            "InputPins": [
+              {
+                "Text": "",
+                "Id": "0x01000000000004EC",
+                "Owner": "0x01000000000004E9",
+                "Connections": [
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.5764706,
+                      "g": 0.75686276,
+                      "b": 0.8
+                    },
+                    "Label": "",
+                    "TargetPin": "0x0100000000000526",
+                    "Target": "0x0100000000000523"
+                  },
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.5764706,
+                      "g": 0.75686276,
+                      "b": 0.8
+                    },
+                    "Label": "",
+                    "TargetPin": "0x010000000000052C",
+                    "Target": "0x0100000000000529"
+                  }
+                ]
+              }
+            ],
+            "OutputPins": [
+              {
+                "Text": "",
+                "Id": "0x01000000000004ED",
+                "Owner": "0x01000000000004E9"
+              }
+            ]
+          }
+        },
+        {
+          "Type": "FlowFragment",
+          "Properties": {
+            "TechnicalName": "FFr_2D57CBFF",
+            "Id": "0x01000000000004EF",
+            "Parent": "0x01000000000004E3",
+            "Attachments": [],
+            "DisplayName": "Timbre Barks",
+            "PreviewImage": {
+              "ViewBox": {
+                "x": 0.0,
+                "y": 0.0,
+                "w": 0.0,
+                "h": 0.0
+              },
+              "Mode": "FromAsset",
+              "Asset": "0x0000000000000000"
+            },
+            "Color": {
+              "r": 0.5764706,
+              "g": 0.75686276,
+              "b": 0.8
+            },
+            "Text": "",
+            "ExternalId": "",
+            "Position": {
+              "x": 650.0,
+              "y": 525.0
+            },
+            "ZIndex": 1.0,
+            "Size": {
+              "w": 275.0,
+              "h": 200.0
+            },
+            "ShortId": 760728575,
+            "InputPins": [
+              {
+                "Text": "",
+                "Id": "0x01000000000004F2",
+                "Owner": "0x01000000000004EF",
+                "Connections": [
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.5764706,
+                      "g": 0.75686276,
+                      "b": 0.8
+                    },
+                    "Label": "",
+                    "TargetPin": "0x01000000000004F8",
+                    "Target": "0x01000000000004F5"
+                  }
+                ]
+              }
+            ],
+            "OutputPins": [
+              {
+                "Text": "",
+                "Id": "0x01000000000004F3",
+                "Owner": "0x01000000000004EF"
+              }
+            ]
+          }
+        },
+        {
           "Type": "Dialogue",
           "Properties": {
             "TechnicalName": "Dlg_12599766",
             "Id": "0x01000000000002E3",
             "Parent": "0x0100000000000207",
             "Attachments": [],
-            "DisplayName": "First Conversation",
+            "DisplayName": "Found Trees",
             "PreviewImage": {
               "ViewBox": {
                 "x": 0.0,
@@ -2399,7 +2691,7 @@
             "ShortId": 307861350,
             "InputPins": [
               {
-                "Text": "QuickTest.FirstConversation == true",
+                "Text": "TreeQuest.TreeQuestFinished == false",
                 "Id": "0x01000000000002E6",
                 "Owner": "0x01000000000002E3",
                 "Connections": [
@@ -2419,9 +2711,86 @@
             ],
             "OutputPins": [
               {
-                "Text": "QuickTest.FirstConversation = false",
+                "Text": "",
                 "Id": "0x01000000000002E7",
                 "Owner": "0x01000000000002E3",
+                "Connections": [
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.577580452,
+                      "g": 0.7605245,
+                      "b": 0.7991027
+                    },
+                    "Label": "",
+                    "TargetPin": "0x010000000000020B",
+                    "Target": "0x0100000000000207"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "Type": "Dialogue",
+          "Properties": {
+            "TechnicalName": "Dlg_C99EBBFF",
+            "Id": "0x01000000000003AC",
+            "Parent": "0x0100000000000207",
+            "Attachments": [],
+            "DisplayName": "New Hobby",
+            "PreviewImage": {
+              "ViewBox": {
+                "x": 0.0,
+                "y": 0.0,
+                "w": 0.0,
+                "h": 0.0
+              },
+              "Mode": "FromAsset",
+              "Asset": "0x0000000000000000"
+            },
+            "Color": {
+              "r": 0.577580452,
+              "g": 0.7605245,
+              "b": 0.7991027
+            },
+            "Text": "",
+            "ExternalId": "",
+            "Position": {
+              "x": 792.0,
+              "y": 725.0
+            },
+            "ZIndex": 3.0,
+            "Size": {
+              "w": 291.0,
+              "h": 200.0
+            },
+            "ShortId": 3382623231,
+            "InputPins": [
+              {
+                "Text": "TreeQuest.TreeQuestFinished == true",
+                "Id": "0x01000000000003AF",
+                "Owner": "0x01000000000003AC",
+                "Connections": [
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.577580452,
+                      "g": 0.7605245,
+                      "b": 0.7991027
+                    },
+                    "Label": "",
+                    "TargetPin": "0x01000000000003B9",
+                    "Target": "0x01000000000003B8"
+                  }
+                ]
+              }
+            ],
+            "OutputPins": [
+              {
+                "Text": "",
+                "Id": "0x01000000000003B0",
+                "Owner": "0x01000000000003AC",
                 "Connections": [
                   {
                     "Color": {
@@ -2494,9 +2863,9 @@
                   {
                     "Color": {
                       "a": 1.0,
-                      "r": 0.5764706,
-                      "g": 0.75686276,
-                      "b": 0.8
+                      "r": 0.577580452,
+                      "g": 0.7605245,
+                      "b": 0.7991027
                     },
                     "Label": "",
                     "TargetPin": "0x01000000000004A7",
@@ -2505,9 +2874,9 @@
                   {
                     "Color": {
                       "a": 1.0,
-                      "r": 0.5764706,
-                      "g": 0.75686276,
-                      "b": 0.8
+                      "r": 0.577580452,
+                      "g": 0.7605245,
+                      "b": 0.7991027
                     },
                     "Label": "",
                     "TargetPin": "0x01000000000004AD",
@@ -2541,11 +2910,11 @@
         {
           "Type": "Dialogue",
           "Properties": {
-            "TechnicalName": "Dlg_C99EBBFF",
-            "Id": "0x01000000000003AC",
-            "Parent": "0x0100000000000207",
+            "TechnicalName": "Dlg_B0105A7D",
+            "Id": "0x01000000000004F5",
+            "Parent": "0x01000000000004EF",
             "Attachments": [],
-            "DisplayName": "Second Conversation",
+            "DisplayName": "Barks",
             "PreviewImage": {
               "ViewBox": {
                 "x": 0.0,
@@ -2564,20 +2933,20 @@
             "Text": "",
             "ExternalId": "",
             "Position": {
-              "x": 792.0,
-              "y": 725.0
+              "x": 517.0,
+              "y": 300.0
             },
-            "ZIndex": 3.0,
+            "ZIndex": 0.0,
             "Size": {
               "w": 291.0,
               "h": 200.0
             },
-            "ShortId": 3382623231,
+            "ShortId": 2953861757,
             "InputPins": [
               {
-                "Text": "QuickTest.FirstConversation == false",
-                "Id": "0x01000000000003AF",
-                "Owner": "0x01000000000003AC",
+                "Text": "",
+                "Id": "0x01000000000004F8",
+                "Owner": "0x01000000000004F5",
                 "Connections": [
                   {
                     "Color": {
@@ -2587,8 +2956,30 @@
                       "b": 0.8
                     },
                     "Label": "",
-                    "TargetPin": "0x01000000000003B9",
-                    "Target": "0x01000000000003B8"
+                    "TargetPin": "0x010000000000051A",
+                    "Target": "0x0100000000000517"
+                  },
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.5764706,
+                      "g": 0.75686276,
+                      "b": 0.8
+                    },
+                    "Label": "",
+                    "TargetPin": "0x010000000000050A",
+                    "Target": "0x0100000000000507"
+                  },
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.5764706,
+                      "g": 0.75686276,
+                      "b": 0.8
+                    },
+                    "Label": "",
+                    "TargetPin": "0x0100000000000513",
+                    "Target": "0x0100000000000510"
                   }
                 ]
               }
@@ -2596,8 +2987,8 @@
             "OutputPins": [
               {
                 "Text": "",
-                "Id": "0x01000000000003B0",
-                "Owner": "0x01000000000003AC",
+                "Id": "0x01000000000004F9",
+                "Owner": "0x01000000000004F5",
                 "Connections": [
                   {
                     "Color": {
@@ -2607,8 +2998,162 @@
                       "b": 0.8
                     },
                     "Label": "",
-                    "TargetPin": "0x010000000000020B",
-                    "Target": "0x0100000000000207"
+                    "TargetPin": "0x01000000000004F3",
+                    "Target": "0x01000000000004EF"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "Type": "Dialogue",
+          "Properties": {
+            "TechnicalName": "Dlg_757BA23F",
+            "Id": "0x0100000000000523",
+            "Parent": "0x01000000000004E9",
+            "Attachments": [],
+            "DisplayName": "Looking For Trees",
+            "PreviewImage": {
+              "ViewBox": {
+                "x": 0.0,
+                "y": 0.0,
+                "w": 0.0,
+                "h": 0.0
+              },
+              "Mode": "FromAsset",
+              "Asset": "0x0000000000000000"
+            },
+            "Color": {
+              "r": 0.5764706,
+              "g": 0.75686276,
+              "b": 0.8
+            },
+            "Text": "",
+            "ExternalId": "",
+            "Position": {
+              "x": 492.0,
+              "y": 500.0
+            },
+            "ZIndex": 1.0,
+            "Size": {
+              "w": 291.0,
+              "h": 200.0
+            },
+            "ShortId": 1971036735,
+            "InputPins": [
+              {
+                "Text": "TreeQuest.TreeQuestFinished == false",
+                "Id": "0x0100000000000526",
+                "Owner": "0x0100000000000523",
+                "Connections": [
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.5764706,
+                      "g": 0.75686276,
+                      "b": 0.8
+                    },
+                    "Label": "",
+                    "TargetPin": "0x0100000000000550",
+                    "Target": "0x010000000000054D"
+                  }
+                ]
+              }
+            ],
+            "OutputPins": [
+              {
+                "Text": "",
+                "Id": "0x0100000000000527",
+                "Owner": "0x0100000000000523",
+                "Connections": [
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.5764706,
+                      "g": 0.75686276,
+                      "b": 0.8
+                    },
+                    "Label": "",
+                    "TargetPin": "0x01000000000004ED",
+                    "Target": "0x01000000000004E9"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "Type": "Dialogue",
+          "Properties": {
+            "TechnicalName": "Dlg_8533CF30",
+            "Id": "0x0100000000000529",
+            "Parent": "0x01000000000004E9",
+            "Attachments": [],
+            "DisplayName": "Thanks",
+            "PreviewImage": {
+              "ViewBox": {
+                "x": 0.0,
+                "y": 0.0,
+                "w": 0.0,
+                "h": 0.0
+              },
+              "Mode": "FromAsset",
+              "Asset": "0x0000000000000000"
+            },
+            "Color": {
+              "r": 0.5764706,
+              "g": 0.75686276,
+              "b": 0.8
+            },
+            "Text": "",
+            "ExternalId": "",
+            "Position": {
+              "x": 492.0,
+              "y": 725.0
+            },
+            "ZIndex": 2.0,
+            "Size": {
+              "w": 291.0,
+              "h": 200.0
+            },
+            "ShortId": 2234765104,
+            "InputPins": [
+              {
+                "Text": "TreeQuest.TreeQuestFinished == true",
+                "Id": "0x010000000000052C",
+                "Owner": "0x0100000000000529",
+                "Connections": [
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.5764706,
+                      "g": 0.75686276,
+                      "b": 0.8
+                    },
+                    "Label": "",
+                    "TargetPin": "0x010000000000058C",
+                    "Target": "0x0100000000000589"
+                  }
+                ]
+              }
+            ],
+            "OutputPins": [
+              {
+                "Text": "",
+                "Id": "0x010000000000052D",
+                "Owner": "0x0100000000000529",
+                "Connections": [
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.5764706,
+                      "g": 0.75686276,
+                      "b": 0.8
+                    },
+                    "Label": "",
+                    "TargetPin": "0x01000000000004ED",
+                    "Target": "0x01000000000004E9"
                   }
                 ]
               }
@@ -2629,11 +3174,11 @@
               "g": 0.7605245,
               "b": 0.7991027
             },
-            "Text": "Hi Melody!",
+            "Text": "Hi Melody! Guess what? I found some trees!",
             "ExternalId": "",
             "Position": {
               "x": 800.0,
-              "y": 500.0
+              "y": 625.0
             },
             "ZIndex": 0.0,
             "Size": {
@@ -2668,13 +3213,24 @@
                   {
                     "Color": {
                       "a": 1.0,
-                      "r": 0.577580452,
-                      "g": 0.7605245,
-                      "b": 0.7991027
+                      "r": 0.5764706,
+                      "g": 0.75686276,
+                      "b": 0.8
                     },
                     "Label": "",
                     "TargetPin": "0x01000000000002FC",
                     "Target": "0x01000000000002F9"
+                  },
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.5764706,
+                      "g": 0.75686276,
+                      "b": 0.8
+                    },
+                    "Label": "",
+                    "TargetPin": "0x010000000000053D",
+                    "Target": "0x010000000000053A"
                   }
                 ]
               }
@@ -2687,7 +3243,7 @@
             "TechnicalName": "DFr_95E32C5F",
             "Id": "0x01000000000002F2",
             "Parent": "0x01000000000002E3",
-            "MenuText": "Hello",
+            "MenuText": "Dang, nice. Where?",
             "StageDirections": "",
             "Speaker": "0x010000000000010F",
             "Color": {
@@ -2709,7 +3265,7 @@
             "ShortId": 2514693215,
             "InputPins": [
               {
-                "Text": "",
+                "Text": "TreeQuest.FoundTrees == false",
                 "Id": "0x01000000000002F5",
                 "Owner": "0x01000000000002F2"
               }
@@ -2742,19 +3298,19 @@
             "TechnicalName": "DFr_7FA458CB",
             "Id": "0x01000000000002F9",
             "Parent": "0x01000000000002E3",
-            "MenuText": "Hello, but in spanish",
+            "MenuText": "Whatever.",
             "StageDirections": "",
             "Speaker": "0x010000000000010F",
             "Color": {
-              "r": 0.577580452,
-              "g": 0.7605245,
-              "b": 0.7991027
+              "r": 0.5764706,
+              "g": 0.75686276,
+              "b": 0.8
             },
             "Text": "",
             "ExternalId": "",
             "Position": {
               "x": 1175.0,
-              "y": 650.0
+              "y": 850.0
             },
             "ZIndex": 4.0,
             "Size": {
@@ -2771,16 +3327,16 @@
             ],
             "OutputPins": [
               {
-                "Text": "QuickTest.SpeaksSpanish = true",
+                "Text": "",
                 "Id": "0x01000000000002FD",
                 "Owner": "0x01000000000002F9",
                 "Connections": [
                   {
                     "Color": {
                       "a": 1.0,
-                      "r": 0.577580452,
-                      "g": 0.7605245,
-                      "b": 0.7991027
+                      "r": 0.5764706,
+                      "g": 0.75686276,
+                      "b": 0.8
                     },
                     "Label": "",
                     "TargetPin": "0x0100000000000309",
@@ -2805,7 +3361,7 @@
               "g": 0.7605245,
               "b": 0.7991027
             },
-            "Text": "Cya!",
+            "Text": "In the woods!",
             "ExternalId": "",
             "Position": {
               "x": 1550.0,
@@ -2826,7 +3382,7 @@
             ],
             "OutputPins": [
               {
-                "Text": "",
+                "Text": "TreeQuest.FoundTrees = true",
                 "Id": "0x0100000000000304",
                 "Owner": "0x0100000000000300",
                 "Connections": [
@@ -2860,11 +3416,11 @@
               "g": 0.7605245,
               "b": 0.7991027
             },
-            "Text": "Adios",
+            "Text": "One day you'll appreciate my knowledge.",
             "ExternalId": "",
             "Position": {
               "x": 1550.0,
-              "y": 650.0
+              "y": 850.0
             },
             "ZIndex": 6.0,
             "Size": {
@@ -2904,41 +3460,41 @@
         {
           "Type": "DialogueFragment",
           "Properties": {
-            "TechnicalName": "DFr_CF55CE2A",
-            "Id": "0x01000000000003BE",
-            "Parent": "0x01000000000003AC",
-            "MenuText": "",
+            "TechnicalName": "DFr_7E804F13",
+            "Id": "0x010000000000053A",
+            "Parent": "0x01000000000002E3",
+            "MenuText": "Yeah, I remember.",
             "StageDirections": "",
-            "Speaker": "0x0100000000000113",
+            "Speaker": "0x010000000000010F",
             "Color": {
               "r": 0.5764706,
               "g": 0.75686276,
               "b": 0.8
             },
-            "Text": "Good luck with whatever it was you were doing! I'm gonna stand here until the end of time.",
+            "Text": "",
             "ExternalId": "",
             "Position": {
-              "x": 938.0,
-              "y": 252.0
+              "x": 1175.0,
+              "y": 625.0
             },
-            "ZIndex": 14.0,
+            "ZIndex": 12.0,
             "Size": {
               "w": 225.0,
               "h": 200.0
             },
-            "ShortId": 3478507050,
+            "ShortId": 2122338067,
             "InputPins": [
               {
-                "Text": "QuickTest.SpeaksSpanish == false",
-                "Id": "0x01000000000003BF",
-                "Owner": "0x01000000000003BE"
+                "Text": "TreeQuest.FoundTrees == true",
+                "Id": "0x010000000000053D",
+                "Owner": "0x010000000000053A"
               }
             ],
             "OutputPins": [
               {
                 "Text": "",
-                "Id": "0x01000000000003C0",
-                "Owner": "0x01000000000003BE",
+                "Id": "0x010000000000053E",
+                "Owner": "0x010000000000053A",
                 "Connections": [
                   {
                     "Color": {
@@ -2948,8 +3504,8 @@
                       "b": 0.8
                     },
                     "Label": "",
-                    "TargetPin": "0x01000000000003B0",
-                    "Target": "0x01000000000003AC"
+                    "TargetPin": "0x0100000000000544",
+                    "Target": "0x0100000000000541"
                   }
                 ]
               }
@@ -2966,11 +3522,11 @@
             "StageDirections": "",
             "Speaker": "0x0100000000000113",
             "Color": {
-              "r": 0.5764706,
-              "g": 0.75686276,
-              "b": 0.8
+              "r": 0.577580452,
+              "g": 0.7605245,
+              "b": 0.7991027
             },
-            "Text": "Oh hey, I remember you!",
+            "Text": "I need a new hobby.",
             "ExternalId": "",
             "Position": {
               "x": 563.0,
@@ -2984,7 +3540,7 @@
             "ShortId": 188067298,
             "InputPins": [
               {
-                "Text": "QuickTest.FirstConversation == false",
+                "Text": "",
                 "Id": "0x01000000000003B9",
                 "Owner": "0x01000000000003B8"
               }
@@ -3003,72 +3559,6 @@
                       "b": 0.8
                     },
                     "Label": "",
-                    "TargetPin": "0x01000000000003BF",
-                    "Target": "0x01000000000003BE"
-                  },
-                  {
-                    "Color": {
-                      "a": 1.0,
-                      "r": 0.5764706,
-                      "g": 0.75686276,
-                      "b": 0.8
-                    },
-                    "Label": "",
-                    "TargetPin": "0x01000000000003B3",
-                    "Target": "0x01000000000003B2"
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "Type": "DialogueFragment",
-          "Properties": {
-            "TechnicalName": "DFr_2C1B4DCA",
-            "Id": "0x01000000000003B2",
-            "Parent": "0x01000000000003AC",
-            "MenuText": "",
-            "StageDirections": "",
-            "Speaker": "0x0100000000000113",
-            "Color": {
-              "r": 0.5764706,
-              "g": 0.75686276,
-              "b": 0.8
-            },
-            "Text": "Hablas ingles? Mi espanol no es muy bueno...",
-            "ExternalId": "",
-            "Position": {
-              "x": 938.0,
-              "y": 477.0
-            },
-            "ZIndex": 15.0,
-            "Size": {
-              "w": 225.0,
-              "h": 200.0
-            },
-            "ShortId": 739986890,
-            "InputPins": [
-              {
-                "Text": "QuickTest.SpeaksSpanish == true",
-                "Id": "0x01000000000003B3",
-                "Owner": "0x01000000000003B2"
-              }
-            ],
-            "OutputPins": [
-              {
-                "Text": "",
-                "Id": "0x01000000000003B4",
-                "Owner": "0x01000000000003B2",
-                "Connections": [
-                  {
-                    "Color": {
-                      "a": 1.0,
-                      "r": 0.5764706,
-                      "g": 0.75686276,
-                      "b": 0.8
-                    },
-                    "Label": "",
                     "TargetPin": "0x01000000000003B0",
                     "Target": "0x01000000000003AC"
                   }
@@ -3078,11 +3568,11 @@
           }
         },
         {
-          "Type": "BarkType",
+          "Type": "DialogueFragment",
           "Properties": {
-            "TechnicalName": "DFr_8F185CB2",
-            "Id": "0x01000000000004AC",
-            "Parent": "0x010000000000033E",
+            "TechnicalName": "DFr_C00C2D3D",
+            "Id": "0x0100000000000541",
+            "Parent": "0x01000000000002E3",
             "MenuText": "",
             "StageDirections": "",
             "Speaker": "0x0100000000000113",
@@ -3091,30 +3581,30 @@
               "g": 0.75686276,
               "b": 0.8
             },
-            "Text": "Oh, hi Melody!",
+            "Text": "Me too!",
             "ExternalId": "",
             "Position": {
-              "x": 0.0,
-              "y": 450.0
+              "x": 1550.0,
+              "y": 625.0
             },
-            "ZIndex": 6.0,
+            "ZIndex": 14.0,
             "Size": {
               "w": 225.0,
               "h": 200.0
             },
-            "ShortId": 2400738482,
+            "ShortId": 3222023485,
             "InputPins": [
               {
-                "Text": "QuickTest.FirstConversation == false && QuickTest.SpeaksSpanish == false;",
-                "Id": "0x01000000000004AD",
-                "Owner": "0x01000000000004AC"
+                "Text": "",
+                "Id": "0x0100000000000544",
+                "Owner": "0x0100000000000541"
               }
             ],
             "OutputPins": [
               {
                 "Text": "",
-                "Id": "0x01000000000004AE",
-                "Owner": "0x01000000000004AC",
+                "Id": "0x0100000000000545",
+                "Owner": "0x0100000000000541",
                 "Connections": [
                   {
                     "Color": {
@@ -3124,57 +3614,52 @@
                       "b": 0.8
                     },
                     "Label": "",
-                    "TargetPin": "0x0100000000000342",
-                    "Target": "0x010000000000033E"
+                    "TargetPin": "0x01000000000002E7",
+                    "Target": "0x01000000000002E3"
                   }
                 ]
               }
             ]
-          },
-          "Template": {
-            "BARK_TYPE": {
-              "DialogueType": 1
-            }
           }
         },
         {
-          "Type": "BarkType",
+          "Type": "DialogueFragment",
           "Properties": {
-            "TechnicalName": "DFr_B90AE832",
-            "Id": "0x01000000000004A6",
-            "Parent": "0x010000000000033E",
+            "TechnicalName": "DFr_71E7648F",
+            "Id": "0x010000000000054D",
+            "Parent": "0x0100000000000523",
             "MenuText": "",
             "StageDirections": "",
-            "Speaker": "0x0100000000000113",
+            "Speaker": "0x010000000000050C",
             "Color": {
               "r": 0.5764706,
               "g": 0.75686276,
               "b": 0.8
             },
-            "Text": "Uh... Hola?",
+            "Text": "Bahahaha! Where are the trees? I'll defeat them all!",
             "ExternalId": "",
             "Position": {
-              "x": 0.0,
+              "x": 375.0,
               "y": 225.0
             },
-            "ZIndex": 3.0,
+            "ZIndex": 0.0,
             "Size": {
               "w": 225.0,
               "h": 200.0
             },
-            "ShortId": 3104499762,
+            "ShortId": 1910989967,
             "InputPins": [
               {
-                "Text": "QuickTest.FirstConversation == false && QuickTest.SpeaksSpanish == true;",
-                "Id": "0x01000000000004A7",
-                "Owner": "0x01000000000004A6"
+                "Text": "",
+                "Id": "0x0100000000000550",
+                "Owner": "0x010000000000054D"
               }
             ],
             "OutputPins": [
               {
                 "Text": "",
-                "Id": "0x01000000000004A8",
-                "Owner": "0x01000000000004A6",
+                "Id": "0x0100000000000551",
+                "Owner": "0x010000000000054D",
                 "Connections": [
                   {
                     "Color": {
@@ -3184,17 +3669,309 @@
                       "b": 0.8
                     },
                     "Label": "",
-                    "TargetPin": "0x0100000000000342",
-                    "Target": "0x010000000000033E"
+                    "TargetPin": "0x0100000000000558",
+                    "Target": "0x0100000000000555"
+                  },
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.5764706,
+                      "g": 0.75686276,
+                      "b": 0.8
+                    },
+                    "Label": "",
+                    "TargetPin": "0x0100000000000561",
+                    "Target": "0x010000000000055E"
+                  },
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.5764706,
+                      "g": 0.75686276,
+                      "b": 0.8
+                    },
+                    "Label": "",
+                    "TargetPin": "0x0100000000000574",
+                    "Target": "0x0100000000000572"
                   }
                 ]
               }
             ]
-          },
-          "Template": {
-            "BARK_TYPE": {
-              "DialogueType": 1
-            }
+          }
+        },
+        {
+          "Type": "DialogueFragment",
+          "Properties": {
+            "TechnicalName": "DFr_01241384",
+            "Id": "0x0100000000000555",
+            "Parent": "0x0100000000000523",
+            "MenuText": "In the woods!",
+            "StageDirections": "",
+            "Speaker": "0x010000000000010F",
+            "Color": {
+              "r": 0.5764706,
+              "g": 0.75686276,
+              "b": 0.8
+            },
+            "Text": "",
+            "ExternalId": "",
+            "Position": {
+              "x": 675.0,
+              "y": 225.0
+            },
+            "ZIndex": 2.0,
+            "Size": {
+              "w": 225.0,
+              "h": 200.0
+            },
+            "ShortId": 19141508,
+            "InputPins": [
+              {
+                "Text": "TreeQuest.FoundTrees == true",
+                "Id": "0x0100000000000558",
+                "Owner": "0x0100000000000555"
+              }
+            ],
+            "OutputPins": [
+              {
+                "Text": "",
+                "Id": "0x0100000000000559",
+                "Owner": "0x0100000000000555",
+                "Connections": [
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.5764706,
+                      "g": 0.75686276,
+                      "b": 0.8
+                    },
+                    "Label": "",
+                    "TargetPin": "0x010000000000057C",
+                    "Target": "0x0100000000000579"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "Type": "DialogueFragment",
+          "Properties": {
+            "TechnicalName": "DFr_557CAF7B",
+            "Id": "0x010000000000055E",
+            "Parent": "0x0100000000000523",
+            "MenuText": "I'm not telling!",
+            "StageDirections": "",
+            "Speaker": "0x010000000000010F",
+            "Color": {
+              "r": 0.5764706,
+              "g": 0.75686276,
+              "b": 0.8
+            },
+            "Text": "",
+            "ExternalId": "",
+            "Position": {
+              "x": 675.0,
+              "y": 475.0
+            },
+            "ZIndex": 5.0,
+            "Size": {
+              "w": 225.0,
+              "h": 200.0
+            },
+            "ShortId": 1434234747,
+            "InputPins": [
+              {
+                "Text": "TreeQuest.FoundTrees == true",
+                "Id": "0x0100000000000561",
+                "Owner": "0x010000000000055E"
+              }
+            ],
+            "OutputPins": [
+              {
+                "Text": "",
+                "Id": "0x0100000000000562",
+                "Owner": "0x010000000000055E",
+                "Connections": [
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.5764706,
+                      "g": 0.75686276,
+                      "b": 0.8
+                    },
+                    "Label": "",
+                    "TargetPin": "0x0100000000000584",
+                    "Target": "0x0100000000000581"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "Type": "DialogueFragment",
+          "Properties": {
+            "TechnicalName": "DFr_4F7290EE",
+            "Id": "0x0100000000000579",
+            "Parent": "0x0100000000000523",
+            "MenuText": "",
+            "StageDirections": "",
+            "Speaker": "0x010000000000050C",
+            "Color": {
+              "r": 0.5764706,
+              "g": 0.75686276,
+              "b": 0.8
+            },
+            "Text": "Oh yeah! Forgot about that. Thanks Melody!",
+            "ExternalId": "",
+            "Position": {
+              "x": 1000.0,
+              "y": 225.0
+            },
+            "ZIndex": 9.0,
+            "Size": {
+              "w": 225.0,
+              "h": 200.0
+            },
+            "ShortId": 1332908270,
+            "InputPins": [
+              {
+                "Text": "",
+                "Id": "0x010000000000057C",
+                "Owner": "0x0100000000000579"
+              }
+            ],
+            "OutputPins": [
+              {
+                "Text": "TreeQuest.TreeQuestFinished = true;",
+                "Id": "0x010000000000057D",
+                "Owner": "0x0100000000000579",
+                "Connections": [
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.5764706,
+                      "g": 0.75686276,
+                      "b": 0.8
+                    },
+                    "Label": "",
+                    "TargetPin": "0x0100000000000527",
+                    "Target": "0x0100000000000523"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "Type": "DialogueFragment",
+          "Properties": {
+            "TechnicalName": "DFr_07EA6D57",
+            "Id": "0x0100000000000581",
+            "Parent": "0x0100000000000523",
+            "MenuText": "",
+            "StageDirections": "",
+            "Speaker": "0x010000000000050C",
+            "Color": {
+              "r": 0.5764706,
+              "g": 0.75686276,
+              "b": 0.8
+            },
+            "Text": "You can't hide them from me forever! Ho ho ho!",
+            "ExternalId": "",
+            "Position": {
+              "x": 1000.0,
+              "y": 475.0
+            },
+            "ZIndex": 12.0,
+            "Size": {
+              "w": 225.0,
+              "h": 200.0
+            },
+            "ShortId": 132803927,
+            "InputPins": [
+              {
+                "Text": "",
+                "Id": "0x0100000000000584",
+                "Owner": "0x0100000000000581"
+              }
+            ],
+            "OutputPins": [
+              {
+                "Text": "",
+                "Id": "0x0100000000000585",
+                "Owner": "0x0100000000000581",
+                "Connections": [
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.5764706,
+                      "g": 0.75686276,
+                      "b": 0.8
+                    },
+                    "Label": "",
+                    "TargetPin": "0x0100000000000527",
+                    "Target": "0x0100000000000523"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "Type": "DialogueFragment",
+          "Properties": {
+            "TechnicalName": "DFr_3C65C361",
+            "Id": "0x0100000000000589",
+            "Parent": "0x0100000000000529",
+            "MenuText": "",
+            "StageDirections": "",
+            "Speaker": "0x010000000000050C",
+            "Color": {
+              "r": 0.5764706,
+              "g": 0.75686276,
+              "b": 0.8
+            },
+            "Text": "Once I stop being a cube those trees are gonna get it!",
+            "ExternalId": "",
+            "Position": {
+              "x": 475.0,
+              "y": 350.0
+            },
+            "ZIndex": 0.0,
+            "Size": {
+              "w": 225.0,
+              "h": 200.0
+            },
+            "ShortId": 1013302113,
+            "InputPins": [
+              {
+                "Text": "",
+                "Id": "0x010000000000058C",
+                "Owner": "0x0100000000000589"
+              }
+            ],
+            "OutputPins": [
+              {
+                "Text": "",
+                "Id": "0x010000000000058D",
+                "Owner": "0x0100000000000589",
+                "Connections": [
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.5764706,
+                      "g": 0.75686276,
+                      "b": 0.8
+                    },
+                    "Label": "",
+                    "TargetPin": "0x010000000000052D",
+                    "Target": "0x0100000000000529"
+                  }
+                ]
+              }
+            ]
           }
         },
         {
@@ -3211,7 +3988,7 @@
               "g": 0.7605245,
               "b": 0.7991027
             },
-            "Text": "Who's that?",
+            "Text": "Guess what I found!",
             "ExternalId": "",
             "Position": {
               "x": 0.0,
@@ -3225,7 +4002,7 @@
             "ShortId": 3677752414,
             "InputPins": [
               {
-                "Text": "QuickTest.FirstConversation == true;",
+                "Text": "TreeQuest.TreeQuestFinished == false &&\nTreeQuest.FoundTrees == false",
                 "Id": "0x0100000000000349",
                 "Owner": "0x0100000000000346"
               }
@@ -3255,6 +4032,359 @@
             "BARK_TYPE": {
               "DialogueType": 0
             }
+          }
+        },
+        {
+          "Type": "BarkType",
+          "Properties": {
+            "TechnicalName": "DFr_B90AE832",
+            "Id": "0x01000000000004A6",
+            "Parent": "0x010000000000033E",
+            "MenuText": "",
+            "StageDirections": "",
+            "Speaker": "0x0100000000000113",
+            "Color": {
+              "r": 0.577580452,
+              "g": 0.7605245,
+              "b": 0.7991027
+            },
+            "Text": "Guess what I found!",
+            "ExternalId": "",
+            "Position": {
+              "x": 0.0,
+              "y": 225.0
+            },
+            "ZIndex": 3.0,
+            "Size": {
+              "w": 225.0,
+              "h": 200.0
+            },
+            "ShortId": 3104499762,
+            "InputPins": [
+              {
+                "Text": "TreeQuest.TreeQuestFinished == false &&\nTreeQuest.FoundTrees == true",
+                "Id": "0x01000000000004A7",
+                "Owner": "0x01000000000004A6"
+              }
+            ],
+            "OutputPins": [
+              {
+                "Text": "",
+                "Id": "0x01000000000004A8",
+                "Owner": "0x01000000000004A6",
+                "Connections": [
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.577580452,
+                      "g": 0.7605245,
+                      "b": 0.7991027
+                    },
+                    "Label": "",
+                    "TargetPin": "0x0100000000000342",
+                    "Target": "0x010000000000033E"
+                  }
+                ]
+              }
+            ]
+          },
+          "Template": {
+            "BARK_TYPE": {
+              "DialogueType": 1
+            }
+          }
+        },
+        {
+          "Type": "BarkType",
+          "Properties": {
+            "TechnicalName": "DFr_8F185CB2",
+            "Id": "0x01000000000004AC",
+            "Parent": "0x010000000000033E",
+            "MenuText": "",
+            "StageDirections": "",
+            "Speaker": "0x0100000000000113",
+            "Color": {
+              "r": 0.577580452,
+              "g": 0.7605245,
+              "b": 0.7991027
+            },
+            "Text": "What to look for next?",
+            "ExternalId": "",
+            "Position": {
+              "x": 0.0,
+              "y": 450.0
+            },
+            "ZIndex": 6.0,
+            "Size": {
+              "w": 225.0,
+              "h": 200.0
+            },
+            "ShortId": 2400738482,
+            "InputPins": [
+              {
+                "Text": "TreeQuest.TreeQuestFinished == true",
+                "Id": "0x01000000000004AD",
+                "Owner": "0x01000000000004AC"
+              }
+            ],
+            "OutputPins": [
+              {
+                "Text": "",
+                "Id": "0x01000000000004AE",
+                "Owner": "0x01000000000004AC",
+                "Connections": [
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.577580452,
+                      "g": 0.7605245,
+                      "b": 0.7991027
+                    },
+                    "Label": "",
+                    "TargetPin": "0x0100000000000342",
+                    "Target": "0x010000000000033E"
+                  }
+                ]
+              }
+            ]
+          },
+          "Template": {
+            "BARK_TYPE": {
+              "DialogueType": 1
+            }
+          }
+        },
+        {
+          "Type": "BarkType",
+          "Properties": {
+            "TechnicalName": "DFr_8BDBDB01",
+            "Id": "0x0100000000000507",
+            "Parent": "0x01000000000004F5",
+            "MenuText": "",
+            "StageDirections": "",
+            "Speaker": "0x010000000000050C",
+            "Color": {
+              "r": 0.5764706,
+              "g": 0.75686276,
+              "b": 0.8
+            },
+            "Text": "Bring 'em on!",
+            "ExternalId": "",
+            "Position": {
+              "x": 625.0,
+              "y": 325.0
+            },
+            "ZIndex": 0.0,
+            "Size": {
+              "w": 225.0,
+              "h": 200.0
+            },
+            "ShortId": 2346441473,
+            "InputPins": [
+              {
+                "Text": "TreeQuest.TreeQuestFinished == false &&\nTreeQuest.FoundTrees== true",
+                "Id": "0x010000000000050A",
+                "Owner": "0x0100000000000507"
+              }
+            ],
+            "OutputPins": [
+              {
+                "Text": "",
+                "Id": "0x010000000000050B",
+                "Owner": "0x0100000000000507",
+                "Connections": [
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.5764706,
+                      "g": 0.75686276,
+                      "b": 0.8
+                    },
+                    "Label": "",
+                    "TargetPin": "0x01000000000004F9",
+                    "Target": "0x01000000000004F5"
+                  }
+                ]
+              }
+            ]
+          },
+          "Template": {
+            "BARK_TYPE": {
+              "DialogueType": 0
+            }
+          }
+        },
+        {
+          "Type": "BarkType",
+          "Properties": {
+            "TechnicalName": "DFr_AEAB5632",
+            "Id": "0x0100000000000510",
+            "Parent": "0x01000000000004F5",
+            "MenuText": "",
+            "StageDirections": "",
+            "Speaker": "0x010000000000050C",
+            "Color": {
+              "r": 0.5764706,
+              "g": 0.75686276,
+              "b": 0.8
+            },
+            "Text": "Thanks Melody! Bahaha!",
+            "ExternalId": "",
+            "Position": {
+              "x": 625.0,
+              "y": 550.0
+            },
+            "ZIndex": 1.0,
+            "Size": {
+              "w": 225.0,
+              "h": 200.0
+            },
+            "ShortId": 2930464306,
+            "InputPins": [
+              {
+                "Text": "TreeQuest.TreeQuestFinished == true &&\nTreeQuest.FoundTrees == true ",
+                "Id": "0x0100000000000513",
+                "Owner": "0x0100000000000510"
+              }
+            ],
+            "OutputPins": [
+              {
+                "Text": "",
+                "Id": "0x0100000000000514",
+                "Owner": "0x0100000000000510",
+                "Connections": [
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.5764706,
+                      "g": 0.75686276,
+                      "b": 0.8
+                    },
+                    "Label": "",
+                    "TargetPin": "0x01000000000004F9",
+                    "Target": "0x01000000000004F5"
+                  }
+                ]
+              }
+            ]
+          },
+          "Template": {
+            "BARK_TYPE": {
+              "DialogueType": 1
+            }
+          }
+        },
+        {
+          "Type": "BarkType",
+          "Properties": {
+            "TechnicalName": "DFr_922314BB",
+            "Id": "0x0100000000000517",
+            "Parent": "0x01000000000004F5",
+            "MenuText": "",
+            "StageDirections": "",
+            "Speaker": "0x010000000000050C",
+            "Color": {
+              "r": 0.5764706,
+              "g": 0.75686276,
+              "b": 0.8
+            },
+            "Text": "Bring 'em on!",
+            "ExternalId": "",
+            "Position": {
+              "x": 625.0,
+              "y": 100.0
+            },
+            "ZIndex": 2.0,
+            "Size": {
+              "w": 225.0,
+              "h": 200.0
+            },
+            "ShortId": 2451772603,
+            "InputPins": [
+              {
+                "Text": "TreeQuest.TreeQuestFinished == false &&\nTreeQuest.FoundTrees== false",
+                "Id": "0x010000000000051A",
+                "Owner": "0x0100000000000517"
+              }
+            ],
+            "OutputPins": [
+              {
+                "Text": "",
+                "Id": "0x010000000000051B",
+                "Owner": "0x0100000000000517",
+                "Connections": [
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.5764706,
+                      "g": 0.75686276,
+                      "b": 0.8
+                    },
+                    "Label": "",
+                    "TargetPin": "0x01000000000004F9",
+                    "Target": "0x01000000000004F5"
+                  }
+                ]
+              }
+            ]
+          },
+          "Template": {
+            "BARK_TYPE": {
+              "DialogueType": 1
+            }
+          }
+        },
+        {
+          "Type": "Hub",
+          "Properties": {
+            "TechnicalName": "Hub_9F906789",
+            "Id": "0x0100000000000572",
+            "Parent": "0x0100000000000523",
+            "DisplayName": "Untitled hub",
+            "Color": {
+              "r": 0.5764706,
+              "g": 0.75686276,
+              "b": 0.8
+            },
+            "Text": "",
+            "ExternalId": "",
+            "Position": {
+              "x": 700.0,
+              "y": 50.0
+            },
+            "ZIndex": 6.0,
+            "Size": {
+              "w": 175.0,
+              "h": 50.0
+            },
+            "ShortId": 2677041033,
+            "InputPins": [
+              {
+                "Text": "TreeQuest.FoundTrees == false",
+                "Id": "0x0100000000000574",
+                "Owner": "0x0100000000000572"
+              }
+            ],
+            "OutputPins": [
+              {
+                "Text": "",
+                "Id": "0x0100000000000575",
+                "Owner": "0x0100000000000572",
+                "Connections": [
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.5764706,
+                      "g": 0.75686276,
+                      "b": 0.8
+                    },
+                    "Label": "",
+                    "TargetPin": "0x0100000000000527",
+                    "Target": "0x0100000000000523"
+                  }
+                ]
+              }
+            ]
           }
         },
         {
@@ -3319,7 +4449,7 @@
           "Properties": {
             "TechnicalName": "Ntt_5ACA5EF0",
             "Id": "0x0100000000000113",
-            "Parent": "0x03000000AC61A2B3",
+            "Parent": "0x0100000000000537",
             "Attachments": [],
             "DisplayName": "Master Fist",
             "Color": {
@@ -3349,6 +4479,55 @@
               "Asset": "0x0000000000000000"
             },
             "ShortId": 1523212016
+          },
+          "Template": {
+            "DefaultBasicCharacterFeature": {
+              "Age": null,
+              "Species": "",
+              "BornIn": "",
+              "Sex": null,
+              "Occupation": "",
+              "Accent": "",
+              "Personality": "",
+              "Appearance": ""
+            }
+          }
+        },
+        {
+          "Type": "DefaultSupportingCharacterTemplate",
+          "Properties": {
+            "TechnicalName": "Ntt_0EAEEC09",
+            "Id": "0x010000000000050C",
+            "Parent": "0x0100000000000537",
+            "Attachments": [],
+            "DisplayName": "Timbre",
+            "Color": {
+              "r": 0.5764706,
+              "g": 0.75686276,
+              "b": 0.8
+            },
+            "Text": "",
+            "ExternalId": "",
+            "Position": {
+              "x": 75.0,
+              "y": 432.0
+            },
+            "ZIndex": 2.0,
+            "Size": {
+              "w": 256.0,
+              "h": 196.0
+            },
+            "PreviewImage": {
+              "ViewBox": {
+                "x": 0.0,
+                "y": 0.0,
+                "w": 0.0,
+                "h": 0.0
+              },
+              "Mode": "FromAsset",
+              "Asset": "0x0000000000000000"
+            },
+            "ShortId": 246344713
           },
           "Template": {
             "DefaultBasicCharacterFeature": {
@@ -3417,6 +4596,17 @@
             "ExternalId": "",
             "ShortId": 118111827
           }
+        },
+        {
+          "Type": "UserFolder",
+          "Properties": {
+            "TechnicalName": "Ufo_FF9D767B",
+            "Id": "0x0100000000000537",
+            "Parent": "0x03000000AC61A2B3",
+            "DisplayName": "Reliqua",
+            "ExternalId": "",
+            "ShortId": 4288509563
+          }
         }
       ]
     }
@@ -3433,90 +4623,196 @@
         "Type": "Flow",
         "Children": [
           {
-            "Id": "0x0100000000000207",
-            "TechnicalName": "FFr_97182879",
+            "Id": "0x01000000000004D7",
+            "TechnicalName": "FFr_82EEB98E",
             "Type": "FlowFragment",
             "Children": [
               {
-                "Id": "0x01000000000002E3",
-                "TechnicalName": "Dlg_12599766",
-                "Type": "Dialogue",
+                "Id": "0x01000000000004DD",
+                "TechnicalName": "FFr_71442640",
+                "Type": "FlowFragment",
                 "Children": [
                   {
-                    "Id": "0x01000000000002EB",
-                    "TechnicalName": "DFr_91D0A9BB",
-                    "Type": "DialogueFragment"
+                    "Id": "0x0100000000000207",
+                    "TechnicalName": "FFr_97182879",
+                    "Type": "FlowFragment",
+                    "Children": [
+                      {
+                        "Id": "0x01000000000002E3",
+                        "TechnicalName": "Dlg_12599766",
+                        "Type": "Dialogue",
+                        "Children": [
+                          {
+                            "Id": "0x01000000000002EB",
+                            "TechnicalName": "DFr_91D0A9BB",
+                            "Type": "DialogueFragment"
+                          },
+                          {
+                            "Id": "0x01000000000002F2",
+                            "TechnicalName": "DFr_95E32C5F",
+                            "Type": "DialogueFragment"
+                          },
+                          {
+                            "Id": "0x01000000000002F9",
+                            "TechnicalName": "DFr_7FA458CB",
+                            "Type": "DialogueFragment"
+                          },
+                          {
+                            "Id": "0x0100000000000300",
+                            "TechnicalName": "DFr_C6419695",
+                            "Type": "DialogueFragment"
+                          },
+                          {
+                            "Id": "0x0100000000000307",
+                            "TechnicalName": "DFr_0EF7613A",
+                            "Type": "DialogueFragment"
+                          },
+                          {
+                            "Id": "0x010000000000053A",
+                            "TechnicalName": "DFr_7E804F13",
+                            "Type": "DialogueFragment"
+                          },
+                          {
+                            "Id": "0x0100000000000541",
+                            "TechnicalName": "DFr_C00C2D3D",
+                            "Type": "DialogueFragment"
+                          }
+                        ]
+                      },
+                      {
+                        "Id": "0x01000000000003AC",
+                        "TechnicalName": "Dlg_C99EBBFF",
+                        "Type": "Dialogue",
+                        "Children": [
+                          {
+                            "Id": "0x01000000000003B8",
+                            "TechnicalName": "DFr_0B35ADE2",
+                            "Type": "DialogueFragment"
+                          }
+                        ]
+                      }
+                    ]
                   },
                   {
-                    "Id": "0x01000000000002F2",
-                    "TechnicalName": "DFr_95E32C5F",
-                    "Type": "DialogueFragment"
-                  },
-                  {
-                    "Id": "0x01000000000002F9",
-                    "TechnicalName": "DFr_7FA458CB",
-                    "Type": "DialogueFragment"
-                  },
-                  {
-                    "Id": "0x0100000000000300",
-                    "TechnicalName": "DFr_C6419695",
-                    "Type": "DialogueFragment"
-                  },
-                  {
-                    "Id": "0x0100000000000307",
-                    "TechnicalName": "DFr_0EF7613A",
-                    "Type": "DialogueFragment"
+                    "Id": "0x0100000000000338",
+                    "TechnicalName": "FFr_AD00C214",
+                    "Type": "FlowFragment",
+                    "Children": [
+                      {
+                        "Id": "0x010000000000033E",
+                        "TechnicalName": "Dlg_23F36A11",
+                        "Type": "Dialogue",
+                        "Children": [
+                          {
+                            "Id": "0x0100000000000346",
+                            "TechnicalName": "DFr_DB360C5E",
+                            "Type": "DialogueFragment"
+                          },
+                          {
+                            "Id": "0x01000000000004A6",
+                            "TechnicalName": "DFr_B90AE832",
+                            "Type": "DialogueFragment"
+                          },
+                          {
+                            "Id": "0x01000000000004AC",
+                            "TechnicalName": "DFr_8F185CB2",
+                            "Type": "DialogueFragment"
+                          }
+                        ]
+                      }
+                    ]
                   }
                 ]
               },
               {
-                "Id": "0x01000000000003AC",
-                "TechnicalName": "Dlg_C99EBBFF",
-                "Type": "Dialogue",
+                "Id": "0x01000000000004E3",
+                "TechnicalName": "FFr_B7BEA3FE",
+                "Type": "FlowFragment",
                 "Children": [
                   {
-                    "Id": "0x01000000000003B2",
-                    "TechnicalName": "DFr_2C1B4DCA",
-                    "Type": "DialogueFragment"
+                    "Id": "0x01000000000004E9",
+                    "TechnicalName": "FFr_219813B4",
+                    "Type": "FlowFragment",
+                    "Children": [
+                      {
+                        "Id": "0x0100000000000523",
+                        "TechnicalName": "Dlg_757BA23F",
+                        "Type": "Dialogue",
+                        "Children": [
+                          {
+                            "Id": "0x010000000000054D",
+                            "TechnicalName": "DFr_71E7648F",
+                            "Type": "DialogueFragment"
+                          },
+                          {
+                            "Id": "0x0100000000000555",
+                            "TechnicalName": "DFr_01241384",
+                            "Type": "DialogueFragment"
+                          },
+                          {
+                            "Id": "0x010000000000055E",
+                            "TechnicalName": "DFr_557CAF7B",
+                            "Type": "DialogueFragment"
+                          },
+                          {
+                            "Id": "0x0100000000000572",
+                            "TechnicalName": "Hub_9F906789",
+                            "Type": "Hub"
+                          },
+                          {
+                            "Id": "0x0100000000000579",
+                            "TechnicalName": "DFr_4F7290EE",
+                            "Type": "DialogueFragment"
+                          },
+                          {
+                            "Id": "0x0100000000000581",
+                            "TechnicalName": "DFr_07EA6D57",
+                            "Type": "DialogueFragment"
+                          }
+                        ]
+                      },
+                      {
+                        "Id": "0x0100000000000529",
+                        "TechnicalName": "Dlg_8533CF30",
+                        "Type": "Dialogue",
+                        "Children": [
+                          {
+                            "Id": "0x0100000000000589",
+                            "TechnicalName": "DFr_3C65C361",
+                            "Type": "DialogueFragment"
+                          }
+                        ]
+                      }
+                    ]
                   },
                   {
-                    "Id": "0x01000000000003B8",
-                    "TechnicalName": "DFr_0B35ADE2",
-                    "Type": "DialogueFragment"
-                  },
-                  {
-                    "Id": "0x01000000000003BE",
-                    "TechnicalName": "DFr_CF55CE2A",
-                    "Type": "DialogueFragment"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "Id": "0x0100000000000338",
-            "TechnicalName": "FFr_AD00C214",
-            "Type": "FlowFragment",
-            "Children": [
-              {
-                "Id": "0x010000000000033E",
-                "TechnicalName": "Dlg_23F36A11",
-                "Type": "Dialogue",
-                "Children": [
-                  {
-                    "Id": "0x0100000000000346",
-                    "TechnicalName": "DFr_DB360C5E",
-                    "Type": "DialogueFragment"
-                  },
-                  {
-                    "Id": "0x01000000000004A6",
-                    "TechnicalName": "DFr_B90AE832",
-                    "Type": "DialogueFragment"
-                  },
-                  {
-                    "Id": "0x01000000000004AC",
-                    "TechnicalName": "DFr_8F185CB2",
-                    "Type": "DialogueFragment"
+                    "Id": "0x01000000000004EF",
+                    "TechnicalName": "FFr_2D57CBFF",
+                    "Type": "FlowFragment",
+                    "Children": [
+                      {
+                        "Id": "0x01000000000004F5",
+                        "TechnicalName": "Dlg_B0105A7D",
+                        "Type": "Dialogue",
+                        "Children": [
+                          {
+                            "Id": "0x0100000000000507",
+                            "TechnicalName": "DFr_8BDBDB01",
+                            "Type": "DialogueFragment"
+                          },
+                          {
+                            "Id": "0x0100000000000510",
+                            "TechnicalName": "DFr_AEAB5632",
+                            "Type": "DialogueFragment"
+                          },
+                          {
+                            "Id": "0x0100000000000517",
+                            "TechnicalName": "DFr_922314BB",
+                            "Type": "DialogueFragment"
+                          }
+                        ]
+                      }
+                    ]
                   }
                 ]
               }
@@ -3540,9 +4836,21 @@
             "Type": "Entity"
           },
           {
-            "Id": "0x0100000000000113",
-            "TechnicalName": "Ntt_5ACA5EF0",
-            "Type": "Entity"
+            "Id": "0x0100000000000537",
+            "TechnicalName": "Ufo_FF9D767B",
+            "Type": "EntitiesUserFolder",
+            "Children": [
+              {
+                "Id": "0x010000000000050C",
+                "TechnicalName": "Ntt_0EAEEC09",
+                "Type": "Entity"
+              },
+              {
+                "Id": "0x0100000000000113",
+                "TechnicalName": "Ntt_5ACA5EF0",
+                "Type": "Entity"
+              }
+            ]
           }
         ]
       },

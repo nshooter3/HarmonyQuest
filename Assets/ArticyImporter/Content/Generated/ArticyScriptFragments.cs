@@ -20,7 +20,7 @@ namespace Articy.Harmonybarktest.GlobalVariables
 {
     
     
-    [Articy.Unity.ArticyCodeGenerationHashAttribute(637456454141957519)]
+    [Articy.Unity.ArticyCodeGenerationHashAttribute(637456728478039310)]
     public class ArticyScriptFragments : BaseScriptFragments, ISerializationCallbackReceiver
     {
         
@@ -37,16 +37,7 @@ namespace Articy.Harmonybarktest.GlobalVariables
         /// </summary>
         public bool Script_0x1000000000002E6Text(ArticyGlobalVariables aGlobalVariablesState, Articy.Unity.IBaseScriptMethodProvider aMethodProvider)
         {
-            return aGlobalVariablesState.QuickTest.FirstConversation == true;
-        }
-        
-        /// <summary>
-        /// ObjectID: 0x1000000000002E7
-        /// Articy Object ref: articy://localhost/view/bda27ac8-48b5-4181-a11d-12f365293693/72057594037928679?pane=selected&amp;tab=current
-        /// </summary>
-        public void Script_0x1000000000002E7Text(ArticyGlobalVariables aGlobalVariablesState, Articy.Unity.IBaseScriptMethodProvider aMethodProvider)
-        {
-            aGlobalVariablesState.QuickTest.FirstConversation = false;
+            return aGlobalVariablesState.TreeQuest.TreeQuestFinished == false;
         }
         
         /// <summary>
@@ -55,61 +46,79 @@ namespace Articy.Harmonybarktest.GlobalVariables
         /// </summary>
         public bool Script_0x1000000000003AFText(ArticyGlobalVariables aGlobalVariablesState, Articy.Unity.IBaseScriptMethodProvider aMethodProvider)
         {
-            return aGlobalVariablesState.QuickTest.FirstConversation == false;
+            return aGlobalVariablesState.TreeQuest.TreeQuestFinished == true;
         }
         
         /// <summary>
-        /// ObjectID: 0x1000000000002FD
-        /// Articy Object ref: articy://localhost/view/bda27ac8-48b5-4181-a11d-12f365293693/72057594037928701?pane=selected&amp;tab=current
+        /// ObjectID: 0x100000000000526
+        /// Articy Object ref: articy://localhost/view/bda27ac8-48b5-4181-a11d-12f365293693/72057594037929254?pane=selected&amp;tab=current
         /// </summary>
-        public void Script_0x1000000000002FDText(ArticyGlobalVariables aGlobalVariablesState, Articy.Unity.IBaseScriptMethodProvider aMethodProvider)
+        public bool Script_0x100000000000526Text(ArticyGlobalVariables aGlobalVariablesState, Articy.Unity.IBaseScriptMethodProvider aMethodProvider)
         {
-            aGlobalVariablesState.QuickTest.SpeaksSpanish = true;
+            return aGlobalVariablesState.TreeQuest.TreeQuestFinished == false;
         }
         
         /// <summary>
-        /// ObjectID: 0x1000000000003BF
-        /// Articy Object ref: articy://localhost/view/bda27ac8-48b5-4181-a11d-12f365293693/72057594037928895?pane=selected&amp;tab=current
+        /// ObjectID: 0x10000000000052C
+        /// Articy Object ref: articy://localhost/view/bda27ac8-48b5-4181-a11d-12f365293693/72057594037929260?pane=selected&amp;tab=current
         /// </summary>
-        public bool Script_0x1000000000003BFText(ArticyGlobalVariables aGlobalVariablesState, Articy.Unity.IBaseScriptMethodProvider aMethodProvider)
+        public bool Script_0x10000000000052CText(ArticyGlobalVariables aGlobalVariablesState, Articy.Unity.IBaseScriptMethodProvider aMethodProvider)
         {
-            return aGlobalVariablesState.QuickTest.SpeaksSpanish == false;
+            return aGlobalVariablesState.TreeQuest.TreeQuestFinished == true;
         }
         
         /// <summary>
-        /// ObjectID: 0x1000000000003B9
-        /// Articy Object ref: articy://localhost/view/bda27ac8-48b5-4181-a11d-12f365293693/72057594037928889?pane=selected&amp;tab=current
+        /// ObjectID: 0x1000000000002F5
+        /// Articy Object ref: articy://localhost/view/bda27ac8-48b5-4181-a11d-12f365293693/72057594037928693?pane=selected&amp;tab=current
         /// </summary>
-        public bool Script_0x1000000000003B9Text(ArticyGlobalVariables aGlobalVariablesState, Articy.Unity.IBaseScriptMethodProvider aMethodProvider)
+        public bool Script_0x1000000000002F5Text(ArticyGlobalVariables aGlobalVariablesState, Articy.Unity.IBaseScriptMethodProvider aMethodProvider)
         {
-            return aGlobalVariablesState.QuickTest.FirstConversation == false;
+            return aGlobalVariablesState.TreeQuest.FoundTrees == false;
         }
         
         /// <summary>
-        /// ObjectID: 0x1000000000003B3
-        /// Articy Object ref: articy://localhost/view/bda27ac8-48b5-4181-a11d-12f365293693/72057594037928883?pane=selected&amp;tab=current
+        /// ObjectID: 0x100000000000304
+        /// Articy Object ref: articy://localhost/view/bda27ac8-48b5-4181-a11d-12f365293693/72057594037928708?pane=selected&amp;tab=current
         /// </summary>
-        public bool Script_0x1000000000003B3Text(ArticyGlobalVariables aGlobalVariablesState, Articy.Unity.IBaseScriptMethodProvider aMethodProvider)
+        public void Script_0x100000000000304Text(ArticyGlobalVariables aGlobalVariablesState, Articy.Unity.IBaseScriptMethodProvider aMethodProvider)
         {
-            return aGlobalVariablesState.QuickTest.SpeaksSpanish == true;
+            aGlobalVariablesState.TreeQuest.FoundTrees = true;
         }
         
         /// <summary>
-        /// ObjectID: 0x1000000000004AD
-        /// Articy Object ref: articy://localhost/view/bda27ac8-48b5-4181-a11d-12f365293693/72057594037929133?pane=selected&amp;tab=current
+        /// ObjectID: 0x10000000000053D
+        /// Articy Object ref: articy://localhost/view/bda27ac8-48b5-4181-a11d-12f365293693/72057594037929277?pane=selected&amp;tab=current
         /// </summary>
-        public bool Script_0x1000000000004ADText(ArticyGlobalVariables aGlobalVariablesState, Articy.Unity.IBaseScriptMethodProvider aMethodProvider)
+        public bool Script_0x10000000000053DText(ArticyGlobalVariables aGlobalVariablesState, Articy.Unity.IBaseScriptMethodProvider aMethodProvider)
         {
-            return aGlobalVariablesState.QuickTest.FirstConversation == false && aGlobalVariablesState.QuickTest.SpeaksSpanish == false;;
+            return aGlobalVariablesState.TreeQuest.FoundTrees == true;
         }
         
         /// <summary>
-        /// ObjectID: 0x1000000000004A7
-        /// Articy Object ref: articy://localhost/view/bda27ac8-48b5-4181-a11d-12f365293693/72057594037929127?pane=selected&amp;tab=current
+        /// ObjectID: 0x100000000000558
+        /// Articy Object ref: articy://localhost/view/bda27ac8-48b5-4181-a11d-12f365293693/72057594037929304?pane=selected&amp;tab=current
         /// </summary>
-        public bool Script_0x1000000000004A7Text(ArticyGlobalVariables aGlobalVariablesState, Articy.Unity.IBaseScriptMethodProvider aMethodProvider)
+        public bool Script_0x100000000000558Text(ArticyGlobalVariables aGlobalVariablesState, Articy.Unity.IBaseScriptMethodProvider aMethodProvider)
         {
-            return aGlobalVariablesState.QuickTest.FirstConversation == false && aGlobalVariablesState.QuickTest.SpeaksSpanish == true;;
+            return aGlobalVariablesState.TreeQuest.FoundTrees == true;
+        }
+        
+        /// <summary>
+        /// ObjectID: 0x100000000000561
+        /// Articy Object ref: articy://localhost/view/bda27ac8-48b5-4181-a11d-12f365293693/72057594037929313?pane=selected&amp;tab=current
+        /// </summary>
+        public bool Script_0x100000000000561Text(ArticyGlobalVariables aGlobalVariablesState, Articy.Unity.IBaseScriptMethodProvider aMethodProvider)
+        {
+            return aGlobalVariablesState.TreeQuest.FoundTrees == true;
+        }
+        
+        /// <summary>
+        /// ObjectID: 0x10000000000057D
+        /// Articy Object ref: articy://localhost/view/bda27ac8-48b5-4181-a11d-12f365293693/72057594037929341?pane=selected&amp;tab=current
+        /// </summary>
+        public void Script_0x10000000000057DText(ArticyGlobalVariables aGlobalVariablesState, Articy.Unity.IBaseScriptMethodProvider aMethodProvider)
+        {
+            aGlobalVariablesState.TreeQuest.TreeQuestFinished = true;;
         }
         
         /// <summary>
@@ -118,7 +127,66 @@ namespace Articy.Harmonybarktest.GlobalVariables
         /// </summary>
         public bool Script_0x100000000000349Text(ArticyGlobalVariables aGlobalVariablesState, Articy.Unity.IBaseScriptMethodProvider aMethodProvider)
         {
-            return aGlobalVariablesState.QuickTest.FirstConversation == true;;
+            return aGlobalVariablesState.TreeQuest.TreeQuestFinished == false &&
+aGlobalVariablesState.TreeQuest.FoundTrees == false;
+        }
+        
+        /// <summary>
+        /// ObjectID: 0x1000000000004A7
+        /// Articy Object ref: articy://localhost/view/bda27ac8-48b5-4181-a11d-12f365293693/72057594037929127?pane=selected&amp;tab=current
+        /// </summary>
+        public bool Script_0x1000000000004A7Text(ArticyGlobalVariables aGlobalVariablesState, Articy.Unity.IBaseScriptMethodProvider aMethodProvider)
+        {
+            return aGlobalVariablesState.TreeQuest.TreeQuestFinished == false &&
+aGlobalVariablesState.TreeQuest.FoundTrees == true;
+        }
+        
+        /// <summary>
+        /// ObjectID: 0x1000000000004AD
+        /// Articy Object ref: articy://localhost/view/bda27ac8-48b5-4181-a11d-12f365293693/72057594037929133?pane=selected&amp;tab=current
+        /// </summary>
+        public bool Script_0x1000000000004ADText(ArticyGlobalVariables aGlobalVariablesState, Articy.Unity.IBaseScriptMethodProvider aMethodProvider)
+        {
+            return aGlobalVariablesState.TreeQuest.TreeQuestFinished == true;
+        }
+        
+        /// <summary>
+        /// ObjectID: 0x10000000000050A
+        /// Articy Object ref: articy://localhost/view/bda27ac8-48b5-4181-a11d-12f365293693/72057594037929226?pane=selected&amp;tab=current
+        /// </summary>
+        public bool Script_0x10000000000050AText(ArticyGlobalVariables aGlobalVariablesState, Articy.Unity.IBaseScriptMethodProvider aMethodProvider)
+        {
+            return aGlobalVariablesState.TreeQuest.TreeQuestFinished == false &&
+aGlobalVariablesState.TreeQuest.FoundTrees== true;
+        }
+        
+        /// <summary>
+        /// ObjectID: 0x100000000000513
+        /// Articy Object ref: articy://localhost/view/bda27ac8-48b5-4181-a11d-12f365293693/72057594037929235?pane=selected&amp;tab=current
+        /// </summary>
+        public bool Script_0x100000000000513Text(ArticyGlobalVariables aGlobalVariablesState, Articy.Unity.IBaseScriptMethodProvider aMethodProvider)
+        {
+            return aGlobalVariablesState.TreeQuest.TreeQuestFinished == true &&
+aGlobalVariablesState.TreeQuest.FoundTrees == true ;
+        }
+        
+        /// <summary>
+        /// ObjectID: 0x10000000000051A
+        /// Articy Object ref: articy://localhost/view/bda27ac8-48b5-4181-a11d-12f365293693/72057594037929242?pane=selected&amp;tab=current
+        /// </summary>
+        public bool Script_0x10000000000051AText(ArticyGlobalVariables aGlobalVariablesState, Articy.Unity.IBaseScriptMethodProvider aMethodProvider)
+        {
+            return aGlobalVariablesState.TreeQuest.TreeQuestFinished == false &&
+aGlobalVariablesState.TreeQuest.FoundTrees== false;
+        }
+        
+        /// <summary>
+        /// ObjectID: 0x100000000000574
+        /// Articy Object ref: articy://localhost/view/bda27ac8-48b5-4181-a11d-12f365293693/72057594037929332?pane=selected&amp;tab=current
+        /// </summary>
+        public bool Script_0x100000000000574Text(ArticyGlobalVariables aGlobalVariablesState, Articy.Unity.IBaseScriptMethodProvider aMethodProvider)
+        {
+            return aGlobalVariablesState.TreeQuest.FoundTrees == false;
         }
         #endregion
         
@@ -132,15 +200,22 @@ namespace Articy.Harmonybarktest.GlobalVariables
             Conditions = new System.Collections.Generic.Dictionary<int, System.Func<ArticyGlobalVariables, Articy.Unity.IBaseScriptMethodProvider, bool>>();
             Instructions = new System.Collections.Generic.Dictionary<int, System.Action<ArticyGlobalVariables, Articy.Unity.IBaseScriptMethodProvider>>();
             Conditions.Add(-1350672235, this.Script_0x1000000000002E6Text);
-            Instructions.Add(-309349008, this.Script_0x1000000000002E7Text);
             Conditions.Add(-1660042460, this.Script_0x1000000000003AFText);
-            Instructions.Add(-496575718, this.Script_0x1000000000002FDText);
-            Conditions.Add(-1660047901, this.Script_0x1000000000003BFText);
-            Conditions.Add(-2021102926, this.Script_0x1000000000003B9Text);
-            Conditions.Add(-1793186908, this.Script_0x1000000000003B3Text);
-            Conditions.Add(-845624619, this.Script_0x1000000000004ADText);
-            Conditions.Add(-1356503850, this.Script_0x1000000000004A7Text);
+            Conditions.Add(-1831015035, this.Script_0x100000000000526Text);
+            Conditions.Add(-1701135474, this.Script_0x10000000000052CText);
+            Conditions.Add(-147213979, this.Script_0x1000000000002F5Text);
+            Instructions.Add(-621717413, this.Script_0x100000000000304Text);
+            Conditions.Add(-1821575330, this.Script_0x10000000000053DText);
+            Conditions.Add(1140567416, this.Script_0x100000000000558Text);
+            Conditions.Add(-256987132, this.Script_0x100000000000561Text);
+            Instructions.Add(-1821571238, this.Script_0x10000000000057DText);
             Conditions.Add(-2021143616, this.Script_0x100000000000349Text);
+            Conditions.Add(-1356503850, this.Script_0x1000000000004A7Text);
+            Conditions.Add(-845624619, this.Script_0x1000000000004ADText);
+            Conditions.Add(-85407654, this.Script_0x10000000000050AText);
+            Conditions.Add(-94849793, this.Script_0x100000000000513Text);
+            Conditions.Add(-85413095, this.Script_0x10000000000051AText);
+            Conditions.Add(-215286518, this.Script_0x100000000000574Text);
         }
         #endregion
         
