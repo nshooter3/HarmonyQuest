@@ -20,7 +20,7 @@ namespace Articy.Harmonybarktest.GlobalVariables
 {
     
     
-    [Articy.Unity.ArticyCodeGenerationHashAttribute(637456728478039310)]
+    [Articy.Unity.ArticyCodeGenerationHashAttribute(637459013733742814)]
     public class ArticyScriptFragments : BaseScriptFragments, ISerializationCallbackReceiver
     {
         
@@ -122,6 +122,15 @@ namespace Articy.Harmonybarktest.GlobalVariables
         }
         
         /// <summary>
+        /// ObjectID: 0x100000000000594
+        /// Articy Object ref: articy://localhost/view/bda27ac8-48b5-4181-a11d-12f365293693/72057594037929364?pane=selected&amp;tab=current
+        /// </summary>
+        public bool Script_0x100000000000594Text(ArticyGlobalVariables aGlobalVariablesState, Articy.Unity.IBaseScriptMethodProvider aMethodProvider)
+        {
+            return aGlobalVariablesState.TreeQuest.FoundTrees == false;
+        }
+        
+        /// <summary>
         /// ObjectID: 0x100000000000349
         /// Articy Object ref: articy://localhost/view/bda27ac8-48b5-4181-a11d-12f365293693/72057594037928777?pane=selected&amp;tab=current
         /// </summary>
@@ -179,15 +188,6 @@ aGlobalVariablesState.TreeQuest.FoundTrees == true ;
             return aGlobalVariablesState.TreeQuest.TreeQuestFinished == false &&
 aGlobalVariablesState.TreeQuest.FoundTrees== false;
         }
-        
-        /// <summary>
-        /// ObjectID: 0x100000000000574
-        /// Articy Object ref: articy://localhost/view/bda27ac8-48b5-4181-a11d-12f365293693/72057594037929332?pane=selected&amp;tab=current
-        /// </summary>
-        public bool Script_0x100000000000574Text(ArticyGlobalVariables aGlobalVariablesState, Articy.Unity.IBaseScriptMethodProvider aMethodProvider)
-        {
-            return aGlobalVariablesState.TreeQuest.FoundTrees == false;
-        }
         #endregion
         
         #region Unity serialization
@@ -209,13 +209,13 @@ aGlobalVariablesState.TreeQuest.FoundTrees== false;
             Conditions.Add(1140567416, this.Script_0x100000000000558Text);
             Conditions.Add(-256987132, this.Script_0x100000000000561Text);
             Instructions.Add(-1821571238, this.Script_0x10000000000057DText);
+            Conditions.Add(-215283960, this.Script_0x100000000000594Text);
             Conditions.Add(-2021143616, this.Script_0x100000000000349Text);
             Conditions.Add(-1356503850, this.Script_0x1000000000004A7Text);
             Conditions.Add(-845624619, this.Script_0x1000000000004ADText);
             Conditions.Add(-85407654, this.Script_0x10000000000050AText);
             Conditions.Add(-94849793, this.Script_0x100000000000513Text);
             Conditions.Add(-85413095, this.Script_0x10000000000051AText);
-            Conditions.Add(-215286518, this.Script_0x100000000000574Text);
         }
         #endregion
         

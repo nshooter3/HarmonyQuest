@@ -61,20 +61,13 @@ namespace HarmonyQuest.Dialog
             {
                 if (BarkReference != null && BarkReference.HasReference)
                 {
-                    //Delay the bark until the end of the frame so that the current dialogue gets closed out properly before reopening the flow manager.
-                    StartCoroutine(DelayedBark());
+                    StartBark(BarkReference);
                 }
             }
             else
             {
                 dialogView.indicator.SetActive(true);
             }
-        }
-
-        private IEnumerator DelayedBark()
-        {
-            yield return new WaitForEndOfFrame();
-            StartBark(BarkReference);
         }
 
         public bool IsOnScreen()
