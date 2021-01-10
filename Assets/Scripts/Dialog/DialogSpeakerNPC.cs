@@ -1,21 +1,24 @@
 ﻿using Articy.Harmonybarktest;
 using Articy.Unity;
+using Articy.Unity.Interfaces;
 using GamePhysics;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace HarmonyQuest.Dialog
 {
-    public class DialogSpeakerNPC : DialogSpeaker
+    public class DialogSpeakerNPC : DialogSpeaker, IArticyFlowPlayerCallbacks
     {
+        public ArticyFlowPlayer flowPlayer;
         public ArticyRef DialogReference;
         public ArticyRef BarkReference;
-
         public CollisionWrapper teaseCollider;
 
-        Camera mainCamera;
-
+        private Camera mainCamera;
         private bool playerInRange = false;
+        private Branch dialog;
+        private DialogueType barkTypeFeature;
 
         public override void OnStart()
         {
@@ -36,18 +39,18 @@ namespace HarmonyQuest.Dialog
                     dialogView.indicator.SetActive(true);
                 }
             }
+
+            if (BarkReference != null)
+            {
+                //StartBark(BarkReference);
+                //dialogView.indicator.SetActive(true);
+            }
         }
 
         public override void Speak(string text)
         {
             base.Speak(text);
             dialogView.bark.SetActive(false);
-        }
-
-        public void SpeakBark(string text)
-        {
-            dialogView.barkText.text = text;
-            dialogView.bark.SetActive(true);
         }
 
         public override void ShutUp()
@@ -71,7 +74,7 @@ namespace HarmonyQuest.Dialog
         private IEnumerator DelayedBark()
         {
             yield return new WaitForEndOfFrame();
-            ServiceLocator.instance.GetDialogController().StartBark(BarkReference);
+            StartBark(BarkReference);
         }
 
         public bool IsOnScreen()
@@ -96,7 +99,7 @@ namespace HarmonyQuest.Dialog
         {
             if (BarkReference != null && BarkReference.HasReference)
             {
-                ServiceLocator.instance.GetDialogController().StartBark(BarkReference);
+                StartBark(BarkReference);
                 dialogView.indicator.SetActive(false);
                 ServiceLocator.instance.GetDialogController().EnterSpeakerZone(this);
                 playerInRange = true;
@@ -114,5 +117,57 @@ namespace HarmonyQuest.Dialog
             }
         }
 
+        public void StartBark(ArticyRef barkRef)
+        {
+            if (barkRef.GetObject() != null)
+            {
+                flowPlayer.StartOn = barkRef.GetObject();
+            }
+        }
+
+        public void SpeakBark(string speakerTechnicalName, string text)
+        {
+            if (character.GetObject().TechnicalName == speakerTechnicalName)
+            {
+                dialogView.barkText.text = text;
+                dialogView.bark.SetActive(true);
+            }
+        }
+
+        public void SetAssets(string speakerTechnicalName, DialogueType dialogueType)
+        {
+            if (character.GetObject().TechnicalName == speakerTechnicalName)
+            {
+                dialogView.SetAssets(dialogueType);
+            }
+        }
+
+        public void OnBranchesUpdated(IList<Branch> aBranches)
+        {
+            if (aBranches.Count > 1)
+            {
+                throw new System.Exception("Error: Barks cannot have more than one branch. Check the articy project to fix this.");
+            }
+            else if (aBranches.Count == 1)
+            {
+                dialog = aBranches[0];
+                var text = dialog.Target as IObjectWithText;
+                var speaker = dialog.Target as IObjectWithSpeaker;
+                if (speaker != null)
+                {
+                    var barkType = dialog.Target as BarkType;
+                    if (barkType != null)
+                    {
+                        barkTypeFeature = barkType.Template.BARK_TYPE.DialogueType;
+                        SetAssets(speaker.Speaker.TechnicalName, barkTypeFeature);
+                    }
+                    SpeakBark(speaker.Speaker.TechnicalName, text.Text);
+                    flowPlayer.FinishCurrentPausedObject();
+                    flowPlayer.StartOn = null;
+                }
+            }
+        }
+
+        public void OnFlowPlayerPaused(IFlowObject aObject) { }
     }
 }

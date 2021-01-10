@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 89677863}
   - component: {fileID: 89677862}
   - component: {fileID: 89677861}
+  - component: {fileID: 89677866}
   m_Layer: 0
   m_Name: Timbre
   m_TagString: Untagged
@@ -162,6 +163,7 @@ MonoBehaviour:
   DialogPrefab: {fileID: 5945235112212906155, guid: 129cefa3636bff24bb1e5e6239ab9c8e,
     type: 3}
   dialogView: {fileID: 0}
+  flowPlayer: {fileID: 89677866}
   DialogReference:
     instanceId: 0
     referencingMode: 0
@@ -248,6 +250,31 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &89677866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89677860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 149237616, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useDefaultGlobalVariables: 1
+  globalVariables: {fileID: 0}
+  overwriteMethodProvider: 0
+  overwrittenMethodProvider: {fileID: 0}
+  startOn:
+    instanceId: 0
+    referencingMode: 0
+    lowId: 0
+    highId: 0
+  pauseOn: 5
+  ignoreInvalidBranches: 1
+  continuouslyRecalculateBranches: 0
+  continouslyRecalculateInterval: 1
 --- !u!1 &123250261
 GameObject:
   m_ObjectHideFlags: 0
@@ -653,6 +680,7 @@ GameObject:
   - component: {fileID: 607862079}
   - component: {fileID: 607862078}
   - component: {fileID: 607862082}
+  - component: {fileID: 607862083}
   m_Layer: 0
   m_Name: MasterFist
   m_TagString: Untagged
@@ -756,6 +784,7 @@ MonoBehaviour:
   DialogPrefab: {fileID: 5945235112212906155, guid: 129cefa3636bff24bb1e5e6239ab9c8e,
     type: 3}
   dialogView: {fileID: 0}
+  flowPlayer: {fileID: 607862083}
   DialogReference:
     instanceId: 0
     referencingMode: 0
@@ -767,6 +796,31 @@ MonoBehaviour:
     lowId: 824
     highId: 16777216
   teaseCollider: {fileID: 214841167}
+--- !u!114 &607862083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 607862077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 149237616, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useDefaultGlobalVariables: 1
+  globalVariables: {fileID: 0}
+  overwriteMethodProvider: 0
+  overwrittenMethodProvider: {fileID: 0}
+  startOn:
+    instanceId: 0
+    referencingMode: 0
+    lowId: 0
+    highId: 0
+  pauseOn: 5
+  ignoreInvalidBranches: 1
+  continuouslyRecalculateBranches: 0
+  continouslyRecalculateInterval: 1
 --- !u!1001 &1052544671
 PrefabInstance:
   m_ObjectHideFlags: 0
