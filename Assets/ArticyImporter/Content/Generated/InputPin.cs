@@ -22,7 +22,7 @@ namespace Articy.Harmonybarktest
     
     
     [Serializable()]
-    [Articy.Unity.ArticyCodeGenerationHashAttribute(637456726080332268)]
+    [Articy.Unity.ArticyCodeGenerationHashAttribute(637459222231729593)]
     public class InputPin : ArticyPrimitive, IInputPin
     {
         

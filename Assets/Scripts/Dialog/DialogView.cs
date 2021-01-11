@@ -13,6 +13,9 @@ namespace HarmonyQuest.Dialog
         public GameObject bark;
 
         [HideInInspector]
+        public bool useIndicator = true;
+
+        [HideInInspector]
         public Text mainText;
 
         [HideInInspector]
@@ -32,6 +35,8 @@ namespace HarmonyQuest.Dialog
 
         [SerializeField]
         public BarkAssetPair[] assetDefinitions;
+
+        public enum DialogueType { Quest, Talk, NonInteractive };
 
         public void Init()
         {
@@ -58,6 +63,15 @@ namespace HarmonyQuest.Dialog
             barkEmblem.sprite = assetDefinitions[typeInt].Emblem;
             emblem.sprite = assetDefinitions[typeInt].Emblem;
             barkPanel.color = assetDefinitions[typeInt].TextBoxColor;
+
+            if (type == DialogueType.Quest)
+            {
+                useIndicator = true;
+            }
+            else
+            {
+                useIndicator = false;
+            }
         }
     }
 

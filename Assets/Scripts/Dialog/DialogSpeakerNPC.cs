@@ -1,8 +1,6 @@
-﻿using Articy.Harmonybarktest;
-using Articy.Unity;
+﻿using Articy.Unity;
 using Articy.Unity.Interfaces;
 using GamePhysics;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,32 +16,23 @@ namespace HarmonyQuest.Dialog
         private Camera mainCamera;
         private bool playerInRange = false;
         private Branch dialog;
-        private DialogueType barkTypeFeature;
+        private DialogView.DialogueType dialogueType;
+
+        private bool initIndicator = true;
 
         public override void OnStart()
         {
             base.OnStart();
 
-            if (DialogReference != null)
+            teaseCollider.AssignFunctionToTriggerEnterDelegate(TriggerEnter);
+            teaseCollider.AssignFunctionToTriggerExitDelegate(TriggerExit);
+
+            ServiceLocator.instance.GetDialogController().RegisterSpeaker(this);
+            mainCamera = ServiceLocator.instance.GetCamera();
+
+            if (DialogReference.HasReference || BarkReference.HasReference)
             {
-
-                teaseCollider.AssignFunctionToTriggerEnterDelegate(TriggerEnter);
-                teaseCollider.AssignFunctionToTriggerExitDelegate(TriggerExit);
-
-                ServiceLocator.instance.GetDialogController().RegisterSpeaker(this);
-                mainCamera = ServiceLocator.instance.GetCamera();
-
-                if (DialogReference.HasReference)
-                {
-                    dialogView.bark.SetActive(false);
-                    dialogView.indicator.SetActive(true);
-                }
-            }
-
-            if (BarkReference != null)
-            {
-                //StartBark(BarkReference);
-                //dialogView.indicator.SetActive(true);
+                StartBark(BarkReference);
             }
         }
 
@@ -59,14 +48,17 @@ namespace HarmonyQuest.Dialog
 
             if (playerInRange)
             {
-                if (BarkReference != null && BarkReference.HasReference)
+                if (BarkReference.HasReference)
                 {
                     StartBark(BarkReference);
                 }
             }
             else
             {
-                dialogView.indicator.SetActive(true);
+                if (dialogView.useIndicator)
+                {
+                    dialogView.indicator.SetActive(true);
+                }
             }
         }
 
@@ -90,7 +82,7 @@ namespace HarmonyQuest.Dialog
 
         private void TriggerEnter(Collider other)
         {
-            if (BarkReference != null && BarkReference.HasReference)
+            if (BarkReference.HasReference)
             {
                 StartBark(BarkReference);
                 dialogView.indicator.SetActive(false);
@@ -101,10 +93,13 @@ namespace HarmonyQuest.Dialog
 
         private void TriggerExit(Collider other)
         {
-            if (BarkReference != null && BarkReference.HasReference)
+            if (BarkReference.HasReference)
             {
                 dialogView.bark.SetActive(false);
-                dialogView.indicator.SetActive(true);
+                if (dialogView.useIndicator)
+                {
+                    dialogView.indicator.SetActive(true);
+                }
                 ServiceLocator.instance.GetDialogController().ExitSpeakerZone(this);
                 playerInRange = false;
             }
@@ -118,21 +113,26 @@ namespace HarmonyQuest.Dialog
             }
         }
 
-        public void SpeakBark(string speakerTechnicalName, string text)
+        public void SpeakBark(string text)
         {
-            if (character.GetObject().TechnicalName == speakerTechnicalName)
+            dialogView.barkText.text = text;
+            if (initIndicator)
             {
-                dialogView.barkText.text = text;
-                dialogView.bark.SetActive(true);
+                if (dialogView.useIndicator)
+                {
+                    dialogView.indicator.SetActive(true);
+                }
+                initIndicator = false;
             }
+            else
+            {
+                dialogView.bark.SetActive(true);
+            };
         }
 
-        public void SetAssets(string speakerTechnicalName, DialogueType dialogueType)
+        public void SetAssets(DialogView.DialogueType dialogueType)
         {
-            if (character.GetObject().TechnicalName == speakerTechnicalName)
-            {
-                dialogView.SetAssets(dialogueType);
-            }
+            dialogView.SetAssets(dialogueType);
         }
 
         public void OnBranchesUpdated(IList<Branch> aBranches)
@@ -144,17 +144,28 @@ namespace HarmonyQuest.Dialog
             else if (aBranches.Count == 1)
             {
                 dialog = aBranches[0];
-                var text = dialog.Target as IObjectWithText;
-                var speaker = dialog.Target as IObjectWithSpeaker;
-                if (speaker != null)
+                var bark = dialog.Target as IObjectWithStageDirections;
+                if (bark != null)
                 {
-                    var barkType = dialog.Target as BarkType;
-                    if (barkType != null)
+                    if (DialogReference.HasReference)
                     {
-                        barkTypeFeature = barkType.Template.BARK_TYPE.DialogueType;
-                        SetAssets(speaker.Speaker.TechnicalName, barkTypeFeature);
+                        //Asterisks are the chars we use to identify barks that should be marked as quest related.
+                        if (bark.StageDirections != null && bark.StageDirections[0] == '*')
+                        {
+                            dialogueType = DialogView.DialogueType.Quest;
+                        }
+                        else
+                        {
+                            dialogueType = DialogView.DialogueType.Talk;
+                        }
                     }
-                    SpeakBark(speaker.Speaker.TechnicalName, text.Text);
+                    else
+                    {
+                        dialogueType = DialogView.DialogueType.NonInteractive;
+                    }
+                    SetAssets(dialogueType);
+
+                    SpeakBark(bark.StageDirections);
                     flowPlayer.FinishCurrentPausedObject();
                     flowPlayer.StartOn = null;
                 }

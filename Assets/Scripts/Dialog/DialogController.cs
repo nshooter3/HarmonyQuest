@@ -180,8 +180,6 @@ namespace HarmonyQuest.Dialog
                 {
                     var text = dialog.Target as IObjectWithText;
                     var speaker = dialog.Target as IObjectWithSpeaker;
-
-                    Debug.Log("text: " + text + ", speaker: " + speaker);
                     if (speaker != null)
                     {
                         Speak(speaker.Speaker.TechnicalName, text.Text);

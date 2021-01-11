@@ -7,11 +7,6 @@ namespace Articy.Harmonybarktest
 			return Articy.Unity.ArticyTypeSystem.GetArticyType("Sex").GetEnumValue(((int)(aSex))).DisplayName;
 		}
 
-		public static string GetDisplayName(this DialogueType aDialogueType)
-		{
-			return Articy.Unity.ArticyTypeSystem.GetArticyType("DialogueType").GetEnumValue(((int)(aDialogueType))).DisplayName;
-		}
-
 		public static string GetDisplayName(this ShapeType aShapeType)
 		{
 			return Articy.Unity.ArticyTypeSystem.GetArticyType("ShapeType").GetEnumValue(((int)(aShapeType))).DisplayName;

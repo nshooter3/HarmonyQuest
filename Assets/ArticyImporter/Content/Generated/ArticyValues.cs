@@ -75,15 +75,6 @@ namespace Articy.Harmonybarktest
     
     
     [Serializable()]
-    public class ArticyValueDialogueType : ArticyValue<DialogueType>
-    {
-    }
-}
-namespace Articy.Harmonybarktest
-{
-    
-    
-    [Serializable()]
     public class ArticyValueShapeType : ArticyValue<ShapeType>
     {
     }
@@ -166,15 +157,6 @@ namespace Articy.Harmonybarktest
     
     [Serializable()]
     public class ArticyValueBarkTypeTemplate : ArticyValue<Articy.Harmonybarktest.Templates.BarkTypeTemplate>
-    {
-    }
-}
-namespace Articy.Harmonybarktest
-{
-    
-    
-    [Serializable()]
-    public class ArticyValueBARK_TYPEFeature : ArticyValue<Articy.Harmonybarktest.Features.BARK_TYPEFeature>
     {
     }
 }
