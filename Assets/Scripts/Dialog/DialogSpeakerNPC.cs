@@ -1,6 +1,7 @@
 ﻿using Articy.Unity;
 using Articy.Unity.Interfaces;
 using GamePhysics;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,7 +19,7 @@ namespace HarmonyQuest.Dialog
         private Branch dialog;
         private DialogView.DialogueType dialogueType;
 
-        private bool initIndicator = true;
+        private bool initIndicator;
 
         public override void OnStart()
         {
@@ -30,8 +31,9 @@ namespace HarmonyQuest.Dialog
             ServiceLocator.instance.GetDialogController().RegisterSpeaker(this);
             mainCamera = ServiceLocator.instance.GetCamera();
 
-            if (DialogReference.HasReference || BarkReference.HasReference)
+            if (BarkReference.HasReference)
             {
+                initIndicator = true;
                 StartBark(BarkReference);
             }
         }
@@ -55,9 +57,10 @@ namespace HarmonyQuest.Dialog
             }
             else
             {
-                if (dialogView.useIndicator)
+                if (BarkReference.HasReference)
                 {
-                    dialogView.indicator.SetActive(true);
+                    initIndicator = true;
+                    StartBark(BarkReference);
                 }
             }
         }
@@ -139,6 +142,20 @@ namespace HarmonyQuest.Dialog
         {
             if (aBranches.Count > 1)
             {
+                foreach (Branch branch in aBranches)
+                {
+                    var bark = dialog.Target as IObjectWithStageDirections;
+                    if (bark != null)
+                    {
+                        Debug.Log("BARK: " + bark.StageDirections);
+                    }
+
+                    var text = branch.Target as IObjectWithText;
+                    if (text != null)
+                    {
+                        Debug.Log("TEXT: " + text.Text);
+                    }
+                }
                 throw new System.Exception("Error: Barks cannot have more than one branch. Check the articy project to fix this.");
             }
             else if (aBranches.Count == 1)

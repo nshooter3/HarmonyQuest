@@ -6,7 +6,7 @@
     "set_UseScriptSupport": "True",
     "ExportVersion": "1.2",
     "ObjectDefinitionsHash": "29405D7108A99CC711076F260E17A42100456601B65FF9DDD89B6252F9EDD537",
-    "ScriptFragmentsHash": "9163715330"
+    "ScriptFragmentsHash": "3316141837"
   },
   "Project": {
     "Name": "HarmonyBarkTest",
@@ -2287,19 +2287,8 @@
                       "b": 0.8
                     },
                     "Label": "",
-                    "TargetPin": "0x010000000000062B",
-                    "Target": "0x01000000000005E9"
-                  },
-                  {
-                    "Color": {
-                      "a": 1.0,
-                      "r": 0.5764706,
-                      "g": 0.75686276,
-                      "b": 0.8
-                    },
-                    "Label": "",
-                    "TargetPin": "0x010000000000063A",
-                    "Target": "0x0100000000000630"
+                    "TargetPin": "0x01000000000006B3",
+                    "Target": "0x01000000000006B1"
                   }
                 ]
               }
@@ -2362,19 +2351,8 @@
                       "b": 0.8
                     },
                     "Label": "",
-                    "TargetPin": "0x0100000000000682",
-                    "Target": "0x0100000000000647"
-                  },
-                  {
-                    "Color": {
-                      "a": 1.0,
-                      "r": 0.5764706,
-                      "g": 0.75686276,
-                      "b": 0.8
-                    },
-                    "Label": "",
-                    "TargetPin": "0x0100000000000691",
-                    "Target": "0x0100000000000687"
+                    "TargetPin": "0x01000000000006BB",
+                    "Target": "0x01000000000006B9"
                   }
                 ]
               }
@@ -2489,7 +2467,7 @@
             "ShortId": 2186738238,
             "InputPins": [
               {
-                "Text": "TreeQuest.TreeQuestFinished == true",
+                "Text": "",
                 "Id": "0x010000000000063A",
                 "Owner": "0x0100000000000630",
                 "Connections": [
@@ -2566,7 +2544,7 @@
             "ShortId": 1250760442,
             "InputPins": [
               {
-                "Text": "TreeQuest.TreeQuestFinished == false",
+                "Text": "",
                 "Id": "0x010000000000062B",
                 "Owner": "0x01000000000005E9",
                 "Connections": [
@@ -2654,7 +2632,7 @@
             "ShortId": 591180792,
             "InputPins": [
               {
-                "Text": "TreeQuest.TreeQuestFinished == false",
+                "Text": "",
                 "Id": "0x0100000000000682",
                 "Owner": "0x0100000000000647",
                 "Connections": [
@@ -2742,7 +2720,7 @@
             "ShortId": 55195652,
             "InputPins": [
               {
-                "Text": "TreeQuest.TreeQuestFinished == true",
+                "Text": "",
                 "Id": "0x0100000000000691",
                 "Owner": "0x0100000000000687",
                 "Connections": [
@@ -3415,7 +3393,7 @@
             "Text": "Bahahaha! Where are the trees? I'll defeat them all!",
             "ExternalId": "",
             "Position": {
-              "x": 350.0,
+              "x": 150.0,
               "y": 100.0
             },
             "ZIndex": 0.0,
@@ -3767,7 +3745,7 @@
             "Text": "Bahahaha! Where are the trees? I'll defeat them all!",
             "ExternalId": "",
             "Position": {
-              "x": 350.0,
+              "x": 150.0,
               "y": 350.0
             },
             "ZIndex": 15.0,
@@ -3931,6 +3909,150 @@
                     "Label": "",
                     "TargetPin": "0x01000000000006A5",
                     "Target": "0x010000000000069A"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "Type": "Condition",
+          "Properties": {
+            "TechnicalName": "Cnd_5336A9C2",
+            "Id": "0x01000000000006B1",
+            "Parent": "0x01000000000004DD",
+            "DisplayName": "TreeQuest.TreeQuestFinished == false",
+            "Text": "",
+            "ExternalId": "",
+            "Position": {
+              "x": -150.0,
+              "y": -250.0
+            },
+            "ZIndex": 6.0,
+            "Size": {
+              "w": 225.0,
+              "h": 100.0
+            },
+            "ShortId": 1396091330,
+            "Expression": "TreeQuest.TreeQuestFinished == false",
+            "Color": {
+              "r": 0.5764706,
+              "g": 0.75686276,
+              "b": 0.8
+            },
+            "InputPins": [
+              {
+                "Text": "",
+                "Id": "0x01000000000006B3",
+                "Owner": "0x01000000000006B1"
+              }
+            ],
+            "OutputPins": [
+              {
+                "Text": "",
+                "Id": "0x01000000000006B4",
+                "Owner": "0x01000000000006B1",
+                "Connections": [
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.5764706,
+                      "g": 0.75686276,
+                      "b": 0.8
+                    },
+                    "Label": "",
+                    "TargetPin": "0x010000000000062B",
+                    "Target": "0x01000000000005E9"
+                  }
+                ]
+              },
+              {
+                "Text": "",
+                "Id": "0x01000000000006B5",
+                "Owner": "0x01000000000006B1",
+                "Connections": [
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.5764706,
+                      "g": 0.75686276,
+                      "b": 0.8
+                    },
+                    "Label": "",
+                    "TargetPin": "0x010000000000063A",
+                    "Target": "0x0100000000000630"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "Type": "Condition",
+          "Properties": {
+            "TechnicalName": "Cnd_9C24356B",
+            "Id": "0x01000000000006B9",
+            "Parent": "0x01000000000004E3",
+            "DisplayName": "TreeQuest.TreeQuestFinished == false",
+            "Text": "",
+            "ExternalId": "",
+            "Position": {
+              "x": 300.0,
+              "y": 525.0
+            },
+            "ZIndex": 6.0,
+            "Size": {
+              "w": 225.0,
+              "h": 100.0
+            },
+            "ShortId": 2619618667,
+            "Expression": "TreeQuest.TreeQuestFinished == false",
+            "Color": {
+              "r": 0.5764706,
+              "g": 0.75686276,
+              "b": 0.8
+            },
+            "InputPins": [
+              {
+                "Text": "",
+                "Id": "0x01000000000006BB",
+                "Owner": "0x01000000000006B9"
+              }
+            ],
+            "OutputPins": [
+              {
+                "Text": "",
+                "Id": "0x01000000000006BC",
+                "Owner": "0x01000000000006B9",
+                "Connections": [
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.5764706,
+                      "g": 0.75686276,
+                      "b": 0.8
+                    },
+                    "Label": "",
+                    "TargetPin": "0x0100000000000682",
+                    "Target": "0x0100000000000647"
+                  }
+                ]
+              },
+              {
+                "Text": "",
+                "Id": "0x01000000000006BD",
+                "Owner": "0x01000000000006B9",
+                "Connections": [
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.5764706,
+                      "g": 0.75686276,
+                      "b": 0.8
+                    },
+                    "Label": "",
+                    "TargetPin": "0x0100000000000691",
+                    "Target": "0x0100000000000687"
                   }
                 ]
               }
@@ -4277,6 +4399,11 @@
                         "Type": "DialogueFragment"
                       }
                     ]
+                  },
+                  {
+                    "Id": "0x01000000000006B1",
+                    "TechnicalName": "Cnd_5336A9C2",
+                    "Type": "Condition"
                   }
                 ]
               },
@@ -4338,6 +4465,11 @@
                         "Type": "DialogueFragment"
                       }
                     ]
+                  },
+                  {
+                    "Id": "0x01000000000006B9",
+                    "TechnicalName": "Cnd_9C24356B",
+                    "Type": "Condition"
                   }
                 ]
               },
