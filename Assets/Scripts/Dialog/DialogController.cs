@@ -20,7 +20,7 @@ namespace HarmonyQuest.Dialog
 
         private List<DialogSpeakerNPC> speakers;
         private const float spacing = 150;
-        private ArticyRef proximalDialog;
+        private DialogSpeakerNPC proximalSpeaker;
         private IList<Branch> dialogOptions;
         private Branch dialog;
         private bool awaitingResponse = false;
@@ -48,23 +48,6 @@ namespace HarmonyQuest.Dialog
                 melodyController.FreezeMovement();
                 PauseManager.ToggleDialog(true);
                 PlayerControllerStateManager.instance.SetState(PlayerControllerStateManager.ControllerState.Dialog);
-            }
-        }
-
-        public void EnterSpeakerZone(DialogSpeakerNPC speaker)
-        {
-            if (proximalDialog != speaker.DialogReference)
-            {
-                proximalDialog = speaker.DialogReference;
-            }
-        }
-
-
-        public void ExitSpeakerZone(DialogSpeakerNPC speaker)
-        {
-            if (proximalDialog == speaker.DialogReference)
-            {
-                proximalDialog = null;
             }
         }
 
@@ -211,13 +194,61 @@ namespace HarmonyQuest.Dialog
                 }
                 else
                 {
-                    if (proximalDialog != null && proximalDialog.HasReference)
+                    proximalSpeaker = GetHighestScoredDialogTarget();
+                    if (proximalSpeaker != null && proximalSpeaker.DialogReference.HasReference)
                     {
                         inDialog = true;
-                        StartDialog(proximalDialog);
+                        StartDialog(proximalSpeaker.DialogReference);
                     }
                 }
             }
+        }
+
+        private DialogSpeakerNPC GetHighestScoredDialogTarget()
+        {
+            DialogSpeakerNPC highestScoredDialogTarget = null;
+
+            float highestScore = 0f;
+            float score = 0f;
+
+            float angle = 0f;
+            float angleScore = 0f;
+            float angleScoreWeight = 0.4f;
+            float maxAngle = 60f;
+
+            float distance = 0f;
+            float distanceScore = 0f;
+            float distanceScoreWeight = 0.6f;
+            float maxDistance = 5;
+
+            foreach (DialogSpeakerNPC speaker in speakers)
+            {
+                if (speaker.playerInRange)
+                {
+                    distance = Vector3.Distance(ServiceLocator.instance.GetMelodyController().transform.position, speaker.transform.position);
+
+                    distanceScore = (Mathf.Max(maxDistance - distance, 0f) / maxDistance) * distanceScoreWeight;
+
+                    angle = GetPotentialTargetAngleWorldSpace(speaker.transform.position);
+                    angleScore = ((maxAngle - angle) / maxAngle) * angleScoreWeight;
+
+                    score = angleScore + distanceScore;
+
+                    if (score > highestScore && angle < maxAngle)
+                    {
+                        highestScore = score;
+                        highestScoredDialogTarget = speaker;
+                    }
+                }
+            }
+            return highestScoredDialogTarget;
+        }
+
+        public float GetPotentialTargetAngleWorldSpace(Vector3 targetPos)
+        {
+            //Calculate the angle of the target by getting the angle between the target position relative to the player, and the direction the player is facing.
+            Vector3 sourceDirection = targetPos - ServiceLocator.instance.GetMelodyController().transform.position;
+            return Vector3.Angle(ServiceLocator.instance.GetMelodyController().transform.forward, sourceDirection);
         }
 
         public override void OnFixedUpdate()

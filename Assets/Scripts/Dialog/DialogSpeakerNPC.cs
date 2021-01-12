@@ -14,8 +14,10 @@ namespace HarmonyQuest.Dialog
         public ArticyRef BarkReference;
         public CollisionWrapper teaseCollider;
 
+        [HideInInspector]
+        public bool playerInRange = false;
+
         private Camera mainCamera;
-        private bool playerInRange = false;
         private Branch dialog;
         private DialogView.DialogueType dialogueType;
 
@@ -89,7 +91,6 @@ namespace HarmonyQuest.Dialog
             {
                 StartBark(BarkReference);
                 dialogView.indicator.SetActive(false);
-                ServiceLocator.instance.GetDialogController().EnterSpeakerZone(this);
                 playerInRange = true;
             }
         }
@@ -103,7 +104,6 @@ namespace HarmonyQuest.Dialog
                 {
                     dialogView.indicator.SetActive(true);
                 }
-                ServiceLocator.instance.GetDialogController().ExitSpeakerZone(this);
                 playerInRange = false;
             }
         }
