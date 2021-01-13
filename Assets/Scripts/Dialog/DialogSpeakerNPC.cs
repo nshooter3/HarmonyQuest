@@ -46,23 +46,26 @@ namespace HarmonyQuest.Dialog
             dialogView.bark.SetActive(false);
         }
 
-        public override void ShutUp()
+        public override void ShutUp(bool dialogueStarted = false)
         {
-            base.ShutUp();
+            base.ShutUp(dialogueStarted);
 
-            if (playerInRange)
+            if (dialogueStarted == false)
             {
-                if (BarkReference.HasReference)
+                if (playerInRange)
                 {
-                    StartBark(BarkReference);
+                    if (BarkReference.HasReference)
+                    {
+                        StartBark(BarkReference);
+                    }
                 }
-            }
-            else
-            {
-                if (BarkReference.HasReference)
+                else
                 {
-                    initIndicator = true;
-                    StartBark(BarkReference);
+                    if (BarkReference.HasReference)
+                    {
+                        initIndicator = true;
+                        StartBark(BarkReference);
+                    }
                 }
             }
         }

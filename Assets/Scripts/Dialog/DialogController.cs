@@ -61,7 +61,7 @@ namespace HarmonyQuest.Dialog
                 }
                 else
                 {
-                    speaker.ShutUp();
+                    speaker.ShutUp(true);
                 }
             }
         }

@@ -28,10 +28,13 @@ namespace HarmonyQuest.Dialog
             dialogView.main.SetActive(true);
         }
 
-        public virtual void ShutUp()
+        public virtual void ShutUp(bool dialogueStarted = false)
         {
             dialogView.mainText.text = "";
             dialogView.main.SetActive(false);
+            dialogView.barkText.text = "";
+            dialogView.bark.SetActive(false);
+            dialogView.indicator.SetActive(false);
         }
     }
 }
