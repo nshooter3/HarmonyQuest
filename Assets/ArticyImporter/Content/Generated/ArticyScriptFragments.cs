@@ -20,7 +20,7 @@ namespace Articy.Harmonybarktest.GlobalVariables
 {
     
     
-    [Articy.Unity.ArticyCodeGenerationHashAttribute(637459284459745910)]
+    [Articy.Unity.ArticyCodeGenerationHashAttribute(637461177711334212)]
     public class ArticyScriptFragments : BaseScriptFragments, ISerializationCallbackReceiver
     {
         
@@ -31,33 +31,6 @@ namespace Articy.Harmonybarktest.GlobalVariables
         #endregion
         
         #region Script fragments
-        /// <summary>
-        /// ObjectID: 0x100000000000621
-        /// Articy Object ref: articy://localhost/view/bda27ac8-48b5-4181-a11d-12f365293693/72057594037929505?pane=selected&amp;tab=current
-        /// </summary>
-        public bool Script_0x100000000000621Text(ArticyGlobalVariables aGlobalVariablesState, Articy.Unity.IBaseScriptMethodProvider aMethodProvider)
-        {
-            return aGlobalVariablesState.TreeQuest.FoundTrees == true;
-        }
-        
-        /// <summary>
-        /// ObjectID: 0x100000000000611
-        /// Articy Object ref: articy://localhost/view/bda27ac8-48b5-4181-a11d-12f365293693/72057594037929489?pane=selected&amp;tab=current
-        /// </summary>
-        public bool Script_0x100000000000611Text(ArticyGlobalVariables aGlobalVariablesState, Articy.Unity.IBaseScriptMethodProvider aMethodProvider)
-        {
-            return aGlobalVariablesState.TreeQuest.FoundTrees == true;
-        }
-        
-        /// <summary>
-        /// ObjectID: 0x100000000000602
-        /// Articy Object ref: articy://localhost/view/bda27ac8-48b5-4181-a11d-12f365293693/72057594037929474?pane=selected&amp;tab=current
-        /// </summary>
-        public void Script_0x100000000000602Text(ArticyGlobalVariables aGlobalVariablesState, Articy.Unity.IBaseScriptMethodProvider aMethodProvider)
-        {
-            aGlobalVariablesState.TreeQuest.FoundTrees = true;
-        }
-        
         /// <summary>
         /// ObjectID: 0x1000000000005EB
         /// Articy Object ref: articy://localhost/view/bda27ac8-48b5-4181-a11d-12f365293693/72057594037929451?pane=selected&amp;tab=current
@@ -74,6 +47,33 @@ namespace Articy.Harmonybarktest.GlobalVariables
         public bool Script_0x1000000000005F3Text(ArticyGlobalVariables aGlobalVariablesState, Articy.Unity.IBaseScriptMethodProvider aMethodProvider)
         {
             return aGlobalVariablesState.TreeQuest.FoundTrees == false;
+        }
+        
+        /// <summary>
+        /// ObjectID: 0x100000000000602
+        /// Articy Object ref: articy://localhost/view/bda27ac8-48b5-4181-a11d-12f365293693/72057594037929474?pane=selected&amp;tab=current
+        /// </summary>
+        public void Script_0x100000000000602Text(ArticyGlobalVariables aGlobalVariablesState, Articy.Unity.IBaseScriptMethodProvider aMethodProvider)
+        {
+            aGlobalVariablesState.TreeQuest.FoundTrees = true;
+        }
+        
+        /// <summary>
+        /// ObjectID: 0x100000000000611
+        /// Articy Object ref: articy://localhost/view/bda27ac8-48b5-4181-a11d-12f365293693/72057594037929489?pane=selected&amp;tab=current
+        /// </summary>
+        public bool Script_0x100000000000611Text(ArticyGlobalVariables aGlobalVariablesState, Articy.Unity.IBaseScriptMethodProvider aMethodProvider)
+        {
+            return aGlobalVariablesState.TreeQuest.FoundTrees == true;
+        }
+        
+        /// <summary>
+        /// ObjectID: 0x100000000000621
+        /// Articy Object ref: articy://localhost/view/bda27ac8-48b5-4181-a11d-12f365293693/72057594037929505?pane=selected&amp;tab=current
+        /// </summary>
+        public bool Script_0x100000000000621Text(ArticyGlobalVariables aGlobalVariablesState, Articy.Unity.IBaseScriptMethodProvider aMethodProvider)
+        {
+            return aGlobalVariablesState.TreeQuest.FoundTrees == true;
         }
         
         /// <summary>
@@ -113,21 +113,21 @@ namespace Articy.Harmonybarktest.GlobalVariables
         }
         
         /// <summary>
-        /// ObjectID: 0x100000000000678
-        /// Articy Object ref: articy://localhost/view/bda27ac8-48b5-4181-a11d-12f365293693/72057594037929592?pane=selected&amp;tab=current
-        /// </summary>
-        public bool Script_0x100000000000678Text(ArticyGlobalVariables aGlobalVariablesState, Articy.Unity.IBaseScriptMethodProvider aMethodProvider)
-        {
-            return aGlobalVariablesState.TreeQuest.FoundTrees == true;
-        }
-        
-        /// <summary>
         /// ObjectID: 0x100000000000670
         /// Articy Object ref: articy://localhost/view/bda27ac8-48b5-4181-a11d-12f365293693/72057594037929584?pane=selected&amp;tab=current
         /// </summary>
         public bool Script_0x100000000000670Text(ArticyGlobalVariables aGlobalVariablesState, Articy.Unity.IBaseScriptMethodProvider aMethodProvider)
         {
             return aGlobalVariablesState.TreeQuest.FoundTrees == false;
+        }
+        
+        /// <summary>
+        /// ObjectID: 0x100000000000678
+        /// Articy Object ref: articy://localhost/view/bda27ac8-48b5-4181-a11d-12f365293693/72057594037929592?pane=selected&amp;tab=current
+        /// </summary>
+        public bool Script_0x100000000000678Text(ArticyGlobalVariables aGlobalVariablesState, Articy.Unity.IBaseScriptMethodProvider aMethodProvider)
+        {
+            return aGlobalVariablesState.TreeQuest.FoundTrees == true;
         }
         
         /// <summary>
@@ -158,17 +158,17 @@ namespace Articy.Harmonybarktest.GlobalVariables
         {
             Conditions = new System.Collections.Generic.Dictionary<int, System.Func<ArticyGlobalVariables, Articy.Unity.IBaseScriptMethodProvider, bool>>();
             Instructions = new System.Collections.Generic.Dictionary<int, System.Action<ArticyGlobalVariables, Articy.Unity.IBaseScriptMethodProvider>>();
-            Conditions.Add(-877319175, this.Script_0x100000000000621Text);
-            Conditions.Add(-877318214, this.Script_0x100000000000611Text);
-            Instructions.Add(-2080776470, this.Script_0x100000000000602Text);
             Conditions.Add(825778838, this.Script_0x1000000000005EBText);
             Conditions.Add(-94795478, this.Script_0x1000000000005F3Text);
+            Instructions.Add(-2080776470, this.Script_0x100000000000602Text);
+            Conditions.Add(-877318214, this.Script_0x100000000000611Text);
+            Conditions.Add(-877319175, this.Script_0x100000000000621Text);
             Conditions.Add(510496719, this.Script_0x100000000000649Text);
             Conditions.Add(-877314122, this.Script_0x100000000000651Text);
             Conditions.Add(510491278, this.Script_0x100000000000659Text);
             Instructions.Add(-877315083, this.Script_0x100000000000661Text);
-            Conditions.Add(-530829903, this.Script_0x100000000000678Text);
             Conditions.Add(-1918635303, this.Script_0x100000000000670Text);
+            Conditions.Add(-530829903, this.Script_0x100000000000678Text);
             Conditions.Add(-1400442500, this.Script_0x1000000000006B1Expression);
             Conditions.Add(1342697892, this.Script_0x1000000000006B9Expression);
         }

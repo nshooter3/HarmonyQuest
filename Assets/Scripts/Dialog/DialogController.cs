@@ -24,7 +24,6 @@ namespace HarmonyQuest.Dialog
         private IList<Branch> dialogOptions;
         private Branch dialog;
         private bool awaitingResponse = false;
-        private string displayName;
 
         public DialogController()
         {
@@ -168,30 +167,14 @@ namespace HarmonyQuest.Dialog
                         var speaker = dialog.Target as IObjectWithSpeaker;
                         if (speaker != null)
                         {
-                            Speak(speaker.Speaker.TechnicalName, text.Text, displayName);
+                            Speak(speaker.Speaker.TechnicalName, text.Text, speaker.Speaker.TechnicalName.Replace("_", " "));
                         }
                     }
                 }
             }
         }
 
-        public void OnFlowPlayerPaused(IFlowObject aObject)
-        {
-            if (aObject != null)
-            {
-                //Grab the display name here since it is inaccessible in OnBranchesUpdated for some reason.
-                //TODO: Figure out why this is null after the first node
-                var objectWithDisplayName = aObject as IObjectWithDisplayName;
-                if (objectWithDisplayName != null)
-                {
-                    displayName = objectWithDisplayName.DisplayName;
-                }
-                else
-                {
-                    displayName = "";
-                }
-            }
-        }
+        public void OnFlowPlayerPaused(IFlowObject aObject) { }
 
         public override void OnStart()
         {

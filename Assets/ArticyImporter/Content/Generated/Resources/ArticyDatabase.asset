@@ -1,5 +1,32 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-5591531731736167802
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85486295c43ba2f4ebc0e3e9c2098370, type: 3}
+  m_Name: DefaultGlobalVariables
+  m_EditorClassIdentifier: 
+  BoolVariableCache:
+  - mFullQualifiedName: TreeQuest.TreeQuestFinished
+    mVar:
+      values: 00
+  - mFullQualifiedName: TreeQuest.FoundTrees
+    mVar:
+      values: 00
+  IntVariableCache: []
+  StringVariableCache: []
+  LiveBoolVariableCache: []
+  LiveIntVariableCache: []
+  LiveStringVariableCache: []
+  isInitialized: 1
+  mTreeQuest:
+    _VariableStorage: {fileID: -5591531731736167802}
 --- !u!114 &-2685529646794070996
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -32,7 +59,7 @@ MonoBehaviour:
   m_Script: {fileID: -1676762633, guid: df2ec02f61e861546b9427c26ccacb8d, type: 3}
   m_Name: ArticyDatabase
   m_EditorClassIdentifier: 
-  mHierarchy: {fileID: 8555992560109740894}
+  mHierarchy: {fileID: 1802544408500555928}
   mLocalization: {fileID: -2685529646794070996}
   mInternalProject:
     mName: HarmonyBarkTest
@@ -40,52 +67,13 @@ MonoBehaviour:
     mId: bda27ac8-48b5-4181-a11d-12f365293693
     mTechnicalName: Harmonybarktest
   mImportedAssets: []
-  mDefaultGlobalVariables: {fileID: 4894400270740475300}
-  mScriptFragments: {fileID: 7942545351639748147}
+  mDefaultGlobalVariables: {fileID: -5591531731736167802}
+  mScriptFragments: {fileID: 1831034226187929738}
   mPackages:
   - PackageName: All objects
     PackagePath: All objects
     mIsDefaultPackage: 1
---- !u!114 &4894400270740475300
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85486295c43ba2f4ebc0e3e9c2098370, type: 3}
-  m_Name: DefaultGlobalVariables
-  m_EditorClassIdentifier: 
-  BoolVariableCache:
-  - mFullQualifiedName: TreeQuest.TreeQuestFinished
-    mVar:
-      values: 00
-  - mFullQualifiedName: TreeQuest.FoundTrees
-    mVar:
-      values: 00
-  IntVariableCache: []
-  StringVariableCache: []
-  LiveBoolVariableCache: []
-  LiveIntVariableCache: []
-  LiveStringVariableCache: []
-  isInitialized: 1
-  mTreeQuest:
-    _VariableStorage: {fileID: 4894400270740475300}
---- !u!114 &7942545351639748147
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30534dcf4c27a2646b3d506504997575, type: 3}
-  m_Name: ArticyScriptFragments
-  m_EditorClassIdentifier: 
---- !u!114 &8555992560109740894
+--- !u!114 &1802544408500555928
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -98,3 +86,15 @@ MonoBehaviour:
   m_Name: HierarchyManager
   m_EditorClassIdentifier: 
   serializedNodes: []
+--- !u!114 &1831034226187929738
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30534dcf4c27a2646b3d506504997575, type: 3}
+  m_Name: ArticyScriptFragments
+  m_EditorClassIdentifier: 
