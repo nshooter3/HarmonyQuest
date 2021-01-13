@@ -22,10 +22,11 @@ namespace HarmonyQuest.Dialog
             dialogView.SetTargetForTrackers(transform);
         }
 
-        public virtual void Speak(string text)
+        public virtual void Speak(string text, string speakerName)
         {
             dialogView.mainText.text = text;
             dialogView.main.SetActive(true);
+            dialogView.SetName(speakerName);
         }
 
         public virtual void ShutUp(bool dialogueStarted = false)

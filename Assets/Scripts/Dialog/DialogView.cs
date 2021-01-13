@@ -12,48 +12,30 @@ namespace HarmonyQuest.Dialog
         public GameObject main;
         public GameObject bark;
         public GameObject activeSpeaker;
+        public GameObject speakerName;
 
-        [HideInInspector]
-        public bool useIndicator = true;
-
-        [HideInInspector]
         public Text mainText;
-
-        [HideInInspector]
         public Text barkText;
+        public Text speakerNameText;
 
-        [HideInInspector]
         public Image barkPanel;
-
-        [HideInInspector]
         public Image emblem;
-
-        [HideInInspector]
         public Image barkEmblem;
-
-        [HideInInspector]
         public Image activeSpeakerEmblem;
 
-        [HideInInspector]
         public UITracker mainTracker;
 
         [SerializeField]
         public BarkAssetPair[] assetDefinitions;
 
+        [HideInInspector]
+        public bool useIndicator = true;
+
         public enum DialogueType { Quest, Talk, NonInteractive };
 
         public void Init()
         {
-            mainText = main.GetComponentInChildren<Text>();
-            mainTracker = main.GetComponent<UITracker>();
-
-            barkText = bark.GetComponentInChildren<Text>();
-            barkPanel = bark.GetComponent<Image>();
-            barkEmblem = bark.GetComponentsInChildren<Image>()[1];
-
-            emblem = indicator.GetComponent<Image>();
-
-            activeSpeakerEmblem = activeSpeaker.GetComponent<Image>();
+            
         }
 
         public void SetTargetForTrackers(Transform target)
@@ -78,6 +60,20 @@ namespace HarmonyQuest.Dialog
             else
             {
                 useIndicator = false;
+            }
+        }
+
+        public void SetName(string name)
+        {
+            speakerNameText.text = name;
+
+            if (name == "")
+            {
+                speakerName.SetActive(false);
+            }
+            else
+            {
+                speakerName.SetActive(true);
             }
         }
     }

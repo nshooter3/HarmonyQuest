@@ -40,9 +40,9 @@ namespace HarmonyQuest.Dialog
             }
         }
 
-        public override void Speak(string text)
+        public override void Speak(string text, string speakerName)
         {
-            base.Speak(text);
+            base.Speak(text, speakerName);
             dialogView.bark.SetActive(false);
         }
 

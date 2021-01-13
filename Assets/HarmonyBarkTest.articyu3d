@@ -3731,6 +3731,61 @@
         {
           "Type": "DialogueFragment",
           "Properties": {
+            "TechnicalName": "DFr_399CB5AA",
+            "Id": "0x01000000000006D5",
+            "Parent": "0x0100000000000647",
+            "MenuText": "",
+            "StageDirections": "",
+            "Speaker": "0x0100000000000113",
+            "Color": {
+              "r": 0.5764706,
+              "g": 0.75686276,
+              "b": 0.8
+            },
+            "Text": "What was that?",
+            "ExternalId": "",
+            "Position": {
+              "x": 1000.0,
+              "y": 0.0
+            },
+            "ZIndex": 20.0,
+            "Size": {
+              "w": 225.0,
+              "h": 200.0
+            },
+            "ShortId": 966571434,
+            "InputPins": [
+              {
+                "Text": "",
+                "Id": "0x01000000000006D8",
+                "Owner": "0x01000000000006D5"
+              }
+            ],
+            "OutputPins": [
+              {
+                "Text": "",
+                "Id": "0x01000000000006D9",
+                "Owner": "0x01000000000006D5",
+                "Connections": [
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.5764706,
+                      "g": 0.75686276,
+                      "b": 0.8
+                    },
+                    "Label": "",
+                    "TargetPin": "0x0100000000000683",
+                    "Target": "0x0100000000000647"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "Type": "DialogueFragment",
+          "Properties": {
             "TechnicalName": "DFr_1F2BE166",
             "Id": "0x0100000000000677",
             "Parent": "0x0100000000000647",
@@ -3852,8 +3907,8 @@
                       "b": 0.8
                     },
                     "Label": "",
-                    "TargetPin": "0x0100000000000683",
-                    "Target": "0x0100000000000647"
+                    "TargetPin": "0x01000000000006D8",
+                    "Target": "0x01000000000006D5"
                   }
                 ]
               }
@@ -4450,6 +4505,11 @@
                       {
                         "Id": "0x0100000000000677",
                         "TechnicalName": "DFr_1F2BE166",
+                        "Type": "DialogueFragment"
+                      },
+                      {
+                        "Id": "0x01000000000006D5",
+                        "TechnicalName": "DFr_399CB5AA",
                         "Type": "DialogueFragment"
                       }
                     ]

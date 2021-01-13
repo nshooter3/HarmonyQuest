@@ -24,6 +24,7 @@ namespace HarmonyQuest.Dialog
         private IList<Branch> dialogOptions;
         private Branch dialog;
         private bool awaitingResponse = false;
+        private string displayName;
 
         public DialogController()
         {
@@ -51,13 +52,13 @@ namespace HarmonyQuest.Dialog
             }
         }
 
-        public void Speak(string speakerTechnicalName, string text)
+        public void Speak(string speakerTechnicalName, string text, string displayName)
         {
             foreach (DialogSpeakerNPC speaker in speakers)
             {
                 if (speaker.character.GetObject().TechnicalName == speakerTechnicalName)
                 {
-                    speaker.Speak(text);
+                    speaker.Speak(text, displayName);
                 }
                 else
                 {
@@ -123,55 +124,74 @@ namespace HarmonyQuest.Dialog
 
         public void OnBranchesUpdated(IList<Branch> aBranches)
         {
-            dialogOptions = aBranches;
+            if (aBranches != null)
+            {
+                if (aBranches.Count > 1)
+                {
+                    dialogOptions = aBranches;
 
-            if (aBranches.Count > 1)
-            {
-                dialogOptionHolder.SetActive(true);
-                awaitingResponse = true;
-                Text[] options = dialogOptionHolder.GetComponentsInChildren<Text>();
-                int index = 0;
-                foreach (Branch branch in aBranches)
-                {
-                    var menuText = branch.Target as IObjectWithMenuText;
-                    if (menuText != null)
+                    dialogOptionHolder.SetActive(true);
+                    awaitingResponse = true;
+                    Text[] options = dialogOptionHolder.GetComponentsInChildren<Text>();
+                    int index = 0;
+                    foreach (Branch branch in aBranches)
                     {
-                        options[index].text = menuText.MenuText;
+                        var menuText = branch.Target as IObjectWithMenuText;
+                        if (menuText != null)
+                        {
+                            options[index].text = menuText.MenuText;
+                        }
+                        index++;
                     }
-                    index++;
-                }
-                while (index < options.Length)
-                {
-                    options[index].gameObject.transform.parent.gameObject.SetActive(false);
-                    index++;
-                }
-            }
-            else if (aBranches.Count == 1)
-            {
-                dialog = aBranches[0];
-                dialogOptionHolder.SetActive(false);
-                var output = dialog.Target as IOutputPin;
-                if (output != null)
-                {
-                    flowPlayer.Play(dialog);
-                    flowPlayer.FinishCurrentPausedObject();
-                    flowPlayer.StartOn = null;
-                    inDialog = false;
-                    ServiceLocator.instance.GetDialogController().EndDialog();
-                }
-                else
-                {
-                    var text = dialog.Target as IObjectWithText;
-                    var speaker = dialog.Target as IObjectWithSpeaker;
-                    if (speaker != null)
+                    while (index < options.Length)
                     {
-                        Speak(speaker.Speaker.TechnicalName, text.Text);
+                        options[index].gameObject.transform.parent.gameObject.SetActive(false);
+                        index++;
+                    }
+                }
+                else if (aBranches.Count == 1)
+                {
+                    dialog = aBranches[0];
+                    dialogOptionHolder.SetActive(false);
+                    var output = dialog.Target as IOutputPin;
+                    if (output != null)
+                    {
+                        flowPlayer.Play(dialog);
+                        flowPlayer.FinishCurrentPausedObject();
+                        flowPlayer.StartOn = null;
+                        inDialog = false;
+                        ServiceLocator.instance.GetDialogController().EndDialog();
+                    }
+                    else
+                    {
+                        var text = dialog.Target as IObjectWithText;
+                        var speaker = dialog.Target as IObjectWithSpeaker;
+                        if (speaker != null)
+                        {
+                            Speak(speaker.Speaker.TechnicalName, text.Text, displayName);
+                        }
                     }
                 }
             }
         }
 
-        public void OnFlowPlayerPaused(IFlowObject aObject) { }
+        public void OnFlowPlayerPaused(IFlowObject aObject)
+        {
+            if (aObject != null)
+            {
+                //Grab the display name here since it is inaccessible in OnBranchesUpdated for some reason.
+                //TODO: Figure out why this is null after the first node
+                var objectWithDisplayName = aObject as IObjectWithDisplayName;
+                if (objectWithDisplayName != null)
+                {
+                    displayName = objectWithDisplayName.DisplayName;
+                }
+                else
+                {
+                    displayName = "";
+                }
+            }
+        }
 
         public override void OnStart()
         {
