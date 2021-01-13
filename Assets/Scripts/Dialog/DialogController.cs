@@ -185,6 +185,7 @@ namespace HarmonyQuest.Dialog
 
         public override void OnUpdate()
         {
+            proximalSpeaker = GetHighestScoredDialogTarget();
             if (ServiceLocator.instance.GetInputManager().InteractButtonDown() && !awaitingResponse)
             {
                 if (inDialog)
@@ -194,7 +195,6 @@ namespace HarmonyQuest.Dialog
                 }
                 else
                 {
-                    proximalSpeaker = GetHighestScoredDialogTarget();
                     if (proximalSpeaker != null && proximalSpeaker.DialogReference.HasReference)
                     {
                         inDialog = true;
@@ -223,6 +223,7 @@ namespace HarmonyQuest.Dialog
 
             foreach (DialogSpeakerNPC speaker in speakers)
             {
+                speaker.dialogView.activeSpeaker.SetActive(false);
                 if (speaker.playerInRange)
                 {
                     distance = Vector3.Distance(ServiceLocator.instance.GetMelodyController().transform.position, speaker.transform.position);
@@ -240,6 +241,10 @@ namespace HarmonyQuest.Dialog
                         highestScoredDialogTarget = speaker;
                     }
                 }
+            }
+            if (highestScoredDialogTarget != null && highestScoredDialogTarget.DialogReference.HasReference && !inDialog)
+            {
+                highestScoredDialogTarget.dialogView.activeSpeaker.SetActive(true);
             }
             return highestScoredDialogTarget;
         }

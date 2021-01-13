@@ -11,6 +11,7 @@ namespace HarmonyQuest.Dialog
         public GameObject indicator;
         public GameObject main;
         public GameObject bark;
+        public GameObject activeSpeaker;
 
         [HideInInspector]
         public bool useIndicator = true;
@@ -31,6 +32,9 @@ namespace HarmonyQuest.Dialog
         public Image barkEmblem;
 
         [HideInInspector]
+        public Image activeSpeakerEmblem;
+
+        [HideInInspector]
         public UITracker mainTracker;
 
         [SerializeField]
@@ -48,6 +52,8 @@ namespace HarmonyQuest.Dialog
             barkEmblem = bark.GetComponentsInChildren<Image>()[1];
 
             emblem = indicator.GetComponent<Image>();
+
+            activeSpeakerEmblem = activeSpeaker.GetComponent<Image>();
         }
 
         public void SetTargetForTrackers(Transform target)
@@ -55,6 +61,7 @@ namespace HarmonyQuest.Dialog
             mainTracker.target = target;
             bark.GetComponent<UITracker>().target = target;
             indicator.GetComponent<UITracker>().target = target;
+            activeSpeaker.GetComponent<UITracker>().target = target;
         }
 
         public void SetAssets(DialogueType type)
